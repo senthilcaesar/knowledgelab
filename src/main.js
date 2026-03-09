@@ -26,7 +26,7 @@ To kick things off, clone the claude skills repo from GitHub with this command:
 Next, drop the skills folder into <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--accent-primary);">~/.claude/skills</code>. Don't see that folder? Just create it. This is where Claude looks for skills — so this part matters.
 
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
-  <img src="/concepts/images/skill3.png" alt="Terminal Skills Placement" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+  <img src="/knowledgelab/images/skill3.png" alt="Terminal Skills Placement" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
 </div>
 
 <hr style="border: none; border-top: 1px solid var(--border-color); margin: 1rem 0;">
@@ -42,7 +42,7 @@ Usually, you can launch it by simply typing <code style="padding: 0.2rem 0.4rem;
 <em>Note: Since I am practicing and learning to use Claude Code, I don't want to pay for an Anthropic API key yet. Because of this, I will be launching Claude using an open source free model via Ollama!</em>
 
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
-  <img src="/concepts/images/skill1.png" alt="Terminal Skills Execution 1" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+  <img src="/knowledgelab/images/skill1.png" alt="Terminal Skills Execution 1" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
 </div>
 
 <hr style="border: none; border-top: 1px solid var(--border-color); margin: 1rem 0;">
@@ -56,7 +56,7 @@ Here's the fun part — just type:
 And Claude takes it from there. It'll walk you through the design, the layout, everything.
 
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
-  <img src="/concepts/images/skill2.png" alt="Terminal Skills Execution 2" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+  <img src="/knowledgelab/images/skill2.png" alt="Terminal Skills Execution 2" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
 </div>
 
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 1.5rem 0; font-family: monospace; color: var(--text-secondary); white-space: pre-wrap; line-height: 1.5;">❯ /frontend-design
