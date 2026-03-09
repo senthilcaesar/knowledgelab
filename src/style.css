@@ -377,6 +377,8 @@ h1, h2, h3 {
 
 #concept-description code {
   font-size: 1.0rem;
+  word-break: break-word;
+  white-space: pre-wrap;
 }
 
 .read-more-link {
