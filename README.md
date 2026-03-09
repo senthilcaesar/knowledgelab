@@ -2,7 +2,7 @@
 
 A personal, interactive web app for storing and reviewing technical concept notes — built to be beautiful enough to make you *want* to come back every day.
 
-🔗 **Live site:** [senthilcaesar.github.io/concepts](https://senthilcaesar.github.io/concepts/)
+🔗 **Live site:** [senthilcaesar.github.io/knowledgelab](https://senthilcaesar.github.io/knowledgelab/)
 
 ---
 
@@ -10,9 +10,12 @@ A personal, interactive web app for storing and reviewing technical concept note
 
 | Feature | Description |
 |---|---|
-| 🌌 **Neural Constellation** | Live canvas animation — 70 glowing nodes drifting and reacting to your mouse |
-| 📰 **Concept of the Day** | Scrolling ticker picks a random concept each day (persisted 24h) |
+| 🌌 **Neural Constellation** | Live canvas animation — glowing nodes drifting and reacting to your mouse |
+| 📰 **Skill of the Day** | Scrolling ticker picks a random concept each day (persisted 24h) |
 | 🌙 **Dark / Light Theme** | Futuristic dark mode + warm "Parchment" reading mode |
+| ⏱️ **Study Mode Timer** | Built-in 25-minute focus timer with an animated "Zen Flow" backdrop |
+| 📱 **Responsive Layout** | Optimized for mobile/tablet with an elegant off-canvas drawer sidebar |
+| 📋 **One-Click Code Copy**| Seamlessly copy terminal commands/code using custom SVG icons |
 | 🔲 **Collapsible Sidebar** | Toggle the sidebar open/closed, state persists across visits |
 | 🔍 **Live Search** | Filter concepts from the sidebar in real time |
 | 🏠 **Home Navigation** | Click `KnowledgeLab` to return to the welcome screen |

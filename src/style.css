@@ -441,6 +441,53 @@ h1, h2, h3 {
   100% { transform: translateX(-100%); }
 }
 
+/* Code Blocks & Copy Button */
+.code-wrapper {
+  position: relative;
+  margin: 1rem 0;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  z-index: 5;
+  transition: var(--transition-fast);
+  backdrop-filter: blur(4px);
+}
+
+.copy-btn:hover {
+  background: var(--surface-hover);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  transform: translateY(-1px);
+}
+
+.copy-btn.copied {
+  background: rgba(0, 242, 255, 0.1);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+:root.light-mode .copy-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: var(--border-color);
+}
+
+:root.light-mode .copy-btn:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
 /* Light mode overrides for ticker */
 :root.light-mode .cotd-ticker {
   border-color: var(--accent-primary);

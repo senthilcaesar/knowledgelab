@@ -264,6 +264,58 @@ const app = {
         </div>
       </article>
     `;
+    this.attachCopyButtons();
+  },
+
+  attachCopyButtons() {
+    const conceptDescription = document.getElementById('concept-description');
+    if (!conceptDescription) return;
+
+    // Find all code blocks
+    const codeBlocks = conceptDescription.querySelectorAll('code');
+    
+    codeBlocks.forEach(code => {
+      // Only attach to block-level code elements (the ones with inline styles or specifically for commands)
+      const isBlock = code.style.display === 'block' || code.textContent.includes('\n');
+      if (!isBlock) return;
+
+      // Create wrapper
+      const wrapper = document.createElement('div');
+      wrapper.className = 'code-wrapper';
+      
+      // Insert wrapper before code
+      code.parentNode.insertBefore(wrapper, code);
+      // Move code into wrapper
+      wrapper.appendChild(code);
+      
+      // Add copy button
+      const btn = document.createElement('button');
+      btn.className = 'copy-btn';
+      btn.setAttribute('title', 'Copy to clipboard');
+      
+      const copyIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
+      const checkIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+      
+      btn.innerHTML = copyIcon;
+      
+      wrapper.appendChild(btn);
+      
+      btn.addEventListener('click', () => {
+        const text = code.textContent;
+        // Clean up text (remove the leading '❯ ' prompt if it's there, but keep the rest)
+        const cleanText = text.replace(/^❯\s+/, '');
+        
+        navigator.clipboard.writeText(cleanText).then(() => {
+          btn.innerHTML = checkIcon;
+          btn.classList.add('copied');
+          
+          setTimeout(() => {
+            btn.innerHTML = copyIcon;
+            btn.classList.remove('copied');
+          }, 2000);
+        });
+      });
+    });
   },
 
   // ========================================
