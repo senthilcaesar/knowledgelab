@@ -11,6 +11,8 @@ const concepts = [
 
 Whether you're a complete beginner looking to build your first website, or an experienced developer looking to speed up your workflow, getting started with Claude Skills is easier than you think. In this simple guide, we'll watch Claude Skills in action as it guides us through building a website, taking our input at each step. Let's go!
 
+A skill is a set of instructions - packaged as a simple folder - that teaches Claude how to handle specific tasks or workflows. Skills are powerful when you have repeatable workflows: generating frontend designs from specs, conducting research with consistent methodology or creating documents that follow your team's style guide. For more details on Skills check out the <a href="#resources" style="color: var(--accent-primary); text-decoration: underline;">resources section below</a>
+
 <hr style="border: none; border-top: 1px solid var(--border-color); margin: 1rem 0;">
 
 <strong>[STEP 1 – Download the Skills Repo]</strong>
@@ -70,7 +72,7 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
 
 <hr style="border: none; border-top: 1px solid var(--border-color); margin: 1rem 0;">
 
-<strong>Resources</strong>
+<strong id="resources">Resources</strong>
 
 <p style="margin-top: 1rem; text-align: left;">
   <a href="https://share.google/9HXMh2Ezc32YiJrVy" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">The Complete Guide to Building Skills for Claude</a>
