@@ -8,6 +8,8 @@
   --accent-primary: #00f2ff;
   --accent-secondary: #7000ff;
   --accent-magenta: #ff00ea;
+  --code-text: #00a8b5;
+  --code-text-secondary: #7a7a8a;
   --sidebar-width: 280px;
   --glass-blur: 16px;
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -24,6 +26,8 @@
   --accent-primary: #b08d57; /* Old gold / Brass */
   --accent-secondary: #7d6b5d; /* Warm earth */
   --accent-magenta: #a64d4d; /* Red clay */
+  --code-text: #8c6b3e; /* Darker old gold */
+  --code-text-secondary: #544436; /* Darker stone brown */
   --glass-blur: 8px;
 }
 

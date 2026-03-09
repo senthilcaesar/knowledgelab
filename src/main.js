@@ -17,13 +17,13 @@ Whether you're a complete beginner looking to build your first website, or an ex
 
 To kick things off, clone the claude skills repo from GitHub with this command:
 
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--accent-primary);">git clone https://github.com/anthropics/skills.git</code>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">git clone https://github.com/anthropics/skills.git</code>
 
 <hr style="border: none; border-top: 1px solid var(--border-color); margin: 1rem 0;">
 
 <strong>[STEP 2 – Place the Skills in the Right Folder]</strong>
 
-Next, drop the skills folder into <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--accent-primary);">~/.claude/skills</code>. Don't see that folder? Just create it. This is where Claude looks for skills — so this part matters.
+Next, drop the skills folder into <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code>. Don't see that folder? Just create it. This is where Claude looks for skills — so this part matters.
 
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
   <img src="/knowledgelab/images/skill3.png" alt="Terminal Skills Placement" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
@@ -35,9 +35,9 @@ Next, drop the skills folder into <code style="padding: 0.2rem 0.4rem; backgroun
 
 If you are new to Claude Code, please install it by following the instructions at <a href="https://code.claude.com/docs/en/quickstart" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">https://code.claude.com/docs/en/quickstart</a>. 
 
-Usually, you can launch it by simply typing <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--accent-primary);">claude</code> in your terminal. For this tutorial, however, I am launching Claude using an open source free model via Ollama with this command:
+Usually, you can launch it by simply typing <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">claude</code> in your terminal. For this tutorial, however, I am launching Claude using an open source free model via Ollama with this command:
 
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--accent-primary);">ollama launch claude --model glm-4.7:cloud</code>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">ollama launch claude --model glm-4.7:cloud</code>
 
 <em>Note: Since I am practicing and learning to use Claude Code, I don't want to pay for an Anthropic API key yet. Because of this, I will be launching Claude using an open source free model via Ollama!</em>
 
@@ -51,7 +51,7 @@ Usually, you can launch it by simply typing <code style="padding: 0.2rem 0.4rem;
 
 Here's the fun part — just type:
 
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--accent-primary);">/frontend-design</code>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">/frontend-design</code>
 
 And Claude takes it from there. It'll walk you through the design, the layout, everything.
 
@@ -59,7 +59,7 @@ And Claude takes it from there. It'll walk you through the design, the layout, e
   <img src="/knowledgelab/images/skill2.png" alt="Terminal Skills Execution 2" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
 </div>
 
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 1.5rem 0; font-family: monospace; color: var(--text-secondary); white-space: pre-wrap; line-height: 1.5;">❯ /frontend-design
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 1.5rem 0; font-family: monospace; color: var(--code-text-secondary); white-space: pre-wrap; line-height: 1.5;">❯ /frontend-design
 
 I'll help you create a distinctive, production-grade frontend interface. To get started, please tell me:
    
@@ -74,6 +74,9 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
 
 <p style="margin-top: 1rem; text-align: left;">
   <a href="https://share.google/9HXMh2Ezc32YiJrVy" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">The Complete Guide to Building Skills for Claude</a>
+</p>
+<p style="margin-top: 0.5rem; text-align: left;">
+  <a href="https://claude.com/blog/improving-frontend-design-through-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">Best practices for building richer, more customized frontend design with Claude and Skills</a>
 </p>`,
     interactiveType: 'custom'
   },
