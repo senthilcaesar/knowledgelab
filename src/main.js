@@ -131,7 +131,7 @@ const app = {
       </div>
       <div class="welcome-card">
         <h2>Welcome to Knowledge Lab</h2>
-        <p>Select a concept from the sidebar to begin your interactive learning journey.</p>
+        <p>Select a tutorial from the sidebar to begin your interactive learning journey.</p>
       </div>
     `;
 
