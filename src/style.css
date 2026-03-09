@@ -371,6 +371,10 @@ h1, h2, h3 {
   margin-bottom: 0;
 }
 
+#concept-description code {
+  font-size: 1.0rem;
+}
+
 .read-more-link {
   color: var(--accent-primary);
   text-decoration: none;
