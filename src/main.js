@@ -17,7 +17,7 @@ A skill is a set of instructions - packaged as a simple folder - that teaches Cl
 
 <strong>[STEP 1 – Download the Skills Repo]</strong>
 
-To kick things off, clone the claude skills repo from GitHub with this command:
+To kick things off, open your terminal and clone the claude skills repo from GitHub with this command:
 
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">git clone https://github.com/anthropics/skills.git</code>
 
