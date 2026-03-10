@@ -1,5 +1,6 @@
 import './style.css'
 import { initConstellation } from './constellation.js'
+import pkg from '../package.json'
 
 const concepts = [
   {
@@ -162,6 +163,7 @@ const app = {
     this.setupEventListeners();
     this.initTheme();
     this.initStudyMode();
+    this.initTechStackModal();
     this.renderWelcome();
     // Start the neural constellation background
     initConstellation(document.getElementById('constellation-bg'));
@@ -365,6 +367,90 @@ const app = {
           }, 2000);
         });
       });
+    });
+  },
+
+  // ========================================
+  // TECH STACK MODAL
+  // ========================================
+
+  initTechStackModal() {
+    const btn = document.getElementById('tech-stack-btn');
+    const overlay = document.getElementById('tech-stack-overlay');
+    const closeBtn = document.getElementById('close-tech-stack');
+    const list = document.getElementById('tech-stack-list');
+
+    if (!btn || !overlay || !closeBtn || !list) return;
+
+    // Check technologies from package.json
+    const deps = { ...(pkg.dependencies || {}), ...(pkg.devDependencies || {}) };
+    
+    // Core tech stack
+    const stack = [
+      {
+        name: 'Vanilla JavaScript',
+        desc: 'Core application logic, ECMAScript modules, DOM manipulation, and dynamic rendering.',
+        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M14.5 9h-5l-.5-5h7l-.5 5zm-5 4h5l-.5 4.5-2 1.5-2-1.5-.2-2h2.2l.1 1.2 1 .8 1-.8.2-1.2h-3.8z"></path></svg>'
+      },
+      {
+        name: 'Vanilla CSS3 & HTML5',
+        desc: 'Custom glassmorphism styling, responsive grid layout, and semantic structure.',
+        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M15 9h-6l-.5-4h7.5l-.5 4zm-6 4h6l-.5 4.5-2.5 1.5-2.5-1.5-.2-2h2.2l.1 1.2 1.2.8 1.2-.8.2-1.2h-4.6z"></path></svg>'
+      },
+      {
+        name: 'HTML5 Canvas API',
+        desc: 'Custom performant animations including the Neural Constellation and Zen Flow backgrounds.',
+        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.268-.652-.053-.877.215-.225.542-.31 1.051-.31h2.438c2.66 0 4.853-2.192 4.853-4.853C21.5 6.756 17.244 2 12 2z"></path></svg>'
+      }
+    ];
+
+    if (deps.vite) {
+      stack.push({
+        name: 'Vite (' + deps.vite.replace(/[\^\~]/, '') + ')',
+        desc: 'Next-generation frontend tooling providing ultra-fast builds and Hot Module Replacement.',
+        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>'
+      });
+    }
+    
+    // Hosting logic mapped explicitly
+    stack.push({
+      name: 'GitHub Pages',
+      desc: 'Automated CI/CD deployment via GitHub Actions pipeline using the deployed build.',
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>'
+    });
+
+    list.innerHTML = stack.map(tech => `
+      <li class="tech-stack-item">
+        <div class="tech-stack-icon-wrapper">
+          ${tech.icon}
+        </div>
+        <div class="tech-stack-info">
+          <span class="tech-stack-name">${tech.name}</span>
+          <span class="tech-stack-desc">${tech.desc}</span>
+        </div>
+      </li>
+    `).join('');
+
+    const openModal = () => {
+      overlay.classList.remove('hidden');
+      // trigger reflow
+      void overlay.offsetWidth;
+      overlay.classList.add('active');
+    };
+
+    const closeModal = () => {
+      overlay.classList.remove('active');
+      setTimeout(() => {
+        if (!overlay.classList.contains('active')) {
+          overlay.classList.add('hidden');
+        }
+      }, 300); // match transition duration
+    };
+
+    btn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeModal();
     });
   },
 
