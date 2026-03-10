@@ -72,6 +72,22 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
 
 <hr style="border: none; border-top: 1px solid var(--border-color); margin: 1rem 0;">
 
+<strong>[STEP 5 – Where to find skills]</strong>
+
+<p style="margin: 1rem 0;">You can find more skills to use with Claude Code in the following places:</p>
+
+<ul style="margin: 1rem 0 1.5rem 2rem; color: var(--text-secondary); line-height: 1.6;">
+  <li style="margin-bottom: 0.5rem;"><strong>Anthropic official:</strong> <a href="https://github.com/anthropics/skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">https://github.com/anthropics/skills</a></li>
+  <li style="margin-bottom: 0.5rem;"><strong>Community marketplaces:</strong>
+    <ol style="margin: 0.5rem 0 0 1.5rem;">
+      <li style="margin-bottom: 0.25rem;"><a href="https://skillsmp.com/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">skillsmp.com</a></li>
+      <li style="margin-bottom: 0.25rem;"><a href="https://skillhub.club/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">skillhub.club</a></li>
+    </ol>
+  </li>
+</ul>
+
+<hr style="border: none; border-top: 1px solid var(--border-color); margin: 1rem 0;">
+
 <strong id="resources">Resources</strong>
 
 <p style="margin-top: 1rem; text-align: left;">
