@@ -84,6 +84,7 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
   <li style="margin-bottom: 0.5rem;"><strong>Community marketplaces:</strong>
     <ol style="margin: 0.5rem 0 0 1.5rem;">
       <li style="margin-bottom: 0.25rem;"><a href="https://skillsmp.com/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">skillsmp.com</a></li>
+      <li style="margin-bottom: 0.25rem;"><a href="https://agent37.com/skills/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">agent37.com</a></li>
       <li style="margin-bottom: 0.25rem;"><a href="https://skillhub.club/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">skillhub.club</a></li>
     </ol>
   </li>
