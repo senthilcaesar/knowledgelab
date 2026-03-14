@@ -8,60 +8,88 @@ const concepts = [
     title: 'Claude Skills Tutorial',
     category: '',
     tags: [''],
-    description: `
+    tabs: [
+      {
+        label: 'Overview',
+        content: `
+<p style="margin-bottom:1.25rem; line-height:1.75;">Whether you're a complete beginner looking to build your first website, or an experienced developer looking to speed up your workflow, getting started with Claude Skills is easier than you think. In this simple guide, we'll watch Claude Skills in action as it guides us through building a website, taking our input at each step. Let's go!</p>
 
-Whether you're a complete beginner looking to build your first website, or an experienced developer looking to speed up your workflow, getting started with Claude Skills is easier than you think. In this simple guide, we'll watch Claude Skills in action as it guides us through building a website, taking our input at each step. Let's go!
+<p style="margin-bottom:1.25rem; line-height:1.75;">A skill is a set of instructions — packaged as a simple folder — that teaches Claude how to handle specific tasks or workflows.</p>
 
-A skill is a set of instructions - packaged as a simple folder - that teaches Claude how to handle specific tasks or workflows. 
+<p style="margin-bottom:1.25rem; line-height:1.75;">Skills are powerful when you have repeatable workflows: generating frontend designs from specs, conducting research with consistent methodology or creating documents that follow your team's style guide. For more details on Skills check out the <a href="#" data-goto-tab="6" style="color: var(--accent-primary); text-decoration: underline;">resources section</a>.</p>
 
-Skills are powerful when you have repeatable workflows: generating frontend designs from specs, conducting research with consistent methodology or creating documents that follow your team's style guide. For more details on Skills check out the <a href="#resources" style="color: var(--accent-primary); text-decoration: underline;">resources section below</a>
+<p style="line-height:1.75;">Instead of repeating instructions every time you ask Claude to review a pull request or write a commit message, you write a skill once and Claude applies it whenever the task comes up.</p>
+`
+      },
+      {
+        label: 'Step 1 – Download',
+        content: `
+<strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 1 – Download the Skills Repo]</strong>
 
-<hr style="border: none; border-top: 1px solid var(--border-color); margin: 1rem 0;">
-
-<strong>[STEP 1 – Download the Skills Repo]</strong>
-
-To kick things off, open your terminal and clone the claude skills repo from GitHub with this command:
+<p style="margin-bottom:1rem; line-height:1.75;">To kick things off, open your terminal and clone the claude skills repo from GitHub with this command:</p>
 
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">git clone https://github.com/anthropics/skills.git</code>
+`
+      },
+      {
+        label: 'Step 2 – Install',
+        content: `
+<strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 2 – Place the Skills in the Right Folder]</strong>
 
-<hr style="border: none; border-top: 1px solid var(--border-color); margin: 1rem 0;">
+<p style="margin-bottom:1rem; line-height:1.75;">Next, drop the skills folder into <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code>. Don't see that folder? Just create it. This is where Claude looks for skills — so this part matters.</p>
 
-<strong>[STEP 2 – Place the Skills in the Right Folder]</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">Each skill lives in a <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">SKILL.md</code> file with a name and description in its frontmatter. Claude uses the description to match skills to requests.</p>
 
-Next, drop the skills folder into <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code>. Don't see that folder? Just create it. This is where Claude looks for skills — so this part matters.
+<p style="margin-bottom:1rem; line-height:1.75;">Here's what a skill's frontmatter looks like:</p>
+
+<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
+  <img src="/knowledgelab/images/gitskill.png" alt="Git Skill Frontmatter" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+</div>
+
+<p style="margin-bottom:1rem; line-height:1.75;">When you ask Claude to do something, it compares your request against available skill descriptions and activates the ones that match.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Personal skills go in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code> and follow you across all projects. Project skills go in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/skills</code> inside a repository and are shared with anyone who clones it.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Skills load on demand — unlike <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> (which loads into every conversation — for example, if you want Claude to always use TypeScript's strict mode, that goes in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code>) or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">slash commands</code> (which require explicit invocation).</p>
+
+<p style="line-height:1.75;">If you find yourself explaining the same thing to Claude repeatedly, that's a skill waiting to be written.</p>
 
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
   <img src="/knowledgelab/images/skill3.png" alt="Terminal Skills Placement" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
 </div>
+`
+      },
+      {
+        label: 'Step 3 – Launch Claude',
+        content: `
+<strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 3 – Launch Claude in Your Terminal]</strong>
 
-<hr style="border: none; border-top: 1px solid var(--border-color); margin: 1rem 0;">
+<p style="margin-bottom:1rem; line-height:1.75;">If you are new to Claude Code, please install it by following the instructions at <a href="https://code.claude.com/docs/en/quickstart" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">https://code.claude.com/docs/en/quickstart</a>.</p>
 
-<strong>[STEP 3 – Launch Claude in Your Terminal]</strong>
-
-If you are new to Claude Code, please install it by following the instructions at <a href="https://code.claude.com/docs/en/quickstart" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">https://code.claude.com/docs/en/quickstart</a>. 
-
-Usually, you can launch it by simply typing <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">claude</code> in your terminal. For this tutorial, however, I am launching Claude using an open source free model via Ollama with this command:
+<p style="margin-bottom:1rem; line-height:1.75;">Usually, you can launch it by simply typing <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">claude</code> in your terminal. For this tutorial, however, I am launching Claude using an open source free model via Ollama with this command:</p>
 
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">ollama launch claude --model glm-4.7:cloud</code>
 
-<em>Note: Since I am practicing and learning to use Claude Code, I don't want to pay for an Anthropic API key yet. Because of this, I will be launching Claude using an open source free model via Ollama!</em>
+<p style="margin: 1rem 0; line-height:1.75;"><em>Note: Since I am practicing and learning to use Claude Code, I don't want to pay for an Anthropic API key yet. Because of this, I will be launching Claude using an open source free model via Ollama!</em></p>
 
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
-  <img src="/knowledgelab/images/skill1.png" alt="Terminal Skills Execution 1" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+  <img src="/knowledgelab/images/skill1.png" alt="Terminal Skills Execution" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
 </div>
+`
+      },
+      {
+        label: 'Step 4 – Call a Skill',
+        content: `
+<strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 4 – Call the Skill]</strong>
 
-<hr style="border: none; border-top: 1px solid var(--border-color); margin: 1rem 0;">
-
-<strong>[STEP 4 – Call the Skill]</strong>
-
-Here's the fun part — just type:
+<p style="margin-bottom:1rem; line-height:1.75;">Here's the fun part — just type:</p>
 
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">/frontend-design</code>
 
-And Claude takes it from there. It'll walk you through the design, the layout, everything.
+<p style="margin: 1rem 0; line-height:1.75;">And Claude takes it from there. It'll walk you through the design, the layout, everything.</p>
 
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
-  <img src="/knowledgelab/images/skill2.png" alt="Terminal Skills Execution 2" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+  <img src="/knowledgelab/images/skill2.png" alt="Terminal Skills Execution" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
 </div>
 
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 1.5rem 0; font-family: monospace; color: var(--code-text-secondary); white-space: pre-wrap; line-height: 1.5;">❯ /frontend-design
@@ -73,11 +101,19 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
   3. Any technical constraints? (framework preference - React/Vue/vanilla HTML/CSS, accessibility requirements, performance considerations)
   4. Is there a specific aesthetic direction you prefer? (or should I propose something bold and unique?)</code>
 
-<hr style="border: none; border-top: 1px solid var(--border-color); margin: 1rem 0;">
+<p style="margin: 1rem 0; line-height:1.75;">When Claude matches a skill to your request, you'll see it load in the terminal:</p>
 
-<strong>[STEP 5 – Where to find skills]</strong>
+<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
+  <img src="/knowledgelab/images/callskill.png" alt="Skill Loading in Terminal" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+</div>
+`
+      },
+      {
+        label: 'Step 5 – Find Skills',
+        content: `
+<strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 5 – Where to Find Skills]</strong>
 
-<p style="margin: 1rem 0;">You can find more skills to use with Claude Code in the following places:</p>
+<p style="margin: 1rem 0; line-height:1.75;">You can find more skills to use with Claude Code in the following places:</p>
 
 <ul style="margin: 1rem 0 1.5rem 2rem; color: var(--text-secondary); line-height: 1.6;">
   <li style="margin-bottom: 0.5rem;"><strong>Anthropic official:</strong> <a href="https://github.com/anthropics/skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">https://github.com/anthropics/skills</a></li>
@@ -89,10 +125,12 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
     </ol>
   </li>
 </ul>
-
-<hr style="border: none; border-top: 1px solid var(--border-color); margin: 1rem 0;">
-
-<strong id="resources">Resources</strong>
+`
+      },
+      {
+        label: 'Resources',
+        content: `
+<strong id="resources" style="display:block; margin-bottom:1rem; font-size:1rem;">Resources</strong>
 
 <p style="margin-top: 1rem; text-align: left;">
   <a href="https://share.google/9HXMh2Ezc32YiJrVy" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">The Complete Guide to Building Skills for Claude</a>
@@ -102,7 +140,10 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
 </p>
 <p style="margin-top: 0.5rem; text-align: left;">
   <a href="https://claude.com/blog/improving-frontend-design-through-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">Best practices for building richer, more customized frontend design with Claude and Skills</a>
-</p>`,
+</p>
+`
+      }
+    ],
     interactiveType: 'custom'
   },
   {
@@ -310,27 +351,86 @@ const app = {
 
   renderConcept(concept) {
     const contentArea = document.getElementById('content-area');
-    contentArea.innerHTML = `
-      <article class="concept-card">
-        <h2 class="concept-title">${concept.title}</h2>
-        <div class="concept-meta">
-          <span class="tag">${concept.category}</span>
-          ${concept.tags.map(t => `<span class="tag">${t}</span>`).join('')}
-        </div>
-        <div class="concept-content" id="concept-description">
-          ${(concept.description || 'Add your description here...').split('\n\n').map(p => `<p>${p}</p>`).join('')}
-        </div>
-      </article>
-    `;
-    this.attachCopyButtons();
+
+    if (concept.tabs && concept.tabs.length > 0) {
+      // Render tabbed interface
+      const tabButtons = concept.tabs.map((tab, i) =>
+        `<button class="tutorial-tab-btn${i === 0 ? ' active' : ''}" data-tab="${i}">${tab.label}</button>`
+      ).join('');
+
+      const tabPanels = concept.tabs.map((tab, i) =>
+        `<div class="tutorial-tab-panel${i === 0 ? ' active' : ''}" data-panel="${i}">
+          <div class="concept-content" id="concept-description-${i}">
+            ${tab.content.split('\n\n').map(p => `<p>${p}</p>`).join('')}
+          </div>
+        </div>`
+      ).join('');
+
+      contentArea.innerHTML = `
+        <article class="concept-card concept-card--tabs">
+          <nav class="tutorial-tabs" role="tablist">${tabButtons}</nav>
+          <div class="tutorial-tab-content">${tabPanels}</div>
+        </article>
+      `;
+
+      this.initTabs();
+      // Attach copy buttons to the first (active) panel
+      concept.tabs.forEach((_, i) => {
+        const el = document.getElementById(`concept-description-${i}`);
+        if (el) this.attachCopyButtonsTo(el);
+      });
+    } else {
+      contentArea.innerHTML = `
+        <article class="concept-card">
+          <h2 class="concept-title">${concept.title}</h2>
+          <div class="concept-meta">
+            <span class="tag">${concept.category}</span>
+            ${concept.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+          </div>
+          <div class="concept-content" id="concept-description">
+            ${(concept.description || 'Add your description here...').split('\n\n').map(p => `<p>${p}</p>`).join('')}
+          </div>
+        </article>
+      `;
+      this.attachCopyButtons();
+    }
+  },
+
+  initTabs() {
+    const btns = document.querySelectorAll('.tutorial-tab-btn');
+    const panels = document.querySelectorAll('.tutorial-tab-panel');
+
+    const switchToTab = (index) => {
+      btns.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      btns[index].classList.add('active');
+      panels[index].classList.add('active');
+    };
+
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => switchToTab(Number(btn.dataset.tab)));
+    });
+
+    // Wire up any in-content links that jump to a specific tab
+    document.querySelectorAll('[data-goto-tab]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchToTab(Number(link.dataset.gotoTab));
+      });
+    });
   },
 
   attachCopyButtons() {
     const conceptDescription = document.getElementById('concept-description');
     if (!conceptDescription) return;
+    this.attachCopyButtonsTo(conceptDescription);
+  },
+
+  attachCopyButtonsTo(container) {
+    if (!container) return;
 
     // Find all code blocks
-    const codeBlocks = conceptDescription.querySelectorAll('code');
+    const codeBlocks = container.querySelectorAll('code');
     
     codeBlocks.forEach(code => {
       // Only attach to block-level code elements (the ones with inline styles or specifically for commands)
