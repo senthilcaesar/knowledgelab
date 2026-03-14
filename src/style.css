@@ -1912,8 +1912,7 @@ h1, h2, h3 {
 .tutorial-tab-content {
   flex: 1;
   overflow-y: auto;             /* ← the only thing that scrolls */
-  padding: 1.75rem;
-  /* Smooth momentum scroll on iOS */
+  padding: 1.75rem 1.75rem 4rem; /* extra bottom room so last content can scroll into view */
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: var(--border-color) transparent;

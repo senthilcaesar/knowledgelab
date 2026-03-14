@@ -16,25 +16,19 @@ const concepts = [
 
 <p style="margin-bottom:1.25rem; line-height:1.75;">A skill is a set of instructions — packaged as a simple folder — that teaches Claude how to handle specific tasks or workflows.</p>
 
-<p style="margin-bottom:1.25rem; line-height:1.75;">Skills are powerful when you have repeatable workflows: generating frontend designs from specs, conducting research with consistent methodology or creating documents that follow your team's style guide. For more details on Skills check out the <a href="#" data-goto-tab="6" style="color: var(--accent-primary); text-decoration: underline;">resources section</a>.</p>
+<p style="margin-bottom:1.25rem; line-height:1.75;">Skills are powerful when you have repeatable workflows: generating frontend designs from specs, conducting research with consistent methodology or creating documents that follow your team's style guide. For more details on Skills check out the <a href="#" data-goto-tab="5" style="color: var(--accent-primary); text-decoration: underline;">resources section</a>.</p>
 
 <p style="line-height:1.75;">Instead of repeating instructions every time you ask Claude to review a pull request or write a commit message, you write a skill once and Claude applies it whenever the task comes up.</p>
 `
       },
       {
-        label: 'Step 1 – Download',
+        label: 'Step 1 – Setup',
         content: `
-<strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 1 – Download the Skills Repo]</strong>
+<strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 1 – Download & Install the Skills Repo]</strong>
 
-<p style="margin-bottom:1rem; line-height:1.75;">To kick things off, open your terminal and clone the claude skills repo from GitHub with this command:</p>
+<p style="margin-bottom:1rem; line-height:1.75;">To kick things off, open your terminal and clone the Claude Skills repo from GitHub:</p>
 
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">git clone https://github.com/anthropics/skills.git</code>
-`
-      },
-      {
-        label: 'Step 2 – Install',
-        content: `
-<strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 2 – Place the Skills in the Right Folder]</strong>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Next, drop the skills folder into <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code>. Don't see that folder? Just create it. This is where Claude looks for skills — so this part matters.</p>
 
@@ -46,11 +40,9 @@ const concepts = [
   <img src="/knowledgelab/images/gitskill.png" alt="Git Skill Frontmatter" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
 </div>
 
-<p style="margin-bottom:1rem; line-height:1.75;">When you ask Claude to do something, it compares your request against available skill descriptions and activates the ones that match.</p>
-
 <p style="margin-bottom:1rem; line-height:1.75;">Personal skills go in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code> and follow you across all projects. Project skills go in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/skills</code> inside a repository and are shared with anyone who clones it.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Skills load on demand — unlike <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> (which loads into every conversation — for example, if you want Claude to always use TypeScript's strict mode, that goes in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code>) or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">slash commands</code> (which require explicit invocation).</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Skills load on demand — unlike <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> (which loads into every conversation) or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">slash commands</code> (which require explicit invocation).</p>
 
 <p style="line-height:1.75;">If you find yourself explaining the same thing to Claude repeatedly, that's a skill waiting to be written.</p>
 
@@ -60,7 +52,7 @@ const concepts = [
 `
       },
       {
-        label: 'Step 3 – Launch Claude',
+        label: 'Step 2 – Launch Claude',
         content: `
 <strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 3 – Launch Claude in Your Terminal]</strong>
 
@@ -78,15 +70,19 @@ const concepts = [
 `
       },
       {
-        label: 'Step 4 – Call a Skill',
+        label: 'Step 3 – Call a Skill',
         content: `
-<strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 4 – Call the Skill]</strong>
+<strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 3 – Call the Skill]</strong>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Here's the fun part — just type:</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">There are two ways to call a skill:</p>
+
+<p style="margin: 1.25rem 0 0.4rem; font-weight: 600; color: var(--text-primary);">① Slash command — call it directly by name</p>
+<p style="margin: 0 0 0.75rem; line-height:1.75; color: var(--text-secondary);">Type the skill's name prefixed with a <code style="padding: 0.15rem 0.35rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/</code> and Claude invokes it immediately:</p>
 
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">/frontend-design</code>
 
 <p style="margin: 1rem 0; line-height:1.75;">And Claude takes it from there. It'll walk you through the design, the layout, everything.</p>
+
 
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
   <img src="/knowledgelab/images/skill2.png" alt="Terminal Skills Execution" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
@@ -101,6 +97,10 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
   3. Any technical constraints? (framework preference - React/Vue/vanilla HTML/CSS, accessibility requirements, performance considerations)
   4. Is there a specific aesthetic direction you prefer? (or should I propose something bold and unique?)</code>
 
+<p style="margin: 1.75rem 0 0.4rem; font-weight: 600; color: var(--text-primary);">② Natural language — just describe what you want</p>
+<p style="margin: 0 0 0.75rem; line-height:1.75; color: var(--text-secondary);">No slash needed. Claude reads your request and automatically matches it to the right skill:</p>
+<p style="margin: 0 0 1rem; line-height:1.75;"><em>"push the recent changes to GitHub"</em> — Claude picks up the git-push skill and handles it end to end.</p>
+
 <p style="margin: 1rem 0; line-height:1.75;">When Claude matches a skill to your request, you'll see it load in the terminal:</p>
 
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
@@ -109,9 +109,9 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
 `
       },
       {
-        label: 'Step 5 – Find Skills',
+        label: 'Step 4 – Find Skills',
         content: `
-<strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 5 – Where to Find Skills]</strong>
+<strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 4 – Where to Find Skills]</strong>
 
 <p style="margin: 1rem 0; line-height:1.75;">You can find more skills to use with Claude Code in the following places:</p>
 
@@ -361,7 +361,7 @@ const app = {
       const tabPanels = concept.tabs.map((tab, i) =>
         `<div class="tutorial-tab-panel${i === 0 ? ' active' : ''}" data-panel="${i}">
           <div class="concept-content" id="concept-description-${i}">
-            ${tab.content.split('\n\n').map(p => `<p>${p}</p>`).join('')}
+            ${tab.content}
           </div>
         </div>`
       ).join('');
