@@ -1844,18 +1844,30 @@ h1, h2, h3 {
    TUTORIAL TABS
    ============================================== */
 
+/*
+ * The card itself clips its own rounded corners (overflow:hidden).
+ * It stretches to fill the content-area column via align-self:stretch.
+ * Only .tutorial-tab-content scrolls — the tab bar stays pinned at the top.
+ */
 .concept-card--tabs {
   padding: 0;
-  /* no overflow:hidden — let tab content be scrollable via parent content-area */
+  overflow: hidden;              /* clips children to the card's border-radius  */
+  display: flex;
+  flex-direction: column;
+  /* Fill available height so the inner scroll works properly */
+  align-self: stretch;
+  max-height: calc(100vh - 8rem); /* leave room for top-bar + content-area padding */
 }
 
+/* ── Tab bar ── */
 .tutorial-tabs {
   display: flex;
   flex-wrap: nowrap;
   gap: 0;
-  padding: 1.5rem 1.75rem 0;
+  padding: 1.25rem 1.75rem 0;
   border-bottom: 2px solid var(--border-color);
   overflow-x: auto;
+  flex-shrink: 0;               /* never let the tab bar compress */
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -1864,6 +1876,7 @@ h1, h2, h3 {
   display: none;
 }
 
+/* ── Tab buttons ── */
 .tutorial-tab-btn {
   flex-shrink: 0;
   padding: 0.6rem 1.2rem;
@@ -1879,7 +1892,7 @@ h1, h2, h3 {
   transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
   white-space: nowrap;
   position: relative;
-  margin-bottom: -2px;   /* overlap the bottom border */
+  margin-bottom: -2px;          /* overlap the 2px bottom border */
 }
 
 .tutorial-tab-btn:hover {
@@ -1890,15 +1903,34 @@ h1, h2, h3 {
 .tutorial-tab-btn.active {
   color: var(--accent-primary);
   font-weight: 650;
-  background: rgba(0, 242, 255, 0.06);  /* subtle cyan tint — dark mode */
+  background: rgba(0, 242, 255, 0.06);
   border-color: var(--border-color);
   border-bottom-color: rgba(0, 242, 255, 0.06);
 }
 
+/* ── Scrollable content panel ── */
 .tutorial-tab-content {
+  flex: 1;
+  overflow-y: auto;             /* ← the only thing that scrolls */
   padding: 1.75rem;
+  /* Smooth momentum scroll on iOS */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) transparent;
 }
 
+.tutorial-tab-content::-webkit-scrollbar {
+  width: 4px;
+}
+.tutorial-tab-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.tutorial-tab-content::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+/* ── Tab panels ── */
 .tutorial-tab-panel {
   display: none;
   animation: tabFadeIn 0.22s ease-out;
@@ -1913,7 +1945,19 @@ h1, h2, h3 {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Light mode fixes ── */
+/* Images & code always contained */
+.tutorial-tab-panel img {
+  max-width: 100%;
+  height: auto;
+}
+
+.tutorial-tab-panel code[style*="display: block"],
+.tutorial-tab-panel .code-wrapper {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+/* ── Light mode ── */
 :root.light-mode .tutorial-tab-btn {
   color: #555;
 }
@@ -1925,18 +1969,19 @@ h1, h2, h3 {
 
 :root.light-mode .tutorial-tab-btn.active {
   color: var(--accent-primary);
-  background: rgba(176, 141, 87, 0.12);  /* warm brass tint — matches sidebar active nav */
+  background: rgba(176, 141, 87, 0.12);
   border-color: rgba(176, 141, 87, 0.3);
   border-bottom-color: rgba(176, 141, 87, 0.12);
 }
 
-/* ── Tablet (641px – 1024px) ── */
+/* ── Tablet (641 – 1024px) ── */
 @media (min-width: 641px) and (max-width: 1024px) {
+  .concept-card--tabs {
+    max-height: calc(100vh - 7rem);
+  }
+
   .tutorial-tabs {
-    padding: 1.25rem 1.25rem 0;
-    gap: 0;
-    overflow-x: auto;
-    flex-wrap: nowrap;
+    padding: 1rem 1.25rem 0;
   }
 
   .tutorial-tab-btn {
@@ -1951,23 +1996,19 @@ h1, h2, h3 {
 
 /* ── Mobile (≤ 640px) ── */
 @media (max-width: 640px) {
-  /* Tab bar scrolls horizontally; single row with enough tap targets */
+  .concept-card--tabs {
+    max-height: calc(100vh - 5rem); /* top-bar is 60px on mobile */
+    border-radius: 16px;
+  }
+
   .tutorial-tabs {
     padding: 0.75rem 0.75rem 0;
-    gap: 0;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    /* Fade hint at the right edge so user knows it scrolls */
-    -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
-    mask-image: linear-gradient(to right, black 85%, transparent 100%);
   }
 
   .tutorial-tab-btn {
-    font-size: 0.75rem;
-    padding: 0.55rem 0.85rem;
-    /* Ensure tappable area is at least 44px tall */
-    min-height: 44px;
+    font-size: 0.74rem;
+    padding: 0.5rem 0.8rem;
+    min-height: 44px;           /* iOS/Android minimum tap target */
     display: inline-flex;
     align-items: center;
   }
@@ -1976,30 +2017,12 @@ h1, h2, h3 {
     padding: 1rem 0.875rem;
   }
 
-  /* Images inside tabs should never overflow on mobile */
-  .tutorial-tab-panel img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 6px;
-  }
-
-  /* Code blocks: horizontal scroll instead of overflow */
-  .tutorial-tab-panel code {
-    white-space: pre;
-    overflow-x: auto;
-    display: block;
-    max-width: 100%;
-  }
-
-  .tutorial-tab-panel .code-wrapper {
-    overflow-x: auto;
-  }
-
-  /* Tighter paragraph spacing inside panels */
   .tutorial-tab-panel p {
     font-size: 0.9rem;
     line-height: 1.65;
   }
 }
+
+
 
 
