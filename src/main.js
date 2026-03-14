@@ -96,8 +96,7 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
   2. What's the purpose and audience? (e.g., portfolio site, admin dashboard, e-commerce checkout, creative agency homepage)
   3. Any technical constraints? (framework preference - React/Vue/vanilla HTML/CSS, accessibility requirements, performance considerations)
   4. Is there a specific aesthetic direction you prefer? (or should I propose something bold and unique?)</code>
-
-<p style="margin: 1.75rem 0 0.4rem; font-weight: 600; color: var(--text-primary);">② Natural language — just describe what you want</p>
+<p style="margin: 0 0 0.4rem; font-weight: 600; color: var(--text-primary);">② Natural language — just describe what you want</p>
 <p style="margin: 0 0 0.75rem; line-height:1.75; color: var(--text-secondary);">No slash needed. Claude reads your request and automatically matches it to the right skill:</p>
 <p style="margin: 0 0 1rem; line-height:1.75;"><em>"push the recent changes to GitHub"</em> — Claude picks up the git-push skill and handles it end to end.</p>
 

@@ -290,11 +290,11 @@ h1, h2, h3 {
 
 .content-area {
   flex: 1;
-  padding: 2rem;
+  padding: 1rem 0.75rem;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .welcome-card {
@@ -323,10 +323,14 @@ h1, h2, h3 {
 /* Concept Cards */
 .concept-card {
   background: var(--surface-color);
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.04);  /* near-invisible in dark mode */
   border-radius: 24px;
   padding: 2rem;
   animation: slideIn 0.5s ease-out;
+}
+
+:root.light-mode .concept-card {
+  border-color: rgba(67, 52, 34, 0.06);          /* near-invisible in light mode */
 }
 
 @keyframes slideIn {
@@ -1854,9 +1858,13 @@ h1, h2, h3 {
   overflow: hidden;              /* clips children to the card's border-radius  */
   display: flex;
   flex-direction: column;
-  /* Fill available height so the inner scroll works properly */
   align-self: stretch;
-  max-height: calc(100vh - 8rem); /* leave room for top-bar + content-area padding */
+  max-height: calc(100vh - 8rem);
+  border: 1px solid rgba(255, 255, 255, 0.04);  /* near-invisible in dark mode */
+}
+
+:root.light-mode .concept-card--tabs {
+  border-color: rgba(67, 52, 34, 0.06);          /* near-invisible in light mode */
 }
 
 /* ── Tab bar ── */
