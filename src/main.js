@@ -34,7 +34,7 @@ const concepts = [
 
 <p style="margin-bottom:1rem; line-height:1.75;">Each skill lives in a <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">SKILL.md</code> file with a name and description in its frontmatter. Claude uses the description to match skills to requests.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Here's what a skill's frontmatter looks like:</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Here's what a skill's frontmatter looks like: The <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">  name</code> identifies your skill and the <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">description</code> tell Claude when to use it.</p>
 
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
   <img src="/knowledgelab/images/gitskill.png" alt="Git Skill Frontmatter" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
@@ -54,7 +54,7 @@ const concepts = [
       {
         label: 'Step 2 – Launch Claude',
         content: `
-<strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 3 – Launch Claude in Your Terminal]</strong>
+<strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 2 – Launch Claude in Your Terminal]</strong>
 
 <p style="margin-bottom:1rem; line-height:1.75;">If you are new to Claude Code, please install it by following the instructions at <a href="https://code.claude.com/docs/en/quickstart" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">https://code.claude.com/docs/en/quickstart</a>.</p>
 
@@ -73,6 +73,10 @@ const concepts = [
         label: 'Step 3 – Call a Skill',
         content: `
 <strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 3 – Call the Skill]</strong>
+
+<p style="margin-bottom:1rem; line-height:1.75;">To know what skills are available, just ask Claude in the terminal:</p>
+
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">What skills are available?</code>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">There are two ways to call a skill:</p>
 
@@ -104,6 +108,18 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
 
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
   <img src="/knowledgelab/images/callskill.png" alt="Skill Loading in Terminal" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+</div>
+
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 2rem 0;">
+  <p style="margin-bottom: 0.75rem; line-height:1.75; color: var(--text-primary); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 1.15rem;">
+    <span>💡</span> When Claude Code starts, it scans four locations for skills:
+  </p>
+  <ul style="margin: 0 0 0 1.5rem; color: var(--text-secondary); line-height: 1.6; font-family: monospace; font-size: 1.05rem;">
+    <li style="margin-bottom: 0.25rem;">Enterprise (managed settings) - managed-settings.json</li>
+    <li style="margin-bottom: 0.25rem;">Personal (your home directory) - ~/.claude/skills</li>
+    <li style="margin-bottom: 0.25rem;">Project (your project directory) - .claude/skills</li>
+    <li style="margin-bottom: 0;">Plugins (installed plugins) - .claude-plugin/plugin.json</li>
+  </ul>
 </div>
 `
       },
