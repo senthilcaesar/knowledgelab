@@ -196,7 +196,8 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
         content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">21st.dev Magic</strong>
 
-<p style="margin-bottom:0.75rem; line-height:1.75;">A tool that helps developers create beautiful, modern UI components instantly through natural language descriptions.</p>
+<p style="margin-bottom:0.75rem; line-height:1.75;">A   <a href="https://21st.dev/home" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">tool</a>
+ that helps developers create beautiful, modern UI components instantly through natural language descriptions.</p>
 
 <div style="margin: 1rem 0; padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px;">
   <p style="margin-bottom:0.5rem;"><strong>Official Link (Get your API key here):</strong></p>
@@ -416,7 +417,15 @@ const app = {
     this.initTheme();
     this.initStudyMode();
     this.initTechStackModal();
-    this.renderWelcome();
+
+    // Initial routing based on hash
+    const hash = window.location.hash.substring(1);
+    if (hash && concepts.some(c => c.id === hash)) {
+      this.selectConcept(hash);
+    } else {
+      this.renderWelcome();
+    }
+    
     // Start the neural constellation background
     initConstellation(document.getElementById('constellation-bg'));
   },
@@ -537,11 +546,31 @@ const app = {
         item.style.display = text.includes(query) ? 'block' : 'none';
       });
     });
+
+    // Hash navigation listener
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.substring(1);
+      if (hash && concepts.some(c => c.id === hash)) {
+        if (!this.activeConcept || this.activeConcept.id !== hash) {
+          this.selectConcept(hash);
+        }
+      } else if (!hash) {
+        // Handle direct home navigation via hash removal
+        this.activeConcept = null;
+        document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+        this.renderWelcome();
+      }
+    });
   },
 
   selectConcept(id) {
     const concept = concepts.find(c => c.id === id);
     if (!concept) return;
+
+    // Update URL hash
+    if (window.location.hash !== `#${id}`) {
+      window.location.hash = id;
+    }
 
     // Hide constellation when reading a concept
     document.getElementById('constellation-bg').style.display = 'none';
@@ -549,7 +578,9 @@ const app = {
     // Update UI
     this.activeConcept = concept;
     document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-    document.querySelector(`[data-id="${id}"]`).classList.add('active');
+    
+    const navItem = document.querySelector(`[data-id="${id}"]`);
+    if (navItem) navItem.classList.add('active');
 
     this.renderConcept(concept);
   },
