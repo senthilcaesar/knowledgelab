@@ -12,11 +12,11 @@ const concepts = [
       {
         label: 'Overview',
         content: `
-<p style="margin-bottom:1.25rem; line-height:1.75;">Whether you're a complete beginner looking to build your first website, or an experienced developer looking to speed up your workflow, getting started with Claude Skills is easier than you think. In this simple guide, we'll watch Claude Skills in action as it guides us through building a website, taking our input at each step. Let's go!</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Whether you're a complete beginner looking to build your first website, or an experienced developer looking to speed up your workflow, getting started with Claude Skills is easier than you think. In this simple guide, we'll watch Claude Skills in action as it guides us through building a website, taking our input at each step. Let's go!</p>
 
-<p style="margin-bottom:1.25rem; line-height:1.75;">A skill is a set of instructions — packaged as a simple folder — that teaches Claude how to handle specific tasks or workflows.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">A skill is a set of instructions — packaged as a simple folder — that teaches Claude how to handle specific tasks or workflows.</p>
 
-<p style="margin-bottom:1.25rem; line-height:1.75;">Skills are powerful when you have repeatable workflows: generating frontend designs from specs, conducting research with consistent methodology or creating documents that follow your team's style guide. For more details on Skills check out the <a href="#" data-goto-tab="5" style="color: var(--accent-primary); text-decoration: underline;">resources section</a>.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Skills are powerful when you have repeatable workflows: generating frontend designs from specs, conducting research with consistent methodology or creating documents that follow your team's style guide. For more details on Skills check out the <a href="#" data-goto-tab="5" style="color: var(--accent-primary); text-decoration: underline;">resources section</a>.</p>
 
 <p style="line-height:1.75;">Instead of repeating instructions every time you ask Claude to review a pull request or write a commit message, you write a skill once and Claude applies it whenever the task comes up.</p>
 `
@@ -24,55 +24,53 @@ const concepts = [
       {
         label: 'Step 1 – Setup',
         content: `
-<strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 1 – Download & Install the Skills Repo]</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 1 – Download & Install the Skills Repo]</strong>
 
-<p style="margin-bottom:1rem; line-height:1.75;">To kick things off, open your terminal and clone the Claude Skills repo from GitHub:</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">To kick things off, open your terminal and clone the Claude Skills repo from GitHub:</p>
 
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">git clone https://github.com/anthropics/skills.git</code>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Next, drop the skills folder into <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code>. Don't see that folder? Just create it. This is where Claude looks for skills — so this part matters.</p>
+<p style="margin: 0.5rem 0; line-height:1.75;">Next, drop the skills folder into <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code>. Don't see that folder? Just create it. This is where Claude looks for skills — so this part matters.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Each skill lives in a <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">SKILL.md</code> file with a name and description in its frontmatter. Claude uses the description to match skills to requests.</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">Each skill lives in a <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">SKILL.md</code> file with a name and description in its frontmatter. Claude uses the description to match skills to requests.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Here's what a skill's frontmatter looks like: The <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">  name</code> identifies your skill and the <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">description</code> tell Claude when to use it.</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">Here's what a skill's frontmatter looks like: The <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">  name</code> identifies your skill and the <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">description</code> tell Claude when to use it.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;">A good description answers two questions:</p>
-<ul style="margin: 0 0 0 1.5rem; color: var(--text-secondary); line-height: 1.6; font-family: monospace; font-size: 1.05rem;">
+<p style="margin-bottom:0.5rem; line-height:1.75;">A good description answers two questions:</p>
+<ul style="margin: 0 0 0.5rem 1.5rem; color: var(--text-secondary); line-height: 1.6; font-family: monospace; font-size: 1.05rem;">
   <li style="margin-bottom: 0.25rem;">What does this skill do?</li>
   <li style="margin-bottom: 0.25rem;">When should Claude use it?</li>
 </ul>
 
-<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
+<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; align-items: center;">
   <img src="/knowledgelab/images/gitskill.png" alt="Git Skill Frontmatter" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
 </div>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Personal skills go in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code> and follow you across all projects. Project skills go in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/skills</code> inside a repository and are shared with anyone who clones it.</p>
+<p style="margin-bottom:0.75rem; line-height:1.75;">Personal skills go in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code> and follow you across all projects. Project skills go in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/skills</code> inside a repository and are shared with anyone who clones it.</p>
 
-<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
+<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; align-items: center;">
   <img src="/knowledgelab/images/skill3.png" alt="Terminal Skills Placement" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
 </div>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Skills load on demand — unlike <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> (which loads into every conversation) or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">slash commands</code> (which require explicit invocation).</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">Skills load on demand — unlike <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> (which loads into every conversation) or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">slash commands</code> (which require explicit invocation).</p>
 
 <p style="line-height:1.75;">If you find yourself explaining the same thing to Claude repeatedly, that's a skill waiting to be written.</p>
-
-
 `
       },
       {
         label: 'Step 2 – Launch Claude',
         content: `
-<strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 2 – Launch Claude in Your Terminal]</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 2 – Launch Claude in Your Terminal]</strong>
 
-<p style="margin-bottom:1rem; line-height:1.75;">If you are new to Claude Code, please install it by following the instructions at <a href="https://code.claude.com/docs/en/quickstart" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">https://code.claude.com/docs/en/quickstart</a>.</p>
+<p style="margin-bottom:0.75rem; line-height:1.75;">If you are new to Claude Code, please install it by following the instructions at <a href="https://code.claude.com/docs/en/quickstart" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">https://code.claude.com/docs/en/quickstart</a>.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Usually, you can launch it by simply typing <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">claude</code> in your terminal. For this tutorial, however, I am launching Claude using an open source free model via Ollama with this command:</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">Usually, you can launch it by simply typing <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">claude</code> in your terminal. For this tutorial, however, I am launching Claude using an open source free model via Ollama with this command:</p>
 
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">ollama launch claude --model glm-4.7:cloud</code>
 
-<p style="margin: 1rem 0; line-height:1.75;"><em>Note: Since I am practicing and learning to use Claude Code, I don't want to pay for an Anthropic API key yet. Because of this, I will be launching Claude using an open source free model via Ollama!</em></p>
+<p style="margin: 0.5rem 0; line-height:1.75;"><em>Note: Since I am practicing and learning to use Claude Code, I don't want to pay for an Anthropic API key yet. Because of this, I will be launching Claude using an open source free model via Ollama!</em></p>
 
-<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
+<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; align-items: center;">
   <img src="/knowledgelab/images/skill1.png" alt="Terminal Skills Execution" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
 </div>
 `
@@ -80,27 +78,29 @@ const concepts = [
       {
         label: 'Step 3 – Call a Skill',
         content: `
-<strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 3 – Call the Skill]</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 3 – Call the Skill]</strong>
 
-<p style="margin-bottom:1rem; line-height:1.75;">To know what skills are available, just ask Claude in the terminal:</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">To know what skills are available, just ask Claude in the terminal:</p>
 
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">What skills are available?</code>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">There are two ways to call a skill:</p>
 
-<p style="margin: 1.25rem 0 0.4rem; font-weight: 600; color: var(--text-primary);">① Slash command — call it explicitly by name</p>
-<p style="margin: 0 0 0.75rem; line-height:1.75; color: var(--text-secondary);">Type the skill's name prefixed with a <code style="padding: 0.15rem 0.35rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/</code> and Claude invokes it immediately:</p>
+<p style="margin: 0.75rem 0 0.25rem; font-weight: 600; color: var(--text-primary);">① Slash command — call it explicitly by name</p>
+<p style="margin: 0 0 0.5rem; line-height:1.75; color: var(--text-secondary);">Type the skill's name prefixed with a <code style="padding: 0.15rem 0.35rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/</code> and Claude invokes it immediately:</p>
 
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">/frontend-design</code>
 
-<p style="margin: 1rem 0; line-height:1.75;">And Claude takes it from there. It'll walk you through the design, the layout, everything.</p>
+<p style="margin: 1rem 0 0.25rem; font-weight: 600; color: var(--text-primary);">② Natural language — Claude picks the right one</p>
+<p style="margin: 0 0 0.5rem; line-height:1.75; color: var(--text-secondary);">Just describe what you need, and Claude will find and run the matching skill:</p>
 
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">create a pixel-perfect React contact form with validation</code>
 
-<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
-  <img src="/knowledgelab/images/skill2.png" alt="Terminal Skills Execution" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; align-items: center;">
+  <img src="/knowledgelab/images/skill2.png" alt="Natural Language Skills" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
 </div>
 
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 1.5rem 0; font-family: monospace; color: var(--code-text-secondary); white-space: pre-wrap; line-height: 1.5;">❯ /frontend-design
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text-secondary); white-space: pre-wrap; line-height: 1.5;">❯ /frontend-design
 
 I'll help you create a distinctive, production-grade frontend interface. To get started, please tell me:
    
@@ -108,17 +108,17 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
   2. What's the purpose and audience? (e.g., portfolio site, admin dashboard, e-commerce checkout, creative agency homepage)
   3. Any technical constraints? (framework preference - React/Vue/vanilla HTML/CSS, accessibility requirements, performance considerations)
   4. Is there a specific aesthetic direction you prefer? (or should I propose something bold and unique?)</code>
-<p style="margin: 0 0 0.4rem; font-weight: 600; color: var(--text-primary);">② Natural language — just describe what you want</p>
-<p style="margin: 0 0 0.75rem; line-height:1.75; color: var(--text-secondary);">No slash needed. Claude reads your request and automatically matches it to the right skill:</p>
-<p style="margin: 0 0 1rem; line-height:1.75;"><em>"push the recent changes to GitHub"</em> — Claude picks up the git-push skill and handles it end to end.</p>
+<p style="margin: 0 0 0.25rem; font-weight: 600; color: var(--text-primary);">② Natural language — just describe what you want</p>
+<p style="margin: 0 0 0.5rem; line-height:1.75; color: var(--text-secondary);">No slash needed. Claude reads your request and automatically matches it to the right skill:</p>
+<p style="margin: 0 0 0.75rem; line-height:1.75;"><em>"push the recent changes to GitHub"</em> — Claude picks up the git-push skill and handles it end to end.</p>
 
-<p style="margin: 1rem 0; line-height:1.75;">When Claude matches a skill to your request, you'll see it load in the terminal:</p>
+<p style="margin: 0.5rem 0; line-height:1.75;">When Claude matches a skill to your request, you'll see it load in the terminal:</p>
 
-<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
+<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; align-items: center;">
   <img src="/knowledgelab/images/callskill.png" alt="Skill Loading in Terminal" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
 </div>
 
-<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 2rem 0;">
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1rem 0;">
   <p style="margin-bottom: 0.75rem; line-height:1.75; color: var(--text-primary); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 1.15rem;">
     <span>💡</span> When Claude Code starts, it scans four locations for skills:
   </p>
@@ -134,11 +134,11 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
       {
         label: 'Step 4 – Find Skills',
         content: `
-<strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 4 – Where to Find Skills]</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 4 – Where to Find Skills]</strong>
 
-<p style="margin: 1rem 0; line-height:1.75;">You can find more skills to use with Claude Code in the following places:</p>
+<p style="margin: 0.5rem 0; line-height:1.75;">You can find more skills to use with Claude Code in the following places:</p>
 
-<ul style="margin: 1rem 0 1.5rem 2rem; color: var(--text-secondary); line-height: 1.6;">
+<ul style="margin: 0.5rem 0 1rem 2rem; color: var(--text-secondary); line-height: 1.6;">
   <li style="margin-bottom: 0.5rem;"><strong>Anthropic official:</strong> <a href="https://github.com/anthropics/skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">https://github.com/anthropics/skills</a></li>
   <li style="margin-bottom: 0.5rem;"><strong>Community marketplaces:</strong>
     <ol style="margin: 0.5rem 0 0 1.5rem;">
@@ -153,21 +153,173 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
       {
         label: 'Resources',
         content: `
-<strong id="resources" style="display:block; margin-bottom:1rem; font-size:1rem;">Resources</strong>
+<strong id="resources" style="display:block; margin-bottom:0.75rem; font-size:1rem;">Resources</strong>
 
-<p style="margin-top: 0.5rem; text-align: left;">
+<p style="margin-top: 0.25rem; text-align: left;">
   <a href="https://anthropic.skilljar.com/introduction-to-agent-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">Introduction to agent skills</a>
 </p>
 
-<p style="margin-top: 0.5rem; text-align: left;">
+<p style="margin-top: 0.25rem; text-align: left;">
   <a href="https://agentskills.io/home" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">An Open Standard for AI Agent Skills</a>
 </p>
-<p style="margin-top: 1rem; text-align: left;">
+<p style="margin-top: 0.5rem; text-align: left;">
   <a href="https://share.google/9HXMh2Ezc32YiJrVy" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">The Complete Guide to Building Skills for Claude</a>
 </p>
-<p style="margin-top: 0.5rem; text-align: left;">
+<p style="margin-top: 0.25rem; text-align: left;">
   <a href="https://claude.com/blog/improving-frontend-design-through-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">Best practices for building richer, more customized frontend design with Claude and Skills</a>
 </p>
+`
+      },
+    ],
+    interactiveType: 'custom'
+  },
+    {
+    id: 'claude-mcp',
+    title: 'Claude MCP',
+    category: '',
+    tags: [''],
+    tabs: [
+      {
+        label: 'Overview',
+        content: `
+<p style="margin-bottom:1rem; line-height:1.75;">The Model Context Protocol (<a href="https://modelcontextprotocol.io/docs/getting-started/intro" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">MCP</a>) is an open standard that enables Claude to interact with external tools and data sources. This modular architecture allows you to extend Claude's capabilities with specialized services.</p>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">In this section, we will configure Claude to connect to <strong>two</strong> powerful MCP servers:</p>
+<ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
+  <li style="margin-bottom: 0.5rem;"><strong>21st.dev Magic:</strong> Create modern, production-ready UI components.</li>
+  <li style="margin-bottom: 0.5rem;"><strong>Supadata:</strong> Advanced web and video scraping capabilities.</li>
+</ul>
+`
+      },
+      {
+        label: '21st.dev Magic',
+        content: `
+<strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">21st.dev Magic</strong>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">A tool that helps developers create beautiful, modern UI components instantly through natural language descriptions.</p>
+
+<div style="margin: 1rem 0; padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px;">
+  <p style="margin-bottom:0.5rem;"><strong>Official Link (Get your API key here):</strong></p>
+  <a href="https://21st.dev/magic" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">https://21st.dev/magic</a>
+</div>
+
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>Installation Command:</strong></p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text-secondary); white-space: pre-wrap;">claude mcp add magic --scope user --env API_KEY="YOUR_API_KEY" -- npx -y @21st-dev/magic@latest</code>
+<p style="margin-top: 0.5rem; margin-bottom: 0.5rem; line-height: 1.75; color: var(--text-secondary);">After installation, you can verify your configuration by reading the <code>~/.claude.json</code> file in your home directory. It should contain the following MCP server entries:</p>
+
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">{
+  "mcpServers": {
+    "magic": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@21st-dev/magic@latest"
+      ],
+      "env": {
+        "API_KEY": "ab1115bb368968***************c8b2867599589"
+      }
+    }
+  }
+}</code>
+
+<p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Once installed, try the following example prompt. In the below image, you can see the 21st.dev MCP server is invoked.</p>
+
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">create a modern navigation bar with responsive design</code>
+
+<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; align-items: center;">
+  <img src="/knowledgelab/images/21stdev.png" alt="21st.dev Magic Interface" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+</div>
+`
+      },
+      {
+        label: 'Supadata',
+        content: `
+<strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">Supadata MCP</strong>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">The Supadata MCP server enables powerful web and video scraping capabilities directly within AI development environments like Claude. This open-source integration allows AI models to extract transcripts, scrape web pages, and crawl entire websites to gather context.</p>
+
+<div style="margin: 1rem 0; padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px;">
+  <p style="margin-bottom:0.5rem;"><strong>Official Link (Get your API key here):</strong></p>
+  <a href="https://supadata.ai/" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">https://supadata.ai/</a>
+</div>
+
+<p style="margin-top:1rem; margin-bottom:1rem; line-height:1.75;"><strong>Installation Command:</strong></p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text-secondary); white-space: pre-wrap;">claude mcp add supadata --scope user --env SUPADATA_API_KEY="YOUR_API_KEY" -- npx -y @supadata/mcp</code>
+
+<p style="margin-top:1rem; margin-bottom:0.5rem; line-height: 1.75; color: var(--text-secondary);">Alternatively, you can manually add the configuration by opening your <code>~/.claude.json</code> file and adding the following entry:</p>
+
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">{
+  "mcpServers": {
+    "supadata": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supadata/mcp"
+      ],
+      "env": {
+        "SUPADATA_API_KEY": "sd_2816a*************360eb7a803"
+      }
+    }
+  }
+}</code>
+
+<p style="margin-top:1rem; margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Once the installation is complete, try pasting a YouTube video URL like the one below in your Claude terminal. You will see the Supadata tool automatically invoked to extract the transcript:</p>
+
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">https://youtu.be/Dp6u0pel-Rs</code>
+
+<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
+  <img src="/knowledgelab/images/supa1.png" alt="Supadata Step 1" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+  <img src="/knowledgelab/images/supa2.png" alt="Supadata Step 2" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+  <img src="/knowledgelab/images/supa3.png" alt="Supadata Step 3" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+</div>
+
+<p style="margin-top:1rem; margin-bottom:0.5rem;"><strong>Documentation & Integration:</strong></p>
+<a href="https://docs.supadata.ai/integrations/mcp" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">https://docs.supadata.ai/integrations/mcp</a>
+`
+      },
+      {
+        label: 'Tool Reference',
+        content: `
+<p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Lists all configured MCP servers in your Claude Code setup (<code>~/.claude.json</code>)</p>
+
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text);">claude mcp list</code>
+
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Terminal Output]</strong>
+
+<code style="display: block; padding: 1rem; background: #000; border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'Fira Code', monospace; color: #fff; white-space: pre-wrap; line-height: 1.5; font-size: 0.9rem;">
+⏺ Bash(claude mcp list)
+  ⎿ Checking MCP server health...
+
+     supadata: npx -y @supadata/mcp - ✓ Connected
+     magic: npx -y @21st-dev/magic@latest - ✓ Connected
+
+⏺ MCP Servers (2 connected):
+
+  ┌──────────┬───────────────────────────────┬─────────────┐
+  │  Server  │            Command            │   Status    │
+  ├──────────┼───────────────────────────────┼─────────────┤
+  │ supadata │ npx -y @supadata/mcp          │ ✓ Connected │
+  ├──────────┼───────────────────────────────┼─────────────┤
+  │ magic    │ npx -y @21st-dev/magic@latest │ ✓ Connected │
+  └──────────┴───────────────────────────────┴─────────────┘
+
+  Available Tools
+
+  supadata — Web content extraction:
+  - supadata_transcript — Extract transcripts from YouTube, TikTok, Instagram, Twitter, or video files
+  - supadata_check_transcript_status — Check transcript job progress
+  - supadata_scrape — Scrape web pages to Markdown
+  - supadata_map — Crawl website to discover all URLs
+  - supadata_crawl — Batch crawl website to extract content from all pages
+  - supadata_check_crawl_status — Check crawl job progress
+
+  magic — 21st.dev UI components:
+  - 21st_magic_component_builder — Build new UI components from library
+  - 21st_magic_component_inspiration — Browse UI component examples
+  - 21st_magic_component_refiner — Redesign/improve existing UI components
+  - logo_search — Search for company logos in JSX/TSX/SVG formats
+</code>
 `
       }
     ],
@@ -211,8 +363,8 @@ Access the prompts and configuration files here:
       {
         label: 'Overview',
         content: `
-<p style="margin-bottom:1.25rem; line-height:1.75;">AI Engineering refers to the process of building applications on top of foundation models.</p>
-<p style="margin-bottom:1.25rem; line-height:1.75;">The model as a service makes it easier to leverage AI to build applications. Models are exposed via APIs that receive user queries and return model outputs.
+<p style="margin-bottom:0.75rem; line-height:1.75;">AI Engineering refers to the process of building applications on top of foundation models.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">The model as a service makes it easier to leverage AI to build applications. Models are exposed via APIs that receive user queries and return model outputs.
 Without these APIs, using an AI model required the infrastructure to host and serve this model. These APIs give you access to powerful models via single API calls.</p>
 
 `
@@ -220,150 +372,9 @@ Without these APIs, using an AI model required the infrastructure to host and se
       {
         label: 'Fundamental Building Blocks',
         content: `
-<strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 1 – Download & Install the Skills Repo]</strong>
 
-<p style="margin-bottom:1rem; line-height:1.75;">To kick things off, open your terminal and clone the Claude Skills repo from GitHub:</p>
+This page is currently under development. Please check back soon.
 
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">git clone https://github.com/anthropics/skills.git</code>
-
-<p style="margin-bottom:1rem; line-height:1.75;">Next, drop the skills folder into <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code>. Don't see that folder? Just create it. This is where Claude looks for skills — so this part matters.</p>
-
-<p style="margin-bottom:1rem; line-height:1.75;">Each skill lives in a <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">SKILL.md</code> file with a name and description in its frontmatter. Claude uses the description to match skills to requests.</p>
-
-<p style="margin-bottom:1rem; line-height:1.75;">Here's what a skill's frontmatter looks like: The <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">  name</code> identifies your skill and the <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">description</code> tell Claude when to use it.</p>
-
-<p style="margin-bottom:1rem; line-height:1.75;">A good description answers two questions:</p>
-<ul style="margin: 0 0 0 1.5rem; color: var(--text-secondary); line-height: 1.6; font-family: monospace; font-size: 1.05rem;">
-  <li style="margin-bottom: 0.25rem;">What does this skill do?</li>
-  <li style="margin-bottom: 0.25rem;">When should Claude use it?</li>
-</ul>
-
-<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
-  <img src="/knowledgelab/images/gitskill.png" alt="Git Skill Frontmatter" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
-</div>
-
-<p style="margin-bottom:1rem; line-height:1.75;">Personal skills go in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code> and follow you across all projects. Project skills go in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/skills</code> inside a repository and are shared with anyone who clones it.</p>
-
-<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
-  <img src="/knowledgelab/images/skill3.png" alt="Terminal Skills Placement" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
-</div>
-
-<p style="margin-bottom:1rem; line-height:1.75;">Skills load on demand — unlike <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> (which loads into every conversation) or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">slash commands</code> (which require explicit invocation).</p>
-
-<p style="line-height:1.75;">If you find yourself explaining the same thing to Claude repeatedly, that's a skill waiting to be written.</p>
-
-
-`
-      },
-      {
-        label: 'Step 2',
-        content: `
-<strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 2 – Launch Claude in Your Terminal]</strong>
-
-<p style="margin-bottom:1rem; line-height:1.75;">If you are new to Claude Code, please install it by following the instructions at <a href="https://code.claude.com/docs/en/quickstart" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">https://code.claude.com/docs/en/quickstart</a>.</p>
-
-<p style="margin-bottom:1rem; line-height:1.75;">Usually, you can launch it by simply typing <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">claude</code> in your terminal. For this tutorial, however, I am launching Claude using an open source free model via Ollama with this command:</p>
-
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">ollama launch claude --model glm-4.7:cloud</code>
-
-<p style="margin: 1rem 0; line-height:1.75;"><em>Note: Since I am practicing and learning to use Claude Code, I don't want to pay for an Anthropic API key yet. Because of this, I will be launching Claude using an open source free model via Ollama!</em></p>
-
-<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
-  <img src="/knowledgelab/images/skill1.png" alt="Terminal Skills Execution" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
-</div>
-`
-      },
-      {
-        label: 'Step 3',
-        content: `
-<strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 3 – Call the Skill]</strong>
-
-<p style="margin-bottom:1rem; line-height:1.75;">To know what skills are available, just ask Claude in the terminal:</p>
-
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">What skills are available?</code>
-
-<p style="margin-bottom:0.5rem; line-height:1.75;">There are two ways to call a skill:</p>
-
-<p style="margin: 1.25rem 0 0.4rem; font-weight: 600; color: var(--text-primary);">① Slash command — call it explicitly by name</p>
-<p style="margin: 0 0 0.75rem; line-height:1.75; color: var(--text-secondary);">Type the skill's name prefixed with a <code style="padding: 0.15rem 0.35rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/</code> and Claude invokes it immediately:</p>
-
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">/frontend-design</code>
-
-<p style="margin: 1rem 0; line-height:1.75;">And Claude takes it from there. It'll walk you through the design, the layout, everything.</p>
-
-
-<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
-  <img src="/knowledgelab/images/skill2.png" alt="Terminal Skills Execution" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
-</div>
-
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 1.5rem 0; font-family: monospace; color: var(--code-text-secondary); white-space: pre-wrap; line-height: 1.5;">❯ /frontend-design
-
-I'll help you create a distinctive, production-grade frontend interface. To get started, please tell me:
-   
-  1. What would you like to build? (a component, page, dashboard, landing page, application interface, etc.)
-  2. What's the purpose and audience? (e.g., portfolio site, admin dashboard, e-commerce checkout, creative agency homepage)
-  3. Any technical constraints? (framework preference - React/Vue/vanilla HTML/CSS, accessibility requirements, performance considerations)
-  4. Is there a specific aesthetic direction you prefer? (or should I propose something bold and unique?)</code>
-<p style="margin: 0 0 0.4rem; font-weight: 600; color: var(--text-primary);">② Natural language — just describe what you want</p>
-<p style="margin: 0 0 0.75rem; line-height:1.75; color: var(--text-secondary);">No slash needed. Claude reads your request and automatically matches it to the right skill:</p>
-<p style="margin: 0 0 1rem; line-height:1.75;"><em>"push the recent changes to GitHub"</em> — Claude picks up the git-push skill and handles it end to end.</p>
-
-<p style="margin: 1rem 0; line-height:1.75;">When Claude matches a skill to your request, you'll see it load in the terminal:</p>
-
-<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
-  <img src="/knowledgelab/images/callskill.png" alt="Skill Loading in Terminal" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
-</div>
-
-<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 2rem 0;">
-  <p style="margin-bottom: 0.75rem; line-height:1.75; color: var(--text-primary); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 1.15rem;">
-    <span>💡</span> When Claude Code starts, it scans four locations for skills:
-  </p>
-  <ul style="margin: 0 0 0 1.5rem; color: var(--text-secondary); line-height: 1.6; font-family: monospace; font-size: 1.05rem;">
-    <li style="margin-bottom: 0.25rem;">Enterprise (managed settings) - managed-settings.json</li>
-    <li style="margin-bottom: 0.25rem;">Personal (your home directory) - ~/.claude/skills</li>
-    <li style="margin-bottom: 0.25rem;">Project (your project directory) - .claude/skills</li>
-    <li style="margin-bottom: 0;">Plugins (installed plugins) - .claude-plugin/plugin.json</li>
-  </ul>
-</div>
-`
-      },
-      {
-        label: 'Step 4',
-        content: `
-<strong style="display:block; margin-bottom:1rem; font-size:1rem;">[STEP 4 – Where to Find Skills]</strong>
-
-<p style="margin: 1rem 0; line-height:1.75;">You can find more skills to use with Claude Code in the following places:</p>
-
-<ul style="margin: 1rem 0 1.5rem 2rem; color: var(--text-secondary); line-height: 1.6;">
-  <li style="margin-bottom: 0.5rem;"><strong>Anthropic official:</strong> <a href="https://github.com/anthropics/skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">https://github.com/anthropics/skills</a></li>
-  <li style="margin-bottom: 0.5rem;"><strong>Community marketplaces:</strong>
-    <ol style="margin: 0.5rem 0 0 1.5rem;">
-      <li style="margin-bottom: 0.25rem;"><a href="https://skillsmp.com/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">skillsmp.com</a></li>
-      <li style="margin-bottom: 0.25rem;"><a href="https://agent37.com/skills/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">agent37.com</a></li>
-      <li style="margin-bottom: 0.25rem;"><a href="https://skillhub.club/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">skillhub.club</a></li>
-    </ol>
-  </li>
-</ul>
-`
-      },
-      {
-        label: 'Resources',
-        content: `
-<strong id="resources" style="display:block; margin-bottom:1rem; font-size:1rem;">Resources</strong>
-
-<p style="margin-top: 0.5rem; text-align: left;">
-  <a href="https://anthropic.skilljar.com/introduction-to-agent-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">Introduction to agent skills</a>
-</p>
-
-<p style="margin-top: 0.5rem; text-align: left;">
-  <a href="https://agentskills.io/home" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">An Open Standard for AI Agent Skills</a>
-</p>
-<p style="margin-top: 1rem; text-align: left;">
-  <a href="https://share.google/9HXMh2Ezc32YiJrVy" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">The Complete Guide to Building Skills for Claude</a>
-</p>
-<p style="margin-top: 0.5rem; text-align: left;">
-  <a href="https://claude.com/blog/improving-frontend-design-through-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">Best practices for building richer, more customized frontend design with Claude and Skills</a>
-</p>
 `
       }
     ],
