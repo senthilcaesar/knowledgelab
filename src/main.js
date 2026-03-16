@@ -182,8 +182,7 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
       {
         label: 'Overview',
         content: `
-<p style="margin-bottom:1rem; line-height:1.75;">The Model Context Protocol (<a href="https://modelcontextprotocol.io/docs/getting-started/intro" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">MCP</a>) is an open standard that enables Claude to interact with external tools and data sources. This modular architecture allows you to extend Claude's capabilities with specialized services.</p>
-
+<p style="margin-bottom:1rem; line-height:1.75;">The Model Context Protocol (<a href="https://modelcontextprotocol.io/docs/getting-started/intro" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">MCP</a>) is an open standard that enables Claude to interact with external tools and data sources. This modular architecture allows you to extend Claude's capabilities with specialized services. Claude Code can connect to hundreds of external tools and data sources through MCP.</p>
 <p style="margin-bottom:0.75rem; line-height:1.75;">In this section, we will configure Claude to connect to <strong>two</strong> powerful MCP servers:</p>
 <ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
   <li style="margin-bottom: 0.5rem;"><strong>21st.dev Magic:</strong> Create modern, production-ready UI components.</li>
@@ -323,6 +322,8 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
   - 21st_magic_component_refiner — Redesign/improve existing UI components
   - logo_search — Search for company logos in JSX/TSX/SVG formats
 </code>
+<p style="margin-top:1rem; margin-bottom:0.5rem;"><strong>Official Documentation:</strong></p>
+<a href="https://code.claude.com/docs/en/mcp" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">https://code.claude.com/docs/en/mcp</a>
 `
       }
     ],
