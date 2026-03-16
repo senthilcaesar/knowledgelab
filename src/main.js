@@ -5,7 +5,7 @@ import pkg from '../package.json'
 const concepts = [
   {
     id: 'claude-skills-tutorial',
-    title: 'Claude Skills Tutorial',
+    title: 'Claude Skills',
     category: '',
     tags: [''],
     tabs: [
