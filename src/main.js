@@ -432,6 +432,13 @@ const app = {
       panels.forEach(p => p.classList.remove('active'));
       btns[index].classList.add('active');
       panels[index].classList.add('active');
+
+      // Scroll the active tab into the center of the viewport
+      btns[index].scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center'
+      });
     };
 
     btns.forEach(btn => {
