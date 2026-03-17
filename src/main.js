@@ -276,13 +276,70 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
 
 <p style="margin-top:1rem; margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Once the installation is complete, try pasting a YouTube video URL like the one below in your Claude terminal. You will see the Supadata tool automatically invoked to extract the transcript:</p>
 
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">https://youtu.be/Dp6u0pel-Rs</code>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">https://youtu.be/1em64iUFt3U</code>
 
-<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
-  <img src="/knowledgelab/images/supa1.png" alt="Supadata Step 1" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
-  <img src="/knowledgelab/images/supa2.png" alt="Supadata Step 2" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
-  <img src="/knowledgelab/images/supa3.png" alt="Supadata Step 3" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
-</div>
+<code style="display: block; padding: 1rem; background: #000; border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'Fira Code', monospace; color: #fff; white-space: pre-wrap; line-height: 1.5; font-size: 0.9rem;">
+⏺ I'll extract the transcript from that YouTube video for you.
+
+⏺ <span style="color: #ffff00;">supadata - supadata_transcript (MCP)</span>(url: "https://youtu.be/1em64iUFt3U")
+  ⎿  ⚠ Large MCP response (~19.6k tokens), this can fill up context quickly
+  ⎿  {
+       "lang": "en",
+       "availableLangs": [
+     … +631 lines (ctrl+o to expand)                                                                                                  
+   
+⏺ The transcript has been extracted. It's quite long (76.9KB), so let me read the full content to provide you with a complete         
+                                                                                                                                                                                                                                        
+⏺ Transcript Summary
+
+  This is a Lenny's Podcast interview with Zevy Arnowitz, a Product Manager at Meta with zero technical background who learned to build real products using AI tools like Cursor and Claude Code.
+
+  Key Highlights:
+
+  Zevy's Background:
+  - Completely non-technical (music in high school, not in tech army unit)
+  - Discovered AI coding tools during a trip to Japan when Sonnet 3.5 came out
+  - Watched a YouTube video about Bolt/Lovable and felt like he was given "superpowers"
+
+  His AI Coding Journey:
+  1. Started with ChatGPT Projects - Created a "CTO" with custom prompts to challenge his ideas
+  2. Graduated to Bolt/Lovable - Hit limitations when things got complex
+  3. Now uses Cursor with Claude Code - Full control over development
+
+  His Workflow:
+  1. Exploration - Use Cursor's Ask mode to explore ideas
+  2. Planning - Use /CreatePlan to generate detailed implementation plans
+  3. Building - Use Composer (Cursor's fast model) or switch to Gemini for UI work
+  4. Code Review - Multi-model review process:
+    - Claude Code reviews its own work
+    - CodeX (GPT's competitor) also reviews
+    - Uses a "peer review" /command to have models debate issues
+  5. Learning - /LearningOpportunity to learn from the code
+  6. Documentation - Updates prompts/docs when AI makes mistakes
+
+  His Philosophy on Different AI Models:
+  - Claude: The perfect CTO - communicative, smart, opinionated but collaborative
+  - CodeX/GPT: The best coder in a hoodie - not communicative but fixes hard bugs
+  - Gemini: The crazy scientist - great at UI design but terrifying to watch work
+
+  Key Advice:
+  - Start gradually: ChatGPT Projects → Bolt/Lovable → Cursor
+  - Treat AI as a learning partner, not just a tool
+  - "It's not that you'll be replaced by AI, you'll be replaced by someone better at using AI"
+  - Best time to be junior - you can build startups on your own now
+
+  His Products:
+  - StudyMate - A study companion app (currently being localized)
+  - The Vortex - Dictation product for Hebrew speakers in Israel
+
+  Other Interesting Points:
+  - Used AI to help him prepare for and pass interviews at Meta
+  - Created a quiz game to practice product segmentation questions
+  - Emphasizes post-mortems and updating prompts to prevent repeated AI mistakes
+  - Believes titles and responsibilities will collapse - "everyone's going to become a builder"
+
+  This conversation is incredibly inspiring for non-technical people showing how AI democratizes software development.
+</code>
 
 <p style="margin-top:1rem; margin-bottom:0.5rem;"><strong>Documentation & Integration:</strong></p>
 <a href="https://docs.supadata.ai/integrations/mcp" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">https://docs.supadata.ai/integrations/mcp</a>
