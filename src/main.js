@@ -143,6 +143,7 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
   <li style="margin-bottom: 0.5rem;"><strong>Community marketplaces:</strong>
     <ol style="margin: 0.5rem 0 0 1.5rem;">
       <li style="margin-bottom: 0.25rem;"><a href="https://skillsmp.com/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">skillsmp.com</a></li>
+      <li style="margin-bottom: 0.25rem;"><a href="https://skills.sh/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">skills.sh</a></li>
       <li style="margin-bottom: 0.25rem;"><a href="https://agent37.com/skills/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">agent37.com</a></li>
       <li style="margin-bottom: 0.25rem;"><a href="https://skillhub.club/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">skillhub.club</a></li>
       <li style="margin-bottom: 0.25rem;"><a href="https://www.uupm.cc/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">UI UX Pro Max</a></li>
@@ -424,7 +425,7 @@ Access the prompts and configuration files here:
 `,
     interactiveType: 'custom'
   },
-    {
+  {
     id: 'ai-engineering',
     title: 'AI Engineering',
     category: '',
@@ -445,6 +446,98 @@ Without these APIs, using an AI model required the infrastructure to host and se
 
 This page is currently under development. Please check back soon.
 
+`
+      }
+    ],
+    interactiveType: 'custom'
+  },
+  {
+    id: 'build-app-skill-mcp',
+    title: 'Build App with Agent Skill + MCP',
+    category: 'Tutorial',
+    tags: ['Agentic', 'Firebase', 'GitHub'],
+    tabs: [
+      {
+        label: 'Overview',
+        content: `
+<p style="margin-bottom:1rem; line-height:1.75;">Welcome! This tutorial will guide you through building a modern "Zen" URL tracker application from scratch using <strong>Antigravity</strong> (AI Coding Agent), <strong>Firebase</strong> (Cloud Services), and <strong>GitHub</strong> (Version Control & CI/CD).</p>
+<div style="padding: 1rem; background: var(--surface-color); border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 1rem;">
+  <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.75; color: var(--text-secondary);">
+    <li><strong>Goal</strong>: Build ZenShelf - a premium link curation app.</li>
+    <li><strong>Soul</strong>: React + Vite + Local Storage logic.</li>
+    <li><strong>Cloud</strong>: Firestore + Google Auth integration.</li>
+    <li><strong>Hand-off</strong>: Automated deployment via GitHub Actions.</li>
+  </ul>
+</div>
+`
+      },
+      {
+        label: '1. Setup',
+        content: `
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Environment Setup]</strong>
+<p style="margin-bottom:0.5rem;">Install the mandatory Gemini CLI extensions:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">gemini extensions install https://github.com/gemini-cli-extensions/firebase/
+gemini extensions install https://github.com/obra/superpowers</code>
+
+<p style="margin-top:1rem; margin-bottom:0.5rem;">Configure MCP Servers in Antigravity (Settings > Customizations):</p>
+<ul style="margin-bottom:1rem; line-height:1.6; color: var(--text-secondary);">
+  <li><strong>StitchMCP</strong> – For advanced UI generation</li>
+  <li><strong>Firebase</strong> – For cloud management</li>
+  <li><strong>GitHub</strong> – For repo & CI/CD</li>
+  <li><strong>21st.dev Magic</strong> – For premium components</li>
+</ul>
+
+<p style="margin-bottom:0.5rem;">Add Firebase Agent Skills:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">npx skills add firebase/agent-skills</code>
+`
+      },
+      {
+        label: '2. Build',
+        content: `
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[3-Stage Development]</strong>
+
+<p style="margin-bottom:0.5rem; font-weight: 600;">Phase 1: The Soul (Logic)</p>
+<p style="color: var(--text-secondary); margin-bottom:0.5rem;">Paste this into Antigravity:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 1rem; font-family: monospace; color: var(--code-text);">I want to build a 'ZenShelf' React application using Vite. Use Lucide icons. The app is a URL tracker where users can save links, descriptions, status, categories, and priority levels. Use local storage for now.</code>
+
+<p style="margin-bottom:0.5rem; font-weight: 600;">Phase 2: The Vessel (Design)</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 1rem; font-family: monospace; color: var(--code-text);">Now, give ZenShelf a 'Zen' aesthetic. Use vanilla CSS, high-end dark mode, glassmorphism, and smooth micro-animations. Make it mobile-responsive with a card layout.</code>
+
+<p style="margin-bottom:0.5rem; font-weight: 600;">Phase 3: The Cloud (Firebase)</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; font-family: monospace; color: var(--code-text);">/firebase_init. Create 'ZenShelf Tracker'. Replace local storage with Cloud Firestore. Setup security rules and Google Sign-In.</code>
+`
+      },
+      {
+        label: '3. Deploy',
+        content: `
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Automated Deployment]</strong>
+
+<p style="margin-bottom:0.5rem;"><strong>Step 1: Manual Fix</strong></p>
+<p style="color: var(--text-secondary); margin-bottom:1rem;">Go to Firebase Console > Authentication and enable <strong>Google</strong> sign-in provider manually.</p>
+
+<p style="margin-bottom:0.5rem;"><strong>Step 2: Initialize Git</strong></p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 1rem; font-family: monospace; color: var(--code-text);">git init
+git remote add origin https://github.com/&lt;user&gt;/repo.git
+git add . && git commit -m "initial release" && git push -u origin main</code>
+
+<p style="margin-bottom:0.5rem;"><strong>Step 3: Setup CD</strong></p>
+<p style="color: var(--text-secondary);">Ask Antigravity:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; font-family: monospace; color: var(--code-text);">Create a GitHub Actions workflow that automatically builds and deploys my app to GitHub Pages whenever I push to main.</code>
+`
+      },
+      {
+        label: 'Concepts',
+        content: `
+<div style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+  <div style="padding: 1rem; background: var(--surface-color); border-radius: 12px; border-left: 4px solid var(--accent-primary);">
+    <strong style="display:block; margin-bottom:0.5rem;">Agent Skills</strong>
+    <p style="font-size: 0.9rem; color: var(--text-secondary);">The "Brain" – providing authoritative expertise on specific tech (like Firebase) to ensure best practices.</p>
+  </div>
+  <div style="padding: 1rem; background: var(--surface-color); border-radius: 12px; border-left: 4px solid var(--accent-secondary);">
+    <strong style="display:block; margin-bottom:0.5rem;">MCP Servers</strong>
+    <p style="font-size: 0.9rem; color: var(--text-secondary);">The "Hands" – bridging the AI to the real world to create databases, repositories, and UI designs.</p>
+  </div>
+</div>
 `
       }
     ],
