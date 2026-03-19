@@ -19,6 +19,12 @@ const concepts = [
 <p style="margin-bottom:1rem; line-height:1.75;">Skills are powerful when you have repeatable workflows: generating frontend designs from specs, conducting research with consistent methodology or creating documents that follow your team's style guide. For more details on Skills check out the <a href="#" data-goto-tab="5" style="color: var(--accent-primary); text-decoration: underline;">resources section</a>.</p>
 
 <p style="line-height:1.75;">Instead of repeating instructions every time you ask Claude to review a pull request or write a commit message, you write a skill once and Claude applies it whenever the task comes up.</p>
+
+<div style="margin-top: 2rem; display: flex; justify-content: flex-end; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="1" class="tutorial-nav-link">
+    Next: Step 1 – Setup <span>→</span>
+  </a>
+</div>
 `,
       },
       {
@@ -55,6 +61,15 @@ const concepts = [
 <p style="margin-bottom:0.5rem; line-height:1.75;">Skills load on demand — unlike <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> (which loads into every conversation) or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">slash commands</code> (which require explicit invocation).</p>
 
 <p style="line-height:1.75;">If you find yourself explaining the same thing to Claude repeatedly, that's a skill waiting to be written.</p>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="0" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Overview
+  </a>
+  <a href="#" data-goto-tab="2" class="tutorial-nav-link">
+    Next: Step 2 – Launch Claude <span>→</span>
+  </a>
+</div>
 `,
       },
       {
@@ -72,6 +87,15 @@ const concepts = [
 
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; align-items: center;">
   <img src="/knowledgelab/images/skill1.png" alt="Terminal Skills Execution" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+</div>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="1" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Step 1
+  </a>
+  <a href="#" data-goto-tab="3" class="tutorial-nav-link">
+    Next: Step 3 – Call a Skill <span>→</span>
+  </a>
 </div>
 `,
       },
@@ -129,6 +153,15 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
     <li style="margin-bottom: 0;">Plugins (installed plugins) - .claude-plugin/plugin.json</li>
   </ul>
 </div>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="2" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Step 2
+  </a>
+  <a href="#" data-goto-tab="4" class="tutorial-nav-link">
+    Next: Step 4 – Find Skills <span>→</span>
+  </a>
+</div>
 `,
       },
       {
@@ -158,6 +191,15 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
     </ul>
   </li>
 </ul>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="3" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Step 3
+  </a>
+  <a href="#" data-goto-tab="5" class="tutorial-nav-link">
+    Next: Step 5 – Resources <span>→</span>
+  </a>
+</div>
 `,
       },
       {
@@ -178,219 +220,11 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
 <p style="margin-top: 0.25rem; text-align: left;">
   <a href="https://claude.com/blog/improving-frontend-design-through-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">Best practices for building richer, more customized frontend design with Claude and Skills</a>
 </p>
-`,
-      },
-    ],
-    interactiveType: 'custom',
-  },
-  {
-    id: 'claude-mcp',
-    title: 'Claude MCP',
-    category: '',
-    tags: [''],
-    tabs: [
-      {
-        label: 'Overview',
-        content: `
-<p style="margin-bottom:1rem; line-height:1.75;">The Model Context Protocol (<a href="https://modelcontextprotocol.io/docs/getting-started/intro" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">MCP</a>) is an open standard that enables Claude to interact with external tools and data sources. This modular architecture allows you to extend Claude's capabilities with specialized services. Claude Code can connect to hundreds of external tools and data sources through MCP.</p>
-<p style="margin-bottom:0.75rem; line-height:1.75;">In this section, we will configure Claude to connect to <strong>two</strong> powerful MCP servers:</p>
-<ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
-  <li style="margin-bottom: 0.5rem;"><strong>21st.dev Magic:</strong> Create modern, production-ready UI components.</li>
-  <li style="margin-bottom: 0.5rem;"><strong>Supadata:</strong> Advanced web and video scraping capabilities.</li>
-</ul>
-`,
-      },
-      {
-        label: '21st.dev Magic',
-        content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">21st.dev Magic</strong>
 
-<p style="margin-bottom:0.75rem; line-height:1.75;">A   <a href="https://21st.dev/home" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">tool</a>
- that helps developers create beautiful, modern UI components instantly through natural language descriptions.</p>
-
-<div style="margin: 1rem 0; padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px;">
-  <p style="margin-bottom:0.5rem;"><strong>Official Link (Get your API key here):</strong></p>
-  <a href="https://21st.dev/magic" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">https://21st.dev/magic</a>
+  <a href="#" data-goto-concept="build-webapp-ai" class="tutorial-nav-link">
+    Next Level: Build Web App with AI <span>→</span>
+  </a>
 </div>
-
-<p style="margin-bottom:1rem; line-height:1.75;"><strong>Installation Command:</strong></p>
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text-secondary); white-space: pre-wrap;">claude mcp add magic --scope user --env API_KEY="YOUR_API_KEY" -- npx -y @21st-dev/magic@latest</code>
-<p style="margin-top: 0.5rem; margin-bottom: 0.5rem; line-height: 1.75; color: var(--text-secondary);">After installation, you can verify your configuration by reading the <code>~/.claude.json</code> file in your home directory. You can quickly view the entry by running this command in your terminal:</p>
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">tail -n 15 /Users/senthilpalanivelu/.claude.json</code>
-<p style="margin-top: 0.5rem; margin-bottom: 0.5rem; line-height: 1.75; color: var(--text-secondary);">It should contain the following MCP server entry:</p>
-
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">{
-  "mcpServers": {
-    "magic": {
-      "type": "stdio",
-      "command": "npx",
-      "args": [
-        "-y",
-        "@21st-dev/magic@latest"
-      ],
-      "env": {
-        "API_KEY": "ab1115bb368968***************c8b2867599589"
-      }
-    }
-  }
-}</code>
-
-<p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Once installed, try the following example prompt. In the below image, you can see the 21st.dev MCP server is invoked to create a modern navigation bar.</p>
-
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">create a modern navigation bar with responsive design</code>
-
-<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; align-items: center;">
-  <img src="/knowledgelab/images/21stdev.png" alt="21st.dev Magic Interface" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
-</div>
-`,
-      },
-      {
-        label: 'Supadata',
-        content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">Supadata MCP</strong>
-
-<p style="margin-bottom:0.75rem; line-height:1.75;">The Supadata MCP server enables powerful web and video scraping capabilities directly within AI development environments like Claude. This open-source integration allows AI models to extract text transcripts from Youtube videos, scrape web pages, and crawl entire websites to gather context.</p>
-
-<div style="margin: 1rem 0; padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px;">
-  <p style="margin-bottom:0.5rem;"><strong>Official Link (Get your API key here):</strong></p>
-  <a href="https://supadata.ai/" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">https://supadata.ai/</a>
-</div>
-
-<p style="margin-top:1rem; margin-bottom:1rem; line-height:1.75;"><strong>Installation Command:</strong></p>
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text-secondary); white-space: pre-wrap;">claude mcp add supadata --scope user --env SUPADATA_API_KEY="YOUR_API_KEY" -- npx -y @supadata/mcp</code>
-
-<p style="margin-top:1rem; margin-bottom:0.5rem; line-height: 1.75; color: var(--text-secondary);">Alternatively, you can manually add the configuration by opening your <code>~/.claude.json</code> file and adding the following entry:</p>
-
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">{
-  "mcpServers": {
-    "supadata": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@supadata/mcp"
-      ],
-      "env": {
-        "SUPADATA_API_KEY": "sd_2816a*************360eb7a803"
-      }
-    }
-  }
-}</code>
-
-<p style="margin-top:1rem; margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Once the installation is complete, try pasting a YouTube video URL like the one below in your Claude terminal. You will see the Supadata tool automatically invoked to extract the text transcript:</p>
-
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">https://youtu.be/1em64iUFt3U</code>
-
-<code style="display: block; padding: 1rem; background: #000; border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'Fira Code', monospace; color: #fff; white-space: pre-wrap; line-height: 1.5; font-size: 0.9rem;">
-⏺ I'll extract the transcript from that YouTube video for you.
-
-⏺ <span style="color: #ffff00;">supadata - supadata_transcript (MCP)</span>(url: "https://youtu.be/1em64iUFt3U")
-  ⎿  ⚠ Large MCP response (~19.6k tokens), this can fill up context quickly
-  ⎿  {
-       "lang": "en",
-       "availableLangs": [
-     … +631 lines (ctrl+o to expand)                                                                                                  
-   
-⏺ The transcript has been extracted. It's quite long (76.9KB), so let me read the full content to provide you with a complete         
-                                                                                                                                                                                                                                        
-⏺ Transcript Summary
-
-  This is a Lenny's Podcast interview with Zevy Arnowitz, a Product Manager at Meta with zero technical background who learned to build real products using AI tools like Cursor and Claude Code.
-
-  Key Highlights:
-
-  Zevy's Background:
-  - Completely non-technical (music in high school, not in tech army unit)
-  - Discovered AI coding tools during a trip to Japan when Sonnet 3.5 came out
-  - Watched a YouTube video about Bolt/Lovable and felt like he was given "superpowers"
-
-  His AI Coding Journey:
-  1. Started with ChatGPT Projects - Created a "CTO" with custom prompts to challenge his ideas
-  2. Graduated to Bolt/Lovable - Hit limitations when things got complex
-  3. Now uses Cursor with Claude Code - Full control over development
-
-  His Workflow:
-  1. Exploration - Use Cursor's Ask mode to explore ideas
-  2. Planning - Use /CreatePlan to generate detailed implementation plans
-  3. Building - Use Composer (Cursor's fast model) or switch to Gemini for UI work
-  4. Code Review - Multi-model review process:
-    - Claude Code reviews its own work
-    - CodeX (GPT's competitor) also reviews
-    - Uses a "peer review" /command to have models debate issues
-  5. Learning - /LearningOpportunity to learn from the code
-  6. Documentation - Updates prompts/docs when AI makes mistakes
-
-  His Philosophy on Different AI Models:
-  - Claude: The perfect CTO - communicative, smart, opinionated but collaborative
-  - CodeX/GPT: The best coder in a hoodie - not communicative but fixes hard bugs
-  - Gemini: The crazy scientist - great at UI design but terrifying to watch work
-
-  Key Advice:
-  - Start gradually: ChatGPT Projects → Bolt/Lovable → Cursor
-  - Treat AI as a learning partner, not just a tool
-  - "It's not that you'll be replaced by AI, you'll be replaced by someone better at using AI"
-  - Best time to be junior - you can build startups on your own now
-
-  His Products:
-  - StudyMate - A study companion app (currently being localized)
-  - The Vortex - Dictation product for Hebrew speakers in Israel
-
-  Other Interesting Points:
-  - Used AI to help him prepare for and pass interviews at Meta
-  - Created a quiz game to practice product segmentation questions
-  - Emphasizes post-mortems and updating prompts to prevent repeated AI mistakes
-  - Believes titles and responsibilities will collapse - "everyone's going to become a builder"
-
-  This conversation is incredibly inspiring for non-technical people showing how AI democratizes software development.
-</code>
-
-<p style="margin-top:1rem; margin-bottom:0.5rem;"><strong>Documentation & Integration:</strong></p>
-<a href="https://docs.supadata.ai/integrations/mcp" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">https://docs.supadata.ai/integrations/mcp</a>
-`,
-      },
-      {
-        label: 'Tool Reference',
-        content: `
-<p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Lists all configured MCP servers in your Claude Code setup (<code>~/.claude.json</code>)</p>
-
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text);">claude mcp list</code>
-
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Terminal Output]</strong>
-
-<code style="display: block; padding: 1rem; background: #000; border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'Fira Code', monospace; color: #fff; white-space: pre-wrap; line-height: 1.5; font-size: 0.9rem;">
-⏺ Bash(claude mcp list)
-  ⎿ Checking MCP server health...
-
-     supadata: npx -y @supadata/mcp - ✓ Connected
-     magic: npx -y @21st-dev/magic@latest - ✓ Connected
-
-⏺ MCP Servers (2 connected):
-
-  ┌──────────┬───────────────────────────────┬─────────────┐
-  │  Server  │            Command            │   Status    │
-  ├──────────┼───────────────────────────────┼─────────────┤
-  │ supadata │ npx -y @supadata/mcp          │ ✓ Connected │
-  ├──────────┼───────────────────────────────┼─────────────┤
-  │ magic    │ npx -y @21st-dev/magic@latest │ ✓ Connected │
-  └──────────┴───────────────────────────────┴─────────────┘
-
-  Available Tools
-
-  supadata — Web content extraction:
-  - supadata_transcript — Extract transcripts from YouTube, TikTok, Instagram, Twitter, or video files
-  - supadata_check_transcript_status — Check transcript job progress
-  - supadata_scrape — Scrape web pages to Markdown
-  - supadata_map — Crawl website to discover all URLs
-  - supadata_crawl — Batch crawl website to extract content from all pages
-  - supadata_check_crawl_status — Check crawl job progress
-
-  magic — 21st.dev UI components:
-  - 21st_magic_component_builder — Build new UI components from library
-  - 21st_magic_component_inspiration — Browse UI component examples
-  - 21st_magic_component_refiner — Redesign/improve existing UI components
-  - logo_search — Search for company logos in JSX/TSX/SVG formats
-</code>
-<p style="margin-top:1rem; margin-bottom:0.5rem;"><strong>Official Documentation:</strong></p>
-<a href="https://code.claude.com/docs/en/mcp" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">https://code.claude.com/docs/en/mcp</a>
 `,
       },
     ],
@@ -483,13 +317,13 @@ This page is currently under development. Please check back soon.
   <div style="flex: 1; padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-secondary); border-radius: 12px; position: relative; overflow: hidden;">
     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--accent-primary); opacity: 0.02; pointer-events: none;"></div>
     <p style="margin-bottom:0.35rem; font-weight: 700; color: var(--text-primary);">Claude Code + <code style="padding: 0.15rem 0.35rem; background: rgba(0,0,0,0.2); border-radius: 4px; font-size: 0.9em;">frontend-design</code> skill</p>
-    <p style="margin: 0; line-height: 1.65; color: var(--text-secondary); font-size: 0.95rem;">The AI coding agent that writes and refines the app UI. The <code style="padding: 0.15rem 0.35rem; background: rgba(0,0,0,0.2); border-radius: 4px;">frontend-design</code> skill — installed to <code style="padding: 0.15rem 0.35rem; background: rgba(0,0,0,0.2); border-radius: 4px;">~/.claude/skills</code> — instructs Claude to produce distinctive, production-grade interfaces instead of generic AI-slop designs.</p>
+    <p style="margin: 0; line-height: 1.65; color: var(--text-secondary); font-size: 0.95rem;">The AI coding agent that develops the app UI. The <code style="padding: 0.15rem 0.35rem; background: rgba(0,0,0,0.2); border-radius: 4px;">frontend-design</code> skill — installed to <code style="padding: 0.15rem 0.35rem; background: rgba(0,0,0,0.2); border-radius: 4px;">~/.claude/skills</code> — instructs Claude to produce distinctive, production-grade interfaces instead of generic AI-slop designs.</p>
   </div>
 
   <div style="flex: 1; padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-secondary); border-radius: 12px; position: relative; overflow: hidden;">
     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--accent-secondary); opacity: 0.02; pointer-events: none;"></div>
     <p style="margin-bottom:0.35rem; font-weight: 700; color: var(--text-primary);">Google Antigravity (AI Coding Agent)</p>
-    <p style="margin: 0; line-height: 1.65; color: var(--text-secondary); font-size: 0.95rem;">Handles the broader coding tasks and is connected to the <strong>Firebase MCP</strong> — which lets it create a real Firebase project, configure Firestore as our URL data store, and set up cloud security rules, all through natural language. No Firebase console wrestling required.</p>
+    <p style="margin: 0; line-height: 1.65; color: var(--text-secondary); font-size: 0.95rem;">Handles the broader coding tasks and is connected to the <strong>Firebase MCP</strong> — which lets it create a real Firebase project, configure Firestore to store URLs data, and set up cloud security rules, all through natural language. No Firebase console wrestling required.</p>
   </div>
 
   <div style="flex: 1; padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-secondary); border-radius: 12px; position: relative; overflow: hidden;">
@@ -502,6 +336,15 @@ This page is currently under development. Please check back soon.
 
 <p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary); font-style: regular;">By the end of this tutorial, you'll have a fully functional ZenShelf app running in the cloud — and a repeatable workflow for shipping any idea using AI agents, skills, and MCP servers.</p>
 
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-concept="claude-skills-tutorial" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Claude Skills
+  </a>
+  <a href="#" data-goto-tab="1" class="tutorial-nav-link">
+    Next: Step 1 – Setup <span>→</span>
+  </a>
+</div>
+
 `,
       },
       {
@@ -509,7 +352,7 @@ This page is currently under development. Please check back soon.
         content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[One-Time Setup — Tools &amp; Configuration]</strong>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Complete these four steps once and you'll have everything in place to build, design, and deploy ZenShelf using AI agents, skills, and MCP servers.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Complete these four steps once and you'll have everything in place to build, design, and deploy apps using AI agents, skills, and MCP servers. This is a one-time setup that is well worth your time, as you can reuse these same configurations to develop and deploy apps for all your future projects.</p>
 
 <hr style="border: none; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
 
@@ -519,7 +362,7 @@ This page is currently under development. Please check back soon.
   <li style="margin-bottom: 0.35rem;"><strong>Node.js</strong> v18 or higher — <a href="https://nodejs.org/en/download" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">nodejs.org</a></li>
   <li style="margin-bottom: 0.35rem;"><strong>Git</strong> — <a href="https://git-scm.com" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">git-scm.com</a></li>
   <li style="margin-bottom: 0.35rem;"><strong>A Google Account</strong> (for Firebase)</li>
-  <li style="margin-bottom: 0.35rem;"><strong>Goole Antigravity</strong> — <a href="https://antigravity.google/download" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">antigravity.google</a></li>
+  <li style="margin-bottom: 0.35rem;"><strong>Google Antigravity</strong> — <a href="https://antigravity.google/download" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">antigravity.google</a></li>
   <li style="margin-bottom: 0.35rem;"><strong>Claude Code</strong> — <a href="https://code.claude.com/docs/en/quickstart" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">code.claude.com</a></li>
 </ul>
 
@@ -548,6 +391,7 @@ This page is currently under development. Please check back soon.
 </div>
 
 <p style="margin-bottom:0.75rem; line-height:1.75;">Personal skills go in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code> and follow you across all projects. Project skills go in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/skills</code> inside a repository and are shared with anyone who clones it.</p>
+<p style="margin-bottom:0.75rem; line-height:1.75;">You can find more skills to use with Claude Code and Gemini at <a href="https://senthilcaesar.github.io/knowledgelab/#claude-skills-tutorial" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Skills Library</a> <strong style="color: var(--accent-primary); font-family: 'Fira Code', monospace; background: rgba(0, 242, 255, 0.1); padding: 0.1rem 0.4rem; border-radius: 4px; border: 1px solid rgba(0, 242, 255, 0.2); font-size: 0.85rem; vertical-align: middle; margin-left: 0.25rem;">Step 4 - Find Skills</strong></p>
 
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; align-items: center;">
   <img src="/knowledgelab/images/claude-skills.png" alt="Terminal Skills Placement" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
@@ -655,6 +499,18 @@ firebase login</code>
 <p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">Skills give the AI the expertise to write correct Firebase code — security rules, Firestore schema, Firestore database, auth setup, and deployment scripts:</p>
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">npx skills add firebase/agent-skills</code>
 
+<div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 8px; margin: 0.75rem 0;">
+  <p style="margin: 0 0 0.4rem; font-weight: 600; color: var(--text-primary);">💡 Pro Tip: Inspect your skills</p>
+  <p style="margin: 0; color: var(--text-secondary); line-height: 1.6;">You can always view your installed Gemini and Antigravity skills at these paths:</p>
+  <ul style="margin: 0.4rem 0 0 1.25rem; color: var(--text-secondary); line-height: 1.6; font-family: monospace; font-size: 0.85rem;">
+    <li>/Users/senthilpalanivelu/.gemini/skills</li>
+    <li>/Users/senthilpalanivelu/.gemini/antigravity/skills</li>
+  </ul>
+</div>
+
+
+
+
 <p style="margin: 0.75rem 0 0.25rem; line-height:1.75; color: var(--text-secondary);">When you run this command, you'll see an interactive installer like the one below. Select all 11 skills and choose <strong>Antigravity</strong> + <strong>Claude Code</strong> as the agents, with <strong>Global</strong> scope and <strong>Symlink</strong> install method:</p>
 <pre style="display: block; padding: 1rem; background: #0d1117; border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; font-size: 0.78rem; color: #7ee787; white-space: pre; overflow-x: auto; line-height: 1.6;">███████╗██╗  ██╗██╗██╗     ██╗     ███████╗
 ██╔════╝██║ ██╔╝██║██║     ██║     ██╔════╝
@@ -707,6 +563,15 @@ firebase login</code>
 
   <p style="margin-bottom: 0.35rem; font-weight: 600; color: var(--text-primary);">You're ready — head to Step 2</p>
   <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">With Gemini CLI, MCP servers, Firebase CLI, and the agent skills all in place, proceed to the <strong>Build</strong> tab to start scaffolding ZenShelf.</p>
+</div>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="0" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Overview
+  </a>
+  <a href="#" data-goto-tab="2" class="tutorial-nav-link">
+    Next: Step 2 – Build <span>→</span>
+  </a>
 </div>
 `,
       },
@@ -766,10 +631,6 @@ Include a search bar.</code>
 
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 1.5rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.6;">I like the design but I think it would greatly benefit from a dark mode toggle. Can you please add one to the top right corner of the app? In the light mode I want to use the sun emoji and in the dark mode I want to use the moon emoji. The app will auto update as you make changes.</code>
 
-<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1.25rem 0;">
-  <p style="margin: 0 0 0.4rem; font-weight: 600; color: var(--text-primary);">Try it — Add your first link!</p>
-  <p style="margin: 0; color: var(--text-secondary); line-height: 1.75;">Paste a URL into the input field, fill out the description, status, and category, and click <strong style="color: var(--text-primary);">Add Link</strong>. You should see your first card appear immediately with the Zen design you chose!</p>
-</div>
 
 <div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1.25rem 0;">
   <p style="margin: 0 0 0.4rem; font-weight: 600; color: var(--text-primary);">Full Test — Kick the tyres!</p>
@@ -782,6 +643,15 @@ Include a search bar.</code>
     <li><strong style="color: var(--text-primary);">Dark / Light toggle</strong> — switch modes and make sure the UI responds cleanly</li>
   </ul>
   <p style="margin: 0; color: var(--text-secondary); line-height: 1.75;"><strong style="color: var(--text-primary);">Found a bug?</strong> Just describe it in plain English to Antigravity — <em>e.g. "When I click the delete button, a confirmation dialog should appear before the card is removed. The dialog should have a clear title like 'Delete this link?', a short warning message, and two buttons — a red 'Delete' button to confirm and a grey 'Cancel' button to dismiss. It should appear centered on screen with a dark overlay behind it."</em>. The more context and detail you give, the quicker the AI can pinpoint and fix it.</p>
+</div>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="1" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Step 1
+  </a>
+  <a href="#" data-goto-tab="3" class="tutorial-nav-link">
+    Next: Step 3 – Cloud <span>→</span>
+  </a>
 </div>
 
 `,
@@ -804,7 +674,7 @@ Include a search bar.</code>
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 0.75rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.6;">Now please upgrade it to use Firebase for cloud storage and Google Sign-In for login. Each user's notes should be private and automatically synced across all their devices. Keep the same design and features — just add the Firebase and Google Sign-In functionality on top.</code>
 
 <div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 0 0 1.5rem;">
-  <p style="margin: 0; color: var(--text-secondary); line-height: 1.75;">⚠️ If you encounter any issue with <strong style="color: var(--text-primary);">Firestore database creation</strong>, don't worry — use <strong style="color: var(--text-primary);">Prompt 2</strong> below instead. It gives the AI explicit step-by-step MCP instructions to resolve it.</p>
+  <p style="margin: 0; color: var(--text-secondary); line-height: 1.75;">⚠️ If you encounter any issue with <strong style="color: var(--text-primary);">Firestore project setup</strong>, don't worry — use <strong style="color: var(--text-primary);">Prompt 2</strong> below instead. It gives the AI explicit step-by-step MCP instructions to resolve it.</p>
 </div>
 
 <hr style="border: none; border-top: 1px solid var(--border-color); margin: 1.25rem 0;">
@@ -852,6 +722,15 @@ Follow these steps:
   </ol>
   <p style="margin: 0; color: var(--text-secondary); line-height: 1.75;">Now when you reload the app with <code style="padding: 0.1rem 0.35rem; background: var(--bg-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">npm run dev</code>, you will see a <strong style="color: var(--text-primary);">Sign-in Screen</strong> asking you to authenticate with your Google account. Once signed in, your URL data will sync to Firestore in real time.</p>
 </div>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="2" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Step 2
+  </a>
+  <a href="#" data-goto-tab="4" class="tutorial-nav-link">
+    Next: Step 4 – Deploy <span>→</span>
+  </a>
+</div>
 `,
       },
       {
@@ -889,6 +768,15 @@ git add . && git commit -m "initial release" && git push -u origin main</code>
   <p style="margin: 0 0 0.4rem; font-weight: 600; color: var(--text-primary);">Your app is live!</p>
   <p style="margin: 0; color: var(--text-secondary); line-height: 1.75;">Once the workflow completes successfully, visit your app at:<br><a href="#" style="color: var(--accent-primary); text-decoration: underline; font-family: monospace;">https://&lt;your-username&gt;.github.io/url-content-tracker</a></p>
 </div>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="3" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Step 3
+  </a>
+  <a href="#" data-goto-tab="5" class="tutorial-nav-link">
+    Next: Bonus <span>→</span>
+  </a>
+</div>
 `,
       },
       {
@@ -920,9 +808,18 @@ Requirements:
   - A brief, one-sentence description of what that technology handles in the app (e.g., 'Fast, modern, component-driven UI framework').
 
 6. Implementation: Please dynamically read the project's dependency file (like package.json) to accurately list the primary frontend framework, CSS/UI library, animation library, and any hosting/deployment pipelines currently configured. Build this using the UI components and icons already available in the project.</code>
- 
+
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.25rem 0; align-items: center;">
-  <img src="/knowledgelab/public/images/tech-stack.png" alt="Tech Stack Modal Preview" style="max-width: 100%; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 8px 32px rgba(0,0,0,0.3); object-fit: cover;">
+  <img src="/knowledgelab/images/tech-stack.png" alt="Tech Stack Modal Preview" style="max-width: 100%; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 8px 32px rgba(0,0,0,0.3); object-fit: cover;">
+</div>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="4" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Step 4
+  </a>
+  <a href="#" data-goto-concept="build-webapp-ai" class="tutorial-nav-link">
+    Next Level: Build Web App with AI <span>→</span>
+  </a>
 </div>
 
 
@@ -1228,6 +1125,16 @@ const app = {
       link.addEventListener('click', (e) => {
         e.preventDefault();
         switchToTab(Number(link.dataset.gotoTab));
+      });
+    });
+
+    // Wire up any in-content links that jump to a specific concept (tutorial)
+    document.querySelectorAll('[data-goto-concept]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (typeof this.selectConcept === 'function') {
+          this.selectConcept(link.dataset.gotoConcept);
+        }
       });
     });
   },

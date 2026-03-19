@@ -1943,6 +1943,47 @@ h1, h2, h3 {
   animation: tabFadeIn 0.22s ease-out;
 }
 
+/* Tutorial Navigation Links */
+.tutorial-nav-link {
+  text-decoration: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transition-fast);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  color: var(--accent-primary);
+  background: transparent;
+}
+
+.tutorial-nav-link:hover {
+  background: var(--surface-hover);
+  transform: translateY(-2px);
+}
+
+.tutorial-nav-link.previous {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.tutorial-nav-link.previous:hover {
+  color: var(--text-primary);
+}
+
+.tutorial-nav-link span {
+  transition: transform 0.2s ease;
+  font-size: 1.2rem;
+}
+
+.tutorial-nav-link:hover span {
+  transform: translateX(4px);
+}
+
+.tutorial-nav-link.previous:hover span {
+  transform: translateX(-4px);
+}
+
 .tutorial-tab-panel.active {
   display: block;
 }
