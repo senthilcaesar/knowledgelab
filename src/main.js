@@ -184,6 +184,7 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
   </li>
   <li style="margin-bottom: 0.5rem;"><strong>GitHub Community Repos:</strong>
     <ul style="margin: 0.5rem 0 0 1.5rem; list-style-type: disc;">
+      <li style="margin-bottom: 0.25rem;"><a href="https://github.com/sickn33/antigravity-awesome-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">antigravity-awesome-skills</a></li>
       <li style="margin-bottom: 0.25rem;"><a href="https://github.com/affaan-m/everything-claude-code" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">everything-claude-code</a></li>
       <li style="margin-bottom: 0.25rem;"><a href="https://github.com/ComposioHQ/awesome-claude-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">awesome-claude-skills</a></li>
       <li style="margin-bottom: 0.25rem;"><a href="https://github.com/obra/superpowers" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">superpowers</a></li>
