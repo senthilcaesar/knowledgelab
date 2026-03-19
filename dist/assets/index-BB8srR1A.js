@@ -1,17 +1,4 @@
-import './style.css';
-import { initConstellation } from './constellation.js';
-import pkg from '../package.json';
-
-const concepts = [
-  {
-    id: 'claude-skills-tutorial',
-    title: 'Claude Skills',
-    category: '',
-    tags: [''],
-    tabs: [
-      {
-        label: 'Overview',
-        content: `
+(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const o of document.querySelectorAll('link[rel="modulepreload"]'))a(o);new MutationObserver(o=>{for(const i of o)if(i.type==="childList")for(const d of i.addedNodes)d.tagName==="LINK"&&d.rel==="modulepreload"&&a(d)}).observe(document,{childList:!0,subtree:!0});function r(o){const i={};return o.integrity&&(i.integrity=o.integrity),o.referrerPolicy&&(i.referrerPolicy=o.referrerPolicy),o.crossOrigin==="use-credentials"?i.credentials="include":o.crossOrigin==="anonymous"?i.credentials="omit":i.credentials="same-origin",i}function a(o){if(o.ep)return;o.ep=!0;const i=r(o);fetch(o.href,i)}})();const L=70,k=160,x=120;class T{constructor(e,r){this.width=e,this.height=r,this.x=Math.random()*e,this.y=Math.random()*r,this.vx=(Math.random()-.5)*.4,this.vy=(Math.random()-.5)*.4,this.baseRadius=1.5+Math.random()*2,this.pulsePhase=Math.random()*Math.PI*2,this.pulseSpeed=.015+Math.random()*.025,this.isHub=Math.random()<.12,this.isHub&&(this.baseRadius*=2)}update(e){this.pulsePhase+=this.pulseSpeed;const r=this.x-e.x,a=this.y-e.y,o=Math.hypot(r,a);if(o<x&&o>0){const d=((x-o)/x)**2*3;this.vx+=r/o*d*.08,this.vy+=a/o*d*.08}this.vx*=.975,this.vy*=.975;const i=Math.hypot(this.vx,this.vy);i>1.5&&(this.vx=this.vx/i*1.5,this.vy=this.vy/i*1.5),this.x+=this.vx,this.y+=this.vy,this.x<0&&(this.x=this.width),this.x>this.width&&(this.x=0),this.y<0&&(this.y=this.height),this.y>this.height&&(this.y=0)}draw(e,r){const a=.5+.5*Math.sin(this.pulsePhase),o=this.baseRadius*(1+a*.6),i=(this.isHub?.7:.4)+a*.4,d=r?`rgba(176, 141, 87, ${i})`:this.isHub?`rgba(180, 100, 255, ${i})`:`rgba(0, 242, 255, ${i})`,m=r?`rgba(176, 141, 87, ${a*.12})`:this.isHub?`rgba(130, 0, 255, ${a*.1})`:`rgba(0, 242, 255, ${a*.1})`;e.beginPath(),e.arc(this.x,this.y,o*5,0,Math.PI*2),e.fillStyle=m,e.fill(),e.beginPath(),e.arc(this.x,this.y,o,0,Math.PI*2),e.fillStyle=d,e.fill()}}class M{constructor(e,r,a,o,i){this.x1=e,this.y1=r,this.x2=a,this.y2=o,this.progress=0,this.speed=.02+Math.random()*.03,this.isLight=i,this.alive=!0}update(){this.progress+=this.speed,this.progress>=1&&(this.alive=!1)}draw(e){const r=this.x1+(this.x2-this.x1)*this.progress,a=this.y1+(this.y2-this.y1)*this.progress,o=1-this.progress;e.beginPath(),e.arc(r,a,3,0,Math.PI*2),e.fillStyle=this.isLight?`rgba(212, 160, 23, ${o})`:`rgba(255, 255, 255, ${o})`,e.fill()}}function P(t){const e=t.getContext("2d");let r=0,a=0,o=[],i=[],d=null;const m={x:-9999,y:-9999};let c=0;function s(){r=t.width=window.innerWidth,a=t.height=window.innerHeight,o=Array.from({length:L},()=>new T(r,a))}function u(p){if(c--,c>0)return;c=30+Math.floor(Math.random()*60);const l=[...o].sort(()=>Math.random()-.5);for(let h=0;h<l.length-1;h++){const y=l[h],g=l[h+1];if(Math.hypot(y.x-g.x,y.y-g.y)<k){i.push(new M(y.x,y.y,g.x,g.y,p));return}}}function b(p,l,h,y){const g=(1-h/k)*(y?.25:.35),f=e.createLinearGradient(p.x,p.y,l.x,l.y),A=y?`rgba(176,141,87,${g*1.5})`:p.isHub?`rgba(150,50,255,${g*1.5})`:`rgba(0,242,255,${g*1.5})`,E=y?`rgba(122,106,83,${g})`:l.isHub?`rgba(150,50,255,${g})`:`rgba(0,200,220,${g})`;f.addColorStop(0,A),f.addColorStop(1,E),e.beginPath(),e.moveTo(p.x,p.y),e.lineTo(l.x,l.y),e.strokeStyle=f,e.lineWidth=y?.6:.8,e.stroke()}function w(){const p=document.documentElement.classList.contains("light-mode");e.clearRect(0,0,r,a);for(let l=0;l<o.length;l++){o[l].update(m);for(let h=l+1;h<o.length;h++){const y=o[l].x-o[h].x,g=o[l].y-o[h].y,f=Math.hypot(y,g);f<k&&b(o[l],o[h],f,p)}}o.forEach(l=>l.draw(e,p)),u(p),i=i.filter(l=>l.alive),i.forEach(l=>{l.update(),l.draw(e)}),d=requestAnimationFrame(w)}function I(){cancelAnimationFrame(d),window.removeEventListener("resize",s),window.removeEventListener("mousemove",C)}function C(p){m.x=p.clientX,m.y=p.clientY}return window.addEventListener("resize",s),window.addEventListener("mousemove",C),s(),w(),{destroy:I}}const B={vite:"^7.3.1"},S={devDependencies:B},v=[{id:"claude-skills-tutorial",title:"Claude Skills",category:"",tags:[""],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:1rem; line-height:1.75;">Whether you're a complete beginner looking to build your first website, or an experienced developer looking to speed up your workflow, getting started with Claude Skills is easier than you think. In this simple guide, we'll watch Claude Skills in action as it guides us through building a website, taking our input at each step. Let's go!</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">A skill is a set of instructions — packaged as a simple folder — that teaches Claude how to handle specific tasks or workflows.</p>
@@ -19,11 +6,7 @@ const concepts = [
 <p style="margin-bottom:1rem; line-height:1.75;">Skills are powerful when you have repeatable workflows: generating frontend designs from specs, conducting research with consistent methodology or creating documents that follow your team's style guide. For more details on Skills check out the <a href="#" data-goto-tab="5" style="color: var(--accent-primary); text-decoration: underline;">resources section</a>.</p>
 
 <p style="line-height:1.75;">Instead of repeating instructions every time you ask Claude to review a pull request or write a commit message, you write a skill once and Claude applies it whenever the task comes up.</p>
-`,
-      },
-      {
-        label: 'Step 1 – Setup',
-        content: `
+`},{label:"Step 1 – Setup",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 1 – Download & Install the Skills Repo]</strong>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">To kick things off, open your terminal and clone the Claude Skills repo from GitHub:</p>
@@ -49,17 +32,13 @@ const concepts = [
 <p style="margin-bottom:0.75rem; line-height:1.75;">Personal skills go in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code> and follow you across all projects. Project skills go in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/skills</code> inside a repository and are shared with anyone who clones it.</p>
 
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; align-items: center;">
-  <img src="/knowledgelab/public/images/claude-skills.png" alt="Terminal Skills Placement" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+  <img src="/knowledgelab/images/claude-skills.png" alt="Terminal Skills Placement" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
 </div>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">Skills load on demand — unlike <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> (which loads into every conversation) or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">slash commands</code> (which require explicit invocation).</p>
 
 <p style="line-height:1.75;">If you find yourself explaining the same thing to Claude repeatedly, that's a skill waiting to be written.</p>
-`,
-      },
-      {
-        label: 'Step 2 – Launch Claude',
-        content: `
+`},{label:"Step 2 – Launch Claude",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 2 – Launch Claude in Your Terminal]</strong>
 
 <p style="margin-bottom:0.75rem; line-height:1.75;">If you are new to Claude Code, please install it by following the instructions at <a href="https://code.claude.com/docs/en/quickstart" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">https://code.claude.com/docs/en/quickstart</a>.</p>
@@ -73,11 +52,7 @@ const concepts = [
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; align-items: center;">
   <img src="/knowledgelab/images/skill1.png" alt="Terminal Skills Execution" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
 </div>
-`,
-      },
-      {
-        label: 'Step 3 – Call a Skill',
-        content: `
+`},{label:"Step 3 – Call a Skill",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 3 – Call the Skill]</strong>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">To know what skills are available, just ask Claude in the terminal:</p>
@@ -129,11 +104,7 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
     <li style="margin-bottom: 0;">Plugins (installed plugins) - .claude-plugin/plugin.json</li>
   </ul>
 </div>
-`,
-      },
-      {
-        label: 'Step 4 – Find Skills',
-        content: `
+`},{label:"Step 4 – Find Skills",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 4 – Where to Find Skills]</strong>
 
 <p style="margin: 0.5rem 0; line-height:1.75;">You can find more skills to use with Claude Code in the following places:</p>
@@ -158,11 +129,7 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
     </ul>
   </li>
 </ul>
-`,
-      },
-      {
-        label: 'Resources',
-        content: `
+`},{label:"Resources",content:`
 <strong id="resources" style="display:block; margin-bottom:0.75rem; font-size:1rem;">Resources</strong>
 
 <p style="margin-top: 0.25rem; text-align: left;">
@@ -178,31 +145,14 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
 <p style="margin-top: 0.25rem; text-align: left;">
   <a href="https://claude.com/blog/improving-frontend-design-through-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">Best practices for building richer, more customized frontend design with Claude and Skills</a>
 </p>
-`,
-      },
-    ],
-    interactiveType: 'custom',
-  },
-  {
-    id: 'claude-mcp',
-    title: 'Claude MCP',
-    category: '',
-    tags: [''],
-    tabs: [
-      {
-        label: 'Overview',
-        content: `
+`}],interactiveType:"custom"},{id:"claude-mcp",title:"Claude MCP",category:"",tags:[""],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:1rem; line-height:1.75;">The Model Context Protocol (<a href="https://modelcontextprotocol.io/docs/getting-started/intro" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">MCP</a>) is an open standard that enables Claude to interact with external tools and data sources. This modular architecture allows you to extend Claude's capabilities with specialized services. Claude Code can connect to hundreds of external tools and data sources through MCP.</p>
 <p style="margin-bottom:0.75rem; line-height:1.75;">In this section, we will configure Claude to connect to <strong>two</strong> powerful MCP servers:</p>
 <ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
   <li style="margin-bottom: 0.5rem;"><strong>21st.dev Magic:</strong> Create modern, production-ready UI components.</li>
   <li style="margin-bottom: 0.5rem;"><strong>Supadata:</strong> Advanced web and video scraping capabilities.</li>
 </ul>
-`,
-      },
-      {
-        label: '21st.dev Magic',
-        content: `
+`},{label:"21st.dev Magic",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">21st.dev Magic</strong>
 
 <p style="margin-bottom:0.75rem; line-height:1.75;">A   <a href="https://21st.dev/home" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">tool</a>
@@ -242,11 +192,7 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; align-items: center;">
   <img src="/knowledgelab/images/21stdev.png" alt="21st.dev Magic Interface" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
 </div>
-`,
-      },
-      {
-        label: 'Supadata',
-        content: `
+`},{label:"Supadata",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">Supadata MCP</strong>
 
 <p style="margin-bottom:0.75rem; line-height:1.75;">The Supadata MCP server enables powerful web and video scraping capabilities directly within AI development environments like Claude. This open-source integration allows AI models to extract text transcripts from Youtube videos, scrape web pages, and crawl entire websites to gather context.</p>
@@ -345,11 +291,7 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
 
 <p style="margin-top:1rem; margin-bottom:0.5rem;"><strong>Documentation & Integration:</strong></p>
 <a href="https://docs.supadata.ai/integrations/mcp" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">https://docs.supadata.ai/integrations/mcp</a>
-`,
-      },
-      {
-        label: 'Tool Reference',
-        content: `
+`},{label:"Tool Reference",content:`
 <p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Lists all configured MCP servers in your Claude Code setup (<code>~/.claude.json</code>)</p>
 
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text);">claude mcp list</code>
@@ -391,17 +333,7 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
 </code>
 <p style="margin-top:1rem; margin-bottom:0.5rem;"><strong>Official Documentation:</strong></p>
 <a href="https://code.claude.com/docs/en/mcp" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">https://code.claude.com/docs/en/mcp</a>
-`,
-      },
-    ],
-    interactiveType: 'custom',
-  },
-  {
-    id: 'build-webapp-ai',
-    title: 'Build Web App with AI',
-    category: '',
-    tags: [''],
-    description: `
+`}],interactiveType:"custom"},{id:"build-webapp-ai",title:"Build Web App with AI",category:"",tags:[""],description:`
 Build your own Notebook Web App using AI coding — no prior coding experience required.
 
 In this tutorial, you’ll learn how to build and launch the app step-by-step using three tools:
@@ -422,44 +354,16 @@ Access the prompts and configuration files here:
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
   <iframe src="https://www.youtube.com/embed/PpvoOyYAMZs" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Build Web App with AI Tutorial"></iframe>
 </div>
-`,
-    interactiveType: 'custom',
-  },
-  {
-    id: 'ai-engineering',
-    title: 'AI Engineering',
-    category: '',
-    tags: [''],
-    tabs: [
-      {
-        label: 'Overview',
-        content: `
+`,interactiveType:"custom"},{id:"ai-engineering",title:"AI Engineering",category:"",tags:[""],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:0.75rem; line-height:1.75;">AI Engineering refers to the process of building applications on top of foundation models.</p>
 <p style="margin-bottom:1rem; line-height:1.75;">The model as a service makes it easier to leverage AI to build applications. Models are exposed via APIs that receive user queries and return model outputs.
 Without these APIs, using an AI model required the infrastructure to host and serve this model. These APIs give you access to powerful models via single API calls.</p>
 
-`,
-      },
-      {
-        label: 'Fundamental Building Blocks',
-        content: `
+`},{label:"Fundamental Building Blocks",content:`
 
 This page is currently under development. Please check back soon.
 
-`,
-      },
-    ],
-    interactiveType: 'custom',
-  },
-  {
-    id: 'build-app-skill-mcp',
-    title: 'Agent Skills + MCP',
-    category: 'Tutorial',
-    tags: ['Agentic', 'Firebase', 'GitHub'],
-    tabs: [
-      {
-        label: 'Overview',
-        content: `
+`}],interactiveType:"custom"},{id:"build-app-skill-mcp",title:"Build App with Agent Skills + MCP",category:"Tutorial",tags:["Agentic","Firebase","GitHub"],tabs:[{label:"Overview",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Build a URL Tracker App with AI Agents &amp; MCP</strong>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Have you ever saved a bunch of URLs to read later — articles, docs, videos — and then a few days later wondered <em>"where did that link go?"</em> You scroll through tabs, dig through your notes app, check your browser history… and still can't find it.</p>
@@ -500,11 +404,7 @@ This page is currently under development. Please check back soon.
 <div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1rem 0;">
   <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">By the end of this tutorial, you'll have a fully functional ZenShelf app running in the cloud — and a repeatable workflow for shipping any idea using AI agents, skills, and MCP servers.</p>
 </div>
-`,
-      },
-      {
-        label: '1. Setup',
-        content: `
+`},{label:"1. Setup",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[One-Time Setup — Tools &amp; Configuration]</strong>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Complete these four steps once and you'll have everything in place to build, design, and deploy ZenShelf using AI agents, skills, and MCP servers.</p>
@@ -548,7 +448,7 @@ This page is currently under development. Please check back soon.
 <p style="margin-bottom:0.75rem; line-height:1.75;">Personal skills go in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code> and follow you across all projects. Project skills go in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/skills</code> inside a repository and are shared with anyone who clones it.</p>
 
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; align-items: center;">
-  <img src="/knowledgelab/images/claude-skills.png" alt="Terminal Skills Placement" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+  <img src="/knowledgelab/images/skill3.png" alt="Terminal Skills Placement" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
 </div>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">Skills load on demand — unlike <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> (which loads into every conversation) or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">slash commands</code> (which require explicit invocation).</p>
@@ -706,151 +606,19 @@ firebase login</code>
   <p style="margin-bottom: 0.35rem; font-weight: 600; color: var(--text-primary);">You're ready — head to Step 2</p>
   <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">With Gemini CLI, MCP servers, Firebase CLI, and the agent skills all in place, proceed to the <strong>Build</strong> tab to start scaffolding ZenShelf.</p>
 </div>
-`,
-      },
-      {
-        label: '2. Build',
-        content: `
+`},{label:"2. Build",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[3-Stage Development]</strong>
 
-<p style="margin-bottom:0.35rem; font-weight: 700; color: var(--text-primary); font-size: 1rem;">First — Create the Project Folder</p>
-<p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">In your terminal, create and enter the project directory:</p>
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">mkdir url-content-tracker
-cd url-content-tracker</code>
-<p style="margin-bottom:1.25rem; line-height:1.75; color: var(--text-secondary);">Then open this folder in <strong style="color: var(--text-primary);">Antigravity</strong>. This folder will contain the entire app.</p>
+<p style="margin-bottom:0.5rem; font-weight: 600;">Phase 1: The Soul (Logic)</p>
+<p style="color: var(--text-secondary); margin-bottom:0.5rem;">Paste this into Antigravity:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 1rem; font-family: monospace; color: var(--code-text);">I want to build a 'ZenShelf' React application using Vite. Use Lucide icons. The app is a URL tracker where users can save links, descriptions, status, categories, and priority levels. Use local storage for now.</code>
 
-<hr style="border: none; border-top: 1px solid var(--border-color); margin: 1.25rem 0;">
+<p style="margin-bottom:0.5rem; font-weight: 600;">Phase 2: The Vessel (Design)</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 1rem; font-family: monospace; color: var(--code-text);">Now, give ZenShelf a 'Zen' aesthetic. Use vanilla CSS, high-end dark mode, glassmorphism, and smooth micro-animations. Make it mobile-responsive with a card layout.</code>
 
-<p style="margin-bottom:0.35rem; font-weight: 700; color: var(--text-primary); font-size: 1rem;">Before you start — invoke the frontend-design skill</p>
-<p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">This skill guides the agent to produce production-grade, visually stunning interfaces. Here's how to use it:</p>
-
-
-<ol style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.9;">
-  <li style="margin-bottom: 0.5rem;">Open <strong style="color: var(--text-primary);">Antigravity</strong> and navigate to your project folder.</li>
-  <li style="margin-bottom: 0.5rem;">Open the <strong style="color: var(--text-primary);">Agent panel</strong> on the right side of the screen.</li>
-  <li style="margin-bottom: 0.5rem;">In the chat window, type <code style="padding: 0.15rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/</code> and search for <code style="padding: 0.15rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">frontend-design</code>.</li>
-  <li style="margin-bottom: 0.5rem;">Select the <strong style="color: var(--text-primary);">frontend-design</strong> skill — it loads from <code style="padding: 0.15rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code> that you configured in Setup.</li>
-  <li style="margin-bottom: 0.5rem;">Once selected, enter the prompt below and press <kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.85rem; font-family: monospace;">Enter</kbd>:</li>
-</ol>
-
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 1.5rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">Help me plan build an URL tracker app where users can save links, descriptions, status (Pending, In Progress, Read, Archived), categories, and priority levels. The user should be able to perform create, read, update and delete operations.
-Include a search bar.</code>
-
-<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; align-items: center;">
-  <img src="/knowledgelab/images/anti1.png" alt="Antigravity Agent Panel" style="max-width: 100%; border-radius: 10px; border: 1px solid var(--border-color); box-shadow: 0 4px 20px rgba(0,0,0,0.25); object-fit: cover;">
-  <img src="/knowledgelab/images/anti2.png" alt="Antigravity frontend-design skill" style="max-width: 100%; border-radius: 10px; border: 1px solid var(--border-color); box-shadow: 0 4px 20px rgba(0,0,0,0.25); object-fit: cover;">
-</div>
-
-<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1.25rem 0;">
-  <p style="margin: 0 0 0.4rem; font-weight: 600; color: var(--text-primary);">💡 What happens next</p>
-  <p style="margin: 0; color: var(--text-secondary); line-height: 1.75;">Gemini Flash will work on creating an <strong style="color: var(--text-primary);">implementation plan</strong> for the app. Review it, then click <strong style="color: var(--text-primary);">Proceed</strong> to let the AI write all the code.</p>
-</div>
-
-<div style="margin: 1rem 0; text-align: center;">
-  <img src="/knowledgelab/images/plan.png" alt="Gemini implementation plan" style="max-width: 100%; border-radius: 10px; border: 1px solid var(--border-color); box-shadow: 0 4px 20px rgba(0,0,0,0.25); object-fit: cover;">
-</div>
-
-<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid #22c55e; border-radius: 12px; margin: 1.25rem 0;">
-  <p style="margin: 0 0 0.4rem; font-weight: 600; color: var(--text-primary);">Preview the app locally</p>
-  <p style="margin: 0 0 0.75rem; color: var(--text-secondary); line-height: 1.75;">Once the AI has finished writing all the code, open your terminal, navigate to the project folder, and run:</p>
-  <code style="display: block; padding: 0.75rem 1rem; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 8px; font-family: monospace; color: var(--code-text); margin-bottom: 0.75rem;">npm run dev</code>
-  <p style="margin: 0; color: var(--text-secondary); line-height: 1.75;">This starts a local development server and compiles the app. It will print a local URL (e.g. <code style="padding: 0.1rem 0.35rem; background: var(--bg-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">http://localhost:5173</code>) in the terminal — copy that URL and open it in your browser to see the app live.</p>
-</div>
-
-<hr style="border: none; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
-
-<p style="margin-bottom:0.35rem; font-weight: 700; color: var(--text-primary); font-size: 1rem;">Bonus — Add a Light / Dark Mode Toggle</p>
-<p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">Now that the app is developed, let's add some UI polish. The first one is a <strong style="color: var(--text-primary);">light mode / dark mode toggle</strong>. Paste the prompt below into the Antigravity chat:</p>
-
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 1.5rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.6;">I like the design but I think it would greatly benefit from a dark mode toggle. Can you please add one to the top right corner of the app? In the light mode I want to use the sun emoji and in the dark mode I want to use the moon emoji. The app will auto update as you make changes.</code>
-
-
-<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid #f59e0b; border-radius: 12px; margin: 1.25rem 0;">
-  <p style="margin: 0 0 0.4rem; font-weight: 600; color: var(--text-primary);">Full Test — Kick the tyres!</p>
-  <p style="margin: 0 0 0.6rem; color: var(--text-secondary); line-height: 1.75;">Now put the whole app through its paces. Check that every feature works as intended:</p>
-  <ul style="margin: 0 0 0.75rem 1.25rem; color: var(--text-secondary); line-height: 1.9;">
-    <li><strong style="color: var(--text-primary);">Add link</strong> — create a few entries with different statuses, categories, and priorities</li>
-    <li><strong style="color: var(--text-primary);">Edit</strong> — update a saved entry and confirm the changes persist</li>
-    <li><strong style="color: var(--text-primary);">Delete</strong> — remove an entry and verify it disappears from the list</li>
-    <li><strong style="color: var(--text-primary);">Search</strong> — type in the search bar and check that results filter correctly</li>
-    <li><strong style="color: var(--text-primary);">Dark / Light toggle</strong> — switch modes and make sure the UI responds cleanly</li>
-  </ul>
-  <p style="margin: 0; color: var(--text-secondary); line-height: 1.75;"><strong style="color: var(--text-primary);">Found a bug?</strong> Just describe it in plain English to Antigravity — <em>e.g. "When I click the delete button, a confirmation dialog should appear before the card is removed. The dialog should have a clear title like 'Delete this link?', a short warning message, and two buttons — a red 'Delete' button to confirm and a grey 'Cancel' button to dismiss. It should appear centered on screen with a dark overlay behind it."</em>. The more context and detail you give, the quicker the AI can pinpoint and fix it.</p>
-</div>
-
-`,
-      },
-      {
-        label: '3. Firebase',
-        content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Firebase Integration via MCP]</strong>
-
-<p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">Now that the app is built and tested locally, it's time to connect it to the cloud. We'll ask the AI to create a Firebase project and store our URL link data in Firestore by invoking the <strong style="color: var(--text-primary);">Firebase MCP server</strong> — no manual Firebase Console clicks needed.</p>
-
-<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 0 0 1.25rem;">
-  <p style="margin: 0 0 0.4rem; font-weight: 600; color: var(--text-primary);">💡 What the Firebase MCP does</p>
-  <p style="margin: 0; color: var(--text-secondary); line-height: 1.75;">The Firebase MCP server gives Antigravity direct access to your Firebase account. When you run the prompt below, the AI will create the project, enable Firestore, configure authentication, and write security rules — all without you leaving your editor.</p>
-</div>
-
-<p style="margin-bottom:0.35rem; font-weight: 700; color: var(--text-primary); font-size: 1rem;">Prompt 1 — Simple & straightforward</p>
-<p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">Start with this prompt. It should work well by invoking the Firebase MCP server and let the AI handle everything automatically:</p>
-
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 0.75rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.6;">Now please upgrade it to use Firebase for cloud storage and Google Sign-In for login. Each user's notes should be private and automatically synced across all their devices. Keep the same design and features — just add the Firebase and Google Sign-In functionality on top.</code>
-
-<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid #f59e0b; border-radius: 12px; margin: 0 0 1.5rem;">
-  <p style="margin: 0; color: var(--text-secondary); line-height: 1.75;">⚠️ If you encounter any issue with <strong style="color: var(--text-primary);">Firestore database creation</strong>, don't worry — use <strong style="color: var(--text-primary);">Prompt 2</strong> below instead. It gives the AI explicit step-by-step MCP instructions to resolve it.</p>
-</div>
-
-<hr style="border: none; border-top: 1px solid var(--border-color); margin: 1.25rem 0;">
-
-<p style="margin-bottom:0.35rem; font-weight: 700; color: var(--text-primary); font-size: 1rem;">Prompt 2 — Detailed MCP fallback</p>
-<p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">Use this if Prompt 1 runs into issues. It walks the AI through each Firebase MCP step explicitly:</p>
-
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 1.25rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.6;">/firebase_init. Use the Firebase MCP tools to create a new project called 'ZenShelf Tracker'. Create a Firestore database in the '(default)' instance (region: us-east1). Integrate Google Sign-In so each user has their own private workspace. Replace local storage with Cloud Firestore for real-time synchronization. Implement Security Rules so users can ONLY access their own data. Finally, use the 'Agent Skills' to ensure the code follows Firebase best practices for React 19.
-
-Follow these steps:
-
-1) Check API Status: Ensure firestore.googleapis.com is enabled for the project. If not, use gcloud or the Google Cloud Console to enable it before proceeding.
-
-2) Create Instance: Create a Firestore Native database named (default) in the us-east1 region.
-
-3) Sync Environment: Update the Firebase CLI/MCP environment to target [PROJECT_ID] explicitly.
-
-4) Initialize Files: Create a firebase.json pointing to a firestore.rules file.
-   Create firestore.rules with a base rules_version = '2' and user-scoped match blocks (avoid using ?? syntax).
-
-5) Deploy: Run firebase deploy --only firestore to release the rules.
-
-6) SDK Config: Provide the full Web SDK config object and update the local firebase.js file.</code>
-
-<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid #22c55e; border-radius: 12px; margin: 0 0 1.25rem;">
-  <p style="margin: 0 0 0.4rem; font-weight: 600; color: var(--text-primary);">What Antigravity will set up for you</p>
-  <ul style="margin: 0.4rem 0 0 1.25rem; color: var(--text-secondary); line-height: 1.9;">
-    <li>A new Firebase project named <strong style="color: var(--text-primary);">ZenShelf Tracker</strong></li>
-    <li>A Firestore database in <strong style="color: var(--text-primary);">us-east1</strong> for storing URL entries</li>
-    <li><strong style="color: var(--text-primary);">Google Sign-In</strong> so every user gets a private workspace</li>
-    <li>Firestore <strong style="color: var(--text-primary);">Security Rules</strong> that restrict each user to their own data</li>
-    <li>Code updated to follow <strong style="color: var(--text-primary);">Firebase best practices for React 19</strong></li>
-  </ul>
-</div>
-
-<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid #f59e0b; border-radius: 12px; margin: 0;">
-  <p style="margin: 0 0 0.6rem; font-weight: 600; color: var(--text-primary);">After the MCP finishes</p>
-  <p style="margin: 0 0 0.75rem; color: var(--text-secondary); line-height: 1.75;">After MCP completes the setup, we need to enable Google Sign-In authentication for the app. Open the <a href="https://console.firebase.google.com/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Firebase Console</a>, select your project, and follow these steps:</p>
-  <ol style="margin: 0 0 0.75rem 1.25rem; color: var(--text-secondary); line-height: 1.9;">
-    <li>Go to <strong style="color: var(--text-primary);">Security → Authentication</strong></li>
-    <li>Click <strong style="color: var(--text-primary);">Get started</strong></li>
-    <li>Select the <strong style="color: var(--text-primary);">Sign-in method</strong> tab</li>
-    <li>Click <strong style="color: var(--text-primary);">Google</strong></li>
-    <li>Toggle it to <strong style="color: var(--text-primary);">Enabled</strong> and click <strong style="color: var(--text-primary);">Save</strong></li>
-  </ol>
-  <p style="margin: 0; color: var(--text-secondary); line-height: 1.75;">Now when you reload the app with <code style="padding: 0.1rem 0.35rem; background: var(--bg-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">npm run dev</code>, you will see a <strong style="color: var(--text-primary);">sign-in screen</strong> asking you to sign in with your Google account. Once signed in, your URL data will sync to Firestore in real time.</p>
-</div>
-`,
-      },
-      {
-        label: '4. Deploy',
-        content: `
+<p style="margin-bottom:0.5rem; font-weight: 600;">Phase 3: The Cloud (Firebase)</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; font-family: monospace; color: var(--code-text);">/firebase_init. Create 'ZenShelf Tracker'. Replace local storage with Cloud Firestore. Setup security rules and Google Sign-In.</code>
+`},{label:"3. Deploy",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Automated Deployment]</strong>
 
 <p style="margin-bottom:0.5rem;"><strong>Step 1: Manual Fix</strong></p>
@@ -864,11 +632,7 @@ git add . && git commit -m "initial release" && git push -u origin main</code>
 <p style="margin-bottom:0.5rem;"><strong>Step 3: Setup CD</strong></p>
 <p style="color: var(--text-secondary);">Ask Antigravity:</p>
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; font-family: monospace; color: var(--code-text);">Create a GitHub Actions workflow that automatically builds and deploys my app to GitHub Pages whenever I push to main.</code>
-`,
-      },
-      {
-        label: 'Concepts',
-        content: `
+`},{label:"Concepts",content:`
 <div style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
   <div style="padding: 1rem; background: var(--surface-color); border-radius: 12px; border-left: 4px solid var(--accent-primary);">
     <strong style="display:block; margin-bottom:0.5rem;">Agent Skills</strong>
@@ -879,887 +643,50 @@ git add . && git commit -m "initial release" && git push -u origin main</code>
     <p style="font-size: 0.9rem; color: var(--text-secondary);">The "Hands" – bridging the AI to the real world to create databases, repositories, and UI designs.</p>
   </div>
 </div>
-`,
-      },
-    ],
-    interactiveType: 'custom',
-  },
-];
-
-// Study Mode State
-const studyMode = {
-  isActive: false,
-  isLocked: false,
-  isMinimized: false,
-  currentView: 'timer',
-  timer: {
-    duration: 25 * 60,
-    remaining: 25 * 60,
-    interval: null,
-    isRunning: false,
-  },
-  flashcards: {
-    currentIndex: 0,
-    shuffled: [],
-    isFlipped: false,
-  },
-  stats: {
-    streak: 0,
-    cardsToday: 0,
-    focusMinutes: 0,
-    lastStudyDate: null,
-  },
-};
-
-const app = {
-  activeConcept: null,
-
-  init() {
-    this.renderSidebar();
-    this.setupEventListeners();
-    this.initTheme();
-    this.initStudyMode();
-    this.initTechStackModal();
-
-    // Initial routing based on hash
-    const hash = window.location.hash.substring(1);
-    if (hash && concepts.some((c) => c.id === hash)) {
-      this.selectConcept(hash);
-    } else {
-      this.renderWelcome();
-    }
-
-    // Start the neural constellation background
-    initConstellation(document.getElementById('constellation-bg'));
-  },
-
-  renderWelcome() {
-    // Restore constellation on home screen
-    document.getElementById('constellation-bg').style.display = '';
-    const cotd = this.getConceptOfTheDay();
-    const contentArea = document.getElementById('content-area');
-    contentArea.innerHTML = `
+`}],interactiveType:"custom"}],n={isActive:!1,isLocked:!1,isMinimized:!1,timer:{duration:1500,remaining:1500,interval:null,isRunning:!1},stats:{streak:0,cardsToday:0,focusMinutes:0,lastStudyDate:null}},z={activeConcept:null,init(){this.renderSidebar(),this.setupEventListeners(),this.initTheme(),this.initStudyMode(),this.initTechStackModal();const t=window.location.hash.substring(1);t&&v.some(e=>e.id===t)?this.selectConcept(t):this.renderWelcome(),P(document.getElementById("constellation-bg"))},renderWelcome(){document.getElementById("constellation-bg").style.display="";const t=this.getConceptOfTheDay(),e=document.getElementById("content-area");e.innerHTML=`
       <div class="cotd-ticker">
         <span class="cotd-label">Skill of the Day</span>
         <div class="ticker-track">
-          <span class="ticker-text">${cotd.title}</span>
+          <span class="ticker-text">${t.title}</span>
         </div>
       </div>
       <div class="welcome-card">
         <h2>Welcome to Knowledge Lab</h2>
         <p>Select a tutorial from the sidebar to begin your interactive learning journey.</p>
       </div>
-    `;
-
-    // Make the ticker clickable to open the concept
-    contentArea.querySelector('.cotd-ticker').addEventListener('click', () => {
-      this.selectConcept(cotd.id);
-    });
-
-    // Pin the start position to the exact right edge of the track (no dead zone)
-    const tickerText = contentArea.querySelector('.ticker-text');
-    const trackWidth = contentArea.querySelector('.ticker-track').offsetWidth;
-    tickerText.style.setProperty('--start-x', trackWidth + 'px');
-  },
-
-  getConceptOfTheDay() {
-    // Deterministic: divide epoch ms by ms-per-day to get a stable daily index.
-    // Every user on the same calendar day (UTC) sees the exact same concept.
-    // Changes automatically at midnight UTC — no localStorage needed.
-    const dayIndex = Math.floor(Date.now() / (24 * 60 * 60 * 1000));
-    return concepts[dayIndex % concepts.length];
-  },
-
-  initTheme() {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-      document.documentElement.classList.add('light-mode');
-      document.querySelector('#theme-toggle .icon').textContent = '☀️';
-    }
-    if (localStorage.getItem('sidebar') === 'collapsed') {
-      document.getElementById('app').classList.add('sidebar-collapsed');
-    }
-  },
-
-  renderSidebar() {
-    const list = document.getElementById('concept-list');
-    list.innerHTML = concepts
-      .map(
-        (c) => `
-      <li class="nav-item" data-id="${c.id}">${c.title}</li>
-    `,
-      )
-      .join('');
-  },
-
-  isMobile() {
-    return window.innerWidth <= 640;
-  },
-
-  closeMobileSidebar() {
-    document.getElementById('app').classList.remove('sidebar-open');
-  },
-
-  setupEventListeners() {
-    // Concept list: close mobile drawer after selecting
-    document.getElementById('concept-list').addEventListener('click', (e) => {
-      if (e.target.classList.contains('nav-item')) {
-        const id = e.target.dataset.id;
-        if (this.isMobile()) this.closeMobileSidebar();
-        this.selectConcept(id);
-      }
-    });
-
-    // Sidebar toggle: overlay drawer on mobile, collapse on desktop
-    document.getElementById('sidebar-toggle').addEventListener('click', () => {
-      const app = document.getElementById('app');
-      if (this.isMobile()) {
-        app.classList.toggle('sidebar-open');
-      } else {
-        const collapsed = app.classList.toggle('sidebar-collapsed');
-        localStorage.setItem('sidebar', collapsed ? 'collapsed' : 'open');
-      }
-    });
-
-    // Backdrop click: close mobile drawer
-    document.getElementById('app').addEventListener('click', (e) => {
-      if (this.isMobile() && e.target === document.getElementById('app')) {
-        this.closeMobileSidebar();
-      }
-    });
-
-    // Theme toggle
-    document.getElementById('theme-toggle').addEventListener('click', () => {
-      const isLight = document.documentElement.classList.toggle('light-mode');
-      const icon = document.querySelector('#theme-toggle .icon');
-      icon.textContent = isLight ? '☀️' : '🌙';
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    });
-
-    // Home navigation
-    document.getElementById('home-link').addEventListener('click', () => {
-      this.activeConcept = null;
-      document
-        .querySelectorAll('.nav-item')
-        .forEach((el) => el.classList.remove('active'));
-      if (this.isMobile()) this.closeMobileSidebar();
-      this.renderWelcome();
-    });
-
-    // Search functionality
-    document.getElementById('concept-search').addEventListener('input', (e) => {
-      const query = e.target.value.toLowerCase();
-      const items = document.querySelectorAll('.nav-item');
-      items.forEach((item) => {
-        const text = item.textContent.toLowerCase();
-        item.style.display = text.includes(query) ? 'block' : 'none';
-      });
-    });
-
-    // Hash navigation listener
-    window.addEventListener('hashchange', () => {
-      const hash = window.location.hash.substring(1);
-      if (hash && concepts.some((c) => c.id === hash)) {
-        if (!this.activeConcept || this.activeConcept.id !== hash) {
-          this.selectConcept(hash);
-        }
-      } else if (!hash) {
-        // Handle direct home navigation via hash removal
-        this.activeConcept = null;
-        document
-          .querySelectorAll('.nav-item')
-          .forEach((el) => el.classList.remove('active'));
-        this.renderWelcome();
-      }
-    });
-  },
-
-  selectConcept(id) {
-    const concept = concepts.find((c) => c.id === id);
-    if (!concept) return;
-
-    // Update URL hash
-    if (window.location.hash !== `#${id}`) {
-      window.location.hash = id;
-    }
-
-    // Hide constellation when reading a concept
-    document.getElementById('constellation-bg').style.display = 'none';
-
-    // Update UI
-    this.activeConcept = concept;
-    document
-      .querySelectorAll('.nav-item')
-      .forEach((el) => el.classList.remove('active'));
-
-    const navItem = document.querySelector(`[data-id="${id}"]`);
-    if (navItem) navItem.classList.add('active');
-
-    this.renderConcept(concept);
-  },
-
-  renderConcept(concept) {
-    const contentArea = document.getElementById('content-area');
-
-    if (concept.tabs && concept.tabs.length > 0) {
-      // Render tabbed interface
-      const tabButtons = concept.tabs
-        .map(
-          (tab, i) =>
-            `<button class="tutorial-tab-btn${i === 0 ? ' active' : ''}" data-tab="${i}">${tab.label}</button>`,
-        )
-        .join('');
-
-      const tabPanels = concept.tabs
-        .map(
-          (tab, i) =>
-            `<div class="tutorial-tab-panel${i === 0 ? ' active' : ''}" data-panel="${i}">
+    `,e.querySelector(".cotd-ticker").addEventListener("click",()=>{this.selectConcept(t.id)});const r=e.querySelector(".ticker-text"),a=e.querySelector(".ticker-track").offsetWidth;r.style.setProperty("--start-x",a+"px")},getConceptOfTheDay(){const t=Math.floor(Date.now()/864e5);return v[t%v.length]},initTheme(){localStorage.getItem("theme")==="light"&&(document.documentElement.classList.add("light-mode"),document.querySelector("#theme-toggle .icon").textContent="☀️"),localStorage.getItem("sidebar")==="collapsed"&&document.getElementById("app").classList.add("sidebar-collapsed")},renderSidebar(){const t=document.getElementById("concept-list");t.innerHTML=v.map(e=>`
+      <li class="nav-item" data-id="${e.id}">${e.title}</li>
+    `).join("")},isMobile(){return window.innerWidth<=640},closeMobileSidebar(){document.getElementById("app").classList.remove("sidebar-open")},setupEventListeners(){document.getElementById("concept-list").addEventListener("click",t=>{if(t.target.classList.contains("nav-item")){const e=t.target.dataset.id;this.isMobile()&&this.closeMobileSidebar(),this.selectConcept(e)}}),document.getElementById("sidebar-toggle").addEventListener("click",()=>{const t=document.getElementById("app");if(this.isMobile())t.classList.toggle("sidebar-open");else{const e=t.classList.toggle("sidebar-collapsed");localStorage.setItem("sidebar",e?"collapsed":"open")}}),document.getElementById("app").addEventListener("click",t=>{this.isMobile()&&t.target===document.getElementById("app")&&this.closeMobileSidebar()}),document.getElementById("theme-toggle").addEventListener("click",()=>{const t=document.documentElement.classList.toggle("light-mode"),e=document.querySelector("#theme-toggle .icon");e.textContent=t?"☀️":"🌙",localStorage.setItem("theme",t?"light":"dark")}),document.getElementById("home-link").addEventListener("click",()=>{this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(t=>t.classList.remove("active")),this.isMobile()&&this.closeMobileSidebar(),this.renderWelcome()}),document.getElementById("concept-search").addEventListener("input",t=>{const e=t.target.value.toLowerCase();document.querySelectorAll(".nav-item").forEach(a=>{const o=a.textContent.toLowerCase();a.style.display=o.includes(e)?"block":"none"})}),window.addEventListener("hashchange",()=>{const t=window.location.hash.substring(1);t&&v.some(e=>e.id===t)?(!this.activeConcept||this.activeConcept.id!==t)&&this.selectConcept(t):t||(this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(e=>e.classList.remove("active")),this.renderWelcome())})},selectConcept(t){const e=v.find(a=>a.id===t);if(!e)return;window.location.hash!==`#${t}`&&(window.location.hash=t),document.getElementById("constellation-bg").style.display="none",this.activeConcept=e,document.querySelectorAll(".nav-item").forEach(a=>a.classList.remove("active"));const r=document.querySelector(`[data-id="${t}"]`);r&&r.classList.add("active"),this.renderConcept(e)},renderConcept(t){const e=document.getElementById("content-area");if(t.tabs&&t.tabs.length>0){const r=t.tabs.map((o,i)=>`<button class="tutorial-tab-btn${i===0?" active":""}" data-tab="${i}">${o.label}</button>`).join(""),a=t.tabs.map((o,i)=>`<div class="tutorial-tab-panel${i===0?" active":""}" data-panel="${i}">
           <div class="concept-content" id="concept-description-${i}">
-            ${tab.content}
+            ${o.content}
           </div>
-        </div>`,
-        )
-        .join('');
-
-      contentArea.innerHTML = `
+        </div>`).join("");e.innerHTML=`
         <article class="concept-card concept-card--tabs">
-          <nav class="tutorial-tabs" role="tablist">${tabButtons}</nav>
-          <div class="tutorial-tab-content">${tabPanels}</div>
+          <nav class="tutorial-tabs" role="tablist">${r}</nav>
+          <div class="tutorial-tab-content">${a}</div>
         </article>
-      `;
-
-      this.initTabs();
-      // Attach copy buttons to the first (active) panel
-      concept.tabs.forEach((_, i) => {
-        const el = document.getElementById(`concept-description-${i}`);
-        if (el) this.attachCopyButtonsTo(el);
-      });
-    } else {
-      contentArea.innerHTML = `
+      `,this.initTabs(),t.tabs.forEach((o,i)=>{const d=document.getElementById(`concept-description-${i}`);d&&this.attachCopyButtonsTo(d)})}else e.innerHTML=`
         <article class="concept-card">
-          <h2 class="concept-title">${concept.title}</h2>
+          <h2 class="concept-title">${t.title}</h2>
           <div class="concept-meta">
-            <span class="tag">${concept.category}</span>
-            ${concept.tags.map((t) => `<span class="tag">${t}</span>`).join('')}
+            <span class="tag">${t.category}</span>
+            ${t.tags.map(r=>`<span class="tag">${r}</span>`).join("")}
           </div>
           <div class="concept-content" id="concept-description">
-            ${(concept.description || 'Add your description here...')
-              .split('\n\n')
-              .map((p) => `<p>${p}</p>`)
-              .join('')}
+            ${(t.description||"Add your description here...").split(`
+
+`).map(r=>`<p>${r}</p>`).join("")}
           </div>
         </article>
-      `;
-      this.attachCopyButtons();
-    }
-  },
-
-  initTabs() {
-    const btns = document.querySelectorAll('.tutorial-tab-btn');
-    const panels = document.querySelectorAll('.tutorial-tab-panel');
-
-    const switchToTab = (index) => {
-      btns.forEach((b) => b.classList.remove('active'));
-      panels.forEach((p) => p.classList.remove('active'));
-      btns[index].classList.add('active');
-      panels[index].classList.add('active');
-
-      // Scroll the active tab into the center of the viewport
-      btns[index].scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'center',
-      });
-    };
-
-    btns.forEach((btn) => {
-      btn.addEventListener('click', () => switchToTab(Number(btn.dataset.tab)));
-    });
-
-    // Wire up any in-content links that jump to a specific tab
-    document.querySelectorAll('[data-goto-tab]').forEach((link) => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        switchToTab(Number(link.dataset.gotoTab));
-      });
-    });
-  },
-
-  attachCopyButtons() {
-    const conceptDescription = document.getElementById('concept-description');
-    if (!conceptDescription) return;
-    this.attachCopyButtonsTo(conceptDescription);
-  },
-
-  attachCopyButtonsTo(container) {
-    if (!container) return;
-
-    // Find all code blocks
-    const codeBlocks = container.querySelectorAll('code');
-
-    codeBlocks.forEach((code) => {
-      // Only attach to block-level code elements (the ones with inline styles or specifically for commands)
-      const isBlock =
-        code.style.display === 'block' || code.textContent.includes('\n');
-      if (!isBlock) return;
-
-      // Create wrapper
-      const wrapper = document.createElement('div');
-      wrapper.className = 'code-wrapper';
-
-      // Insert wrapper before code
-      code.parentNode.insertBefore(wrapper, code);
-      // Move code into wrapper
-      wrapper.appendChild(code);
-
-      // Add copy button
-      const btn = document.createElement('button');
-      btn.className = 'copy-btn';
-      btn.setAttribute('title', 'Copy to clipboard');
-
-      const copyIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
-      const checkIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
-
-      btn.innerHTML = copyIcon;
-
-      wrapper.appendChild(btn);
-
-      btn.addEventListener('click', () => {
-        const text = code.textContent;
-        // Clean up text (remove the leading '❯ ' prompt if it's there, but keep the rest)
-        const cleanText = text.replace(/^❯\s+/, '');
-
-        navigator.clipboard.writeText(cleanText).then(() => {
-          btn.innerHTML = checkIcon;
-          btn.classList.add('copied');
-
-          setTimeout(() => {
-            btn.innerHTML = copyIcon;
-            btn.classList.remove('copied');
-          }, 2000);
-        });
-      });
-    });
-  },
-
-  // ========================================
-  // TECH STACK MODAL
-  // ========================================
-
-  initTechStackModal() {
-    const btn = document.getElementById('tech-stack-btn');
-    const overlay = document.getElementById('tech-stack-overlay');
-    const closeBtn = document.getElementById('close-tech-stack');
-    const list = document.getElementById('tech-stack-list');
-
-    if (!btn || !overlay || !closeBtn || !list) return;
-
-    // Check technologies from package.json
-    const deps = {
-      ...(pkg.dependencies || {}),
-      ...(pkg.devDependencies || {}),
-    };
-
-    // Core tech stack
-    const stack = [
-      {
-        name: 'Vanilla JavaScript',
-        desc: 'Core application logic, ECMAScript modules, DOM manipulation, and dynamic rendering.',
-        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M14.5 9h-5l-.5-5h7l-.5 5zm-5 4h5l-.5 4.5-2 1.5-2-1.5-.2-2h2.2l.1 1.2 1 .8 1-.8.2-1.2h-3.8z"></path></svg>',
-      },
-      {
-        name: 'Vanilla CSS3 & HTML5',
-        desc: 'Custom glassmorphism styling, responsive grid layout, and semantic structure.',
-        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M15 9h-6l-.5-4h7.5l-.5 4zm-6 4h6l-.5 4.5-2.5 1.5-2.5-1.5-.2-2h2.2l.1 1.2 1.2.8 1.2-.8.2-1.2h-4.6z"></path></svg>',
-      },
-      {
-        name: 'HTML5 Canvas API',
-        desc: 'Custom performant animations including the Neural Constellation and Zen Flow backgrounds.',
-        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.268-.652-.053-.877.215-.225.542-.31 1.051-.31h2.438c2.66 0 4.853-2.192 4.853-4.853C21.5 6.756 17.244 2 12 2z"></path></svg>',
-      },
-    ];
-
-    if (deps.vite) {
-      stack.push({
-        name: 'Vite (' + deps.vite.replace(/[\^\~]/, '') + ')',
-        desc: 'Next-generation frontend tooling providing ultra-fast builds and Hot Module Replacement.',
-        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>',
-      });
-    }
-
-    // Hosting logic mapped explicitly
-    stack.push({
-      name: 'GitHub Pages',
-      desc: 'Automated CI/CD deployment via GitHub Actions pipeline using the deployed build.',
-      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>',
-    });
-
-    list.innerHTML = stack
-      .map(
-        (tech) => `
+      `,this.attachCopyButtons()},initTabs(){const t=document.querySelectorAll(".tutorial-tab-btn"),e=document.querySelectorAll(".tutorial-tab-panel"),r=a=>{t.forEach(o=>o.classList.remove("active")),e.forEach(o=>o.classList.remove("active")),t[a].classList.add("active"),e[a].classList.add("active"),t[a].scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"})};t.forEach(a=>{a.addEventListener("click",()=>r(Number(a.dataset.tab)))}),document.querySelectorAll("[data-goto-tab]").forEach(a=>{a.addEventListener("click",o=>{o.preventDefault(),r(Number(a.dataset.gotoTab))})})},attachCopyButtons(){const t=document.getElementById("concept-description");t&&this.attachCopyButtonsTo(t)},attachCopyButtonsTo(t){if(!t)return;t.querySelectorAll("code").forEach(r=>{if(!(r.style.display==="block"||r.textContent.includes(`
+`)))return;const o=document.createElement("div");o.className="code-wrapper",r.parentNode.insertBefore(o,r),o.appendChild(r);const i=document.createElement("button");i.className="copy-btn",i.setAttribute("title","Copy to clipboard");const d='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>',m='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';i.innerHTML=d,o.appendChild(i),i.addEventListener("click",()=>{const s=r.textContent.replace(/^❯\s+/,"");navigator.clipboard.writeText(s).then(()=>{i.innerHTML=m,i.classList.add("copied"),setTimeout(()=>{i.innerHTML=d,i.classList.remove("copied")},2e3)})})})},initTechStackModal(){const t=document.getElementById("tech-stack-btn"),e=document.getElementById("tech-stack-overlay"),r=document.getElementById("close-tech-stack"),a=document.getElementById("tech-stack-list");if(!t||!e||!r||!a)return;const o={...S.dependencies||{},...S.devDependencies||{}},i=[{name:"Vanilla JavaScript",desc:"Core application logic, ECMAScript modules, DOM manipulation, and dynamic rendering.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M14.5 9h-5l-.5-5h7l-.5 5zm-5 4h5l-.5 4.5-2 1.5-2-1.5-.2-2h2.2l.1 1.2 1 .8 1-.8.2-1.2h-3.8z"></path></svg>'},{name:"Vanilla CSS3 & HTML5",desc:"Custom glassmorphism styling, responsive grid layout, and semantic structure.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M15 9h-6l-.5-4h7.5l-.5 4zm-6 4h6l-.5 4.5-2.5 1.5-2.5-1.5-.2-2h2.2l.1 1.2 1.2.8 1.2-.8.2-1.2h-4.6z"></path></svg>'},{name:"HTML5 Canvas API",desc:"Custom performant animations including the Neural Constellation and Zen Flow backgrounds.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.268-.652-.053-.877.215-.225.542-.31 1.051-.31h2.438c2.66 0 4.853-2.192 4.853-4.853C21.5 6.756 17.244 2 12 2z"></path></svg>'}];o.vite&&i.push({name:"Vite ("+o.vite.replace(/[\^\~]/,"")+")",desc:"Next-generation frontend tooling providing ultra-fast builds and Hot Module Replacement.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>'}),i.push({name:"GitHub Pages",desc:"Automated CI/CD deployment via GitHub Actions pipeline using the deployed build.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>'}),a.innerHTML=i.map(c=>`
       <li class="tech-stack-item">
         <div class="tech-stack-icon-wrapper">
-          ${tech.icon}
+          ${c.icon}
         </div>
         <div class="tech-stack-info">
-          <span class="tech-stack-name">${tech.name}</span>
-          <span class="tech-stack-desc">${tech.desc}</span>
+          <span class="tech-stack-name">${c.name}</span>
+          <span class="tech-stack-desc">${c.desc}</span>
         </div>
       </li>
-    `,
-      )
-      .join('');
-
-    const openModal = () => {
-      overlay.classList.remove('hidden');
-      // trigger reflow
-      void overlay.offsetWidth;
-      overlay.classList.add('active');
-    };
-
-    const closeModal = () => {
-      overlay.classList.remove('active');
-      setTimeout(() => {
-        if (!overlay.classList.contains('active')) {
-          overlay.classList.add('hidden');
-        }
-      }, 300); // match transition duration
-    };
-
-    btn.addEventListener('click', openModal);
-    closeBtn.addEventListener('click', closeModal);
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) closeModal();
-    });
-  },
-
-  // ========================================
-  // STUDY MODE
-  // ========================================
-
-  initStudyMode() {
-    // Load stats from localStorage
-    this.loadStudyStats();
-    this.updateStudyMetrics();
-    this.initZenFlow();
-
-    // Study mode button
-    document.getElementById('study-mode-btn').addEventListener('click', () => {
-      this.toggleStudyMode();
-    });
-
-    // Exit study mode
-    document.getElementById('exit-study').addEventListener('click', () => {
-      this.toggleStudyMode();
-    });
-
-    // Timer controls
-    document.getElementById('timer-toggle').addEventListener('click', () => {
-      this.toggleTimer();
-    });
-
-    document.getElementById('timer-reset').addEventListener('click', () => {
-      this.resetTimer();
-    });
-
-    // Timer presets
-    document.querySelectorAll('.preset-btn').forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        const time = parseInt(e.target.dataset.time);
-        this.setTimerDuration(time);
-      });
-    });
-
-    // Minimize / expand study mode
-    document.getElementById('minimize-study').addEventListener('click', () => {
-      this.minimizeStudy();
-    });
-
-    document.getElementById('expand-study').addEventListener('click', () => {
-      this.expandStudy();
-    });
-
-    document.getElementById('mini-stop-btn').addEventListener('click', () => {
-      this.expandStudy();
-      this.toggleStudyMode(); // exit study mode
-    });
-
-    // Lock / unlock screen
-    document.getElementById('lock-screen-btn').addEventListener('click', () => {
-      this.lockScreen();
-    });
-
-    document
-      .getElementById('unlock-screen-btn')
-      .addEventListener('click', () => {
-        this.unlockScreen();
-      });
-  },
-
-  loadStudyStats() {
-    const saved = localStorage.getItem('studyStats');
-    if (saved) {
-      studyMode.stats = JSON.parse(saved);
-      this.updateStreak();
-    }
-  },
-
-  saveStudyStats() {
-    localStorage.setItem('studyStats', JSON.stringify(studyMode.stats));
-  },
-
-  updateStreak() {
-    const today = new Date().toDateString();
-    const lastDate = studyMode.stats.lastStudyDate;
-
-    if (lastDate) {
-      const lastStudy = new Date(lastDate);
-      const yesterday = new Date();
-      yesterday.setDate(yesterday.getDate() - 1);
-
-      if (lastStudy.toDateString() === yesterday.toDateString()) {
-        // Continue streak
-      } else if (lastStudy.toDateString() !== today) {
-        // Reset streak
-        studyMode.stats.streak = 0;
-      }
-    }
-  },
-
-  updateStudyMetrics() {
-    // Elements removed from UI — guard against null refs
-    const streak = document.getElementById('study-streak');
-    const cards = document.getElementById('study-cards');
-    const mins = document.getElementById('study-minutes');
-    if (streak) streak.textContent = studyMode.stats.streak;
-    if (cards) cards.textContent = studyMode.stats.cardsToday;
-    if (mins) mins.textContent = studyMode.stats.focusMinutes;
-  },
-
-  toggleStudyMode() {
-    studyMode.isActive = !studyMode.isActive;
-    const overlay = document.getElementById('study-mode-overlay');
-    const zenFlowBg = document.querySelector('.zen-flow-bg');
-
-    if (studyMode.isActive) {
-      // If coming back from minimized, just expand
-      if (studyMode.isMinimized) {
-        this.expandStudy();
-        return;
-      }
-      overlay.classList.remove('hidden');
-      overlay.classList.add('active');
-      zenFlowBg.style.opacity = '1';
-      this.updateStreak();
-      this.saveStudyStats();
-    } else {
-      // Fully exit — also clear minimized state
-      this.expandStudy(); // ensure mini-timer is hidden
-      overlay.classList.remove('active');
-      zenFlowBg.style.opacity = '0';
-      this.resetTimer();
-      setTimeout(() => {
-        overlay.classList.add('hidden');
-      }, 500);
-    }
-  },
-
-  // Timer methods
-  setTimerDuration(minutes) {
-    studyMode.timer.duration = minutes * 60;
-    studyMode.timer.remaining = minutes * 60;
-
-    // Update UI
-    document.querySelectorAll('.preset-btn').forEach((btn) => {
-      btn.classList.toggle('active', parseInt(btn.dataset.time) === minutes);
-    });
-
-    this.updateTimerDisplay();
-  },
-
-  toggleTimer() {
-    if (studyMode.timer.isRunning) {
-      this.pauseTimer();
-    } else {
-      this.startTimer();
-    }
-  },
-
-  startTimer() {
-    studyMode.timer.isRunning = true;
-    document.getElementById('timer-toggle').textContent = 'Pause';
-    document.querySelector('.timer-wrapper').classList.add('active');
-    document.getElementById('lock-screen-btn').classList.remove('hidden');
-
-    studyMode.timer.interval = setInterval(() => {
-      studyMode.timer.remaining--;
-      this.updateTimerDisplay();
-
-      if (studyMode.timer.remaining <= 0) {
-        this.completeTimer();
-      }
-    }, 1000);
-  },
-
-  pauseTimer() {
-    studyMode.timer.isRunning = false;
-    document.getElementById('timer-toggle').textContent = 'Resume';
-    document.querySelector('.timer-wrapper').classList.remove('active');
-    document.getElementById('lock-screen-btn').classList.add('hidden');
-    clearInterval(studyMode.timer.interval);
-    if (studyMode.isLocked) this.unlockScreen();
-  },
-
-  resetTimer() {
-    this.pauseTimer();
-    studyMode.timer.remaining = studyMode.timer.duration;
-    document.getElementById('timer-toggle').textContent = 'Start Focus';
-    document.getElementById('timer-status').textContent = 'Ready to focus';
-    document.getElementById('lock-screen-btn').classList.add('hidden');
-    this.updateTimerDisplay();
-  },
-
-  completeTimer() {
-    this.pauseTimer();
-    document.getElementById('timer-status').textContent =
-      'Focus complete! Great work!';
-
-    // Update stats
-    studyMode.stats.focusMinutes += Math.floor(studyMode.timer.duration / 60);
-    this.updateStreakDate();
-    this.saveStudyStats();
-    this.updateStudyMetrics();
-
-    // Play notification sound (optional)
-    if ('Notification' in window && Notification.permission === 'granted') {
-      new Notification('Focus Session Complete', {
-        body: 'Great job! Take a break.',
-        icon: '/vite.svg',
-      });
-    }
-  },
-
-  updateTimerDisplay() {
-    const minutes = Math.floor(studyMode.timer.remaining / 60);
-    const seconds = studyMode.timer.remaining % 60;
-    const timeStr = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-    document.getElementById('timer-minutes').textContent = minutes
-      .toString()
-      .padStart(2, '0');
-    document.getElementById('timer-seconds').textContent = seconds
-      .toString()
-      .padStart(2, '0');
-
-    // Update mini-timer display
-    document.getElementById('mini-timer-display').textContent = timeStr;
-    const progressPct =
-      (studyMode.timer.remaining / studyMode.timer.duration) * 100;
-    document.getElementById('mini-timer-progress').style.width =
-      `${progressPct}%`;
-
-    // Update progress ring
-    const progress = studyMode.timer.remaining / studyMode.timer.duration;
-    const circumference = 2 * Math.PI * 130;
-    const offset = circumference * (1 - progress);
-    document.getElementById('timer-progress').style.strokeDashoffset = offset;
-
-    // Update status
-    if (!studyMode.timer.isRunning) {
-      document.getElementById('timer-status').textContent = 'Ready to focus';
-    } else {
-      document.getElementById('timer-status').textContent = 'Stay focused...';
-    }
-  },
-
-  // Minimize to floating widget
-  minimizeStudy() {
-    studyMode.isMinimized = true;
-    const overlay = document.getElementById('study-mode-overlay');
-    const zenFlowBg = document.querySelector('.zen-flow-bg');
-    overlay.classList.remove('active');
-    zenFlowBg.style.opacity = '0';
-    setTimeout(() => overlay.classList.add('hidden'), 500);
-    document.getElementById('mini-timer').classList.remove('hidden');
-    // Sync mini display immediately
-    const m = Math.floor(studyMode.timer.remaining / 60);
-    const s = studyMode.timer.remaining % 60;
-    document.getElementById('mini-timer-display').textContent =
-      `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-    const progressPct =
-      (studyMode.timer.remaining / studyMode.timer.duration) * 100;
-    document.getElementById('mini-timer-progress').style.width =
-      `${progressPct}%`;
-  },
-
-  // Expand back to full study mode
-  expandStudy() {
-    studyMode.isMinimized = false;
-    document.getElementById('mini-timer').classList.add('hidden');
-    if (studyMode.isActive) {
-      const overlay = document.getElementById('study-mode-overlay');
-      const zenFlowBg = document.querySelector('.zen-flow-bg');
-      overlay.classList.remove('hidden');
-      overlay.classList.add('active');
-      zenFlowBg.style.opacity = '1';
-    }
-  },
-
-  // Lock Screen
-  lockScreen() {
-    studyMode.isLocked = true;
-    document.getElementById('study-mode-overlay').classList.add('study-locked');
-    document.getElementById('unlock-screen-overlay').classList.remove('hidden');
-  },
-
-  unlockScreen() {
-    studyMode.isLocked = false;
-    document
-      .getElementById('study-mode-overlay')
-      .classList.remove('study-locked');
-    document.getElementById('unlock-screen-overlay').classList.add('hidden');
-  },
-
-  updateStreakDate() {
-    const today = new Date().toDateString();
-    const lastDate = studyMode.stats.lastStudyDate;
-
-    if (lastDate !== today) {
-      const yesterday = new Date();
-      yesterday.setDate(yesterday.getDate() - 1);
-
-      if (lastDate === yesterday.toDateString()) {
-        studyMode.stats.streak++;
-      } else {
-        studyMode.stats.streak = 1;
-      }
-
-      studyMode.stats.lastStudyDate = today;
-    }
-  },
-
-  // Zen Flow Animation
-  initZenFlow() {
-    const canvas = document.getElementById('zen-flow-canvas');
-    const ctx = canvas.getContext('2d');
-
-    let width, height;
-    let particles = [];
-
-    const resize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-      initParticles();
-    };
-
-    const initParticles = () => {
-      particles = [];
-      const particleCount = 30;
-
-      for (let i = 0; i < particleCount; i++) {
-        particles.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.3,
-          vy: (Math.random() - 0.5) * 0.3,
-          radius: Math.random() * 80 + 40,
-          hue: Math.random() * 60 + 170, // Blue-cyan range
-          alpha: Math.random() * 0.1 + 0.05,
-          pulse: Math.random() * Math.PI * 2,
-        });
-      }
-    };
-
-    const animate = () => {
-      if (!studyMode.isActive) {
-        requestAnimationFrame(animate);
-        return;
-      }
-
-      ctx.clearRect(0, 0, width, height);
-
-      // Get theme colors
-      const isLight = document.documentElement.classList.contains('light-mode');
-
-      particles.forEach((p) => {
-        // Update position
-        p.x += p.vx;
-        p.y += p.vy;
-
-        // Wrap around
-        if (p.x < -p.radius) p.x = width + p.radius;
-        if (p.x > width + p.radius) p.x = -p.radius;
-        if (p.y < -p.radius) p.y = height + p.radius;
-        if (p.y > height + p.radius) p.y = -p.radius;
-
-        // Update pulse
-        p.pulse += 0.02;
-
-        // Draw particle
-        const gradient = ctx.createRadialGradient(
-          p.x,
-          p.y,
-          0,
-          p.x,
-          p.y,
-          p.radius,
-        );
-        const pulseRadius = p.radius * (1 + Math.sin(p.pulse) * 0.1);
-
-        if (isLight) {
-          gradient.addColorStop(0, `hsla(40, 30%, 70%, ${p.alpha * 0.5})`);
-          gradient.addColorStop(0.5, `hsla(40, 20%, 80%, ${p.alpha * 0.2})`);
-          gradient.addColorStop(1, 'transparent');
-        } else {
-          gradient.addColorStop(0, `hsla(${p.hue}, 70%, 50%, ${p.alpha})`);
-          gradient.addColorStop(
-            0.5,
-            `hsla(${p.hue}, 70%, 50%, ${p.alpha * 0.3})`,
-          );
-          gradient.addColorStop(1, 'transparent');
-        }
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, pulseRadius, 0, Math.PI * 2);
-        ctx.fillStyle = gradient;
-        ctx.fill();
-      });
-
-      // Draw breathing aura
-      if (studyMode.timer.isRunning) {
-        const time = Date.now() / 1000;
-        const breathRadius = 150 + Math.sin(time * 0.5) * 20;
-
-        const breathGradient = ctx.createRadialGradient(
-          width / 2,
-          height / 2,
-          0,
-          width / 2,
-          height / 2,
-          breathRadius,
-        );
-
-        if (isLight) {
-          breathGradient.addColorStop(0, 'hsla(40, 30%, 75%, 0.05)');
-          breathGradient.addColorStop(1, 'transparent');
-        } else {
-          breathGradient.addColorStop(0, 'hsla(180, 70%, 50%, 0.03)');
-          breathGradient.addColorStop(1, 'transparent');
-        }
-
-        ctx.beginPath();
-        ctx.arc(width / 2, height / 2, breathRadius, 0, Math.PI * 2);
-        ctx.fillStyle = breathGradient;
-        ctx.fill();
-      }
-
-      requestAnimationFrame(animate);
-    };
-
-    window.addEventListener('resize', resize);
-    resize();
-    animate();
-  },
-};
-
-document.addEventListener('DOMContentLoaded', () => app.init());
+    `).join("");const d=()=>{e.classList.remove("hidden"),e.offsetWidth,e.classList.add("active")},m=()=>{e.classList.remove("active"),setTimeout(()=>{e.classList.contains("active")||e.classList.add("hidden")},300)};t.addEventListener("click",d),r.addEventListener("click",m),e.addEventListener("click",c=>{c.target===e&&m()})},initStudyMode(){this.loadStudyStats(),this.updateStudyMetrics(),this.initZenFlow(),document.getElementById("study-mode-btn").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("exit-study").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("timer-toggle").addEventListener("click",()=>{this.toggleTimer()}),document.getElementById("timer-reset").addEventListener("click",()=>{this.resetTimer()}),document.querySelectorAll(".preset-btn").forEach(t=>{t.addEventListener("click",e=>{const r=parseInt(e.target.dataset.time);this.setTimerDuration(r)})}),document.getElementById("minimize-study").addEventListener("click",()=>{this.minimizeStudy()}),document.getElementById("expand-study").addEventListener("click",()=>{this.expandStudy()}),document.getElementById("mini-stop-btn").addEventListener("click",()=>{this.expandStudy(),this.toggleStudyMode()}),document.getElementById("lock-screen-btn").addEventListener("click",()=>{this.lockScreen()}),document.getElementById("unlock-screen-btn").addEventListener("click",()=>{this.unlockScreen()})},loadStudyStats(){const t=localStorage.getItem("studyStats");t&&(n.stats=JSON.parse(t),this.updateStreak())},saveStudyStats(){localStorage.setItem("studyStats",JSON.stringify(n.stats))},updateStreak(){const t=new Date().toDateString(),e=n.stats.lastStudyDate;if(e){const r=new Date(e),a=new Date;a.setDate(a.getDate()-1),r.toDateString()===a.toDateString()||r.toDateString()!==t&&(n.stats.streak=0)}},updateStudyMetrics(){const t=document.getElementById("study-streak"),e=document.getElementById("study-cards"),r=document.getElementById("study-minutes");t&&(t.textContent=n.stats.streak),e&&(e.textContent=n.stats.cardsToday),r&&(r.textContent=n.stats.focusMinutes)},toggleStudyMode(){n.isActive=!n.isActive;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");if(n.isActive){if(n.isMinimized){this.expandStudy();return}t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1",this.updateStreak(),this.saveStudyStats()}else this.expandStudy(),t.classList.remove("active"),e.style.opacity="0",this.resetTimer(),setTimeout(()=>{t.classList.add("hidden")},500)},setTimerDuration(t){n.timer.duration=t*60,n.timer.remaining=t*60,document.querySelectorAll(".preset-btn").forEach(e=>{e.classList.toggle("active",parseInt(e.dataset.time)===t)}),this.updateTimerDisplay()},toggleTimer(){n.timer.isRunning?this.pauseTimer():this.startTimer()},startTimer(){n.timer.isRunning=!0,document.getElementById("timer-toggle").textContent="Pause",document.querySelector(".timer-wrapper").classList.add("active"),document.getElementById("lock-screen-btn").classList.remove("hidden"),n.timer.interval=setInterval(()=>{n.timer.remaining--,this.updateTimerDisplay(),n.timer.remaining<=0&&this.completeTimer()},1e3)},pauseTimer(){n.timer.isRunning=!1,document.getElementById("timer-toggle").textContent="Resume",document.querySelector(".timer-wrapper").classList.remove("active"),document.getElementById("lock-screen-btn").classList.add("hidden"),clearInterval(n.timer.interval),n.isLocked&&this.unlockScreen()},resetTimer(){this.pauseTimer(),n.timer.remaining=n.timer.duration,document.getElementById("timer-toggle").textContent="Start Focus",document.getElementById("timer-status").textContent="Ready to focus",document.getElementById("lock-screen-btn").classList.add("hidden"),this.updateTimerDisplay()},completeTimer(){this.pauseTimer(),document.getElementById("timer-status").textContent="Focus complete! Great work!",n.stats.focusMinutes+=Math.floor(n.timer.duration/60),this.updateStreakDate(),this.saveStudyStats(),this.updateStudyMetrics(),"Notification"in window&&Notification.permission==="granted"&&new Notification("Focus Session Complete",{body:"Great job! Take a break.",icon:"/vite.svg"})},updateTimerDisplay(){const t=Math.floor(n.timer.remaining/60),e=n.timer.remaining%60,r=`${t.toString().padStart(2,"0")}:${e.toString().padStart(2,"0")}`;document.getElementById("timer-minutes").textContent=t.toString().padStart(2,"0"),document.getElementById("timer-seconds").textContent=e.toString().padStart(2,"0"),document.getElementById("mini-timer-display").textContent=r;const a=n.timer.remaining/n.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${a}%`;const o=n.timer.remaining/n.timer.duration,d=2*Math.PI*130*(1-o);document.getElementById("timer-progress").style.strokeDashoffset=d,n.timer.isRunning?document.getElementById("timer-status").textContent="Stay focused...":document.getElementById("timer-status").textContent="Ready to focus"},minimizeStudy(){n.isMinimized=!0;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("active"),e.style.opacity="0",setTimeout(()=>t.classList.add("hidden"),500),document.getElementById("mini-timer").classList.remove("hidden");const r=Math.floor(n.timer.remaining/60),a=n.timer.remaining%60;document.getElementById("mini-timer-display").textContent=`${r.toString().padStart(2,"0")}:${a.toString().padStart(2,"0")}`;const o=n.timer.remaining/n.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${o}%`},expandStudy(){if(n.isMinimized=!1,document.getElementById("mini-timer").classList.add("hidden"),n.isActive){const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1"}},lockScreen(){n.isLocked=!0,document.getElementById("study-mode-overlay").classList.add("study-locked"),document.getElementById("unlock-screen-overlay").classList.remove("hidden")},unlockScreen(){n.isLocked=!1,document.getElementById("study-mode-overlay").classList.remove("study-locked"),document.getElementById("unlock-screen-overlay").classList.add("hidden")},updateStreakDate(){const t=new Date().toDateString(),e=n.stats.lastStudyDate;if(e!==t){const r=new Date;r.setDate(r.getDate()-1),e===r.toDateString()?n.stats.streak++:n.stats.streak=1,n.stats.lastStudyDate=t}},initZenFlow(){const t=document.getElementById("zen-flow-canvas"),e=t.getContext("2d");let r,a,o=[];const i=()=>{r=t.width=window.innerWidth,a=t.height=window.innerHeight,d()},d=()=>{o=[];const c=30;for(let s=0;s<c;s++)o.push({x:Math.random()*r,y:Math.random()*a,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,radius:Math.random()*80+40,hue:Math.random()*60+170,alpha:Math.random()*.1+.05,pulse:Math.random()*Math.PI*2})},m=()=>{if(!n.isActive){requestAnimationFrame(m);return}e.clearRect(0,0,r,a);const c=document.documentElement.classList.contains("light-mode");if(o.forEach(s=>{s.x+=s.vx,s.y+=s.vy,s.x<-s.radius&&(s.x=r+s.radius),s.x>r+s.radius&&(s.x=-s.radius),s.y<-s.radius&&(s.y=a+s.radius),s.y>a+s.radius&&(s.y=-s.radius),s.pulse+=.02;const u=e.createRadialGradient(s.x,s.y,0,s.x,s.y,s.radius),b=s.radius*(1+Math.sin(s.pulse)*.1);c?(u.addColorStop(0,`hsla(40, 30%, 70%, ${s.alpha*.5})`),u.addColorStop(.5,`hsla(40, 20%, 80%, ${s.alpha*.2})`),u.addColorStop(1,"transparent")):(u.addColorStop(0,`hsla(${s.hue}, 70%, 50%, ${s.alpha})`),u.addColorStop(.5,`hsla(${s.hue}, 70%, 50%, ${s.alpha*.3})`),u.addColorStop(1,"transparent")),e.beginPath(),e.arc(s.x,s.y,b,0,Math.PI*2),e.fillStyle=u,e.fill()}),n.timer.isRunning){const s=Date.now()/1e3,u=150+Math.sin(s*.5)*20,b=e.createRadialGradient(r/2,a/2,0,r/2,a/2,u);c?(b.addColorStop(0,"hsla(40, 30%, 75%, 0.05)"),b.addColorStop(1,"transparent")):(b.addColorStop(0,"hsla(180, 70%, 50%, 0.03)"),b.addColorStop(1,"transparent")),e.beginPath(),e.arc(r/2,a/2,u,0,Math.PI*2),e.fillStyle=b,e.fill()}requestAnimationFrame(m)};window.addEventListener("resize",i),i(),m()}};document.addEventListener("DOMContentLoaded",()=>z.init());
