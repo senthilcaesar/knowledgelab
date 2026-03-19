@@ -1,17 +1,4 @@
-import './style.css';
-import { initConstellation } from './constellation.js';
-import pkg from '../package.json';
-
-const concepts = [
-  {
-    id: 'claude-skills-tutorial',
-    title: 'Claude Skills',
-    category: '',
-    tags: [''],
-    tabs: [
-      {
-        label: 'Overview',
-        content: `
+(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const o of document.querySelectorAll('link[rel="modulepreload"]'))a(o);new MutationObserver(o=>{for(const i of o)if(i.type==="childList")for(const d of i.addedNodes)d.tagName==="LINK"&&d.rel==="modulepreload"&&a(d)}).observe(document,{childList:!0,subtree:!0});function r(o){const i={};return o.integrity&&(i.integrity=o.integrity),o.referrerPolicy&&(i.referrerPolicy=o.referrerPolicy),o.crossOrigin==="use-credentials"?i.credentials="include":o.crossOrigin==="anonymous"?i.credentials="omit":i.credentials="same-origin",i}function a(o){if(o.ep)return;o.ep=!0;const i=r(o);fetch(o.href,i)}})();const L=70,x=160,k=120;class T{constructor(e,r){this.width=e,this.height=r,this.x=Math.random()*e,this.y=Math.random()*r,this.vx=(Math.random()-.5)*.4,this.vy=(Math.random()-.5)*.4,this.baseRadius=1.5+Math.random()*2,this.pulsePhase=Math.random()*Math.PI*2,this.pulseSpeed=.015+Math.random()*.025,this.isHub=Math.random()<.12,this.isHub&&(this.baseRadius*=2)}update(e){this.pulsePhase+=this.pulseSpeed;const r=this.x-e.x,a=this.y-e.y,o=Math.hypot(r,a);if(o<k&&o>0){const d=((k-o)/k)**2*3;this.vx+=r/o*d*.08,this.vy+=a/o*d*.08}this.vx*=.975,this.vy*=.975;const i=Math.hypot(this.vx,this.vy);i>1.5&&(this.vx=this.vx/i*1.5,this.vy=this.vy/i*1.5),this.x+=this.vx,this.y+=this.vy,this.x<0&&(this.x=this.width),this.x>this.width&&(this.x=0),this.y<0&&(this.y=this.height),this.y>this.height&&(this.y=0)}draw(e,r){const a=.5+.5*Math.sin(this.pulsePhase),o=this.baseRadius*(1+a*.6),i=(this.isHub?.7:.4)+a*.4,d=r?`rgba(176, 141, 87, ${i})`:this.isHub?`rgba(180, 100, 255, ${i})`:`rgba(0, 242, 255, ${i})`,m=r?`rgba(176, 141, 87, ${a*.12})`:this.isHub?`rgba(130, 0, 255, ${a*.1})`:`rgba(0, 242, 255, ${a*.1})`;e.beginPath(),e.arc(this.x,this.y,o*5,0,Math.PI*2),e.fillStyle=m,e.fill(),e.beginPath(),e.arc(this.x,this.y,o,0,Math.PI*2),e.fillStyle=d,e.fill()}}class M{constructor(e,r,a,o,i){this.x1=e,this.y1=r,this.x2=a,this.y2=o,this.progress=0,this.speed=.02+Math.random()*.03,this.isLight=i,this.alive=!0}update(){this.progress+=this.speed,this.progress>=1&&(this.alive=!1)}draw(e){const r=this.x1+(this.x2-this.x1)*this.progress,a=this.y1+(this.y2-this.y1)*this.progress,o=1-this.progress;e.beginPath(),e.arc(r,a,3,0,Math.PI*2),e.fillStyle=this.isLight?`rgba(212, 160, 23, ${o})`:`rgba(255, 255, 255, ${o})`,e.fill()}}function P(t){const e=t.getContext("2d");let r=0,a=0,o=[],i=[],d=null;const m={x:-9999,y:-9999};let c=0;function n(){r=t.width=window.innerWidth,a=t.height=window.innerHeight,o=Array.from({length:L},()=>new T(r,a))}function u(p){if(c--,c>0)return;c=30+Math.floor(Math.random()*60);const l=[...o].sort(()=>Math.random()-.5);for(let h=0;h<l.length-1;h++){const y=l[h],g=l[h+1];if(Math.hypot(y.x-g.x,y.y-g.y)<x){i.push(new M(y.x,y.y,g.x,g.y,p));return}}}function b(p,l,h,y){const g=(1-h/x)*(y?.25:.35),v=e.createLinearGradient(p.x,p.y,l.x,l.y),A=y?`rgba(176,141,87,${g*1.5})`:p.isHub?`rgba(150,50,255,${g*1.5})`:`rgba(0,242,255,${g*1.5})`,E=y?`rgba(122,106,83,${g})`:l.isHub?`rgba(150,50,255,${g})`:`rgba(0,200,220,${g})`;v.addColorStop(0,A),v.addColorStop(1,E),e.beginPath(),e.moveTo(p.x,p.y),e.lineTo(l.x,l.y),e.strokeStyle=v,e.lineWidth=y?.6:.8,e.stroke()}function w(){const p=document.documentElement.classList.contains("light-mode");e.clearRect(0,0,r,a);for(let l=0;l<o.length;l++){o[l].update(m);for(let h=l+1;h<o.length;h++){const y=o[l].x-o[h].x,g=o[l].y-o[h].y,v=Math.hypot(y,g);v<x&&b(o[l],o[h],v,p)}}o.forEach(l=>l.draw(e,p)),u(p),i=i.filter(l=>l.alive),i.forEach(l=>{l.update(),l.draw(e)}),d=requestAnimationFrame(w)}function I(){cancelAnimationFrame(d),window.removeEventListener("resize",n),window.removeEventListener("mousemove",S)}function S(p){m.x=p.clientX,m.y=p.clientY}return window.addEventListener("resize",n),window.addEventListener("mousemove",S),n(),w(),{destroy:I}}const B={vite:"^7.3.1"},C={devDependencies:B},f=[{id:"claude-skills-tutorial",title:"Claude Skills",category:"",tags:[""],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:1rem; line-height:1.75;">Whether you're a complete beginner looking to build your first website, or an experienced developer looking to speed up your workflow, getting started with Claude Skills is easier than you think. In this simple guide, we'll watch Claude Skills in action as it guides us through building a website, taking our input at each step. Let's go!</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">A skill is a set of instructions — packaged as a simple folder — that teaches Claude how to handle specific tasks or workflows.</p>
@@ -25,11 +12,7 @@ const concepts = [
     Next: Step 1 – Setup <span>→</span>
   </a>
 </div>
-`,
-      },
-      {
-        label: 'Step 1 – Setup',
-        content: `
+`},{label:"Step 1 – Setup",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 1 – Download & Install the Skills Repo]</strong>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">To kick things off, open your terminal and clone the Claude Skills repo from GitHub:</p>
@@ -70,11 +53,7 @@ const concepts = [
     Next: Step 2 – Launch Claude <span>→</span>
   </a>
 </div>
-`,
-      },
-      {
-        label: 'Step 2 – Launch Claude',
-        content: `
+`},{label:"Step 2 – Launch Claude",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 2 – Launch Claude in Your Terminal]</strong>
 
 <p style="margin-bottom:0.75rem; line-height:1.75;">If you are new to Claude Code, please install it by following the instructions at <a href="https://code.claude.com/docs/en/quickstart" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">https://code.claude.com/docs/en/quickstart</a>.</p>
@@ -97,11 +76,7 @@ const concepts = [
     Next: Step 3 – Call a Skill <span>→</span>
   </a>
 </div>
-`,
-      },
-      {
-        label: 'Step 3 – Call a Skill',
-        content: `
+`},{label:"Step 3 – Call a Skill",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 3 – Call the Skill]</strong>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">To know what skills are available, just ask Claude in the terminal:</p>
@@ -162,11 +137,7 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
     Next: Step 4 – Find Skills <span>→</span>
   </a>
 </div>
-`,
-      },
-      {
-        label: 'Step 4 – Find Skills',
-        content: `
+`},{label:"Step 4 – Find Skills",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 4 – Where to Find Skills]</strong>
 
 <p style="margin: 0.5rem 0; line-height:1.75;">You can find more skills to use with Claude Code in the following places:</p>
@@ -200,11 +171,7 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
     Next: Step 5 – Resources <span>→</span>
   </a>
 </div>
-`,
-      },
-      {
-        label: 'Resources',
-        content: `
+`},{label:"Resources",content:`
 <strong id="resources" style="display:block; margin-bottom:0.75rem; font-size:1rem;">Resources</strong>
 
 <p style="margin-top: 0.25rem; text-align: left;">
@@ -225,17 +192,7 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
     Next Level: Build Web App with AI <span>→</span>
   </a>
 </div>
-`,
-      },
-    ],
-    interactiveType: 'custom',
-  },
-  {
-    id: 'build-webapp-ai',
-    title: 'Build Web App with AI',
-    category: '',
-    tags: [''],
-    description: `
+`}],interactiveType:"custom"},{id:"build-webapp-ai",title:"Build Web App with AI",category:"",tags:[""],description:`
 Build your own Notebook Web App using AI coding — no prior coding experience required.
 
 In this tutorial, you’ll learn how to build and launch the app step-by-step using three tools:
@@ -256,44 +213,16 @@ Access the prompts and configuration files here:
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
   <iframe src="https://www.youtube.com/embed/PpvoOyYAMZs" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Build Web App with AI Tutorial"></iframe>
 </div>
-`,
-    interactiveType: 'custom',
-  },
-  {
-    id: 'ai-engineering',
-    title: 'AI Engineering',
-    category: '',
-    tags: [''],
-    tabs: [
-      {
-        label: 'Overview',
-        content: `
+`,interactiveType:"custom"},{id:"ai-engineering",title:"AI Engineering",category:"",tags:[""],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:0.75rem; line-height:1.75;">AI Engineering refers to the process of building applications on top of foundation models.</p>
 <p style="margin-bottom:1rem; line-height:1.75;">The model as a service makes it easier to leverage AI to build applications. Models are exposed via APIs that receive user queries and return model outputs.
 Without these APIs, using an AI model required the infrastructure to host and serve this model. These APIs give you access to powerful models via single API calls.</p>
 
-`,
-      },
-      {
-        label: 'Fundamental Building Blocks',
-        content: `
+`},{label:"Fundamental Building Blocks",content:`
 
 This page is currently under development. Please check back soon.
 
-`,
-      },
-    ],
-    interactiveType: 'custom',
-  },
-  {
-    id: 'build-app-skill-mcp',
-    title: 'Agent Skills + MCP',
-    category: 'Tutorial',
-    tags: ['Agentic', 'Firebase', 'GitHub'],
-    tabs: [
-      {
-        label: 'Overview',
-        content: `
+`}],interactiveType:"custom"},{id:"build-app-skill-mcp",title:"Agent Skills + MCP",category:"Tutorial",tags:["Agentic","Firebase","GitHub"],tabs:[{label:"Overview",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Build a URL Tracker App with AI Agents Skills &amp; MCP</strong>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Have you ever saved a bunch of URLs to read later — articles, docs, videos — and then a few days later wondered <em>"where did that link go?"</em> You scroll through tabs, dig through your notes app, check your browser history… and still can't find it.</p>
@@ -345,11 +274,7 @@ This page is currently under development. Please check back soon.
   </a>
 </div>
 
-`,
-      },
-      {
-        label: '1. Setup',
-        content: `
+`},{label:"1. Setup",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[One-Time Setup — Tools &amp; Configuration]</strong>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Complete these four steps once and you'll have everything in place to build, design, and deploy apps using AI agents, skills, and MCP servers. This is a one-time setup that is well worth your time, as you can reuse these same configurations to develop and deploy apps for all your future projects.</p>
@@ -573,11 +498,7 @@ firebase login</code>
     Next: Step 2 – Build <span>→</span>
   </a>
 </div>
-`,
-      },
-      {
-        label: '2. Build',
-        content: `
+`},{label:"2. Build",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[3-Stage Development]</strong>
 
 <p style="margin-bottom:0.35rem; font-weight: 700; color: var(--text-primary); font-size: 1rem;">First — Create the Project Folder</p>
@@ -654,11 +575,7 @@ Include a search bar.</code>
   </a>
 </div>
 
-`,
-      },
-      {
-        label: '3. Cloud',
-        content: `
+`},{label:"3. Cloud",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Firebase Integration via MCP]</strong>
 
 <p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">Now that the app is built and tested locally, it's time to connect it to the cloud. We'll ask the AI to create a Firebase project and store our URL link data in Firestore by invoking the <strong style="color: var(--text-primary);">Firebase MCP server</strong> — no manual Firebase Console clicks needed.</p>
@@ -731,11 +648,7 @@ Follow these steps:
     Next: Step 4 – Deploy <span>→</span>
   </a>
 </div>
-`,
-      },
-      {
-        label: '4. Deploy',
-        content: `
+`},{label:"4. Deploy",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Deploy to GitHub Pages]</strong>
 
 <p style="margin-bottom:1rem; line-height:1.75; color: var(--text-secondary);">Now that the app is complete and Firebase-integrated, let's publish it to the web using <strong style="color: var(--text-primary);">GitHub Pages</strong> — free, fast hosting straight from your repository.</p>
@@ -777,11 +690,7 @@ git add . && git commit -m "initial release" && git push -u origin main</code>
     Next: Bonus <span>→</span>
   </a>
 </div>
-`,
-      },
-      {
-        label: 'Bonus',
-        content: `
+`},{label:"Bonus",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Bonus — Showcase Your Tech Stack]</strong>
 
 <p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">Want to show off the technologies powering your app? Use the prompt below to ask Antigravity to add a professional 'Tech Stack' modal to your navigation bar. It will dynamically read your <code style="padding: 0.1rem 0.35rem; background: var(--bg-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">package.json</code> and display a beautiful, themed dialog with icons and descriptions.</p>
@@ -823,908 +732,50 @@ Requirements:
 </div>
 
 
-`,
-      },
-    ],
-    interactiveType: 'custom',
-  },
-];
-
-// Study Mode State
-const studyMode = {
-  isActive: false,
-  isLocked: false,
-  isMinimized: false,
-  currentView: 'timer',
-  timer: {
-    duration: 25 * 60,
-    remaining: 25 * 60,
-    interval: null,
-    isRunning: false,
-  },
-  flashcards: {
-    currentIndex: 0,
-    shuffled: [],
-    isFlipped: false,
-  },
-  stats: {
-    streak: 0,
-    cardsToday: 0,
-    focusMinutes: 0,
-    lastStudyDate: null,
-  },
-};
-
-const app = {
-  activeConcept: null,
-
-  resetContentScroll() {
-    const contentArea = document.getElementById('content-area');
-    if (contentArea) contentArea.scrollTop = 0;
-
-    const tutorialContent = document.querySelector('.tutorial-tab-content');
-    if (tutorialContent) tutorialContent.scrollTop = 0;
-  },
-
-  init() {
-    this.renderSidebar();
-    this.setupEventListeners();
-    this.initTheme();
-    this.initStudyMode();
-    this.initTechStackModal();
-
-    // Initial routing based on hash
-    const hash = window.location.hash.substring(1);
-    if (hash && concepts.some((c) => c.id === hash)) {
-      this.selectConcept(hash);
-    } else {
-      this.renderWelcome();
-    }
-
-    // Start the neural constellation background
-    initConstellation(document.getElementById('constellation-bg'));
-  },
-
-  renderWelcome() {
-    // Restore constellation on home screen
-    document.getElementById('constellation-bg').style.display = '';
-    const cotd = this.getConceptOfTheDay();
-    const contentArea = document.getElementById('content-area');
-    contentArea.innerHTML = `
+`}],interactiveType:"custom"}],s={isActive:!1,isLocked:!1,isMinimized:!1,timer:{duration:1500,remaining:1500,interval:null,isRunning:!1},stats:{streak:0,cardsToday:0,focusMinutes:0,lastStudyDate:null}},j={activeConcept:null,resetContentScroll(){const t=document.getElementById("content-area");t&&(t.scrollTop=0);const e=document.querySelector(".tutorial-tab-content");e&&(e.scrollTop=0)},init(){this.renderSidebar(),this.setupEventListeners(),this.initTheme(),this.initStudyMode(),this.initTechStackModal();const t=window.location.hash.substring(1);t&&f.some(e=>e.id===t)?this.selectConcept(t):this.renderWelcome(),P(document.getElementById("constellation-bg"))},renderWelcome(){document.getElementById("constellation-bg").style.display="";const t=this.getConceptOfTheDay(),e=document.getElementById("content-area");e.innerHTML=`
       <div class="cotd-ticker">
         <span class="cotd-label">Skill of the Day</span>
         <div class="ticker-track">
-          <span class="ticker-text">${cotd.title}</span>
+          <span class="ticker-text">${t.title}</span>
         </div>
       </div>
       <div class="welcome-card">
         <h2>Welcome to Knowledge Lab</h2>
         <p>Select a tutorial from the sidebar to begin your interactive learning journey.</p>
       </div>
-    `;
-
-    // Make the ticker clickable to open the concept
-    contentArea.querySelector('.cotd-ticker').addEventListener('click', () => {
-      this.selectConcept(cotd.id);
-    });
-
-    // Pin the start position to the exact right edge of the track (no dead zone)
-    const tickerText = contentArea.querySelector('.ticker-text');
-    const trackWidth = contentArea.querySelector('.ticker-track').offsetWidth;
-    tickerText.style.setProperty('--start-x', trackWidth + 'px');
-  },
-
-  getConceptOfTheDay() {
-    // Deterministic: divide epoch ms by ms-per-day to get a stable daily index.
-    // Every user on the same calendar day (UTC) sees the exact same concept.
-    // Changes automatically at midnight UTC — no localStorage needed.
-    const dayIndex = Math.floor(Date.now() / (24 * 60 * 60 * 1000));
-    return concepts[dayIndex % concepts.length];
-  },
-
-  initTheme() {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-      document.documentElement.classList.add('light-mode');
-      document.querySelector('#theme-toggle .icon').textContent = '☀️';
-    }
-    if (localStorage.getItem('sidebar') === 'collapsed') {
-      document.getElementById('app').classList.add('sidebar-collapsed');
-    }
-  },
-
-  renderSidebar() {
-    const list = document.getElementById('concept-list');
-    list.innerHTML = concepts
-      .map(
-        (c) => `
-      <li class="nav-item" data-id="${c.id}">${c.title}</li>
-    `,
-      )
-      .join('');
-  },
-
-  isMobile() {
-    return window.innerWidth <= 640;
-  },
-
-  closeMobileSidebar() {
-    document.getElementById('app').classList.remove('sidebar-open');
-  },
-
-  setupEventListeners() {
-    // Concept list: close mobile drawer after selecting
-    document.getElementById('concept-list').addEventListener('click', (e) => {
-      if (e.target.classList.contains('nav-item')) {
-        const id = e.target.dataset.id;
-        if (this.isMobile()) this.closeMobileSidebar();
-        this.selectConcept(id);
-      }
-    });
-
-    // Sidebar toggle: overlay drawer on mobile, collapse on desktop
-    document.getElementById('sidebar-toggle').addEventListener('click', () => {
-      const app = document.getElementById('app');
-      if (this.isMobile()) {
-        app.classList.toggle('sidebar-open');
-      } else {
-        const collapsed = app.classList.toggle('sidebar-collapsed');
-        localStorage.setItem('sidebar', collapsed ? 'collapsed' : 'open');
-      }
-    });
-
-    // Backdrop click: close mobile drawer
-    document.getElementById('app').addEventListener('click', (e) => {
-      if (this.isMobile() && e.target === document.getElementById('app')) {
-        this.closeMobileSidebar();
-      }
-    });
-
-    // Theme toggle
-    document.getElementById('theme-toggle').addEventListener('click', () => {
-      const isLight = document.documentElement.classList.toggle('light-mode');
-      const icon = document.querySelector('#theme-toggle .icon');
-      icon.textContent = isLight ? '☀️' : '🌙';
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    });
-
-    // Home navigation
-    document.getElementById('home-link').addEventListener('click', () => {
-      this.activeConcept = null;
-      document
-        .querySelectorAll('.nav-item')
-        .forEach((el) => el.classList.remove('active'));
-      if (this.isMobile()) this.closeMobileSidebar();
-      this.renderWelcome();
-    });
-
-    // Search functionality
-    document.getElementById('concept-search').addEventListener('input', (e) => {
-      const query = e.target.value.toLowerCase();
-      const items = document.querySelectorAll('.nav-item');
-      items.forEach((item) => {
-        const text = item.textContent.toLowerCase();
-        item.style.display = text.includes(query) ? 'block' : 'none';
-      });
-    });
-
-    // Hash navigation listener
-    window.addEventListener('hashchange', () => {
-      const hash = window.location.hash.substring(1);
-      if (hash && concepts.some((c) => c.id === hash)) {
-        if (!this.activeConcept || this.activeConcept.id !== hash) {
-          this.selectConcept(hash);
-        }
-      } else if (!hash) {
-        // Handle direct home navigation via hash removal
-        this.activeConcept = null;
-        document
-          .querySelectorAll('.nav-item')
-          .forEach((el) => el.classList.remove('active'));
-        this.renderWelcome();
-      }
-    });
-  },
-
-  selectConcept(id) {
-    const concept = concepts.find((c) => c.id === id);
-    if (!concept) return;
-
-    // Update URL hash
-    if (window.location.hash !== `#${id}`) {
-      window.location.hash = id;
-    }
-
-    // Hide constellation when reading a concept
-    document.getElementById('constellation-bg').style.display = 'none';
-
-    // Update UI
-    this.activeConcept = concept;
-    document
-      .querySelectorAll('.nav-item')
-      .forEach((el) => el.classList.remove('active'));
-
-    const navItem = document.querySelector(`[data-id="${id}"]`);
-    if (navItem) navItem.classList.add('active');
-
-    this.renderConcept(concept);
-    this.resetContentScroll();
-  },
-
-  renderConcept(concept) {
-    const contentArea = document.getElementById('content-area');
-
-    if (concept.tabs && concept.tabs.length > 0) {
-      // Render tabbed interface
-      const tabButtons = concept.tabs
-        .map(
-          (tab, i) =>
-            `<button class="tutorial-tab-btn${i === 0 ? ' active' : ''}" data-tab="${i}">${tab.label}</button>`,
-        )
-        .join('');
-
-      const tabPanels = concept.tabs
-        .map(
-          (tab, i) =>
-            `<div class="tutorial-tab-panel${i === 0 ? ' active' : ''}" data-panel="${i}">
+    `,e.querySelector(".cotd-ticker").addEventListener("click",()=>{this.selectConcept(t.id)});const r=e.querySelector(".ticker-text"),a=e.querySelector(".ticker-track").offsetWidth;r.style.setProperty("--start-x",a+"px")},getConceptOfTheDay(){const t=Math.floor(Date.now()/864e5);return f[t%f.length]},initTheme(){localStorage.getItem("theme")==="light"&&(document.documentElement.classList.add("light-mode"),document.querySelector("#theme-toggle .icon").textContent="☀️"),localStorage.getItem("sidebar")==="collapsed"&&document.getElementById("app").classList.add("sidebar-collapsed")},renderSidebar(){const t=document.getElementById("concept-list");t.innerHTML=f.map(e=>`
+      <li class="nav-item" data-id="${e.id}">${e.title}</li>
+    `).join("")},isMobile(){return window.innerWidth<=640},closeMobileSidebar(){document.getElementById("app").classList.remove("sidebar-open")},setupEventListeners(){document.getElementById("concept-list").addEventListener("click",t=>{if(t.target.classList.contains("nav-item")){const e=t.target.dataset.id;this.isMobile()&&this.closeMobileSidebar(),this.selectConcept(e)}}),document.getElementById("sidebar-toggle").addEventListener("click",()=>{const t=document.getElementById("app");if(this.isMobile())t.classList.toggle("sidebar-open");else{const e=t.classList.toggle("sidebar-collapsed");localStorage.setItem("sidebar",e?"collapsed":"open")}}),document.getElementById("app").addEventListener("click",t=>{this.isMobile()&&t.target===document.getElementById("app")&&this.closeMobileSidebar()}),document.getElementById("theme-toggle").addEventListener("click",()=>{const t=document.documentElement.classList.toggle("light-mode"),e=document.querySelector("#theme-toggle .icon");e.textContent=t?"☀️":"🌙",localStorage.setItem("theme",t?"light":"dark")}),document.getElementById("home-link").addEventListener("click",()=>{this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(t=>t.classList.remove("active")),this.isMobile()&&this.closeMobileSidebar(),this.renderWelcome()}),document.getElementById("concept-search").addEventListener("input",t=>{const e=t.target.value.toLowerCase();document.querySelectorAll(".nav-item").forEach(a=>{const o=a.textContent.toLowerCase();a.style.display=o.includes(e)?"block":"none"})}),window.addEventListener("hashchange",()=>{const t=window.location.hash.substring(1);t&&f.some(e=>e.id===t)?(!this.activeConcept||this.activeConcept.id!==t)&&this.selectConcept(t):t||(this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(e=>e.classList.remove("active")),this.renderWelcome())})},selectConcept(t){const e=f.find(a=>a.id===t);if(!e)return;window.location.hash!==`#${t}`&&(window.location.hash=t),document.getElementById("constellation-bg").style.display="none",this.activeConcept=e,document.querySelectorAll(".nav-item").forEach(a=>a.classList.remove("active"));const r=document.querySelector(`[data-id="${t}"]`);r&&r.classList.add("active"),this.renderConcept(e),this.resetContentScroll()},renderConcept(t){const e=document.getElementById("content-area");if(t.tabs&&t.tabs.length>0){const r=t.tabs.map((o,i)=>`<button class="tutorial-tab-btn${i===0?" active":""}" data-tab="${i}">${o.label}</button>`).join(""),a=t.tabs.map((o,i)=>`<div class="tutorial-tab-panel${i===0?" active":""}" data-panel="${i}">
           <div class="concept-content" id="concept-description-${i}">
-            ${tab.content}
+            ${o.content}
           </div>
-        </div>`,
-        )
-        .join('');
-
-      contentArea.innerHTML = `
+        </div>`).join("");e.innerHTML=`
         <article class="concept-card concept-card--tabs">
-          <nav class="tutorial-tabs" role="tablist">${tabButtons}</nav>
-          <div class="tutorial-tab-content">${tabPanels}</div>
+          <nav class="tutorial-tabs" role="tablist">${r}</nav>
+          <div class="tutorial-tab-content">${a}</div>
         </article>
-      `;
-
-      this.initTabs();
-      // Attach copy buttons to the first (active) panel
-      concept.tabs.forEach((_, i) => {
-        const el = document.getElementById(`concept-description-${i}`);
-        if (el) this.attachCopyButtonsTo(el);
-      });
-    } else {
-      contentArea.innerHTML = `
+      `,this.initTabs(),t.tabs.forEach((o,i)=>{const d=document.getElementById(`concept-description-${i}`);d&&this.attachCopyButtonsTo(d)})}else e.innerHTML=`
         <article class="concept-card">
-          <h2 class="concept-title">${concept.title}</h2>
+          <h2 class="concept-title">${t.title}</h2>
           <div class="concept-meta">
-            <span class="tag">${concept.category}</span>
-            ${concept.tags.map((t) => `<span class="tag">${t}</span>`).join('')}
+            <span class="tag">${t.category}</span>
+            ${t.tags.map(r=>`<span class="tag">${r}</span>`).join("")}
           </div>
           <div class="concept-content" id="concept-description">
-            ${(concept.description || 'Add your description here...')
-              .split('\n\n')
-              .map((p) => `<p>${p}</p>`)
-              .join('')}
+            ${(t.description||"Add your description here...").split(`
+
+`).map(r=>`<p>${r}</p>`).join("")}
           </div>
         </article>
-      `;
-      this.attachCopyButtons();
-    }
-  },
-
-  initTabs() {
-    const btns = document.querySelectorAll('.tutorial-tab-btn');
-    const panels = document.querySelectorAll('.tutorial-tab-panel');
-
-    const switchToTab = (index) => {
-      btns.forEach((b) => b.classList.remove('active'));
-      panels.forEach((p) => p.classList.remove('active'));
-      btns[index].classList.add('active');
-      panels[index].classList.add('active');
-
-      // Scroll the active tab into the center of the viewport
-      btns[index].scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'center',
-      });
-
-      this.resetContentScroll();
-    };
-
-    btns.forEach((btn) => {
-      btn.addEventListener('click', () => switchToTab(Number(btn.dataset.tab)));
-    });
-
-    // Wire up any in-content links that jump to a specific tab
-    document.querySelectorAll('[data-goto-tab]').forEach((link) => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        switchToTab(Number(link.dataset.gotoTab));
-      });
-    });
-
-    // Wire up any in-content links that jump to a specific concept (tutorial)
-    document.querySelectorAll('[data-goto-concept]').forEach((link) => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (typeof this.selectConcept === 'function') {
-          this.selectConcept(link.dataset.gotoConcept);
-        }
-      });
-    });
-  },
-
-  attachCopyButtons() {
-    const conceptDescription = document.getElementById('concept-description');
-    if (!conceptDescription) return;
-    this.attachCopyButtonsTo(conceptDescription);
-  },
-
-  attachCopyButtonsTo(container) {
-    if (!container) return;
-
-    // Find all code blocks
-    const codeBlocks = container.querySelectorAll('code');
-
-    codeBlocks.forEach((code) => {
-      // Only attach to block-level code elements (the ones with inline styles or specifically for commands)
-      const isBlock =
-        code.style.display === 'block' || code.textContent.includes('\n');
-      if (!isBlock) return;
-
-      // Create wrapper
-      const wrapper = document.createElement('div');
-      wrapper.className = 'code-wrapper';
-
-      // Insert wrapper before code
-      code.parentNode.insertBefore(wrapper, code);
-      // Move code into wrapper
-      wrapper.appendChild(code);
-
-      // Add copy button
-      const btn = document.createElement('button');
-      btn.className = 'copy-btn';
-      btn.setAttribute('title', 'Copy to clipboard');
-
-      const copyIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
-      const checkIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
-
-      btn.innerHTML = copyIcon;
-
-      wrapper.appendChild(btn);
-
-      btn.addEventListener('click', () => {
-        const text = code.textContent;
-        // Clean up text (remove the leading '❯ ' prompt if it's there, but keep the rest)
-        const cleanText = text.replace(/^❯\s+/, '');
-
-        navigator.clipboard.writeText(cleanText).then(() => {
-          btn.innerHTML = checkIcon;
-          btn.classList.add('copied');
-
-          setTimeout(() => {
-            btn.innerHTML = copyIcon;
-            btn.classList.remove('copied');
-          }, 2000);
-        });
-      });
-    });
-  },
-
-  // ========================================
-  // TECH STACK MODAL
-  // ========================================
-
-  initTechStackModal() {
-    const btn = document.getElementById('tech-stack-btn');
-    const overlay = document.getElementById('tech-stack-overlay');
-    const closeBtn = document.getElementById('close-tech-stack');
-    const list = document.getElementById('tech-stack-list');
-
-    if (!btn || !overlay || !closeBtn || !list) return;
-
-    // Check technologies from package.json
-    const deps = {
-      ...(pkg.dependencies || {}),
-      ...(pkg.devDependencies || {}),
-    };
-
-    // Core tech stack
-    const stack = [
-      {
-        name: 'Vanilla JavaScript',
-        desc: 'Core application logic, ECMAScript modules, DOM manipulation, and dynamic rendering.',
-        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M14.5 9h-5l-.5-5h7l-.5 5zm-5 4h5l-.5 4.5-2 1.5-2-1.5-.2-2h2.2l.1 1.2 1 .8 1-.8.2-1.2h-3.8z"></path></svg>',
-      },
-      {
-        name: 'Vanilla CSS3 & HTML5',
-        desc: 'Custom glassmorphism styling, responsive grid layout, and semantic structure.',
-        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M15 9h-6l-.5-4h7.5l-.5 4zm-6 4h6l-.5 4.5-2.5 1.5-2.5-1.5-.2-2h2.2l.1 1.2 1.2.8 1.2-.8.2-1.2h-4.6z"></path></svg>',
-      },
-      {
-        name: 'HTML5 Canvas API',
-        desc: 'Custom performant animations including the Neural Constellation and Zen Flow backgrounds.',
-        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.268-.652-.053-.877.215-.225.542-.31 1.051-.31h2.438c2.66 0 4.853-2.192 4.853-4.853C21.5 6.756 17.244 2 12 2z"></path></svg>',
-      },
-    ];
-
-    if (deps.vite) {
-      stack.push({
-        name: 'Vite (' + deps.vite.replace(/[\^\~]/, '') + ')',
-        desc: 'Next-generation frontend tooling providing ultra-fast builds and Hot Module Replacement.',
-        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>',
-      });
-    }
-
-    // Hosting logic mapped explicitly
-    stack.push({
-      name: 'GitHub Pages',
-      desc: 'Automated CI/CD deployment via GitHub Actions pipeline using the deployed build.',
-      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>',
-    });
-
-    list.innerHTML = stack
-      .map(
-        (tech) => `
+      `,this.attachCopyButtons()},initTabs(){const t=document.querySelectorAll(".tutorial-tab-btn"),e=document.querySelectorAll(".tutorial-tab-panel"),r=a=>{t.forEach(o=>o.classList.remove("active")),e.forEach(o=>o.classList.remove("active")),t[a].classList.add("active"),e[a].classList.add("active"),t[a].scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"}),this.resetContentScroll()};t.forEach(a=>{a.addEventListener("click",()=>r(Number(a.dataset.tab)))}),document.querySelectorAll("[data-goto-tab]").forEach(a=>{a.addEventListener("click",o=>{o.preventDefault(),r(Number(a.dataset.gotoTab))})}),document.querySelectorAll("[data-goto-concept]").forEach(a=>{a.addEventListener("click",o=>{o.preventDefault(),typeof this.selectConcept=="function"&&this.selectConcept(a.dataset.gotoConcept)})})},attachCopyButtons(){const t=document.getElementById("concept-description");t&&this.attachCopyButtonsTo(t)},attachCopyButtonsTo(t){if(!t)return;t.querySelectorAll("code").forEach(r=>{if(!(r.style.display==="block"||r.textContent.includes(`
+`)))return;const o=document.createElement("div");o.className="code-wrapper",r.parentNode.insertBefore(o,r),o.appendChild(r);const i=document.createElement("button");i.className="copy-btn",i.setAttribute("title","Copy to clipboard");const d='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>',m='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';i.innerHTML=d,o.appendChild(i),i.addEventListener("click",()=>{const n=r.textContent.replace(/^❯\s+/,"");navigator.clipboard.writeText(n).then(()=>{i.innerHTML=m,i.classList.add("copied"),setTimeout(()=>{i.innerHTML=d,i.classList.remove("copied")},2e3)})})})},initTechStackModal(){const t=document.getElementById("tech-stack-btn"),e=document.getElementById("tech-stack-overlay"),r=document.getElementById("close-tech-stack"),a=document.getElementById("tech-stack-list");if(!t||!e||!r||!a)return;const o={...C.dependencies||{},...C.devDependencies||{}},i=[{name:"Vanilla JavaScript",desc:"Core application logic, ECMAScript modules, DOM manipulation, and dynamic rendering.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M14.5 9h-5l-.5-5h7l-.5 5zm-5 4h5l-.5 4.5-2 1.5-2-1.5-.2-2h2.2l.1 1.2 1 .8 1-.8.2-1.2h-3.8z"></path></svg>'},{name:"Vanilla CSS3 & HTML5",desc:"Custom glassmorphism styling, responsive grid layout, and semantic structure.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M15 9h-6l-.5-4h7.5l-.5 4zm-6 4h6l-.5 4.5-2.5 1.5-2.5-1.5-.2-2h2.2l.1 1.2 1.2.8 1.2-.8.2-1.2h-4.6z"></path></svg>'},{name:"HTML5 Canvas API",desc:"Custom performant animations including the Neural Constellation and Zen Flow backgrounds.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.268-.652-.053-.877.215-.225.542-.31 1.051-.31h2.438c2.66 0 4.853-2.192 4.853-4.853C21.5 6.756 17.244 2 12 2z"></path></svg>'}];o.vite&&i.push({name:"Vite ("+o.vite.replace(/[\^\~]/,"")+")",desc:"Next-generation frontend tooling providing ultra-fast builds and Hot Module Replacement.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>'}),i.push({name:"GitHub Pages",desc:"Automated CI/CD deployment via GitHub Actions pipeline using the deployed build.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>'}),a.innerHTML=i.map(c=>`
       <li class="tech-stack-item">
         <div class="tech-stack-icon-wrapper">
-          ${tech.icon}
+          ${c.icon}
         </div>
         <div class="tech-stack-info">
-          <span class="tech-stack-name">${tech.name}</span>
-          <span class="tech-stack-desc">${tech.desc}</span>
+          <span class="tech-stack-name">${c.name}</span>
+          <span class="tech-stack-desc">${c.desc}</span>
         </div>
       </li>
-    `,
-      )
-      .join('');
-
-    const openModal = () => {
-      overlay.classList.remove('hidden');
-      // trigger reflow
-      void overlay.offsetWidth;
-      overlay.classList.add('active');
-    };
-
-    const closeModal = () => {
-      overlay.classList.remove('active');
-      setTimeout(() => {
-        if (!overlay.classList.contains('active')) {
-          overlay.classList.add('hidden');
-        }
-      }, 300); // match transition duration
-    };
-
-    btn.addEventListener('click', openModal);
-    closeBtn.addEventListener('click', closeModal);
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) closeModal();
-    });
-  },
-
-  // ========================================
-  // STUDY MODE
-  // ========================================
-
-  initStudyMode() {
-    // Load stats from localStorage
-    this.loadStudyStats();
-    this.updateStudyMetrics();
-    this.initZenFlow();
-
-    // Study mode button
-    document.getElementById('study-mode-btn').addEventListener('click', () => {
-      this.toggleStudyMode();
-    });
-
-    // Exit study mode
-    document.getElementById('exit-study').addEventListener('click', () => {
-      this.toggleStudyMode();
-    });
-
-    // Timer controls
-    document.getElementById('timer-toggle').addEventListener('click', () => {
-      this.toggleTimer();
-    });
-
-    document.getElementById('timer-reset').addEventListener('click', () => {
-      this.resetTimer();
-    });
-
-    // Timer presets
-    document.querySelectorAll('.preset-btn').forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        const time = parseInt(e.target.dataset.time);
-        this.setTimerDuration(time);
-      });
-    });
-
-    // Minimize / expand study mode
-    document.getElementById('minimize-study').addEventListener('click', () => {
-      this.minimizeStudy();
-    });
-
-    document.getElementById('expand-study').addEventListener('click', () => {
-      this.expandStudy();
-    });
-
-    document.getElementById('mini-stop-btn').addEventListener('click', () => {
-      this.expandStudy();
-      this.toggleStudyMode(); // exit study mode
-    });
-
-    // Lock / unlock screen
-    document.getElementById('lock-screen-btn').addEventListener('click', () => {
-      this.lockScreen();
-    });
-
-    document
-      .getElementById('unlock-screen-btn')
-      .addEventListener('click', () => {
-        this.unlockScreen();
-      });
-  },
-
-  loadStudyStats() {
-    const saved = localStorage.getItem('studyStats');
-    if (saved) {
-      studyMode.stats = JSON.parse(saved);
-      this.updateStreak();
-    }
-  },
-
-  saveStudyStats() {
-    localStorage.setItem('studyStats', JSON.stringify(studyMode.stats));
-  },
-
-  updateStreak() {
-    const today = new Date().toDateString();
-    const lastDate = studyMode.stats.lastStudyDate;
-
-    if (lastDate) {
-      const lastStudy = new Date(lastDate);
-      const yesterday = new Date();
-      yesterday.setDate(yesterday.getDate() - 1);
-
-      if (lastStudy.toDateString() === yesterday.toDateString()) {
-        // Continue streak
-      } else if (lastStudy.toDateString() !== today) {
-        // Reset streak
-        studyMode.stats.streak = 0;
-      }
-    }
-  },
-
-  updateStudyMetrics() {
-    // Elements removed from UI — guard against null refs
-    const streak = document.getElementById('study-streak');
-    const cards = document.getElementById('study-cards');
-    const mins = document.getElementById('study-minutes');
-    if (streak) streak.textContent = studyMode.stats.streak;
-    if (cards) cards.textContent = studyMode.stats.cardsToday;
-    if (mins) mins.textContent = studyMode.stats.focusMinutes;
-  },
-
-  toggleStudyMode() {
-    studyMode.isActive = !studyMode.isActive;
-    const overlay = document.getElementById('study-mode-overlay');
-    const zenFlowBg = document.querySelector('.zen-flow-bg');
-
-    if (studyMode.isActive) {
-      // If coming back from minimized, just expand
-      if (studyMode.isMinimized) {
-        this.expandStudy();
-        return;
-      }
-      overlay.classList.remove('hidden');
-      overlay.classList.add('active');
-      zenFlowBg.style.opacity = '1';
-      this.updateStreak();
-      this.saveStudyStats();
-    } else {
-      // Fully exit — also clear minimized state
-      this.expandStudy(); // ensure mini-timer is hidden
-      overlay.classList.remove('active');
-      zenFlowBg.style.opacity = '0';
-      this.resetTimer();
-      setTimeout(() => {
-        overlay.classList.add('hidden');
-      }, 500);
-    }
-  },
-
-  // Timer methods
-  setTimerDuration(minutes) {
-    studyMode.timer.duration = minutes * 60;
-    studyMode.timer.remaining = minutes * 60;
-
-    // Update UI
-    document.querySelectorAll('.preset-btn').forEach((btn) => {
-      btn.classList.toggle('active', parseInt(btn.dataset.time) === minutes);
-    });
-
-    this.updateTimerDisplay();
-  },
-
-  toggleTimer() {
-    if (studyMode.timer.isRunning) {
-      this.pauseTimer();
-    } else {
-      this.startTimer();
-    }
-  },
-
-  startTimer() {
-    studyMode.timer.isRunning = true;
-    document.getElementById('timer-toggle').textContent = 'Pause';
-    document.querySelector('.timer-wrapper').classList.add('active');
-    document.getElementById('lock-screen-btn').classList.remove('hidden');
-
-    studyMode.timer.interval = setInterval(() => {
-      studyMode.timer.remaining--;
-      this.updateTimerDisplay();
-
-      if (studyMode.timer.remaining <= 0) {
-        this.completeTimer();
-      }
-    }, 1000);
-  },
-
-  pauseTimer() {
-    studyMode.timer.isRunning = false;
-    document.getElementById('timer-toggle').textContent = 'Resume';
-    document.querySelector('.timer-wrapper').classList.remove('active');
-    document.getElementById('lock-screen-btn').classList.add('hidden');
-    clearInterval(studyMode.timer.interval);
-    if (studyMode.isLocked) this.unlockScreen();
-  },
-
-  resetTimer() {
-    this.pauseTimer();
-    studyMode.timer.remaining = studyMode.timer.duration;
-    document.getElementById('timer-toggle').textContent = 'Start Focus';
-    document.getElementById('timer-status').textContent = 'Ready to focus';
-    document.getElementById('lock-screen-btn').classList.add('hidden');
-    this.updateTimerDisplay();
-  },
-
-  completeTimer() {
-    this.pauseTimer();
-    document.getElementById('timer-status').textContent =
-      'Focus complete! Great work!';
-
-    // Update stats
-    studyMode.stats.focusMinutes += Math.floor(studyMode.timer.duration / 60);
-    this.updateStreakDate();
-    this.saveStudyStats();
-    this.updateStudyMetrics();
-
-    // Play notification sound (optional)
-    if ('Notification' in window && Notification.permission === 'granted') {
-      new Notification('Focus Session Complete', {
-        body: 'Great job! Take a break.',
-        icon: '/vite.svg',
-      });
-    }
-  },
-
-  updateTimerDisplay() {
-    const minutes = Math.floor(studyMode.timer.remaining / 60);
-    const seconds = studyMode.timer.remaining % 60;
-    const timeStr = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-    document.getElementById('timer-minutes').textContent = minutes
-      .toString()
-      .padStart(2, '0');
-    document.getElementById('timer-seconds').textContent = seconds
-      .toString()
-      .padStart(2, '0');
-
-    // Update mini-timer display
-    document.getElementById('mini-timer-display').textContent = timeStr;
-    const progressPct =
-      (studyMode.timer.remaining / studyMode.timer.duration) * 100;
-    document.getElementById('mini-timer-progress').style.width =
-      `${progressPct}%`;
-
-    // Update progress ring
-    const progress = studyMode.timer.remaining / studyMode.timer.duration;
-    const circumference = 2 * Math.PI * 130;
-    const offset = circumference * (1 - progress);
-    document.getElementById('timer-progress').style.strokeDashoffset = offset;
-
-    // Update status
-    if (!studyMode.timer.isRunning) {
-      document.getElementById('timer-status').textContent = 'Ready to focus';
-    } else {
-      document.getElementById('timer-status').textContent = 'Stay focused...';
-    }
-  },
-
-  // Minimize to floating widget
-  minimizeStudy() {
-    studyMode.isMinimized = true;
-    const overlay = document.getElementById('study-mode-overlay');
-    const zenFlowBg = document.querySelector('.zen-flow-bg');
-    overlay.classList.remove('active');
-    zenFlowBg.style.opacity = '0';
-    setTimeout(() => overlay.classList.add('hidden'), 500);
-    document.getElementById('mini-timer').classList.remove('hidden');
-    // Sync mini display immediately
-    const m = Math.floor(studyMode.timer.remaining / 60);
-    const s = studyMode.timer.remaining % 60;
-    document.getElementById('mini-timer-display').textContent =
-      `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-    const progressPct =
-      (studyMode.timer.remaining / studyMode.timer.duration) * 100;
-    document.getElementById('mini-timer-progress').style.width =
-      `${progressPct}%`;
-  },
-
-  // Expand back to full study mode
-  expandStudy() {
-    studyMode.isMinimized = false;
-    document.getElementById('mini-timer').classList.add('hidden');
-    if (studyMode.isActive) {
-      const overlay = document.getElementById('study-mode-overlay');
-      const zenFlowBg = document.querySelector('.zen-flow-bg');
-      overlay.classList.remove('hidden');
-      overlay.classList.add('active');
-      zenFlowBg.style.opacity = '1';
-    }
-  },
-
-  // Lock Screen
-  lockScreen() {
-    studyMode.isLocked = true;
-    document.getElementById('study-mode-overlay').classList.add('study-locked');
-    document.getElementById('unlock-screen-overlay').classList.remove('hidden');
-  },
-
-  unlockScreen() {
-    studyMode.isLocked = false;
-    document
-      .getElementById('study-mode-overlay')
-      .classList.remove('study-locked');
-    document.getElementById('unlock-screen-overlay').classList.add('hidden');
-  },
-
-  updateStreakDate() {
-    const today = new Date().toDateString();
-    const lastDate = studyMode.stats.lastStudyDate;
-
-    if (lastDate !== today) {
-      const yesterday = new Date();
-      yesterday.setDate(yesterday.getDate() - 1);
-
-      if (lastDate === yesterday.toDateString()) {
-        studyMode.stats.streak++;
-      } else {
-        studyMode.stats.streak = 1;
-      }
-
-      studyMode.stats.lastStudyDate = today;
-    }
-  },
-
-  // Zen Flow Animation
-  initZenFlow() {
-    const canvas = document.getElementById('zen-flow-canvas');
-    const ctx = canvas.getContext('2d');
-
-    let width, height;
-    let particles = [];
-
-    const resize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-      initParticles();
-    };
-
-    const initParticles = () => {
-      particles = [];
-      const particleCount = 30;
-
-      for (let i = 0; i < particleCount; i++) {
-        particles.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.3,
-          vy: (Math.random() - 0.5) * 0.3,
-          radius: Math.random() * 80 + 40,
-          hue: Math.random() * 60 + 170, // Blue-cyan range
-          alpha: Math.random() * 0.1 + 0.05,
-          pulse: Math.random() * Math.PI * 2,
-        });
-      }
-    };
-
-    const animate = () => {
-      if (!studyMode.isActive) {
-        requestAnimationFrame(animate);
-        return;
-      }
-
-      ctx.clearRect(0, 0, width, height);
-
-      // Get theme colors
-      const isLight = document.documentElement.classList.contains('light-mode');
-
-      particles.forEach((p) => {
-        // Update position
-        p.x += p.vx;
-        p.y += p.vy;
-
-        // Wrap around
-        if (p.x < -p.radius) p.x = width + p.radius;
-        if (p.x > width + p.radius) p.x = -p.radius;
-        if (p.y < -p.radius) p.y = height + p.radius;
-        if (p.y > height + p.radius) p.y = -p.radius;
-
-        // Update pulse
-        p.pulse += 0.02;
-
-        // Draw particle
-        const gradient = ctx.createRadialGradient(
-          p.x,
-          p.y,
-          0,
-          p.x,
-          p.y,
-          p.radius,
-        );
-        const pulseRadius = p.radius * (1 + Math.sin(p.pulse) * 0.1);
-
-        if (isLight) {
-          gradient.addColorStop(0, `hsla(40, 30%, 70%, ${p.alpha * 0.5})`);
-          gradient.addColorStop(0.5, `hsla(40, 20%, 80%, ${p.alpha * 0.2})`);
-          gradient.addColorStop(1, 'transparent');
-        } else {
-          gradient.addColorStop(0, `hsla(${p.hue}, 70%, 50%, ${p.alpha})`);
-          gradient.addColorStop(
-            0.5,
-            `hsla(${p.hue}, 70%, 50%, ${p.alpha * 0.3})`,
-          );
-          gradient.addColorStop(1, 'transparent');
-        }
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, pulseRadius, 0, Math.PI * 2);
-        ctx.fillStyle = gradient;
-        ctx.fill();
-      });
-
-      // Draw breathing aura
-      if (studyMode.timer.isRunning) {
-        const time = Date.now() / 1000;
-        const breathRadius = 150 + Math.sin(time * 0.5) * 20;
-
-        const breathGradient = ctx.createRadialGradient(
-          width / 2,
-          height / 2,
-          0,
-          width / 2,
-          height / 2,
-          breathRadius,
-        );
-
-        if (isLight) {
-          breathGradient.addColorStop(0, 'hsla(40, 30%, 75%, 0.05)');
-          breathGradient.addColorStop(1, 'transparent');
-        } else {
-          breathGradient.addColorStop(0, 'hsla(180, 70%, 50%, 0.03)');
-          breathGradient.addColorStop(1, 'transparent');
-        }
-
-        ctx.beginPath();
-        ctx.arc(width / 2, height / 2, breathRadius, 0, Math.PI * 2);
-        ctx.fillStyle = breathGradient;
-        ctx.fill();
-      }
-
-      requestAnimationFrame(animate);
-    };
-
-    window.addEventListener('resize', resize);
-    resize();
-    animate();
-  },
-};
-
-document.addEventListener('DOMContentLoaded', () => app.init());
+    `).join("");const d=()=>{e.classList.remove("hidden"),e.offsetWidth,e.classList.add("active")},m=()=>{e.classList.remove("active"),setTimeout(()=>{e.classList.contains("active")||e.classList.add("hidden")},300)};t.addEventListener("click",d),r.addEventListener("click",m),e.addEventListener("click",c=>{c.target===e&&m()})},initStudyMode(){this.loadStudyStats(),this.updateStudyMetrics(),this.initZenFlow(),document.getElementById("study-mode-btn").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("exit-study").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("timer-toggle").addEventListener("click",()=>{this.toggleTimer()}),document.getElementById("timer-reset").addEventListener("click",()=>{this.resetTimer()}),document.querySelectorAll(".preset-btn").forEach(t=>{t.addEventListener("click",e=>{const r=parseInt(e.target.dataset.time);this.setTimerDuration(r)})}),document.getElementById("minimize-study").addEventListener("click",()=>{this.minimizeStudy()}),document.getElementById("expand-study").addEventListener("click",()=>{this.expandStudy()}),document.getElementById("mini-stop-btn").addEventListener("click",()=>{this.expandStudy(),this.toggleStudyMode()}),document.getElementById("lock-screen-btn").addEventListener("click",()=>{this.lockScreen()}),document.getElementById("unlock-screen-btn").addEventListener("click",()=>{this.unlockScreen()})},loadStudyStats(){const t=localStorage.getItem("studyStats");t&&(s.stats=JSON.parse(t),this.updateStreak())},saveStudyStats(){localStorage.setItem("studyStats",JSON.stringify(s.stats))},updateStreak(){const t=new Date().toDateString(),e=s.stats.lastStudyDate;if(e){const r=new Date(e),a=new Date;a.setDate(a.getDate()-1),r.toDateString()===a.toDateString()||r.toDateString()!==t&&(s.stats.streak=0)}},updateStudyMetrics(){const t=document.getElementById("study-streak"),e=document.getElementById("study-cards"),r=document.getElementById("study-minutes");t&&(t.textContent=s.stats.streak),e&&(e.textContent=s.stats.cardsToday),r&&(r.textContent=s.stats.focusMinutes)},toggleStudyMode(){s.isActive=!s.isActive;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");if(s.isActive){if(s.isMinimized){this.expandStudy();return}t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1",this.updateStreak(),this.saveStudyStats()}else this.expandStudy(),t.classList.remove("active"),e.style.opacity="0",this.resetTimer(),setTimeout(()=>{t.classList.add("hidden")},500)},setTimerDuration(t){s.timer.duration=t*60,s.timer.remaining=t*60,document.querySelectorAll(".preset-btn").forEach(e=>{e.classList.toggle("active",parseInt(e.dataset.time)===t)}),this.updateTimerDisplay()},toggleTimer(){s.timer.isRunning?this.pauseTimer():this.startTimer()},startTimer(){s.timer.isRunning=!0,document.getElementById("timer-toggle").textContent="Pause",document.querySelector(".timer-wrapper").classList.add("active"),document.getElementById("lock-screen-btn").classList.remove("hidden"),s.timer.interval=setInterval(()=>{s.timer.remaining--,this.updateTimerDisplay(),s.timer.remaining<=0&&this.completeTimer()},1e3)},pauseTimer(){s.timer.isRunning=!1,document.getElementById("timer-toggle").textContent="Resume",document.querySelector(".timer-wrapper").classList.remove("active"),document.getElementById("lock-screen-btn").classList.add("hidden"),clearInterval(s.timer.interval),s.isLocked&&this.unlockScreen()},resetTimer(){this.pauseTimer(),s.timer.remaining=s.timer.duration,document.getElementById("timer-toggle").textContent="Start Focus",document.getElementById("timer-status").textContent="Ready to focus",document.getElementById("lock-screen-btn").classList.add("hidden"),this.updateTimerDisplay()},completeTimer(){this.pauseTimer(),document.getElementById("timer-status").textContent="Focus complete! Great work!",s.stats.focusMinutes+=Math.floor(s.timer.duration/60),this.updateStreakDate(),this.saveStudyStats(),this.updateStudyMetrics(),"Notification"in window&&Notification.permission==="granted"&&new Notification("Focus Session Complete",{body:"Great job! Take a break.",icon:"/vite.svg"})},updateTimerDisplay(){const t=Math.floor(s.timer.remaining/60),e=s.timer.remaining%60,r=`${t.toString().padStart(2,"0")}:${e.toString().padStart(2,"0")}`;document.getElementById("timer-minutes").textContent=t.toString().padStart(2,"0"),document.getElementById("timer-seconds").textContent=e.toString().padStart(2,"0"),document.getElementById("mini-timer-display").textContent=r;const a=s.timer.remaining/s.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${a}%`;const o=s.timer.remaining/s.timer.duration,d=2*Math.PI*130*(1-o);document.getElementById("timer-progress").style.strokeDashoffset=d,s.timer.isRunning?document.getElementById("timer-status").textContent="Stay focused...":document.getElementById("timer-status").textContent="Ready to focus"},minimizeStudy(){s.isMinimized=!0;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("active"),e.style.opacity="0",setTimeout(()=>t.classList.add("hidden"),500),document.getElementById("mini-timer").classList.remove("hidden");const r=Math.floor(s.timer.remaining/60),a=s.timer.remaining%60;document.getElementById("mini-timer-display").textContent=`${r.toString().padStart(2,"0")}:${a.toString().padStart(2,"0")}`;const o=s.timer.remaining/s.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${o}%`},expandStudy(){if(s.isMinimized=!1,document.getElementById("mini-timer").classList.add("hidden"),s.isActive){const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1"}},lockScreen(){s.isLocked=!0,document.getElementById("study-mode-overlay").classList.add("study-locked"),document.getElementById("unlock-screen-overlay").classList.remove("hidden")},unlockScreen(){s.isLocked=!1,document.getElementById("study-mode-overlay").classList.remove("study-locked"),document.getElementById("unlock-screen-overlay").classList.add("hidden")},updateStreakDate(){const t=new Date().toDateString(),e=s.stats.lastStudyDate;if(e!==t){const r=new Date;r.setDate(r.getDate()-1),e===r.toDateString()?s.stats.streak++:s.stats.streak=1,s.stats.lastStudyDate=t}},initZenFlow(){const t=document.getElementById("zen-flow-canvas"),e=t.getContext("2d");let r,a,o=[];const i=()=>{r=t.width=window.innerWidth,a=t.height=window.innerHeight,d()},d=()=>{o=[];const c=30;for(let n=0;n<c;n++)o.push({x:Math.random()*r,y:Math.random()*a,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,radius:Math.random()*80+40,hue:Math.random()*60+170,alpha:Math.random()*.1+.05,pulse:Math.random()*Math.PI*2})},m=()=>{if(!s.isActive){requestAnimationFrame(m);return}e.clearRect(0,0,r,a);const c=document.documentElement.classList.contains("light-mode");if(o.forEach(n=>{n.x+=n.vx,n.y+=n.vy,n.x<-n.radius&&(n.x=r+n.radius),n.x>r+n.radius&&(n.x=-n.radius),n.y<-n.radius&&(n.y=a+n.radius),n.y>a+n.radius&&(n.y=-n.radius),n.pulse+=.02;const u=e.createRadialGradient(n.x,n.y,0,n.x,n.y,n.radius),b=n.radius*(1+Math.sin(n.pulse)*.1);c?(u.addColorStop(0,`hsla(40, 30%, 70%, ${n.alpha*.5})`),u.addColorStop(.5,`hsla(40, 20%, 80%, ${n.alpha*.2})`),u.addColorStop(1,"transparent")):(u.addColorStop(0,`hsla(${n.hue}, 70%, 50%, ${n.alpha})`),u.addColorStop(.5,`hsla(${n.hue}, 70%, 50%, ${n.alpha*.3})`),u.addColorStop(1,"transparent")),e.beginPath(),e.arc(n.x,n.y,b,0,Math.PI*2),e.fillStyle=u,e.fill()}),s.timer.isRunning){const n=Date.now()/1e3,u=150+Math.sin(n*.5)*20,b=e.createRadialGradient(r/2,a/2,0,r/2,a/2,u);c?(b.addColorStop(0,"hsla(40, 30%, 75%, 0.05)"),b.addColorStop(1,"transparent")):(b.addColorStop(0,"hsla(180, 70%, 50%, 0.03)"),b.addColorStop(1,"transparent")),e.beginPath(),e.arc(r/2,a/2,u,0,Math.PI*2),e.fillStyle=b,e.fill()}requestAnimationFrame(m)};window.addEventListener("resize",i),i(),m()}};document.addEventListener("DOMContentLoaded",()=>j.init());
