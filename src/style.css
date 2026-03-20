@@ -1937,6 +1937,16 @@ h1, h2, h3 {
   border-radius: 4px;
 }
 
+.tutorial-tab-content code {
+  font-size: 1.05rem;
+}
+
+.tutorial-tab-content .code-wrapper code,
+.tutorial-tab-content .concept-content code[style*="display: block"] {
+  font-size: 1.12rem;
+  line-height: 1.65;
+}
+
 /* ── Tab panels ── */
 .tutorial-tab-panel {
   display: none;
@@ -2070,7 +2080,6 @@ h1, h2, h3 {
     line-height: 1.65;
   }
 }
-
 
 
 
