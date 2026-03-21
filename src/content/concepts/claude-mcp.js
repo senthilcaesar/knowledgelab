@@ -9,11 +9,18 @@ const claudeMcpConcept = {
         content: `
 <p style="margin-bottom:1rem; line-height:1.75;">The Model Context Protocol (<a href="https://modelcontextprotocol.io/docs/getting-started/intro" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">MCP</a>) is an open standard that enables Claude to interact with external tools and data sources. This modular architecture allows you to extend Claude's capabilities with specialized services.</p>
 
-<p style="margin-bottom:0.75rem; line-height:1.75;">In this section, we will configure Claude to connect to <strong>two</strong> powerful MCP servers:</p>
+<p style="margin-bottom:0.75rem; line-height:1.75;">In this section, we will configure Claude to connect to <strong>three</strong> powerful MCP servers:</p>
 <ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
   <li style="margin-bottom: 0.5rem;"><strong>21st.dev Magic:</strong> Create modern, production-ready UI components.</li>
   <li style="margin-bottom: 0.5rem;"><strong>Supadata:</strong> Advanced web and video scraping capabilities.</li>
+  <li style="margin-bottom: 0.5rem;"><strong>Stitch:</strong> Generates UIs for mobile and web applications.</li>
 </ul>
+
+<div style="margin-top: 2rem; display: flex; justify-content: flex-end; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="1" class="tutorial-nav-link">
+    Next: 21st.dev Magic <span>→</span>
+  </a>
+</div>
 `,
       },
       {
@@ -54,6 +61,15 @@ const claudeMcpConcept = {
 
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; align-items: center;">
   <img src="/knowledgelab/images/21stdev.png" alt="21st.dev Magic Interface" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+</div>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="0" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Overview
+  </a>
+  <a href="#" data-goto-tab="2" class="tutorial-nav-link">
+    Next: Supadata <span>→</span>
+  </a>
 </div>
 `,
       },
@@ -101,6 +117,44 @@ const claudeMcpConcept = {
 
 <p style="margin-top:1rem; margin-bottom:0.5rem;"><strong>Documentation & Integration:</strong></p>
 <a href="https://docs.supadata.ai/integrations/mcp" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">https://docs.supadata.ai/integrations/mcp</a>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="1" class="tutorial-nav-link previous">
+    <span>←</span> Previous: 21st.dev Magic
+  </a>
+  <a href="#" data-goto-tab="3" class="tutorial-nav-link">
+    Next: Stitch <span>→</span>
+  </a>
+</div>
+`,
+      },
+      {
+        label: 'Stitch',
+        content: `
+<strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">Stitch MCP</strong>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">Stitch helps you generate polished UI concepts and app flows that you can bring directly into your Claude workflow.</p>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">First, go to the Stitch website and get your API key:</p>
+<p style="margin: 0 0 1rem; line-height:1.75;"><a href="https://stitch.withgoogle.com/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">https://stitch.withgoogle.com/</a></p>
+
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>Installation Command:</strong></p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text-secondary); white-space: pre-wrap;">claude mcp add stitch --transport http https://stitch.googleapis.com/mcp --header "X-Goog-Api-Key: AQ.Ab8***********R_TsknDvKmw" -s user</code>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">Once Stitch is connected, you can use it from Claude to explore and generate app ideas. For example, try a prompt like this in your Claude terminal:</p>
+
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">Design a modern reading-list web app for saving articles and YouTube links. Create a clean dashboard, an add-link form, a category filter, and a mobile-friendly layout. Make it feel polished and production-ready.</code>
+
+<p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">This is especially useful when you want Claude to help generate the overall look and structure of a web app before you start refining the code.</p>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="2" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Supadata
+  </a>
+  <a href="#" data-goto-tab="4" class="tutorial-nav-link">
+    Next: Tool Reference <span>→</span>
+  </a>
+</div>
 `,
       },
       {
@@ -145,6 +199,12 @@ const claudeMcpConcept = {
   - 21st_magic_component_refiner — Redesign/improve existing UI components
   - logo_search — Search for company logos in JSX/TSX/SVG formats
 </code>
+
+<div style="margin-top: 2rem; display: flex; justify-content: flex-start; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="3" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Stitch
+  </a>
+</div>
 `,
       },
     ],
