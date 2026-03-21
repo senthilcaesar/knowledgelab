@@ -168,6 +168,9 @@ const app = {
       document
         .querySelectorAll('.nav-item')
         .forEach((el) => el.classList.remove('active'));
+      if (window.location.hash) {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
       if (this.isMobile()) this.closeMobileSidebar();
       this.renderWelcome();
     });

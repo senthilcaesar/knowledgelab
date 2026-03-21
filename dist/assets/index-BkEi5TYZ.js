@@ -1,4 +1,4 @@
-(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const r of document.querySelectorAll('link[rel="modulepreload"]'))a(r);new MutationObserver(r=>{for(const i of r)if(i.type==="childList")for(const d of i.addedNodes)d.tagName==="LINK"&&d.rel==="modulepreload"&&a(d)}).observe(document,{childList:!0,subtree:!0});function o(r){const i={};return r.integrity&&(i.integrity=r.integrity),r.referrerPolicy&&(i.referrerPolicy=r.referrerPolicy),r.crossOrigin==="use-credentials"?i.credentials="include":r.crossOrigin==="anonymous"?i.credentials="omit":i.credentials="same-origin",i}function a(r){if(r.ep)return;r.ep=!0;const i=o(r);fetch(r.href,i)}})();const P=70,x=160,k=120;class T{constructor(e,o){this.width=e,this.height=o,this.x=Math.random()*e,this.y=Math.random()*o,this.vx=(Math.random()-.5)*.4,this.vy=(Math.random()-.5)*.4,this.baseRadius=1.5+Math.random()*2,this.pulsePhase=Math.random()*Math.PI*2,this.pulseSpeed=.015+Math.random()*.025,this.isHub=Math.random()<.12,this.isHub&&(this.baseRadius*=2)}update(e){this.pulsePhase+=this.pulseSpeed;const o=this.x-e.x,a=this.y-e.y,r=Math.hypot(o,a);if(r<k&&r>0){const d=((k-r)/k)**2*3;this.vx+=o/r*d*.08,this.vy+=a/r*d*.08}this.vx*=.975,this.vy*=.975;const i=Math.hypot(this.vx,this.vy);i>1.5&&(this.vx=this.vx/i*1.5,this.vy=this.vy/i*1.5),this.x+=this.vx,this.y+=this.vy,this.x<0&&(this.x=this.width),this.x>this.width&&(this.x=0),this.y<0&&(this.y=this.height),this.y>this.height&&(this.y=0)}draw(e,o){const a=.5+.5*Math.sin(this.pulsePhase),r=this.baseRadius*(1+a*.6),i=(this.isHub?.7:.4)+a*.4,d=o?`rgba(176, 141, 87, ${i})`:this.isHub?`rgba(180, 100, 255, ${i})`:`rgba(0, 242, 255, ${i})`,m=o?`rgba(176, 141, 87, ${a*.12})`:this.isHub?`rgba(130, 0, 255, ${a*.1})`:`rgba(0, 242, 255, ${a*.1})`;e.beginPath(),e.arc(this.x,this.y,r*5,0,Math.PI*2),e.fillStyle=m,e.fill(),e.beginPath(),e.arc(this.x,this.y,r,0,Math.PI*2),e.fillStyle=d,e.fill()}}class L{constructor(e,o,a,r,i){this.x1=e,this.y1=o,this.x2=a,this.y2=r,this.progress=0,this.speed=.02+Math.random()*.03,this.isLight=i,this.alive=!0}update(){this.progress+=this.speed,this.progress>=1&&(this.alive=!1)}draw(e){const o=this.x1+(this.x2-this.x1)*this.progress,a=this.y1+(this.y2-this.y1)*this.progress,r=1-this.progress;e.beginPath(),e.arc(o,a,3,0,Math.PI*2),e.fillStyle=this.isLight?`rgba(212, 160, 23, ${r})`:`rgba(255, 255, 255, ${r})`,e.fill()}}function M(t){const e=t.getContext("2d");let o=0,a=0,r=[],i=[],d=null;const m={x:-9999,y:-9999};let c=0;function n(){o=t.width=window.innerWidth,a=t.height=window.innerHeight,r=Array.from({length:P},()=>new T(o,a))}function u(p){if(c--,c>0)return;c=30+Math.floor(Math.random()*60);const l=[...r].sort(()=>Math.random()-.5);for(let y=0;y<l.length-1;y++){const h=l[y],g=l[y+1];if(Math.hypot(h.x-g.x,h.y-g.y)<x){i.push(new L(h.x,h.y,g.x,g.y,p));return}}}function b(p,l,y,h){const g=(1-y/x)*(h?.25:.35),v=e.createLinearGradient(p.x,p.y,l.x,l.y),A=h?`rgba(176,141,87,${g*1.5})`:p.isHub?`rgba(150,50,255,${g*1.5})`:`rgba(0,242,255,${g*1.5})`,E=h?`rgba(122,106,83,${g})`:l.isHub?`rgba(150,50,255,${g})`:`rgba(0,200,220,${g})`;v.addColorStop(0,A),v.addColorStop(1,E),e.beginPath(),e.moveTo(p.x,p.y),e.lineTo(l.x,l.y),e.strokeStyle=v,e.lineWidth=h?.6:.8,e.stroke()}function w(){const p=document.documentElement.classList.contains("light-mode");e.clearRect(0,0,o,a);for(let l=0;l<r.length;l++){r[l].update(m);for(let y=l+1;y<r.length;y++){const h=r[l].x-r[y].x,g=r[l].y-r[y].y,v=Math.hypot(h,g);v<x&&b(r[l],r[y],v,p)}}r.forEach(l=>l.draw(e,p)),u(p),i=i.filter(l=>l.alive),i.forEach(l=>{l.update(),l.draw(e)}),d=requestAnimationFrame(w)}function I(){cancelAnimationFrame(d),window.removeEventListener("resize",n),window.removeEventListener("mousemove",C)}function C(p){m.x=p.clientX,m.y=p.clientY}return window.addEventListener("resize",n),window.addEventListener("mousemove",C),n(),w(),{destroy:I}}const B={vite:"^7.3.1"},S={devDependencies:B},j={id:"claude-skills-tutorial",title:"Claude Skills",category:"",tags:[""],tabs:[{label:"Overview",content:`
+(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const r of document.querySelectorAll('link[rel="modulepreload"]'))a(r);new MutationObserver(r=>{for(const i of r)if(i.type==="childList")for(const d of i.addedNodes)d.tagName==="LINK"&&d.rel==="modulepreload"&&a(d)}).observe(document,{childList:!0,subtree:!0});function o(r){const i={};return r.integrity&&(i.integrity=r.integrity),r.referrerPolicy&&(i.referrerPolicy=r.referrerPolicy),r.crossOrigin==="use-credentials"?i.credentials="include":r.crossOrigin==="anonymous"?i.credentials="omit":i.credentials="same-origin",i}function a(r){if(r.ep)return;r.ep=!0;const i=o(r);fetch(r.href,i)}})();const P=70,x=160,k=120;class T{constructor(e,o){this.width=e,this.height=o,this.x=Math.random()*e,this.y=Math.random()*o,this.vx=(Math.random()-.5)*.4,this.vy=(Math.random()-.5)*.4,this.baseRadius=1.5+Math.random()*2,this.pulsePhase=Math.random()*Math.PI*2,this.pulseSpeed=.015+Math.random()*.025,this.isHub=Math.random()<.12,this.isHub&&(this.baseRadius*=2)}update(e){this.pulsePhase+=this.pulseSpeed;const o=this.x-e.x,a=this.y-e.y,r=Math.hypot(o,a);if(r<k&&r>0){const d=((k-r)/k)**2*3;this.vx+=o/r*d*.08,this.vy+=a/r*d*.08}this.vx*=.975,this.vy*=.975;const i=Math.hypot(this.vx,this.vy);i>1.5&&(this.vx=this.vx/i*1.5,this.vy=this.vy/i*1.5),this.x+=this.vx,this.y+=this.vy,this.x<0&&(this.x=this.width),this.x>this.width&&(this.x=0),this.y<0&&(this.y=this.height),this.y>this.height&&(this.y=0)}draw(e,o){const a=.5+.5*Math.sin(this.pulsePhase),r=this.baseRadius*(1+a*.6),i=(this.isHub?.7:.4)+a*.4,d=o?`rgba(176, 141, 87, ${i})`:this.isHub?`rgba(180, 100, 255, ${i})`:`rgba(0, 242, 255, ${i})`,m=o?`rgba(176, 141, 87, ${a*.12})`:this.isHub?`rgba(130, 0, 255, ${a*.1})`:`rgba(0, 242, 255, ${a*.1})`;e.beginPath(),e.arc(this.x,this.y,r*5,0,Math.PI*2),e.fillStyle=m,e.fill(),e.beginPath(),e.arc(this.x,this.y,r,0,Math.PI*2),e.fillStyle=d,e.fill()}}class M{constructor(e,o,a,r,i){this.x1=e,this.y1=o,this.x2=a,this.y2=r,this.progress=0,this.speed=.02+Math.random()*.03,this.isLight=i,this.alive=!0}update(){this.progress+=this.speed,this.progress>=1&&(this.alive=!1)}draw(e){const o=this.x1+(this.x2-this.x1)*this.progress,a=this.y1+(this.y2-this.y1)*this.progress,r=1-this.progress;e.beginPath(),e.arc(o,a,3,0,Math.PI*2),e.fillStyle=this.isLight?`rgba(212, 160, 23, ${r})`:`rgba(255, 255, 255, ${r})`,e.fill()}}function L(t){const e=t.getContext("2d");let o=0,a=0,r=[],i=[],d=null;const m={x:-9999,y:-9999};let c=0;function n(){o=t.width=window.innerWidth,a=t.height=window.innerHeight,r=Array.from({length:P},()=>new T(o,a))}function u(p){if(c--,c>0)return;c=30+Math.floor(Math.random()*60);const l=[...r].sort(()=>Math.random()-.5);for(let y=0;y<l.length-1;y++){const h=l[y],g=l[y+1];if(Math.hypot(h.x-g.x,h.y-g.y)<x){i.push(new M(h.x,h.y,g.x,g.y,p));return}}}function b(p,l,y,h){const g=(1-y/x)*(h?.25:.35),v=e.createLinearGradient(p.x,p.y,l.x,l.y),A=h?`rgba(176,141,87,${g*1.5})`:p.isHub?`rgba(150,50,255,${g*1.5})`:`rgba(0,242,255,${g*1.5})`,E=h?`rgba(122,106,83,${g})`:l.isHub?`rgba(150,50,255,${g})`:`rgba(0,200,220,${g})`;v.addColorStop(0,A),v.addColorStop(1,E),e.beginPath(),e.moveTo(p.x,p.y),e.lineTo(l.x,l.y),e.strokeStyle=v,e.lineWidth=h?.6:.8,e.stroke()}function w(){const p=document.documentElement.classList.contains("light-mode");e.clearRect(0,0,o,a);for(let l=0;l<r.length;l++){r[l].update(m);for(let y=l+1;y<r.length;y++){const h=r[l].x-r[y].x,g=r[l].y-r[y].y,v=Math.hypot(h,g);v<x&&b(r[l],r[y],v,p)}}r.forEach(l=>l.draw(e,p)),u(p),i=i.filter(l=>l.alive),i.forEach(l=>{l.update(),l.draw(e)}),d=requestAnimationFrame(w)}function I(){cancelAnimationFrame(d),window.removeEventListener("resize",n),window.removeEventListener("mousemove",C)}function C(p){m.x=p.clientX,m.y=p.clientY}return window.addEventListener("resize",n),window.addEventListener("mousemove",C),n(),w(),{destroy:I}}const B={vite:"^7.3.1"},S={devDependencies:B},j={id:"claude-skills-tutorial",title:"Claude Skills",category:"",tags:[""],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:1rem; line-height:1.75;">Whether you're a complete beginner looking to build your first website, or an experienced developer looking to speed up your workflow, getting started with Claude Skills is easier than you think. In this simple guide, we'll watch Claude Skills in action as it guides us through building a website, taking our input at each step. Let's go!</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">A skill is a set of instructions — packaged as a simple folder — that teaches Claude how to handle specific tasks or workflows.</p>
@@ -15,11 +15,14 @@
 `},{label:"Step 1 – Setup",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 1 – Download & Install the Skills Repo]</strong>
 
-<p style="margin-bottom:0.5rem; line-height:1.75;">To kick things off, open your terminal and clone the Claude Skills repo from GitHub:</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">To kick things off, clone the Claude Skills repo and copy the skill folders into <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code>:</p>
 
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">git clone https://github.com/anthropics/skills.git</code>
+<p style="margin: 0.5rem 0; line-height:1.75;">If the directory does not exist yet, create it first:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: monospace; color: var(--code-text);">mkdir -p ~/.claude/skills</code>
 
-<p style="margin: 0.5rem 0; line-height:1.75;">Next, drop the skills folder into <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code>. Don't see that folder? Just create it. This is where Claude looks for skills — so this part matters.</p>
+<p style="margin: 0.5rem 0; line-height:1.75;">Then run:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">git clone https://github.com/anthropics/skills.git
+cp -R skills/* ~/.claude/skills/</code>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">Each skill lives in a <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">SKILL.md</code> file with a name and description in its frontmatter. Claude uses the description to match skills to requests.</p>
 
@@ -38,7 +41,7 @@
 <p style="margin-bottom:0.75rem; line-height:1.75;">Personal skills go in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code> and follow you across all projects. Project skills go in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/skills</code> inside a repository and are shared with anyone who clones it.</p>
 
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; align-items: center;">
-  <img src="/knowledgelab/public/images/claude-skills.png" alt="Terminal Skills Placement" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+  <img src="/knowledgelab/images/claude-skills.png" alt="Terminal Skills Placement" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
 </div>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">Skills load on demand — unlike <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> (which loads into every conversation) or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">slash commands</code> (which require explicit invocation).</p>
@@ -191,11 +194,18 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
 `}],interactiveType:"custom"},z={id:"claude-mcp",title:"Claude MCP",category:"",tags:[""],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:1rem; line-height:1.75;">The Model Context Protocol (<a href="https://modelcontextprotocol.io/docs/getting-started/intro" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">MCP</a>) is an open standard that enables Claude to interact with external tools and data sources. This modular architecture allows you to extend Claude's capabilities with specialized services.</p>
 
-<p style="margin-bottom:0.75rem; line-height:1.75;">In this section, we will configure Claude to connect to <strong>two</strong> powerful MCP servers:</p>
+<p style="margin-bottom:0.75rem; line-height:1.75;">In this section, we will configure Claude to connect to <strong>three</strong> powerful MCP servers:</p>
 <ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
   <li style="margin-bottom: 0.5rem;"><strong>21st.dev Magic:</strong> Create modern, production-ready UI components.</li>
   <li style="margin-bottom: 0.5rem;"><strong>Supadata:</strong> Advanced web and video scraping capabilities.</li>
+  <li style="margin-bottom: 0.5rem;"><strong>Stitch:</strong> Generates UIs for mobile and web applications.</li>
 </ul>
+
+<div style="margin-top: 2rem; display: flex; justify-content: flex-end; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="1" class="tutorial-nav-link">
+    Next: 21st.dev Magic <span>→</span>
+  </a>
+</div>
 `},{label:"21st.dev Magic",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">21st.dev Magic</strong>
 
@@ -232,6 +242,15 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
 
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; align-items: center;">
   <img src="/knowledgelab/images/21stdev.png" alt="21st.dev Magic Interface" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+</div>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="0" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Overview
+  </a>
+  <a href="#" data-goto-tab="2" class="tutorial-nav-link">
+    Next: Supadata <span>→</span>
+  </a>
 </div>
 `},{label:"Supadata",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">Supadata MCP</strong>
@@ -275,6 +294,40 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
 
 <p style="margin-top:1rem; margin-bottom:0.5rem;"><strong>Documentation & Integration:</strong></p>
 <a href="https://docs.supadata.ai/integrations/mcp" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">https://docs.supadata.ai/integrations/mcp</a>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="1" class="tutorial-nav-link previous">
+    <span>←</span> Previous: 21st.dev Magic
+  </a>
+  <a href="#" data-goto-tab="3" class="tutorial-nav-link">
+    Next: Stitch <span>→</span>
+  </a>
+</div>
+`},{label:"Stitch",content:`
+<strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">Stitch MCP</strong>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">Stitch helps you generate polished UI concepts and app flows that you can bring directly into your Claude workflow.</p>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">First, go to the Stitch website and get your API key:</p>
+<p style="margin: 0 0 1rem; line-height:1.75;"><a href="https://stitch.withgoogle.com/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">https://stitch.withgoogle.com/</a></p>
+
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>Installation Command:</strong></p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text-secondary); white-space: pre-wrap;">claude mcp add stitch --transport http https://stitch.googleapis.com/mcp --header "X-Goog-Api-Key: AQ.Ab8***********R_TsknDvKmw" -s user</code>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">Once Stitch is connected, you can use it from Claude to explore and generate app ideas. For example, try a prompt like this in your Claude terminal:</p>
+
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">Design a modern reading-list web app for saving articles and YouTube links. Create a clean dashboard, an add-link form, a category filter, and a mobile-friendly layout. Make it feel polished and production-ready.</code>
+
+<p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">This is especially useful when you want Claude to help generate the overall look and structure of a web app before you start refining the code.</p>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="2" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Supadata
+  </a>
+  <a href="#" data-goto-tab="4" class="tutorial-nav-link">
+    Next: Tool Reference <span>→</span>
+  </a>
+</div>
 `},{label:"Tool Reference",content:`
 <p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Lists all configured MCP servers in your Claude Code setup (<code>~/.claude.json</code>)</p>
 
@@ -315,16 +368,22 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
   - 21st_magic_component_refiner — Redesign/improve existing UI components
   - logo_search — Search for company logos in JSX/TSX/SVG formats
 </code>
-`}],interactiveType:"custom"},F={id:"claude-code-uiux-21st-dev",title:"Claude Code + UI/UX + 21st.dev",category:"Tutorial",tags:["Claude Code","UI/UX","21st.dev"],tabs:[{label:"Overview",content:`
-<p style="margin-bottom:1rem; line-height:1.75;">This setup lets you generate <strong>production-level websites</strong> with three ingredients working together:</p>
+
+<div style="margin-top: 2rem; display: flex; justify-content: flex-start; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="3" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Stitch
+  </a>
+</div>
+`}],interactiveType:"custom"},F={id:"claude-code-uiux-21st-dev",title:"Claude UI Stack",category:"Tutorial",tags:["Claude Code","UI/UX","21st.dev"],tabs:[{label:"Overview",content:`
+<p style="margin-bottom:1rem; line-height:1.75;">This setup helps you create <strong>production-quality websites</strong> by combining three powerful ingredients:</p>
 
 <ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
-  <li style="margin-bottom: 0.35rem;">An AI agent delivering structure with <strong>Claude Code</strong></li>
-  <li style="margin-bottom: 0.35rem;">Taste and visual direction through the <strong>UI/UX Pro</strong> skill</li>
-  <li style="margin-bottom: 0.35rem;">Real production-ready components from <strong>21st.dev</strong></li>
+  <li style="margin-bottom: 0.35rem;"><strong>Claude Code</strong> for structure, implementation, and execution</li>
+  <li style="margin-bottom: 0.35rem;"><strong><a href="https://www.uupm.cc/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">UI/UX Pro Max</a></strong> skill for stronger taste and visual direction</li>
+  <li style="margin-bottom: 0.35rem;"><strong><a href="https://21st.dev/magic" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">21st.dev</a></strong> for polished, production-ready components</li>
 </ul>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Claude Code <em>can</em> pick these up implicitly, but explicitly adding them almost guarantees better output.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Claude Code <em>may</em> pick some of these up implicitly, but explicitly adding them usually leads to much stronger results.</p>
 
 <div style="margin-top: 2rem; display: flex; justify-content: flex-end; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="1" class="tutorial-nav-link">
@@ -334,18 +393,26 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
 `},{label:"Install Claude Code",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[First: Install Claude Code]</strong>
 
-<p style="margin-bottom:0.75rem; line-height:1.75;">Start by installing Claude Code from the official quickstart page:</p>
+<p style="margin-bottom:0.75rem; line-height:1.75;">Begin by installing Claude Code from the official quickstart page:</p>
 
 <p style="margin: 0.25rem 0 0.75rem; line-height:1.75;">
   <a href="https://code.claude.com/docs/en/quickstart" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">https://code.claude.com/docs/en/quickstart</a>
 </p>
 
 <ol style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.85;">
-  <li style="margin-bottom: 0.35rem;">Open the Claude Code quickstart page.</li>
-  <li style="margin-bottom: 0.35rem;">Copy the install command.</li>
-  <li style="margin-bottom: 0.35rem;">Paste it into your terminal and press Enter.</li>
-  <li style="margin-bottom: 0.35rem;">Launch it by typing <code style="padding: 0.15rem 0.35rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">claude</code> and pressing Enter again.</li>
+  <li style="margin-bottom: 0.35rem;">Open the quickstart page and copy the install command shown for your operating system.</li>
+  <li style="margin-bottom: 0.35rem;">Paste that install command into your regular terminal and press Enter.</li>
+  <li style="margin-bottom: 0.35rem;">Wait until the installation finishes completely.</li>
+  <li style="margin-bottom: 0.35rem;">Once installation is complete, launch Claude Code from your terminal.</li>
 </ol>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">After installation, use these commands:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">claude
+
+# Optional: verify that the CLI is installed correctly
+claude --help</code>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">If Claude Code opens successfully, you are ready to move on to the next step.</p>
 
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="0" class="tutorial-nav-link previous">
@@ -356,23 +423,21 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
   </a>
 </div>
 `},{label:"Install UI/UX + 21st.dev",content:`
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Next: Add UI/UX Pro and 21st.dev]</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Next: Add UI/UX Pro Max and 21st.dev]</strong>
 
-<p style="margin-bottom:0.75rem; line-height:1.75;">Usually you would install these separately:</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;"><strong>1. Install the <a href="https://www.uupm.cc/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">UI/UX Pro</a> skill:</strong></p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">/plugin marketplace add nextlevelbuilder/ui-ux-pro-max-skill
+/plugin install ui-ux-pro-max@ui-ux-pro-max-skill</code>
 
-<p style="margin: 0 0 0.5rem; line-height:1.75;"><strong>1. UI/UX Pro Skill:</strong> <a href="https://github.com/nextlevelbuilder/ui-ux-pro-max-skill" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">https://github.com/nextlevelbuilder/ui-ux-pro-max-skill</a></p>
-<p style="margin: 0 0 1rem; line-height:1.75;"><strong>2. 21st.dev MCP Server:</strong> <a href="https://21st.dev/mcp?redirect=%2Fmcp" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">https://21st.dev/mcp?redirect=%2Fmcp</a></p>
+<p style="margin-bottom:0.5rem; line-height:1.75;"><strong>2. Connect 21st.dev MCP:</strong></p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">Before you run the command below, get your 21st.dev Magic API key here:</p>
+<p style="margin: 0 0 1rem; line-height:1.75;"><a href="https://21st.dev/magic" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">https://21st.dev/magic</a></p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">claude mcp add magic --scope user --env API_KEY="34********84c1624bd4be49e2f309ffd5fb4e" -- npx -y @21st-dev/magic@latest</code>
 
-<p style="margin-bottom:0.75rem; line-height:1.75;">But you can set both up in one flow by following these commands:</p>
-
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">Install UI/UX Pro skill using:
-/plugin marketplace add nextlevelbuilder/ui-ux-pro-max-skill
-/plugin install ui-ux-pro-max@ui-ux-pro-max-skill
-
-Then connect 21st.dev MCP using:
-claude mcp add magic --scope user --env API_KEY="34********84c1624bd4be49e2f309ffd5fb4e" -- npx -y @21st-dev/magic@latest
-
-Double check and confirm that both are installed after you're done</code>
+<p style="margin-bottom:0.5rem; line-height:1.75;">To confirm both are installed, run these checks:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">claude plugin list
+claude mcp list</code>
+<p style="margin-bottom:0.75rem; line-height:1.75;">You should see <code style="padding: 0.15rem 0.35rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">ui-ux-pro-max</code> in the plugin list and <code style="padding: 0.15rem 0.35rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">magic</code> in the MCP list.</p>
 
 <div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1rem 0;">
   <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">Claude Code may detect and use these automatically, but explicitly installing and referencing them tends to produce much stronger results.</p>
@@ -394,7 +459,7 @@ Double check and confirm that both are installed after you're done</code>
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">Build a modern, high-end website for [DESCRIBE YOUR PRODUCT].
 
 Requirements:
-- Use UI/UX Pro design system for layout, spacing, and structure
+- Use UI/UX Pro Max design system for layout, spacing, and structure
 - Use 21st.dev components and assets for UI elements
 - Prioritize clean, production-level design (not generic AI styling)
 - Include subtle animations/interactions where appropriate
@@ -423,7 +488,7 @@ Make it feel like a top-tier product (Stripe / Linear / Apple-level quality).</c
     <span>←</span> Previous: Install UI/UX + 21st.dev
   </a>
 </div>
-`}],interactiveType:"custom"},D={id:"build-webapp-ai",title:"Build Web App with AI",category:"",tags:[""],description:`
+`}],interactiveType:"custom"},_={id:"build-webapp-ai",title:"Build Web App with AI",category:"",tags:[""],description:`
 Build your own Notebook Web App using AI coding — no prior coding experience required.
 
 In this tutorial, you’ll learn how to build and launch the app step-by-step using three tools:
@@ -444,7 +509,7 @@ Access the prompts and configuration files here:
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
   <iframe src="https://www.youtube.com/embed/PpvoOyYAMZs" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Build Web App with AI Tutorial"></iframe>
 </div>
-`,interactiveType:"custom"},_={id:"ai-engineering",title:"AI Engineering",category:"",tags:[""],tabs:[{label:"Overview",content:`
+`,interactiveType:"custom"},D={id:"ai-engineering",title:"AI Engineering",category:"",tags:[""],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:0.75rem; line-height:1.75;">AI Engineering refers to the process of building applications on top of foundation models.</p>
 <p style="margin-bottom:1rem; line-height:1.75;">The model as a service makes it easier to leverage AI to build applications. Models are exposed via APIs that receive user queries and return model outputs.
 Without these APIs, using an AI model required the infrastructure to host and serve this model. These APIs give you access to powerful models via single API calls.</p>
@@ -453,7 +518,7 @@ Without these APIs, using an AI model required the infrastructure to host and se
 
 This page is currently under development. Please check back soon.
 
-`}],interactiveType:"custom"},U={id:"build-app-skill-mcp",title:"Agent Skills + MCP",category:"Tutorial",tags:["Agentic","Firebase","GitHub"],tabs:[{label:"Overview",content:`
+`}],interactiveType:"custom"},R={id:"build-app-skill-mcp",title:"Agent Skills + MCP",category:"Tutorial",tags:["Agentic","Firebase","GitHub"],tabs:[{label:"Overview",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Build a URL Tracker App with AI Agents Skills &amp; MCP</strong>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Have you ever saved a bunch of URLs to read later — articles, docs, videos — and then a few days later wondered <em>"where did that link go?"</em> You scroll through tabs, dig through your notes app, check your browser history… and still can't find it.</p>
@@ -463,7 +528,7 @@ This page is currently under development. Please check back soon.
 <p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary); font-style: italic;">Below is a preview of what we'll build. The exact design may look different — that's the beauty of AI: it'll surprise you with its own creative take.</p>
 
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; align-items: center;">
-  <img src="/knowledgelab/images/zenshelf-preview.png" alt="ZenShelf App Preview" style="max-width: 100%; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 8px 32px rgba(0,0,0,0.3); object-fit: cover;">
+  <img src="/knowledgelab/images/zenshelf-preview1.png" alt="ZenShelf App Preview" style="max-width: 100%; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 8px 32px rgba(0,0,0,0.3); object-fit: cover;">
 </div>
 
 <hr style="border: none; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
@@ -526,12 +591,14 @@ This page is currently under development. Please check back soon.
 
 <p style="margin-bottom:0.35rem; font-weight: 700; color: var(--text-primary); font-size: 1rem;">0 — Download & Install the Claude Skills Repo</p>
 
-<p style="margin-bottom:0.5rem; line-height:1.75;">To kick things off, open your terminal and clone the Claude Skills repo from GitHub directly into <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code>:</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">To kick things off, clone the Claude Skills repo and copy the skill folders into <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code>:</p>
 
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">git clone https://github.com/anthropics/skills.git ~/.claude/skills</code>
+<p style="margin: 0.5rem 0; line-height:1.75;">If the directory does not exist yet, create it first:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: monospace; color: var(--code-text);">mkdir -p ~/.claude/skills</code>
 
-<p style="margin: 0.5rem 0; line-height:1.75;">If <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude</code> doesn't exist yet, create it first:</p>
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: monospace; color: var(--code-text);">mkdir -p ~/.claude</code>
+<p style="margin: 0.5rem 0; line-height:1.75;">Then run:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">git clone https://github.com/anthropics/skills.git
+cp -R skills/* ~/.claude/skills/</code>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">Each skill lives in a <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">SKILL.md</code> file with a name and description in its frontmatter. Claude uses the description to match skills to requests.</p>
 
@@ -558,7 +625,7 @@ This page is currently under development. Please check back soon.
 
 
 <p style="margin-bottom:0.35rem; font-weight: 700; color: var(--text-primary); font-size: 1rem;">1 — Install Gemini CLI &amp; Extensions</p>
-<p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">The Gemini CLI brings terminal-based AI to your fingertips. Install it and add two extensions that power our workflow:</p>
+<p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">The <a href="https://geminicli.com/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Gemini CLI</a> brings terminal-based AI to your fingertips. Install it and add two extensions that power our workflow:</p>
 
 <p style="margin-bottom:0.25rem; line-height:1.75; color: var(--text-secondary);">Install globally with npm:</p>
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: monospace; color: var(--code-text);">npm install -g @google/gemini-cli</code>
@@ -572,6 +639,9 @@ gemini extensions install https://github.com/gemini-cli-extensions/firebase/
 
 # Install the Superpowers extension for Gemini CLI
 gemini extensions install https://github.com/obra/superpowers</code>
+
+<p style="margin-top:0.75rem; margin-bottom:0.25rem; line-height:1.75; color: var(--text-secondary);">The Firebase extension is updated frequently, so you should regularly update the installed version:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1.25rem; font-family: monospace; color: var(--code-text);">gemini extensions update firebase</code>
 
 <div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1rem 0;">
   <p style="margin-bottom: 0.25rem; font-weight: 600; color: var(--text-primary);">💡 What is Superpowers?</p>
@@ -653,7 +723,7 @@ firebase login</code>
 <hr style="border: none; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
 
 <p style="margin-bottom:0.35rem; font-weight: 700; color: var(--text-primary); font-size: 1rem;">4 — Add Firebase Agent Skills</p>
-<p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">Skills give the AI the expertise to write correct Firebase code — security rules, Firestore schema, Firestore database, auth setup, and deployment scripts:</p>
+<p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">Skills give the AI the expertise to write correct Firebase code — security rules, Firestore schema, Firestore database, auth setup, and deployment scripts. You can read more in the <a href="https://firebase.google.com/docs/ai-assistance/agent-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Firebase agent skills documentation</a>:</p>
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">npx skills add firebase/agent-skills</code>
 
 <div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 8px; margin: 0.75rem 0;">
@@ -664,6 +734,10 @@ firebase login</code>
     <li>/Users/senthilpalanivelu/.gemini/antigravity/skills</li>
   </ul>
 </div>
+
+
+
+
 
 
 
@@ -715,6 +789,16 @@ firebase login</code>
 <span style="color: #3fb950;">✓</span> ~/.agents/skills/developing-genkit-dart                    symlinked: Antigravity, Claude Code
 
 <span style="color: #6e7681;">└  Done!  Review skills before use; they run with full agent permissions.</span></pre>
+
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-secondary); border-radius: 12px; margin: 1.5rem 0;">
+  <p style="margin-bottom: 0.5rem; font-weight: 600; color: var(--text-primary);">💡 Skills vs. Extensions: What's the difference?</p>
+  <p style="margin-bottom: 0.75rem; line-height: 1.75; color: var(--text-secondary);">You might notice we use <code>gemini extensions</code> in Step 1 and <code>npx skills</code> in Step 4. Here's the distinction:</p>
+  <ul style="margin: 0 0 0.75rem 1.25rem; color: var(--text-secondary); line-height: 1.75;">
+    <li><strong>Extensions</strong> (<code>gemini extensions install</code>) are <strong>Gemini-specific</strong>. They are all-in-one bundles that add new slash commands and tools directly to the Gemini terminal CLI.</li>
+    <li><strong>Skills</strong> (<code>npx skills add</code>) are the primary way to add expertise to <strong>Antigravity</strong> and <strong>Claude Code</strong>. They are universal and provide the instruction sets that teach these agents how to code correctly.</li>
+  </ul>
+  <p style="margin: 0; line-height: 1.75; color: var(--text-secondary);">Think of <strong>Extensions</strong> as giving your agent "new tools," while <strong>Skills</strong> give your agent "the instruction manual" on how to use them effectively.</p>
+</div>
 
 <div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1rem 0;">
 
@@ -967,7 +1051,7 @@ Requirements:
 </div>
 
 
-`}],interactiveType:"custom"},f=[j,z,F,D,_,U],s={isActive:!1,isLocked:!1,isMinimized:!1,timer:{duration:1500,remaining:1500,interval:null,isRunning:!1},stats:{streak:0,cardsToday:0,focusMinutes:0,lastStudyDate:null}},R={activeConcept:null,resetContentScroll(){const t=document.getElementById("content-area");t&&(t.scrollTop=0);const e=document.querySelector(".tutorial-tab-content");e&&(e.scrollTop=0)},init(){this.renderSidebar(),this.setupEventListeners(),this.initTheme(),this.initStudyMode(),this.initTechStackModal();const t=window.location.hash.substring(1);t&&f.some(e=>e.id===t)?this.selectConcept(t):this.renderWelcome(),M(document.getElementById("constellation-bg"))},renderWelcome(){document.getElementById("constellation-bg").style.display="";const t=this.getConceptOfTheDay(),e=document.getElementById("content-area");e.innerHTML=`
+`}],interactiveType:"custom"},f=[j,z,F,R,_,D],s={isActive:!1,isLocked:!1,isMinimized:!1,timer:{duration:1500,remaining:1500,interval:null,isRunning:!1},stats:{streak:0,cardsToday:0,focusMinutes:0,lastStudyDate:null}},U={activeConcept:null,resetContentScroll(){const t=document.getElementById("content-area");t&&(t.scrollTop=0);const e=document.querySelector(".tutorial-tab-content");e&&(e.scrollTop=0)},init(){this.renderSidebar(),this.setupEventListeners(),this.initTheme(),this.initStudyMode(),this.initTechStackModal();const t=window.location.hash.substring(1);t&&f.some(e=>e.id===t)?this.selectConcept(t):this.renderWelcome(),L(document.getElementById("constellation-bg"))},renderWelcome(){document.getElementById("constellation-bg").style.display="";const t=this.getConceptOfTheDay(),e=document.getElementById("content-area");e.innerHTML=`
       <div class="cotd-ticker">
         <span class="cotd-label">Skill of the Day</span>
         <div class="ticker-track">
@@ -980,7 +1064,7 @@ Requirements:
       </div>
     `,e.querySelector(".cotd-ticker").addEventListener("click",()=>{this.selectConcept(t.id)});const o=e.querySelector(".ticker-text"),a=e.querySelector(".ticker-track").offsetWidth;o.style.setProperty("--start-x",a+"px")},getConceptOfTheDay(){const t=Math.floor(Date.now()/864e5);return f[t%f.length]},initTheme(){localStorage.getItem("theme")==="light"&&(document.documentElement.classList.add("light-mode"),document.querySelector("#theme-toggle .icon").textContent="☀️"),localStorage.getItem("sidebar")==="collapsed"&&document.getElementById("app").classList.add("sidebar-collapsed")},renderSidebar(){const t=document.getElementById("concept-list");t.innerHTML=f.map(e=>`
       <li class="nav-item" data-id="${e.id}">${e.title}</li>
-    `).join("")},isMobile(){return window.innerWidth<=640},closeMobileSidebar(){document.getElementById("app").classList.remove("sidebar-open")},setupEventListeners(){document.getElementById("concept-list").addEventListener("click",t=>{if(t.target.classList.contains("nav-item")){const e=t.target.dataset.id;this.isMobile()&&this.closeMobileSidebar(),this.selectConcept(e)}}),document.getElementById("sidebar-toggle").addEventListener("click",()=>{const t=document.getElementById("app");if(this.isMobile())t.classList.toggle("sidebar-open");else{const e=t.classList.toggle("sidebar-collapsed");localStorage.setItem("sidebar",e?"collapsed":"open")}}),document.getElementById("app").addEventListener("click",t=>{this.isMobile()&&t.target===document.getElementById("app")&&this.closeMobileSidebar()}),document.getElementById("theme-toggle").addEventListener("click",()=>{const t=document.documentElement.classList.toggle("light-mode"),e=document.querySelector("#theme-toggle .icon");e.textContent=t?"☀️":"🌙",localStorage.setItem("theme",t?"light":"dark")}),document.getElementById("home-link").addEventListener("click",()=>{this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(t=>t.classList.remove("active")),this.isMobile()&&this.closeMobileSidebar(),this.renderWelcome()}),document.getElementById("concept-search").addEventListener("input",t=>{const e=t.target.value.toLowerCase();document.querySelectorAll(".nav-item").forEach(a=>{const r=a.textContent.toLowerCase();a.style.display=r.includes(e)?"block":"none"})}),window.addEventListener("hashchange",()=>{const t=window.location.hash.substring(1);t&&f.some(e=>e.id===t)?(!this.activeConcept||this.activeConcept.id!==t)&&this.selectConcept(t):t||(this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(e=>e.classList.remove("active")),this.renderWelcome())})},selectConcept(t){const e=f.find(a=>a.id===t);if(!e)return;window.location.hash!==`#${t}`&&(window.location.hash=t),document.getElementById("constellation-bg").style.display="none",this.activeConcept=e,document.querySelectorAll(".nav-item").forEach(a=>a.classList.remove("active"));const o=document.querySelector(`[data-id="${t}"]`);o&&o.classList.add("active"),this.renderConcept(e),this.resetContentScroll()},renderConcept(t){const e=document.getElementById("content-area");if(t.tabs&&t.tabs.length>0){const o=t.tabs.map((r,i)=>`<button class="tutorial-tab-btn${i===0?" active":""}" data-tab="${i}">${r.label}</button>`).join(""),a=t.tabs.map((r,i)=>`<div class="tutorial-tab-panel${i===0?" active":""}" data-panel="${i}">
+    `).join("")},isMobile(){return window.innerWidth<=640},closeMobileSidebar(){document.getElementById("app").classList.remove("sidebar-open")},setupEventListeners(){document.getElementById("concept-list").addEventListener("click",t=>{if(t.target.classList.contains("nav-item")){const e=t.target.dataset.id;this.isMobile()&&this.closeMobileSidebar(),this.selectConcept(e)}}),document.getElementById("sidebar-toggle").addEventListener("click",()=>{const t=document.getElementById("app");if(this.isMobile())t.classList.toggle("sidebar-open");else{const e=t.classList.toggle("sidebar-collapsed");localStorage.setItem("sidebar",e?"collapsed":"open")}}),document.getElementById("app").addEventListener("click",t=>{this.isMobile()&&t.target===document.getElementById("app")&&this.closeMobileSidebar()}),document.getElementById("theme-toggle").addEventListener("click",()=>{const t=document.documentElement.classList.toggle("light-mode"),e=document.querySelector("#theme-toggle .icon");e.textContent=t?"☀️":"🌙",localStorage.setItem("theme",t?"light":"dark")}),document.getElementById("home-link").addEventListener("click",()=>{this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(t=>t.classList.remove("active")),window.location.hash&&history.replaceState(null,"",window.location.pathname+window.location.search),this.isMobile()&&this.closeMobileSidebar(),this.renderWelcome()}),document.getElementById("concept-search").addEventListener("input",t=>{const e=t.target.value.toLowerCase();document.querySelectorAll(".nav-item").forEach(a=>{const r=a.textContent.toLowerCase();a.style.display=r.includes(e)?"block":"none"})}),window.addEventListener("hashchange",()=>{const t=window.location.hash.substring(1);t&&f.some(e=>e.id===t)?(!this.activeConcept||this.activeConcept.id!==t)&&this.selectConcept(t):t||(this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(e=>e.classList.remove("active")),this.renderWelcome())})},selectConcept(t){const e=f.find(a=>a.id===t);if(!e)return;window.location.hash!==`#${t}`&&(window.location.hash=t),document.getElementById("constellation-bg").style.display="none",this.activeConcept=e,document.querySelectorAll(".nav-item").forEach(a=>a.classList.remove("active"));const o=document.querySelector(`[data-id="${t}"]`);o&&o.classList.add("active"),this.renderConcept(e),this.resetContentScroll()},renderConcept(t){const e=document.getElementById("content-area");if(t.tabs&&t.tabs.length>0){const o=t.tabs.map((r,i)=>`<button class="tutorial-tab-btn${i===0?" active":""}" data-tab="${i}">${r.label}</button>`).join(""),a=t.tabs.map((r,i)=>`<div class="tutorial-tab-panel${i===0?" active":""}" data-panel="${i}">
           <div class="concept-content" id="concept-description-${i}">
             ${r.content}
           </div>
@@ -1013,4 +1097,4 @@ Requirements:
           <span class="tech-stack-desc">${c.desc}</span>
         </div>
       </li>
-    `).join("");const d=()=>{e.classList.remove("hidden"),e.offsetWidth,e.classList.add("active")},m=()=>{e.classList.remove("active"),setTimeout(()=>{e.classList.contains("active")||e.classList.add("hidden")},300)};t.addEventListener("click",d),o.addEventListener("click",m),e.addEventListener("click",c=>{c.target===e&&m()})},initStudyMode(){this.loadStudyStats(),this.updateStudyMetrics(),this.initZenFlow(),document.getElementById("study-mode-btn").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("exit-study").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("timer-toggle").addEventListener("click",()=>{this.toggleTimer()}),document.getElementById("timer-reset").addEventListener("click",()=>{this.resetTimer()}),document.querySelectorAll(".preset-btn").forEach(t=>{t.addEventListener("click",e=>{const o=parseInt(e.target.dataset.time);this.setTimerDuration(o)})}),document.getElementById("minimize-study").addEventListener("click",()=>{this.minimizeStudy()}),document.getElementById("expand-study").addEventListener("click",()=>{this.expandStudy()}),document.getElementById("mini-stop-btn").addEventListener("click",()=>{this.expandStudy(),this.toggleStudyMode()}),document.getElementById("lock-screen-btn").addEventListener("click",()=>{this.lockScreen()}),document.getElementById("unlock-screen-btn").addEventListener("click",()=>{this.unlockScreen()})},loadStudyStats(){const t=localStorage.getItem("studyStats");t&&(s.stats=JSON.parse(t),this.updateStreak())},saveStudyStats(){localStorage.setItem("studyStats",JSON.stringify(s.stats))},updateStreak(){const t=new Date().toDateString(),e=s.stats.lastStudyDate;if(e){const o=new Date(e),a=new Date;a.setDate(a.getDate()-1),o.toDateString()===a.toDateString()||o.toDateString()!==t&&(s.stats.streak=0)}},updateStudyMetrics(){const t=document.getElementById("study-streak"),e=document.getElementById("study-cards"),o=document.getElementById("study-minutes");t&&(t.textContent=s.stats.streak),e&&(e.textContent=s.stats.cardsToday),o&&(o.textContent=s.stats.focusMinutes)},toggleStudyMode(){s.isActive=!s.isActive;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");if(s.isActive){if(s.isMinimized){this.expandStudy();return}t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1",this.updateStreak(),this.saveStudyStats()}else this.expandStudy(),t.classList.remove("active"),e.style.opacity="0",this.resetTimer(),setTimeout(()=>{t.classList.add("hidden")},500)},setTimerDuration(t){s.timer.duration=t*60,s.timer.remaining=t*60,document.querySelectorAll(".preset-btn").forEach(e=>{e.classList.toggle("active",parseInt(e.dataset.time)===t)}),this.updateTimerDisplay()},toggleTimer(){s.timer.isRunning?this.pauseTimer():this.startTimer()},startTimer(){s.timer.isRunning=!0,document.getElementById("timer-toggle").textContent="Pause",document.querySelector(".timer-wrapper").classList.add("active"),document.getElementById("lock-screen-btn").classList.remove("hidden"),s.timer.interval=setInterval(()=>{s.timer.remaining--,this.updateTimerDisplay(),s.timer.remaining<=0&&this.completeTimer()},1e3)},pauseTimer(){s.timer.isRunning=!1,document.getElementById("timer-toggle").textContent="Resume",document.querySelector(".timer-wrapper").classList.remove("active"),document.getElementById("lock-screen-btn").classList.add("hidden"),clearInterval(s.timer.interval),s.isLocked&&this.unlockScreen()},resetTimer(){this.pauseTimer(),s.timer.remaining=s.timer.duration,document.getElementById("timer-toggle").textContent="Start Focus",document.getElementById("timer-status").textContent="Ready to focus",document.getElementById("lock-screen-btn").classList.add("hidden"),this.updateTimerDisplay()},completeTimer(){this.pauseTimer(),document.getElementById("timer-status").textContent="Focus complete! Great work!",s.stats.focusMinutes+=Math.floor(s.timer.duration/60),this.updateStreakDate(),this.saveStudyStats(),this.updateStudyMetrics(),"Notification"in window&&Notification.permission==="granted"&&new Notification("Focus Session Complete",{body:"Great job! Take a break.",icon:"/vite.svg"})},updateTimerDisplay(){const t=Math.floor(s.timer.remaining/60),e=s.timer.remaining%60,o=`${t.toString().padStart(2,"0")}:${e.toString().padStart(2,"0")}`;document.getElementById("timer-minutes").textContent=t.toString().padStart(2,"0"),document.getElementById("timer-seconds").textContent=e.toString().padStart(2,"0"),document.getElementById("mini-timer-display").textContent=o;const a=s.timer.remaining/s.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${a}%`;const r=s.timer.remaining/s.timer.duration,d=2*Math.PI*130*(1-r);document.getElementById("timer-progress").style.strokeDashoffset=d,s.timer.isRunning?document.getElementById("timer-status").textContent="Stay focused...":document.getElementById("timer-status").textContent="Ready to focus"},minimizeStudy(){s.isMinimized=!0;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("active"),e.style.opacity="0",setTimeout(()=>t.classList.add("hidden"),500),document.getElementById("mini-timer").classList.remove("hidden");const o=Math.floor(s.timer.remaining/60),a=s.timer.remaining%60;document.getElementById("mini-timer-display").textContent=`${o.toString().padStart(2,"0")}:${a.toString().padStart(2,"0")}`;const r=s.timer.remaining/s.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${r}%`},expandStudy(){if(s.isMinimized=!1,document.getElementById("mini-timer").classList.add("hidden"),s.isActive){const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1"}},lockScreen(){s.isLocked=!0,document.getElementById("study-mode-overlay").classList.add("study-locked"),document.getElementById("unlock-screen-overlay").classList.remove("hidden")},unlockScreen(){s.isLocked=!1,document.getElementById("study-mode-overlay").classList.remove("study-locked"),document.getElementById("unlock-screen-overlay").classList.add("hidden")},updateStreakDate(){const t=new Date().toDateString(),e=s.stats.lastStudyDate;if(e!==t){const o=new Date;o.setDate(o.getDate()-1),e===o.toDateString()?s.stats.streak++:s.stats.streak=1,s.stats.lastStudyDate=t}},initZenFlow(){const t=document.getElementById("zen-flow-canvas"),e=t.getContext("2d");let o,a,r=[];const i=()=>{o=t.width=window.innerWidth,a=t.height=window.innerHeight,d()},d=()=>{r=[];const c=30;for(let n=0;n<c;n++)r.push({x:Math.random()*o,y:Math.random()*a,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,radius:Math.random()*80+40,hue:Math.random()*60+170,alpha:Math.random()*.1+.05,pulse:Math.random()*Math.PI*2})},m=()=>{if(!s.isActive){requestAnimationFrame(m);return}e.clearRect(0,0,o,a);const c=document.documentElement.classList.contains("light-mode");if(r.forEach(n=>{n.x+=n.vx,n.y+=n.vy,n.x<-n.radius&&(n.x=o+n.radius),n.x>o+n.radius&&(n.x=-n.radius),n.y<-n.radius&&(n.y=a+n.radius),n.y>a+n.radius&&(n.y=-n.radius),n.pulse+=.02;const u=e.createRadialGradient(n.x,n.y,0,n.x,n.y,n.radius),b=n.radius*(1+Math.sin(n.pulse)*.1);c?(u.addColorStop(0,`hsla(40, 30%, 70%, ${n.alpha*.5})`),u.addColorStop(.5,`hsla(40, 20%, 80%, ${n.alpha*.2})`),u.addColorStop(1,"transparent")):(u.addColorStop(0,`hsla(${n.hue}, 70%, 50%, ${n.alpha})`),u.addColorStop(.5,`hsla(${n.hue}, 70%, 50%, ${n.alpha*.3})`),u.addColorStop(1,"transparent")),e.beginPath(),e.arc(n.x,n.y,b,0,Math.PI*2),e.fillStyle=u,e.fill()}),s.timer.isRunning){const n=Date.now()/1e3,u=150+Math.sin(n*.5)*20,b=e.createRadialGradient(o/2,a/2,0,o/2,a/2,u);c?(b.addColorStop(0,"hsla(40, 30%, 75%, 0.05)"),b.addColorStop(1,"transparent")):(b.addColorStop(0,"hsla(180, 70%, 50%, 0.03)"),b.addColorStop(1,"transparent")),e.beginPath(),e.arc(o/2,a/2,u,0,Math.PI*2),e.fillStyle=b,e.fill()}requestAnimationFrame(m)};window.addEventListener("resize",i),i(),m()}};document.addEventListener("DOMContentLoaded",()=>R.init());
+    `).join("");const d=()=>{e.classList.remove("hidden"),e.offsetWidth,e.classList.add("active")},m=()=>{e.classList.remove("active"),setTimeout(()=>{e.classList.contains("active")||e.classList.add("hidden")},300)};t.addEventListener("click",d),o.addEventListener("click",m),e.addEventListener("click",c=>{c.target===e&&m()})},initStudyMode(){this.loadStudyStats(),this.updateStudyMetrics(),this.initZenFlow(),document.getElementById("study-mode-btn").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("exit-study").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("timer-toggle").addEventListener("click",()=>{this.toggleTimer()}),document.getElementById("timer-reset").addEventListener("click",()=>{this.resetTimer()}),document.querySelectorAll(".preset-btn").forEach(t=>{t.addEventListener("click",e=>{const o=parseInt(e.target.dataset.time);this.setTimerDuration(o)})}),document.getElementById("minimize-study").addEventListener("click",()=>{this.minimizeStudy()}),document.getElementById("expand-study").addEventListener("click",()=>{this.expandStudy()}),document.getElementById("mini-stop-btn").addEventListener("click",()=>{this.expandStudy(),this.toggleStudyMode()}),document.getElementById("lock-screen-btn").addEventListener("click",()=>{this.lockScreen()}),document.getElementById("unlock-screen-btn").addEventListener("click",()=>{this.unlockScreen()})},loadStudyStats(){const t=localStorage.getItem("studyStats");t&&(s.stats=JSON.parse(t),this.updateStreak())},saveStudyStats(){localStorage.setItem("studyStats",JSON.stringify(s.stats))},updateStreak(){const t=new Date().toDateString(),e=s.stats.lastStudyDate;if(e){const o=new Date(e),a=new Date;a.setDate(a.getDate()-1),o.toDateString()===a.toDateString()||o.toDateString()!==t&&(s.stats.streak=0)}},updateStudyMetrics(){const t=document.getElementById("study-streak"),e=document.getElementById("study-cards"),o=document.getElementById("study-minutes");t&&(t.textContent=s.stats.streak),e&&(e.textContent=s.stats.cardsToday),o&&(o.textContent=s.stats.focusMinutes)},toggleStudyMode(){s.isActive=!s.isActive;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");if(s.isActive){if(s.isMinimized){this.expandStudy();return}t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1",this.updateStreak(),this.saveStudyStats()}else this.expandStudy(),t.classList.remove("active"),e.style.opacity="0",this.resetTimer(),setTimeout(()=>{t.classList.add("hidden")},500)},setTimerDuration(t){s.timer.duration=t*60,s.timer.remaining=t*60,document.querySelectorAll(".preset-btn").forEach(e=>{e.classList.toggle("active",parseInt(e.dataset.time)===t)}),this.updateTimerDisplay()},toggleTimer(){s.timer.isRunning?this.pauseTimer():this.startTimer()},startTimer(){s.timer.isRunning=!0,document.getElementById("timer-toggle").textContent="Pause",document.querySelector(".timer-wrapper").classList.add("active"),document.getElementById("lock-screen-btn").classList.remove("hidden"),s.timer.interval=setInterval(()=>{s.timer.remaining--,this.updateTimerDisplay(),s.timer.remaining<=0&&this.completeTimer()},1e3)},pauseTimer(){s.timer.isRunning=!1,document.getElementById("timer-toggle").textContent="Resume",document.querySelector(".timer-wrapper").classList.remove("active"),document.getElementById("lock-screen-btn").classList.add("hidden"),clearInterval(s.timer.interval),s.isLocked&&this.unlockScreen()},resetTimer(){this.pauseTimer(),s.timer.remaining=s.timer.duration,document.getElementById("timer-toggle").textContent="Start Focus",document.getElementById("timer-status").textContent="Ready to focus",document.getElementById("lock-screen-btn").classList.add("hidden"),this.updateTimerDisplay()},completeTimer(){this.pauseTimer(),document.getElementById("timer-status").textContent="Focus complete! Great work!",s.stats.focusMinutes+=Math.floor(s.timer.duration/60),this.updateStreakDate(),this.saveStudyStats(),this.updateStudyMetrics(),"Notification"in window&&Notification.permission==="granted"&&new Notification("Focus Session Complete",{body:"Great job! Take a break.",icon:"/vite.svg"})},updateTimerDisplay(){const t=Math.floor(s.timer.remaining/60),e=s.timer.remaining%60,o=`${t.toString().padStart(2,"0")}:${e.toString().padStart(2,"0")}`;document.getElementById("timer-minutes").textContent=t.toString().padStart(2,"0"),document.getElementById("timer-seconds").textContent=e.toString().padStart(2,"0"),document.getElementById("mini-timer-display").textContent=o;const a=s.timer.remaining/s.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${a}%`;const r=s.timer.remaining/s.timer.duration,d=2*Math.PI*130*(1-r);document.getElementById("timer-progress").style.strokeDashoffset=d,s.timer.isRunning?document.getElementById("timer-status").textContent="Stay focused...":document.getElementById("timer-status").textContent="Ready to focus"},minimizeStudy(){s.isMinimized=!0;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("active"),e.style.opacity="0",setTimeout(()=>t.classList.add("hidden"),500),document.getElementById("mini-timer").classList.remove("hidden");const o=Math.floor(s.timer.remaining/60),a=s.timer.remaining%60;document.getElementById("mini-timer-display").textContent=`${o.toString().padStart(2,"0")}:${a.toString().padStart(2,"0")}`;const r=s.timer.remaining/s.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${r}%`},expandStudy(){if(s.isMinimized=!1,document.getElementById("mini-timer").classList.add("hidden"),s.isActive){const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1"}},lockScreen(){s.isLocked=!0,document.getElementById("study-mode-overlay").classList.add("study-locked"),document.getElementById("unlock-screen-overlay").classList.remove("hidden")},unlockScreen(){s.isLocked=!1,document.getElementById("study-mode-overlay").classList.remove("study-locked"),document.getElementById("unlock-screen-overlay").classList.add("hidden")},updateStreakDate(){const t=new Date().toDateString(),e=s.stats.lastStudyDate;if(e!==t){const o=new Date;o.setDate(o.getDate()-1),e===o.toDateString()?s.stats.streak++:s.stats.streak=1,s.stats.lastStudyDate=t}},initZenFlow(){const t=document.getElementById("zen-flow-canvas"),e=t.getContext("2d");let o,a,r=[];const i=()=>{o=t.width=window.innerWidth,a=t.height=window.innerHeight,d()},d=()=>{r=[];const c=30;for(let n=0;n<c;n++)r.push({x:Math.random()*o,y:Math.random()*a,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,radius:Math.random()*80+40,hue:Math.random()*60+170,alpha:Math.random()*.1+.05,pulse:Math.random()*Math.PI*2})},m=()=>{if(!s.isActive){requestAnimationFrame(m);return}e.clearRect(0,0,o,a);const c=document.documentElement.classList.contains("light-mode");if(r.forEach(n=>{n.x+=n.vx,n.y+=n.vy,n.x<-n.radius&&(n.x=o+n.radius),n.x>o+n.radius&&(n.x=-n.radius),n.y<-n.radius&&(n.y=a+n.radius),n.y>a+n.radius&&(n.y=-n.radius),n.pulse+=.02;const u=e.createRadialGradient(n.x,n.y,0,n.x,n.y,n.radius),b=n.radius*(1+Math.sin(n.pulse)*.1);c?(u.addColorStop(0,`hsla(40, 30%, 70%, ${n.alpha*.5})`),u.addColorStop(.5,`hsla(40, 20%, 80%, ${n.alpha*.2})`),u.addColorStop(1,"transparent")):(u.addColorStop(0,`hsla(${n.hue}, 70%, 50%, ${n.alpha})`),u.addColorStop(.5,`hsla(${n.hue}, 70%, 50%, ${n.alpha*.3})`),u.addColorStop(1,"transparent")),e.beginPath(),e.arc(n.x,n.y,b,0,Math.PI*2),e.fillStyle=u,e.fill()}),s.timer.isRunning){const n=Date.now()/1e3,u=150+Math.sin(n*.5)*20,b=e.createRadialGradient(o/2,a/2,0,o/2,a/2,u);c?(b.addColorStop(0,"hsla(40, 30%, 75%, 0.05)"),b.addColorStop(1,"transparent")):(b.addColorStop(0,"hsla(180, 70%, 50%, 0.03)"),b.addColorStop(1,"transparent")),e.beginPath(),e.arc(o/2,a/2,u,0,Math.PI*2),e.fillStyle=b,e.fill()}requestAnimationFrame(m)};window.addEventListener("resize",i),i(),m()}};document.addEventListener("DOMContentLoaded",()=>U.init());
