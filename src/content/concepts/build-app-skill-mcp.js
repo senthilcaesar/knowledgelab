@@ -16,7 +16,7 @@ const buildAppSkillMcpConcept = {
 <p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary); font-style: italic;">Below is a preview of what we'll build. The exact design may look different — that's the beauty of AI: it'll surprise you with its own creative take.</p>
 
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; align-items: center;">
-  <img src="/knowledgelab/images/zenshelf-preview.png" alt="ZenShelf App Preview" style="max-width: 100%; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 8px 32px rgba(0,0,0,0.3); object-fit: cover;">
+  <img src="/knowledgelab/images/zenshelf-preview1.png" alt="ZenShelf App Preview" style="max-width: 100%; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 8px 32px rgba(0,0,0,0.3); object-fit: cover;">
 </div>
 
 <hr style="border: none; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
