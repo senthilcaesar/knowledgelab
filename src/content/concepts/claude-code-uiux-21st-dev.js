@@ -63,7 +63,7 @@ claude --help</code>
     {
       label: 'Install UI/UX + 21st.dev',
       content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Next: Add UI/UX Pro and 21st.dev]</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Next: Add UI/UX Pro Max and 21st.dev]</strong>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;"><strong>1. Install the <a href="https://www.uupm.cc/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">UI/UX Pro</a> skill:</strong></p>
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">/plugin marketplace add nextlevelbuilder/ui-ux-pro-max-skill
@@ -103,7 +103,7 @@ claude mcp list</code>
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">Build a modern, high-end website for [DESCRIBE YOUR PRODUCT].
 
 Requirements:
-- Use UI/UX Pro design system for layout, spacing, and structure
+- Use UI/UX Pro Max design system for layout, spacing, and structure
 - Use 21st.dev components and assets for UI elements
 - Prioritize clean, production-level design (not generic AI styling)
 - Include subtle animations/interactions where appropriate
