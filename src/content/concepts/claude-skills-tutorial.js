@@ -11,8 +11,7 @@ const claudeSkillsTutorialConcept = {
 
 <p style="margin-bottom:1rem; line-height:1.75;">A skill is a set of instructions — packaged as a simple folder — that teaches Claude how to handle specific tasks or workflows.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Skills are powerful when you have repeatable workflows: generating frontend designs from specs, conducting research with consistent methodology or creating documents that follow your team's style guide. For more details on Skills check out the <a href="#" data-goto-tab="5" style="color: var(--accent-primary); text-decoration: underline;">resources section</a>.</p>
-
+<p style="margin-bottom:1rem; line-height:1.75;">Skills are powerful when you have repeatable workflows: generating frontend designs from specs, conducting research with consistent methodology or creating documents that follow your team's style guide. For more details on Skills check out the <a href="#" data-goto-tab="6" style="color: var(--accent-primary); text-decoration: underline;">resources section</a>.</p>
 <p style="line-height:1.75;">Instead of repeating instructions every time you ask Claude to review a pull request or write a commit message, you write a skill once and Claude applies it whenever the task comes up.</p>
 
 <div style="margin-top: 2rem; display: flex; justify-content: flex-end; border-top: 1px solid var(--border-color); padding-top: 1rem;">
@@ -152,15 +151,65 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
     <span>←</span> Previous: Step 2
   </a>
   <a href="#" data-goto-tab="4" class="tutorial-nav-link">
-    Next: Step 4 – Find Skills <span>→</span>
+    Next: Step 4 – Create a Skill <span>→</span>
   </a>
 </div>
 `,
       },
       {
-        label: 'Step 4 – Find Skills',
+        label: 'Step 4 – Create a skill',
         content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 4 – Where to Find Skills]</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 4 – Create Your Own Skill]</strong>
+<p style="margin-bottom:0.75rem; line-height:1.75;">Building your first skill is the best way to understand how Claude thinks. Let's create a <strong>Python Code Reviewer</strong> skill.</p>
+
+<strong style="display:block; margin-top: 1.5rem; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 1 — Create the directory structure</strong>
+<p style="margin-bottom:0.5rem;">Run this in your terminal to create the skill folder:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">mkdir -p ~/.claude/skills/py-review</code>
+
+<strong style="display:block; margin-top: 1.5rem; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 2 — Create the SKILL.md file</strong>
+<p style="margin-bottom:0.5rem;">Create the manifest file with instructions for Claude:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.4;">cat > ~/.claude/skills/py-review/SKILL.md << 'EOF'
+---
+name: py-review
+description: Reviews Python code for style, bugs, and best practices
+---
+You are reviewing Python code. For any file or snippet provided via $ARGUMENTS:
+1. Check for PEP 8 style violations
+2. Identify potential bugs (off-by-one, mutable defaults, etc.)
+3. Suggest more Pythonic rewrites if applicable
+4. Check for missing type hints
+5. Report: LGTM / Minor issues / Major issues
+Be concise — use a bullet per issue, not paragraphs.
+EOF</code>
+
+<strong style="display:block; margin-top: 1.5rem; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 3 — Test it inside Claude Code</strong>
+<p style="margin-bottom:0.5rem;">Launch Claude and call your new skill explicitly:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">claude  # open Claude Code
+# then type:
+/py-review utils/parser.py</code>
+
+<div style="padding: 1rem; background: rgba(0, 242, 255, 0.05); border: 1px solid rgba(0, 242, 255, 0.1); border-radius: 8px; margin: 1.5rem 0;">
+  <p style="margin:0; line-height:1.6;">Claude will now read <code style="color: var(--code-text);">utils/parser.py</code> and give you a structured review.</p>
+</div>
+
+<p style="margin-top: 1rem; line-height:1.75;">
+  <strong>Pro tip:</strong> Add a <code style="color: var(--code-text);">scripts/</code> subfolder in your skill directory for Python helper scripts. Claude will run them externally — only the output enters the context window, not the script itself.
+</p>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="3" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Step 3
+  </a>
+  <a href="#" data-goto-tab="5" class="tutorial-nav-link">
+    Next: Step 5 – Find Skills <span>→</span>
+  </a>
+</div>
+`,
+      },
+      {
+        label: 'Step 5 – Find Skills',
+        content: `
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 5 – Where to Find Skills]</strong>
 
 <p style="margin: 0.5rem 0; line-height:1.75;">You can find more skills to use with Claude Code in the following places:</p>
 
@@ -187,11 +236,11 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
 </ul>
 
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
-  <a href="#" data-goto-tab="3" class="tutorial-nav-link previous">
-    <span>←</span> Previous: Step 3
+  <a href="#" data-goto-tab="4" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Step 4
   </a>
-  <a href="#" data-goto-tab="5" class="tutorial-nav-link">
-    Next: Step 5 – Resources <span>→</span>
+  <a href="#" data-goto-tab="6" class="tutorial-nav-link">
+    Next: Resources <span>→</span>
   </a>
 </div>
 `,

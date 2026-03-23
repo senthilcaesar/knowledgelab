@@ -265,18 +265,21 @@ const app = {
         if (el) this.attachCopyButtonsTo(el);
       });
     } else {
+      const content = concept.description || 'Add your description here...';
+      const formattedContent = content.trim().startsWith('<') 
+        ? content 
+        : content.split('\n\n').map((p) => `<p>${p}</p>`).join('');
+
       contentArea.innerHTML = `
         <article class="concept-card">
           <h2 class="concept-title">${concept.title}</h2>
+          ${(concept.category || (concept.tags && concept.tags.length > 0)) ? `
           <div class="concept-meta">
-            <span class="tag">${concept.category}</span>
-            ${concept.tags.map((t) => `<span class="tag">${t}</span>`).join('')}
-          </div>
+            ${concept.category ? `<span class="tag">${concept.category}</span>` : ''}
+            ${concept.tags ? concept.tags.map((t) => `<span class="tag">${t}</span>`).join('') : ''}
+          </div>` : ''}
           <div class="concept-content" id="concept-description">
-            ${(concept.description || 'Add your description here...')
-              .split('\n\n')
-              .map((p) => `<p>${p}</p>`)
-              .join('')}
+            ${formattedContent}
           </div>
         </article>
       `;
