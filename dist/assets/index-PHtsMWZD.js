@@ -1,10 +1,9 @@
-(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const r of document.querySelectorAll('link[rel="modulepreload"]'))a(r);new MutationObserver(r=>{for(const i of r)if(i.type==="childList")for(const d of i.addedNodes)d.tagName==="LINK"&&d.rel==="modulepreload"&&a(d)}).observe(document,{childList:!0,subtree:!0});function o(r){const i={};return r.integrity&&(i.integrity=r.integrity),r.referrerPolicy&&(i.referrerPolicy=r.referrerPolicy),r.crossOrigin==="use-credentials"?i.credentials="include":r.crossOrigin==="anonymous"?i.credentials="omit":i.credentials="same-origin",i}function a(r){if(r.ep)return;r.ep=!0;const i=o(r);fetch(r.href,i)}})();const P=70,x=160,k=120;class T{constructor(e,o){this.width=e,this.height=o,this.x=Math.random()*e,this.y=Math.random()*o,this.vx=(Math.random()-.5)*.4,this.vy=(Math.random()-.5)*.4,this.baseRadius=1.5+Math.random()*2,this.pulsePhase=Math.random()*Math.PI*2,this.pulseSpeed=.015+Math.random()*.025,this.isHub=Math.random()<.12,this.isHub&&(this.baseRadius*=2)}update(e){this.pulsePhase+=this.pulseSpeed;const o=this.x-e.x,a=this.y-e.y,r=Math.hypot(o,a);if(r<k&&r>0){const d=((k-r)/k)**2*3;this.vx+=o/r*d*.08,this.vy+=a/r*d*.08}this.vx*=.975,this.vy*=.975;const i=Math.hypot(this.vx,this.vy);i>1.5&&(this.vx=this.vx/i*1.5,this.vy=this.vy/i*1.5),this.x+=this.vx,this.y+=this.vy,this.x<0&&(this.x=this.width),this.x>this.width&&(this.x=0),this.y<0&&(this.y=this.height),this.y>this.height&&(this.y=0)}draw(e,o){const a=.5+.5*Math.sin(this.pulsePhase),r=this.baseRadius*(1+a*.6),i=(this.isHub?.7:.4)+a*.4,d=o?`rgba(176, 141, 87, ${i})`:this.isHub?`rgba(180, 100, 255, ${i})`:`rgba(0, 242, 255, ${i})`,m=o?`rgba(176, 141, 87, ${a*.12})`:this.isHub?`rgba(130, 0, 255, ${a*.1})`:`rgba(0, 242, 255, ${a*.1})`;e.beginPath(),e.arc(this.x,this.y,r*5,0,Math.PI*2),e.fillStyle=m,e.fill(),e.beginPath(),e.arc(this.x,this.y,r,0,Math.PI*2),e.fillStyle=d,e.fill()}}class M{constructor(e,o,a,r,i){this.x1=e,this.y1=o,this.x2=a,this.y2=r,this.progress=0,this.speed=.02+Math.random()*.03,this.isLight=i,this.alive=!0}update(){this.progress+=this.speed,this.progress>=1&&(this.alive=!1)}draw(e){const o=this.x1+(this.x2-this.x1)*this.progress,a=this.y1+(this.y2-this.y1)*this.progress,r=1-this.progress;e.beginPath(),e.arc(o,a,3,0,Math.PI*2),e.fillStyle=this.isLight?`rgba(212, 160, 23, ${r})`:`rgba(255, 255, 255, ${r})`,e.fill()}}function L(t){const e=t.getContext("2d");let o=0,a=0,r=[],i=[],d=null;const m={x:-9999,y:-9999};let c=0;function n(){o=t.width=window.innerWidth,a=t.height=window.innerHeight,r=Array.from({length:P},()=>new T(o,a))}function u(p){if(c--,c>0)return;c=30+Math.floor(Math.random()*60);const l=[...r].sort(()=>Math.random()-.5);for(let y=0;y<l.length-1;y++){const h=l[y],g=l[y+1];if(Math.hypot(h.x-g.x,h.y-g.y)<x){i.push(new M(h.x,h.y,g.x,g.y,p));return}}}function b(p,l,y,h){const g=(1-y/x)*(h?.25:.35),v=e.createLinearGradient(p.x,p.y,l.x,l.y),A=h?`rgba(176,141,87,${g*1.5})`:p.isHub?`rgba(150,50,255,${g*1.5})`:`rgba(0,242,255,${g*1.5})`,E=h?`rgba(122,106,83,${g})`:l.isHub?`rgba(150,50,255,${g})`:`rgba(0,200,220,${g})`;v.addColorStop(0,A),v.addColorStop(1,E),e.beginPath(),e.moveTo(p.x,p.y),e.lineTo(l.x,l.y),e.strokeStyle=v,e.lineWidth=h?.6:.8,e.stroke()}function w(){const p=document.documentElement.classList.contains("light-mode");e.clearRect(0,0,o,a);for(let l=0;l<r.length;l++){r[l].update(m);for(let y=l+1;y<r.length;y++){const h=r[l].x-r[y].x,g=r[l].y-r[y].y,v=Math.hypot(h,g);v<x&&b(r[l],r[y],v,p)}}r.forEach(l=>l.draw(e,p)),u(p),i=i.filter(l=>l.alive),i.forEach(l=>{l.update(),l.draw(e)}),d=requestAnimationFrame(w)}function I(){cancelAnimationFrame(d),window.removeEventListener("resize",n),window.removeEventListener("mousemove",C)}function C(p){m.x=p.clientX,m.y=p.clientY}return window.addEventListener("resize",n),window.addEventListener("mousemove",C),n(),w(),{destroy:I}}const B={vite:"^7.3.1"},S={devDependencies:B},j={id:"claude-skills-tutorial",title:"Claude Skills",category:"",tags:[""],tabs:[{label:"Overview",content:`
+(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const o of document.querySelectorAll('link[rel="modulepreload"]'))a(o);new MutationObserver(o=>{for(const i of o)if(i.type==="childList")for(const d of i.addedNodes)d.tagName==="LINK"&&d.rel==="modulepreload"&&a(d)}).observe(document,{childList:!0,subtree:!0});function r(o){const i={};return o.integrity&&(i.integrity=o.integrity),o.referrerPolicy&&(i.referrerPolicy=o.referrerPolicy),o.crossOrigin==="use-credentials"?i.credentials="include":o.crossOrigin==="anonymous"?i.credentials="omit":i.credentials="same-origin",i}function a(o){if(o.ep)return;o.ep=!0;const i=r(o);fetch(o.href,i)}})();const E=70,x=160,k=120;class T{constructor(e,r){this.width=e,this.height=r,this.x=Math.random()*e,this.y=Math.random()*r,this.vx=(Math.random()-.5)*.4,this.vy=(Math.random()-.5)*.4,this.baseRadius=1.5+Math.random()*2,this.pulsePhase=Math.random()*Math.PI*2,this.pulseSpeed=.015+Math.random()*.025,this.isHub=Math.random()<.12,this.isHub&&(this.baseRadius*=2)}update(e){this.pulsePhase+=this.pulseSpeed;const r=this.x-e.x,a=this.y-e.y,o=Math.hypot(r,a);if(o<k&&o>0){const d=((k-o)/k)**2*3;this.vx+=r/o*d*.08,this.vy+=a/o*d*.08}this.vx*=.975,this.vy*=.975;const i=Math.hypot(this.vx,this.vy);i>1.5&&(this.vx=this.vx/i*1.5,this.vy=this.vy/i*1.5),this.x+=this.vx,this.y+=this.vy,this.x<0&&(this.x=this.width),this.x>this.width&&(this.x=0),this.y<0&&(this.y=this.height),this.y>this.height&&(this.y=0)}draw(e,r){const a=.5+.5*Math.sin(this.pulsePhase),o=this.baseRadius*(1+a*.6),i=(this.isHub?.7:.4)+a*.4,d=r?`rgba(176, 141, 87, ${i})`:this.isHub?`rgba(180, 100, 255, ${i})`:`rgba(0, 242, 255, ${i})`,p=r?`rgba(176, 141, 87, ${a*.12})`:this.isHub?`rgba(130, 0, 255, ${a*.1})`:`rgba(0, 242, 255, ${a*.1})`;e.beginPath(),e.arc(this.x,this.y,o*5,0,Math.PI*2),e.fillStyle=p,e.fill(),e.beginPath(),e.arc(this.x,this.y,o,0,Math.PI*2),e.fillStyle=d,e.fill()}}class L{constructor(e,r,a,o,i){this.x1=e,this.y1=r,this.x2=a,this.y2=o,this.progress=0,this.speed=.02+Math.random()*.03,this.isLight=i,this.alive=!0}update(){this.progress+=this.speed,this.progress>=1&&(this.alive=!1)}draw(e){const r=this.x1+(this.x2-this.x1)*this.progress,a=this.y1+(this.y2-this.y1)*this.progress,o=1-this.progress;e.beginPath(),e.arc(r,a,3,0,Math.PI*2),e.fillStyle=this.isLight?`rgba(212, 160, 23, ${o})`:`rgba(255, 255, 255, ${o})`,e.fill()}}function M(t){const e=t.getContext("2d");let r=0,a=0,o=[],i=[],d=null;const p={x:-9999,y:-9999};let c=0;function n(){r=t.width=window.innerWidth,a=t.height=window.innerHeight,o=Array.from({length:E},()=>new T(r,a))}function u(m){if(c--,c>0)return;c=30+Math.floor(Math.random()*60);const l=[...o].sort(()=>Math.random()-.5);for(let y=0;y<l.length-1;y++){const h=l[y],g=l[y+1];if(Math.hypot(h.x-g.x,h.y-g.y)<x){i.push(new L(h.x,h.y,g.x,g.y,m));return}}}function b(m,l,y,h){const g=(1-y/x)*(h?.25:.35),v=e.createLinearGradient(m.x,m.y,l.x,l.y),A=h?`rgba(176,141,87,${g*1.5})`:m.isHub?`rgba(150,50,255,${g*1.5})`:`rgba(0,242,255,${g*1.5})`,P=h?`rgba(122,106,83,${g})`:l.isHub?`rgba(150,50,255,${g})`:`rgba(0,200,220,${g})`;v.addColorStop(0,A),v.addColorStop(1,P),e.beginPath(),e.moveTo(m.x,m.y),e.lineTo(l.x,l.y),e.strokeStyle=v,e.lineWidth=h?.6:.8,e.stroke()}function w(){const m=document.documentElement.classList.contains("light-mode");e.clearRect(0,0,r,a);for(let l=0;l<o.length;l++){o[l].update(p);for(let y=l+1;y<o.length;y++){const h=o[l].x-o[y].x,g=o[l].y-o[y].y,v=Math.hypot(h,g);v<x&&b(o[l],o[y],v,m)}}o.forEach(l=>l.draw(e,m)),u(m),i=i.filter(l=>l.alive),i.forEach(l=>{l.update(),l.draw(e)}),d=requestAnimationFrame(w)}function I(){cancelAnimationFrame(d),window.removeEventListener("resize",n),window.removeEventListener("mousemove",C)}function C(m){p.x=m.clientX,p.y=m.clientY}return window.addEventListener("resize",n),window.addEventListener("mousemove",C),n(),w(),{destroy:I}}const z={vite:"^7.3.1"},B={three:"^0.183.2"},S={devDependencies:z,dependencies:B},j={id:"claude-skills-tutorial",title:"Claude Skills",category:"",tags:[""],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:1rem; line-height:1.75;">Whether you're a complete beginner looking to build your first website, or an experienced developer looking to speed up your workflow, getting started with Claude Skills is easier than you think. In this simple guide, we'll watch Claude Skills in action as it guides us through building a website, taking our input at each step. Let's go!</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">A skill is a set of instructions — packaged as a simple folder — that teaches Claude how to handle specific tasks or workflows.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Skills are powerful when you have repeatable workflows: generating frontend designs from specs, conducting research with consistent methodology or creating documents that follow your team's style guide. For more details on Skills check out the <a href="#" data-goto-tab="5" style="color: var(--accent-primary); text-decoration: underline;">resources section</a>.</p>
-
+<p style="margin-bottom:1rem; line-height:1.75;">Skills are powerful when you have repeatable workflows: generating frontend designs from specs, conducting research with consistent methodology or creating documents that follow your team's style guide. For more details on Skills check out the <a href="#" data-goto-tab="6" style="color: var(--accent-primary); text-decoration: underline;">resources section</a>.</p>
 <p style="line-height:1.75;">Instead of repeating instructions every time you ask Claude to review a pull request or write a commit message, you write a skill once and Claude applies it whenever the task comes up.</p>
 
 <div style="margin-top: 2rem; display: flex; justify-content: flex-end; border-top: 1px solid var(--border-color); padding-top: 1rem;">
@@ -93,11 +92,6 @@ cp -R skills/* ~/.claude/skills/</code>
 
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">/frontend-design</code>
 
-<p style="margin: 1rem 0 0.25rem; font-weight: 600; color: var(--text-primary);">② Natural language — Claude picks the right one</p>
-<p style="margin: 0 0 0.5rem; line-height:1.75; color: var(--text-secondary);">Just describe what you need, and Claude will find and run the matching skill:</p>
-
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">create a pixel-perfect React contact form with validation</code>
-
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; align-items: center;">
   <img src="/knowledgelab/images/skill2.png" alt="Natural Language Skills" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
 </div>
@@ -137,11 +131,57 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
     <span>←</span> Previous: Step 2
   </a>
   <a href="#" data-goto-tab="4" class="tutorial-nav-link">
-    Next: Step 4 – Find Skills <span>→</span>
+    Next: Step 4 – Create a Skill <span>→</span>
   </a>
 </div>
-`},{label:"Step 4 – Find Skills",content:`
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 4 – Where to Find Skills]</strong>
+`},{label:"Step 4 – Create a skill",content:`
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 4 – Create Your Own Skill]</strong>
+<p style="margin-bottom:0.75rem; line-height:1.75;">Building your first skill is the best way to understand how Claude thinks. Let's create a <strong>Python Code Reviewer</strong> skill.</p>
+
+<strong style="display:block; margin-top: 1.5rem; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 1 — Create the directory structure</strong>
+<p style="margin-bottom:0.5rem;">Run this in your terminal to create the skill folder:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">mkdir -p ~/.claude/skills/py-review</code>
+
+<strong style="display:block; margin-top: 1.5rem; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 2 — Create the SKILL.md file</strong>
+<p style="margin-bottom:0.5rem;">Create the manifest file with instructions for Claude:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.4;">cat > ~/.claude/skills/py-review/SKILL.md << 'EOF'
+---
+name: py-review
+description: Reviews Python code for style, bugs, and best practices
+---
+You are reviewing Python code. For any file or snippet provided via $ARGUMENTS:
+1. Check for PEP 8 style violations
+2. Identify potential bugs (off-by-one, mutable defaults, etc.)
+3. Suggest more Pythonic rewrites if applicable
+4. Check for missing type hints
+5. Report: LGTM / Minor issues / Major issues
+Be concise — use a bullet per issue, not paragraphs.
+EOF</code>
+
+<strong style="display:block; margin-top: 1.5rem; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 3 — Test it inside Claude Code</strong>
+<p style="margin-bottom:0.5rem;">Launch Claude and call your new skill explicitly:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">claude  # open Claude Code
+# then type:
+/py-review utils/parser.py</code>
+
+<div style="padding: 1rem; background: rgba(0, 242, 255, 0.05); border: 1px solid rgba(0, 242, 255, 0.1); border-radius: 8px; margin: 1.5rem 0;">
+  <p style="margin:0; line-height:1.6;">Claude will now read <code style="color: var(--code-text);">utils/parser.py</code> and give you a structured review.</p>
+</div>
+
+<p style="margin-top: 1rem; line-height:1.75;">
+  <strong>Pro tip:</strong> Add a <code style="color: var(--code-text);">scripts/</code> subfolder in your skill directory for Python helper scripts. Claude will run them externally — only the output enters the context window, not the script itself.
+</p>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="3" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Step 3
+  </a>
+  <a href="#" data-goto-tab="5" class="tutorial-nav-link">
+    Next: Step 5 – Find Skills <span>→</span>
+  </a>
+</div>
+`},{label:"Step 5 – Find Skills",content:`
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 5 – Where to Find Skills]</strong>
 
 <p style="margin: 0.5rem 0; line-height:1.75;">You can find more skills to use with Claude Code in the following places:</p>
 
@@ -168,11 +208,11 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
 </ul>
 
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
-  <a href="#" data-goto-tab="3" class="tutorial-nav-link previous">
-    <span>←</span> Previous: Step 3
+  <a href="#" data-goto-tab="4" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Step 4
   </a>
-  <a href="#" data-goto-tab="5" class="tutorial-nav-link">
-    Next: Step 5 – Resources <span>→</span>
+  <a href="#" data-goto-tab="6" class="tutorial-nav-link">
+    Next: Resources <span>→</span>
   </a>
 </div>
 `},{label:"Resources",content:`
@@ -191,7 +231,7 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
 <p style="margin-top: 0.25rem; text-align: left;">
   <a href="https://claude.com/blog/improving-frontend-design-through-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">Best practices for building richer, more customized frontend design with Claude and Skills</a>
 </p>
-`}],interactiveType:"custom"},z={id:"claude-mcp",title:"Claude MCP",category:"",tags:[""],tabs:[{label:"Overview",content:`
+`}],interactiveType:"custom"},F={id:"claude-mcp",title:"Claude MCP",category:"",tags:[""],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:1rem; line-height:1.75;">The Model Context Protocol (<a href="https://modelcontextprotocol.io/docs/getting-started/intro" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">MCP</a>) is an open standard that enables Claude to interact with external tools and data sources. This modular architecture allows you to extend Claude's capabilities with specialized services.</p>
 
 <p style="margin-bottom:0.75rem; line-height:1.75;">In this section, we will configure Claude to connect to <strong>three</strong> powerful MCP servers:</p>
@@ -374,7 +414,7 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
     <span>←</span> Previous: Stitch
   </a>
 </div>
-`}],interactiveType:"custom"},F={id:"claude-code-uiux-21st-dev",title:"Claude UI Stack",category:"Tutorial",tags:["Claude Code","UI/UX","21st.dev"],tabs:[{label:"Overview",content:`
+`}],interactiveType:"custom"},_={id:"claude-code-uiux-21st-dev",title:"Claude UI Stack",category:"Tutorial",tags:["Claude Code","UI/UX","21st.dev"],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:1rem; line-height:1.75;">This setup helps you create <strong>production-quality websites</strong> by combining three powerful ingredients:</p>
 
 <ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
@@ -488,7 +528,7 @@ Make it feel like a top-tier product (Stripe / Linear / Apple-level quality).</c
     <span>←</span> Previous: Install UI/UX + 21st.dev
   </a>
 </div>
-`}],interactiveType:"custom"},_={id:"build-webapp-ai",title:"Build Web App with AI",category:"",tags:[""],description:`
+`}],interactiveType:"custom"},D={id:"build-webapp-ai",title:"Build Web App with AI",category:"",tags:[""],description:`
 Build your own Notebook Web App using AI coding — no prior coding experience required.
 
 In this tutorial, you’ll learn how to build and launch the app step-by-step using three tools:
@@ -509,7 +549,7 @@ Access the prompts and configuration files here:
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
   <iframe src="https://www.youtube.com/embed/PpvoOyYAMZs" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Build Web App with AI Tutorial"></iframe>
 </div>
-`,interactiveType:"custom"},D={id:"ai-engineering",title:"AI Engineering",category:"",tags:[""],tabs:[{label:"Overview",content:`
+`,interactiveType:"custom"},R={id:"ai-engineering",title:"AI Engineering",category:"",tags:[""],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:0.75rem; line-height:1.75;">AI Engineering refers to the process of building applications on top of foundation models.</p>
 <p style="margin-bottom:1rem; line-height:1.75;">The model as a service makes it easier to leverage AI to build applications. Models are exposed via APIs that receive user queries and return model outputs.
 Without these APIs, using an AI model required the infrastructure to host and serve this model. These APIs give you access to powerful models via single API calls.</p>
@@ -518,7 +558,7 @@ Without these APIs, using an AI model required the infrastructure to host and se
 
 This page is currently under development. Please check back soon.
 
-`}],interactiveType:"custom"},R={id:"build-app-skill-mcp",title:"Agent Skills + MCP",category:"Tutorial",tags:["Agentic","Firebase","GitHub"],tabs:[{label:"Overview",content:`
+`}],interactiveType:"custom"},O={id:"build-app-skill-mcp",title:"Agent Skills + MCP",category:"Tutorial",tags:["Agentic","Firebase","GitHub"],tabs:[{label:"Overview",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Build a URL Tracker App with AI Agents Skills &amp; MCP</strong>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Have you ever saved a bunch of URLs to read later — articles, docs, videos — and then a few days later wondered <em>"where did that link go?"</em> You scroll through tabs, dig through your notes app, check your browser history… and still can't find it.</p>
@@ -1051,7 +1091,313 @@ Requirements:
 </div>
 
 
-`}],interactiveType:"custom"},f=[j,z,F,R,_,D],s={isActive:!1,isLocked:!1,isMinimized:!1,timer:{duration:1500,remaining:1500,interval:null,isRunning:!1},stats:{streak:0,cardsToday:0,focusMinutes:0,lastStudyDate:null}},U={activeConcept:null,resetContentScroll(){const t=document.getElementById("content-area");t&&(t.scrollTop=0);const e=document.querySelector(".tutorial-tab-content");e&&(e.scrollTop=0)},init(){this.renderSidebar(),this.setupEventListeners(),this.initTheme(),this.initStudyMode(),this.initTechStackModal();const t=window.location.hash.substring(1);t&&f.some(e=>e.id===t)?this.selectConcept(t):this.renderWelcome(),L(document.getElementById("constellation-bg"))},renderWelcome(){document.getElementById("constellation-bg").style.display="";const t=this.getConceptOfTheDay(),e=document.getElementById("content-area");e.innerHTML=`
+`}],interactiveType:"custom"},U={id:"claude-extension",title:"Claude Extension",category:"",tags:[],tabs:[{label:"Features",content:`
+<style>
+.cc-table { width:100%;border-collapse:collapse;font-size:15px;font-family:'Outfit', sans-serif;line-height:1.5;table-layout:fixed; margin-top: 1.5rem; letter-spacing:0.01em; }
+.cc-table th { padding:12px 10px;text-align:left;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;font-size:12px;color:var(--text-secondary);border-bottom:1px solid var(--border-color);background:rgba(0,0,0,0.2) }
+.cc-table td { padding:24px 10px;border-bottom:1px solid var(--border-color);vertical-align:top;color:var(--text-primary); }
+.cc-table td p { margin: 0; padding: 0; height: 26px; line-height: 26px; }
+.cc-table td code { 
+  vertical-align: top; 
+  display: inline-block;
+  padding: 0.15rem 0.4rem; 
+  background: var(--surface-color); 
+  border: 1px solid var(--border-color); 
+  border-radius: 4px; 
+  font-family: 'Inter', monospace; 
+  font-size: 12.5px; 
+  color: var(--code-text); 
+  white-space: pre-wrap; 
+  word-break: break-word; 
+  overflow-wrap: break-word;
+  height: 26px;
+  line-height: 23px;
+  box-sizing: border-box;
+}
+.cc-table tr:last-child td { border-bottom:none }
+.cc-table tr:hover td { background:var(--surface-hover) }
+.badge { display:inline-block;padding:0 10px;border-radius:6px;font-size:12.5px;font-weight:700;white-space:nowrap; border: 1px solid var(--border-color); letter-spacing: 0.02em; height: 26px; line-height: 24px; vertical-align: top; margin: 0; box-sizing: border-box; }
+.doc-links { display:grid; gap: 4px; }
+.doc-links a { font-size:13.5px;color:var(--accent-primary);text-decoration:none;white-space:nowrap; transition: 0.2s ease; }
+.doc-links a:hover { text-decoration:underline; opacity: 0.8; }
+.doc-label { font-size:12px;color:var(--text-secondary);display:block;margin:0;font-weight:700;letter-spacing:0.02em;padding:0;text-transform:uppercase; height: 26px; line-height: 26px; vertical-align: top; }
+
+:root.light-mode .cc-table th { background: rgba(0,0,0,0.03); }
+:root.light-mode .badge { border-color: rgba(67, 52, 34, 0.2); }
+</style>
+
+<table class="cc-table">
+<thead>
+<tr>
+<th style="width:12%">Feature</th>
+<th style="width:23%">One-liner</th>
+<th style="width:16%">What it stores</th>
+<th style="width:14%">How to invoke</th>
+<th style="width:21%">Best used for</th>
+<th style="width:14%">Official docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="badge">Skills</span></td>
+<td><p>Teaches Claude how to handle specific tasks or workflows</p></td>
+<td><p>Instructions, scripts, reference files in a folder</p></td>
+<td><p><code>/skill-name</code></p></td>
+<td><p>Codifying repeatable workflows: code review, deployments, doc generation</p></td>
+<td class="doc-links">
+  <span class="doc-label">Guide</span>
+  <a href="https://code.claude.com/docs/en/skills" target="_blank">Skills →</a>
+</td>
+</tr>
+<tr>
+<td><span class="badge">Commands</span></td>
+<td><p>Prompt shortcuts</p></td>
+<td><p>Single markdown file with prompt template</p></td>
+<td><p><code>/command-name</code></p></td>
+<td><p>Quick prompt templates: /fix-bug, /explain-code, /summarize</p></td>
+<td class="doc-links">
+  <span class="doc-label">Guide</span>
+  <a href="https://docs.anthropic.com/en/docs/claude-code/slash-commands" target="_blank">Slash commands →</a>
+</td>
+</tr>
+<tr>
+<td><span class="badge">MCP</span></td>
+<td><p>USB-C for AI — connects Claude to real data</p></td>
+<td><p>External tool definitions (21st.dev, Supadata, Stitch..)</p></td>
+<td><p>Claude picks tools automatically</p></td>
+<td><p>Querying live databases, creating PRs, reading Slack, anything with real external state</p></td>
+<td class="doc-links">
+  <span class="doc-label">Guide</span>
+  <a href="https://docs.anthropic.com/en/docs/claude-code/mcp" target="_blank">MCP overview →</a>
+</td>
+</tr>
+<tr>
+<td><span class="badge">Hooks</span></td>
+<td><p>Scripts that fire automatically at lifecycle events</p></td>
+<td><p>Shell commands tied to events (PostToolUse etc.)</p></td>
+<td><p>Never manually — fires automatically on event</p></td>
+<td><p>Auto-linting, blocking dangerous commands, desktop notifications, test gates</p></td>
+<td class="doc-links">
+  <span class="doc-label">Guide</span>
+  <a href="https://docs.anthropic.com/en/docs/claude-code/hooks-guide" target="_blank">Hooks guide →</a>
+</td>
+</tr>
+<tr>
+<td><span class="badge">Plugins</span></td>
+<td><p>Installable bundles containing all of the above (Skills, Commands, MCPs, Hooks)</p></td>
+<td><p>plugin.json manifest + skills/ agents/ hooks/ MCPs</p></td>
+<td><p>All components auto-activate on install</p></td>
+<td><p>Sharing team setups, open-source toolkits, org-wide standards</p></td>
+<td class="doc-links">
+  <span class="doc-label">Discover</span>
+  <a href="https://docs.anthropic.com/en/docs/claude-code/plugins" target="_blank">Find &amp; install plugins →</a>
+  <span class="doc-label">Build</span>
+  <a href="https://docs.anthropic.com/en/docs/claude-code/create-plugins" target="_blank">Create plugins →</a>
+</td>
+</tr>
+<tr>
+<td><span class="badge">Subagents</span></td>
+<td><p>Isolated mini-agents with their own context window</p></td>
+<td><p>Agent system prompt + tool/model config in YAML</p></td>
+<td><p>Natural language or <code>/agents</code> menu</p></td>
+<td><p>Delegating heavy subtasks without polluting main session context</p></td>
+<td class="doc-links">
+  <span class="doc-label">Guide</span>
+  <a href="https://docs.anthropic.com/en/docs/claude-code/sub-agents" target="_blank">Subagents →</a>
+</td>
+</tr>
+<tr>
+<td><span class="badge">Agent teams</span></td>
+<td><p>Multiple Claude sessions that collaborate and cross-check</p></td>
+<td><p>Defined through prompts; teams.json for fine-tuning</p></td>
+<td><p>Prompt-driven; keyboard shortcuts to manage</p></td>
+<td><p>Large parallel work: security + perf + tests reviewing the same module</p></td>
+<td class="doc-links">
+  <span class="doc-label">Guide</span>
+  <a href="https://docs.anthropic.com/en/docs/claude-code/agent-teams" target="_blank">Agent teams →</a>
+</td>
+</tr>
+</tbody>
+</table>
+<div style="height: 20vh;"></div>
+      `},{label:"Decision Flow",content:`
+<div style="width: 100%; height: calc(100vh - 160px); min-height: 700px; overflow: hidden; background: var(--surface-color); border-radius: 12px; border: 1px solid var(--border-color);">
+  <iframe src="./flowchart.html" style="width: 100%; height: 100%; border: none;" title="Decision Flowchart"></iframe>
+</div>
+      `}],interactiveType:"custom"},G={id:"claude-commands",title:"Claude Commands",description:`
+<strong style="display:block; margin-bottom:0.75rem; font-size:1.2rem; color: var(--accent-primary);">Tutorial 4 — Slash Commands (quick prompt shortcuts)</strong>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Claude commands <code style="color: var(--code-text);">.claude/commands/</code> are the simplest entry point — a single markdown file becomes a slash command.</p>
+
+<div style="margin-top: 2rem;">
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 1 — Create a project-level command</strong>
+  <p style="margin-bottom:0.5rem;">Run this in your terminal to create a command:</p>
+  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.4;">mkdir -p .claude/commands
+cat > .claude/commands/explain.md << 'EOF'
+Explain the following code in simple English. Assume the reader knows Python basics 
+but is new to this codebase. Show a one-paragraph summary, then a bullet list of 
+what each major section does.
+
+Code to explain:
+$ARGUMENTS
+EOF</code>
+</div>
+
+<div style="margin-top: 2rem;">
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 2 — Use it</strong>
+  <p style="margin-bottom:0.5rem;">Typing the slash followed by the command name in Claude:</p>
+  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">/explain src/auth/jwt_handler.py</code>
+</div>
+
+<div style="margin-top: 2rem;">
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 3 — Share it with your team</strong>
+  <p style="line-height:1.75;">Share it with your team by committing <code style="color: var(--code-text);">.claude/commands/</code> to your repository. Everyone on the team gets the same slash commands automatically.</p>
+</div>
+
+<div style="margin-top: 2rem; padding: 1rem; background: rgba(0, 242, 255, 0.05); border: 1px solid rgba(0, 242, 255, 0.1); border-radius: 8px;">
+  <strong style="display:block; margin-bottom:0.75rem; font-size:1rem; color: var(--accent-primary);">Practical Python examples to create:</strong>
+  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.4;"># .claude/commands/docstring.md  — generate Google-style docstrings
+# .claude/commands/test.md       — generate pytest tests for a function
+# .claude/commands/changelog.md  — write a changelog entry from recent commits
+# .claude/commands/type-hints.md — add type hints to a Python file</code>
+</div>
+  `,interactiveType:"custom"},N={id:"claude-subagents",title:"Claude Subagents",description:`
+<strong style="display:block; margin-bottom:0.75rem; font-size:1.2rem; color: var(--accent-primary);">Tutorial 5 — Subagents (delegating heavy tasks)</strong>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Subagents solve context pollution. They spin up separate AI instances — each with its own system prompt, tool permissions, and even a different model. They work in isolation, then hand back a summary.</p>
+
+<div style="margin-top: 2rem;">
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 1 — Create a code-reviewer subagent</strong>
+  <p style="margin-bottom:0.5rem;">Create the agent manifest in your local agents directory:</p>
+  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.4;">mkdir -p ~/.claude/agents
+cat > ~/.claude/agents/code-reviewer.md << 'EOF'
+---
+name: code-reviewer
+description: Specialized agent for reviewing Python code quality, security, and performance
+model: claude-sonnet-4-6
+tools: Read, Bash
+---
+You are an expert Python code reviewer. When given a file or diff to review:
+
+1. Check for security vulnerabilities (SQL injection, hardcoded secrets, etc.)
+2. Assess performance (O(n²) loops, unnecessary DB calls, memory leaks)
+3. Evaluate code clarity and maintainability
+4. Check test coverage adequacy
+
+Return a structured report with severity ratings: Critical / High / Medium / Low.
+You have access to Read (to inspect files) and Bash (to run tests/linters).
+EOF</code>
+</div>
+
+<div style="margin-top: 2rem;">
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 2 — Invoke it</strong>
+  <p style="margin-bottom:0.5rem;">In Claude Code, you can describe the task naturally or use the agents menu:</p>
+  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.4;"># Natural language request:
+"Use the code-reviewer agent to inspect src/payments/stripe_handler.py"
+
+# Or open the interactive agents menu:
+/agents</code>
+</div>
+
+<div style="margin-top: 2rem;">
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 3 — Create a second specialized agent for documentation</strong>
+  <p style="margin-bottom:0.5rem;">Spin up a specialist for writing docstrings and examples:</p>
+  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.4;">cat > ~/.claude/agents/doc-writer.md << 'EOF'
+---
+name: doc-writer
+description: Writes Sphinx/Google-style documentation for Python modules
+tools: Read
+---
+You write clear, accurate Python documentation. Given a module path via the task:
+
+1. Read all .py files in the module
+2. Generate module-level docstring
+3. Generate class and function docstrings in Google style
+4. Write a usage example section
+
+Output ready-to-paste Python docstrings.
+EOF</code>
+</div>
+
+<div style="margin-top: 2rem; padding: 1rem; background: rgba(0, 242, 255, 0.05); border: 1px solid rgba(0, 242, 255, 0.1); border-radius: 8px;">
+  <p style="margin:0; line-height:1.6;">Now your main Claude session stays focused while these specialists do the heavy lifting in their own isolated contexts.</p>
+</div>
+  `,interactiveType:"custom"},q={id:"claude-plugins",title:"Claude Plugins",description:`
+<strong style="display:block; margin-bottom:0.75rem; font-size:1.2rem; color: var(--accent-primary);">Tutorial 6 — Plugins (packaging everything to share)</strong>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Plugins solve the "works-on-my-machine" problem. Instead of every team member manually setting up their <code style="color: var(--code-text);">.claude/</code> folders, you package everything into a plugin with a manifest. One install command, identical tooling for everyone.</p>
+
+<div style="margin-top: 2rem;">
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 1 — Create the plugin directory structure</strong>
+  <p style="margin-bottom:0.5rem;">Initialize a clean workspace for your shared tools:</p>
+  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.4;">mkdir -p my-python-toolkit/.claude-plugin
+mkdir -p my-python-toolkit/skills/py-review
+mkdir -p my-python-toolkit/skills/py-docs
+mkdir -p my-python-toolkit/agents</code>
+</div>
+
+<div style="margin-top: 2rem;">
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 2 — Create the manifest</strong>
+  <p style="margin-bottom:0.5rem;">Defines the plugin identity for Claude's installation system:</p>
+  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.4;">cat > my-python-toolkit/.claude-plugin/plugin.json << 'EOF'
+{
+  "name": "my-python-toolkit",
+  "description": "Python dev toolkit: code review, doc writing, and auto-lint hooks",
+  "version": "1.0.0",
+  "author": {
+    "name": "Your Name"
+  }
+}
+EOF</code>
+</div>
+
+<div style="margin-top: 2rem;">
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 3 — Add a skill</strong>
+  <p style="margin-bottom:0.5rem;">Reuse your existing skills from previous sessions:</p>
+  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">cp ~/.claude/skills/py-review/SKILL.md my-python-toolkit/skills/py-review/SKILL.md</code>
+</div>
+
+<div style="margin-top: 2rem;">
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 4 — Add a hook</strong>
+  <p style="margin-bottom:0.5rem;">Include automation logic (like auto-linting on file write):</p>
+  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.4;">cat > my-python-toolkit/hooks.json << 'EOF'
+{
+  "PostToolUse": [
+    {
+      "matcher": "Write",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "if [[ \\"$CLAUDE_TOOL_OUTPUT_FILE\\" == *.py ]]; then black \\"$CLAUDE_TOOL_OUTPUT_FILE\\"; fi"
+        }
+      ]
+    }
+  ]
+}
+EOF</code>
+</div>
+
+<div style="margin-top: 2rem;">
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 5 — Test and Install</strong>
+  <p style="margin-bottom:0.5rem;">Verify locally before sharing with the team:</p>
+  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.4;"># Test without installing:
+claude --plugin-dir ./my-python-toolkit
+
+# Install permanently:
+claude plugin add --path ./my-python-toolkit</code>
+</div>
+
+<div style="margin-top: 2rem;">
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 6 — Share via GitHub</strong>
+  <p style="margin-bottom:0.5rem;">Push your toolkit to a repository and let others install it in one command:</p>
+  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.4;">cd my-python-toolkit && git init && git add . && git commit -m "Initial plugin"
+git remote add origin https://github.com/you/my-python-toolkit
+git push -u origin main
+
+# Teammates install with:
+/plugin install github.com/you/my-python-toolkit</code>
+</div>
+  `,interactiveType:"custom"},f=[U,G,N,q,j,F,_,O,D,R],s={isActive:!1,isLocked:!1,isMinimized:!1,timer:{duration:1500,remaining:1500,interval:null,isRunning:!1},stats:{streak:0,cardsToday:0,focusMinutes:0,lastStudyDate:null}},H={activeConcept:null,resetContentScroll(){const t=document.getElementById("content-area");t&&(t.scrollTop=0);const e=document.querySelector(".tutorial-tab-content");e&&(e.scrollTop=0)},init(){this.renderSidebar(),this.setupEventListeners(),this.initTheme(),this.initStudyMode(),this.initTechStackModal();const t=window.location.hash.substring(1);t&&f.some(e=>e.id===t)?this.selectConcept(t):this.renderWelcome(),M(document.getElementById("constellation-bg"))},renderWelcome(){document.getElementById("constellation-bg").style.display="";const t=this.getConceptOfTheDay(),e=document.getElementById("content-area");e.innerHTML=`
       <div class="cotd-ticker">
         <span class="cotd-label">Skill of the Day</span>
         <div class="ticker-track">
@@ -1062,32 +1408,33 @@ Requirements:
         <h2>Welcome to Knowledge Lab</h2>
         <p>Select a tutorial from the sidebar to begin your interactive learning journey.</p>
       </div>
-    `,e.querySelector(".cotd-ticker").addEventListener("click",()=>{this.selectConcept(t.id)});const o=e.querySelector(".ticker-text"),a=e.querySelector(".ticker-track").offsetWidth;o.style.setProperty("--start-x",a+"px")},getConceptOfTheDay(){const t=Math.floor(Date.now()/864e5);return f[t%f.length]},initTheme(){localStorage.getItem("theme")==="light"&&(document.documentElement.classList.add("light-mode"),document.querySelector("#theme-toggle .icon").textContent="☀️"),localStorage.getItem("sidebar")==="collapsed"&&document.getElementById("app").classList.add("sidebar-collapsed")},renderSidebar(){const t=document.getElementById("concept-list");t.innerHTML=f.map(e=>`
+    `,e.querySelector(".cotd-ticker").addEventListener("click",()=>{this.selectConcept(t.id)});const r=e.querySelector(".ticker-text"),a=e.querySelector(".ticker-track").offsetWidth;r.style.setProperty("--start-x",a+"px")},getConceptOfTheDay(){const t=Math.floor(Date.now()/864e5);return f[t%f.length]},initTheme(){localStorage.getItem("theme")==="light"&&(document.documentElement.classList.add("light-mode"),document.querySelector("#theme-toggle .icon").textContent="☀️"),localStorage.getItem("sidebar")==="collapsed"&&document.getElementById("app").classList.add("sidebar-collapsed")},renderSidebar(){const t=document.getElementById("concept-list");t.innerHTML=f.map(e=>`
       <li class="nav-item" data-id="${e.id}">${e.title}</li>
-    `).join("")},isMobile(){return window.innerWidth<=640},closeMobileSidebar(){document.getElementById("app").classList.remove("sidebar-open")},setupEventListeners(){document.getElementById("concept-list").addEventListener("click",t=>{if(t.target.classList.contains("nav-item")){const e=t.target.dataset.id;this.isMobile()&&this.closeMobileSidebar(),this.selectConcept(e)}}),document.getElementById("sidebar-toggle").addEventListener("click",()=>{const t=document.getElementById("app");if(this.isMobile())t.classList.toggle("sidebar-open");else{const e=t.classList.toggle("sidebar-collapsed");localStorage.setItem("sidebar",e?"collapsed":"open")}}),document.getElementById("app").addEventListener("click",t=>{this.isMobile()&&t.target===document.getElementById("app")&&this.closeMobileSidebar()}),document.getElementById("theme-toggle").addEventListener("click",()=>{const t=document.documentElement.classList.toggle("light-mode"),e=document.querySelector("#theme-toggle .icon");e.textContent=t?"☀️":"🌙",localStorage.setItem("theme",t?"light":"dark")}),document.getElementById("home-link").addEventListener("click",()=>{this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(t=>t.classList.remove("active")),window.location.hash&&history.replaceState(null,"",window.location.pathname+window.location.search),this.isMobile()&&this.closeMobileSidebar(),this.renderWelcome()}),document.getElementById("concept-search").addEventListener("input",t=>{const e=t.target.value.toLowerCase();document.querySelectorAll(".nav-item").forEach(a=>{const r=a.textContent.toLowerCase();a.style.display=r.includes(e)?"block":"none"})}),window.addEventListener("hashchange",()=>{const t=window.location.hash.substring(1);t&&f.some(e=>e.id===t)?(!this.activeConcept||this.activeConcept.id!==t)&&this.selectConcept(t):t||(this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(e=>e.classList.remove("active")),this.renderWelcome())})},selectConcept(t){const e=f.find(a=>a.id===t);if(!e)return;window.location.hash!==`#${t}`&&(window.location.hash=t),document.getElementById("constellation-bg").style.display="none",this.activeConcept=e,document.querySelectorAll(".nav-item").forEach(a=>a.classList.remove("active"));const o=document.querySelector(`[data-id="${t}"]`);o&&o.classList.add("active"),this.renderConcept(e),this.resetContentScroll()},renderConcept(t){const e=document.getElementById("content-area");if(t.tabs&&t.tabs.length>0){const o=t.tabs.map((r,i)=>`<button class="tutorial-tab-btn${i===0?" active":""}" data-tab="${i}">${r.label}</button>`).join(""),a=t.tabs.map((r,i)=>`<div class="tutorial-tab-panel${i===0?" active":""}" data-panel="${i}">
+    `).join("")},isMobile(){return window.innerWidth<=640},closeMobileSidebar(){document.getElementById("app").classList.remove("sidebar-open")},setupEventListeners(){document.getElementById("concept-list").addEventListener("click",t=>{if(t.target.classList.contains("nav-item")){const e=t.target.dataset.id;this.isMobile()&&this.closeMobileSidebar(),this.selectConcept(e)}}),document.getElementById("sidebar-toggle").addEventListener("click",()=>{const t=document.getElementById("app");if(this.isMobile())t.classList.toggle("sidebar-open");else{const e=t.classList.toggle("sidebar-collapsed");localStorage.setItem("sidebar",e?"collapsed":"open")}}),document.getElementById("app").addEventListener("click",t=>{this.isMobile()&&t.target===document.getElementById("app")&&this.closeMobileSidebar()}),document.getElementById("theme-toggle").addEventListener("click",()=>{const t=document.documentElement.classList.toggle("light-mode"),e=document.querySelector("#theme-toggle .icon");e.textContent=t?"☀️":"🌙",localStorage.setItem("theme",t?"light":"dark")}),document.getElementById("home-link").addEventListener("click",()=>{this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(t=>t.classList.remove("active")),window.location.hash&&history.replaceState(null,"",window.location.pathname+window.location.search),this.isMobile()&&this.closeMobileSidebar(),this.renderWelcome()}),document.getElementById("concept-search").addEventListener("input",t=>{const e=t.target.value.toLowerCase();document.querySelectorAll(".nav-item").forEach(a=>{const o=a.textContent.toLowerCase();a.style.display=o.includes(e)?"block":"none"})}),window.addEventListener("hashchange",()=>{const t=window.location.hash.substring(1);t&&f.some(e=>e.id===t)?(!this.activeConcept||this.activeConcept.id!==t)&&this.selectConcept(t):t||(this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(e=>e.classList.remove("active")),this.renderWelcome())})},selectConcept(t){const e=f.find(a=>a.id===t);if(!e)return;window.location.hash!==`#${t}`&&(window.location.hash=t),document.getElementById("constellation-bg").style.display="none",this.activeConcept=e,document.querySelectorAll(".nav-item").forEach(a=>a.classList.remove("active"));const r=document.querySelector(`[data-id="${t}"]`);r&&r.classList.add("active"),this.renderConcept(e),this.resetContentScroll()},renderConcept(t){const e=document.getElementById("content-area");if(t.tabs&&t.tabs.length>0){const r=t.tabs.map((o,i)=>`<button class="tutorial-tab-btn${i===0?" active":""}" data-tab="${i}">${o.label}</button>`).join(""),a=t.tabs.map((o,i)=>`<div class="tutorial-tab-panel${i===0?" active":""}" data-panel="${i}">
           <div class="concept-content" id="concept-description-${i}">
-            ${r.content}
+            ${o.content}
           </div>
         </div>`).join("");e.innerHTML=`
         <article class="concept-card concept-card--tabs">
-          <nav class="tutorial-tabs" role="tablist">${o}</nav>
+          <nav class="tutorial-tabs" role="tablist">${r}</nav>
           <div class="tutorial-tab-content">${a}</div>
         </article>
-      `,this.initTabs(),t.tabs.forEach((r,i)=>{const d=document.getElementById(`concept-description-${i}`);d&&this.attachCopyButtonsTo(d)})}else e.innerHTML=`
+      `,this.initTabs(),t.tabs.forEach((o,i)=>{const d=document.getElementById(`concept-description-${i}`);d&&this.attachCopyButtonsTo(d)})}else{const r=t.description||"Add your description here...",a=r.trim().startsWith("<")?r:r.split(`
+
+`).map(o=>`<p>${o}</p>`).join("");e.innerHTML=`
         <article class="concept-card">
           <h2 class="concept-title">${t.title}</h2>
+          ${t.category||t.tags&&t.tags.length>0?`
           <div class="concept-meta">
-            <span class="tag">${t.category}</span>
-            ${t.tags.map(o=>`<span class="tag">${o}</span>`).join("")}
-          </div>
+            ${t.category?`<span class="tag">${t.category}</span>`:""}
+            ${t.tags?t.tags.map(o=>`<span class="tag">${o}</span>`).join(""):""}
+          </div>`:""}
           <div class="concept-content" id="concept-description">
-            ${(t.description||"Add your description here...").split(`
-
-`).map(o=>`<p>${o}</p>`).join("")}
+            ${a}
           </div>
         </article>
-      `,this.attachCopyButtons()},initTabs(){const t=document.querySelectorAll(".tutorial-tab-btn"),e=document.querySelectorAll(".tutorial-tab-panel"),o=a=>{t.forEach(r=>r.classList.remove("active")),e.forEach(r=>r.classList.remove("active")),t[a].classList.add("active"),e[a].classList.add("active"),t[a].scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"}),this.resetContentScroll()};t.forEach(a=>{a.addEventListener("click",()=>o(Number(a.dataset.tab)))}),document.querySelectorAll("[data-goto-tab]").forEach(a=>{a.addEventListener("click",r=>{r.preventDefault(),o(Number(a.dataset.gotoTab))})}),document.querySelectorAll("[data-goto-concept]").forEach(a=>{a.addEventListener("click",r=>{r.preventDefault(),typeof this.selectConcept=="function"&&this.selectConcept(a.dataset.gotoConcept)})})},attachCopyButtons(){const t=document.getElementById("concept-description");t&&this.attachCopyButtonsTo(t)},attachCopyButtonsTo(t){if(!t)return;t.querySelectorAll("code").forEach(o=>{if(!(o.style.display==="block"||o.textContent.includes(`
-`)))return;const r=document.createElement("div");r.className="code-wrapper",o.parentNode.insertBefore(r,o),r.appendChild(o);const i=document.createElement("button");i.className="copy-btn",i.setAttribute("title","Copy to clipboard");const d='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>',m='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';i.innerHTML=d,r.appendChild(i),i.addEventListener("click",()=>{const n=o.textContent.replace(/^❯\s+/,"");navigator.clipboard.writeText(n).then(()=>{i.innerHTML=m,i.classList.add("copied"),setTimeout(()=>{i.innerHTML=d,i.classList.remove("copied")},2e3)})})})},initTechStackModal(){const t=document.getElementById("tech-stack-btn"),e=document.getElementById("tech-stack-overlay"),o=document.getElementById("close-tech-stack"),a=document.getElementById("tech-stack-list");if(!t||!e||!o||!a)return;const r={...S.dependencies||{},...S.devDependencies||{}},i=[{name:"Vanilla JavaScript",desc:"Core application logic, ECMAScript modules, DOM manipulation, and dynamic rendering.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M14.5 9h-5l-.5-5h7l-.5 5zm-5 4h5l-.5 4.5-2 1.5-2-1.5-.2-2h2.2l.1 1.2 1 .8 1-.8.2-1.2h-3.8z"></path></svg>'},{name:"Vanilla CSS3 & HTML5",desc:"Custom glassmorphism styling, responsive grid layout, and semantic structure.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M15 9h-6l-.5-4h7.5l-.5 4zm-6 4h6l-.5 4.5-2.5 1.5-2.5-1.5-.2-2h2.2l.1 1.2 1.2.8 1.2-.8.2-1.2h-4.6z"></path></svg>'},{name:"HTML5 Canvas API",desc:"Custom performant animations including the Neural Constellation and Zen Flow backgrounds.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.268-.652-.053-.877.215-.225.542-.31 1.051-.31h2.438c2.66 0 4.853-2.192 4.853-4.853C21.5 6.756 17.244 2 12 2z"></path></svg>'}];r.vite&&i.push({name:"Vite ("+r.vite.replace(/[\^\~]/,"")+")",desc:"Next-generation frontend tooling providing ultra-fast builds and Hot Module Replacement.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>'}),i.push({name:"GitHub Pages",desc:"Automated CI/CD deployment via GitHub Actions pipeline using the deployed build.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>'}),a.innerHTML=i.map(c=>`
+      `,this.attachCopyButtons()}},initTabs(){const t=document.querySelectorAll(".tutorial-tab-btn"),e=document.querySelectorAll(".tutorial-tab-panel"),r=a=>{t.forEach(o=>o.classList.remove("active")),e.forEach(o=>o.classList.remove("active")),t[a].classList.add("active"),e[a].classList.add("active"),t[a].scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"}),this.resetContentScroll()};t.forEach(a=>{a.addEventListener("click",()=>r(Number(a.dataset.tab)))}),document.querySelectorAll("[data-goto-tab]").forEach(a=>{a.addEventListener("click",o=>{o.preventDefault(),r(Number(a.dataset.gotoTab))})}),document.querySelectorAll("[data-goto-concept]").forEach(a=>{a.addEventListener("click",o=>{o.preventDefault(),typeof this.selectConcept=="function"&&this.selectConcept(a.dataset.gotoConcept)})})},attachCopyButtons(){const t=document.getElementById("concept-description");t&&this.attachCopyButtonsTo(t)},attachCopyButtonsTo(t){if(!t)return;t.querySelectorAll("code").forEach(r=>{if(!(r.style.display==="block"||r.textContent.includes(`
+`)))return;const o=document.createElement("div");o.className="code-wrapper",r.parentNode.insertBefore(o,r),o.appendChild(r);const i=document.createElement("button");i.className="copy-btn",i.setAttribute("title","Copy to clipboard");const d='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>',p='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';i.innerHTML=d,o.appendChild(i),i.addEventListener("click",()=>{const n=r.textContent.replace(/^❯\s+/,"");navigator.clipboard.writeText(n).then(()=>{i.innerHTML=p,i.classList.add("copied"),setTimeout(()=>{i.innerHTML=d,i.classList.remove("copied")},2e3)})})})},initTechStackModal(){const t=document.getElementById("tech-stack-btn"),e=document.getElementById("tech-stack-overlay"),r=document.getElementById("close-tech-stack"),a=document.getElementById("tech-stack-list");if(!t||!e||!r||!a)return;const o={...S.dependencies||{},...S.devDependencies||{}},i=[{name:"Vanilla JavaScript",desc:"Core application logic, ECMAScript modules, DOM manipulation, and dynamic rendering.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M14.5 9h-5l-.5-5h7l-.5 5zm-5 4h5l-.5 4.5-2 1.5-2-1.5-.2-2h2.2l.1 1.2 1 .8 1-.8.2-1.2h-3.8z"></path></svg>'},{name:"Vanilla CSS3 & HTML5",desc:"Custom glassmorphism styling, responsive grid layout, and semantic structure.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M15 9h-6l-.5-4h7.5l-.5 4zm-6 4h6l-.5 4.5-2.5 1.5-2.5-1.5-.2-2h2.2l.1 1.2 1.2.8 1.2-.8.2-1.2h-4.6z"></path></svg>'},{name:"HTML5 Canvas API",desc:"Custom performant animations including the Neural Constellation and Zen Flow backgrounds.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.268-.652-.053-.877.215-.225.542-.31 1.051-.31h2.438c2.66 0 4.853-2.192 4.853-4.853C21.5 6.756 17.244 2 12 2z"></path></svg>'}];o.vite&&i.push({name:"Vite ("+o.vite.replace(/[\^\~]/,"")+")",desc:"Next-generation frontend tooling providing ultra-fast builds and Hot Module Replacement.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>'}),i.push({name:"GitHub Pages",desc:"Automated CI/CD deployment via GitHub Actions pipeline using the deployed build.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>'}),a.innerHTML=i.map(c=>`
       <li class="tech-stack-item">
         <div class="tech-stack-icon-wrapper">
           ${c.icon}
@@ -1097,4 +1444,4 @@ Requirements:
           <span class="tech-stack-desc">${c.desc}</span>
         </div>
       </li>
-    `).join("");const d=()=>{e.classList.remove("hidden"),e.offsetWidth,e.classList.add("active")},m=()=>{e.classList.remove("active"),setTimeout(()=>{e.classList.contains("active")||e.classList.add("hidden")},300)};t.addEventListener("click",d),o.addEventListener("click",m),e.addEventListener("click",c=>{c.target===e&&m()})},initStudyMode(){this.loadStudyStats(),this.updateStudyMetrics(),this.initZenFlow(),document.getElementById("study-mode-btn").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("exit-study").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("timer-toggle").addEventListener("click",()=>{this.toggleTimer()}),document.getElementById("timer-reset").addEventListener("click",()=>{this.resetTimer()}),document.querySelectorAll(".preset-btn").forEach(t=>{t.addEventListener("click",e=>{const o=parseInt(e.target.dataset.time);this.setTimerDuration(o)})}),document.getElementById("minimize-study").addEventListener("click",()=>{this.minimizeStudy()}),document.getElementById("expand-study").addEventListener("click",()=>{this.expandStudy()}),document.getElementById("mini-stop-btn").addEventListener("click",()=>{this.expandStudy(),this.toggleStudyMode()}),document.getElementById("lock-screen-btn").addEventListener("click",()=>{this.lockScreen()}),document.getElementById("unlock-screen-btn").addEventListener("click",()=>{this.unlockScreen()})},loadStudyStats(){const t=localStorage.getItem("studyStats");t&&(s.stats=JSON.parse(t),this.updateStreak())},saveStudyStats(){localStorage.setItem("studyStats",JSON.stringify(s.stats))},updateStreak(){const t=new Date().toDateString(),e=s.stats.lastStudyDate;if(e){const o=new Date(e),a=new Date;a.setDate(a.getDate()-1),o.toDateString()===a.toDateString()||o.toDateString()!==t&&(s.stats.streak=0)}},updateStudyMetrics(){const t=document.getElementById("study-streak"),e=document.getElementById("study-cards"),o=document.getElementById("study-minutes");t&&(t.textContent=s.stats.streak),e&&(e.textContent=s.stats.cardsToday),o&&(o.textContent=s.stats.focusMinutes)},toggleStudyMode(){s.isActive=!s.isActive;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");if(s.isActive){if(s.isMinimized){this.expandStudy();return}t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1",this.updateStreak(),this.saveStudyStats()}else this.expandStudy(),t.classList.remove("active"),e.style.opacity="0",this.resetTimer(),setTimeout(()=>{t.classList.add("hidden")},500)},setTimerDuration(t){s.timer.duration=t*60,s.timer.remaining=t*60,document.querySelectorAll(".preset-btn").forEach(e=>{e.classList.toggle("active",parseInt(e.dataset.time)===t)}),this.updateTimerDisplay()},toggleTimer(){s.timer.isRunning?this.pauseTimer():this.startTimer()},startTimer(){s.timer.isRunning=!0,document.getElementById("timer-toggle").textContent="Pause",document.querySelector(".timer-wrapper").classList.add("active"),document.getElementById("lock-screen-btn").classList.remove("hidden"),s.timer.interval=setInterval(()=>{s.timer.remaining--,this.updateTimerDisplay(),s.timer.remaining<=0&&this.completeTimer()},1e3)},pauseTimer(){s.timer.isRunning=!1,document.getElementById("timer-toggle").textContent="Resume",document.querySelector(".timer-wrapper").classList.remove("active"),document.getElementById("lock-screen-btn").classList.add("hidden"),clearInterval(s.timer.interval),s.isLocked&&this.unlockScreen()},resetTimer(){this.pauseTimer(),s.timer.remaining=s.timer.duration,document.getElementById("timer-toggle").textContent="Start Focus",document.getElementById("timer-status").textContent="Ready to focus",document.getElementById("lock-screen-btn").classList.add("hidden"),this.updateTimerDisplay()},completeTimer(){this.pauseTimer(),document.getElementById("timer-status").textContent="Focus complete! Great work!",s.stats.focusMinutes+=Math.floor(s.timer.duration/60),this.updateStreakDate(),this.saveStudyStats(),this.updateStudyMetrics(),"Notification"in window&&Notification.permission==="granted"&&new Notification("Focus Session Complete",{body:"Great job! Take a break.",icon:"/vite.svg"})},updateTimerDisplay(){const t=Math.floor(s.timer.remaining/60),e=s.timer.remaining%60,o=`${t.toString().padStart(2,"0")}:${e.toString().padStart(2,"0")}`;document.getElementById("timer-minutes").textContent=t.toString().padStart(2,"0"),document.getElementById("timer-seconds").textContent=e.toString().padStart(2,"0"),document.getElementById("mini-timer-display").textContent=o;const a=s.timer.remaining/s.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${a}%`;const r=s.timer.remaining/s.timer.duration,d=2*Math.PI*130*(1-r);document.getElementById("timer-progress").style.strokeDashoffset=d,s.timer.isRunning?document.getElementById("timer-status").textContent="Stay focused...":document.getElementById("timer-status").textContent="Ready to focus"},minimizeStudy(){s.isMinimized=!0;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("active"),e.style.opacity="0",setTimeout(()=>t.classList.add("hidden"),500),document.getElementById("mini-timer").classList.remove("hidden");const o=Math.floor(s.timer.remaining/60),a=s.timer.remaining%60;document.getElementById("mini-timer-display").textContent=`${o.toString().padStart(2,"0")}:${a.toString().padStart(2,"0")}`;const r=s.timer.remaining/s.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${r}%`},expandStudy(){if(s.isMinimized=!1,document.getElementById("mini-timer").classList.add("hidden"),s.isActive){const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1"}},lockScreen(){s.isLocked=!0,document.getElementById("study-mode-overlay").classList.add("study-locked"),document.getElementById("unlock-screen-overlay").classList.remove("hidden")},unlockScreen(){s.isLocked=!1,document.getElementById("study-mode-overlay").classList.remove("study-locked"),document.getElementById("unlock-screen-overlay").classList.add("hidden")},updateStreakDate(){const t=new Date().toDateString(),e=s.stats.lastStudyDate;if(e!==t){const o=new Date;o.setDate(o.getDate()-1),e===o.toDateString()?s.stats.streak++:s.stats.streak=1,s.stats.lastStudyDate=t}},initZenFlow(){const t=document.getElementById("zen-flow-canvas"),e=t.getContext("2d");let o,a,r=[];const i=()=>{o=t.width=window.innerWidth,a=t.height=window.innerHeight,d()},d=()=>{r=[];const c=30;for(let n=0;n<c;n++)r.push({x:Math.random()*o,y:Math.random()*a,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,radius:Math.random()*80+40,hue:Math.random()*60+170,alpha:Math.random()*.1+.05,pulse:Math.random()*Math.PI*2})},m=()=>{if(!s.isActive){requestAnimationFrame(m);return}e.clearRect(0,0,o,a);const c=document.documentElement.classList.contains("light-mode");if(r.forEach(n=>{n.x+=n.vx,n.y+=n.vy,n.x<-n.radius&&(n.x=o+n.radius),n.x>o+n.radius&&(n.x=-n.radius),n.y<-n.radius&&(n.y=a+n.radius),n.y>a+n.radius&&(n.y=-n.radius),n.pulse+=.02;const u=e.createRadialGradient(n.x,n.y,0,n.x,n.y,n.radius),b=n.radius*(1+Math.sin(n.pulse)*.1);c?(u.addColorStop(0,`hsla(40, 30%, 70%, ${n.alpha*.5})`),u.addColorStop(.5,`hsla(40, 20%, 80%, ${n.alpha*.2})`),u.addColorStop(1,"transparent")):(u.addColorStop(0,`hsla(${n.hue}, 70%, 50%, ${n.alpha})`),u.addColorStop(.5,`hsla(${n.hue}, 70%, 50%, ${n.alpha*.3})`),u.addColorStop(1,"transparent")),e.beginPath(),e.arc(n.x,n.y,b,0,Math.PI*2),e.fillStyle=u,e.fill()}),s.timer.isRunning){const n=Date.now()/1e3,u=150+Math.sin(n*.5)*20,b=e.createRadialGradient(o/2,a/2,0,o/2,a/2,u);c?(b.addColorStop(0,"hsla(40, 30%, 75%, 0.05)"),b.addColorStop(1,"transparent")):(b.addColorStop(0,"hsla(180, 70%, 50%, 0.03)"),b.addColorStop(1,"transparent")),e.beginPath(),e.arc(o/2,a/2,u,0,Math.PI*2),e.fillStyle=b,e.fill()}requestAnimationFrame(m)};window.addEventListener("resize",i),i(),m()}};document.addEventListener("DOMContentLoaded",()=>U.init());
+    `).join("");const d=()=>{e.classList.remove("hidden"),e.offsetWidth,e.classList.add("active")},p=()=>{e.classList.remove("active"),setTimeout(()=>{e.classList.contains("active")||e.classList.add("hidden")},300)};t.addEventListener("click",d),r.addEventListener("click",p),e.addEventListener("click",c=>{c.target===e&&p()})},initStudyMode(){this.loadStudyStats(),this.updateStudyMetrics(),this.initZenFlow(),document.getElementById("study-mode-btn").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("exit-study").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("timer-toggle").addEventListener("click",()=>{this.toggleTimer()}),document.getElementById("timer-reset").addEventListener("click",()=>{this.resetTimer()}),document.querySelectorAll(".preset-btn").forEach(t=>{t.addEventListener("click",e=>{const r=parseInt(e.target.dataset.time);this.setTimerDuration(r)})}),document.getElementById("minimize-study").addEventListener("click",()=>{this.minimizeStudy()}),document.getElementById("expand-study").addEventListener("click",()=>{this.expandStudy()}),document.getElementById("mini-stop-btn").addEventListener("click",()=>{this.expandStudy(),this.toggleStudyMode()}),document.getElementById("lock-screen-btn").addEventListener("click",()=>{this.lockScreen()}),document.getElementById("unlock-screen-btn").addEventListener("click",()=>{this.unlockScreen()})},loadStudyStats(){const t=localStorage.getItem("studyStats");t&&(s.stats=JSON.parse(t),this.updateStreak())},saveStudyStats(){localStorage.setItem("studyStats",JSON.stringify(s.stats))},updateStreak(){const t=new Date().toDateString(),e=s.stats.lastStudyDate;if(e){const r=new Date(e),a=new Date;a.setDate(a.getDate()-1),r.toDateString()===a.toDateString()||r.toDateString()!==t&&(s.stats.streak=0)}},updateStudyMetrics(){const t=document.getElementById("study-streak"),e=document.getElementById("study-cards"),r=document.getElementById("study-minutes");t&&(t.textContent=s.stats.streak),e&&(e.textContent=s.stats.cardsToday),r&&(r.textContent=s.stats.focusMinutes)},toggleStudyMode(){s.isActive=!s.isActive;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");if(s.isActive){if(s.isMinimized){this.expandStudy();return}t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1",this.updateStreak(),this.saveStudyStats()}else this.expandStudy(),t.classList.remove("active"),e.style.opacity="0",this.resetTimer(),setTimeout(()=>{t.classList.add("hidden")},500)},setTimerDuration(t){s.timer.duration=t*60,s.timer.remaining=t*60,document.querySelectorAll(".preset-btn").forEach(e=>{e.classList.toggle("active",parseInt(e.dataset.time)===t)}),this.updateTimerDisplay()},toggleTimer(){s.timer.isRunning?this.pauseTimer():this.startTimer()},startTimer(){s.timer.isRunning=!0,document.getElementById("timer-toggle").textContent="Pause",document.querySelector(".timer-wrapper").classList.add("active"),document.getElementById("lock-screen-btn").classList.remove("hidden"),s.timer.interval=setInterval(()=>{s.timer.remaining--,this.updateTimerDisplay(),s.timer.remaining<=0&&this.completeTimer()},1e3)},pauseTimer(){s.timer.isRunning=!1,document.getElementById("timer-toggle").textContent="Resume",document.querySelector(".timer-wrapper").classList.remove("active"),document.getElementById("lock-screen-btn").classList.add("hidden"),clearInterval(s.timer.interval),s.isLocked&&this.unlockScreen()},resetTimer(){this.pauseTimer(),s.timer.remaining=s.timer.duration,document.getElementById("timer-toggle").textContent="Start Focus",document.getElementById("timer-status").textContent="Ready to focus",document.getElementById("lock-screen-btn").classList.add("hidden"),this.updateTimerDisplay()},completeTimer(){this.pauseTimer(),document.getElementById("timer-status").textContent="Focus complete! Great work!",s.stats.focusMinutes+=Math.floor(s.timer.duration/60),this.updateStreakDate(),this.saveStudyStats(),this.updateStudyMetrics(),"Notification"in window&&Notification.permission==="granted"&&new Notification("Focus Session Complete",{body:"Great job! Take a break.",icon:"/vite.svg"})},updateTimerDisplay(){const t=Math.floor(s.timer.remaining/60),e=s.timer.remaining%60,r=`${t.toString().padStart(2,"0")}:${e.toString().padStart(2,"0")}`;document.getElementById("timer-minutes").textContent=t.toString().padStart(2,"0"),document.getElementById("timer-seconds").textContent=e.toString().padStart(2,"0"),document.getElementById("mini-timer-display").textContent=r;const a=s.timer.remaining/s.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${a}%`;const o=s.timer.remaining/s.timer.duration,d=2*Math.PI*130*(1-o);document.getElementById("timer-progress").style.strokeDashoffset=d,s.timer.isRunning?document.getElementById("timer-status").textContent="Stay focused...":document.getElementById("timer-status").textContent="Ready to focus"},minimizeStudy(){s.isMinimized=!0;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("active"),e.style.opacity="0",setTimeout(()=>t.classList.add("hidden"),500),document.getElementById("mini-timer").classList.remove("hidden");const r=Math.floor(s.timer.remaining/60),a=s.timer.remaining%60;document.getElementById("mini-timer-display").textContent=`${r.toString().padStart(2,"0")}:${a.toString().padStart(2,"0")}`;const o=s.timer.remaining/s.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${o}%`},expandStudy(){if(s.isMinimized=!1,document.getElementById("mini-timer").classList.add("hidden"),s.isActive){const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1"}},lockScreen(){s.isLocked=!0,document.getElementById("study-mode-overlay").classList.add("study-locked"),document.getElementById("unlock-screen-overlay").classList.remove("hidden")},unlockScreen(){s.isLocked=!1,document.getElementById("study-mode-overlay").classList.remove("study-locked"),document.getElementById("unlock-screen-overlay").classList.add("hidden")},updateStreakDate(){const t=new Date().toDateString(),e=s.stats.lastStudyDate;if(e!==t){const r=new Date;r.setDate(r.getDate()-1),e===r.toDateString()?s.stats.streak++:s.stats.streak=1,s.stats.lastStudyDate=t}},initZenFlow(){const t=document.getElementById("zen-flow-canvas"),e=t.getContext("2d");let r,a,o=[];const i=()=>{r=t.width=window.innerWidth,a=t.height=window.innerHeight,d()},d=()=>{o=[];const c=30;for(let n=0;n<c;n++)o.push({x:Math.random()*r,y:Math.random()*a,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,radius:Math.random()*80+40,hue:Math.random()*60+170,alpha:Math.random()*.1+.05,pulse:Math.random()*Math.PI*2})},p=()=>{if(!s.isActive){requestAnimationFrame(p);return}e.clearRect(0,0,r,a);const c=document.documentElement.classList.contains("light-mode");if(o.forEach(n=>{n.x+=n.vx,n.y+=n.vy,n.x<-n.radius&&(n.x=r+n.radius),n.x>r+n.radius&&(n.x=-n.radius),n.y<-n.radius&&(n.y=a+n.radius),n.y>a+n.radius&&(n.y=-n.radius),n.pulse+=.02;const u=e.createRadialGradient(n.x,n.y,0,n.x,n.y,n.radius),b=n.radius*(1+Math.sin(n.pulse)*.1);c?(u.addColorStop(0,`hsla(40, 30%, 70%, ${n.alpha*.5})`),u.addColorStop(.5,`hsla(40, 20%, 80%, ${n.alpha*.2})`),u.addColorStop(1,"transparent")):(u.addColorStop(0,`hsla(${n.hue}, 70%, 50%, ${n.alpha})`),u.addColorStop(.5,`hsla(${n.hue}, 70%, 50%, ${n.alpha*.3})`),u.addColorStop(1,"transparent")),e.beginPath(),e.arc(n.x,n.y,b,0,Math.PI*2),e.fillStyle=u,e.fill()}),s.timer.isRunning){const n=Date.now()/1e3,u=150+Math.sin(n*.5)*20,b=e.createRadialGradient(r/2,a/2,0,r/2,a/2,u);c?(b.addColorStop(0,"hsla(40, 30%, 75%, 0.05)"),b.addColorStop(1,"transparent")):(b.addColorStop(0,"hsla(180, 70%, 50%, 0.03)"),b.addColorStop(1,"transparent")),e.beginPath(),e.arc(r/2,a/2,u,0,Math.PI*2),e.fillStyle=b,e.fill()}requestAnimationFrame(p)};window.addEventListener("resize",i),i(),p()}};document.addEventListener("DOMContentLoaded",()=>H.init());
