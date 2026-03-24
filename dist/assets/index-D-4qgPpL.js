@@ -1,4 +1,4 @@
-(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const o of document.querySelectorAll('link[rel="modulepreload"]'))a(o);new MutationObserver(o=>{for(const i of o)if(i.type==="childList")for(const d of i.addedNodes)d.tagName==="LINK"&&d.rel==="modulepreload"&&a(d)}).observe(document,{childList:!0,subtree:!0});function r(o){const i={};return o.integrity&&(i.integrity=o.integrity),o.referrerPolicy&&(i.referrerPolicy=o.referrerPolicy),o.crossOrigin==="use-credentials"?i.credentials="include":o.crossOrigin==="anonymous"?i.credentials="omit":i.credentials="same-origin",i}function a(o){if(o.ep)return;o.ep=!0;const i=r(o);fetch(o.href,i)}})();const E=70,x=160,k=120;class T{constructor(e,r){this.width=e,this.height=r,this.x=Math.random()*e,this.y=Math.random()*r,this.vx=(Math.random()-.5)*.4,this.vy=(Math.random()-.5)*.4,this.baseRadius=1.5+Math.random()*2,this.pulsePhase=Math.random()*Math.PI*2,this.pulseSpeed=.015+Math.random()*.025,this.isHub=Math.random()<.12,this.isHub&&(this.baseRadius*=2)}update(e){this.pulsePhase+=this.pulseSpeed;const r=this.x-e.x,a=this.y-e.y,o=Math.hypot(r,a);if(o<k&&o>0){const d=((k-o)/k)**2*3;this.vx+=r/o*d*.08,this.vy+=a/o*d*.08}this.vx*=.975,this.vy*=.975;const i=Math.hypot(this.vx,this.vy);i>1.5&&(this.vx=this.vx/i*1.5,this.vy=this.vy/i*1.5),this.x+=this.vx,this.y+=this.vy,this.x<0&&(this.x=this.width),this.x>this.width&&(this.x=0),this.y<0&&(this.y=this.height),this.y>this.height&&(this.y=0)}draw(e,r){const a=.5+.5*Math.sin(this.pulsePhase),o=this.baseRadius*(1+a*.6),i=(this.isHub?.7:.4)+a*.4,d=r?`rgba(176, 141, 87, ${i})`:this.isHub?`rgba(180, 100, 255, ${i})`:`rgba(0, 242, 255, ${i})`,p=r?`rgba(176, 141, 87, ${a*.12})`:this.isHub?`rgba(130, 0, 255, ${a*.1})`:`rgba(0, 242, 255, ${a*.1})`;e.beginPath(),e.arc(this.x,this.y,o*5,0,Math.PI*2),e.fillStyle=p,e.fill(),e.beginPath(),e.arc(this.x,this.y,o,0,Math.PI*2),e.fillStyle=d,e.fill()}}class L{constructor(e,r,a,o,i){this.x1=e,this.y1=r,this.x2=a,this.y2=o,this.progress=0,this.speed=.02+Math.random()*.03,this.isLight=i,this.alive=!0}update(){this.progress+=this.speed,this.progress>=1&&(this.alive=!1)}draw(e){const r=this.x1+(this.x2-this.x1)*this.progress,a=this.y1+(this.y2-this.y1)*this.progress,o=1-this.progress;e.beginPath(),e.arc(r,a,3,0,Math.PI*2),e.fillStyle=this.isLight?`rgba(212, 160, 23, ${o})`:`rgba(255, 255, 255, ${o})`,e.fill()}}function M(t){const e=t.getContext("2d");let r=0,a=0,o=[],i=[],d=null;const p={x:-9999,y:-9999};let c=0;function n(){r=t.width=window.innerWidth,a=t.height=window.innerHeight,o=Array.from({length:E},()=>new T(r,a))}function u(m){if(c--,c>0)return;c=30+Math.floor(Math.random()*60);const l=[...o].sort(()=>Math.random()-.5);for(let y=0;y<l.length-1;y++){const h=l[y],g=l[y+1];if(Math.hypot(h.x-g.x,h.y-g.y)<x){i.push(new L(h.x,h.y,g.x,g.y,m));return}}}function b(m,l,y,h){const g=(1-y/x)*(h?.25:.35),v=e.createLinearGradient(m.x,m.y,l.x,l.y),A=h?`rgba(176,141,87,${g*1.5})`:m.isHub?`rgba(150,50,255,${g*1.5})`:`rgba(0,242,255,${g*1.5})`,P=h?`rgba(122,106,83,${g})`:l.isHub?`rgba(150,50,255,${g})`:`rgba(0,200,220,${g})`;v.addColorStop(0,A),v.addColorStop(1,P),e.beginPath(),e.moveTo(m.x,m.y),e.lineTo(l.x,l.y),e.strokeStyle=v,e.lineWidth=h?.6:.8,e.stroke()}function w(){const m=document.documentElement.classList.contains("light-mode");e.clearRect(0,0,r,a);for(let l=0;l<o.length;l++){o[l].update(p);for(let y=l+1;y<o.length;y++){const h=o[l].x-o[y].x,g=o[l].y-o[y].y,v=Math.hypot(h,g);v<x&&b(o[l],o[y],v,m)}}o.forEach(l=>l.draw(e,m)),u(m),i=i.filter(l=>l.alive),i.forEach(l=>{l.update(),l.draw(e)}),d=requestAnimationFrame(w)}function I(){cancelAnimationFrame(d),window.removeEventListener("resize",n),window.removeEventListener("mousemove",C)}function C(m){p.x=m.clientX,p.y=m.clientY}return window.addEventListener("resize",n),window.addEventListener("mousemove",C),n(),w(),{destroy:I}}const z={vite:"^7.3.1"},B={three:"^0.183.2"},S={devDependencies:z,dependencies:B},j={id:"claude-skills-tutorial",title:"Claude Skills",category:"",tags:[""],tabs:[{label:"Overview",content:`
+(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const r of document.querySelectorAll('link[rel="modulepreload"]'))a(r);new MutationObserver(r=>{for(const i of r)if(i.type==="childList")for(const d of i.addedNodes)d.tagName==="LINK"&&d.rel==="modulepreload"&&a(d)}).observe(document,{childList:!0,subtree:!0});function o(r){const i={};return r.integrity&&(i.integrity=r.integrity),r.referrerPolicy&&(i.referrerPolicy=r.referrerPolicy),r.crossOrigin==="use-credentials"?i.credentials="include":r.crossOrigin==="anonymous"?i.credentials="omit":i.credentials="same-origin",i}function a(r){if(r.ep)return;r.ep=!0;const i=o(r);fetch(r.href,i)}})();const T=70,x=160,k=120;class E{constructor(e,o){this.width=e,this.height=o,this.x=Math.random()*e,this.y=Math.random()*o,this.vx=(Math.random()-.5)*.4,this.vy=(Math.random()-.5)*.4,this.baseRadius=1.5+Math.random()*2,this.pulsePhase=Math.random()*Math.PI*2,this.pulseSpeed=.015+Math.random()*.025,this.isHub=Math.random()<.12,this.isHub&&(this.baseRadius*=2)}update(e){this.pulsePhase+=this.pulseSpeed;const o=this.x-e.x,a=this.y-e.y,r=Math.hypot(o,a);if(r<k&&r>0){const d=((k-r)/k)**2*3;this.vx+=o/r*d*.08,this.vy+=a/r*d*.08}this.vx*=.975,this.vy*=.975;const i=Math.hypot(this.vx,this.vy);i>1.5&&(this.vx=this.vx/i*1.5,this.vy=this.vy/i*1.5),this.x+=this.vx,this.y+=this.vy,this.x<0&&(this.x=this.width),this.x>this.width&&(this.x=0),this.y<0&&(this.y=this.height),this.y>this.height&&(this.y=0)}draw(e,o){const a=.5+.5*Math.sin(this.pulsePhase),r=this.baseRadius*(1+a*.6),i=(this.isHub?.7:.4)+a*.4,d=o?`rgba(176, 141, 87, ${i})`:this.isHub?`rgba(180, 100, 255, ${i})`:`rgba(0, 242, 255, ${i})`,p=o?`rgba(176, 141, 87, ${a*.12})`:this.isHub?`rgba(130, 0, 255, ${a*.1})`:`rgba(0, 242, 255, ${a*.1})`;e.beginPath(),e.arc(this.x,this.y,r*5,0,Math.PI*2),e.fillStyle=p,e.fill(),e.beginPath(),e.arc(this.x,this.y,r,0,Math.PI*2),e.fillStyle=d,e.fill()}}class M{constructor(e,o,a,r,i){this.x1=e,this.y1=o,this.x2=a,this.y2=r,this.progress=0,this.speed=.02+Math.random()*.03,this.isLight=i,this.alive=!0}update(){this.progress+=this.speed,this.progress>=1&&(this.alive=!1)}draw(e){const o=this.x1+(this.x2-this.x1)*this.progress,a=this.y1+(this.y2-this.y1)*this.progress,r=1-this.progress;e.beginPath(),e.arc(o,a,3,0,Math.PI*2),e.fillStyle=this.isLight?`rgba(212, 160, 23, ${r})`:`rgba(255, 255, 255, ${r})`,e.fill()}}function L(t){const e=t.getContext("2d");let o=0,a=0,r=[],i=[],d=null;const p={x:-9999,y:-9999};let c=0;function s(){o=t.width=window.innerWidth,a=t.height=window.innerHeight,r=Array.from({length:T},()=>new E(o,a))}function u(m){if(c--,c>0)return;c=30+Math.floor(Math.random()*60);const l=[...r].sort(()=>Math.random()-.5);for(let y=0;y<l.length-1;y++){const h=l[y],g=l[y+1];if(Math.hypot(h.x-g.x,h.y-g.y)<x){i.push(new M(h.x,h.y,g.x,g.y,m));return}}}function b(m,l,y,h){const g=(1-y/x)*(h?.25:.35),v=e.createLinearGradient(m.x,m.y,l.x,l.y),P=h?`rgba(176,141,87,${g*1.5})`:m.isHub?`rgba(150,50,255,${g*1.5})`:`rgba(0,242,255,${g*1.5})`,A=h?`rgba(122,106,83,${g})`:l.isHub?`rgba(150,50,255,${g})`:`rgba(0,200,220,${g})`;v.addColorStop(0,P),v.addColorStop(1,A),e.beginPath(),e.moveTo(m.x,m.y),e.lineTo(l.x,l.y),e.strokeStyle=v,e.lineWidth=h?.6:.8,e.stroke()}function w(){const m=document.documentElement.classList.contains("light-mode");e.clearRect(0,0,o,a);for(let l=0;l<r.length;l++){r[l].update(p);for(let y=l+1;y<r.length;y++){const h=r[l].x-r[y].x,g=r[l].y-r[y].y,v=Math.hypot(h,g);v<x&&b(r[l],r[y],v,m)}}r.forEach(l=>l.draw(e,m)),u(m),i=i.filter(l=>l.alive),i.forEach(l=>{l.update(),l.draw(e)}),d=requestAnimationFrame(w)}function I(){cancelAnimationFrame(d),window.removeEventListener("resize",s),window.removeEventListener("mousemove",C)}function C(m){p.x=m.clientX,p.y=m.clientY}return window.addEventListener("resize",s),window.addEventListener("mousemove",C),s(),w(),{destroy:I}}const j={vite:"^7.3.1"},z={three:"^0.183.2"},S={devDependencies:j,dependencies:z},F={id:"claude-skills-tutorial",title:"Claude Skills",category:"",tags:[""],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:1rem; line-height:1.75;">Whether you're a complete beginner looking to build your first website, or an experienced developer looking to speed up your workflow, getting started with Claude Skills is easier than you think. In this simple guide, we'll watch Claude Skills in action as it guides us through building a website, taking our input at each step. Let's go!</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">A skill is a set of instructions — packaged as a simple folder — that teaches Claude how to handle specific tasks or workflows.</p>
@@ -231,7 +231,7 @@ EOF</code>
 <p style="margin-top: 0.25rem; text-align: left;">
   <a href="https://claude.com/blog/improving-frontend-design-through-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">Best practices for building richer, more customized frontend design with Claude and Skills</a>
 </p>
-`}],interactiveType:"custom"},F={id:"claude-mcp",title:"Claude MCP",category:"",tags:[""],tabs:[{label:"Overview",content:`
+`}],interactiveType:"custom"},B={id:"claude-mcp",title:"Claude MCP",category:"",tags:[""],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:1rem; line-height:1.75;">The Model Context Protocol (<a href="https://modelcontextprotocol.io/docs/getting-started/intro" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">MCP</a>) is an open standard that enables Claude to interact with external tools and data sources. This modular architecture allows you to extend Claude's capabilities with specialized services.</p>
 
 <p style="margin-bottom:0.75rem; line-height:1.75;">In this section, we will configure Claude to connect to <strong>three</strong> powerful MCP servers:</p>
@@ -528,7 +528,7 @@ Make it feel like a top-tier product (Stripe / Linear / Apple-level quality).</c
     <span>←</span> Previous: Install UI/UX + 21st.dev
   </a>
 </div>
-`}],interactiveType:"custom"},D={id:"build-webapp-ai",title:"Build Web App with AI",category:"",tags:[""],description:`
+`}],interactiveType:"custom"},O={id:"build-webapp-ai",title:"Build Web App with AI",category:"",tags:[""],description:`
 Build your own Notebook Web App using AI coding — no prior coding experience required.
 
 In this tutorial, you’ll learn how to build and launch the app step-by-step using three tools:
@@ -558,7 +558,7 @@ Without these APIs, using an AI model required the infrastructure to host and se
 
 This page is currently under development. Please check back soon.
 
-`}],interactiveType:"custom"},O={id:"build-app-skill-mcp",title:"Agent Skills + MCP",category:"Tutorial",tags:["Agentic","Firebase","GitHub"],tabs:[{label:"Overview",content:`
+`}],interactiveType:"custom"},G={id:"build-app-skill-mcp",title:"Agent Skills + MCP",category:"Tutorial",tags:["Agentic","Firebase","GitHub"],tabs:[{label:"Overview",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Build a URL Tracker App with AI Agents Skills &amp; MCP</strong>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Have you ever saved a bunch of URLs to read later — articles, docs, videos — and then a few days later wondered <em>"where did that link go?"</em> You scroll through tabs, dig through your notes app, check your browser history… and still can't find it.</p>
@@ -1091,7 +1091,7 @@ Requirements:
 </div>
 
 
-`}],interactiveType:"custom"},U={id:"claude-extension",title:"Claude Extension",category:"",tags:[],tabs:[{label:"Features",content:`
+`}],interactiveType:"custom"},D={id:"claude-extension",title:"Claude Extension",category:"",tags:[],tabs:[{label:"Features",content:`
 <style>
 .cc-table { width:100%;border-collapse:collapse;font-size:15px;font-family:'Outfit', sans-serif;line-height:1.5;table-layout:fixed; margin-top: 1.5rem; letter-spacing:0.01em; }
 .cc-table th { padding:12px 10px;text-align:left;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;font-size:12px;color:var(--text-secondary);border-bottom:1px solid var(--border-color);background:rgba(0,0,0,0.2) }
@@ -1224,19 +1224,33 @@ Requirements:
 <div style="width: 100%; height: calc(100vh - 160px); min-height: 700px; overflow: hidden; background: var(--surface-color); border-radius: 12px; border: 1px solid var(--border-color);">
   <iframe src="./flowchart.html" style="width: 100%; height: 100%; border: none;" title="Decision Flowchart"></iframe>
 </div>
-      `}],interactiveType:"custom"},G={id:"claude-commands",title:"Claude Commands",description:`
-<strong style="display:block; margin-bottom:0.75rem; font-size:1.2rem; color: var(--accent-primary);">Tutorial 4 — Slash Commands (quick prompt shortcuts)</strong>
+      `}],interactiveType:"custom"},U={id:"claude-commands",title:"Claude Commands",description:`
+<p style="margin-bottom:1rem; line-height:1.75;">Claude Commands (also called slash commands) are a feature of Claude Code. Think of them like custom keyboard shortcuts or macros, but for your AI workflow.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Claude commands <code style="color: var(--code-text);">.claude/commands/</code> are the simplest entry point — a single markdown file becomes a slash command.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Instead of typing out a long, detailed instruction every time you want Claude to do something repetitive, you save that instruction as a simple Markdown file and call it up with a quick <code style="color: var(--code-text);">/command-name</code>.</p>
 
+<p style="margin-bottom:1.5rem; line-height:1.75; font-style: italic; opacity: 0.8;"><strong>Real-world analogy:</strong> Imagine you always ask a new intern the same 5-step process to review code before every commit. Instead of explaining it every single time, you write it down once in a document and just say "follow the checklist." That document is a slash command.</p>
+
+<div style="margin-bottom: 2rem; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px;">
+  <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">Two Types of Commands</strong>
+  <p style="margin-bottom:0.75rem;">Commands come in two main flavors:</p>
+  <ul style="margin-left: 1.25rem; line-height: 1.6;">
+    <li style="margin-bottom: 0.5rem;"><strong style="color: var(--accent-secondary);">Built-in</strong> — Standard tools that ship with Claude Code for managing your session (like <code style="color: var(--code-text);">/clear</code>, <code style="color: var(--code-text);">/help</code>, etc.)</li>
+    <li><strong style="color: var(--accent-secondary);">Custom</strong> — Commands you build yourself for your own repetitive workflows</li>
+  </ul>
+</div>
+
+<p style="margin-bottom:1.5rem; line-height:1.75;">Commands can be stored in <strong>globally</strong> (<code style="color: var(--code-text);">~/.claude/commands/</code>) to work across all your projects, or inside a <strong>specific project's</strong> <code style="color: var(--code-text);">(.claude/commands/)</code> folder to share with teammates.</p>
 <div style="margin-top: 2rem;">
   <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 1 — Create a project-level command</strong>
-  <p style="margin-bottom:0.5rem;">Run this in your terminal to create a command:</p>
-  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.4;">mkdir -p .claude/commands
-cat > .claude/commands/explain.md << 'EOF'
-Explain the following code in simple English. Assume the reader knows Python basics 
-but is new to this codebase. Show a one-paragraph summary, then a bullet list of 
-what each major section does.
+  <p style="margin-bottom:0.5rem;">First, create the command directory:</p>
+  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.4;">mkdir -p .claude/commands</code>
+
+  <p style="margin-top: 1rem; margin-bottom:0.5rem;">Then, create the command file:</p>
+  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.4;">cat > .claude/commands/explain.md << 'EOF'
+Explain the following code in simple English. Assume the reader knows the basics 
+of the programming language but is new to this codebase. Show a one-paragraph summary, 
+then a bullet list of what each major section does.
 
 Code to explain:
 $ARGUMENTS
@@ -1245,22 +1259,20 @@ EOF</code>
 
 <div style="margin-top: 2rem;">
   <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 2 — Use it</strong>
-  <p style="margin-bottom:0.5rem;">Typing the slash followed by the command name in Claude:</p>
-  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">/explain src/auth/jwt_handler.py</code>
+  <p style="margin-bottom:0.5rem;">Typing the slash followed by the command name in Claude code:</p>
+  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">/explain src/utils/logger.js</code>
 </div>
 
 <div style="margin-top: 2rem;">
-  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 3 — Share it with your team</strong>
-  <p style="line-height:1.75;">Share it with your team by committing <code style="color: var(--code-text);">.claude/commands/</code> to your repository. Everyone on the team gets the same slash commands automatically.</p>
+  <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">Why Is This Useful?</strong>
+  <p style="margin-bottom:1rem; line-height:1.75;">The real power is how slash commands turn a clunky, multi-step process into one quick action. Some popular uses include:</p>
+  <ul style="margin-left: 1.25rem; line-height: 1.6;">
+    <li style="margin-bottom: 0.5rem;"><code style="color: var(--code-text);">/commit</code> — Claude analyzes your changes and writes a proper commit message</li>
+    <li style="margin-bottom: 0.5rem;"><code style="color: var(--code-text);">/test</code> — runs your test suite and auto-fixes failures</li>
+    <li><code style="color: var(--code-text);">/pr</code> — generates a pull request description from your recent commits</li>
+  </ul>
 </div>
-
-<div style="margin-top: 2rem; padding: 1rem; background: rgba(0, 242, 255, 0.05); border: 1px solid rgba(0, 242, 255, 0.1); border-radius: 8px;">
-  <strong style="display:block; margin-bottom:0.75rem; font-size:1rem; color: var(--accent-primary);">Practical Python examples to create:</strong>
-  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.4;"># .claude/commands/docstring.md  — generate Google-style docstrings
-# .claude/commands/test.md       — generate pytest tests for a function
-# .claude/commands/changelog.md  — write a changelog entry from recent commits
-# .claude/commands/type-hints.md — add type hints to a Python file</code>
-</div>
+<div style="height: 10rem;"></div>
   `,interactiveType:"custom"},N={id:"claude-subagents",title:"Claude Subagents",description:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1.2rem; color: var(--accent-primary);">Tutorial 5 — Subagents (delegating heavy tasks)</strong>
 
@@ -1322,82 +1334,428 @@ EOF</code>
 <div style="margin-top: 2rem; padding: 1rem; background: rgba(0, 242, 255, 0.05); border: 1px solid rgba(0, 242, 255, 0.1); border-radius: 8px;">
   <p style="margin:0; line-height:1.6;">Now your main Claude session stays focused while these specialists do the heavy lifting in their own isolated contexts.</p>
 </div>
-  `,interactiveType:"custom"},q={id:"claude-plugins",title:"Claude Plugins",description:`
-<strong style="display:block; margin-bottom:0.75rem; font-size:1.2rem; color: var(--accent-primary);">Tutorial 6 — Plugins (packaging everything to share)</strong>
+  `,interactiveType:"custom"},H={id:"claude-plugins",title:"Claude Plugins",category:"Tutorial",tags:["Plugins","Marketplace","Claude Code"],tabs:[{label:"Overview",content:`
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Claude Code Plugin Tutorial]</strong>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Plugins solve the "works-on-my-machine" problem. Instead of every team member manually setting up their <code style="color: var(--code-text);">.claude/</code> folders, you package everything into a plugin with a manifest. One install command, identical tooling for everyone.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">This tutorial walks you through building a complete Claude Code plugin from scratch.</p>
 
-<div style="margin-top: 2rem;">
-  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 1 — Create the plugin directory structure</strong>
-  <p style="margin-bottom:0.5rem;">Initialize a clean workspace for your shared tools:</p>
-  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.4;">mkdir -p my-python-toolkit/.claude-plugin
-mkdir -p my-python-toolkit/skills/py-review
-mkdir -p my-python-toolkit/skills/py-docs
-mkdir -p my-python-toolkit/agents</code>
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; margin: 1rem 0;">
+  <p style="margin: 0 0 0.75rem; font-weight: 600; color: var(--text-primary);">What you will build</p>
+  <p style="margin: 0 0 0.75rem; line-height:1.75; color: var(--text-secondary);"><strong>py-helper</strong> — a Python code review plugin that includes:</p>
+  <ul style="margin: 0 0 0 1.5rem; color: var(--text-secondary); line-height: 1.75;">
+    <li style="margin-bottom: 0.35rem;"><strong>Skill:</strong> auto-review Python files</li>
+    <li style="margin-bottom: 0.35rem;"><strong>Command:</strong> manually fix style issues</li>
+    <li style="margin-bottom: 0.35rem;"><strong>Hook:</strong> run automatic safety checks</li>
+    <li style="margin-bottom: 0;"><strong>MCP:</strong> connect Claude to GitHub</li>
+  </ul>
 </div>
 
-<div style="margin-top: 2rem;">
-  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 2 — Create the manifest</strong>
-  <p style="margin-bottom:0.5rem;">Defines the plugin identity for Claude's installation system:</p>
-  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.4;">cat > my-python-toolkit/.claude-plugin/plugin.json << 'EOF'
+<p style="margin-bottom:0.75rem; line-height:1.75;">By the end, you will have a plugin that can review code, fix formatting, warn about secrets, and interact with GitHub directly from Claude Code.</p>
+
+<div style="margin-top: 2rem; display: flex; justify-content: flex-end; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="1" class="tutorial-nav-link">
+    Next: Prerequisites <span>→</span>
+  </a>
+</div>
+`},{label:"1. Prerequisites",content:`
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Before You Start]</strong>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">You need two things installed before building any plugin.</p>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Step 1 — Install Node.js</p>
+<p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">Claude Code runs on Node.js, so install the LTS version from <a href="https://nodejs.org" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">nodejs.org</a>.</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">node --version
+# You should see something like: v22.0.0</code>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Step 2 — Install Claude Code</p>
+<p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Install Claude Code globally with npm:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">npm install -g @anthropic-ai/claude-code
+
+# Verify the installation
+claude --version</code>
+
+<div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 8px; margin: 1rem 0;">
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">You will also need a Claude API key or an authenticated Claude account. Claude Code will ask you to sign in the first time you run it.</p>
+</div>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="0" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Overview
+  </a>
+  <a href="#" data-goto-tab="2" class="tutorial-nav-link">
+    Next: Folder Plan <span>→</span>
+  </a>
+</div>
+`},{label:"2. Folder Plan",content:`
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[What We Are Building]</strong>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Before creating files, it helps to understand the complete plugin structure.</p>
+
+<table style="width: 100%; border-collapse: collapse; margin-top: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;">
+  <thead>
+    <tr style="background: rgba(0, 242, 255, 0.05);">
+      <th style="padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color); color: var(--accent-primary);">Component</th>
+      <th style="padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color); color: var(--accent-primary);">Name</th>
+      <th style="padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color); color: var(--accent-primary);">What it does</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Skill</td>
+      <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><strong>py-review</strong></td>
+      <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Auto-reviews Python files when you ask Claude to review them</td>
+    </tr>
+    <tr>
+      <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Command</td>
+      <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><strong>py-fix</strong></td>
+      <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Fixes PEP 8 issues on demand</td>
+    </tr>
+    <tr>
+      <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Hook</td>
+      <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><strong>hooks.json</strong></td>
+      <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Checks for secrets before saves and syntax errors after edits</td>
+    </tr>
+    <tr>
+      <td style="padding: 1rem;">MCP</td>
+      <td style="padding: 1rem;"><strong>GitHub</strong></td>
+      <td style="padding: 1rem;">Lets Claude create issues and PRs from the terminal</td>
+    </tr>
+  </tbody>
+</table>
+
+<p style="margin: 1rem 0 0.75rem; line-height:1.75;">Final folder structure:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.45;">my-claude-marketplace/
+└── py-helper-marketplace/
+    ├── .claude-plugin/
+    │   └── marketplace.json
+    └── plugins/
+        └── py-helper/
+            ├── .claude-plugin/
+            │   └── plugin.json
+            ├── skills/
+            │   └── py-review/
+            │       └── SKILL.md
+            ├── commands/
+            │   └── py-fix.md
+            ├── hooks/
+            │   └── hooks.json
+            └── .mcp.json</code>
+
+<div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 8px; margin: 1rem 0;">
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);"><strong>Important:</strong> the plugin folder must live inside the marketplace folder under a <code style="color: var(--code-text);">plugins/</code> subfolder.</p>
+</div>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="1" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Prerequisites
+  </a>
+  <a href="#" data-goto-tab="3" class="tutorial-nav-link">
+    Next: Create Folders <span>→</span>
+  </a>
+</div>
+`},{label:"3. Create Folders",content:`
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Create All Folders]</strong>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Step 1 — Create your Python project</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">This is where your actual Python code will live:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">mkdir my-python-project
+cd my-python-project
+touch app.py</code>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">Open <code style="color: var(--code-text);">app.py</code> and paste in this intentionally messy example:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">def add_numbers(a,b):
+    x=a+b
+    return x
+ 
+def greet(name):
+    print("Hello "+name)
+ 
+result=add_numbers(5,10)
+greet("Alice")</code>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Step 2 — Create the marketplace and plugin folders</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cd ..
+
+mkdir -p my-claude-marketplace/py-helper-marketplace/.claude-plugin
+mkdir -p my-claude-marketplace/py-helper-marketplace/plugins/py-helper/.claude-plugin
+mkdir -p my-claude-marketplace/py-helper-marketplace/plugins/py-helper/skills/py-review
+mkdir -p my-claude-marketplace/py-helper-marketplace/plugins/py-helper/commands
+mkdir -p my-claude-marketplace/py-helper-marketplace/plugins/py-helper/hooks</code>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Step 3 — Verify the folders</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">find my-claude-marketplace -type d</code>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">If your folder tree matches the intended layout, you are ready to create the files.</p>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="2" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Folder Plan
+  </a>
+  <a href="#" data-goto-tab="4" class="tutorial-nav-link">
+    Next: Marketplace + Plugin Files <span>→</span>
+  </a>
+</div>
+`},{label:"4. Core Files",content:`
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Create the Core Files]</strong>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">Run each block one at a time.</p>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">File 1 — marketplace.json</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cat > my-claude-marketplace/py-helper-marketplace/.claude-plugin/marketplace.json << 'EOF'
 {
-  "name": "my-python-toolkit",
-  "description": "Python dev toolkit: code review, doc writing, and auto-lint hooks",
+  "name": "py-helper-marketplace",
+  "owner": {
+    "name": "Your Name"
+  },
+  "plugins": [
+    {
+      "name": "py-helper",
+      "version": "1.0.0",
+      "description": "Python coding toolkit with review, fix, and safety checks",
+      "source": "./plugins/py-helper"
+    }
+  ]
+}
+EOF</code>
+
+<p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">The <code style="color: var(--code-text);">source</code> path must be <code style="color: var(--code-text);">./plugins/py-helper</code>, relative to the marketplace root.</p>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">File 2 — plugin.json</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cat > my-claude-marketplace/py-helper-marketplace/plugins/py-helper/.claude-plugin/plugin.json << 'EOF'
+{
+  "name": "py-helper",
   "version": "1.0.0",
+  "description": "Python coding toolkit with review, fix, and safety checks",
   "author": {
     "name": "Your Name"
   }
 }
 EOF</code>
-</div>
 
-<div style="margin-top: 2rem;">
-  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 3 — Add a skill</strong>
-  <p style="margin-bottom:0.5rem;">Reuse your existing skills from previous sessions:</p>
-  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text);">cp ~/.claude/skills/py-review/SKILL.md my-python-toolkit/skills/py-review/SKILL.md</code>
-</div>
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">File 3 — SKILL.md</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cat > my-claude-marketplace/py-helper-marketplace/plugins/py-helper/skills/py-review/SKILL.md << 'EOF'
+---
+name: py-review
+description: >
+  Reviews Python code for quality issues. Auto-trigger when the user
+  asks to review, check, audit, or improve a Python file.
+---
+ 
+When reviewing Python code, always check for:
+ 
+1. **Bugs** — logic errors, off-by-one mistakes, unhandled exceptions
+2. **Style** — PEP 8 violations (spacing, naming conventions)
+3. **Type hints** — missing annotations on functions
+4. **Docstrings** — missing documentation on classes and functions
+ 
+For each issue, show:
+- The line number
+- What the problem is
+- A corrected version of the code
+EOF</code>
 
-<div style="margin-top: 2rem;">
-  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 4 — Add a hook</strong>
-  <p style="margin-bottom:0.5rem;">Include automation logic (like auto-linting on file write):</p>
-  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.4;">cat > my-python-toolkit/hooks.json << 'EOF'
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="3" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Create Folders
+  </a>
+  <a href="#" data-goto-tab="5" class="tutorial-nav-link">
+    Next: Commands, Hooks, MCP <span>→</span>
+  </a>
+</div>
+`},{label:"5. Commands + MCP",content:`
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Create the Remaining Files]</strong>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">File 4 — commands/py-fix.md</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cat > my-claude-marketplace/py-helper-marketplace/plugins/py-helper/commands/py-fix.md << 'EOF'
+---
+description: "Automatically fix PEP 8 issues in the current Python file"
+---
+ 
+Look at the currently open Python file and:
+ 
+1. Fix all PEP 8 style violations
+2. Add missing type hints to all functions
+3. Add docstrings to any functions that are missing them
+4. Show a summary of every change you made and why
+EOF</code>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">File 5 — hooks/hooks.json</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cat > my-claude-marketplace/py-helper-marketplace/plugins/py-helper/hooks/hooks.json << 'EOF'
 {
-  "PostToolUse": [
-    {
-      "matcher": "Write",
-      "hooks": [
-        {
-          "type": "command",
-          "command": "if [[ \\"$CLAUDE_TOOL_OUTPUT_FILE\\" == *.py ]]; then black \\"$CLAUDE_TOOL_OUTPUT_FILE\\"; fi"
-        }
-      ]
-    }
-  ]
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Before writing this Python file, check: does it contain any hardcoded passwords, API keys, or secrets? If yes, warn the user and suggest using environment variables instead."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "After editing this Python file, quickly check if any obvious syntax errors were introduced. If yes, point them out immediately."
+          }
+        ]
+      }
+    ]
+  }
 }
 EOF</code>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">File 6 — .mcp.json</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">First, create a GitHub personal access token with <code style="color: var(--code-text);">repo</code> scope at <a href="https://github.com/settings/tokens" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">github.com/settings/tokens</a>.</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cat > my-claude-marketplace/py-helper-marketplace/plugins/py-helper/.mcp.json << 'EOF'
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "YOUR_TOKEN_HERE"
+      }
+    }
+  }
+}
+EOF</code>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="4" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Core Files
+  </a>
+  <a href="#" data-goto-tab="6" class="tutorial-nav-link">
+    Next: Verify Files <span>→</span>
+  </a>
+</div>
+`},{label:"6. Verify",content:`
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Verify Your Files]</strong>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">Before installing the plugin, make sure every file is in the correct place.</p>
+
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">find my-claude-marketplace -type f</code>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">You should see these files:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">my-claude-marketplace/py-helper-marketplace/.claude-plugin/marketplace.json
+my-claude-marketplace/py-helper-marketplace/plugins/py-helper/.claude-plugin/plugin.json
+my-claude-marketplace/py-helper-marketplace/plugins/py-helper/skills/py-review/SKILL.md
+my-claude-marketplace/py-helper-marketplace/plugins/py-helper/commands/py-fix.md
+my-claude-marketplace/py-helper-marketplace/plugins/py-helper/hooks/hooks.json
+my-claude-marketplace/py-helper-marketplace/plugins/py-helper/.mcp.json</code>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">If you want to spot-check one file, print it:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cat my-claude-marketplace/py-helper-marketplace/.claude-plugin/marketplace.json</code>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="5" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Commands + MCP
+  </a>
+  <a href="#" data-goto-tab="7" class="tutorial-nav-link">
+    Next: Install the Plugin <span>→</span>
+  </a>
+</div>
+`},{label:"7. Install",content:`
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Install the Plugin]</strong>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Step 1 — Go to your Python project</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cd my-python-project
+claude</code>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Step 2 — Register your marketplace</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">Inside Claude Code, use the absolute path to your marketplace:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">/plugin marketplace add /absolute/path/to/my-claude-marketplace/py-helper-marketplace</code>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">To get the absolute path, open another terminal tab and run:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cd my-claude-marketplace/py-helper-marketplace && pwd</code>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Step 3 — Install and reload</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">/plugin install py-helper@py-helper-marketplace
+/reload-plugins</code>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">To confirm the plugin is installed, open the plugin panel:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text);">/plugin</code>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="6" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Verify
+  </a>
+  <a href="#" data-goto-tab="8" class="tutorial-nav-link">
+    Next: Test the Plugin <span>→</span>
+  </a>
+</div>
+`},{label:"8. Test",content:`
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Test Each Component]</strong>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">Now test all four parts of the plugin one by one inside Claude Code.</p>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Test 1 — Skill</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text);">can you review app.py?</code>
+<p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">Claude should auto-apply the <code style="color: var(--code-text);">py-review</code> skill.</p>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Test 2 — Command</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text);">/py-helper:py-fix</code>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Test 3 — Hook</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">ask Claude to add: password = "abc123" to app.py</code>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Test 4 — MCP GitHub Connection</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">/mcp
+
+show me the open issues in my GitHub repo</code>
+
+<div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 8px; margin: 1rem 0;">
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">If something is not working, the fastest fallback is usually <code style="color: var(--code-text);">/reload-plugins</code>.</p>
 </div>
 
-<div style="margin-top: 2rem;">
-  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 5 — Test and Install</strong>
-  <p style="margin-bottom:0.5rem;">Verify locally before sharing with the team:</p>
-  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.4;"># Test without installing:
-claude --plugin-dir ./my-python-toolkit
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="7" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Install
+  </a>
+  <a href="#" data-goto-tab="9" class="tutorial-nav-link">
+    Next: Share With Your Team <span>→</span>
+  </a>
+</div>
+`},{label:"9. Share",content:`
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Share With Your Team]</strong>
 
-# Install permanently:
-claude plugin add --path ./my-python-toolkit</code>
+<p style="margin-bottom:0.75rem; line-height:1.75;">Once the plugin works locally, you can publish the marketplace and share it with your team.</p>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Push the marketplace to GitHub</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cd my-claude-marketplace/py-helper-marketplace
+git init
+git add .
+git commit -m "Initial plugin"
+git remote add origin https://github.com/yourname/py-helper-marketplace.git
+git push -u origin main</code>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Teammates install it with two commands inside Claude Code</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">/plugin marketplace add github.com/yourname/py-helper-marketplace
+/plugin install py-helper@py-helper-marketplace</code>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Update later</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text);">/plugin marketplace update</code>
+
+<div style="padding: 1.25rem; background: rgba(0, 242, 255, 0.03); border: 1px solid var(--border-color); border-radius: 8px; margin: 1rem 0;">
+  <p style="margin: 0 0 0.75rem; font-weight: 600; color: var(--text-primary);">You are done</p>
+  <ul style="margin: 0 0 0 1.5rem; color: var(--text-secondary); line-height: 1.75;">
+    <li style="margin-bottom: 0.35rem;">A skill that auto-reviews Python code</li>
+    <li style="margin-bottom: 0.35rem;">A command that fixes style issues on demand</li>
+    <li style="margin-bottom: 0.35rem;">Hooks that guard every file save</li>
+    <li style="margin-bottom: 0;">An MCP connection to GitHub for issues and PRs</li>
+  </ul>
 </div>
 
-<div style="margin-top: 2rem;">
-  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 6 — Share via GitHub</strong>
-  <p style="margin-bottom:0.5rem;">Push your toolkit to a repository and let others install it in one command:</p>
-  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: monospace; color: var(--code-text); white-space: pre-wrap; line-height: 1.4;">cd my-python-toolkit && git init && git add . && git commit -m "Initial plugin"
-git remote add origin https://github.com/you/my-python-toolkit
-git push -u origin main
-
-# Teammates install with:
-/plugin install github.com/you/my-python-toolkit</code>
+<div style="margin-top: 2rem; display: flex; justify-content: flex-start; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="8" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Test
+  </a>
 </div>
-  `,interactiveType:"custom"},f=[U,G,N,q,j,F,_,O,D,R],s={isActive:!1,isLocked:!1,isMinimized:!1,timer:{duration:1500,remaining:1500,interval:null,isRunning:!1},stats:{streak:0,cardsToday:0,focusMinutes:0,lastStudyDate:null}},H={activeConcept:null,resetContentScroll(){const t=document.getElementById("content-area");t&&(t.scrollTop=0);const e=document.querySelector(".tutorial-tab-content");e&&(e.scrollTop=0)},init(){this.renderSidebar(),this.setupEventListeners(),this.initTheme(),this.initStudyMode(),this.initTechStackModal();const t=window.location.hash.substring(1);t&&f.some(e=>e.id===t)?this.selectConcept(t):this.renderWelcome(),M(document.getElementById("constellation-bg"))},renderWelcome(){document.getElementById("constellation-bg").style.display="";const t=this.getConceptOfTheDay(),e=document.getElementById("content-area");e.innerHTML=`
+`}],interactiveType:"custom"},f=[D,U,N,H,F,B,_,G,O,R],n={isActive:!1,isLocked:!1,isMinimized:!1,timer:{duration:1500,remaining:1500,interval:null,isRunning:!1},stats:{streak:0,cardsToday:0,focusMinutes:0,lastStudyDate:null}},q={activeConcept:null,resetContentScroll(){const t=document.getElementById("content-area");t&&(t.scrollTop=0);const e=document.querySelector(".tutorial-tab-content");e&&(e.scrollTop=0)},init(){this.renderSidebar(),this.setupEventListeners(),this.initTheme(),this.initStudyMode(),this.initTechStackModal();const t=window.location.hash.substring(1);t&&f.some(e=>e.id===t)?this.selectConcept(t):this.renderWelcome(),L(document.getElementById("constellation-bg"))},renderWelcome(){document.getElementById("constellation-bg").style.display="";const t=this.getConceptOfTheDay(),e=document.getElementById("content-area");e.innerHTML=`
       <div class="cotd-ticker">
         <span class="cotd-label">Skill of the Day</span>
         <div class="ticker-track">
@@ -1408,33 +1766,33 @@ git push -u origin main
         <h2>Welcome to Knowledge Lab</h2>
         <p>Select a tutorial from the sidebar to begin your interactive learning journey.</p>
       </div>
-    `,e.querySelector(".cotd-ticker").addEventListener("click",()=>{this.selectConcept(t.id)});const r=e.querySelector(".ticker-text"),a=e.querySelector(".ticker-track").offsetWidth;r.style.setProperty("--start-x",a+"px")},getConceptOfTheDay(){const t=Math.floor(Date.now()/864e5);return f[t%f.length]},initTheme(){localStorage.getItem("theme")==="light"&&(document.documentElement.classList.add("light-mode"),document.querySelector("#theme-toggle .icon").textContent="☀️"),localStorage.getItem("sidebar")==="collapsed"&&document.getElementById("app").classList.add("sidebar-collapsed")},renderSidebar(){const t=document.getElementById("concept-list");t.innerHTML=f.map(e=>`
+    `,e.querySelector(".cotd-ticker").addEventListener("click",()=>{this.selectConcept(t.id)});const o=e.querySelector(".ticker-text"),a=e.querySelector(".ticker-track").offsetWidth;o.style.setProperty("--start-x",a+"px")},getConceptOfTheDay(){const t=Math.floor(Date.now()/864e5);return f[t%f.length]},initTheme(){localStorage.getItem("theme")==="light"&&(document.documentElement.classList.add("light-mode"),document.querySelector("#theme-toggle .icon").textContent="☀️"),localStorage.getItem("sidebar")==="collapsed"&&document.getElementById("app").classList.add("sidebar-collapsed")},renderSidebar(){const t=document.getElementById("concept-list");t.innerHTML=f.map(e=>`
       <li class="nav-item" data-id="${e.id}">${e.title}</li>
-    `).join("")},isMobile(){return window.innerWidth<=640},closeMobileSidebar(){document.getElementById("app").classList.remove("sidebar-open")},setupEventListeners(){document.getElementById("concept-list").addEventListener("click",t=>{if(t.target.classList.contains("nav-item")){const e=t.target.dataset.id;this.isMobile()&&this.closeMobileSidebar(),this.selectConcept(e)}}),document.getElementById("sidebar-toggle").addEventListener("click",()=>{const t=document.getElementById("app");if(this.isMobile())t.classList.toggle("sidebar-open");else{const e=t.classList.toggle("sidebar-collapsed");localStorage.setItem("sidebar",e?"collapsed":"open")}}),document.getElementById("app").addEventListener("click",t=>{this.isMobile()&&t.target===document.getElementById("app")&&this.closeMobileSidebar()}),document.getElementById("theme-toggle").addEventListener("click",()=>{const t=document.documentElement.classList.toggle("light-mode"),e=document.querySelector("#theme-toggle .icon");e.textContent=t?"☀️":"🌙",localStorage.setItem("theme",t?"light":"dark")}),document.getElementById("home-link").addEventListener("click",()=>{this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(t=>t.classList.remove("active")),window.location.hash&&history.replaceState(null,"",window.location.pathname+window.location.search),this.isMobile()&&this.closeMobileSidebar(),this.renderWelcome()}),document.getElementById("concept-search").addEventListener("input",t=>{const e=t.target.value.toLowerCase();document.querySelectorAll(".nav-item").forEach(a=>{const o=a.textContent.toLowerCase();a.style.display=o.includes(e)?"block":"none"})}),window.addEventListener("hashchange",()=>{const t=window.location.hash.substring(1);t&&f.some(e=>e.id===t)?(!this.activeConcept||this.activeConcept.id!==t)&&this.selectConcept(t):t||(this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(e=>e.classList.remove("active")),this.renderWelcome())})},selectConcept(t){const e=f.find(a=>a.id===t);if(!e)return;window.location.hash!==`#${t}`&&(window.location.hash=t),document.getElementById("constellation-bg").style.display="none",this.activeConcept=e,document.querySelectorAll(".nav-item").forEach(a=>a.classList.remove("active"));const r=document.querySelector(`[data-id="${t}"]`);r&&r.classList.add("active"),this.renderConcept(e),this.resetContentScroll()},renderConcept(t){const e=document.getElementById("content-area");if(t.tabs&&t.tabs.length>0){const r=t.tabs.map((o,i)=>`<button class="tutorial-tab-btn${i===0?" active":""}" data-tab="${i}">${o.label}</button>`).join(""),a=t.tabs.map((o,i)=>`<div class="tutorial-tab-panel${i===0?" active":""}" data-panel="${i}">
+    `).join("")},isMobile(){return window.innerWidth<=640},closeMobileSidebar(){document.getElementById("app").classList.remove("sidebar-open")},setupEventListeners(){document.getElementById("concept-list").addEventListener("click",t=>{if(t.target.classList.contains("nav-item")){const e=t.target.dataset.id;this.isMobile()&&this.closeMobileSidebar(),this.selectConcept(e)}}),document.getElementById("sidebar-toggle").addEventListener("click",()=>{const t=document.getElementById("app");if(this.isMobile())t.classList.toggle("sidebar-open");else{const e=t.classList.toggle("sidebar-collapsed");localStorage.setItem("sidebar",e?"collapsed":"open")}}),document.getElementById("app").addEventListener("click",t=>{this.isMobile()&&t.target===document.getElementById("app")&&this.closeMobileSidebar()}),document.getElementById("theme-toggle").addEventListener("click",()=>{const t=document.documentElement.classList.toggle("light-mode"),e=document.querySelector("#theme-toggle .icon");e.textContent=t?"☀️":"🌙",localStorage.setItem("theme",t?"light":"dark")}),document.getElementById("home-link").addEventListener("click",()=>{this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(t=>t.classList.remove("active")),window.location.hash&&history.replaceState(null,"",window.location.pathname+window.location.search),this.isMobile()&&this.closeMobileSidebar(),this.renderWelcome()}),document.getElementById("concept-search").addEventListener("input",t=>{const e=t.target.value.toLowerCase();document.querySelectorAll(".nav-item").forEach(a=>{const r=a.textContent.toLowerCase();a.style.display=r.includes(e)?"block":"none"})}),window.addEventListener("hashchange",()=>{const t=window.location.hash.substring(1);t&&f.some(e=>e.id===t)?(!this.activeConcept||this.activeConcept.id!==t)&&this.selectConcept(t):t||(this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(e=>e.classList.remove("active")),this.renderWelcome())})},selectConcept(t){const e=f.find(a=>a.id===t);if(!e)return;window.location.hash!==`#${t}`&&(window.location.hash=t),document.getElementById("constellation-bg").style.display="none",this.activeConcept=e,document.querySelectorAll(".nav-item").forEach(a=>a.classList.remove("active"));const o=document.querySelector(`[data-id="${t}"]`);o&&o.classList.add("active"),this.renderConcept(e),this.resetContentScroll()},renderConcept(t){const e=document.getElementById("content-area");if(t.tabs&&t.tabs.length>0){const o=t.tabs.map((r,i)=>`<button class="tutorial-tab-btn${i===0?" active":""}" data-tab="${i}">${r.label}</button>`).join(""),a=t.tabs.map((r,i)=>`<div class="tutorial-tab-panel${i===0?" active":""}" data-panel="${i}">
           <div class="concept-content" id="concept-description-${i}">
-            ${o.content}
+            ${r.content}
           </div>
         </div>`).join("");e.innerHTML=`
         <article class="concept-card concept-card--tabs">
-          <nav class="tutorial-tabs" role="tablist">${r}</nav>
+          <nav class="tutorial-tabs" role="tablist">${o}</nav>
           <div class="tutorial-tab-content">${a}</div>
         </article>
-      `,this.initTabs(),t.tabs.forEach((o,i)=>{const d=document.getElementById(`concept-description-${i}`);d&&this.attachCopyButtonsTo(d)})}else{const r=t.description||"Add your description here...",a=r.trim().startsWith("<")?r:r.split(`
+      `,this.initTabs(),t.tabs.forEach((r,i)=>{const d=document.getElementById(`concept-description-${i}`);d&&this.attachCopyButtonsTo(d)})}else{const o=t.description||"Add your description here...",a=o.trim().startsWith("<")?o:o.split(`
 
-`).map(o=>`<p>${o}</p>`).join("");e.innerHTML=`
+`).map(r=>`<p>${r}</p>`).join("");e.innerHTML=`
         <article class="concept-card">
           <h2 class="concept-title">${t.title}</h2>
           ${t.category||t.tags&&t.tags.length>0?`
           <div class="concept-meta">
             ${t.category?`<span class="tag">${t.category}</span>`:""}
-            ${t.tags?t.tags.map(o=>`<span class="tag">${o}</span>`).join(""):""}
+            ${t.tags?t.tags.map(r=>`<span class="tag">${r}</span>`).join(""):""}
           </div>`:""}
           <div class="concept-content" id="concept-description">
             ${a}
           </div>
         </article>
-      `,this.attachCopyButtons()}},initTabs(){const t=document.querySelectorAll(".tutorial-tab-btn"),e=document.querySelectorAll(".tutorial-tab-panel"),r=a=>{t.forEach(o=>o.classList.remove("active")),e.forEach(o=>o.classList.remove("active")),t[a].classList.add("active"),e[a].classList.add("active"),t[a].scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"}),this.resetContentScroll()};t.forEach(a=>{a.addEventListener("click",()=>r(Number(a.dataset.tab)))}),document.querySelectorAll("[data-goto-tab]").forEach(a=>{a.addEventListener("click",o=>{o.preventDefault(),r(Number(a.dataset.gotoTab))})}),document.querySelectorAll("[data-goto-concept]").forEach(a=>{a.addEventListener("click",o=>{o.preventDefault(),typeof this.selectConcept=="function"&&this.selectConcept(a.dataset.gotoConcept)})})},attachCopyButtons(){const t=document.getElementById("concept-description");t&&this.attachCopyButtonsTo(t)},attachCopyButtonsTo(t){if(!t)return;t.querySelectorAll("code").forEach(r=>{if(!(r.style.display==="block"||r.textContent.includes(`
-`)))return;const o=document.createElement("div");o.className="code-wrapper",r.parentNode.insertBefore(o,r),o.appendChild(r);const i=document.createElement("button");i.className="copy-btn",i.setAttribute("title","Copy to clipboard");const d='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>',p='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';i.innerHTML=d,o.appendChild(i),i.addEventListener("click",()=>{const n=r.textContent.replace(/^❯\s+/,"");navigator.clipboard.writeText(n).then(()=>{i.innerHTML=p,i.classList.add("copied"),setTimeout(()=>{i.innerHTML=d,i.classList.remove("copied")},2e3)})})})},initTechStackModal(){const t=document.getElementById("tech-stack-btn"),e=document.getElementById("tech-stack-overlay"),r=document.getElementById("close-tech-stack"),a=document.getElementById("tech-stack-list");if(!t||!e||!r||!a)return;const o={...S.dependencies||{},...S.devDependencies||{}},i=[{name:"Vanilla JavaScript",desc:"Core application logic, ECMAScript modules, DOM manipulation, and dynamic rendering.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M14.5 9h-5l-.5-5h7l-.5 5zm-5 4h5l-.5 4.5-2 1.5-2-1.5-.2-2h2.2l.1 1.2 1 .8 1-.8.2-1.2h-3.8z"></path></svg>'},{name:"Vanilla CSS3 & HTML5",desc:"Custom glassmorphism styling, responsive grid layout, and semantic structure.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M15 9h-6l-.5-4h7.5l-.5 4zm-6 4h6l-.5 4.5-2.5 1.5-2.5-1.5-.2-2h2.2l.1 1.2 1.2.8 1.2-.8.2-1.2h-4.6z"></path></svg>'},{name:"HTML5 Canvas API",desc:"Custom performant animations including the Neural Constellation and Zen Flow backgrounds.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.268-.652-.053-.877.215-.225.542-.31 1.051-.31h2.438c2.66 0 4.853-2.192 4.853-4.853C21.5 6.756 17.244 2 12 2z"></path></svg>'}];o.vite&&i.push({name:"Vite ("+o.vite.replace(/[\^\~]/,"")+")",desc:"Next-generation frontend tooling providing ultra-fast builds and Hot Module Replacement.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>'}),i.push({name:"GitHub Pages",desc:"Automated CI/CD deployment via GitHub Actions pipeline using the deployed build.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>'}),a.innerHTML=i.map(c=>`
+      `,this.attachCopyButtons()}},initTabs(){const t=document.querySelectorAll(".tutorial-tab-btn"),e=document.querySelectorAll(".tutorial-tab-panel"),o=a=>{t.forEach(r=>r.classList.remove("active")),e.forEach(r=>r.classList.remove("active")),t[a].classList.add("active"),e[a].classList.add("active"),t[a].scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"}),this.resetContentScroll()};t.forEach(a=>{a.addEventListener("click",()=>o(Number(a.dataset.tab)))}),document.querySelectorAll("[data-goto-tab]").forEach(a=>{a.addEventListener("click",r=>{r.preventDefault(),o(Number(a.dataset.gotoTab))})}),document.querySelectorAll("[data-goto-concept]").forEach(a=>{a.addEventListener("click",r=>{r.preventDefault(),typeof this.selectConcept=="function"&&this.selectConcept(a.dataset.gotoConcept)})})},attachCopyButtons(){const t=document.getElementById("concept-description");t&&this.attachCopyButtonsTo(t)},attachCopyButtonsTo(t){if(!t)return;t.querySelectorAll("code").forEach(o=>{if(!(o.style.display==="block"||o.textContent.includes(`
+`)))return;const r=document.createElement("div");r.className="code-wrapper",o.parentNode.insertBefore(r,o),r.appendChild(o);const i=document.createElement("button");i.className="copy-btn",i.setAttribute("title","Copy to clipboard");const d='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>',p='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';i.innerHTML=d,r.appendChild(i),i.addEventListener("click",()=>{const s=o.textContent.replace(/^❯\s+/,"");navigator.clipboard.writeText(s).then(()=>{i.innerHTML=p,i.classList.add("copied"),setTimeout(()=>{i.innerHTML=d,i.classList.remove("copied")},2e3)})})})},initTechStackModal(){const t=document.getElementById("tech-stack-btn"),e=document.getElementById("tech-stack-overlay"),o=document.getElementById("close-tech-stack"),a=document.getElementById("tech-stack-list");if(!t||!e||!o||!a)return;const r={...S.dependencies||{},...S.devDependencies||{}},i=[{name:"Vanilla JavaScript",desc:"Core application logic, ECMAScript modules, DOM manipulation, and dynamic rendering.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M14.5 9h-5l-.5-5h7l-.5 5zm-5 4h5l-.5 4.5-2 1.5-2-1.5-.2-2h2.2l.1 1.2 1 .8 1-.8.2-1.2h-3.8z"></path></svg>'},{name:"Vanilla CSS3 & HTML5",desc:"Custom glassmorphism styling, responsive grid layout, and semantic structure.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M15 9h-6l-.5-4h7.5l-.5 4zm-6 4h6l-.5 4.5-2.5 1.5-2.5-1.5-.2-2h2.2l.1 1.2 1.2.8 1.2-.8.2-1.2h-4.6z"></path></svg>'},{name:"HTML5 Canvas API",desc:"Custom performant animations including the Neural Constellation and Zen Flow backgrounds.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.268-.652-.053-.877.215-.225.542-.31 1.051-.31h2.438c2.66 0 4.853-2.192 4.853-4.853C21.5 6.756 17.244 2 12 2z"></path></svg>'}];r.vite&&i.push({name:"Vite ("+r.vite.replace(/[\^\~]/,"")+")",desc:"Next-generation frontend tooling providing ultra-fast builds and Hot Module Replacement.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>'}),i.push({name:"GitHub Pages",desc:"Automated CI/CD deployment via GitHub Actions pipeline using the deployed build.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>'}),a.innerHTML=i.map(c=>`
       <li class="tech-stack-item">
         <div class="tech-stack-icon-wrapper">
           ${c.icon}
@@ -1444,4 +1802,4 @@ git push -u origin main
           <span class="tech-stack-desc">${c.desc}</span>
         </div>
       </li>
-    `).join("");const d=()=>{e.classList.remove("hidden"),e.offsetWidth,e.classList.add("active")},p=()=>{e.classList.remove("active"),setTimeout(()=>{e.classList.contains("active")||e.classList.add("hidden")},300)};t.addEventListener("click",d),r.addEventListener("click",p),e.addEventListener("click",c=>{c.target===e&&p()})},initStudyMode(){this.loadStudyStats(),this.updateStudyMetrics(),this.initZenFlow(),document.getElementById("study-mode-btn").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("exit-study").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("timer-toggle").addEventListener("click",()=>{this.toggleTimer()}),document.getElementById("timer-reset").addEventListener("click",()=>{this.resetTimer()}),document.querySelectorAll(".preset-btn").forEach(t=>{t.addEventListener("click",e=>{const r=parseInt(e.target.dataset.time);this.setTimerDuration(r)})}),document.getElementById("minimize-study").addEventListener("click",()=>{this.minimizeStudy()}),document.getElementById("expand-study").addEventListener("click",()=>{this.expandStudy()}),document.getElementById("mini-stop-btn").addEventListener("click",()=>{this.expandStudy(),this.toggleStudyMode()}),document.getElementById("lock-screen-btn").addEventListener("click",()=>{this.lockScreen()}),document.getElementById("unlock-screen-btn").addEventListener("click",()=>{this.unlockScreen()})},loadStudyStats(){const t=localStorage.getItem("studyStats");t&&(s.stats=JSON.parse(t),this.updateStreak())},saveStudyStats(){localStorage.setItem("studyStats",JSON.stringify(s.stats))},updateStreak(){const t=new Date().toDateString(),e=s.stats.lastStudyDate;if(e){const r=new Date(e),a=new Date;a.setDate(a.getDate()-1),r.toDateString()===a.toDateString()||r.toDateString()!==t&&(s.stats.streak=0)}},updateStudyMetrics(){const t=document.getElementById("study-streak"),e=document.getElementById("study-cards"),r=document.getElementById("study-minutes");t&&(t.textContent=s.stats.streak),e&&(e.textContent=s.stats.cardsToday),r&&(r.textContent=s.stats.focusMinutes)},toggleStudyMode(){s.isActive=!s.isActive;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");if(s.isActive){if(s.isMinimized){this.expandStudy();return}t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1",this.updateStreak(),this.saveStudyStats()}else this.expandStudy(),t.classList.remove("active"),e.style.opacity="0",this.resetTimer(),setTimeout(()=>{t.classList.add("hidden")},500)},setTimerDuration(t){s.timer.duration=t*60,s.timer.remaining=t*60,document.querySelectorAll(".preset-btn").forEach(e=>{e.classList.toggle("active",parseInt(e.dataset.time)===t)}),this.updateTimerDisplay()},toggleTimer(){s.timer.isRunning?this.pauseTimer():this.startTimer()},startTimer(){s.timer.isRunning=!0,document.getElementById("timer-toggle").textContent="Pause",document.querySelector(".timer-wrapper").classList.add("active"),document.getElementById("lock-screen-btn").classList.remove("hidden"),s.timer.interval=setInterval(()=>{s.timer.remaining--,this.updateTimerDisplay(),s.timer.remaining<=0&&this.completeTimer()},1e3)},pauseTimer(){s.timer.isRunning=!1,document.getElementById("timer-toggle").textContent="Resume",document.querySelector(".timer-wrapper").classList.remove("active"),document.getElementById("lock-screen-btn").classList.add("hidden"),clearInterval(s.timer.interval),s.isLocked&&this.unlockScreen()},resetTimer(){this.pauseTimer(),s.timer.remaining=s.timer.duration,document.getElementById("timer-toggle").textContent="Start Focus",document.getElementById("timer-status").textContent="Ready to focus",document.getElementById("lock-screen-btn").classList.add("hidden"),this.updateTimerDisplay()},completeTimer(){this.pauseTimer(),document.getElementById("timer-status").textContent="Focus complete! Great work!",s.stats.focusMinutes+=Math.floor(s.timer.duration/60),this.updateStreakDate(),this.saveStudyStats(),this.updateStudyMetrics(),"Notification"in window&&Notification.permission==="granted"&&new Notification("Focus Session Complete",{body:"Great job! Take a break.",icon:"/vite.svg"})},updateTimerDisplay(){const t=Math.floor(s.timer.remaining/60),e=s.timer.remaining%60,r=`${t.toString().padStart(2,"0")}:${e.toString().padStart(2,"0")}`;document.getElementById("timer-minutes").textContent=t.toString().padStart(2,"0"),document.getElementById("timer-seconds").textContent=e.toString().padStart(2,"0"),document.getElementById("mini-timer-display").textContent=r;const a=s.timer.remaining/s.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${a}%`;const o=s.timer.remaining/s.timer.duration,d=2*Math.PI*130*(1-o);document.getElementById("timer-progress").style.strokeDashoffset=d,s.timer.isRunning?document.getElementById("timer-status").textContent="Stay focused...":document.getElementById("timer-status").textContent="Ready to focus"},minimizeStudy(){s.isMinimized=!0;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("active"),e.style.opacity="0",setTimeout(()=>t.classList.add("hidden"),500),document.getElementById("mini-timer").classList.remove("hidden");const r=Math.floor(s.timer.remaining/60),a=s.timer.remaining%60;document.getElementById("mini-timer-display").textContent=`${r.toString().padStart(2,"0")}:${a.toString().padStart(2,"0")}`;const o=s.timer.remaining/s.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${o}%`},expandStudy(){if(s.isMinimized=!1,document.getElementById("mini-timer").classList.add("hidden"),s.isActive){const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1"}},lockScreen(){s.isLocked=!0,document.getElementById("study-mode-overlay").classList.add("study-locked"),document.getElementById("unlock-screen-overlay").classList.remove("hidden")},unlockScreen(){s.isLocked=!1,document.getElementById("study-mode-overlay").classList.remove("study-locked"),document.getElementById("unlock-screen-overlay").classList.add("hidden")},updateStreakDate(){const t=new Date().toDateString(),e=s.stats.lastStudyDate;if(e!==t){const r=new Date;r.setDate(r.getDate()-1),e===r.toDateString()?s.stats.streak++:s.stats.streak=1,s.stats.lastStudyDate=t}},initZenFlow(){const t=document.getElementById("zen-flow-canvas"),e=t.getContext("2d");let r,a,o=[];const i=()=>{r=t.width=window.innerWidth,a=t.height=window.innerHeight,d()},d=()=>{o=[];const c=30;for(let n=0;n<c;n++)o.push({x:Math.random()*r,y:Math.random()*a,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,radius:Math.random()*80+40,hue:Math.random()*60+170,alpha:Math.random()*.1+.05,pulse:Math.random()*Math.PI*2})},p=()=>{if(!s.isActive){requestAnimationFrame(p);return}e.clearRect(0,0,r,a);const c=document.documentElement.classList.contains("light-mode");if(o.forEach(n=>{n.x+=n.vx,n.y+=n.vy,n.x<-n.radius&&(n.x=r+n.radius),n.x>r+n.radius&&(n.x=-n.radius),n.y<-n.radius&&(n.y=a+n.radius),n.y>a+n.radius&&(n.y=-n.radius),n.pulse+=.02;const u=e.createRadialGradient(n.x,n.y,0,n.x,n.y,n.radius),b=n.radius*(1+Math.sin(n.pulse)*.1);c?(u.addColorStop(0,`hsla(40, 30%, 70%, ${n.alpha*.5})`),u.addColorStop(.5,`hsla(40, 20%, 80%, ${n.alpha*.2})`),u.addColorStop(1,"transparent")):(u.addColorStop(0,`hsla(${n.hue}, 70%, 50%, ${n.alpha})`),u.addColorStop(.5,`hsla(${n.hue}, 70%, 50%, ${n.alpha*.3})`),u.addColorStop(1,"transparent")),e.beginPath(),e.arc(n.x,n.y,b,0,Math.PI*2),e.fillStyle=u,e.fill()}),s.timer.isRunning){const n=Date.now()/1e3,u=150+Math.sin(n*.5)*20,b=e.createRadialGradient(r/2,a/2,0,r/2,a/2,u);c?(b.addColorStop(0,"hsla(40, 30%, 75%, 0.05)"),b.addColorStop(1,"transparent")):(b.addColorStop(0,"hsla(180, 70%, 50%, 0.03)"),b.addColorStop(1,"transparent")),e.beginPath(),e.arc(r/2,a/2,u,0,Math.PI*2),e.fillStyle=b,e.fill()}requestAnimationFrame(p)};window.addEventListener("resize",i),i(),p()}};document.addEventListener("DOMContentLoaded",()=>H.init());
+    `).join("");const d=()=>{e.classList.remove("hidden"),e.offsetWidth,e.classList.add("active")},p=()=>{e.classList.remove("active"),setTimeout(()=>{e.classList.contains("active")||e.classList.add("hidden")},300)};t.addEventListener("click",d),o.addEventListener("click",p),e.addEventListener("click",c=>{c.target===e&&p()})},initStudyMode(){this.loadStudyStats(),this.updateStudyMetrics(),this.initZenFlow(),document.getElementById("study-mode-btn").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("exit-study").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("timer-toggle").addEventListener("click",()=>{this.toggleTimer()}),document.getElementById("timer-reset").addEventListener("click",()=>{this.resetTimer()}),document.querySelectorAll(".preset-btn").forEach(t=>{t.addEventListener("click",e=>{const o=parseInt(e.target.dataset.time);this.setTimerDuration(o)})}),document.getElementById("minimize-study").addEventListener("click",()=>{this.minimizeStudy()}),document.getElementById("expand-study").addEventListener("click",()=>{this.expandStudy()}),document.getElementById("mini-stop-btn").addEventListener("click",()=>{this.expandStudy(),this.toggleStudyMode()}),document.getElementById("lock-screen-btn").addEventListener("click",()=>{this.lockScreen()}),document.getElementById("unlock-screen-btn").addEventListener("click",()=>{this.unlockScreen()})},loadStudyStats(){const t=localStorage.getItem("studyStats");t&&(n.stats=JSON.parse(t),this.updateStreak())},saveStudyStats(){localStorage.setItem("studyStats",JSON.stringify(n.stats))},updateStreak(){const t=new Date().toDateString(),e=n.stats.lastStudyDate;if(e){const o=new Date(e),a=new Date;a.setDate(a.getDate()-1),o.toDateString()===a.toDateString()||o.toDateString()!==t&&(n.stats.streak=0)}},updateStudyMetrics(){const t=document.getElementById("study-streak"),e=document.getElementById("study-cards"),o=document.getElementById("study-minutes");t&&(t.textContent=n.stats.streak),e&&(e.textContent=n.stats.cardsToday),o&&(o.textContent=n.stats.focusMinutes)},toggleStudyMode(){n.isActive=!n.isActive;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");if(n.isActive){if(n.isMinimized){this.expandStudy();return}t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1",this.updateStreak(),this.saveStudyStats()}else this.expandStudy(),t.classList.remove("active"),e.style.opacity="0",this.resetTimer(),setTimeout(()=>{t.classList.add("hidden")},500)},setTimerDuration(t){n.timer.duration=t*60,n.timer.remaining=t*60,document.querySelectorAll(".preset-btn").forEach(e=>{e.classList.toggle("active",parseInt(e.dataset.time)===t)}),this.updateTimerDisplay()},toggleTimer(){n.timer.isRunning?this.pauseTimer():this.startTimer()},startTimer(){n.timer.isRunning=!0,document.getElementById("timer-toggle").textContent="Pause",document.querySelector(".timer-wrapper").classList.add("active"),document.getElementById("lock-screen-btn").classList.remove("hidden"),n.timer.interval=setInterval(()=>{n.timer.remaining--,this.updateTimerDisplay(),n.timer.remaining<=0&&this.completeTimer()},1e3)},pauseTimer(){n.timer.isRunning=!1,document.getElementById("timer-toggle").textContent="Resume",document.querySelector(".timer-wrapper").classList.remove("active"),document.getElementById("lock-screen-btn").classList.add("hidden"),clearInterval(n.timer.interval),n.isLocked&&this.unlockScreen()},resetTimer(){this.pauseTimer(),n.timer.remaining=n.timer.duration,document.getElementById("timer-toggle").textContent="Start Focus",document.getElementById("timer-status").textContent="Ready to focus",document.getElementById("lock-screen-btn").classList.add("hidden"),this.updateTimerDisplay()},completeTimer(){this.pauseTimer(),document.getElementById("timer-status").textContent="Focus complete! Great work!",n.stats.focusMinutes+=Math.floor(n.timer.duration/60),this.updateStreakDate(),this.saveStudyStats(),this.updateStudyMetrics(),"Notification"in window&&Notification.permission==="granted"&&new Notification("Focus Session Complete",{body:"Great job! Take a break.",icon:"/vite.svg"})},updateTimerDisplay(){const t=Math.floor(n.timer.remaining/60),e=n.timer.remaining%60,o=`${t.toString().padStart(2,"0")}:${e.toString().padStart(2,"0")}`;document.getElementById("timer-minutes").textContent=t.toString().padStart(2,"0"),document.getElementById("timer-seconds").textContent=e.toString().padStart(2,"0"),document.getElementById("mini-timer-display").textContent=o;const a=n.timer.remaining/n.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${a}%`;const r=n.timer.remaining/n.timer.duration,d=2*Math.PI*130*(1-r);document.getElementById("timer-progress").style.strokeDashoffset=d,n.timer.isRunning?document.getElementById("timer-status").textContent="Stay focused...":document.getElementById("timer-status").textContent="Ready to focus"},minimizeStudy(){n.isMinimized=!0;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("active"),e.style.opacity="0",setTimeout(()=>t.classList.add("hidden"),500),document.getElementById("mini-timer").classList.remove("hidden");const o=Math.floor(n.timer.remaining/60),a=n.timer.remaining%60;document.getElementById("mini-timer-display").textContent=`${o.toString().padStart(2,"0")}:${a.toString().padStart(2,"0")}`;const r=n.timer.remaining/n.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${r}%`},expandStudy(){if(n.isMinimized=!1,document.getElementById("mini-timer").classList.add("hidden"),n.isActive){const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1"}},lockScreen(){n.isLocked=!0,document.getElementById("study-mode-overlay").classList.add("study-locked"),document.getElementById("unlock-screen-overlay").classList.remove("hidden")},unlockScreen(){n.isLocked=!1,document.getElementById("study-mode-overlay").classList.remove("study-locked"),document.getElementById("unlock-screen-overlay").classList.add("hidden")},updateStreakDate(){const t=new Date().toDateString(),e=n.stats.lastStudyDate;if(e!==t){const o=new Date;o.setDate(o.getDate()-1),e===o.toDateString()?n.stats.streak++:n.stats.streak=1,n.stats.lastStudyDate=t}},initZenFlow(){const t=document.getElementById("zen-flow-canvas"),e=t.getContext("2d");let o,a,r=[];const i=()=>{o=t.width=window.innerWidth,a=t.height=window.innerHeight,d()},d=()=>{r=[];const c=30;for(let s=0;s<c;s++)r.push({x:Math.random()*o,y:Math.random()*a,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,radius:Math.random()*80+40,hue:Math.random()*60+170,alpha:Math.random()*.1+.05,pulse:Math.random()*Math.PI*2})},p=()=>{if(!n.isActive){requestAnimationFrame(p);return}e.clearRect(0,0,o,a);const c=document.documentElement.classList.contains("light-mode");if(r.forEach(s=>{s.x+=s.vx,s.y+=s.vy,s.x<-s.radius&&(s.x=o+s.radius),s.x>o+s.radius&&(s.x=-s.radius),s.y<-s.radius&&(s.y=a+s.radius),s.y>a+s.radius&&(s.y=-s.radius),s.pulse+=.02;const u=e.createRadialGradient(s.x,s.y,0,s.x,s.y,s.radius),b=s.radius*(1+Math.sin(s.pulse)*.1);c?(u.addColorStop(0,`hsla(40, 30%, 70%, ${s.alpha*.5})`),u.addColorStop(.5,`hsla(40, 20%, 80%, ${s.alpha*.2})`),u.addColorStop(1,"transparent")):(u.addColorStop(0,`hsla(${s.hue}, 70%, 50%, ${s.alpha})`),u.addColorStop(.5,`hsla(${s.hue}, 70%, 50%, ${s.alpha*.3})`),u.addColorStop(1,"transparent")),e.beginPath(),e.arc(s.x,s.y,b,0,Math.PI*2),e.fillStyle=u,e.fill()}),n.timer.isRunning){const s=Date.now()/1e3,u=150+Math.sin(s*.5)*20,b=e.createRadialGradient(o/2,a/2,0,o/2,a/2,u);c?(b.addColorStop(0,"hsla(40, 30%, 75%, 0.05)"),b.addColorStop(1,"transparent")):(b.addColorStop(0,"hsla(180, 70%, 50%, 0.03)"),b.addColorStop(1,"transparent")),e.beginPath(),e.arc(o/2,a/2,u,0,Math.PI*2),e.fillStyle=b,e.fill()}requestAnimationFrame(p)};window.addEventListener("resize",i),i(),p()}};document.addEventListener("DOMContentLoaded",()=>q.init());
