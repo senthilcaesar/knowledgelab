@@ -166,6 +166,31 @@
           filter 180ms ease;
       }
 
+      .node-root {
+        --title: #3a2d22;
+        --subtitle: #6b5846;
+        background:
+          radial-gradient(circle at 16% 18%, rgba(255, 255, 255, 0.48), transparent 30%),
+          radial-gradient(circle at 84% 14%, rgba(255, 248, 224, 0.3), transparent 34%),
+          radial-gradient(circle at 52% 100%, rgba(220, 228, 255, 0.16), transparent 42%),
+          linear-gradient(
+            180deg,
+            rgba(246, 243, 236, 0.98) 0%,
+            rgba(228, 222, 212, 0.97) 100%
+          );
+        border-color: rgba(255, 255, 255, 0.52);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.45),
+          0 22px 38px rgba(0, 0, 0, 0.22),
+          0 0 0 1px rgba(255, 255, 255, 0.12),
+          0 0 26px rgba(255, 255, 255, 0.1);
+      }
+
+      .node-root .node-meta {
+        background: rgba(58, 45, 34, 0.12);
+        color: #4e3c2f;
+      }
+
       .node button {
         all: unset;
         display: block;
@@ -297,7 +322,7 @@
           </svg>
 
           <div class="node-layer">
-            <article class="node active" data-node="root" style="--accent:#5f5d57; --title:#f1ede6; --subtitle:#d2cbc0; top: 24px; left: 540px;">
+            <article class="node node-root active" data-node="root" style="--accent:#5f5d57; top: 24px; left: 540px;">
               <button type="button" aria-pressed="true">
                 <span class="node-title">What do you need?</span>
                 <span class="node-subtitle">Start here and choose the best path</span>
