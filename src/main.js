@@ -64,6 +64,7 @@ const app = {
     document.getElementById('constellation-bg').style.display = '';
     const cotd = this.getConceptOfTheDay();
     const contentArea = document.getElementById('content-area');
+    contentArea.classList.remove('content-area--tabbed');
     contentArea.innerHTML = `
       <div class="cotd-ticker">
         <span class="cotd-label">Skill of the Day</span>
@@ -232,6 +233,7 @@ const app = {
     const contentArea = document.getElementById('content-area');
 
     if (concept.tabs && concept.tabs.length > 0) {
+      contentArea.classList.add('content-area--tabbed');
       // Render tabbed interface
       const tabButtons = concept.tabs
         .map(
@@ -265,6 +267,7 @@ const app = {
         if (el) this.attachCopyButtonsTo(el);
       });
     } else {
+      contentArea.classList.remove('content-area--tabbed');
       const content = concept.description || 'Add your description here...';
       const formattedContent = content.trim().startsWith('<') 
         ? content 

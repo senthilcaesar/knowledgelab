@@ -288,11 +288,8 @@ h1, h2, h3 {
   box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
 }
 
-.content-area {
-  flex: 1;
-  padding: 1rem 0.75rem;
-  overflow-y: auto;
-  min-height: 0;
+.content-area--tabbed {
+  overflow: hidden;
 }
 
 
@@ -1850,7 +1847,8 @@ h1, h2, h3 {
 /*
  * The card itself clips its own rounded corners (overflow:hidden).
  * It stretches to fill the content-area column via align-self:stretch.
- * Only .tutorial-tab-content scrolls — the tab bar stays pinned at the top.
+ * In tabbed tutorials, the inner panel owns vertical scrolling so the app does
+ * not show both an outer content scroll and an inner tutorial scroll at once.
  */
 .concept-card--tabs {
   padding: 0;
@@ -1858,7 +1856,7 @@ h1, h2, h3 {
   display: flex;
   flex-direction: column;
   align-self: stretch;
-  max-height: calc(100vh - 8rem);
+  height: 100%;
   border: 1px solid rgba(255, 255, 255, 0.04);  /* near-invisible in dark mode */
 }
 
@@ -1915,22 +1913,26 @@ h1, h2, h3 {
   border-bottom-color: rgba(0, 242, 255, 0.06);
 }
 
-/* ── Scrollable content panel ── */
+/* ── Content panel ── */
+.content-area,
 .tutorial-tab-content {
   flex: 1;
-  overflow-y: auto;             /* ← the only thing that scrolls */
+  overflow-y: auto;
   padding: 1.75rem 1.75rem 4rem; /* extra bottom room so last content can scroll into view */
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: var(--border-color) transparent;
 }
 
+.content-area::-webkit-scrollbar,
 .tutorial-tab-content::-webkit-scrollbar {
   width: 4px;
 }
+.content-area::-webkit-scrollbar-track,
 .tutorial-tab-content::-webkit-scrollbar-track {
   background: transparent;
 }
+.content-area::-webkit-scrollbar-thumb,
 .tutorial-tab-content::-webkit-scrollbar-thumb {
   background: var(--border-color);
   border-radius: 4px;
@@ -2033,10 +2035,6 @@ h1, h2, h3 {
 
 /* ── Tablet (641 – 1024px) ── */
 @media (min-width: 641px) and (max-width: 1024px) {
-  .concept-card--tabs {
-    max-height: calc(100vh - 7rem);
-  }
-
   .tutorial-tabs {
     padding: 1rem 1.25rem 0;
   }
@@ -2046,6 +2044,7 @@ h1, h2, h3 {
     padding: 0.55rem 1rem;
   }
 
+  .content-area,
   .tutorial-tab-content {
     padding: 1.5rem 1.25rem;
   }
@@ -2054,7 +2053,6 @@ h1, h2, h3 {
 /* ── Mobile (≤ 640px) ── */
 @media (max-width: 640px) {
   .concept-card--tabs {
-    max-height: calc(100vh - 5rem); /* top-bar is 60px on mobile */
     border-radius: 16px;
   }
 
@@ -2070,6 +2068,7 @@ h1, h2, h3 {
     align-items: center;
   }
 
+  .content-area,
   .tutorial-tab-content {
     padding: 1rem 0.875rem;
   }
@@ -2079,6 +2078,3 @@ h1, h2, h3 {
     line-height: 1.65;
   }
 }
-
-
-

@@ -240,6 +240,56 @@
         letter-spacing: 0.01em;
       }
 
+      .note-panel {
+        position: fixed;
+        right: 24px;
+        bottom: 24px;
+        width: min(420px, calc(100vw - 32px));
+        padding: 18px 20px;
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(26, 24, 22, 0.94);
+        color: rgba(255, 248, 239, 0.96);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.34);
+        backdrop-filter: blur(14px);
+        z-index: 2500;
+      }
+
+      .note-panel.is-hidden {
+        display: none;
+      }
+
+      .note-panel-title {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 1rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #f6e4b7;
+      }
+
+      .note-panel-heading {
+        display: block;
+        margin-bottom: 10px;
+        font-family: "Shantell Sans", cursive;
+        font-size: 1.5rem;
+        line-height: 1.05;
+        color: #fff3d4;
+      }
+
+      .note-panel p {
+        margin: 0;
+        font-size: 1.12rem;
+        line-height: 1.6;
+      }
+
+      .note-panel code {
+        font-family: "SFMono-Regular", "Consolas", monospace;
+        font-size: 1rem;
+        color: #ffdca0;
+      }
+
       @media (max-width: 1024px) {
         .chart-shell,
         .chart-grid {
@@ -255,6 +305,23 @@
           width: 44px;
           height: 44px;
           border-radius: 12px;
+        }
+
+        .note-panel {
+          right: 12px;
+          left: 12px;
+          bottom: 12px;
+          width: auto;
+          padding: 16px;
+        }
+
+        .note-panel-heading {
+          font-size: 1.3rem;
+        }
+
+        .note-panel p,
+        .note-panel code {
+          font-size: 1rem;
         }
       }
 
@@ -326,97 +393,114 @@
               <button type="button" aria-pressed="true">
                 <span class="node-title">What do you need?</span>
                 <span class="node-subtitle">Start here and choose the best path</span>
-                <span class="node-meta">Primary decision</span>
               </button>
             </article>
 
             <article class="node" data-node="access" style="--accent:#16528f; --title:#b9d8ff; --subtitle:#87b5ef; top: 280px; left: 20px;">
               <button type="button" aria-pressed="false">
                 <span class="node-title">Connect to external tools and data sources</span>
-                <span class="node-subtitle">DB, API, GitHub, Slack</span>
-                <span class="node-meta">Integration route</span>
+                <span class="node-subtitle">Stitch, Supadata, GitHub</span>
               </button>
             </article>
 
             <article class="node" data-node="repeat" style="--accent:#0b745f; --title:#a6e5d2; --subtitle:#62cea8; top: 280px; left: 540px;">
               <button type="button" aria-pressed="false">
                 <span class="node-title">Repeatable Workflows</span>
-                <span class="node-subtitle">same steps, every time</span>
-                <span class="node-meta">Process route</span>
+                <span class="node-subtitle">Define once, run every time</span>
               </button>
             </article>
 
             <article class="node" data-node="rules" style="--accent:#8a5204; --title:#ffd089; --subtitle:#ffab21; top: 280px; left: 1100px;">
               <button type="button" aria-pressed="false">
                 <span class="node-title">Enforce rules</span>
-                <span class="node-subtitle">lint, block, notify</span>
-                <span class="node-meta">Guardrail route</span>
+                <span class="node-subtitle">Validate, restrict, alert</span>
               </button>
             </article>
 
-            <article class="node" data-node="mcp" style="--accent:#18518b; --title:#b7d6ff; --subtitle:#8cb7ef; top: 580px; left: 20px;">
+            <article class="node has-note" data-node="mcp" style="--accent:#18518b; --title:#b7d6ff; --subtitle:#8cb7ef; top: 580px; left: 20px;">
               <button type="button" aria-pressed="false">
                 <span class="node-title">Use MCP</span>
-                <span class="node-subtitle">claude mcp add ...</span>
-                <span class="node-meta">Tooling choice</span>
+                <span class="node-subtitle">Plug in external capabilities</span>
               </button>
             </article>
 
-            <article class="node" data-node="skills" style="--accent:#0b6d5c; --title:#a5e3d2; --subtitle:#65cfab; top: 580px; left: 540px;">
+            <article class="node has-note" data-node="skills" style="--accent:#0b6d5c; --title:#a5e3d2; --subtitle:#65cfab; top: 580px; left: 540px;">
               <button type="button" aria-pressed="false">
                 <span class="node-title">Use Skills</span>
-                <span class="node-subtitle">SKILL.md + /command</span>
-                <span class="node-meta">Reusable guidance</span>
+                <span class="node-subtitle">Reusable expertise, on demand</span>
               </button>
             </article>
 
-            <article class="node" data-node="hooks" style="--accent:#8a5304; --title:#ffd191; --subtitle:#ffaf27; top: 580px; left: 1100px;">
+            <article class="node has-note" data-node="hooks" style="--accent:#8a5304; --title:#ffd191; --subtitle:#ffaf27; top: 580px; left: 1100px;">
               <button type="button" aria-pressed="false">
                 <span class="node-title">Use Hooks</span>
-                <span class="node-subtitle">settings.json events</span>
-                <span class="node-meta">Automation events</span>
+                <span class="node-subtitle">Trigger actions on events</span>
               </button>
             </article>
 
             <article class="node" data-node="subtask" style="--accent:#973b16; --title:#ffc7ad; --subtitle:#eea17f; top: 820px; left: 280px;">
               <button type="button" aria-pressed="false">
                 <span class="node-title">Delegate a subtask</span>
-                <span class="node-subtitle">heavy/isolated work</span>
-                <span class="node-meta">Focused delegation</span>
+                <span class="node-subtitle">Isolated task, Scoped work, Independent run</span>
               </button>
             </article>
 
             <article class="node" data-node="parallel" style="--accent:#8d2856; --title:#f7b5d1; --subtitle:#ef90ba; top: 820px; left: 840px;">
               <button type="button" aria-pressed="false">
                 <span class="node-title">Parallel teamwork</span>
-                <span class="node-subtitle">agents cross-checking</span>
-                <span class="node-meta">Multi-agent path</span>
+                <span class="node-subtitle">Concurrent tasks, merged results, Agents working side by side</span>
               </button>
             </article>
 
-            <article class="node" data-node="subagents" style="--accent:#963b16; --title:#ffc7ad; --subtitle:#eea17f; top: 1170px; left: 280px;">
+            <article class="node has-note" data-node="subagents" style="--accent:#963b16; --title:#ffc7ad; --subtitle:#eea17f; top: 1170px; left: 280px;">
               <button type="button" aria-pressed="false">
                 <span class="node-title">Use Subagents</span>
                 <span class="node-subtitle">~/.claude/agents/</span>
-                <span class="node-meta">Delegation output</span>
               </button>
             </article>
 
-            <article class="node" data-node="agentTeams" style="--accent:#8a2b56; --title:#f8b8d3; --subtitle:#ef96bf; top: 1170px; left: 840px;">
+            <article class="node has-note" data-node="agentTeams" style="--accent:#8a2b56; --title:#f8b8d3; --subtitle:#ef96bf; top: 1170px; left: 840px;">
               <button type="button" aria-pressed="false">
                 <span class="node-title">Use Agent teams</span>
-                <span class="node-subtitle">Experimental flag</span>
-                <span class="node-meta">Team orchestration</span>
+                <span class="node-subtitle">Team Orchestration</span>
               </button>
             </article>
 
           </div>
           </div>
         </div>
+        <aside class="note-panel is-hidden" id="notePanel" aria-live="polite">
+          <span class="note-panel-title">Quick Note</span>
+          <span class="note-panel-heading" id="notePanelHeading"></span>
+          <p id="notePanelBody"></p>
+        </aside>
       </section>
     </main>
 
     <script>
+      const noteContent = {
+        mcp: {
+          heading: "Use MCP",
+          body: "MCP connects Claude Code to external tools, databases, and APIs. Add a server with <code>claude mcp add ...</code>, then ask Claude to use it for tasks like GitHub, PostgreSQL, or monitoring workflows."
+        },
+        skills: {
+          heading: "Use Skills",
+          body: "Skills live in <code>SKILL.md</code> and can load automatically when relevant or run directly with <code>/skill-name</code>. Use them to package repeatable workflows, reference files, and helper scripts."
+        },
+        hooks: {
+          heading: "Use Hooks",
+          body: "Hooks run automatically at lifecycle events such as <code>PreToolUse</code>, <code>PostToolUse</code>, and <code>Stop</code>. They are great for linting, blocking risky commands, notifications, and verification steps in <code>settings.json</code>."
+        },
+        subagents: {
+          heading: "Use Subagents",
+          body: "Subagents are specialized assistants with their own context window, tools, and permissions. Create or manage them with <code>/agents</code>, or store reusable ones in <code>~/.claude/agents/</code> for focused tasks like code review or debugging."
+        },
+        agentTeams: {
+          heading: "Use Agent Teams",
+          body: "Agent teams are experimental and coordinate multiple Claude Code sessions with a lead plus teammates. Enable <code>CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1</code>, then ask Claude to create a team for parallel work such as UX, architecture, and review."
+        }
+      };
+
       const edgesByNode = {
         root: ["root-access", "root-repeat-mid", "root-rules", "root-subtask", "root-parallel"],
         access: ["root-access", "access-mcp"],
@@ -433,8 +517,25 @@
 
       const nodes = Array.from(document.querySelectorAll(".node"));
       const lines = Array.from(document.querySelectorAll(".line"));
+      const notePanel = document.getElementById("notePanel");
+      const notePanelHeading = document.getElementById("notePanelHeading");
+      const notePanelBody = document.getElementById("notePanelBody");
       const CHART_WIDTH = 1480;
       const CHART_HEIGHT = 1460;
+
+      function renderNote(key) {
+        const note = noteContent[key];
+        if (!note) {
+          notePanel.classList.add("is-hidden");
+          notePanelHeading.textContent = "";
+          notePanelBody.innerHTML = "";
+          return;
+        }
+
+        notePanelHeading.textContent = note.heading;
+        notePanelBody.innerHTML = note.body;
+        notePanel.classList.remove("is-hidden");
+      }
 
       function renderDetails(key) {
         const activeEdges = new Set(edgesByNode[key] || []);
@@ -448,6 +549,8 @@
         lines.forEach((line) => {
           line.classList.toggle("active", activeEdges.has(line.dataset.edge));
         });
+
+        renderNote(key);
       }
 
       nodes.forEach((node) => {
