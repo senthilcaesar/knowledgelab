@@ -33,8 +33,8 @@
 
 :root.light-mode #app {
   background-image: 
-    radial-gradient(circle at 10% 10%, rgba(176, 141, 87, 0.1) 0%, transparent 40%),
-    radial-gradient(circle at 90% 90%, rgba(110, 91, 75, 0.1) 0%, transparent 40%);
+    radial-gradient(circle at 10% 10%, rgba(176, 141, 87, 0.22) 0%, rgba(176, 141, 87, 0.09) 18%, transparent 32%),
+    radial-gradient(circle at 90% 90%, rgba(125, 107, 93, 0.22) 0%, rgba(125, 107, 93, 0.09) 18%, transparent 32%);
 }
 
 :root.light-mode .sidebar {
