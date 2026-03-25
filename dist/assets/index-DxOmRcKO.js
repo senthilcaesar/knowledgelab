@@ -1,4 +1,4 @@
-(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const r of document.querySelectorAll('link[rel="modulepreload"]'))a(r);new MutationObserver(r=>{for(const i of r)if(i.type==="childList")for(const d of i.addedNodes)d.tagName==="LINK"&&d.rel==="modulepreload"&&a(d)}).observe(document,{childList:!0,subtree:!0});function o(r){const i={};return r.integrity&&(i.integrity=r.integrity),r.referrerPolicy&&(i.referrerPolicy=r.referrerPolicy),r.crossOrigin==="use-credentials"?i.credentials="include":r.crossOrigin==="anonymous"?i.credentials="omit":i.credentials="same-origin",i}function a(r){if(r.ep)return;r.ep=!0;const i=o(r);fetch(r.href,i)}})();const T=70,x=160,k=120;class E{constructor(e,o){this.width=e,this.height=o,this.x=Math.random()*e,this.y=Math.random()*o,this.vx=(Math.random()-.5)*.4,this.vy=(Math.random()-.5)*.4,this.baseRadius=1.5+Math.random()*2,this.pulsePhase=Math.random()*Math.PI*2,this.pulseSpeed=.015+Math.random()*.025,this.isHub=Math.random()<.12,this.isHub&&(this.baseRadius*=2)}update(e){this.pulsePhase+=this.pulseSpeed;const o=this.x-e.x,a=this.y-e.y,r=Math.hypot(o,a);if(r<k&&r>0){const d=((k-r)/k)**2*3;this.vx+=o/r*d*.08,this.vy+=a/r*d*.08}this.vx*=.975,this.vy*=.975;const i=Math.hypot(this.vx,this.vy);i>1.5&&(this.vx=this.vx/i*1.5,this.vy=this.vy/i*1.5),this.x+=this.vx,this.y+=this.vy,this.x<0&&(this.x=this.width),this.x>this.width&&(this.x=0),this.y<0&&(this.y=this.height),this.y>this.height&&(this.y=0)}draw(e,o){const a=.5+.5*Math.sin(this.pulsePhase),r=this.baseRadius*(1+a*.6),i=(this.isHub?.7:.4)+a*.4,d=o?`rgba(176, 141, 87, ${i})`:this.isHub?`rgba(180, 100, 255, ${i})`:`rgba(0, 242, 255, ${i})`,p=o?`rgba(176, 141, 87, ${a*.12})`:this.isHub?`rgba(130, 0, 255, ${a*.1})`:`rgba(0, 242, 255, ${a*.1})`;e.beginPath(),e.arc(this.x,this.y,r*5,0,Math.PI*2),e.fillStyle=p,e.fill(),e.beginPath(),e.arc(this.x,this.y,r,0,Math.PI*2),e.fillStyle=d,e.fill()}}class M{constructor(e,o,a,r,i){this.x1=e,this.y1=o,this.x2=a,this.y2=r,this.progress=0,this.speed=.02+Math.random()*.03,this.isLight=i,this.alive=!0}update(){this.progress+=this.speed,this.progress>=1&&(this.alive=!1)}draw(e){const o=this.x1+(this.x2-this.x1)*this.progress,a=this.y1+(this.y2-this.y1)*this.progress,r=1-this.progress;e.beginPath(),e.arc(o,a,3,0,Math.PI*2),e.fillStyle=this.isLight?`rgba(212, 160, 23, ${r})`:`rgba(255, 255, 255, ${r})`,e.fill()}}function L(t){const e=t.getContext("2d");let o=0,a=0,r=[],i=[],d=null;const p={x:-9999,y:-9999};let c=0;function s(){o=t.width=window.innerWidth,a=t.height=window.innerHeight,r=Array.from({length:T},()=>new E(o,a))}function u(m){if(c--,c>0)return;c=30+Math.floor(Math.random()*60);const l=[...r].sort(()=>Math.random()-.5);for(let y=0;y<l.length-1;y++){const h=l[y],g=l[y+1];if(Math.hypot(h.x-g.x,h.y-g.y)<x){i.push(new M(h.x,h.y,g.x,g.y,m));return}}}function b(m,l,y,h){const g=(1-y/x)*(h?.25:.35),v=e.createLinearGradient(m.x,m.y,l.x,l.y),P=h?`rgba(176,141,87,${g*1.5})`:m.isHub?`rgba(150,50,255,${g*1.5})`:`rgba(0,242,255,${g*1.5})`,A=h?`rgba(122,106,83,${g})`:l.isHub?`rgba(150,50,255,${g})`:`rgba(0,200,220,${g})`;v.addColorStop(0,P),v.addColorStop(1,A),e.beginPath(),e.moveTo(m.x,m.y),e.lineTo(l.x,l.y),e.strokeStyle=v,e.lineWidth=h?.6:.8,e.stroke()}function w(){const m=document.documentElement.classList.contains("light-mode");e.clearRect(0,0,o,a);for(let l=0;l<r.length;l++){r[l].update(p);for(let y=l+1;y<r.length;y++){const h=r[l].x-r[y].x,g=r[l].y-r[y].y,v=Math.hypot(h,g);v<x&&b(r[l],r[y],v,m)}}r.forEach(l=>l.draw(e,m)),u(m),i=i.filter(l=>l.alive),i.forEach(l=>{l.update(),l.draw(e)}),d=requestAnimationFrame(w)}function I(){cancelAnimationFrame(d),window.removeEventListener("resize",s),window.removeEventListener("mousemove",C)}function C(m){p.x=m.clientX,p.y=m.clientY}return window.addEventListener("resize",s),window.addEventListener("mousemove",C),s(),w(),{destroy:I}}const j={vite:"^7.3.1"},z={three:"^0.183.2"},S={devDependencies:j,dependencies:z},F={id:"claude-skills-tutorial",title:"Claude Skills",category:"",tags:[""],tabs:[{label:"Overview",content:`
+(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const o of document.querySelectorAll('link[rel="modulepreload"]'))a(o);new MutationObserver(o=>{for(const i of o)if(i.type==="childList")for(const d of i.addedNodes)d.tagName==="LINK"&&d.rel==="modulepreload"&&a(d)}).observe(document,{childList:!0,subtree:!0});function r(o){const i={};return o.integrity&&(i.integrity=o.integrity),o.referrerPolicy&&(i.referrerPolicy=o.referrerPolicy),o.crossOrigin==="use-credentials"?i.credentials="include":o.crossOrigin==="anonymous"?i.credentials="omit":i.credentials="same-origin",i}function a(o){if(o.ep)return;o.ep=!0;const i=r(o);fetch(o.href,i)}})();const T=70,x=160,k=120;class E{constructor(e,r){this.width=e,this.height=r,this.x=Math.random()*e,this.y=Math.random()*r,this.vx=(Math.random()-.5)*.4,this.vy=(Math.random()-.5)*.4,this.baseRadius=1.5+Math.random()*2,this.pulsePhase=Math.random()*Math.PI*2,this.pulseSpeed=.015+Math.random()*.025,this.isHub=Math.random()<.12,this.isHub&&(this.baseRadius*=2)}update(e){this.pulsePhase+=this.pulseSpeed;const r=this.x-e.x,a=this.y-e.y,o=Math.hypot(r,a);if(o<k&&o>0){const d=((k-o)/k)**2*3;this.vx+=r/o*d*.08,this.vy+=a/o*d*.08}this.vx*=.975,this.vy*=.975;const i=Math.hypot(this.vx,this.vy);i>1.5&&(this.vx=this.vx/i*1.5,this.vy=this.vy/i*1.5),this.x+=this.vx,this.y+=this.vy,this.x<0&&(this.x=this.width),this.x>this.width&&(this.x=0),this.y<0&&(this.y=this.height),this.y>this.height&&(this.y=0)}draw(e,r){const a=.5+.5*Math.sin(this.pulsePhase),o=this.baseRadius*(1+a*.6),i=(this.isHub?.7:.4)+a*.4,d=r?`rgba(176, 141, 87, ${i})`:this.isHub?`rgba(180, 100, 255, ${i})`:`rgba(0, 242, 255, ${i})`,p=r?`rgba(176, 141, 87, ${a*.12})`:this.isHub?`rgba(130, 0, 255, ${a*.1})`:`rgba(0, 242, 255, ${a*.1})`;e.beginPath(),e.arc(this.x,this.y,o*5,0,Math.PI*2),e.fillStyle=p,e.fill(),e.beginPath(),e.arc(this.x,this.y,o,0,Math.PI*2),e.fillStyle=d,e.fill()}}class M{constructor(e,r,a,o,i){this.x1=e,this.y1=r,this.x2=a,this.y2=o,this.progress=0,this.speed=.02+Math.random()*.03,this.isLight=i,this.alive=!0}update(){this.progress+=this.speed,this.progress>=1&&(this.alive=!1)}draw(e){const r=this.x1+(this.x2-this.x1)*this.progress,a=this.y1+(this.y2-this.y1)*this.progress,o=1-this.progress;e.beginPath(),e.arc(r,a,3,0,Math.PI*2),e.fillStyle=this.isLight?`rgba(212, 160, 23, ${o})`:`rgba(255, 255, 255, ${o})`,e.fill()}}function L(t){const e=t.getContext("2d");let r=0,a=0,o=[],i=[],d=null;const p={x:-9999,y:-9999};let c=0;function l(){r=t.width=window.innerWidth,a=t.height=window.innerHeight,o=Array.from({length:T},()=>new E(r,a))}function u(m){if(c--,c>0)return;c=30+Math.floor(Math.random()*60);const n=[...o].sort(()=>Math.random()-.5);for(let y=0;y<n.length-1;y++){const h=n[y],g=n[y+1];if(Math.hypot(h.x-g.x,h.y-g.y)<x){i.push(new M(h.x,h.y,g.x,g.y,m));return}}}function b(m,n,y,h){const g=(1-y/x)*(h?.25:.35),v=e.createLinearGradient(m.x,m.y,n.x,n.y),P=h?`rgba(176,141,87,${g*1.5})`:m.isHub?`rgba(150,50,255,${g*1.5})`:`rgba(0,242,255,${g*1.5})`,A=h?`rgba(122,106,83,${g})`:n.isHub?`rgba(150,50,255,${g})`:`rgba(0,200,220,${g})`;v.addColorStop(0,P),v.addColorStop(1,A),e.beginPath(),e.moveTo(m.x,m.y),e.lineTo(n.x,n.y),e.strokeStyle=v,e.lineWidth=h?.6:.8,e.stroke()}function w(){const m=document.documentElement.classList.contains("light-mode");e.clearRect(0,0,r,a);for(let n=0;n<o.length;n++){o[n].update(p);for(let y=n+1;y<o.length;y++){const h=o[n].x-o[y].x,g=o[n].y-o[y].y,v=Math.hypot(h,g);v<x&&b(o[n],o[y],v,m)}}o.forEach(n=>n.draw(e,m)),u(m),i=i.filter(n=>n.alive),i.forEach(n=>{n.update(),n.draw(e)}),d=requestAnimationFrame(w)}function I(){cancelAnimationFrame(d),window.removeEventListener("resize",l),window.removeEventListener("mousemove",C)}function C(m){p.x=m.clientX,p.y=m.clientY}return window.addEventListener("resize",l),window.addEventListener("mousemove",C),l(),w(),{destroy:I}}const z={vite:"^7.3.1"},j={three:"^0.183.2"},S={devDependencies:z,dependencies:j},F={id:"claude-skills-tutorial",title:"Claude Skills",category:"",tags:[""],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:1rem; line-height:1.75;">Whether you're a complete beginner looking to build your first website, or an experienced developer looking to speed up your workflow, getting started with Claude Skills is easier than you think. In this simple guide, we'll watch Claude Skills in action as it guides us through building a website, taking our input at each step. Let's go!</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">A skill is a set of instructions — packaged as a simple folder — that teaches Claude how to handle specific tasks or workflows.</p>
@@ -558,7 +558,7 @@ Without these APIs, using an AI model required the infrastructure to host and se
 
 This page is currently under development. Please check back soon.
 
-`}],interactiveType:"custom"},G={id:"build-app-skill-mcp",title:"Agent Skills + MCP",category:"Tutorial",tags:["Agentic","Firebase","GitHub"],tabs:[{label:"Overview",content:`
+`}],interactiveType:"custom"},U={id:"build-app-skill-mcp",title:"Agent Skills + MCP",category:"Tutorial",tags:["Agentic","Firebase","GitHub"],tabs:[{label:"Overview",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Build a URL Tracker App with AI Agents Skills &amp; MCP</strong>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Have you ever saved a bunch of URLs to read later — articles, docs, videos — and then a few days later wondered <em>"where did that link go?"</em> You scroll through tabs, dig through your notes app, check your browser history… and still can't find it.</p>
@@ -1093,7 +1093,8 @@ Requirements:
 
 `}],interactiveType:"custom"},D={id:"claude-extension",title:"Claude Extension",category:"",tags:[],tabs:[{label:"Features",content:`
 <style>
-.cc-table { width:100%;border-collapse:collapse;font-size:15px;font-family:'Outfit', sans-serif;line-height:1.5;table-layout:fixed; margin-top: 1.5rem; letter-spacing:0.01em; }
+.cc-table-wrap { width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; margin-top:1.5rem; border-radius:12px; }
+.cc-table { width:100%;border-collapse:collapse;font-size:15px;font-family:'Outfit', sans-serif;line-height:1.5;table-layout:fixed; letter-spacing:0.01em; min-width: 980px; }
 .cc-table th { padding:12px 10px;text-align:left;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;font-size:12px;color:var(--text-secondary);border-bottom:1px solid var(--border-color);background:rgba(0,0,0,0.2) }
 .cc-table td { padding:24px 10px;border-bottom:1px solid var(--border-color);vertical-align:top;color:var(--text-primary); }
 .cc-table td p { margin: 0; padding: 0; height: 26px; line-height: 26px; }
@@ -1122,10 +1123,102 @@ Requirements:
 .doc-links a:hover { text-decoration:underline; opacity: 0.8; }
 .doc-label { font-size:12px;color:var(--text-secondary);display:block;margin:0;font-weight:700;letter-spacing:0.02em;padding:0;text-transform:uppercase; height: 26px; line-height: 26px; vertical-align: top; }
 
+@media (max-width: 1024px) {
+  .cc-table-wrap {
+    padding-bottom: 0.25rem;
+  }
+
+  .cc-table {
+    min-width: 860px;
+    font-size: 14px;
+  }
+
+  .cc-table th,
+  .cc-table td {
+    padding: 18px 10px;
+  }
+
+  .cc-table td p,
+  .doc-label,
+  .badge,
+  .cc-table td code {
+    height: auto;
+    line-height: 1.45;
+  }
+}
+
+@media (max-width: 720px) {
+  .cc-table-wrap {
+    overflow: visible;
+  }
+
+  .cc-table,
+  .cc-table thead,
+  .cc-table tbody,
+  .cc-table tr,
+  .cc-table th,
+  .cc-table td {
+    display: block;
+  }
+
+  .cc-table {
+    min-width: 0;
+  }
+
+  .cc-table thead {
+    display: none;
+  }
+
+  .cc-table tr {
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.12);
+  }
+
+  .cc-table td {
+    padding: 0.9rem 1rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .cc-table td:last-child {
+    border-bottom: none;
+  }
+
+  .cc-table td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 0.45rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+  }
+
+  .cc-table td p,
+  .doc-label,
+  .badge,
+  .cc-table td code {
+    height: auto;
+    line-height: 1.5;
+  }
+
+  .doc-links {
+    gap: 0.3rem;
+  }
+
+  .doc-links a {
+    white-space: normal;
+  }
+}
+
 :root.light-mode .cc-table th { background: rgba(0,0,0,0.03); }
 :root.light-mode .badge { border-color: rgba(67, 52, 34, 0.2); }
 </style>
 
+<div class="cc-table-wrap">
 <table class="cc-table">
 <thead>
 <tr>
@@ -1139,56 +1232,56 @@ Requirements:
 </thead>
 <tbody>
 <tr>
-<td><span class="badge">Skills</span></td>
-<td><p>Teaches Claude how to handle specific tasks or workflows</p></td>
-<td><p>Instructions, scripts, reference files in a folder</p></td>
-<td><p><code>/skill-name</code></p></td>
-<td><p>Codifying repeatable workflows: code review, deployments, doc generation</p></td>
-<td class="doc-links">
+<td data-label="Feature"><span class="badge">Skills</span></td>
+<td data-label="One-liner"><p>Teaches Claude how to handle specific tasks or workflows</p></td>
+<td data-label="What it stores"><p>Instructions, scripts, reference files in a folder</p></td>
+<td data-label="How to invoke"><p><code>/skill-name</code></p></td>
+<td data-label="Best used for"><p>Codifying repeatable workflows: code review, deployments, doc generation</p></td>
+<td data-label="Official docs" class="doc-links">
   <span class="doc-label">Guide</span>
   <a href="https://code.claude.com/docs/en/skills" target="_blank">Skills →</a>
 </td>
 </tr>
 <tr>
-<td><span class="badge">Commands</span></td>
-<td><p>Prompt shortcuts</p></td>
-<td><p>Single markdown file with prompt template</p></td>
-<td><p><code>/command-name</code></p></td>
-<td><p>Quick prompt templates: /fix-bug, /explain-code, /summarize</p></td>
-<td class="doc-links">
+<td data-label="Feature"><span class="badge">Commands</span></td>
+<td data-label="One-liner"><p>Prompt shortcuts</p></td>
+<td data-label="What it stores"><p>Single markdown file with prompt template</p></td>
+<td data-label="How to invoke"><p><code>/command-name</code></p></td>
+<td data-label="Best used for"><p>Quick prompt templates: /fix-bug, /explain-code, /summarize</p></td>
+<td data-label="Official docs" class="doc-links">
   <span class="doc-label">Guide</span>
   <a href="https://docs.anthropic.com/en/docs/claude-code/slash-commands" target="_blank">Slash commands →</a>
 </td>
 </tr>
 <tr>
-<td><span class="badge">MCP</span></td>
-<td><p>USB-C for AI — connects Claude to real data</p></td>
-<td><p>External tool definitions (21st.dev, Supadata, Stitch..)</p></td>
-<td><p>Claude picks tools automatically</p></td>
-<td><p>Querying live databases, creating PRs, reading Slack, anything with real external state</p></td>
-<td class="doc-links">
+<td data-label="Feature"><span class="badge">MCP</span></td>
+<td data-label="One-liner"><p>USB-C for AI — connects Claude to real data</p></td>
+<td data-label="What it stores"><p>External tool definitions (21st.dev, Supadata, Stitch..)</p></td>
+<td data-label="How to invoke"><p>Claude picks tools automatically</p></td>
+<td data-label="Best used for"><p>Querying live databases, creating PRs, reading Slack, anything with real external state</p></td>
+<td data-label="Official docs" class="doc-links">
   <span class="doc-label">Guide</span>
   <a href="https://docs.anthropic.com/en/docs/claude-code/mcp" target="_blank">MCP overview →</a>
 </td>
 </tr>
 <tr>
-<td><span class="badge">Hooks</span></td>
-<td><p>Scripts that fire automatically at lifecycle events</p></td>
-<td><p>Shell commands tied to events (PostToolUse etc.)</p></td>
-<td><p>Never manually — fires automatically on event</p></td>
-<td><p>Auto-linting, blocking dangerous commands, desktop notifications, test gates</p></td>
-<td class="doc-links">
+<td data-label="Feature"><span class="badge">Hooks</span></td>
+<td data-label="One-liner"><p>Scripts that fire automatically at lifecycle events</p></td>
+<td data-label="What it stores"><p>Shell commands tied to events (PostToolUse etc.)</p></td>
+<td data-label="How to invoke"><p>Never manually — fires automatically on event</p></td>
+<td data-label="Best used for"><p>Auto-linting, blocking dangerous commands, desktop notifications, test gates</p></td>
+<td data-label="Official docs" class="doc-links">
   <span class="doc-label">Guide</span>
   <a href="https://docs.anthropic.com/en/docs/claude-code/hooks-guide" target="_blank">Hooks guide →</a>
 </td>
 </tr>
 <tr>
-<td><span class="badge">Plugins</span></td>
-<td><p>Installable bundles containing all of the above (Skills, Commands, MCPs, Hooks)</p></td>
-<td><p>plugin.json manifest + skills/ agents/ hooks/ MCPs</p></td>
-<td><p>All components auto-activate on install</p></td>
-<td><p>Sharing team setups, open-source toolkits, org-wide standards</p></td>
-<td class="doc-links">
+<td data-label="Feature"><span class="badge">Plugins</span></td>
+<td data-label="One-liner"><p>Installable bundles containing all of the above (Skills, Commands, MCPs, Hooks)</p></td>
+<td data-label="What it stores"><p>plugin.json manifest + skills/ agents/ hooks/ MCPs</p></td>
+<td data-label="How to invoke"><p>All components auto-activate on install</p></td>
+<td data-label="Best used for"><p>Sharing team setups, open-source toolkits, org-wide standards</p></td>
+<td data-label="Official docs" class="doc-links">
   <span class="doc-label">Discover</span>
   <a href="https://docs.anthropic.com/en/docs/claude-code/plugins" target="_blank">Find &amp; install plugins →</a>
   <span class="doc-label">Build</span>
@@ -1196,35 +1289,36 @@ Requirements:
 </td>
 </tr>
 <tr>
-<td><span class="badge">Subagents</span></td>
-<td><p>Isolated mini-agents with their own context window</p></td>
-<td><p>Agent system prompt + tool/model config in YAML</p></td>
-<td><p>Natural language or <code>/agents</code> menu</p></td>
-<td><p>Delegating heavy subtasks without polluting main session context</p></td>
-<td class="doc-links">
+<td data-label="Feature"><span class="badge">Subagents</span></td>
+<td data-label="One-liner"><p>Isolated mini-agents with their own context window</p></td>
+<td data-label="What it stores"><p>Agent system prompt + tool/model config in YAML</p></td>
+<td data-label="How to invoke"><p>Natural language or <code>/agents</code> menu</p></td>
+<td data-label="Best used for"><p>Delegating heavy subtasks without polluting main session context</p></td>
+<td data-label="Official docs" class="doc-links">
   <span class="doc-label">Guide</span>
   <a href="https://docs.anthropic.com/en/docs/claude-code/sub-agents" target="_blank">Subagents →</a>
 </td>
 </tr>
 <tr>
-<td><span class="badge">Agent teams</span></td>
-<td><p>Multiple Claude sessions that collaborate and cross-check</p></td>
-<td><p>Defined through prompts; teams.json for fine-tuning</p></td>
-<td><p>Prompt-driven; keyboard shortcuts to manage</p></td>
-<td><p>Large parallel work: security + perf + tests reviewing the same module</p></td>
-<td class="doc-links">
+<td data-label="Feature"><span class="badge">Agent teams</span></td>
+<td data-label="One-liner"><p>Multiple Claude sessions that collaborate and cross-check</p></td>
+<td data-label="What it stores"><p>Defined through prompts; teams.json for fine-tuning</p></td>
+<td data-label="How to invoke"><p>Prompt-driven; keyboard shortcuts to manage</p></td>
+<td data-label="Best used for"><p>Large parallel work: security + perf + tests reviewing the same module</p></td>
+<td data-label="Official docs" class="doc-links">
   <span class="doc-label">Guide</span>
   <a href="https://docs.anthropic.com/en/docs/claude-code/agent-teams" target="_blank">Agent teams →</a>
 </td>
 </tr>
 </tbody>
 </table>
+</div>
 <div style="height: 20vh;"></div>
       `},{label:"Decision Flow",content:`
 <div style="width: 100%; height: calc(100vh - 160px); min-height: 700px; overflow: hidden; background: var(--surface-color); border-radius: 12px; border: 1px solid var(--border-color);">
   <iframe src="./flowchart.html" style="width: 100%; height: 100%; border: none;" title="Decision Flowchart"></iframe>
 </div>
-      `}],interactiveType:"custom"},U={id:"claude-commands",title:"Claude Commands",description:`
+      `}],interactiveType:"custom"},W={id:"claude-commands",title:"Claude Commands",description:`
 <p style="margin-bottom:1rem; line-height:1.75;">Claude Commands (also called slash commands) are a feature of Claude Code. Think of them like custom keyboard shortcuts or macros, but for your AI workflow.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Instead of typing out a long, detailed instruction every time you want Claude to do something repetitive, you save that instruction as a simple Markdown file and call it up with a quick <code style="color: var(--code-text);">/command-name</code>.</p>
@@ -1334,10 +1428,44 @@ EOF</code>
 <div style="margin-top: 2rem; padding: 1rem; background: rgba(0, 242, 255, 0.05); border: 1px solid rgba(0, 242, 255, 0.1); border-radius: 8px;">
   <p style="margin:0; line-height:1.6;">Now your main Claude session stays focused while these specialists do the heavy lifting in their own isolated contexts.</p>
 </div>
-  `,interactiveType:"custom"},H={id:"claude-plugins",title:"Claude Plugins",category:"Tutorial",tags:["Plugins","Marketplace","Claude Code"],tabs:[{label:"Overview",content:`
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Claude Code Plugin Tutorial]</strong>
+  `,interactiveType:"custom"},G={id:"claude-plugins",title:"Claude Plugins",category:"Tutorial",tags:["Plugins","Marketplace","Claude Code"],tabs:[{label:"Overview",content:`
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>Claude Plugins</strong> are like app bundles — a single package that installs multiple commands, tools, and behaviors all at once.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Plugins can bundle MCPs, skills, hooks, and commands into a single download. Instead of installing each piece separately, you get everything you need in one package.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">This tutorial walks you through building a complete Claude Code plugin from scratch.</p>
+
+<div style="margin-top: 1.5rem; margin-bottom: 2rem;">
+  <strong style="display:block; margin-bottom:1rem; font-size:1.05rem; color: var(--accent-primary);">What Can a Plugin Contain?</strong>
+  <p style="margin-bottom:1rem; line-height:1.75;">A Claude plugin can include slash commands, MCPs, hooks, and skills — all packaged together and shared across projects or teams.</p>
+
+  <table style="width: 100%; border-collapse: collapse; margin-top: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;">
+    <thead>
+      <tr style="background: rgba(0, 242, 255, 0.05);">
+        <th style="padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color); color: var(--accent-primary);">Ingredient</th>
+        <th style="padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color); color: var(--accent-primary);">What it does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><strong>Skills</strong></td>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Instructions that guide Claude on how to perform a task</td>
+      </tr>
+      <tr>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><strong>Commands</strong></td>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Slash commands you can trigger manually, like <code style="color: var(--code-text);">/review</code></td>
+      </tr>
+      <tr>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><strong>MCPs</strong></td>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Connections to external tools, APIs, databases, and services</td>
+      </tr>
+      <tr>
+        <td style="padding: 1rem;"><strong>Hooks</strong></td>
+        <td style="padding: 1rem;">Automatic behaviors that run when specific events happen</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; margin: 1rem 0;">
   <p style="margin: 0 0 0.75rem; font-weight: 600; color: var(--text-primary);">What you will build</p>
@@ -1346,11 +1474,11 @@ EOF</code>
     <li style="margin-bottom: 0.35rem;"><strong>Skill:</strong> auto-review Python files</li>
     <li style="margin-bottom: 0.35rem;"><strong>Command:</strong> manually fix style issues</li>
     <li style="margin-bottom: 0.35rem;"><strong>Hook:</strong> run automatic safety checks</li>
-    <li style="margin-bottom: 0;"><strong>MCP:</strong> connect Claude to GitHub</li>
+    <li style="margin-bottom: 0;"><strong>MCP:</strong> connect Claude to Context7</li>
   </ul>
 </div>
 
-<p style="margin-bottom:0.75rem; line-height:1.75;">By the end, you will have a plugin that can review code, fix formatting, warn about secrets, and interact with GitHub directly from Claude Code.</p>
+<p style="margin-bottom:0.75rem; line-height:1.75;">By the end, you will have a plugin that can review code, fix formatting, warn about secrets, and interact with Context7 for live Python documentation.</p>
 
 <div style="margin-top: 2rem; display: flex; justify-content: flex-end; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="1" class="tutorial-nav-link">
@@ -1363,20 +1491,23 @@ EOF</code>
 <p style="margin-bottom:0.75rem; line-height:1.75;">You need two things installed before building any plugin.</p>
 
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Step 1 — Install Node.js</p>
-<p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">Claude Code runs on Node.js, so install the LTS version from <a href="https://nodejs.org" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">nodejs.org</a>.</p>
+<p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">You can install Claude Code using npm. To use npm, install the LTS version from <a href="https://nodejs.org" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">nodejs.org</a>.</p>
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">node --version
 # You should see something like: v22.0.0</code>
 
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Step 2 — Install Claude Code</p>
 <p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Install Claude Code globally with npm:</p>
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">npm install -g @anthropic-ai/claude-code
-
-# Verify the installation
-claude --version</code>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">npm install -g @anthropic-ai/claude-code</code>
+<p style="margin-top: 1rem; margin-bottom: 0.5rem; line-height: 1.75; color: var(--text-secondary);">Verify the installation:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">claude --version</code>
 
 <div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 8px; margin: 1rem 0;">
   <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">You will also need a Claude API key or an authenticated Claude account. Claude Code will ask you to sign in the first time you run it.</p>
 </div>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Step 3 — Launch Claude</p>
+<p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Type <code style="color: var(--code-text);">claude</code> in your terminal to get started:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text);">claude</code>
 
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="0" class="tutorial-nav-link previous">
@@ -1403,22 +1534,22 @@ claude --version</code>
     <tr>
       <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Skill</td>
       <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><strong>py-review</strong></td>
-      <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Auto-reviews Python files when you ask Claude to review them</td>
+      <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Automatically checks for bugs, PEP 8 style issues, missing type hints, and docstrings whenever you ask Claude to review, audit, or check a Python file. It runs automatically based on natural language. When you say something like "review this file" or "check my Python code," Claude detects the intent and triggers it without any special syntax. It's passive and context-aware. py-review is read-only — it finds and reports issues with line numbers and suggested fixes, but doesn't touch your files.</td>
     </tr>
     <tr>
       <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Command</td>
       <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><strong>py-fix</strong></td>
-      <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Fixes PEP 8 issues on demand</td>
+      <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">A manual slash command (<code style="color: var(--code-text);">/py-helper:py-fix</code>) that instantly fixes style violations, adds missing docstrings, and applies type hints across the entire open file. It runs manually via an explicit slash command. You have to deliberately invoke it. It won't activate from conversation alone. py-fix is destructive (in the good sense) — it actually modifies the file and then summarizes what changed.</td>
     </tr>
     <tr>
       <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Hook</td>
       <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><strong>hooks.json</strong></td>
-      <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Checks for secrets before saves and syntax errors after edits</td>
+      <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Runs background safety checks: scans for hardcoded secrets keys, passwords <strong>before</strong> any file write, and performs an automatic syntax check <strong>after</strong> every edit.</td>
     </tr>
     <tr>
       <td style="padding: 1rem;">MCP</td>
-      <td style="padding: 1rem;"><strong>GitHub</strong></td>
-      <td style="padding: 1rem;">Lets Claude create issues and PRs from the terminal</td>
+      <td style="padding: 1rem;"><strong>context7</strong></td>
+      <td style="padding: 1rem;">Context7 is a documentation lookup tool that plugs into Claude Code. When you ask Claude how to use a Python library, it fetches the real, up-to-date documentation directly from the library's source before answering — so you always get accurate, version-specific code instead of potentially outdated suggestions.</td>
     </tr>
   </tbody>
 </table>
@@ -1442,7 +1573,7 @@ claude --version</code>
             └── .mcp.json</code>
 
 <div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 8px; margin: 1rem 0;">
-  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);"><strong>Important:</strong> the plugin folder must live inside the marketplace folder under a <code style="color: var(--code-text);">plugins/</code> subfolder.</p>
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);"><strong>Important:</strong> the <code style="color: var(--code-text);">py-helper</code> plugin folder must live inside the <code style="color: var(--code-text);">py-helper-marketplace</code> folder under a <code style="color: var(--code-text);">plugins/</code> subfolder.</p>
 </div>
 
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
@@ -1457,10 +1588,12 @@ claude --version</code>
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Create All Folders]</strong>
 
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Step 1 — Create your Python project</p>
-<p style="margin-bottom:0.5rem; line-height:1.75;">This is where your actual Python code will live:</p>
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">mkdir my-python-project
-cd my-python-project
-touch app.py</code>
+<p style="margin-bottom:0.5rem; line-height:1.75;">This is where your actual Python code will live. Create the folder and enter it:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">mkdir my-python-project</code>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cd my-python-project</code>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">Create a test file:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">touch app.py</code>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">Open <code style="color: var(--code-text);">app.py</code> and paste in this intentionally messy example:</p>
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">def add_numbers(a,b):
@@ -1474,9 +1607,10 @@ result=add_numbers(5,10)
 greet("Alice")</code>
 
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Step 2 — Create the marketplace and plugin folders</p>
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cd ..
+<p style="margin-bottom:0.5rem; line-height:1.75;">Go back to your parent folder and create the plugin structure:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cd ..</code>
 
-mkdir -p my-claude-marketplace/py-helper-marketplace/.claude-plugin
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">mkdir -p my-claude-marketplace/py-helper-marketplace/.claude-plugin
 mkdir -p my-claude-marketplace/py-helper-marketplace/plugins/py-helper/.claude-plugin
 mkdir -p my-claude-marketplace/py-helper-marketplace/plugins/py-helper/skills/py-review
 mkdir -p my-claude-marketplace/py-helper-marketplace/plugins/py-helper/commands
@@ -1518,7 +1652,28 @@ mkdir -p my-claude-marketplace/py-helper-marketplace/plugins/py-helper/hooks</co
 }
 EOF</code>
 
-<p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">The <code style="color: var(--code-text);">source</code> path must be <code style="color: var(--code-text);">./plugins/py-helper</code>, relative to the marketplace root.</p>
+<div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 8px; margin: 1rem 0;">
+  <p style="margin-bottom:0.75rem; font-weight:700; color: var(--text-primary);"><code style="color: var(--code-text);">marketplace.json</code> — Marketplace Registry File</p>
+  <p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">This is the registry file for the <code style="color: var(--code-text);">py-helper-marketplace</code> — a Claude marketplace (a collection of one or more plugins). It serves as the top-level catalog that tells Claude what plugins are available within this marketplace, where to find them, and who owns the marketplace itself.</p>
+  
+  <p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">It defines four key pieces of information:</p>
+  <ul style="margin-bottom:1rem; padding-left: 1.25rem; color: var(--text-secondary); line-height: 1.6;">
+    <li><strong><code style="color: var(--code-text);">name</code></strong> — the unique identifier for the marketplace (<code style="color: var(--code-text);">py-helper-marketplace</code>), distinguishing it from the individual plugins it contains</li>
+    <li><strong><code style="color: var(--code-text);">owner</code></strong> — credits the person or organization that maintains the marketplace</li>
+    <li><strong><code style="color: var(--code-text);">plugins</code></strong> — an array listing every plugin available in this marketplace, with each entry containing:
+      <ul style="margin: 0.25rem 0 0.25rem 1rem;">
+        <li><code style="color: var(--code-text);">name</code> — the plugin's identifier (<code style="color: var(--code-text);">py-helper</code>)</li>
+        <li><code style="color: var(--code-text);">version</code> — the version to load (<code style="color: var(--code-text);">1.0.0</code>)</li>
+        <li><code style="color: var(--code-text);">description</code> — a short summary shown in listings</li>
+        <li><code style="color: var(--code-text);">source</code> — the <strong>relative path</strong> to the plugin folder (<code style="color: var(--code-text);">./plugins/py-helper</code>)</li>
+      </ul>
+    </li>
+  </ul>
+  
+  <p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">No logic or behavior is defined here — it is purely a directory and routing file.</p>
+  
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);"><strong>How it differs from <code style="color: var(--code-text);">plugin.json</code>:</strong> while <code style="color: var(--code-text);">plugin.json</code> is the ID card for a single plugin, <code style="color: var(--code-text);">marketplace.json</code> is the index for the entire collection. It sits one level above and points <em>to</em> the <code style="color: var(--code-text);">plugin.json</code> files beneath it.</p>
+</div>
 
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">File 2 — plugin.json</p>
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cat > my-claude-marketplace/py-helper-marketplace/plugins/py-helper/.claude-plugin/plugin.json << 'EOF'
@@ -1531,6 +1686,21 @@ EOF</code>
   }
 }
 EOF</code>
+
+<div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 8px; margin: 1rem 0;">
+  <p style="margin-bottom:0.75rem; font-weight:700; color: var(--text-primary);"><code style="color: var(--code-text);">plugin.json</code> — Plugin Manifest File</p>
+  <p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">This is the manifest file for the <code style="color: var(--code-text);">py-helper</code> Claude plugin. It serves as the plugin's identity card, providing essential metadata that the Claude marketplace and runtime use to recognize, register, and load the plugin as a valid package.</p>
+  
+  <p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">It defines four key pieces of information:</p>
+  <ul style="margin-bottom:1rem; padding-left: 1.25rem; color: var(--text-secondary); line-height: 1.6;">
+    <li><strong><code style="color: var(--code-text);">name</code></strong> — the unique identifier (<code style="color: var(--code-text);">py-helper</code>), which also becomes the namespace prefix for all slash commands (e.g. <code style="color: var(--code-text);">/py-helper:py-fix</code>)</li>
+    <li><strong><code style="color: var(--code-text);">version</code></strong> — tracks the release version (<code style="color: var(--code-text);">1.0.0</code>) for updates and compatibility</li>
+    <li><strong><code style="color: var(--code-text);">description</code></strong> — a human-readable summary of the plugin's purpose, displayed in the marketplace listing</li>
+    <li><strong><code style="color: var(--code-text);">author</code></strong> — credits the creator of the plugin</li>
+  </ul>
+  
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">This file contains no logic or behavior of its own — it does not define any skills, commands, or code. It simply declares that the folder it lives in is a named, versioned, attributable plugin package. Think of it as the equivalent of a <code style="color: var(--code-text);">package.json</code> in Node.js or a <code style="color: var(--code-text);">pyproject.toml</code> in Python.</p>
+</div>
 
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">File 3 — SKILL.md</p>
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cat > my-claude-marketplace/py-helper-marketplace/plugins/py-helper/skills/py-review/SKILL.md << 'EOF'
@@ -1554,6 +1724,33 @@ For each issue, show:
 - A corrected version of the code
 EOF</code>
 
+<div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 8px; margin: 1rem 0;">
+  <p style="margin-bottom:0.75rem; font-weight:700; color: var(--text-primary);"><code style="color: var(--code-text);">SKILL.md</code> — Skill Definition File for <code style="color: var(--code-text);">py-review</code></p>
+  <p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">This is the skill definition file for the <code style="color: var(--code-text);">py-review</code> skill within the <code style="color: var(--code-text);">py-helper</code> plugin. It is a Markdown file with a YAML frontmatter header that together define both the <strong>identity</strong> and the <strong>behavior</strong> of the skill — making it the most functional of the three files, as it contains actual instructions that Claude executes.</p>
+  
+  <p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">It is split into two distinct sections:</p>
+  
+  <p style="margin-bottom:0.25rem; font-weight:700; color: var(--text-primary);">Frontmatter (YAML header <code style="color: var(--code-text);">---</code>)</p>
+  <ul style="margin-bottom:1rem; padding-left: 1.25rem; color: var(--text-secondary); line-height: 1.6;">
+    <li><strong><code style="color: var(--code-text);">name</code></strong> — the skill's unique identifier (<code style="color: var(--code-text);">py-review</code>), used to reference it within the plugin</li>
+    <li><strong><code style="color: var(--code-text);">description</code></strong> — a natural language trigger definition that tells Claude <em>when</em> to automatically activate this skill. The phrase "auto-trigger when the user asks to review, check, audit, or improve a Python file" is what enables intent-based activation — no slash command needed.</li>
+  </ul>
+  
+  <p style="margin-bottom:0.25rem; font-weight:700; color: var(--text-primary);">Body (Markdown instructions)</p>
+  <ul style="margin-bottom:1rem; padding-left: 1.25rem; color: var(--text-secondary); line-height: 1.6;">
+    <li>This is the actual prompt/behavior Claude follows when the skill fires. It instructs Claude to check for four specific categories of issues — bugs, PEP 8 style violations, missing type hints, and missing docstrings</li>
+    <li>It also defines the <strong>output format</strong> Claude must follow for every issue found: the line number, a description of the problem, and a corrected version of the code</li>
+  </ul>
+  
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);"><strong>How it differs from the other files:</strong> unlike <code style="color: var(--code-text);">marketplace.json</code> and <code style="color: var(--code-text);">plugin.json</code> which are purely metadata, <code style="color: var(--code-text);">SKILL.md</code> contains executable instructions. It is both a configuration file (frontmatter) and a behavior file (body) in one, giving the plugin its actual intelligence and usefulness.</p>
+</div>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Step 4 — Verify these files</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">Make sure these three critical files were created successfully and have the correct contents:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cat my-claude-marketplace/py-helper-marketplace/.claude-plugin/marketplace.json
+cat my-claude-marketplace/py-helper-marketplace/plugins/py-helper/.claude-plugin/plugin.json
+cat my-claude-marketplace/py-helper-marketplace/plugins/py-helper/skills/py-review/SKILL.md</code>
+
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="3" class="tutorial-nav-link previous">
     <span>←</span> Previous: Create Folders
@@ -1568,16 +1765,37 @@ EOF</code>
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">File 4 — commands/py-fix.md</p>
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cat > my-claude-marketplace/py-helper-marketplace/plugins/py-helper/commands/py-fix.md << 'EOF'
 ---
-description: "Automatically fix PEP 8 issues in the current Python file"
+description: "Automatically fix PEP 8 issues in a Python file"
 ---
  
-Look at the currently open Python file and:
+Look at the Python file at $ARGUMENTS (or the currently open file if no path is provided) and:
  
 1. Fix all PEP 8 style violations
 2. Add missing type hints to all functions
 3. Add docstrings to any functions that are missing them
 4. Show a summary of every change you made and why
 EOF</code>
+
+<div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 8px; margin: 1rem 0;">
+  <p style="margin-bottom:0.75rem; font-weight:700; color: var(--text-primary);"><code style="color: var(--code-text);">py-fix.md</code> — Command Definition File for <code style="color: var(--code-text);">py-fix</code></p>
+  <p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">This is the command definition file for the <code style="color: var(--code-text);">py-fix</code> slash command within the <code style="color: var(--code-text);">py-helper</code> plugin. Like <code style="color: var(--code-text);">SKILL.md</code>, it is a Markdown file with a YAML frontmatter header, combining identity and behavior in one file. However, unlike the skill, this file defines a <strong>manually triggered command</strong> rather than an auto-activating skill.</p>
+  
+  <p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">It is split into two distinct sections:</p>
+  
+  <p style="margin-bottom:0.25rem; font-weight:700; color: var(--text-primary);">Frontmatter (YAML header <code style="color: var(--code-text);">---</code>)</p>
+  <ul style="margin-bottom:1rem; padding-left: 1.25rem; color: var(--text-secondary); line-height: 1.6;">
+    <li><strong><code style="color: var(--code-text);">description</code></strong> — a short summary of what the command does ("Automatically fix PEP 8 issues in a Python file"), used for display purposes in the marketplace and command palette. Notably, there is <strong>no auto-trigger definition</strong> here — this command only fires when explicitly invoked via <code style="color: var(--code-text);">/py-helper:py-fix</code></li>
+  </ul>
+  
+  <p style="margin-bottom:0.25rem; font-weight:700; color: var(--text-primary);">Body (Markdown instructions)</p>
+  <ul style="margin-bottom:1rem; padding-left: 1.25rem; color: var(--text-secondary); line-height: 1.6;">
+    <li><strong><code style="color: var(--code-text);">$ARGUMENTS</code></strong> — a special placeholder that captures whatever the user types after the slash command (typically a file path). If nothing is provided, Claude falls back to the currently open file. This is what makes the command flexible and reusable across different files</li>
+    <li>The instructions tell Claude to perform three <strong>destructive (file-modifying) actions</strong>: fix PEP 8 violations, add missing type hints, and add missing docstrings</li>
+    <li>It also requires Claude to produce a <strong>change summary</strong> explaining every modification made and why</li>
+  </ul>
+  
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);"><strong>How it differs from <code style="color: var(--code-text);">SKILL.md</code>:</strong> while <code style="color: var(--code-text);">SKILL.md</code> is read-only and report-based, <code style="color: var(--code-text);">py-fix.md</code> is action-based and modifies actual files. It also uses <code style="color: var(--code-text);">$ARGUMENTS</code> for explicit file targeting. The absence of an auto-trigger means the user retains full control over when fixes are applied — appropriate given that this command directly alters code.</p>
+</div>
 
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">File 5 — hooks/hooks.json</p>
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cat > my-claude-marketplace/py-helper-marketplace/plugins/py-helper/hooks/hooks.json << 'EOF'
@@ -1609,21 +1827,70 @@ EOF</code>
 }
 EOF</code>
 
+<div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 8px; margin: 1rem 0;">
+  <p style="margin-bottom:0.75rem; font-weight:700; color: var(--text-primary);"><code style="color: var(--code-text);">hooks.json</code> — Hooks Configuration File</p>
+  <p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">This is the hooks configuration file for the <code style="color: var(--code-text);">py-helper</code> plugin. It defines <strong>automatic background checks</strong> that fire silently around file write and edit operations — before and after Claude touches a Python file. Unlike the skill and command files, hooks are not triggered by the user at all; they run invisibly as a safety layer wrapped around Claude's own tool usage.</p>
+  
+  <p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">It is organized around two lifecycle events:</p>
+  
+  <p style="margin-bottom:0.25rem; font-weight:700; color: var(--text-primary);"><code style="color: var(--code-text);">PreToolUse</code> (Before writing/editing)</p>
+  <ul style="margin-bottom:1rem; padding-left: 1.25rem; color: var(--text-secondary); line-height: 1.6;">
+    <li><strong><code style="color: var(--code-text);">matcher</code></strong> — <code style="color: var(--code-text);">"Write|Edit"</code> tells Claude to intercept any Write or Edit tool call before it executes</li>
+    <li><strong><code style="color: var(--code-text);">prompt</code></strong> — instructs Claude to scan the file for hardcoded passwords, API keys, or secrets <em>before</em> writing, and if found, warn the user and recommend environment variables instead</li>
+    <li>This acts as a <strong>security gate</strong> — catching sensitive data leaks before they are committed to disk</li>
+  </ul>
+  
+  <p style="margin-bottom:0.25rem; font-weight:700; color: var(--text-primary);"><code style="color: var(--code-text);">PostToolUse</code> (After writing/editing)</p>
+  <ul style="margin-bottom:1rem; padding-left: 1.25rem; color: var(--text-secondary); line-height: 1.6;">
+    <li><strong><code style="color: var(--code-text);">matcher</code></strong> — same <code style="color: var(--code-text);">"Write|Edit"</code> pattern, but fires <em>after</em> the tool call completes</li>
+    <li><strong><code style="color: var(--code-text);">prompt</code></strong> — instructs Claude to immediately check whether the edit introduced any obvious syntax errors, and flag them if so</li>
+    <li>This acts as a <strong>quality gate</strong> — catching accidental breakage introduced during a fix or edit</li>
+  </ul>
+  
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);"><strong>How it differs from the other files:</strong> <code style="color: var(--code-text);">SKILL.md</code> and <code style="color: var(--code-text);">py-fix.md</code> are user-facing and user-initiated. <code style="color: var(--code-text);">hooks.json</code> is entirely <strong>system-facing and automatic</strong>. The user never calls it directly; it wraps around Claude's own actions to enforce security and correctness passively. Together with the skill and command, it completes the plugin's three-layer approach: review on request, fix on demand, and guard automatically.</p>
+</div>
+
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">File 6 — .mcp.json</p>
-<p style="margin-bottom:0.5rem; line-height:1.75;">First, create a GitHub personal access token with <code style="color: var(--code-text);">repo</code> scope at <a href="https://github.com/settings/tokens" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">github.com/settings/tokens</a>.</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">Context7 addresses one of the most frustrating challenges in AI-assisted development: outdated or inaccurate library documentation. By fetching real-time documentation directly from source repositories, it ensures Claude always provides current, version-specific code examples and API usage patterns.</p>
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cat > my-claude-marketplace/py-helper-marketplace/plugins/py-helper/.mcp.json << 'EOF'
 {
   "mcpServers": {
-    "github": {
+    "context7": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "YOUR_TOKEN_HERE"
-      }
+      "args": ["-y", "@upstash/context7-mcp"]
     }
   }
 }
 EOF</code>
+
+<div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 8px; margin: 1rem 0;">
+  <p style="margin-bottom:0.75rem; font-weight:700; color: var(--text-primary);"><code style="color: var(--code-text);">.mcp.json</code> — MCP Server Configuration File</p>
+  <p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">This is the MCP (Model Context Protocol) server configuration file for the <code style="color: var(--code-text);">py-helper</code> plugin. It connects Claude to <a href="https://context7.com/" target="_blank" style="color: var(--accent-primary); text-decoration: none; font-weight: 700;">Context7</a>, an external real-time documentation server, giving the plugin access to up-to-date, version-specific library documentation pulled directly from source repositories. Unlike all the other files in this plugin, <code style="color: var(--code-text);">.mcp.json</code> reaches <em>outside</em> the plugin itself and wires Claude into a live external service.</p>
+  
+  <p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">It contains a single configuration block:</p>
+  
+  <p style="margin-bottom:0.25rem; font-weight:700; color: var(--text-primary);"><code style="color: var(--code-text);">mcpServers</code></p>
+  <ul style="margin-bottom:1rem; padding-left: 1.25rem; color: var(--text-secondary); line-height: 1.6;">
+    <li><strong><code style="color: var(--code-text);">context7</code></strong> — the name given to this MCP server connection, used to reference it internally</li>
+    <li><strong><code style="color: var(--code-text);">command</code></strong> — <code style="color: var(--code-text);">npx</code> tells Claude to use Node's package runner to launch the server</li>
+    <li><strong><code style="color: var(--code-text);">args</code></strong> — <code style="color: var(--code-text);">["-y", "@upstash/context7-mcp"]</code> automatically installs and runs the Context7 MCP package without requiring manual setup. The <code style="color: var(--code-text);">-y</code> flag bypasses confirmation prompts, making it seamless on first use</li>
+  </ul>
+  
+  <p style="margin-bottom:0.5rem; font-weight:700; color: var(--text-primary);">What Context7 actually does</p>
+  <ul style="margin-bottom:1rem; padding-left: 1.25rem; color: var(--text-secondary); line-height: 1.6;">
+    <li>Solves a core problem in AI-assisted development: Claude's training data has a knowledge cutoff, meaning library documentation it knows may be outdated or version-mismatched</li>
+    <li>Context7 fetches <strong>live documentation</strong> directly from source repositories at the moment it's needed, ensuring Claude suggests current API patterns, not deprecated ones</li>
+    <li>For a Python toolkit plugin like <code style="color: var(--code-text);">py-helper</code>, this is especially valuable — when reviewing or fixing code that uses third-party libraries, Claude can reference the actual current docs rather than relying on potentially stale training knowledge</li>
+  </ul>
+  
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);"><strong>How it differs from the other files:</strong> every other file in this plugin defines what Claude <em>does</em>. <code style="color: var(--code-text);">.mcp.json</code> defines what Claude <em>knows</em> — extending its context with real-time external knowledge. It is the plugin's connection to the outside world, making the difference between Claude guessing at library usage and Claude knowing it with certainty.</p>
+</div>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Step 3 — Verify these files</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">Make sure these three remaining logic files were created successfully and have the correct contents:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cat my-claude-marketplace/py-helper-marketplace/plugins/py-helper/commands/py-fix.md
+cat my-claude-marketplace/py-helper-marketplace/plugins/py-helper/hooks/hooks.json
+cat my-claude-marketplace/py-helper-marketplace/plugins/py-helper/.mcp.json</code>
 
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="4" class="tutorial-nav-link previous">
@@ -1641,15 +1908,12 @@ EOF</code>
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">find my-claude-marketplace -type f</code>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">You should see these files:</p>
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">my-claude-marketplace/py-helper-marketplace/.claude-plugin/marketplace.json
-my-claude-marketplace/py-helper-marketplace/plugins/py-helper/.claude-plugin/plugin.json
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">my-claude-marketplace/py-helper-marketplace/plugins/py-helper/.claude-plugin/plugin.json
 my-claude-marketplace/py-helper-marketplace/plugins/py-helper/skills/py-review/SKILL.md
 my-claude-marketplace/py-helper-marketplace/plugins/py-helper/commands/py-fix.md
 my-claude-marketplace/py-helper-marketplace/plugins/py-helper/hooks/hooks.json
-my-claude-marketplace/py-helper-marketplace/plugins/py-helper/.mcp.json</code>
-
-<p style="margin-bottom:0.5rem; line-height:1.75;">If you want to spot-check one file, print it:</p>
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cat my-claude-marketplace/py-helper-marketplace/.claude-plugin/marketplace.json</code>
+my-claude-marketplace/py-helper-marketplace/plugins/py-helper/.mcp.json
+my-claude-marketplace/py-helper-marketplace/.claude-plugin/marketplace.json</code>
 
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="5" class="tutorial-nav-link previous">
@@ -1663,22 +1927,72 @@ my-claude-marketplace/py-helper-marketplace/plugins/py-helper/.mcp.json</code>
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Install the Plugin]</strong>
 
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Step 1 — Go to your Python project</p>
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cd my-python-project
-claude</code>
+<p style="margin-bottom:0.5rem; line-height:1.75;">Enter your project directory and launch Claude:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cd my-python-project</code>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">claude</code>
 
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Step 2 — Register your marketplace</p>
 <p style="margin-bottom:0.5rem; line-height:1.75;">Inside Claude Code, use the absolute path to your marketplace:</p>
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">/plugin marketplace add /absolute/path/to/my-claude-marketplace/py-helper-marketplace</code>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">/plugin marketplace add <span style="color: var(--accent-primary); font-weight: bold;">/absolute/path/to</span>/my-claude-marketplace/py-helper-marketplace</code>
+<p style="margin-bottom:1rem; line-height:1.75; color: var(--text-secondary); font-style: italic;">(Make sure to replace the highlighted <code style="color: var(--code-text);">/absolute/path/to</code> part with your actual absolute path.)</p>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">To get the absolute path, open another terminal tab and run:</p>
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">cd my-claude-marketplace/py-helper-marketplace && pwd</code>
 
+<p style="margin-bottom:0.5rem; line-height:1.75;">You should see a success message like this:</p>
+<code style="display: block; padding: 1rem; background: #1a1a1a; border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: #00ff00; white-space: pre-wrap;">❯ /plugin marketplace add /Users/senthilpalanivelu/Downloads/my-claude-marketplace/py-helper-marketplace                                                       
+  ⎿  Successfully added marketplace: py-helper-marketplace</code>
+  
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Step 3 — Install and reload</p>
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">/plugin install py-helper@py-helper-marketplace
-/reload-plugins</code>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.5rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">/plugin install py-helper@py-helper-marketplace</code>
+
+<p style="margin-bottom: 1.5rem; line-height: 1.6; color: var(--text-secondary); font-size: 0.9rem; padding-left: 0.5rem; border-left: 2px solid var(--accent-primary);">
+  Where:<br>
+  <code style="color: var(--code-text);">py-helper</code> is the plugin you want to install<br>
+  <code style="color: var(--code-text);">py-helper-marketplace</code> is the marketplace it comes from
+</p>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">You should see a confirmation message like this:</p>
+<code style="display: block; padding: 1rem; background: #1a1a1a; border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: #00ff00; white-space: pre-wrap;"> /plugin install py-helper@py-helper-marketplace                                                                                                            
+  ⎿  ✓ Installed py-helper. Run /reload-plugins to activate..</code>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">Then, reload your plugins to activate the changes:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text);">/reload-plugins</code>
+
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">To confirm the plugin is installed, open the plugin panel:</p>
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text);">/plugin</code>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">You should see <code style="color: var(--code-text);">py-helper</code> listed in your marketplaces:</p>
+<code style="display: block; padding: 1rem; background: #1a1a1a; border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: #00ff00; white-space: pre-wrap;">❯ /plugin                                                                                                                                          
+                                                                                                                                                   
+───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  Plugins  Discover   Installed   <span style="background: var(--accent-primary); color: var(--bg-color); padding: 0 4px; border-radius: 2px; font-weight: bold;">Marketplaces</span>   Errors                                                                                            
+                                                                                                                                                 
+  Manage marketplaces                                                                                                                            
+                                                                                                                                                   
+  ❯ + Add Marketplace                                                                                                                              
+                                                                                                                                                   
+    ● claude-code-plugins                                                                                                                          
+      anthropics/claude-code                                                                                                                       
+      13 available • Updated 3/24/2026                                                                                                             
+                                                                                                                                                   
+    ● ✻ claude-plugins-official ✻                                                                                                                  
+      anthropics/claude-plugins-official                                                                                                           
+      118 available • 2 installed • Updated 3/24/2026                                                                                              
+                                                                                                                                                   
+    ● everything-claude-code                                                                                                                       
+      affaan-m/everything-claude-code                                                                                                              
+      1 available • 1 installed • Updated 3/17/2026                                                                                                
+                                                                                                                                                   
+    <span style="color: var(--accent-primary); font-weight: bold;">● py-helper-marketplace
+      /Users/senthilpalanivelu/Downloads/my-claude-marketplace/py-helper-marketplace                                                                          
+      1 available • 1 installed • Updated 3/24/2026</span>
+                                                                                                                                                   
+    ● ui-ux-pro-max-skill                                                                                                                          
+      nextlevelbuilder/ui-ux-pro-max-skill                                                                                                         
+      1 available • 1 installed • Updated 3/15/2026</code>
+<p style="margin-top: 1.25rem; margin-bottom: 0.5rem; line-height: 1.75; font-weight: 500;">Now that you have installed the plugin, it's time to test it!</p>
 
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="6" class="tutorial-nav-link previous">
@@ -1694,19 +2008,310 @@ claude</code>
 <p style="margin-bottom:0.75rem; line-height:1.75;">Now test all four parts of the plugin one by one inside Claude Code.</p>
 
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Test 1 — Skill</p>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;"><code style="color: var(--code-text);">py-review</code> operates on whatever code is in the conversation context.</p>
+
 <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text);">can you review app.py?</code>
-<p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">Claude should auto-apply the <code style="color: var(--code-text);">py-review</code> skill.</p>
+<p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">Claude should auto-apply the <code style="color: var(--code-text);">py-review</code> skill. You will see a <strong>Tool Use</strong> indicator in the terminal:</p>
+<code style="display: block; padding: 1rem; background: #1a1a1a; border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: #00ff00; white-space: pre-wrap;"> 🔧 py-helper: py-review(path: "app.py")</code>
 
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Test 2 — Command</p>
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text);">/py-helper:py-fix</code>
+<p style="margin-bottom:0.75rem; line-height:1.75;"><code style="color: var(--code-text);">py-fix</code> uses <code style="color: var(--code-text);">$ARGUMENTS</code> — meaning it takes a file path as input, making it suitable for operating on files outside the current context.</p>
+
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text);">/py-helper:py-fix app.py</code>
+<code style="display: block; padding: 1rem; background: #1a1a1a; border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: #00ff00; white-space: pre-wrap;">❯ /py-helper:py-fix app.py                                                                                                                         
+                                                                                                                                                   
+<span style="background: rgba(0, 255, 0, 0.15); border-radius: 4px; padding: 0 2px;">⏺ Skill(py-helper:py-fix)</span>                                                                                                                          
+<span style="background: rgba(0, 255, 0, 0.15); border-radius: 4px; padding: 0 2px;">  ⎿  Successfully loaded skill</span>                                                                                                                     
+                                                                                                                                                   
+⏺ I have read app.py. Let me apply the fixes:                                                                                           
+                                                                                                                                                   
+⏺ Update(app.py)
+
+⏺ Summary of Changes                          
+                                                                                          
+  PEP 8 Fixes                                                                                                                                      
+                                                                                                                                                   
+<div style="margin: 0.5rem 0 1rem; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; overflow-x: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+  <table style="width: 100%; border-collapse: collapse; font-family: 'Fira Code', monospace; font-size: 0.82rem; color: #7ee787; min-width: 800px; line-height: 1.4;">
+    <thead>
+      <tr style="border-bottom: 1px dotted #444; background: rgba(255,255,255,0.03);">
+        <th style="padding: 0.6rem 0.8rem; text-align: left; border-right: 1px dotted #444; color: #fff; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.7rem; width: 60px;">Line</th>
+        <th style="padding: 0.6rem 0.8rem; text-align: left; border-right: 1px dotted #444; color: #fff; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.7rem; width: 180px;">Before</th>
+        <th style="padding: 0.6rem 0.8rem; text-align: left; border-right: 1px dotted #444; color: #fff; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.7rem; width: 280px;">After</th>
+        <th style="padding: 0.6rem 0.8rem; text-align: left; color: #fff; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.7rem;">Why</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom: 1px solid #2a2a2a;">
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; color: #888;">01</td>
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; white-space: nowrap;"><code style="background: transparent; color: #f87171; padding: 0; white-space: nowrap;">def add_numbers(a,b):</code></td>
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; white-space: nowrap;"><code style="background: transparent; color: #4ade80; padding: 0; white-space: nowrap;">def add_numbers(a: int, b: int):</code></td>
+        <td style="padding: 0.6rem 0.8rem; color: #9ca3af;">Added space after comma and type hints</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #2a2a2a;">
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; color: #888;">02</td>
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; white-space: nowrap;"><code style="background: transparent; color: #f87171; padding: 0; white-space: nowrap;">x=a+b</code></td>
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; white-space: nowrap;"><code style="background: transparent; color: #4ade80; padding: 0; white-space: nowrap;">return a + b</code></td>
+        <td style="padding: 0.6rem 0.8rem; color: #9ca3af;">Added spaces around operators; removed unused variable <code style="color: #888;">x</code></td>
+      </tr>
+      <tr style="border-bottom: 1px solid #2a2a2a;">
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; color: #888;">03-04</td>
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; color: #f87171; white-space: nowrap;">Trailing whitespace</td>
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; color: #4ade80; white-space: nowrap;">Removed</td>
+        <td style="padding: 0.6rem 0.8rem; color: #9ca3af;">PEP 8: no trailing whitespace</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #2a2a2a;">
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; color: #888;">05</td>
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; white-space: nowrap;"><code style="background: transparent; color: #f87171; padding: 0; white-space: nowrap;">def greet(name):</code></td>
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; white-space: nowrap;"><code style="background: transparent; color: #4ade80; padding: 0; white-space: nowrap;">def greet(name: str) -> None:</code></td>
+        <td style="padding: 0.6rem 0.8rem; color: #9ca3af;">Added type hints</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; color: #888;">08-09</td>
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; color: #f87171; white-space: nowrap;">Module-level code</td>
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; white-space: nowrap;"><code style="background: transparent; color: #4ade80; padding: 0; white-space: nowrap;">if __name__ == "__main__":</code></td>
+        <td style="padding: 0.6rem 0.8rem; color: #9ca3af;">Prevents execution on import</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+                  
+  Type Hints Added                                                                                                                                 
+                  
+  - add_numbers(a: int, b: int) -> int - Parameters and return type                                                                                
+  - greet(name: str) -> None - Parameter and return type
+                                                                                                                                                   
+  Docstrings Added                                                                                                                                 
+                                                                                                                                                   
+  - add_numbers: "Add two numbers and return the result."                                                                                          
+  - greet: "Print a greeting message to the console."
+                                                                                                                                                   
+  Additional Improvements                                                                                                                          
+                                                                                                                                                   
+  - Removed intermediate variable x in add_numbers (direct return is cleaner)                                                                      
+  - Added proper blank line between functions (PEP 8 requires 2 blank lines)
+
+  The updated code now follows Python best practices and is more maintainable, readable, and professional.</code>
+
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">The intended workflow is sequential: run <code style="color: var(--code-text);"> /py-review </code> first to understand the problems, then run <code style="color: var(--code-text);"> /py-fix app.py </code> when you're ready to apply the fixes.</p>
+
 
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Test 3 — Hook</p>
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">ask Claude to add: password = "abc123" to app.py</code>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">add password="abc123" to app.py</code>
+<code style="display: block; padding: 1rem; background: #1a1a1a; border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: #00ff00; white-space: pre-wrap;">❯ add password="abc123" to app.py                                                                                                                  
+                                  
+⏺ I'll add the password variable to app.py. Let me first check the current content of the file and then make the update.                           
+                                                                                                                                                   
+  Read 1 file (ctrl+o to expand)                                                                                                                   
+           
+⏺ Now I'll add the password variable to the file. I'll place it near the top of the file, after the imports (though there are no imports in this   
+  file). I'll add it right after the module docstring (which doesn't exist yet) or at the beginning of the file.
 
-<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Test 4 — MCP GitHub Connection</p>
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">/mcp
+⏺ Update(app.py)                                                                                                                                   
+  ⎿  <span style="color: #ff4d4d;">Error: PreToolUse:Edit hook error: Prompt hook condition was not met: The edit introduces a hardcoded password ('abc123') which is a security risk. Hardcoded secrets should be avoided and instead be loaded from environment variables or secure configuration management systems.</span>
+                                                                                          
+⏺ I understand the security concern. The hook is preventing me from adding a hardcoded password, which is actually a good security practice.
+  Hardcoding passwords in source code is a security risk because:                                                                                  
+   
+  1. The password would be visible to anyone with access to the code                                                                               
+  2. It would be difficult to change the password without modifying the code
+  3. It could accidentally be committed to version control systems                                                                                 
+                                                                                                                                                   
+  Instead of adding the password directly to the file, I recommend one of these more secure approaches:                                            
+                                                                                                                                                   
+  1. Environment Variables: Store the password in an environment variable and read it in the code:                                                 
+  import os       
+  password = os.getenv('APP_PASSWORD', 'default_password')                                                                                         
+  2. Configuration File: Store the password in a separate configuration file that is not committed to version control:                             
+  import json                                                                                                                                      
+  with open('config.json') as f:                                                                                                                   
+      config = json.load(f)                                                                                                                        
+      password = config.get('password')                                                                                                            
+  3. Command Line Arguments: Pass the password as a command line argument when running the script.</span></code>
 
-show me the open issues in my GitHub repo</code>
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Test 4 — MCP Context7 Connection</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">First, verify the MCP server is loaded</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">/mcp</code>
+<code style="display: block; padding: 1rem; background: #1a1a1a; border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: #00ff00; white-space: pre-wrap;">❯ /mcp                                                                                                                                             
+                                                                                                                                                   
+───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  Manage MCP servers                                                                                                                               
+  4 servers                                                                                                                                        
+                                                                                                                                                   
+    User MCPs (/Users/senthilpalanivelu/.claude.json)                                                                                              
+  ❯ magic · ✔ connected                                                                                                                            
+    stitch · ✔ connected                                                                                                                           
+    supadata · ✔ connected
+
+    Built-in MCPs (always available)
+    plugin:py-helper:context7 · ✔ connected
+
+  https://code.claude.com/docs/en/mcp for help</code>
+
+<p style="margin-top:1.5rem; margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1.1rem;">How to Use It</p>
+<p style="margin-bottom:0.75rem; line-height:1.75;">Just add <code style="color: var(--code-text);">use context7</code> to any Python question:</p>
+
+<table style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;">
+  <thead>
+    <tr style="background: var(--surface-color); border-bottom: 1px solid var(--border-color);">
+      <th style="padding: 0.75rem; text-align: left; color: var(--text-primary);">What you say</th>
+      <th style="padding: 0.75rem; text-align: left; color: var(--text-primary);">What Claude does</th>
+    </tr>
+  </thead>
+  <tbody style="line-height:1.6; color: var(--text-secondary);">
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;"><code style="color: var(--code-text);">how do I use pandas groupby? use context7</code></td>
+      <td style="padding: 0.75rem;">Fetches live pandas docs and gives you current syntax</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;"><code style="color: var(--code-text);">what's new in FastAPI 0.115? use context7</code></td>
+      <td style="padding: 0.75rem;">Pulls the actual FastAPI changelog and summarises it</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;"><code style="color: var(--code-text);">how do I use pytest fixtures? use context7</code></td>
+      <td style="padding: 0.75rem;">Gets real pytest docs, not training data from months ago</td>
+    </tr>
+    <tr>
+      <td style="padding: 0.75rem;"><code style="color: var(--code-text);">show me latest asyncio syntax use context7</code></td>
+      <td style="padding: 0.75rem;">Fetches current Python asyncio docs</td>
+    </tr>
+  </tbody>
+</table>
+
+<p style="margin: 1.5rem 0; line-height:1.75; color: var(--text-secondary); font-style: italic;">Context7 is useful on literally every Python coding session — the moment you touch <code style="color: var(--code-text);">requests</code>, <code style="color: var(--code-text);">pandas</code>, <code style="color: var(--code-text);">FastAPI</code>, <code style="color: var(--code-text);">pytest</code> or any other library, it's working for you in the background.</p>
+
+<p style="margin-top:2.5rem; margin-bottom:0.75rem; font-weight:700; color: var(--text-primary); font-size:1.15rem;">The Problem It Solves</p>
+<p style="margin-bottom:0.75rem; line-height:1.75;">When you ask Claude (or any AI) how to use a Python library, Claude answers based on its <strong>training data</strong> — which has a cutoff date. Libraries like <code style="color: var(--code-text);">pandas</code>, <code style="color: var(--code-text);">FastAPI</code>, and <code style="color: var(--code-text);">pytest</code> update constantly. This means Claude might give you:</p>
+
+<ul style="margin: 0.75rem 0 1.25rem 1.25rem; line-height:1.75; color: var(--text-secondary);">
+  <li>A method that was <strong>renamed</strong> in the latest version</li>
+  <li>A parameter that was <strong>removed</strong></li>
+  <li>An old way of doing something that now has a <strong>better approach</strong></li>
+  <li>Code that flat out <strong>doesn't work</strong> on your installed version</li>
+</ul>
+
+<hr style="border: 0; border-top: 1px solid var(--border-color); margin: 2rem 0;">
+
+<p style="margin-bottom:0.75rem; font-weight:700; color: var(--text-primary); font-size:1.15rem;">What Context7 Does</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Context7 sits between you and Claude. Every time you ask about a library, it:</p>
+
+<ol style="margin: 0.75rem 0 1.25rem 1.25rem; line-height:1.75; color: var(--text-secondary);">
+  <li><strong>Looks up the real, live documentation</strong> directly from the library's source</li>
+  <li><strong>Feeds it to Claude</strong> before Claude answers you</li>
+  <li><strong>Claude then answers using current docs</strong> instead of potentially stale training data</li>
+</ol>
+
+<p style="margin-bottom:0.75rem; line-height:1.75; font-style: italic;">Think of it like giving Claude the ability to read the actual manual before answering — every single time.</p>
+
+<hr style="border: 0; border-top: 1px solid var(--border-color); margin: 2rem 0;">
+
+<p style="margin-bottom:0.75rem; font-weight:700; color: var(--text-primary); font-size:1.15rem;">A Concrete Example</p>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-secondary); font-size:0.95rem;">Without Context7:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1.25rem; font-family: monospace; color: var(--text-secondary); white-space: pre-wrap;">You: how do I read a CSV in pandas?
+Claude: Use pd.read_csv() with the parse_dates parameter...
+        (might be based on pandas 1.x docs, but you're running 2.x)</code>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:0.95rem;">With Context7:</p>
+<code style="display: block; padding: 1rem; background: #1a1a1a; border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1.5rem; font-family: monospace; color: #00ff00; white-space: pre-wrap;">You: how do I read a CSV in pandas? use context7
+⏺ I'll help you learn how to read a CSV file in pandas using the Context7 documentation service. Let me look up the relevant documentation for you.
+                                                                                                                                                   
+⏺ plugin:py-helper:context7 - resolve-library-id (MCP)(query: "How to read a CSV file in pandas", libraryName: "pandas")                           
+  ⎿  Available Libraries:                                                                                                                          
+                                                                                                                                                   
+     - Title: pandas                                                                                                                               
+     … +34 lines (ctrl+o to expand)                                                                                                                
+                                                                                                                                                   
+⏺ Now I'll query the documentation for reading CSV files in pandas:                                                                                
+                                                                                                                                                   
+⏺ <span style="background: rgba(255, 152, 0, 0.2); border-radius: 4px; padding: 0 2px;">plugin:py-helper:context7 - query-docs (MCP)</span>(libraryId: "/websites/pandas_pydata", query: "How to read a CSV file into a pandas DataFrame")      
+  ⎿  ### Read CSV data into pandas DataFrame                                                                                                       
+                                                                                                                                                   
+     Source: https://pandas.pydata.org/docs/getting_started/intro_tutorials/09_timeseries                                                          
+     … +49 lines (ctrl+o to expand)                                                                                                                
+                                                                                                                                                   
+⏺ Based on the documentation from Context7, here's how to read a CSV file in pandas:                                                               
+                                                                                                                                                   
+  Basic CSV Reading                                                                                                                                
+                                                                                                                                                   
+  The most common way to read a CSV file in pandas is using the pd.read_csv() function:                                                            
+                                                                                                                                                   
+  import pandas as pd                                                                                                                              
+                                                                                                                                                   
+  # Basic usage                                                                                                                                    
+  df = pd.read_csv('filename.csv')                                                                                                                 
+                                                                                                                                                   
+  # Example with a specific file                                                                                                                   
+  titanic = pd.read_csv("data/titanic.csv")                                                                                                        
+                                                                                                                                                   
+  Common Parameters                                                                                                                                
+                                                                                                                                                   
+  The read_csv() function has many useful parameters:                                                                                              
+                  
+  import pandas as pd                                                                                                                              
+                                                                                                                                                   
+  # Read CSV with specific options                                                                                                                 
+  df = pd.read_csv(                                                                                                                                
+      'filename.csv',                                                                                                                              
+      index_col=0,           # Set first column as index                                                                                           
+      parse_dates=True,       # Parse index column as dates                                                                                        
+      sep=',',               # Specify separator (default is comma)                                                                                
+      header=0,              # Row to use as column names                                                                                          
+      usecols=['col1', 'col2']  # Only read specific columns                                                                                       
+  )                                                                                                                                                
+                                                                                                                                                   
+  Simple Example                                                                                                                                   
+                                                                                                                                                   
+  Here's a complete example:                                                                                                                       
+                  
+  import pandas as pd                                                                                                                              
+                                                                                                                                                   
+  # Read a CSV file into a DataFrame                                                                                                               
+  df = pd.read_csv('data.csv')                                                                                                                     
+                                                                                                                                                   
+  # Display the first few rows                                                                                                                     
+  print(df.head())                                                                                                                                 
+                                                                                                                                                   
+  # Get basic info about the DataFrame                                                                                                             
+  print(df.info())                                                                                                                                 
+                                                                                                                                                   
+  This is the standard way to load CSV data into pandas for analysis. The function automatically handles most CSV formatting, but you can customize its behavior with the various parameters when needed.</code>
+
+<hr style="border: 0; border-top: 1px solid var(--border-color); margin: 2rem 0;">
+
+<p style="margin-bottom:0.75rem; font-weight:700; color: var(--text-primary); font-size:1.15rem;">Why It Fits the py-helper Plugin Perfectly</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Our plugin is all about <strong>Python code quality</strong>. Context7 completes that picture:</p>
+
+<table style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;">
+  <thead>
+    <tr style="background: var(--surface-color); border-bottom: 2px solid var(--border-color);">
+      <th style="padding: 0.75rem; text-align: left; color: var(--text-primary);">Plugin Component</th>
+      <th style="padding: 0.75rem; text-align: left; color: var(--text-primary);">What it handles</th>
+    </tr>
+  </thead>
+  <tbody style="line-height:1.6; color: var(--text-secondary);">
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem; font-weight: 700; color: var(--text-primary);">Skill (py-review)</td>
+      <td style="padding: 0.75rem;">Finds bugs and style issues</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem; font-weight: 700; color: var(--text-primary);">Command (py-fix)</td>
+      <td style="padding: 0.75rem;">Fixes PEP 8 violations</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem; font-weight: 700; color: var(--text-primary);">Hook</td>
+      <td style="padding: 0.75rem;">Guards against secrets and syntax errors</td>
+    </tr>
+    <tr style="background: rgba(0, 242, 255, 0.05);">
+      <td style="padding: 0.75rem; font-weight: 700; color: var(--accent-primary);">MCP (Context7)</td>
+      <td style="padding: 0.75rem; font-weight: 700; color: var(--accent-primary);">Ensures library usage is always up to date</td>
+    </tr>
+  </tbody>
+</table>
+
+<p style="margin-top: 1.25rem; margin-bottom: 1.5rem; line-height: 1.75; color: var(--text-secondary);">Without Context7, Claude could review and fix your code perfectly — but still suggest a library pattern that's outdated. With it, the entire plugin becomes <strong>version-aware</strong>.</p>
 
 <div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 8px; margin: 1rem 0;">
   <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">If something is not working, the fastest fallback is usually <code style="color: var(--code-text);">/reload-plugins</code>.</p>
@@ -1730,15 +2335,12 @@ show me the open issues in my GitHub repo</code>
 git init
 git add .
 git commit -m "Initial plugin"
-git remote add origin https://github.com/yourname/py-helper-marketplace.git
+git remote add origin https://github.com/yourname/py-helper.git
 git push -u origin main</code>
 
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Teammates install it with two commands inside Claude Code</p>
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">/plugin marketplace add github.com/yourname/py-helper-marketplace
+<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); white-space: pre-wrap;">/plugin marketplace add yourname/py-helper
 /plugin install py-helper@py-helper-marketplace</code>
-
-<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Update later</p>
-<code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text);">/plugin marketplace update</code>
 
 <div style="padding: 1.25rem; background: rgba(0, 242, 255, 0.03); border: 1px solid var(--border-color); border-radius: 8px; margin: 1rem 0;">
   <p style="margin: 0 0 0.75rem; font-weight: 600; color: var(--text-primary);">You are done</p>
@@ -1746,16 +2348,47 @@ git push -u origin main</code>
     <li style="margin-bottom: 0.35rem;">A skill that auto-reviews Python code</li>
     <li style="margin-bottom: 0.35rem;">A command that fixes style issues on demand</li>
     <li style="margin-bottom: 0.35rem;">Hooks that guard every file save</li>
-    <li style="margin-bottom: 0;">An MCP connection to GitHub for issues and PRs</li>
+    <li style="margin-bottom: 0;">An MCP connection to Context7 for live Python documentation</li>
   </ul>
 </div>
 
-<div style="margin-top: 2rem; display: flex; justify-content: flex-start; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+<div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(0, 242, 255, 0.1), rgba(112, 0, 255, 0.1)); border: 1px solid var(--accent-primary); border-radius: 12px; margin: 2rem 0; text-align: center;">
+  <p style="margin: 0 0 0.5rem; font-size: 1.25rem; font-weight: 800; color: var(--text-primary); letter-spacing: -0.02em;">Congratulations!</p>
+  <p style="margin: 0; line-height: 1.6; color: var(--text-secondary);">You've successfully built and shared your first high-quality Claude Plugin. Your Python development workflow is now powered by custom skills, automated style fixes, security-first hooks, and live documentation via MCP. <strong>Go build something amazing!</strong></p>
+</div>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="8" class="tutorial-nav-link previous">
     <span>←</span> Previous: Test
   </a>
+  <a href="#" data-goto-tab="9" class="tutorial-nav-link">
+    Next: Additional <span>→</span>
+  </a>
 </div>
-`}],interactiveType:"custom"},f=[D,U,N,H,F,B,_,G,O,R],n={isActive:!1,isLocked:!1,isMinimized:!1,timer:{duration:1500,remaining:1500,interval:null,isRunning:!1},stats:{streak:0,cardsToday:0,focusMinutes:0,lastStudyDate:null}},q={activeConcept:null,resetContentScroll(){const t=document.getElementById("content-area");t&&(t.scrollTop=0);const e=document.querySelector(".tutorial-tab-content");e&&(e.scrollTop=0)},init(){this.renderSidebar(),this.setupEventListeners(),this.initTheme(),this.initStudyMode(),this.initTechStackModal();const t=window.location.hash.substring(1);t&&f.some(e=>e.id===t)?this.selectConcept(t):this.renderWelcome(),L(document.getElementById("constellation-bg"))},renderWelcome(){document.getElementById("constellation-bg").style.display="";const t=this.getConceptOfTheDay(),e=document.getElementById("content-area");e.innerHTML=`
+`},{label:"10. Additional",content:`
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Maintenance & Troubleshooting]</strong>
+
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-top: 4px solid var(--accent-secondary); border-radius: 8px; margin: 1.5rem 0;">
+  <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1.1rem;">How to remove a Marketplace plugin from Claude</p>
+  <p style="margin-bottom:0.5rem; line-height:1.75;">Inside Claude Code, first list what's registered:</p>
+  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); border-left: 2px solid var(--accent-secondary);">/plugin marketplace list</code>
+  <code style="display: block; padding: 1rem; background: #1a1a1a; border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: #00ff00; white-space: pre-wrap;">❯ /plugin marketplace list                                                                                                                         
+  ⎿  Configured marketplaces:                                                                                                                      
+       • claude-plugins-official                                                                                                                   
+       • claude-code-plugins
+       • ui-ux-pro-max-skill
+       • everything-claude-code
+       • <span style="background: rgba(0, 242, 255, 0.2); border-radius: 4px; padding: 0 4px; color: #00f2ff; font-weight: bold;">py-helper-marketplace</span></code>
+  <p style="margin-bottom:0.5rem; line-height:1.75;">You can remove it by using the following command:</p>
+  <code style="display: block; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-text); border-left: 2px solid var(--accent-secondary);">/plugin marketplace remove py-helper-marketplace</code>
+</div>
+
+<div style="margin-top: 2rem; display: flex; justify-content: flex-start; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="9" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Share
+  </a>
+</div>
+`}],interactiveType:"custom"},f=[D,W,N,G,F,B,_,U,O,R],s={isActive:!1,isLocked:!1,isMinimized:!1,timer:{duration:1500,remaining:1500,interval:null,isRunning:!1},stats:{streak:0,cardsToday:0,focusMinutes:0,lastStudyDate:null}},H={activeConcept:null,resetContentScroll(){const t=document.getElementById("content-area");t&&(t.scrollTop=0);const e=document.querySelector(".tutorial-tab-content");e&&(e.scrollTop=0)},init(){this.renderSidebar(),this.setupEventListeners(),this.initTheme(),this.initStudyMode(),this.initTechStackModal();const t=window.location.hash.substring(1);t&&f.some(e=>e.id===t)?this.selectConcept(t):this.renderWelcome(),L(document.getElementById("constellation-bg"))},renderWelcome(){document.getElementById("constellation-bg").style.display="";const t=this.getConceptOfTheDay(),e=document.getElementById("content-area");e.innerHTML=`
       <div class="cotd-ticker">
         <span class="cotd-label">Skill of the Day</span>
         <div class="ticker-track">
@@ -1766,33 +2399,33 @@ git push -u origin main</code>
         <h2>Welcome to Knowledge Lab</h2>
         <p>Select a tutorial from the sidebar to begin your interactive learning journey.</p>
       </div>
-    `,e.querySelector(".cotd-ticker").addEventListener("click",()=>{this.selectConcept(t.id)});const o=e.querySelector(".ticker-text"),a=e.querySelector(".ticker-track").offsetWidth;o.style.setProperty("--start-x",a+"px")},getConceptOfTheDay(){const t=Math.floor(Date.now()/864e5);return f[t%f.length]},initTheme(){localStorage.getItem("theme")==="light"&&(document.documentElement.classList.add("light-mode"),document.querySelector("#theme-toggle .icon").textContent="☀️"),localStorage.getItem("sidebar")==="collapsed"&&document.getElementById("app").classList.add("sidebar-collapsed")},renderSidebar(){const t=document.getElementById("concept-list");t.innerHTML=f.map(e=>`
+    `,e.querySelector(".cotd-ticker").addEventListener("click",()=>{this.selectConcept(t.id)});const r=e.querySelector(".ticker-text"),a=e.querySelector(".ticker-track").offsetWidth;r.style.setProperty("--start-x",a+"px")},getConceptOfTheDay(){const t=Math.floor(Date.now()/864e5);return f[t%f.length]},initTheme(){localStorage.getItem("theme")==="light"&&(document.documentElement.classList.add("light-mode"),document.querySelector("#theme-toggle .icon").textContent="☀️"),localStorage.getItem("sidebar")==="collapsed"&&document.getElementById("app").classList.add("sidebar-collapsed")},renderSidebar(){const t=document.getElementById("concept-list");t.innerHTML=f.map(e=>`
       <li class="nav-item" data-id="${e.id}">${e.title}</li>
-    `).join("")},isMobile(){return window.innerWidth<=640},closeMobileSidebar(){document.getElementById("app").classList.remove("sidebar-open")},setupEventListeners(){document.getElementById("concept-list").addEventListener("click",t=>{if(t.target.classList.contains("nav-item")){const e=t.target.dataset.id;this.isMobile()&&this.closeMobileSidebar(),this.selectConcept(e)}}),document.getElementById("sidebar-toggle").addEventListener("click",()=>{const t=document.getElementById("app");if(this.isMobile())t.classList.toggle("sidebar-open");else{const e=t.classList.toggle("sidebar-collapsed");localStorage.setItem("sidebar",e?"collapsed":"open")}}),document.getElementById("app").addEventListener("click",t=>{this.isMobile()&&t.target===document.getElementById("app")&&this.closeMobileSidebar()}),document.getElementById("theme-toggle").addEventListener("click",()=>{const t=document.documentElement.classList.toggle("light-mode"),e=document.querySelector("#theme-toggle .icon");e.textContent=t?"☀️":"🌙",localStorage.setItem("theme",t?"light":"dark")}),document.getElementById("home-link").addEventListener("click",()=>{this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(t=>t.classList.remove("active")),window.location.hash&&history.replaceState(null,"",window.location.pathname+window.location.search),this.isMobile()&&this.closeMobileSidebar(),this.renderWelcome()}),document.getElementById("concept-search").addEventListener("input",t=>{const e=t.target.value.toLowerCase();document.querySelectorAll(".nav-item").forEach(a=>{const r=a.textContent.toLowerCase();a.style.display=r.includes(e)?"block":"none"})}),window.addEventListener("hashchange",()=>{const t=window.location.hash.substring(1);t&&f.some(e=>e.id===t)?(!this.activeConcept||this.activeConcept.id!==t)&&this.selectConcept(t):t||(this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(e=>e.classList.remove("active")),this.renderWelcome())})},selectConcept(t){const e=f.find(a=>a.id===t);if(!e)return;window.location.hash!==`#${t}`&&(window.location.hash=t),document.getElementById("constellation-bg").style.display="none",this.activeConcept=e,document.querySelectorAll(".nav-item").forEach(a=>a.classList.remove("active"));const o=document.querySelector(`[data-id="${t}"]`);o&&o.classList.add("active"),this.renderConcept(e),this.resetContentScroll()},renderConcept(t){const e=document.getElementById("content-area");if(t.tabs&&t.tabs.length>0){const o=t.tabs.map((r,i)=>`<button class="tutorial-tab-btn${i===0?" active":""}" data-tab="${i}">${r.label}</button>`).join(""),a=t.tabs.map((r,i)=>`<div class="tutorial-tab-panel${i===0?" active":""}" data-panel="${i}">
+    `).join("")},isMobile(){return window.innerWidth<=640},closeMobileSidebar(){document.getElementById("app").classList.remove("sidebar-open")},setupEventListeners(){document.getElementById("concept-list").addEventListener("click",t=>{if(t.target.classList.contains("nav-item")){const e=t.target.dataset.id;this.isMobile()&&this.closeMobileSidebar(),this.selectConcept(e)}}),document.getElementById("sidebar-toggle").addEventListener("click",()=>{const t=document.getElementById("app");if(this.isMobile())t.classList.toggle("sidebar-open");else{const e=t.classList.toggle("sidebar-collapsed");localStorage.setItem("sidebar",e?"collapsed":"open")}}),document.getElementById("app").addEventListener("click",t=>{this.isMobile()&&t.target===document.getElementById("app")&&this.closeMobileSidebar()}),document.getElementById("theme-toggle").addEventListener("click",()=>{const t=document.documentElement.classList.toggle("light-mode"),e=document.querySelector("#theme-toggle .icon");e.textContent=t?"☀️":"🌙",localStorage.setItem("theme",t?"light":"dark")}),document.getElementById("home-link").addEventListener("click",()=>{this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(t=>t.classList.remove("active")),window.location.hash&&history.replaceState(null,"",window.location.pathname+window.location.search),this.isMobile()&&this.closeMobileSidebar(),this.renderWelcome()}),document.getElementById("concept-search").addEventListener("input",t=>{const e=t.target.value.toLowerCase();document.querySelectorAll(".nav-item").forEach(a=>{const o=a.textContent.toLowerCase();a.style.display=o.includes(e)?"block":"none"})}),window.addEventListener("hashchange",()=>{const t=window.location.hash.substring(1);t&&f.some(e=>e.id===t)?(!this.activeConcept||this.activeConcept.id!==t)&&this.selectConcept(t):t||(this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(e=>e.classList.remove("active")),this.renderWelcome())})},selectConcept(t){const e=f.find(a=>a.id===t);if(!e)return;window.location.hash!==`#${t}`&&(window.location.hash=t),document.getElementById("constellation-bg").style.display="none",this.activeConcept=e,document.querySelectorAll(".nav-item").forEach(a=>a.classList.remove("active"));const r=document.querySelector(`[data-id="${t}"]`);r&&r.classList.add("active"),this.renderConcept(e),this.resetContentScroll()},renderConcept(t){const e=document.getElementById("content-area");if(t.tabs&&t.tabs.length>0){const r=t.tabs.map((o,i)=>`<button class="tutorial-tab-btn${i===0?" active":""}" data-tab="${i}">${o.label}</button>`).join(""),a=t.tabs.map((o,i)=>`<div class="tutorial-tab-panel${i===0?" active":""}" data-panel="${i}">
           <div class="concept-content" id="concept-description-${i}">
-            ${r.content}
+            ${o.content}
           </div>
         </div>`).join("");e.innerHTML=`
         <article class="concept-card concept-card--tabs">
-          <nav class="tutorial-tabs" role="tablist">${o}</nav>
+          <nav class="tutorial-tabs" role="tablist">${r}</nav>
           <div class="tutorial-tab-content">${a}</div>
         </article>
-      `,this.initTabs(),t.tabs.forEach((r,i)=>{const d=document.getElementById(`concept-description-${i}`);d&&this.attachCopyButtonsTo(d)})}else{const o=t.description||"Add your description here...",a=o.trim().startsWith("<")?o:o.split(`
+      `,this.initTabs(),t.tabs.forEach((o,i)=>{const d=document.getElementById(`concept-description-${i}`);d&&this.attachCopyButtonsTo(d)})}else{const r=t.description||"Add your description here...",a=r.trim().startsWith("<")?r:r.split(`
 
-`).map(r=>`<p>${r}</p>`).join("");e.innerHTML=`
+`).map(o=>`<p>${o}</p>`).join("");e.innerHTML=`
         <article class="concept-card">
           <h2 class="concept-title">${t.title}</h2>
           ${t.category||t.tags&&t.tags.length>0?`
           <div class="concept-meta">
             ${t.category?`<span class="tag">${t.category}</span>`:""}
-            ${t.tags?t.tags.map(r=>`<span class="tag">${r}</span>`).join(""):""}
+            ${t.tags?t.tags.map(o=>`<span class="tag">${o}</span>`).join(""):""}
           </div>`:""}
           <div class="concept-content" id="concept-description">
             ${a}
           </div>
         </article>
-      `,this.attachCopyButtons()}},initTabs(){const t=document.querySelectorAll(".tutorial-tab-btn"),e=document.querySelectorAll(".tutorial-tab-panel"),o=a=>{t.forEach(r=>r.classList.remove("active")),e.forEach(r=>r.classList.remove("active")),t[a].classList.add("active"),e[a].classList.add("active"),t[a].scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"}),this.resetContentScroll()};t.forEach(a=>{a.addEventListener("click",()=>o(Number(a.dataset.tab)))}),document.querySelectorAll("[data-goto-tab]").forEach(a=>{a.addEventListener("click",r=>{r.preventDefault(),o(Number(a.dataset.gotoTab))})}),document.querySelectorAll("[data-goto-concept]").forEach(a=>{a.addEventListener("click",r=>{r.preventDefault(),typeof this.selectConcept=="function"&&this.selectConcept(a.dataset.gotoConcept)})})},attachCopyButtons(){const t=document.getElementById("concept-description");t&&this.attachCopyButtonsTo(t)},attachCopyButtonsTo(t){if(!t)return;t.querySelectorAll("code").forEach(o=>{if(!(o.style.display==="block"||o.textContent.includes(`
-`)))return;const r=document.createElement("div");r.className="code-wrapper",o.parentNode.insertBefore(r,o),r.appendChild(o);const i=document.createElement("button");i.className="copy-btn",i.setAttribute("title","Copy to clipboard");const d='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>',p='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';i.innerHTML=d,r.appendChild(i),i.addEventListener("click",()=>{const s=o.textContent.replace(/^❯\s+/,"");navigator.clipboard.writeText(s).then(()=>{i.innerHTML=p,i.classList.add("copied"),setTimeout(()=>{i.innerHTML=d,i.classList.remove("copied")},2e3)})})})},initTechStackModal(){const t=document.getElementById("tech-stack-btn"),e=document.getElementById("tech-stack-overlay"),o=document.getElementById("close-tech-stack"),a=document.getElementById("tech-stack-list");if(!t||!e||!o||!a)return;const r={...S.dependencies||{},...S.devDependencies||{}},i=[{name:"Vanilla JavaScript",desc:"Core application logic, ECMAScript modules, DOM manipulation, and dynamic rendering.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M14.5 9h-5l-.5-5h7l-.5 5zm-5 4h5l-.5 4.5-2 1.5-2-1.5-.2-2h2.2l.1 1.2 1 .8 1-.8.2-1.2h-3.8z"></path></svg>'},{name:"Vanilla CSS3 & HTML5",desc:"Custom glassmorphism styling, responsive grid layout, and semantic structure.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M15 9h-6l-.5-4h7.5l-.5 4zm-6 4h6l-.5 4.5-2.5 1.5-2.5-1.5-.2-2h2.2l.1 1.2 1.2.8 1.2-.8.2-1.2h-4.6z"></path></svg>'},{name:"HTML5 Canvas API",desc:"Custom performant animations including the Neural Constellation and Zen Flow backgrounds.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.268-.652-.053-.877.215-.225.542-.31 1.051-.31h2.438c2.66 0 4.853-2.192 4.853-4.853C21.5 6.756 17.244 2 12 2z"></path></svg>'}];r.vite&&i.push({name:"Vite ("+r.vite.replace(/[\^\~]/,"")+")",desc:"Next-generation frontend tooling providing ultra-fast builds and Hot Module Replacement.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>'}),i.push({name:"GitHub Pages",desc:"Automated CI/CD deployment via GitHub Actions pipeline using the deployed build.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>'}),a.innerHTML=i.map(c=>`
+      `,this.attachCopyButtons()}},initTabs(){const t=document.querySelectorAll(".tutorial-tab-btn"),e=document.querySelectorAll(".tutorial-tab-panel"),r=a=>{t.forEach(o=>o.classList.remove("active")),e.forEach(o=>o.classList.remove("active")),t[a].classList.add("active"),e[a].classList.add("active"),t[a].scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"}),this.resetContentScroll()};t.forEach(a=>{a.addEventListener("click",()=>r(Number(a.dataset.tab)))}),document.querySelectorAll("[data-goto-tab]").forEach(a=>{a.addEventListener("click",o=>{o.preventDefault(),r(Number(a.dataset.gotoTab))})}),document.querySelectorAll("[data-goto-concept]").forEach(a=>{a.addEventListener("click",o=>{o.preventDefault(),typeof this.selectConcept=="function"&&this.selectConcept(a.dataset.gotoConcept)})})},attachCopyButtons(){const t=document.getElementById("concept-description");t&&this.attachCopyButtonsTo(t)},attachCopyButtonsTo(t){if(!t)return;t.querySelectorAll("code").forEach(r=>{if(!(r.style.display==="block"||r.textContent.includes(`
+`)))return;const o=document.createElement("div");o.className="code-wrapper",r.parentNode.insertBefore(o,r),o.appendChild(r);const i=document.createElement("button");i.className="copy-btn",i.setAttribute("title","Copy to clipboard");const d='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>',p='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';i.innerHTML=d,o.appendChild(i),i.addEventListener("click",()=>{const l=r.textContent.replace(/^❯\s+/,"");navigator.clipboard.writeText(l).then(()=>{i.innerHTML=p,i.classList.add("copied"),setTimeout(()=>{i.innerHTML=d,i.classList.remove("copied")},2e3)})})})},initTechStackModal(){const t=document.getElementById("tech-stack-btn"),e=document.getElementById("tech-stack-overlay"),r=document.getElementById("close-tech-stack"),a=document.getElementById("tech-stack-list");if(!t||!e||!r||!a)return;const o={...S.dependencies||{},...S.devDependencies||{}},i=[{name:"Vanilla JavaScript",desc:"Core application logic, ECMAScript modules, DOM manipulation, and dynamic rendering.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M14.5 9h-5l-.5-5h7l-.5 5zm-5 4h5l-.5 4.5-2 1.5-2-1.5-.2-2h2.2l.1 1.2 1 .8 1-.8.2-1.2h-3.8z"></path></svg>'},{name:"Vanilla CSS3 & HTML5",desc:"Custom glassmorphism styling, responsive grid layout, and semantic structure.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M15 9h-6l-.5-4h7.5l-.5 4zm-6 4h6l-.5 4.5-2.5 1.5-2.5-1.5-.2-2h2.2l.1 1.2 1.2.8 1.2-.8.2-1.2h-4.6z"></path></svg>'},{name:"HTML5 Canvas API",desc:"Custom performant animations including the Neural Constellation and Zen Flow backgrounds.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.268-.652-.053-.877.215-.225.542-.31 1.051-.31h2.438c2.66 0 4.853-2.192 4.853-4.853C21.5 6.756 17.244 2 12 2z"></path></svg>'}];o.vite&&i.push({name:"Vite ("+o.vite.replace(/[\^\~]/,"")+")",desc:"Next-generation frontend tooling providing ultra-fast builds and Hot Module Replacement.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>'}),i.push({name:"GitHub Pages",desc:"Automated CI/CD deployment via GitHub Actions pipeline using the deployed build.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>'}),a.innerHTML=i.map(c=>`
       <li class="tech-stack-item">
         <div class="tech-stack-icon-wrapper">
           ${c.icon}
@@ -1802,4 +2435,4 @@ git push -u origin main</code>
           <span class="tech-stack-desc">${c.desc}</span>
         </div>
       </li>
-    `).join("");const d=()=>{e.classList.remove("hidden"),e.offsetWidth,e.classList.add("active")},p=()=>{e.classList.remove("active"),setTimeout(()=>{e.classList.contains("active")||e.classList.add("hidden")},300)};t.addEventListener("click",d),o.addEventListener("click",p),e.addEventListener("click",c=>{c.target===e&&p()})},initStudyMode(){this.loadStudyStats(),this.updateStudyMetrics(),this.initZenFlow(),document.getElementById("study-mode-btn").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("exit-study").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("timer-toggle").addEventListener("click",()=>{this.toggleTimer()}),document.getElementById("timer-reset").addEventListener("click",()=>{this.resetTimer()}),document.querySelectorAll(".preset-btn").forEach(t=>{t.addEventListener("click",e=>{const o=parseInt(e.target.dataset.time);this.setTimerDuration(o)})}),document.getElementById("minimize-study").addEventListener("click",()=>{this.minimizeStudy()}),document.getElementById("expand-study").addEventListener("click",()=>{this.expandStudy()}),document.getElementById("mini-stop-btn").addEventListener("click",()=>{this.expandStudy(),this.toggleStudyMode()}),document.getElementById("lock-screen-btn").addEventListener("click",()=>{this.lockScreen()}),document.getElementById("unlock-screen-btn").addEventListener("click",()=>{this.unlockScreen()})},loadStudyStats(){const t=localStorage.getItem("studyStats");t&&(n.stats=JSON.parse(t),this.updateStreak())},saveStudyStats(){localStorage.setItem("studyStats",JSON.stringify(n.stats))},updateStreak(){const t=new Date().toDateString(),e=n.stats.lastStudyDate;if(e){const o=new Date(e),a=new Date;a.setDate(a.getDate()-1),o.toDateString()===a.toDateString()||o.toDateString()!==t&&(n.stats.streak=0)}},updateStudyMetrics(){const t=document.getElementById("study-streak"),e=document.getElementById("study-cards"),o=document.getElementById("study-minutes");t&&(t.textContent=n.stats.streak),e&&(e.textContent=n.stats.cardsToday),o&&(o.textContent=n.stats.focusMinutes)},toggleStudyMode(){n.isActive=!n.isActive;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");if(n.isActive){if(n.isMinimized){this.expandStudy();return}t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1",this.updateStreak(),this.saveStudyStats()}else this.expandStudy(),t.classList.remove("active"),e.style.opacity="0",this.resetTimer(),setTimeout(()=>{t.classList.add("hidden")},500)},setTimerDuration(t){n.timer.duration=t*60,n.timer.remaining=t*60,document.querySelectorAll(".preset-btn").forEach(e=>{e.classList.toggle("active",parseInt(e.dataset.time)===t)}),this.updateTimerDisplay()},toggleTimer(){n.timer.isRunning?this.pauseTimer():this.startTimer()},startTimer(){n.timer.isRunning=!0,document.getElementById("timer-toggle").textContent="Pause",document.querySelector(".timer-wrapper").classList.add("active"),document.getElementById("lock-screen-btn").classList.remove("hidden"),n.timer.interval=setInterval(()=>{n.timer.remaining--,this.updateTimerDisplay(),n.timer.remaining<=0&&this.completeTimer()},1e3)},pauseTimer(){n.timer.isRunning=!1,document.getElementById("timer-toggle").textContent="Resume",document.querySelector(".timer-wrapper").classList.remove("active"),document.getElementById("lock-screen-btn").classList.add("hidden"),clearInterval(n.timer.interval),n.isLocked&&this.unlockScreen()},resetTimer(){this.pauseTimer(),n.timer.remaining=n.timer.duration,document.getElementById("timer-toggle").textContent="Start Focus",document.getElementById("timer-status").textContent="Ready to focus",document.getElementById("lock-screen-btn").classList.add("hidden"),this.updateTimerDisplay()},completeTimer(){this.pauseTimer(),document.getElementById("timer-status").textContent="Focus complete! Great work!",n.stats.focusMinutes+=Math.floor(n.timer.duration/60),this.updateStreakDate(),this.saveStudyStats(),this.updateStudyMetrics(),"Notification"in window&&Notification.permission==="granted"&&new Notification("Focus Session Complete",{body:"Great job! Take a break.",icon:"/vite.svg"})},updateTimerDisplay(){const t=Math.floor(n.timer.remaining/60),e=n.timer.remaining%60,o=`${t.toString().padStart(2,"0")}:${e.toString().padStart(2,"0")}`;document.getElementById("timer-minutes").textContent=t.toString().padStart(2,"0"),document.getElementById("timer-seconds").textContent=e.toString().padStart(2,"0"),document.getElementById("mini-timer-display").textContent=o;const a=n.timer.remaining/n.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${a}%`;const r=n.timer.remaining/n.timer.duration,d=2*Math.PI*130*(1-r);document.getElementById("timer-progress").style.strokeDashoffset=d,n.timer.isRunning?document.getElementById("timer-status").textContent="Stay focused...":document.getElementById("timer-status").textContent="Ready to focus"},minimizeStudy(){n.isMinimized=!0;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("active"),e.style.opacity="0",setTimeout(()=>t.classList.add("hidden"),500),document.getElementById("mini-timer").classList.remove("hidden");const o=Math.floor(n.timer.remaining/60),a=n.timer.remaining%60;document.getElementById("mini-timer-display").textContent=`${o.toString().padStart(2,"0")}:${a.toString().padStart(2,"0")}`;const r=n.timer.remaining/n.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${r}%`},expandStudy(){if(n.isMinimized=!1,document.getElementById("mini-timer").classList.add("hidden"),n.isActive){const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1"}},lockScreen(){n.isLocked=!0,document.getElementById("study-mode-overlay").classList.add("study-locked"),document.getElementById("unlock-screen-overlay").classList.remove("hidden")},unlockScreen(){n.isLocked=!1,document.getElementById("study-mode-overlay").classList.remove("study-locked"),document.getElementById("unlock-screen-overlay").classList.add("hidden")},updateStreakDate(){const t=new Date().toDateString(),e=n.stats.lastStudyDate;if(e!==t){const o=new Date;o.setDate(o.getDate()-1),e===o.toDateString()?n.stats.streak++:n.stats.streak=1,n.stats.lastStudyDate=t}},initZenFlow(){const t=document.getElementById("zen-flow-canvas"),e=t.getContext("2d");let o,a,r=[];const i=()=>{o=t.width=window.innerWidth,a=t.height=window.innerHeight,d()},d=()=>{r=[];const c=30;for(let s=0;s<c;s++)r.push({x:Math.random()*o,y:Math.random()*a,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,radius:Math.random()*80+40,hue:Math.random()*60+170,alpha:Math.random()*.1+.05,pulse:Math.random()*Math.PI*2})},p=()=>{if(!n.isActive){requestAnimationFrame(p);return}e.clearRect(0,0,o,a);const c=document.documentElement.classList.contains("light-mode");if(r.forEach(s=>{s.x+=s.vx,s.y+=s.vy,s.x<-s.radius&&(s.x=o+s.radius),s.x>o+s.radius&&(s.x=-s.radius),s.y<-s.radius&&(s.y=a+s.radius),s.y>a+s.radius&&(s.y=-s.radius),s.pulse+=.02;const u=e.createRadialGradient(s.x,s.y,0,s.x,s.y,s.radius),b=s.radius*(1+Math.sin(s.pulse)*.1);c?(u.addColorStop(0,`hsla(40, 30%, 70%, ${s.alpha*.5})`),u.addColorStop(.5,`hsla(40, 20%, 80%, ${s.alpha*.2})`),u.addColorStop(1,"transparent")):(u.addColorStop(0,`hsla(${s.hue}, 70%, 50%, ${s.alpha})`),u.addColorStop(.5,`hsla(${s.hue}, 70%, 50%, ${s.alpha*.3})`),u.addColorStop(1,"transparent")),e.beginPath(),e.arc(s.x,s.y,b,0,Math.PI*2),e.fillStyle=u,e.fill()}),n.timer.isRunning){const s=Date.now()/1e3,u=150+Math.sin(s*.5)*20,b=e.createRadialGradient(o/2,a/2,0,o/2,a/2,u);c?(b.addColorStop(0,"hsla(40, 30%, 75%, 0.05)"),b.addColorStop(1,"transparent")):(b.addColorStop(0,"hsla(180, 70%, 50%, 0.03)"),b.addColorStop(1,"transparent")),e.beginPath(),e.arc(o/2,a/2,u,0,Math.PI*2),e.fillStyle=b,e.fill()}requestAnimationFrame(p)};window.addEventListener("resize",i),i(),p()}};document.addEventListener("DOMContentLoaded",()=>q.init());
+    `).join("");const d=()=>{e.classList.remove("hidden"),e.offsetWidth,e.classList.add("active")},p=()=>{e.classList.remove("active"),setTimeout(()=>{e.classList.contains("active")||e.classList.add("hidden")},300)};t.addEventListener("click",d),r.addEventListener("click",p),e.addEventListener("click",c=>{c.target===e&&p()})},initStudyMode(){this.loadStudyStats(),this.updateStudyMetrics(),this.initZenFlow(),document.getElementById("study-mode-btn").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("exit-study").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("timer-toggle").addEventListener("click",()=>{this.toggleTimer()}),document.getElementById("timer-reset").addEventListener("click",()=>{this.resetTimer()}),document.querySelectorAll(".preset-btn").forEach(t=>{t.addEventListener("click",e=>{const r=parseInt(e.target.dataset.time);this.setTimerDuration(r)})}),document.getElementById("minimize-study").addEventListener("click",()=>{this.minimizeStudy()}),document.getElementById("expand-study").addEventListener("click",()=>{this.expandStudy()}),document.getElementById("mini-stop-btn").addEventListener("click",()=>{this.expandStudy(),this.toggleStudyMode()}),document.getElementById("lock-screen-btn").addEventListener("click",()=>{this.lockScreen()}),document.getElementById("unlock-screen-btn").addEventListener("click",()=>{this.unlockScreen()})},loadStudyStats(){const t=localStorage.getItem("studyStats");t&&(s.stats=JSON.parse(t),this.updateStreak())},saveStudyStats(){localStorage.setItem("studyStats",JSON.stringify(s.stats))},updateStreak(){const t=new Date().toDateString(),e=s.stats.lastStudyDate;if(e){const r=new Date(e),a=new Date;a.setDate(a.getDate()-1),r.toDateString()===a.toDateString()||r.toDateString()!==t&&(s.stats.streak=0)}},updateStudyMetrics(){const t=document.getElementById("study-streak"),e=document.getElementById("study-cards"),r=document.getElementById("study-minutes");t&&(t.textContent=s.stats.streak),e&&(e.textContent=s.stats.cardsToday),r&&(r.textContent=s.stats.focusMinutes)},toggleStudyMode(){s.isActive=!s.isActive;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");if(s.isActive){if(s.isMinimized){this.expandStudy();return}t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1",this.updateStreak(),this.saveStudyStats()}else this.expandStudy(),t.classList.remove("active"),e.style.opacity="0",this.resetTimer(),setTimeout(()=>{t.classList.add("hidden")},500)},setTimerDuration(t){s.timer.duration=t*60,s.timer.remaining=t*60,document.querySelectorAll(".preset-btn").forEach(e=>{e.classList.toggle("active",parseInt(e.dataset.time)===t)}),this.updateTimerDisplay()},toggleTimer(){s.timer.isRunning?this.pauseTimer():this.startTimer()},startTimer(){s.timer.isRunning=!0,document.getElementById("timer-toggle").textContent="Pause",document.querySelector(".timer-wrapper").classList.add("active"),document.getElementById("lock-screen-btn").classList.remove("hidden"),s.timer.interval=setInterval(()=>{s.timer.remaining--,this.updateTimerDisplay(),s.timer.remaining<=0&&this.completeTimer()},1e3)},pauseTimer(){s.timer.isRunning=!1,document.getElementById("timer-toggle").textContent="Resume",document.querySelector(".timer-wrapper").classList.remove("active"),document.getElementById("lock-screen-btn").classList.add("hidden"),clearInterval(s.timer.interval),s.isLocked&&this.unlockScreen()},resetTimer(){this.pauseTimer(),s.timer.remaining=s.timer.duration,document.getElementById("timer-toggle").textContent="Start Focus",document.getElementById("timer-status").textContent="Ready to focus",document.getElementById("lock-screen-btn").classList.add("hidden"),this.updateTimerDisplay()},completeTimer(){this.pauseTimer(),document.getElementById("timer-status").textContent="Focus complete! Great work!",s.stats.focusMinutes+=Math.floor(s.timer.duration/60),this.updateStreakDate(),this.saveStudyStats(),this.updateStudyMetrics(),"Notification"in window&&Notification.permission==="granted"&&new Notification("Focus Session Complete",{body:"Great job! Take a break.",icon:"/vite.svg"})},updateTimerDisplay(){const t=Math.floor(s.timer.remaining/60),e=s.timer.remaining%60,r=`${t.toString().padStart(2,"0")}:${e.toString().padStart(2,"0")}`;document.getElementById("timer-minutes").textContent=t.toString().padStart(2,"0"),document.getElementById("timer-seconds").textContent=e.toString().padStart(2,"0"),document.getElementById("mini-timer-display").textContent=r;const a=s.timer.remaining/s.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${a}%`;const o=s.timer.remaining/s.timer.duration,d=2*Math.PI*130*(1-o);document.getElementById("timer-progress").style.strokeDashoffset=d,s.timer.isRunning?document.getElementById("timer-status").textContent="Stay focused...":document.getElementById("timer-status").textContent="Ready to focus"},minimizeStudy(){s.isMinimized=!0;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("active"),e.style.opacity="0",setTimeout(()=>t.classList.add("hidden"),500),document.getElementById("mini-timer").classList.remove("hidden");const r=Math.floor(s.timer.remaining/60),a=s.timer.remaining%60;document.getElementById("mini-timer-display").textContent=`${r.toString().padStart(2,"0")}:${a.toString().padStart(2,"0")}`;const o=s.timer.remaining/s.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${o}%`},expandStudy(){if(s.isMinimized=!1,document.getElementById("mini-timer").classList.add("hidden"),s.isActive){const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1"}},lockScreen(){s.isLocked=!0,document.getElementById("study-mode-overlay").classList.add("study-locked"),document.getElementById("unlock-screen-overlay").classList.remove("hidden")},unlockScreen(){s.isLocked=!1,document.getElementById("study-mode-overlay").classList.remove("study-locked"),document.getElementById("unlock-screen-overlay").classList.add("hidden")},updateStreakDate(){const t=new Date().toDateString(),e=s.stats.lastStudyDate;if(e!==t){const r=new Date;r.setDate(r.getDate()-1),e===r.toDateString()?s.stats.streak++:s.stats.streak=1,s.stats.lastStudyDate=t}},initZenFlow(){const t=document.getElementById("zen-flow-canvas"),e=t.getContext("2d");let r,a,o=[];const i=()=>{r=t.width=window.innerWidth,a=t.height=window.innerHeight,d()},d=()=>{o=[];const c=30;for(let l=0;l<c;l++)o.push({x:Math.random()*r,y:Math.random()*a,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,radius:Math.random()*80+40,hue:Math.random()*60+170,alpha:Math.random()*.1+.05,pulse:Math.random()*Math.PI*2})},p=()=>{if(!s.isActive){requestAnimationFrame(p);return}e.clearRect(0,0,r,a);const c=document.documentElement.classList.contains("light-mode");if(o.forEach(l=>{l.x+=l.vx,l.y+=l.vy,l.x<-l.radius&&(l.x=r+l.radius),l.x>r+l.radius&&(l.x=-l.radius),l.y<-l.radius&&(l.y=a+l.radius),l.y>a+l.radius&&(l.y=-l.radius),l.pulse+=.02;const u=e.createRadialGradient(l.x,l.y,0,l.x,l.y,l.radius),b=l.radius*(1+Math.sin(l.pulse)*.1);c?(u.addColorStop(0,`hsla(40, 30%, 70%, ${l.alpha*.5})`),u.addColorStop(.5,`hsla(40, 20%, 80%, ${l.alpha*.2})`),u.addColorStop(1,"transparent")):(u.addColorStop(0,`hsla(${l.hue}, 70%, 50%, ${l.alpha})`),u.addColorStop(.5,`hsla(${l.hue}, 70%, 50%, ${l.alpha*.3})`),u.addColorStop(1,"transparent")),e.beginPath(),e.arc(l.x,l.y,b,0,Math.PI*2),e.fillStyle=u,e.fill()}),s.timer.isRunning){const l=Date.now()/1e3,u=150+Math.sin(l*.5)*20,b=e.createRadialGradient(r/2,a/2,0,r/2,a/2,u);c?(b.addColorStop(0,"hsla(40, 30%, 75%, 0.05)"),b.addColorStop(1,"transparent")):(b.addColorStop(0,"hsla(180, 70%, 50%, 0.03)"),b.addColorStop(1,"transparent")),e.beginPath(),e.arc(r/2,a/2,u,0,Math.PI*2),e.fillStyle=b,e.fill()}requestAnimationFrame(p)};window.addEventListener("resize",i),i(),p()}};document.addEventListener("DOMContentLoaded",()=>H.init());

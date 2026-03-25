@@ -642,19 +642,50 @@ my-claude-marketplace/py-helper-marketplace/.claude-plugin/marketplace.json</cod
                                                                                           
   PEP 8 Fixes                                                                                                                                      
                                                                                                                                                    
-  ┌──────┬───────────────────────┬───────────────────────────────────────┬──────────────────────────────────────────────────────────┐              
-  │ Line │        Before         │                 After                 │                           Why                            │              
-  ├──────┼───────────────────────┼───────────────────────────────────────┼──────────────────────────────────────────────────────────┤              
-  │ 1    │ def add_numbers(a,b): │ def add_numbers(a: int, b: int):      │ Added space after comma and type hints                   │
-  ├──────┼───────────────────────┼───────────────────────────────────────┼──────────────────────────────────────────────────────────┤              
-  │ 2    │ x=a+b                 │ return a + b                          │ Added spaces around operators; removed unused variable x │              
-  ├──────┼───────────────────────┼───────────────────────────────────────┼──────────────────────────────────────────────────────────┤              
-  │ 3-4  │ Trailing whitespace   │ Removed                               │ PEP 8: no trailing whitespace                            │              
-  ├──────┼───────────────────────┼───────────────────────────────────────┼──────────────────────────────────────────────────────────┤              
-  │ 5    │ def greet(name):      │ def greet(name: str) -> None:         │ Added type hints                                         │
-  ├──────┼───────────────────────┼───────────────────────────────────────┼──────────────────────────────────────────────────────────┤              
-  │ 8-9  │ Module-level code     │ Wrapped in if __name__ == "__main__": │ Prevents execution on import                             │
-  └──────┴───────────────────────┴───────────────────────────────────────┴──────────────────────────────────────────────────────────┘              
+<div style="margin: 0.5rem 0 1rem; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; overflow-x: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+  <table style="width: 100%; border-collapse: collapse; font-family: 'Fira Code', monospace; font-size: 0.82rem; color: #7ee787; min-width: 800px; line-height: 1.4;">
+    <thead>
+      <tr style="border-bottom: 1px dotted #444; background: rgba(255,255,255,0.03);">
+        <th style="padding: 0.6rem 0.8rem; text-align: left; border-right: 1px dotted #444; color: #fff; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.7rem; width: 60px;">Line</th>
+        <th style="padding: 0.6rem 0.8rem; text-align: left; border-right: 1px dotted #444; color: #fff; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.7rem; width: 180px;">Before</th>
+        <th style="padding: 0.6rem 0.8rem; text-align: left; border-right: 1px dotted #444; color: #fff; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.7rem; width: 280px;">After</th>
+        <th style="padding: 0.6rem 0.8rem; text-align: left; color: #fff; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.7rem;">Why</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom: 1px solid #2a2a2a;">
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; color: #888;">01</td>
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; white-space: nowrap;"><code style="background: transparent; color: #f87171; padding: 0; white-space: nowrap;">def add_numbers(a,b):</code></td>
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; white-space: nowrap;"><code style="background: transparent; color: #4ade80; padding: 0; white-space: nowrap;">def add_numbers(a: int, b: int):</code></td>
+        <td style="padding: 0.6rem 0.8rem; color: #9ca3af;">Added space after comma and type hints</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #2a2a2a;">
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; color: #888;">02</td>
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; white-space: nowrap;"><code style="background: transparent; color: #f87171; padding: 0; white-space: nowrap;">x=a+b</code></td>
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; white-space: nowrap;"><code style="background: transparent; color: #4ade80; padding: 0; white-space: nowrap;">return a + b</code></td>
+        <td style="padding: 0.6rem 0.8rem; color: #9ca3af;">Added spaces around operators; removed unused variable <code style="color: #888;">x</code></td>
+      </tr>
+      <tr style="border-bottom: 1px solid #2a2a2a;">
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; color: #888;">03-04</td>
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; color: #f87171; white-space: nowrap;">Trailing whitespace</td>
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; color: #4ade80; white-space: nowrap;">Removed</td>
+        <td style="padding: 0.6rem 0.8rem; color: #9ca3af;">PEP 8: no trailing whitespace</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #2a2a2a;">
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; color: #888;">05</td>
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; white-space: nowrap;"><code style="background: transparent; color: #f87171; padding: 0; white-space: nowrap;">def greet(name):</code></td>
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; white-space: nowrap;"><code style="background: transparent; color: #4ade80; padding: 0; white-space: nowrap;">def greet(name: str) -> None:</code></td>
+        <td style="padding: 0.6rem 0.8rem; color: #9ca3af;">Added type hints</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; color: #888;">08-09</td>
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; color: #f87171; white-space: nowrap;">Module-level code</td>
+        <td style="padding: 0.6rem 0.8rem; border-right: 1px dotted #444; white-space: nowrap;"><code style="background: transparent; color: #4ade80; padding: 0; white-space: nowrap;">if __name__ == "__main__":</code></td>
+        <td style="padding: 0.6rem 0.8rem; color: #9ca3af;">Prevents execution on import</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
                   
   Type Hints Added                                                                                                                                 
                   
