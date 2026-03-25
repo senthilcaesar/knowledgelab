@@ -244,9 +244,9 @@
         position: fixed;
         right: 24px;
         bottom: 24px;
-        width: min(420px, calc(100vw - 32px));
-        padding: 18px 20px;
-        border-radius: 18px;
+        width: min(360px, calc(100vw - 40px));
+        padding: 15px 16px;
+        border-radius: 16px;
         border: 1px solid rgba(255, 255, 255, 0.14);
         background: rgba(26, 24, 22, 0.94);
         color: rgba(255, 248, 239, 0.96);
@@ -261,8 +261,8 @@
 
       .note-panel-title {
         display: block;
-        margin-bottom: 10px;
-        font-size: 1rem;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
         font-weight: 800;
         text-transform: uppercase;
         letter-spacing: 0.08em;
@@ -271,22 +271,22 @@
 
       .note-panel-heading {
         display: block;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
         font-family: "Shantell Sans", cursive;
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         line-height: 1.05;
         color: #fff3d4;
       }
 
       .note-panel p {
         margin: 0;
-        font-size: 1.12rem;
-        line-height: 1.6;
+        font-size: 0.98rem;
+        line-height: 1.5;
       }
 
       .note-panel code {
         font-family: "SFMono-Regular", "Consolas", monospace;
-        font-size: 1rem;
+        font-size: 0.9rem;
         color: #ffdca0;
       }
 
@@ -312,16 +312,16 @@
           left: 12px;
           bottom: 12px;
           width: auto;
-          padding: 16px;
+          padding: 14px;
         }
 
         .note-panel-heading {
-          font-size: 1.3rem;
+          font-size: 1.16rem;
         }
 
         .note-panel p,
         .note-panel code {
-          font-size: 1rem;
+          font-size: 0.94rem;
         }
       }
 
@@ -617,31 +617,50 @@
       window.addEventListener('resize', handleResize);
       handleResize();
 
-      // Fullscreen Logic
-      const fsToggle = document.getElementById('fsToggle');
-      fsToggle.addEventListener('click', () => {
-        if (!document.fullscreenElement) {
-          document.documentElement.requestFullscreen().catch(err => {
-            console.error(`Error attempting to enable fullscreen: ${err.message}`);
-          });
-        } else {
-          document.exitFullscreen();
-        }
-      });
-
-      document.addEventListener('fullscreenchange', () => {
-        if (document.fullscreenElement) {
+      function setFullscreenButtonState(isFullscreen) {
+        if (isFullscreen) {
           fsToggle.innerHTML = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14h6v6M20 10h-6V4M14 10l7-7M10 14l-7 7" /></svg>';
           fsToggle.title = "Exit Fullscreen";
         } else {
           fsToggle.innerHTML = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>';
           fsToggle.title = "Toggle Fullscreen";
         }
+      }
+
+      // Fullscreen Logic
+      const fsToggle = document.getElementById('fsToggle');
+      fsToggle.addEventListener('click', () => {
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({ type: 'knowledgeLabFlowchartFullscreenToggle' }, window.location.origin);
+          return;
+        }
+
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(err => {
+            console.error(`Error attempting to enable fullscreen: ${err.message}`);
+          });
+          return;
+        }
+
+        document.exitFullscreen();
+      });
+
+      document.addEventListener('fullscreenchange', () => {
+        setFullscreenButtonState(Boolean(document.fullscreenElement));
         // Force a scale update after the browser finishes resizing the element
         setTimeout(handleResize, 100);
       });
 
+      window.addEventListener('message', (event) => {
+        if (event.origin !== window.location.origin) return;
+        if (event.data?.type !== 'knowledgeLabFlowchartFullscreenState') return;
+
+        setFullscreenButtonState(Boolean(event.data.isFullscreen));
+        setTimeout(handleResize, 100);
+      });
+
       renderDetails("root");
+      setFullscreenButtonState(false);
     </script>
   </body>
 </html>

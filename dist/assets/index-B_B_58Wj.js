@@ -1,4 +1,4 @@
-(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const o of document.querySelectorAll('link[rel="modulepreload"]'))r(o);new MutationObserver(o=>{for(const i of o)if(i.type==="childList")for(const n of i.addedNodes)n.tagName==="LINK"&&n.rel==="modulepreload"&&r(n)}).observe(document,{childList:!0,subtree:!0});function a(o){const i={};return o.integrity&&(i.integrity=o.integrity),o.referrerPolicy&&(i.referrerPolicy=o.referrerPolicy),o.crossOrigin==="use-credentials"?i.credentials="include":o.crossOrigin==="anonymous"?i.credentials="omit":i.credentials="same-origin",i}function r(o){if(o.ep)return;o.ep=!0;const i=a(o);fetch(o.href,i)}})();const T=70,x=160,k=120;class E{constructor(e,a){this.width=e,this.height=a,this.x=Math.random()*e,this.y=Math.random()*a,this.vx=(Math.random()-.5)*.4,this.vy=(Math.random()-.5)*.4,this.baseRadius=1.5+Math.random()*2,this.pulsePhase=Math.random()*Math.PI*2,this.pulseSpeed=.015+Math.random()*.025,this.isHub=Math.random()<.12,this.isHub&&(this.baseRadius*=2)}update(e){this.pulsePhase+=this.pulseSpeed;const a=this.x-e.x,r=this.y-e.y,o=Math.hypot(a,r);if(o<k&&o>0){const n=((k-o)/k)**2*3;this.vx+=a/o*n*.08,this.vy+=r/o*n*.08}this.vx*=.975,this.vy*=.975;const i=Math.hypot(this.vx,this.vy);i>1.5&&(this.vx=this.vx/i*1.5,this.vy=this.vy/i*1.5),this.x+=this.vx,this.y+=this.vy,this.x<0&&(this.x=this.width),this.x>this.width&&(this.x=0),this.y<0&&(this.y=this.height),this.y>this.height&&(this.y=0)}draw(e,a){const r=.5+.5*Math.sin(this.pulsePhase),o=this.baseRadius*(1+r*.6),i=(this.isHub?.7:.4)+r*.4,n=a?`rgba(176, 141, 87, ${i})`:this.isHub?`rgba(180, 100, 255, ${i})`:`rgba(0, 242, 255, ${i})`,c=a?`rgba(176, 141, 87, ${r*.12})`:this.isHub?`rgba(130, 0, 255, ${r*.1})`:`rgba(0, 242, 255, ${r*.1})`;e.beginPath(),e.arc(this.x,this.y,o*5,0,Math.PI*2),e.fillStyle=c,e.fill(),e.beginPath(),e.arc(this.x,this.y,o,0,Math.PI*2),e.fillStyle=n,e.fill()}}class M{constructor(e,a,r,o,i){this.x1=e,this.y1=a,this.x2=r,this.y2=o,this.progress=0,this.speed=.02+Math.random()*.03,this.isLight=i,this.alive=!0}update(){this.progress+=this.speed,this.progress>=1&&(this.alive=!1)}draw(e){const a=this.x1+(this.x2-this.x1)*this.progress,r=this.y1+(this.y2-this.y1)*this.progress,o=1-this.progress;e.beginPath(),e.arc(a,r,3,0,Math.PI*2),e.fillStyle=this.isLight?`rgba(212, 160, 23, ${o})`:`rgba(255, 255, 255, ${o})`,e.fill()}}function L(t){const e=t.getContext("2d");let a=0,r=0,o=[],i=[],n=null;const c={x:-9999,y:-9999};let p=0;function l(){a=t.width=window.innerWidth,r=t.height=window.innerHeight,o=Array.from({length:T},()=>new E(a,r))}function u(m){if(p--,p>0)return;p=30+Math.floor(Math.random()*60);const d=[...o].sort(()=>Math.random()-.5);for(let y=0;y<d.length-1;y++){const h=d[y],g=d[y+1];if(Math.hypot(h.x-g.x,h.y-g.y)<x){i.push(new M(h.x,h.y,g.x,g.y,m));return}}}function b(m,d,y,h){const g=(1-y/x)*(h?.25:.35),v=e.createLinearGradient(m.x,m.y,d.x,d.y),P=h?`rgba(176,141,87,${g*1.5})`:m.isHub?`rgba(150,50,255,${g*1.5})`:`rgba(0,242,255,${g*1.5})`,A=h?`rgba(122,106,83,${g})`:d.isHub?`rgba(150,50,255,${g})`:`rgba(0,200,220,${g})`;v.addColorStop(0,P),v.addColorStop(1,A),e.beginPath(),e.moveTo(m.x,m.y),e.lineTo(d.x,d.y),e.strokeStyle=v,e.lineWidth=h?.6:.8,e.stroke()}function w(){const m=document.documentElement.classList.contains("light-mode");e.clearRect(0,0,a,r);for(let d=0;d<o.length;d++){o[d].update(c);for(let y=d+1;y<o.length;y++){const h=o[d].x-o[y].x,g=o[d].y-o[y].y,v=Math.hypot(h,g);v<x&&b(o[d],o[y],v,m)}}o.forEach(d=>d.draw(e,m)),u(m),i=i.filter(d=>d.alive),i.forEach(d=>{d.update(),d.draw(e)}),n=requestAnimationFrame(w)}function I(){cancelAnimationFrame(n),window.removeEventListener("resize",l),window.removeEventListener("mousemove",C)}function C(m){c.x=m.clientX,c.y=m.clientY}return window.addEventListener("resize",l),window.addEventListener("mousemove",C),l(),w(),{destroy:I}}const z={vite:"^7.3.1"},j={three:"^0.183.2"},S={devDependencies:z,dependencies:j},F={id:"claude-skills-tutorial",title:"Claude Skills",category:"",tags:[""],tabs:[{label:"Overview",content:`
+(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const o of document.querySelectorAll('link[rel="modulepreload"]'))a(o);new MutationObserver(o=>{for(const i of o)if(i.type==="childList")for(const d of i.addedNodes)d.tagName==="LINK"&&d.rel==="modulepreload"&&a(d)}).observe(document,{childList:!0,subtree:!0});function r(o){const i={};return o.integrity&&(i.integrity=o.integrity),o.referrerPolicy&&(i.referrerPolicy=o.referrerPolicy),o.crossOrigin==="use-credentials"?i.credentials="include":o.crossOrigin==="anonymous"?i.credentials="omit":i.credentials="same-origin",i}function a(o){if(o.ep)return;o.ep=!0;const i=r(o);fetch(o.href,i)}})();const T=70,x=160,k=120;class E{constructor(e,r){this.width=e,this.height=r,this.x=Math.random()*e,this.y=Math.random()*r,this.vx=(Math.random()-.5)*.4,this.vy=(Math.random()-.5)*.4,this.baseRadius=1.5+Math.random()*2,this.pulsePhase=Math.random()*Math.PI*2,this.pulseSpeed=.015+Math.random()*.025,this.isHub=Math.random()<.12,this.isHub&&(this.baseRadius*=2)}update(e){this.pulsePhase+=this.pulseSpeed;const r=this.x-e.x,a=this.y-e.y,o=Math.hypot(r,a);if(o<k&&o>0){const d=((k-o)/k)**2*3;this.vx+=r/o*d*.08,this.vy+=a/o*d*.08}this.vx*=.975,this.vy*=.975;const i=Math.hypot(this.vx,this.vy);i>1.5&&(this.vx=this.vx/i*1.5,this.vy=this.vy/i*1.5),this.x+=this.vx,this.y+=this.vy,this.x<0&&(this.x=this.width),this.x>this.width&&(this.x=0),this.y<0&&(this.y=this.height),this.y>this.height&&(this.y=0)}draw(e,r){const a=.5+.5*Math.sin(this.pulsePhase),o=this.baseRadius*(1+a*.6),i=(this.isHub?.7:.4)+a*.4,d=r?`rgba(176, 141, 87, ${i})`:this.isHub?`rgba(180, 100, 255, ${i})`:`rgba(0, 242, 255, ${i})`,p=r?`rgba(176, 141, 87, ${a*.12})`:this.isHub?`rgba(130, 0, 255, ${a*.1})`:`rgba(0, 242, 255, ${a*.1})`;e.beginPath(),e.arc(this.x,this.y,o*5,0,Math.PI*2),e.fillStyle=p,e.fill(),e.beginPath(),e.arc(this.x,this.y,o,0,Math.PI*2),e.fillStyle=d,e.fill()}}class M{constructor(e,r,a,o,i){this.x1=e,this.y1=r,this.x2=a,this.y2=o,this.progress=0,this.speed=.02+Math.random()*.03,this.isLight=i,this.alive=!0}update(){this.progress+=this.speed,this.progress>=1&&(this.alive=!1)}draw(e){const r=this.x1+(this.x2-this.x1)*this.progress,a=this.y1+(this.y2-this.y1)*this.progress,o=1-this.progress;e.beginPath(),e.arc(r,a,3,0,Math.PI*2),e.fillStyle=this.isLight?`rgba(212, 160, 23, ${o})`:`rgba(255, 255, 255, ${o})`,e.fill()}}function L(t){const e=t.getContext("2d");let r=0,a=0,o=[],i=[],d=null;const p={x:-9999,y:-9999};let c=0;function l(){r=t.width=window.innerWidth,a=t.height=window.innerHeight,o=Array.from({length:T},()=>new E(r,a))}function u(m){if(c--,c>0)return;c=30+Math.floor(Math.random()*60);const n=[...o].sort(()=>Math.random()-.5);for(let y=0;y<n.length-1;y++){const h=n[y],g=n[y+1];if(Math.hypot(h.x-g.x,h.y-g.y)<x){i.push(new M(h.x,h.y,g.x,g.y,m));return}}}function b(m,n,y,h){const g=(1-y/x)*(h?.25:.35),v=e.createLinearGradient(m.x,m.y,n.x,n.y),P=h?`rgba(176,141,87,${g*1.5})`:m.isHub?`rgba(150,50,255,${g*1.5})`:`rgba(0,242,255,${g*1.5})`,A=h?`rgba(122,106,83,${g})`:n.isHub?`rgba(150,50,255,${g})`:`rgba(0,200,220,${g})`;v.addColorStop(0,P),v.addColorStop(1,A),e.beginPath(),e.moveTo(m.x,m.y),e.lineTo(n.x,n.y),e.strokeStyle=v,e.lineWidth=h?.6:.8,e.stroke()}function w(){const m=document.documentElement.classList.contains("light-mode");e.clearRect(0,0,r,a);for(let n=0;n<o.length;n++){o[n].update(p);for(let y=n+1;y<o.length;y++){const h=o[n].x-o[y].x,g=o[n].y-o[y].y,v=Math.hypot(h,g);v<x&&b(o[n],o[y],v,m)}}o.forEach(n=>n.draw(e,m)),u(m),i=i.filter(n=>n.alive),i.forEach(n=>{n.update(),n.draw(e)}),d=requestAnimationFrame(w)}function I(){cancelAnimationFrame(d),window.removeEventListener("resize",l),window.removeEventListener("mousemove",C)}function C(m){p.x=m.clientX,p.y=m.clientY}return window.addEventListener("resize",l),window.addEventListener("mousemove",C),l(),w(),{destroy:I}}const F={vite:"^7.3.1"},z={three:"^0.183.2"},S={devDependencies:F,dependencies:z},j={id:"claude-skills-tutorial",title:"Claude Skills",category:"",tags:[""],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:1rem; line-height:1.75;">Whether you're a complete beginner looking to build your first website, or an experienced developer looking to speed up your workflow, getting started with Claude Skills is easier than you think. In this simple guide, we'll watch Claude Skills in action as it guides us through building a website, taking our input at each step. Let's go!</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">A skill is a set of instructions — packaged as a simple folder — that teaches Claude how to handle specific tasks or workflows.</p>
@@ -1093,11 +1093,11 @@ Requirements:
 
 `}],interactiveType:"custom"},D={id:"claude-extension",title:"Claude Extension",category:"",tags:[],tabs:[{label:"Features",content:`
 <style>
-.cc-table-wrap { width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; margin-top:1.5rem; border-radius:12px; }
-.cc-table { width:100%;border-collapse:collapse;font-size:15px;font-family:'Outfit', sans-serif;line-height:1.5;table-layout:fixed; letter-spacing:0.01em; min-width: 980px; }
-.cc-table th { padding:12px 10px;text-align:left;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;font-size:12px;color:var(--text-secondary);border-bottom:1px solid var(--border-color);background:rgba(0,0,0,0.2) }
-.cc-table td { padding:24px 10px;border-bottom:1px solid var(--border-color);vertical-align:top;color:var(--text-primary); }
-.cc-table td p { margin: 0; padding: 0; height: 26px; line-height: 26px; }
+.cc-table-wrap { width:100%; margin-top:1.5rem; border-radius:12px; overflow: visible; }
+.cc-table { width:100%; border-collapse:collapse; font-size:15px; font-family:'Outfit', sans-serif; line-height:1.5; table-layout:auto; letter-spacing:0.01em; }
+.cc-table th { padding:12px 12px;text-align:left;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;font-size:12px;color:var(--text-secondary);border-bottom:1px solid var(--border-color);background:rgba(0,0,0,0.2) }
+.cc-table td { padding:24px 12px;border-bottom:1px solid var(--border-color);vertical-align:top;color:var(--text-primary); }
+.cc-table td p { margin: 0; padding: 0; line-height: 1.5; }
 .cc-table td code { 
   vertical-align: top; 
   display: inline-block;
@@ -1111,43 +1111,18 @@ Requirements:
   white-space: pre-wrap; 
   word-break: break-word; 
   overflow-wrap: break-word;
-  height: 26px;
-  line-height: 23px;
+  line-height: 1.5;
   box-sizing: border-box;
 }
 .cc-table tr:last-child td { border-bottom:none }
 .cc-table tr:hover td { background:var(--surface-hover) }
-.badge { display:inline-block;padding:0 10px;border-radius:6px;font-size:12.5px;font-weight:700;white-space:nowrap; border: 1px solid var(--border-color); letter-spacing: 0.02em; height: 26px; line-height: 24px; vertical-align: top; margin: 0; box-sizing: border-box; }
+.badge { display:inline-block;padding:0 10px;border-radius:6px;font-size:12.5px;font-weight:700;white-space:nowrap; border: 1px solid var(--border-color); letter-spacing: 0.02em; line-height: 24px; vertical-align: top; margin: 0; box-sizing: border-box; }
 .doc-links { display:grid; gap: 4px; }
 .doc-links a { font-size:13.5px;color:var(--accent-primary);text-decoration:none;white-space:nowrap; transition: 0.2s ease; }
 .doc-links a:hover { text-decoration:underline; opacity: 0.8; }
-.doc-label { font-size:12px;color:var(--text-secondary);display:block;margin:0;font-weight:700;letter-spacing:0.02em;padding:0;text-transform:uppercase; height: 26px; line-height: 26px; vertical-align: top; }
+.doc-label { font-size:12px;color:var(--text-secondary);display:block;margin:0;font-weight:700;letter-spacing:0.02em;padding:0;text-transform:uppercase; line-height: 26px; vertical-align: top; }
 
 @media (max-width: 1024px) {
-  .cc-table-wrap {
-    padding-bottom: 0.25rem;
-  }
-
-  .cc-table {
-    min-width: 860px;
-    font-size: 14px;
-  }
-
-  .cc-table th,
-  .cc-table td {
-    padding: 18px 10px;
-  }
-
-  .cc-table td p,
-  .doc-label,
-  .badge,
-  .cc-table td code {
-    height: auto;
-    line-height: 1.45;
-  }
-}
-
-@media (max-width: 720px) {
   .cc-table-wrap {
     overflow: visible;
   }
@@ -1159,10 +1134,6 @@ Requirements:
   .cc-table th,
   .cc-table td {
     display: block;
-  }
-
-  .cc-table {
-    min-width: 0;
   }
 
   .cc-table thead {
@@ -1222,12 +1193,12 @@ Requirements:
 <table class="cc-table">
 <thead>
 <tr>
-<th style="width:12%">Feature</th>
-<th style="width:23%">One-liner</th>
-<th style="width:16%">What it stores</th>
-<th style="width:14%">How to invoke</th>
-<th style="width:21%">Best used for</th>
-<th style="width:14%">Official docs</th>
+<th>Feature</th>
+<th>One-liner</th>
+<th>What it stores</th>
+<th>How to invoke</th>
+<th>Best used for</th>
+<th>Official docs</th>
 </tr>
 </thead>
 <tbody>
@@ -1237,9 +1208,11 @@ Requirements:
 <td data-label="What it stores"><p>Instructions, scripts, reference files in a folder</p></td>
 <td data-label="How to invoke"><p><code>/skill-name</code></p></td>
 <td data-label="Best used for"><p>Codifying repeatable workflows: code review, deployments, doc generation</p></td>
-<td data-label="Official docs" class="doc-links">
-  <span class="doc-label">Guide</span>
-  <a href="https://code.claude.com/docs/en/skills" target="_blank">Skills →</a>
+<td data-label="Official docs">
+  <div class="doc-links">
+    <span class="doc-label">Guide</span>
+    <a href="https://code.claude.com/docs/en/skills" target="_blank">Skills →</a>
+  </div>
 </td>
 </tr>
 <tr>
@@ -1248,9 +1221,11 @@ Requirements:
 <td data-label="What it stores"><p>Single markdown file with prompt template</p></td>
 <td data-label="How to invoke"><p><code>/command-name</code></p></td>
 <td data-label="Best used for"><p>Quick prompt templates: /fix-bug, /explain-code, /summarize</p></td>
-<td data-label="Official docs" class="doc-links">
-  <span class="doc-label">Guide</span>
-  <a href="https://docs.anthropic.com/en/docs/claude-code/slash-commands" target="_blank">Slash commands →</a>
+<td data-label="Official docs">
+  <div class="doc-links">
+    <span class="doc-label">Guide</span>
+    <a href="https://docs.anthropic.com/en/docs/claude-code/slash-commands" target="_blank">Slash commands →</a>
+  </div>
 </td>
 </tr>
 <tr>
@@ -1259,9 +1234,11 @@ Requirements:
 <td data-label="What it stores"><p>External tool definitions (21st.dev, Supadata, Stitch..)</p></td>
 <td data-label="How to invoke"><p>Claude picks tools automatically</p></td>
 <td data-label="Best used for"><p>Querying live databases, creating PRs, reading Slack, anything with real external state</p></td>
-<td data-label="Official docs" class="doc-links">
-  <span class="doc-label">Guide</span>
-  <a href="https://docs.anthropic.com/en/docs/claude-code/mcp" target="_blank">MCP overview →</a>
+<td data-label="Official docs">
+  <div class="doc-links">
+    <span class="doc-label">Guide</span>
+    <a href="https://docs.anthropic.com/en/docs/claude-code/mcp" target="_blank">MCP overview →</a>
+  </div>
 </td>
 </tr>
 <tr>
@@ -1270,9 +1247,11 @@ Requirements:
 <td data-label="What it stores"><p>Shell commands tied to events (PostToolUse etc.)</p></td>
 <td data-label="How to invoke"><p>Never manually — fires automatically on event</p></td>
 <td data-label="Best used for"><p>Auto-linting, blocking dangerous commands, desktop notifications, test gates</p></td>
-<td data-label="Official docs" class="doc-links">
-  <span class="doc-label">Guide</span>
-  <a href="https://docs.anthropic.com/en/docs/claude-code/hooks-guide" target="_blank">Hooks guide →</a>
+<td data-label="Official docs">
+  <div class="doc-links">
+    <span class="doc-label">Guide</span>
+    <a href="https://docs.anthropic.com/en/docs/claude-code/hooks-guide" target="_blank">Hooks guide →</a>
+  </div>
 </td>
 </tr>
 <tr>
@@ -1281,11 +1260,13 @@ Requirements:
 <td data-label="What it stores"><p>plugin.json manifest + skills/ agents/ hooks/ MCPs</p></td>
 <td data-label="How to invoke"><p>All components auto-activate on install</p></td>
 <td data-label="Best used for"><p>Sharing team setups, open-source toolkits, org-wide standards</p></td>
-<td data-label="Official docs" class="doc-links">
-  <span class="doc-label">Discover</span>
-  <a href="https://docs.anthropic.com/en/docs/claude-code/plugins" target="_blank">Find &amp; install plugins →</a>
-  <span class="doc-label">Build</span>
-  <a href="https://docs.anthropic.com/en/docs/claude-code/create-plugins" target="_blank">Create plugins →</a>
+<td data-label="Official docs">
+  <div class="doc-links">
+    <span class="doc-label">Discover</span>
+    <a href="https://docs.anthropic.com/en/docs/claude-code/plugins" target="_blank">Find &amp; install plugins →</a>
+    <span class="doc-label">Build</span>
+    <a href="https://docs.anthropic.com/en/docs/claude-code/create-plugins" target="_blank">Create plugins →</a>
+  </div>
 </td>
 </tr>
 <tr>
@@ -1294,9 +1275,11 @@ Requirements:
 <td data-label="What it stores"><p>Agent system prompt + tool/model config in YAML</p></td>
 <td data-label="How to invoke"><p>Natural language or <code>/agents</code> menu</p></td>
 <td data-label="Best used for"><p>Delegating heavy subtasks without polluting main session context</p></td>
-<td data-label="Official docs" class="doc-links">
-  <span class="doc-label">Guide</span>
-  <a href="https://docs.anthropic.com/en/docs/claude-code/sub-agents" target="_blank">Subagents →</a>
+<td data-label="Official docs">
+  <div class="doc-links">
+    <span class="doc-label">Guide</span>
+    <a href="https://docs.anthropic.com/en/docs/claude-code/sub-agents" target="_blank">Subagents →</a>
+  </div>
 </td>
 </tr>
 <tr>
@@ -1305,17 +1288,19 @@ Requirements:
 <td data-label="What it stores"><p>Defined through prompts; teams.json for fine-tuning</p></td>
 <td data-label="How to invoke"><p>Prompt-driven; keyboard shortcuts to manage</p></td>
 <td data-label="Best used for"><p>Large parallel work: security + perf + tests reviewing the same module</p></td>
-<td data-label="Official docs" class="doc-links">
-  <span class="doc-label">Guide</span>
-  <a href="https://docs.anthropic.com/en/docs/claude-code/agent-teams" target="_blank">Agent teams →</a>
+<td data-label="Official docs">
+  <div class="doc-links">
+    <span class="doc-label">Guide</span>
+    <a href="https://docs.anthropic.com/en/docs/claude-code/agent-teams" target="_blank">Agent teams →</a>
+  </div>
 </td>
 </tr>
 </tbody>
 </table>
 </div>
       `},{label:"Decision Flow",content:`
-<div style="width: 100%; height: calc(100vh - 160px); min-height: 700px; overflow: hidden; background: var(--surface-color); border-radius: 12px; border: 1px solid var(--border-color);">
-  <iframe src="./flowchart.html" style="width: 100%; height: 100%; border: none;" title="Decision Flowchart"></iframe>
+<div class="flowchart-embed" style="width: 100%; height: calc(100vh - 160px); min-height: 700px; overflow: hidden; background: var(--surface-color); border-radius: 12px; border: 1px solid var(--border-color);">
+  <iframe src="/knowledgelab/flowchart.html" style="width: 100%; height: 100%; border: none;" title="Decision Flowchart" allow="fullscreen" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
 </div>
       `}],interactiveType:"custom"},W={id:"claude-commands",title:"Claude Commands",description:`
 <p style="margin-bottom:1rem; line-height:1.75;">Claude Commands (also called slash commands) are a feature of Claude Code. Think of them like custom keyboard shortcuts or macros, but for your AI workflow.</p>
@@ -1366,7 +1351,7 @@ EOF</code>
   </ul>
 </div>
 <div style="height: 10rem;"></div>
-  `,interactiveType:"custom"},N={id:"claude-subagents",title:"Claude Subagents",description:`
+  `,interactiveType:"custom"},q={id:"claude-subagents",title:"Claude Subagents",description:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1.2rem; color: var(--accent-primary);">Tutorial 5 — Subagents (delegating heavy tasks)</strong>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Subagents solve context pollution. They spin up separate AI instances — each with its own system prompt, tool permissions, and even a different model. They work in isolation, then hand back a summary.</p>
@@ -1427,7 +1412,7 @@ EOF</code>
 <div style="margin-top: 2rem; padding: 1rem; background: rgba(0, 242, 255, 0.05); border: 1px solid rgba(0, 242, 255, 0.1); border-radius: 8px;">
   <p style="margin:0; line-height:1.6;">Now your main Claude session stays focused while these specialists do the heavy lifting in their own isolated contexts.</p>
 </div>
-  `,interactiveType:"custom"},G={id:"claude-plugins",title:"Claude Plugins",category:"Tutorial",tags:["Plugins","Marketplace","Claude Code"],tabs:[{label:"Overview",content:`
+  `,interactiveType:"custom"},N={id:"claude-plugins",title:"Claude Plugins",category:"Tutorial",tags:["Plugins","Marketplace","Claude Code"],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:1rem; line-height:1.75;"><strong>Claude Plugins</strong> are like app bundles — a single package that installs multiple commands, tools, and behaviors all at once.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Plugins can bundle MCPs, skills, hooks, and commands into a single download. Instead of installing each piece separately, you get everything you need in one package.</p>
@@ -2387,7 +2372,7 @@ git push -u origin main</code>
     <span>←</span> Previous: Share
   </a>
 </div>
-`}],interactiveType:"custom"},f=[D,W,N,G,F,B,_,U,O,R],s={isActive:!1,isLocked:!1,isMinimized:!1,timer:{duration:1500,remaining:1500,interval:null,isRunning:!1},stats:{streak:0,cardsToday:0,focusMinutes:0,lastStudyDate:null}},H={activeConcept:null,resetContentScroll(){const t=document.getElementById("content-area");t&&(t.scrollTop=0);const e=document.querySelector(".tutorial-tab-content");e&&(e.scrollTop=0)},init(){this.renderSidebar(),this.setupEventListeners(),this.initTheme(),this.initStudyMode(),this.initTechStackModal();const t=window.location.hash.substring(1);t&&f.some(e=>e.id===t)?this.selectConcept(t):this.renderWelcome(),L(document.getElementById("constellation-bg"))},renderWelcome(){document.getElementById("constellation-bg").style.display="";const t=this.getConceptOfTheDay(),e=document.getElementById("content-area");e.classList.remove("content-area--tabbed"),e.innerHTML=`
+`}],interactiveType:"custom"},f=[D,W,q,N,j,B,_,U,O,R],s={isActive:!1,isLocked:!1,isMinimized:!1,timer:{duration:1500,remaining:1500,interval:null,isRunning:!1},stats:{streak:0,cardsToday:0,focusMinutes:0,lastStudyDate:null}},G={activeConcept:null,resetContentScroll(){const t=document.getElementById("content-area");t&&(t.scrollTop=0);const e=document.querySelector(".tutorial-tab-content");e&&(e.scrollTop=0)},init(){this.renderSidebar(),this.setupEventListeners(),this.initTheme(),this.initStudyMode(),this.initTechStackModal();const t=window.location.hash.substring(1);t&&f.some(e=>e.id===t)?this.selectConcept(t):this.renderWelcome(),L(document.getElementById("constellation-bg"))},renderWelcome(){document.getElementById("constellation-bg").style.display="";const t=this.getConceptOfTheDay(),e=document.getElementById("content-area");e.classList.remove("content-area--tabbed"),e.innerHTML=`
       <div class="cotd-ticker">
         <span class="cotd-label">Skill of the Day</span>
         <div class="ticker-track">
@@ -2398,40 +2383,40 @@ git push -u origin main</code>
         <h2>Welcome to Knowledge Lab</h2>
         <p>Select a tutorial from the sidebar to begin your interactive learning journey.</p>
       </div>
-    `,e.querySelector(".cotd-ticker").addEventListener("click",()=>{this.selectConcept(t.id)});const a=e.querySelector(".ticker-text"),r=e.querySelector(".ticker-track").offsetWidth;a.style.setProperty("--start-x",r+"px")},getConceptOfTheDay(){const t=Math.floor(Date.now()/864e5);return f[t%f.length]},initTheme(){localStorage.getItem("theme")==="light"&&(document.documentElement.classList.add("light-mode"),document.querySelector("#theme-toggle .icon").textContent="☀️"),localStorage.getItem("sidebar")==="collapsed"&&document.getElementById("app").classList.add("sidebar-collapsed")},renderSidebar(){const t=document.getElementById("concept-list");t.innerHTML=f.map(e=>`
+    `,e.querySelector(".cotd-ticker").addEventListener("click",()=>{this.selectConcept(t.id)});const r=e.querySelector(".ticker-text"),a=e.querySelector(".ticker-track").offsetWidth;r.style.setProperty("--start-x",a+"px")},getConceptOfTheDay(){const t=Math.floor(Date.now()/864e5);return f[t%f.length]},initTheme(){localStorage.getItem("theme")==="light"&&(document.documentElement.classList.add("light-mode"),document.querySelector("#theme-toggle .icon").textContent="☀️"),localStorage.getItem("sidebar")==="collapsed"&&document.getElementById("app").classList.add("sidebar-collapsed")},renderSidebar(){const t=document.getElementById("concept-list");t.innerHTML=f.map(e=>`
       <li class="nav-item" data-id="${e.id}">${e.title}</li>
-    `).join("")},isMobile(){return window.innerWidth<=640},closeMobileSidebar(){document.getElementById("app").classList.remove("sidebar-open")},setupEventListeners(){document.getElementById("concept-list").addEventListener("click",t=>{if(t.target.classList.contains("nav-item")){const e=t.target.dataset.id;this.isMobile()&&this.closeMobileSidebar(),this.selectConcept(e)}}),document.getElementById("sidebar-toggle").addEventListener("click",()=>{const t=document.getElementById("app");if(this.isMobile())t.classList.toggle("sidebar-open");else{const e=t.classList.toggle("sidebar-collapsed");localStorage.setItem("sidebar",e?"collapsed":"open")}}),document.getElementById("app").addEventListener("click",t=>{this.isMobile()&&t.target===document.getElementById("app")&&this.closeMobileSidebar()}),document.getElementById("theme-toggle").addEventListener("click",()=>{const t=document.documentElement.classList.toggle("light-mode"),e=document.querySelector("#theme-toggle .icon");e.textContent=t?"☀️":"🌙",localStorage.setItem("theme",t?"light":"dark")}),document.getElementById("home-link").addEventListener("click",()=>{this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(t=>t.classList.remove("active")),window.location.hash&&history.replaceState(null,"",window.location.pathname+window.location.search),this.isMobile()&&this.closeMobileSidebar(),this.renderWelcome()}),document.getElementById("concept-search").addEventListener("input",t=>{const e=t.target.value.toLowerCase();document.querySelectorAll(".nav-item").forEach(r=>{const o=r.textContent.toLowerCase();r.style.display=o.includes(e)?"block":"none"})}),window.addEventListener("hashchange",()=>{const t=window.location.hash.substring(1);t&&f.some(e=>e.id===t)?(!this.activeConcept||this.activeConcept.id!==t)&&this.selectConcept(t):t||(this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(e=>e.classList.remove("active")),this.renderWelcome())})},selectConcept(t){const e=f.find(r=>r.id===t);if(!e)return;window.location.hash!==`#${t}`&&(window.location.hash=t),document.getElementById("constellation-bg").style.display="none",this.activeConcept=e,document.querySelectorAll(".nav-item").forEach(r=>r.classList.remove("active"));const a=document.querySelector(`[data-id="${t}"]`);a&&a.classList.add("active"),this.renderConcept(e),this.resetContentScroll()},renderConcept(t){const e=document.getElementById("content-area"),a=t.id==="claude-extension";if(t.tabs&&t.tabs.length>0){e.classList.toggle("content-area--tabbed",!a);const r=t.tabs.map((i,n)=>`<button class="tutorial-tab-btn${n===0?" active":""}" data-tab="${n}">${i.label}</button>`).join(""),o=t.tabs.map((i,n)=>`<div class="tutorial-tab-panel${n===0?" active":""}" data-panel="${n}">
-          <div class="concept-content" id="concept-description-${n}">
-            ${i.content}
+    `).join("")},isMobile(){return window.innerWidth<=640},closeMobileSidebar(){document.getElementById("app").classList.remove("sidebar-open")},setupEventListeners(){document.getElementById("concept-list").addEventListener("click",t=>{if(t.target.classList.contains("nav-item")){const e=t.target.dataset.id;this.isMobile()&&this.closeMobileSidebar(),this.selectConcept(e)}}),document.getElementById("sidebar-toggle").addEventListener("click",()=>{const t=document.getElementById("app");if(this.isMobile())t.classList.toggle("sidebar-open");else{const e=t.classList.toggle("sidebar-collapsed");localStorage.setItem("sidebar",e?"collapsed":"open")}}),document.getElementById("app").addEventListener("click",t=>{this.isMobile()&&t.target===document.getElementById("app")&&this.closeMobileSidebar()}),document.getElementById("theme-toggle").addEventListener("click",()=>{const t=document.documentElement.classList.toggle("light-mode"),e=document.querySelector("#theme-toggle .icon");e.textContent=t?"☀️":"🌙",localStorage.setItem("theme",t?"light":"dark")}),document.getElementById("home-link").addEventListener("click",()=>{this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(t=>t.classList.remove("active")),window.location.hash&&history.replaceState(null,"",window.location.pathname+window.location.search),this.isMobile()&&this.closeMobileSidebar(),this.renderWelcome()}),document.getElementById("concept-search").addEventListener("input",t=>{const e=t.target.value.toLowerCase();document.querySelectorAll(".nav-item").forEach(a=>{const o=a.textContent.toLowerCase();a.style.display=o.includes(e)?"block":"none"})}),window.addEventListener("hashchange",()=>{const t=window.location.hash.substring(1);t&&f.some(e=>e.id===t)?(!this.activeConcept||this.activeConcept.id!==t)&&this.selectConcept(t):t||(this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(e=>e.classList.remove("active")),this.renderWelcome())}),window.addEventListener("message",async t=>{if(t.origin!==window.location.origin||t.data?.type!=="knowledgeLabFlowchartFullscreenToggle")return;const e=document.querySelector(".flowchart-embed");if(e)try{document.fullscreenElement===e?await document.exitFullscreen():document.fullscreenElement||await e.requestFullscreen()}catch(r){console.error("Flowchart fullscreen toggle failed:",r)}finally{e.querySelector("iframe")?.contentWindow?.postMessage({type:"knowledgeLabFlowchartFullscreenState",isFullscreen:document.fullscreenElement===e},window.location.origin)}}),document.addEventListener("fullscreenchange",()=>{const t=document.querySelector(".flowchart-embed");t?.querySelector("iframe")?.contentWindow?.postMessage({type:"knowledgeLabFlowchartFullscreenState",isFullscreen:document.fullscreenElement===t},window.location.origin)})},selectConcept(t){const e=f.find(a=>a.id===t);if(!e)return;window.location.hash!==`#${t}`&&(window.location.hash=t),document.getElementById("constellation-bg").style.display="none",this.activeConcept=e,document.querySelectorAll(".nav-item").forEach(a=>a.classList.remove("active"));const r=document.querySelector(`[data-id="${t}"]`);r&&r.classList.add("active"),this.renderConcept(e),this.resetContentScroll()},renderConcept(t){const e=document.getElementById("content-area");if(t.tabs&&t.tabs.length>0){e.classList.add("content-area--tabbed");const r=t.tabs.map((o,i)=>`<button class="tutorial-tab-btn${i===0?" active":""}" data-tab="${i}">${o.label}</button>`).join(""),a=t.tabs.map((o,i)=>`<div class="tutorial-tab-panel${i===0?" active":""}" data-panel="${i}">
+          <div class="concept-content" id="concept-description-${i}">
+            ${o.content}
           </div>
         </div>`).join("");e.innerHTML=`
-        <article class="concept-card concept-card--tabs${a?" concept-card--outer-scroll":""}">
+        <article class="concept-card concept-card--tabs">
           <nav class="tutorial-tabs" role="tablist">${r}</nav>
-          <div class="tutorial-tab-content">${o}</div>
+          <div class="tutorial-tab-content">${a}</div>
         </article>
-      `,this.initTabs(),t.tabs.forEach((i,n)=>{const c=document.getElementById(`concept-description-${n}`);c&&this.attachCopyButtonsTo(c)})}else{e.classList.remove("content-area--tabbed");const r=t.description||"Add your description here...",o=r.trim().startsWith("<")?r:r.split(`
+      `,this.initTabs(),t.tabs.forEach((o,i)=>{const d=document.getElementById(`concept-description-${i}`);d&&this.attachCopyButtonsTo(d)})}else{e.classList.remove("content-area--tabbed");const r=t.description||"Add your description here...",a=r.trim().startsWith("<")?r:r.split(`
 
-`).map(i=>`<p>${i}</p>`).join("");e.innerHTML=`
+`).map(o=>`<p>${o}</p>`).join("");e.innerHTML=`
         <article class="concept-card">
           <h2 class="concept-title">${t.title}</h2>
           ${t.category||t.tags&&t.tags.length>0?`
           <div class="concept-meta">
             ${t.category?`<span class="tag">${t.category}</span>`:""}
-            ${t.tags?t.tags.map(i=>`<span class="tag">${i}</span>`).join(""):""}
+            ${t.tags?t.tags.map(o=>`<span class="tag">${o}</span>`).join(""):""}
           </div>`:""}
           <div class="concept-content" id="concept-description">
-            ${o}
+            ${a}
           </div>
         </article>
-      `,this.attachCopyButtons()}},initTabs(){const t=document.querySelectorAll(".tutorial-tab-btn"),e=document.querySelectorAll(".tutorial-tab-panel"),a=r=>{t.forEach(o=>o.classList.remove("active")),e.forEach(o=>o.classList.remove("active")),t[r].classList.add("active"),e[r].classList.add("active"),t[r].scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"}),this.resetContentScroll()};t.forEach(r=>{r.addEventListener("click",()=>a(Number(r.dataset.tab)))}),document.querySelectorAll("[data-goto-tab]").forEach(r=>{r.addEventListener("click",o=>{o.preventDefault(),a(Number(r.dataset.gotoTab))})}),document.querySelectorAll("[data-goto-concept]").forEach(r=>{r.addEventListener("click",o=>{o.preventDefault(),typeof this.selectConcept=="function"&&this.selectConcept(r.dataset.gotoConcept)})})},attachCopyButtons(){const t=document.getElementById("concept-description");t&&this.attachCopyButtonsTo(t)},attachCopyButtonsTo(t){if(!t)return;t.querySelectorAll("code").forEach(a=>{if(!(a.style.display==="block"||a.textContent.includes(`
-`)))return;const o=document.createElement("div");o.className="code-wrapper",a.parentNode.insertBefore(o,a),o.appendChild(a);const i=document.createElement("button");i.className="copy-btn",i.setAttribute("title","Copy to clipboard");const n='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>',c='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';i.innerHTML=n,o.appendChild(i),i.addEventListener("click",()=>{const l=a.textContent.replace(/^❯\s+/,"");navigator.clipboard.writeText(l).then(()=>{i.innerHTML=c,i.classList.add("copied"),setTimeout(()=>{i.innerHTML=n,i.classList.remove("copied")},2e3)})})})},initTechStackModal(){const t=document.getElementById("tech-stack-btn"),e=document.getElementById("tech-stack-overlay"),a=document.getElementById("close-tech-stack"),r=document.getElementById("tech-stack-list");if(!t||!e||!a||!r)return;const o={...S.dependencies||{},...S.devDependencies||{}},i=[{name:"Vanilla JavaScript",desc:"Core application logic, ECMAScript modules, DOM manipulation, and dynamic rendering.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M14.5 9h-5l-.5-5h7l-.5 5zm-5 4h5l-.5 4.5-2 1.5-2-1.5-.2-2h2.2l.1 1.2 1 .8 1-.8.2-1.2h-3.8z"></path></svg>'},{name:"Vanilla CSS3 & HTML5",desc:"Custom glassmorphism styling, responsive grid layout, and semantic structure.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M15 9h-6l-.5-4h7.5l-.5 4zm-6 4h6l-.5 4.5-2.5 1.5-2.5-1.5-.2-2h2.2l.1 1.2 1.2.8 1.2-.8.2-1.2h-4.6z"></path></svg>'},{name:"HTML5 Canvas API",desc:"Custom performant animations including the Neural Constellation and Zen Flow backgrounds.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.268-.652-.053-.877.215-.225.542-.31 1.051-.31h2.438c2.66 0 4.853-2.192 4.853-4.853C21.5 6.756 17.244 2 12 2z"></path></svg>'}];o.vite&&i.push({name:"Vite ("+o.vite.replace(/[\^\~]/,"")+")",desc:"Next-generation frontend tooling providing ultra-fast builds and Hot Module Replacement.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>'}),i.push({name:"GitHub Pages",desc:"Automated CI/CD deployment via GitHub Actions pipeline using the deployed build.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>'}),r.innerHTML=i.map(p=>`
+      `,this.attachCopyButtons()}},initTabs(){const t=document.querySelectorAll(".tutorial-tab-btn"),e=document.querySelectorAll(".tutorial-tab-panel"),r=a=>{t.forEach(o=>o.classList.remove("active")),e.forEach(o=>o.classList.remove("active")),t[a].classList.add("active"),e[a].classList.add("active"),t[a].scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"}),this.resetContentScroll()};t.forEach(a=>{a.addEventListener("click",()=>r(Number(a.dataset.tab)))}),document.querySelectorAll("[data-goto-tab]").forEach(a=>{a.addEventListener("click",o=>{o.preventDefault(),r(Number(a.dataset.gotoTab))})}),document.querySelectorAll("[data-goto-concept]").forEach(a=>{a.addEventListener("click",o=>{o.preventDefault(),typeof this.selectConcept=="function"&&this.selectConcept(a.dataset.gotoConcept)})})},attachCopyButtons(){const t=document.getElementById("concept-description");t&&this.attachCopyButtonsTo(t)},attachCopyButtonsTo(t){if(!t)return;t.querySelectorAll("code").forEach(r=>{if(!(r.style.display==="block"||r.textContent.includes(`
+`)))return;const o=document.createElement("div");o.className="code-wrapper",r.parentNode.insertBefore(o,r),o.appendChild(r);const i=document.createElement("button");i.className="copy-btn",i.setAttribute("title","Copy to clipboard");const d='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>',p='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';i.innerHTML=d,o.appendChild(i),i.addEventListener("click",()=>{const l=r.textContent.replace(/^❯\s+/,"");navigator.clipboard.writeText(l).then(()=>{i.innerHTML=p,i.classList.add("copied"),setTimeout(()=>{i.innerHTML=d,i.classList.remove("copied")},2e3)})})})},initTechStackModal(){const t=document.getElementById("tech-stack-btn"),e=document.getElementById("tech-stack-overlay"),r=document.getElementById("close-tech-stack"),a=document.getElementById("tech-stack-list");if(!t||!e||!r||!a)return;const o={...S.dependencies||{},...S.devDependencies||{}},i=[{name:"Vanilla JavaScript",desc:"Core application logic, ECMAScript modules, DOM manipulation, and dynamic rendering.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M14.5 9h-5l-.5-5h7l-.5 5zm-5 4h5l-.5 4.5-2 1.5-2-1.5-.2-2h2.2l.1 1.2 1 .8 1-.8.2-1.2h-3.8z"></path></svg>'},{name:"Vanilla CSS3 & HTML5",desc:"Custom glassmorphism styling, responsive grid layout, and semantic structure.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M15 9h-6l-.5-4h7.5l-.5 4zm-6 4h6l-.5 4.5-2.5 1.5-2.5-1.5-.2-2h2.2l.1 1.2 1.2.8 1.2-.8.2-1.2h-4.6z"></path></svg>'},{name:"HTML5 Canvas API",desc:"Custom performant animations including the Neural Constellation and Zen Flow backgrounds.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.268-.652-.053-.877.215-.225.542-.31 1.051-.31h2.438c2.66 0 4.853-2.192 4.853-4.853C21.5 6.756 17.244 2 12 2z"></path></svg>'}];o.vite&&i.push({name:"Vite ("+o.vite.replace(/[\^\~]/,"")+")",desc:"Next-generation frontend tooling providing ultra-fast builds and Hot Module Replacement.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>'}),i.push({name:"GitHub Pages",desc:"Automated CI/CD deployment via GitHub Actions pipeline using the deployed build.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>'}),a.innerHTML=i.map(c=>`
       <li class="tech-stack-item">
         <div class="tech-stack-icon-wrapper">
-          ${p.icon}
+          ${c.icon}
         </div>
         <div class="tech-stack-info">
-          <span class="tech-stack-name">${p.name}</span>
-          <span class="tech-stack-desc">${p.desc}</span>
+          <span class="tech-stack-name">${c.name}</span>
+          <span class="tech-stack-desc">${c.desc}</span>
         </div>
       </li>
-    `).join("");const n=()=>{e.classList.remove("hidden"),e.offsetWidth,e.classList.add("active")},c=()=>{e.classList.remove("active"),setTimeout(()=>{e.classList.contains("active")||e.classList.add("hidden")},300)};t.addEventListener("click",n),a.addEventListener("click",c),e.addEventListener("click",p=>{p.target===e&&c()})},initStudyMode(){this.loadStudyStats(),this.updateStudyMetrics(),this.initZenFlow(),document.getElementById("study-mode-btn").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("exit-study").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("timer-toggle").addEventListener("click",()=>{this.toggleTimer()}),document.getElementById("timer-reset").addEventListener("click",()=>{this.resetTimer()}),document.querySelectorAll(".preset-btn").forEach(t=>{t.addEventListener("click",e=>{const a=parseInt(e.target.dataset.time);this.setTimerDuration(a)})}),document.getElementById("minimize-study").addEventListener("click",()=>{this.minimizeStudy()}),document.getElementById("expand-study").addEventListener("click",()=>{this.expandStudy()}),document.getElementById("mini-stop-btn").addEventListener("click",()=>{this.expandStudy(),this.toggleStudyMode()}),document.getElementById("lock-screen-btn").addEventListener("click",()=>{this.lockScreen()}),document.getElementById("unlock-screen-btn").addEventListener("click",()=>{this.unlockScreen()})},loadStudyStats(){const t=localStorage.getItem("studyStats");t&&(s.stats=JSON.parse(t),this.updateStreak())},saveStudyStats(){localStorage.setItem("studyStats",JSON.stringify(s.stats))},updateStreak(){const t=new Date().toDateString(),e=s.stats.lastStudyDate;if(e){const a=new Date(e),r=new Date;r.setDate(r.getDate()-1),a.toDateString()===r.toDateString()||a.toDateString()!==t&&(s.stats.streak=0)}},updateStudyMetrics(){const t=document.getElementById("study-streak"),e=document.getElementById("study-cards"),a=document.getElementById("study-minutes");t&&(t.textContent=s.stats.streak),e&&(e.textContent=s.stats.cardsToday),a&&(a.textContent=s.stats.focusMinutes)},toggleStudyMode(){s.isActive=!s.isActive;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");if(s.isActive){if(s.isMinimized){this.expandStudy();return}t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1",this.updateStreak(),this.saveStudyStats()}else this.expandStudy(),t.classList.remove("active"),e.style.opacity="0",this.resetTimer(),setTimeout(()=>{t.classList.add("hidden")},500)},setTimerDuration(t){s.timer.duration=t*60,s.timer.remaining=t*60,document.querySelectorAll(".preset-btn").forEach(e=>{e.classList.toggle("active",parseInt(e.dataset.time)===t)}),this.updateTimerDisplay()},toggleTimer(){s.timer.isRunning?this.pauseTimer():this.startTimer()},startTimer(){s.timer.isRunning=!0,document.getElementById("timer-toggle").textContent="Pause",document.querySelector(".timer-wrapper").classList.add("active"),document.getElementById("lock-screen-btn").classList.remove("hidden"),s.timer.interval=setInterval(()=>{s.timer.remaining--,this.updateTimerDisplay(),s.timer.remaining<=0&&this.completeTimer()},1e3)},pauseTimer(){s.timer.isRunning=!1,document.getElementById("timer-toggle").textContent="Resume",document.querySelector(".timer-wrapper").classList.remove("active"),document.getElementById("lock-screen-btn").classList.add("hidden"),clearInterval(s.timer.interval),s.isLocked&&this.unlockScreen()},resetTimer(){this.pauseTimer(),s.timer.remaining=s.timer.duration,document.getElementById("timer-toggle").textContent="Start Focus",document.getElementById("timer-status").textContent="Ready to focus",document.getElementById("lock-screen-btn").classList.add("hidden"),this.updateTimerDisplay()},completeTimer(){this.pauseTimer(),document.getElementById("timer-status").textContent="Focus complete! Great work!",s.stats.focusMinutes+=Math.floor(s.timer.duration/60),this.updateStreakDate(),this.saveStudyStats(),this.updateStudyMetrics(),"Notification"in window&&Notification.permission==="granted"&&new Notification("Focus Session Complete",{body:"Great job! Take a break.",icon:"/vite.svg"})},updateTimerDisplay(){const t=Math.floor(s.timer.remaining/60),e=s.timer.remaining%60,a=`${t.toString().padStart(2,"0")}:${e.toString().padStart(2,"0")}`;document.getElementById("timer-minutes").textContent=t.toString().padStart(2,"0"),document.getElementById("timer-seconds").textContent=e.toString().padStart(2,"0"),document.getElementById("mini-timer-display").textContent=a;const r=s.timer.remaining/s.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${r}%`;const o=s.timer.remaining/s.timer.duration,n=2*Math.PI*130*(1-o);document.getElementById("timer-progress").style.strokeDashoffset=n,s.timer.isRunning?document.getElementById("timer-status").textContent="Stay focused...":document.getElementById("timer-status").textContent="Ready to focus"},minimizeStudy(){s.isMinimized=!0;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("active"),e.style.opacity="0",setTimeout(()=>t.classList.add("hidden"),500),document.getElementById("mini-timer").classList.remove("hidden");const a=Math.floor(s.timer.remaining/60),r=s.timer.remaining%60;document.getElementById("mini-timer-display").textContent=`${a.toString().padStart(2,"0")}:${r.toString().padStart(2,"0")}`;const o=s.timer.remaining/s.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${o}%`},expandStudy(){if(s.isMinimized=!1,document.getElementById("mini-timer").classList.add("hidden"),s.isActive){const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1"}},lockScreen(){s.isLocked=!0,document.getElementById("study-mode-overlay").classList.add("study-locked"),document.getElementById("unlock-screen-overlay").classList.remove("hidden")},unlockScreen(){s.isLocked=!1,document.getElementById("study-mode-overlay").classList.remove("study-locked"),document.getElementById("unlock-screen-overlay").classList.add("hidden")},updateStreakDate(){const t=new Date().toDateString(),e=s.stats.lastStudyDate;if(e!==t){const a=new Date;a.setDate(a.getDate()-1),e===a.toDateString()?s.stats.streak++:s.stats.streak=1,s.stats.lastStudyDate=t}},initZenFlow(){const t=document.getElementById("zen-flow-canvas"),e=t.getContext("2d");let a,r,o=[];const i=()=>{a=t.width=window.innerWidth,r=t.height=window.innerHeight,n()},n=()=>{o=[];const p=30;for(let l=0;l<p;l++)o.push({x:Math.random()*a,y:Math.random()*r,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,radius:Math.random()*80+40,hue:Math.random()*60+170,alpha:Math.random()*.1+.05,pulse:Math.random()*Math.PI*2})},c=()=>{if(!s.isActive){requestAnimationFrame(c);return}e.clearRect(0,0,a,r);const p=document.documentElement.classList.contains("light-mode");if(o.forEach(l=>{l.x+=l.vx,l.y+=l.vy,l.x<-l.radius&&(l.x=a+l.radius),l.x>a+l.radius&&(l.x=-l.radius),l.y<-l.radius&&(l.y=r+l.radius),l.y>r+l.radius&&(l.y=-l.radius),l.pulse+=.02;const u=e.createRadialGradient(l.x,l.y,0,l.x,l.y,l.radius),b=l.radius*(1+Math.sin(l.pulse)*.1);p?(u.addColorStop(0,`hsla(40, 30%, 70%, ${l.alpha*.5})`),u.addColorStop(.5,`hsla(40, 20%, 80%, ${l.alpha*.2})`),u.addColorStop(1,"transparent")):(u.addColorStop(0,`hsla(${l.hue}, 70%, 50%, ${l.alpha})`),u.addColorStop(.5,`hsla(${l.hue}, 70%, 50%, ${l.alpha*.3})`),u.addColorStop(1,"transparent")),e.beginPath(),e.arc(l.x,l.y,b,0,Math.PI*2),e.fillStyle=u,e.fill()}),s.timer.isRunning){const l=Date.now()/1e3,u=150+Math.sin(l*.5)*20,b=e.createRadialGradient(a/2,r/2,0,a/2,r/2,u);p?(b.addColorStop(0,"hsla(40, 30%, 75%, 0.05)"),b.addColorStop(1,"transparent")):(b.addColorStop(0,"hsla(180, 70%, 50%, 0.03)"),b.addColorStop(1,"transparent")),e.beginPath(),e.arc(a/2,r/2,u,0,Math.PI*2),e.fillStyle=b,e.fill()}requestAnimationFrame(c)};window.addEventListener("resize",i),i(),c()}};document.addEventListener("DOMContentLoaded",()=>H.init());
+    `).join("");const d=()=>{e.classList.remove("hidden"),e.offsetWidth,e.classList.add("active")},p=()=>{e.classList.remove("active"),setTimeout(()=>{e.classList.contains("active")||e.classList.add("hidden")},300)};t.addEventListener("click",d),r.addEventListener("click",p),e.addEventListener("click",c=>{c.target===e&&p()})},initStudyMode(){this.loadStudyStats(),this.updateStudyMetrics(),this.initZenFlow(),document.getElementById("study-mode-btn").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("exit-study").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("timer-toggle").addEventListener("click",()=>{this.toggleTimer()}),document.getElementById("timer-reset").addEventListener("click",()=>{this.resetTimer()}),document.querySelectorAll(".preset-btn").forEach(t=>{t.addEventListener("click",e=>{const r=parseInt(e.target.dataset.time);this.setTimerDuration(r)})}),document.getElementById("minimize-study").addEventListener("click",()=>{this.minimizeStudy()}),document.getElementById("expand-study").addEventListener("click",()=>{this.expandStudy()}),document.getElementById("mini-stop-btn").addEventListener("click",()=>{this.expandStudy(),this.toggleStudyMode()}),document.getElementById("lock-screen-btn").addEventListener("click",()=>{this.lockScreen()}),document.getElementById("unlock-screen-btn").addEventListener("click",()=>{this.unlockScreen()})},loadStudyStats(){const t=localStorage.getItem("studyStats");t&&(s.stats=JSON.parse(t),this.updateStreak())},saveStudyStats(){localStorage.setItem("studyStats",JSON.stringify(s.stats))},updateStreak(){const t=new Date().toDateString(),e=s.stats.lastStudyDate;if(e){const r=new Date(e),a=new Date;a.setDate(a.getDate()-1),r.toDateString()===a.toDateString()||r.toDateString()!==t&&(s.stats.streak=0)}},updateStudyMetrics(){const t=document.getElementById("study-streak"),e=document.getElementById("study-cards"),r=document.getElementById("study-minutes");t&&(t.textContent=s.stats.streak),e&&(e.textContent=s.stats.cardsToday),r&&(r.textContent=s.stats.focusMinutes)},toggleStudyMode(){s.isActive=!s.isActive;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");if(s.isActive){if(s.isMinimized){this.expandStudy();return}t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1",this.updateStreak(),this.saveStudyStats()}else this.expandStudy(),t.classList.remove("active"),e.style.opacity="0",this.resetTimer(),setTimeout(()=>{t.classList.add("hidden")},500)},setTimerDuration(t){s.timer.duration=t*60,s.timer.remaining=t*60,document.querySelectorAll(".preset-btn").forEach(e=>{e.classList.toggle("active",parseInt(e.dataset.time)===t)}),this.updateTimerDisplay()},toggleTimer(){s.timer.isRunning?this.pauseTimer():this.startTimer()},startTimer(){s.timer.isRunning=!0,document.getElementById("timer-toggle").textContent="Pause",document.querySelector(".timer-wrapper").classList.add("active"),document.getElementById("lock-screen-btn").classList.remove("hidden"),s.timer.interval=setInterval(()=>{s.timer.remaining--,this.updateTimerDisplay(),s.timer.remaining<=0&&this.completeTimer()},1e3)},pauseTimer(){s.timer.isRunning=!1,document.getElementById("timer-toggle").textContent="Resume",document.querySelector(".timer-wrapper").classList.remove("active"),document.getElementById("lock-screen-btn").classList.add("hidden"),clearInterval(s.timer.interval),s.isLocked&&this.unlockScreen()},resetTimer(){this.pauseTimer(),s.timer.remaining=s.timer.duration,document.getElementById("timer-toggle").textContent="Start Focus",document.getElementById("timer-status").textContent="Ready to focus",document.getElementById("lock-screen-btn").classList.add("hidden"),this.updateTimerDisplay()},completeTimer(){this.pauseTimer(),document.getElementById("timer-status").textContent="Focus complete! Great work!",s.stats.focusMinutes+=Math.floor(s.timer.duration/60),this.updateStreakDate(),this.saveStudyStats(),this.updateStudyMetrics(),"Notification"in window&&Notification.permission==="granted"&&new Notification("Focus Session Complete",{body:"Great job! Take a break.",icon:"/vite.svg"})},updateTimerDisplay(){const t=Math.floor(s.timer.remaining/60),e=s.timer.remaining%60,r=`${t.toString().padStart(2,"0")}:${e.toString().padStart(2,"0")}`;document.getElementById("timer-minutes").textContent=t.toString().padStart(2,"0"),document.getElementById("timer-seconds").textContent=e.toString().padStart(2,"0"),document.getElementById("mini-timer-display").textContent=r;const a=s.timer.remaining/s.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${a}%`;const o=s.timer.remaining/s.timer.duration,d=2*Math.PI*130*(1-o);document.getElementById("timer-progress").style.strokeDashoffset=d,s.timer.isRunning?document.getElementById("timer-status").textContent="Stay focused...":document.getElementById("timer-status").textContent="Ready to focus"},minimizeStudy(){s.isMinimized=!0;const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("active"),e.style.opacity="0",setTimeout(()=>t.classList.add("hidden"),500),document.getElementById("mini-timer").classList.remove("hidden");const r=Math.floor(s.timer.remaining/60),a=s.timer.remaining%60;document.getElementById("mini-timer-display").textContent=`${r.toString().padStart(2,"0")}:${a.toString().padStart(2,"0")}`;const o=s.timer.remaining/s.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${o}%`},expandStudy(){if(s.isMinimized=!1,document.getElementById("mini-timer").classList.add("hidden"),s.isActive){const t=document.getElementById("study-mode-overlay"),e=document.querySelector(".zen-flow-bg");t.classList.remove("hidden"),t.classList.add("active"),e.style.opacity="1"}},lockScreen(){s.isLocked=!0,document.getElementById("study-mode-overlay").classList.add("study-locked"),document.getElementById("unlock-screen-overlay").classList.remove("hidden")},unlockScreen(){s.isLocked=!1,document.getElementById("study-mode-overlay").classList.remove("study-locked"),document.getElementById("unlock-screen-overlay").classList.add("hidden")},updateStreakDate(){const t=new Date().toDateString(),e=s.stats.lastStudyDate;if(e!==t){const r=new Date;r.setDate(r.getDate()-1),e===r.toDateString()?s.stats.streak++:s.stats.streak=1,s.stats.lastStudyDate=t}},initZenFlow(){const t=document.getElementById("zen-flow-canvas"),e=t.getContext("2d");let r,a,o=[];const i=()=>{r=t.width=window.innerWidth,a=t.height=window.innerHeight,d()},d=()=>{o=[];const c=30;for(let l=0;l<c;l++)o.push({x:Math.random()*r,y:Math.random()*a,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,radius:Math.random()*80+40,hue:Math.random()*60+170,alpha:Math.random()*.1+.05,pulse:Math.random()*Math.PI*2})},p=()=>{if(!s.isActive){requestAnimationFrame(p);return}e.clearRect(0,0,r,a);const c=document.documentElement.classList.contains("light-mode");if(o.forEach(l=>{l.x+=l.vx,l.y+=l.vy,l.x<-l.radius&&(l.x=r+l.radius),l.x>r+l.radius&&(l.x=-l.radius),l.y<-l.radius&&(l.y=a+l.radius),l.y>a+l.radius&&(l.y=-l.radius),l.pulse+=.02;const u=e.createRadialGradient(l.x,l.y,0,l.x,l.y,l.radius),b=l.radius*(1+Math.sin(l.pulse)*.1);c?(u.addColorStop(0,`hsla(40, 30%, 70%, ${l.alpha*.5})`),u.addColorStop(.5,`hsla(40, 20%, 80%, ${l.alpha*.2})`),u.addColorStop(1,"transparent")):(u.addColorStop(0,`hsla(${l.hue}, 70%, 50%, ${l.alpha})`),u.addColorStop(.5,`hsla(${l.hue}, 70%, 50%, ${l.alpha*.3})`),u.addColorStop(1,"transparent")),e.beginPath(),e.arc(l.x,l.y,b,0,Math.PI*2),e.fillStyle=u,e.fill()}),s.timer.isRunning){const l=Date.now()/1e3,u=150+Math.sin(l*.5)*20,b=e.createRadialGradient(r/2,a/2,0,r/2,a/2,u);c?(b.addColorStop(0,"hsla(40, 30%, 75%, 0.05)"),b.addColorStop(1,"transparent")):(b.addColorStop(0,"hsla(180, 70%, 50%, 0.03)"),b.addColorStop(1,"transparent")),e.beginPath(),e.arc(r/2,a/2,u,0,Math.PI*2),e.fillStyle=b,e.fill()}requestAnimationFrame(p)};window.addEventListener("resize",i),i(),p()}};document.addEventListener("DOMContentLoaded",()=>G.init());

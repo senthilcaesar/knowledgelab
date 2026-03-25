@@ -202,6 +202,45 @@ const app = {
         this.renderWelcome();
       }
     });
+
+    window.addEventListener('message', async (event) => {
+      if (event.origin !== window.location.origin) return;
+      if (event.data?.type !== 'knowledgeLabFlowchartFullscreenToggle') return;
+
+      const embed = document.querySelector('.flowchart-embed');
+      if (!embed) return;
+
+      try {
+        if (document.fullscreenElement === embed) {
+          await document.exitFullscreen();
+        } else if (!document.fullscreenElement) {
+          await embed.requestFullscreen();
+        }
+      } catch (error) {
+        console.error('Flowchart fullscreen toggle failed:', error);
+      } finally {
+        const iframe = embed.querySelector('iframe');
+        iframe?.contentWindow?.postMessage(
+          {
+            type: 'knowledgeLabFlowchartFullscreenState',
+            isFullscreen: document.fullscreenElement === embed,
+          },
+          window.location.origin,
+        );
+      }
+    });
+
+    document.addEventListener('fullscreenchange', () => {
+      const embed = document.querySelector('.flowchart-embed');
+      const iframe = embed?.querySelector('iframe');
+      iframe?.contentWindow?.postMessage(
+        {
+          type: 'knowledgeLabFlowchartFullscreenState',
+          isFullscreen: document.fullscreenElement === embed,
+        },
+        window.location.origin,
+      );
+    });
   },
 
   selectConcept(id) {
