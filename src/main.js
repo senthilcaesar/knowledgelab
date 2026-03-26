@@ -387,25 +387,40 @@ const app = {
   attachCopyButtonsTo(container) {
     if (!container) return;
 
-    // Find all code blocks
-    const codeBlocks = container.querySelectorAll('code');
+    const blockCandidates = container.querySelectorAll('pre, code');
+    const wrappedTargets = new Set();
 
-    codeBlocks.forEach((code) => {
-      // Only attach to block-level code elements (the ones with inline styles or specifically for commands)
-      const isBlock =
-        code.style.display === 'block' || 
-        (code.parentNode && code.parentNode.tagName === 'PRE') ||
-        code.textContent.includes('\n');
-      if (!isBlock) return;
+    blockCandidates.forEach((node) => {
+      if (node.closest('.code-wrapper')) return;
+
+      let target = null;
+
+      if (node.tagName === 'PRE') {
+        target = node;
+      } else {
+        const code = node;
+        const isBlock =
+          code.style.display === 'block' ||
+          (code.parentNode && code.parentNode.tagName === 'PRE') ||
+          code.textContent.includes('\n');
+        if (!isBlock) return;
+
+        target = code.parentNode && code.parentNode.tagName === 'PRE' ? code.parentNode : code;
+      }
+
+      if (!target || wrappedTargets.has(target)) return;
+      if (target.parentNode && target.parentNode.classList?.contains('code-wrapper')) return;
+
+      wrappedTargets.add(target);
 
       // Create wrapper
       const wrapper = document.createElement('div');
       wrapper.className = 'code-wrapper';
 
-      // Insert wrapper before code
-      code.parentNode.insertBefore(wrapper, code);
-      // Move code into wrapper
-      wrapper.appendChild(code);
+      // Insert wrapper before the block target
+      target.parentNode.insertBefore(wrapper, target);
+      // Move the pre/code block into the wrapper
+      wrapper.appendChild(target);
 
       // Add copy button
       const btn = document.createElement('button');
@@ -420,7 +435,7 @@ const app = {
       wrapper.appendChild(btn);
 
       btn.addEventListener('click', () => {
-        const text = code.textContent;
+        const text = target.textContent;
         // Clean up text (remove the leading '❯ ' prompt if it's there, but keep the rest)
         const cleanText = text.replace(/^❯\s+/, '');
 

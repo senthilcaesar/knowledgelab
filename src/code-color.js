@@ -41,7 +41,7 @@ const BASE_PRE = [
   'font-size: 0.85rem',
   'white-space: pre-wrap',
   'line-height: 1.5',
-  'overflow-x: auto',
+  'overflow-x: hidden',
   'margin: 0.5rem 0',
   'box-shadow: inset 0 2px 4px rgba(0,0,0,0.15)',
 ].join('; ');

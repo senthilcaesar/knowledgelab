@@ -496,6 +496,8 @@ h1, h2, h3 {
 .code-wrapper {
   position: relative;
   margin: 1rem 0;
+  animation: none !important;
+  transition: none !important;
 }
 
 .copy-btn {
@@ -513,7 +515,6 @@ h1, h2, h3 {
   color: var(--text-secondary);
   cursor: pointer;
   z-index: 5;
-  transition: var(--transition-fast);
   backdrop-filter: blur(4px);
 }
 
@@ -521,7 +522,6 @@ h1, h2, h3 {
   background: var(--surface-hover);
   border-color: var(--accent-primary);
   color: var(--accent-primary);
-  transform: translateY(-1px);
 }
 
 .copy-btn.copied {
@@ -2051,10 +2051,48 @@ h1, h2, h3 {
   height: auto;
 }
 
-.tutorial-tab-panel code[style*="display: block"],
+.tutorial-tab-content,
+.tutorial-tab-panel,
+.tutorial-tab-panel pre,
+.tutorial-tab-panel code,
 .tutorial-tab-panel .code-wrapper {
-  overflow-x: auto;
-  max-width: 100%;
+  overflow-x: hidden !important;
+  max-width: 100% !important;
+}
+
+.tutorial-tab-panel pre,
+.tutorial-tab-panel code[style*="display: block"],
+.tutorial-tab-panel .code-wrapper code {
+  white-space: pre-wrap !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  overflow: visible !important;
+  max-height: none !important;
+  scrollbar-width: none !important;
+  animation: none !important;
+  transition: none !important;
+  box-shadow: none !important;
+  background-image: none !important;
+  filter: none !important;
+}
+
+.tutorial-tab-panel .code-wrapper,
+.tutorial-tab-panel pre {
+  overflow: visible !important;
+  max-height: none !important;
+  scrollbar-width: none !important;
+  animation: none !important;
+  transition: none !important;
+  box-shadow: none !important;
+  background-image: none !important;
+  filter: none !important;
+}
+
+.tutorial-tab-panel pre::-webkit-scrollbar,
+.tutorial-tab-panel code[style*="display: block"]::-webkit-scrollbar,
+.tutorial-tab-panel .code-wrapper::-webkit-scrollbar,
+.tutorial-tab-panel .code-wrapper code::-webkit-scrollbar {
+  display: none !important;
 }
 
 /* ── Light mode ── */

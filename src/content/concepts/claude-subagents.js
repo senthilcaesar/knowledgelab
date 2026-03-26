@@ -116,7 +116,7 @@ export function useDarkMode() {
 
           <div style="margin-top: 3rem;">
             <strong style="display:block; margin-bottom:1rem; font-size:1.1rem; color: var(--text-primary);">Division of Work Summary</strong>
-            <div style="overflow-x: auto;">
+            <div style="max-width: 100%;">
               <table style="width: 100%; border-collapse: collapse; font-size: 0.95rem; border: 1px solid var(--border-color);">
                 <thead>
                   <tr style="background: rgba(255, 255, 255, 0.05); border-bottom: 2px solid var(--border-color);">
@@ -210,7 +210,7 @@ export function useDarkMode() {
           <h3 style="margin-bottom: 1rem; color: var(--accent-primary); font-size: 1.2rem;">1. Choose the subagent scope</h3>
           <p style="margin-bottom: 1.5rem; line-height: 1.6;">Subagents are Markdown files with YAML frontmatter. Store them in different locations depending on scope. When multiple subagents share the same name, the higher-priority location wins.</p>
           
-          <div style="overflow-x: auto; margin-bottom: 2rem;">
+          <div style="margin-bottom: 2rem; max-width: 100%;">
             <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem; border: 1px solid var(--border-color);">
               <thead>
                 <tr style="background: var(--surface-color); border-bottom: 2px solid var(--border-color);">
@@ -380,7 +380,7 @@ description: Reviews code for quality and best practices
 memory: user
 ---</code>
 
-            <div style="overflow-x: auto; margin: 1.5rem 0;">
+            <div style="margin: 1.5rem 0; max-width: 100%;">
               <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem; border: 1px solid var(--border-color);">
                 <thead>
                   <tr style="background: var(--surface-color); border-bottom: 2px solid var(--border-color);">
