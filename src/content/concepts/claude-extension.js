@@ -9,20 +9,20 @@ const claudeExtensionConcept = {
       content: `
 <style>
 .cc-table-wrap { width:100%; margin-top:1.5rem; border-radius:12px; overflow: visible; }
-.cc-table { width:100%; border-collapse:collapse; font-size:15px; font-family:'Outfit', sans-serif; line-height:1.5; table-layout:auto; letter-spacing:0.01em; }
-.cc-table th { padding:12px 12px;text-align:left;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;font-size:12px;color:var(--text-secondary);border-bottom:1px solid var(--border-color);background:rgba(0,0,0,0.2) }
+.cc-table { width:100%; border-collapse:collapse; font-size:0.85rem; font-family:'Outfit', sans-serif; line-height:1.5; table-layout:auto; letter-spacing:0.01em; }
+.cc-table th { padding:12px 12px;text-align:left;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;font-size:0.75rem;color:var(--text-secondary);border-bottom:1px solid var(--border-color);background:rgba(0,0,0,0.2) }
 .cc-table td { padding:24px 12px;border-bottom:1px solid var(--border-color);vertical-align:top;color:var(--text-primary); }
 .cc-table td p { margin: 0; padding: 0; line-height: 1.5; }
 .cc-table td code { 
   vertical-align: top; 
   display: inline-block;
   padding: 0.15rem 0.4rem; 
-  background: var(--surface-color); 
+  background: var(--syntax-bg); 
   border: 1px solid var(--border-color); 
   border-radius: 4px; 
-  font-family: 'Inter', monospace; 
-  font-size: 12.5px; 
-  color: var(--code-text); 
+  font-family: 'JetBrains Mono', monospace; 
+  font-size: 0.85rem; 
+  color: var(--accent-primary); 
   white-space: pre-wrap; 
   word-break: break-word; 
   overflow-wrap: break-word;
@@ -31,11 +31,11 @@ const claudeExtensionConcept = {
 }
 .cc-table tr:last-child td { border-bottom:none }
 .cc-table tr:hover td { background:var(--surface-hover) }
-.badge { display:inline-block;padding:0 10px;border-radius:6px;font-size:12.5px;font-weight:700;white-space:nowrap; border: 1px solid var(--border-color); letter-spacing: 0.02em; line-height: 24px; vertical-align: top; margin: 0; box-sizing: border-box; }
+.badge { display:inline-block;padding:0 10px;border-radius:6px;font-size:0.8rem;font-weight:700;white-space:nowrap; border: 1px solid var(--border-color); letter-spacing: 0.02em; line-height: 24px; vertical-align: top; margin: 0; box-sizing: border-box; }
 .doc-links { display:grid; gap: 4px; }
-.doc-links a { font-size:13.5px;color:var(--accent-primary);text-decoration:none;white-space:nowrap; transition: 0.2s ease; }
+.doc-links a { font-size:0.85rem;color:var(--accent-primary);text-decoration:none;white-space:nowrap; transition: 0.2s ease; }
 .doc-links a:hover { text-decoration:underline; opacity: 0.8; }
-.doc-label { font-size:12px;color:var(--text-secondary);display:block;margin:0;font-weight:700;letter-spacing:0.02em;padding:0;text-transform:uppercase; line-height: 26px; vertical-align: top; }
+.doc-label { font-size:0.75rem;color:var(--text-secondary);display:block;margin:0;font-weight:700;letter-spacing:0.02em;padding:0;text-transform:uppercase; line-height: 26px; vertical-align: top; }
 
 @media (max-width: 1024px) {
   .cc-table-wrap {
@@ -218,7 +218,7 @@ const claudeExtensionConcept = {
     {
       label: 'Decision Flow',
       content: `
-<div class="flowchart-embed" style="width: 100%; height: calc(100vh - 160px); min-height: 700px; overflow: hidden; background: var(--surface-color); border-radius: 12px; border: 1px solid var(--border-color);">
+<div class="flowchart-embed" style="width: 100%; height: calc(100vh - 160px); min-height: 700px; overflow: hidden; background: var(--syntax-bg); border-radius: 12px; border: 1px solid var(--border-color);">
   <iframe src="/knowledgelab/flowchart.html" style="width: 100%; height: 100%; border: none;" title="Decision Flowchart" allow="fullscreen" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
 </div>
       `,

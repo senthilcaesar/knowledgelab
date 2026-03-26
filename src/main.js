@@ -1,5 +1,6 @@
 import './style.css';
 import { initConstellation } from './constellation.js';
+import { applyCodeColors } from './code-color.js';
 import pkg from '../package.json';
 
 import concepts from './content/concepts/index.js';
@@ -300,10 +301,13 @@ const app = {
       `;
 
       this.initTabs();
-      // Attach copy buttons to the first (active) panel
+      // Apply Monokai syntax theme to all code blocks
       concept.tabs.forEach((_, i) => {
         const el = document.getElementById(`concept-description-${i}`);
-        if (el) this.attachCopyButtonsTo(el);
+        if (el) {
+          applyCodeColors(el);
+          this.attachCopyButtonsTo(el);
+        }
       });
     } else {
       contentArea.classList.remove('content-area--tabbed');
@@ -325,6 +329,8 @@ const app = {
           </div>
         </article>
       `;
+      // Apply Monokai syntax theme to all code blocks
+      applyCodeColors(document.getElementById('concept-description'));
       this.attachCopyButtons();
     }
   },
@@ -387,7 +393,9 @@ const app = {
     codeBlocks.forEach((code) => {
       // Only attach to block-level code elements (the ones with inline styles or specifically for commands)
       const isBlock =
-        code.style.display === 'block' || code.textContent.includes('\n');
+        code.style.display === 'block' || 
+        (code.parentNode && code.parentNode.tagName === 'PRE') ||
+        code.textContent.includes('\n');
       if (!isBlock) return;
 
       // Create wrapper

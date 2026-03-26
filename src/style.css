@@ -14,6 +14,30 @@
   --glass-blur: 16px;
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Syntax Highlighting — authentic Monokai (from Vim colorscheme)
+   * Keyword    = #f92672  Conditional Statement Operator Type Tag
+   * String     = #e6db74  String Label
+   * Constant   = #ae81ff  Boolean Number Float SpecialChar
+   * Comment    = #75715e  italic
+   * Function   = #a6e22e  Function name
+   * Identifier = #66d9ef  italic  Identifier StorageClass built-ins
+   * Params     = #fd971f  italic  block params / decorators
+   */
+  --syntax-bg:         #272822;
+  --syntax-text:       #f8f8f2;
+  --syntax-keyword:    #f92672;  /* keyword / operator / type  */
+  --syntax-string:     #e6db74;  /* strings, labels            */
+  --syntax-constant:   #ae81ff;  /* numbers, booleans          */
+  --syntax-comment:    #75715e;  /* comments (italic)          */
+  --syntax-function:   #a6e22e;  /* function names             */
+  --syntax-identifier: #66d9ef;  /* identifiers / built-ins (cyan italic) */
+  --syntax-params:     #fd971f;  /* params / decorators (orange italic)  */
+
+  /* Code block surface colors */
+  --surface-dark: #1a1a1a;        /* terminal/output blocks */
+  --surface-light: rgba(255,255,255,0.04); /* command/input blocks */
+  --code-green: #00ff00;          /* terminal output text */
 }
 
 :root.light-mode {
@@ -29,6 +53,22 @@
   --code-text: #8c6b3e; /* Darker old gold */
   --code-text-secondary: #544436; /* Darker stone brown */
   --glass-blur: 8px;
+
+  /* Syntax Highlighting — Parchment-compatible analogues */
+  --syntax-bg:         rgba(67, 52, 34, 0.07);
+  --syntax-text:       #3d3021;
+  --syntax-keyword:    #a64d4d;  /* red clay   */
+  --syntax-string:     #4a7c44;  /* forest     */
+  --syntax-constant:   #704da6;  /* plum       */
+  --syntax-comment:    #8a7a6a;  /* stone      */
+  --syntax-function:   #4a6fa6;  /* slate blue */
+  --syntax-identifier: #2e7d8a;  /* teal (cyan analogue, italic) */
+  --syntax-params:     #8a5a1e;  /* amber (orange analogue, italic) */
+
+  /* Code block surface colors (light mode) */
+  --surface-dark: rgba(67, 52, 34, 0.07);
+  --surface-light: rgba(67, 52, 34, 0.04);
+  --code-green: #2a6e1e;
 }
 
 :root.light-mode #app {
@@ -376,7 +416,7 @@ h1, h2, h3 {
 }
 
 #concept-description code {
-  font-size: 1.0rem;
+  font-size: 0.85rem;
   word-break: break-word;
   white-space: pre-wrap;
 }
@@ -1940,13 +1980,13 @@ h1, h2, h3 {
 }
 
 .tutorial-tab-content code {
-  font-size: 1.05rem;
+  font-size: 0.85rem;
 }
 
 .tutorial-tab-content .code-wrapper code,
 .tutorial-tab-content .concept-content code[style*="display: block"] {
-  font-size: 1.12rem;
-  line-height: 1.65;
+  font-size: 0.85rem;
+  line-height: 1.5;
 }
 
 /* ── Tab panels ── */
