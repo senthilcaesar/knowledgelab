@@ -20,7 +20,7 @@ const claudeAgentsConcept = {
   <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
     &#x26A1; How this differs from Subagents
   </p>
-  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">Unlike <a href="#" data-goto-concept="claude-subagents" style="color: var(--accent-primary); text-decoration: underline;">subagents</a> which run <em>inside</em> one session and only report back to the main agent, <strong>agent teammates are fully independent Claude Code sessions</strong> &mdash; each with its own context window, project files, and the ability to message other teammates directly.</p>
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">Unlike <a href="#" data-goto-concept="claude-subagents" style="color: var(--accent-primary); text-decoration: underline;">subagents</a> which run <em>inside</em> one session and only report back to the main agent, <strong>agent teammates are fully independent Claude Code sessions</strong> &mdash; each with its own context window, project files, and the ability to message other teammates directly. <strong>Agent teammates can communicate directly with each other</strong> and share a task list for coordination</p>
 </div>
 
 <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);">Prerequisites</h3>
@@ -30,14 +30,6 @@ const claudeAgentsConcept = {
   <li style="margin-bottom: 0.25rem;">Optional: <code style="padding: 0.1rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--syntax-text); font-family: monospace;">tmux</code> for split-pane display (covered in Step 2)</li>
 </ul>
 
-<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1rem 0;">
-  <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
-    <span style="color: var(--accent-primary);">⚡</span> Key Difference from Subagents
-  </p>
-  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">
-    Unlike <a href="#" data-goto-concept="claude-subagents" style="color: var(--accent-primary); text-decoration: underline;">subagents</a> which run within a single session and only report back to the main agent, <strong>agent teammates can communicate directly with each other</strong> and share a task list for coordination.
-  </p>
-</div>
 
 <h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">What You'll Build</h3>
 <p style="margin-bottom:0.75rem; line-height:1.75;">A simple <strong>Research Team</strong> that works in parallel to analyze a topic from multiple angles. Perfect for learning because:</p>
@@ -107,10 +99,10 @@ const claudeAgentsConcept = {
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">Open or create your Claude Code global settings file:</p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code># macOS/Linux — open in nano text editor
-nano ~/.claude.json
+nano ~/.claude/settings.json
 
 # Or use VS Code
-code ~/.claude.json</code></pre>
+code ~/.claude/settings.json</code></pre>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">Add (or merge) this content into the file:</p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>{
@@ -118,7 +110,48 @@ code ~/.claude.json</code></pre>
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   }
 }</code></pre>
+
+<p style="margin-bottom:0.5rem; line-height:1.75; margin-top: 1.5rem;">Example real-world output:</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>senthilpalanivelu@Senthils-MacBook-Pro-M4 ~/.claude$ pwd
+/Users/senthilpalanivelu/.claude</code></pre>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>senthilpalanivelu@Senthils-MacBook-Pro-M4 ~/.claude$ cat settings.json 
+{
+  "enabledPlugins": {
+    "commit-commands@claude-plugins-official": true,
+    "ui-ux-pro-max@ui-ux-pro-max-skill": true,
+    "everything-claude-code@everything-claude-code": true,
+    "frontend-design@claude-plugins-official": true,
+    "py-helper@py-helper-marketplace": true
+  },
+  "extraKnownMarketplaces": {
+    "everything-claude-code": {
+      "source": {
+        "source": "github",
+        "repo": "affaan-m/everything-claude-code"
+      }
+    },
+    "ui-ux-pro-max-skill": {
+      "source": {
+        "source": "github",
+        "repo": "nextlevelbuilder/ui-ux-pro-max-skill"
+      }
+    },
+    "py-helper-marketplace": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/senthilpalanivelu/Downloads/my-claude-marketplace/py-helper-marketplace"
+      }
+    }
+  },
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  }
+}</code></pre>
+
+
 <p style="margin-bottom:1.5rem; font-size:0.85rem; color: var(--text-secondary); line-height:1.6;">Save and close. This flag is read every time Claude Code starts, so you only need to set it once.</p>
+
 
 <h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Option B: Shell environment variable <span style="font-size:0.8rem; color: var(--text-secondary); font-weight:400;">(Current terminal only)</span></h3>
 
