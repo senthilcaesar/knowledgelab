@@ -162,12 +162,6 @@ code ~/.claude/settings.json</code></pre>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>echo 'export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1' >> ~/.zshrc
 source ~/.zshrc   # reload (use ~/.bashrc if on bash)</code></pre>
 
-<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Verify it's enabled</h3>
-<p style="margin-bottom:0.5rem; line-height:1.75;">Start Claude Code — you should see a note in the startup banner confirming agent teams are active:</p>
-<pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); line-height: 1.5;"><code>claude
-# ✓ Agent teams: enabled (experimental)</code></pre>
-<p style="margin-bottom:1rem; font-size:0.85rem; color: var(--text-secondary); font-style:italic;">If you don't see this, double-check the env variable is set before launching Claude.</p>
-
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="0" class="tutorial-nav-link previous">
     <span>←</span> Previous: Overview
@@ -209,33 +203,42 @@ source ~/.zshrc   # reload (use ~/.bashrc if on bash)</code></pre>
   </tbody>
 </table>
 
-<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Installing tmux for Split Panes</h3>
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Configuring Split Panes for Beginners</h3>
 
-<p style="margin-bottom:0.5rem; line-height:1.75;"><strong>macOS:</strong></p>
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; white-space: pre-wrap; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>brew install tmux</code></pre>
+<p style="margin-bottom:0.75rem; line-height:1.75;">To see all your teammates working in parallel, you'll need a terminal multiplexer like <strong>tmux</strong>. Follow these simple steps:</p>
 
-<p style="margin-bottom:0.5rem; line-height:1.75;"><strong>Ubuntu/Debian:</strong></p>
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; white-space: pre-wrap; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>sudo apt install tmux</code></pre>
+<ol style="margin: 0.5rem 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
+  <li style="margin-bottom: 0.5rem;">
+    <strong>Install tmux:</strong> Ensure you have Homebrew installed, then run:
+    <pre style="display: block; padding: 0.75rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>brew install tmux</code></pre>
+  </li>
+  <li style="margin-bottom: 0.5rem;">
+    <strong>Start a tmux session:</strong> Before launching Claude Code, you must start a tmux session so it can manage your terminal panes.
+    <pre style="display: block; padding: 0.75rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>tmux new -s claude-session</code></pre>
+    <div style="padding: 0.75rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 3px solid var(--accent-primary); border-radius: 8px; margin: 0.5rem 0; font-size: 0.85rem; line-height: 1.5;">
+      <strong>Mac / iTerm2 Users:</strong> Start tmux with native window integration for the best native-tab experience:<br>
+      <code style="color: var(--code-green); font-family: 'JetBrains Mono', monospace; margin-top: 0.25rem; display: inline-block;">tmux -CC new -s claude-session</code>
+    </div>
+  </li>
+  <li style="margin-bottom: 0.5rem;">
+    <strong>Launch Claude Code:</strong> Tell Claude to use the split-pane mode.
+    <pre style="display: block; padding: 0.75rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>claude --teammate-mode tmux</code></pre>
+  </li>
+</ol>
 
-<p style="margin-bottom:0.5rem; line-height:1.75;"><strong>Fedora:</strong></p>
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; white-space: pre-wrap; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>sudo dnf install tmux</code></pre>
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Make Split-Pane Mode the Default</h3>
 
-<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Configuring Display Mode</h3>
-
-<p style="margin-bottom:0.5rem; line-height:1.75;">The default is <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">"auto"</code> (uses split panes if in tmux, in-process otherwise). Override in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude.json</code>:</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">If you want to make this the default behavior whenever you run Claude inside a tmux session, open or create your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude.json</code> file and add:</p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; white-space: pre-wrap; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>{
-  "teammateMode": "in-process"
+  "teammateMode": "tmux"
 }</code></pre>
-
-<p style="margin-bottom:0.5rem; line-height:1.75;">Or force for a single session:</p>
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; white-space: pre-wrap; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>claude --teammate-mode in-process</code></pre>
 
 <div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1rem 0;">
   <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
-    <span style="color: var(--accent-primary);">💡</span> Tip for Beginners
+    <span style="color: var(--accent-primary);">💡</span> Pro Tip
   </p>
   <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">
-    Start with <strong>in-process mode</strong> — it works in any terminal and is simpler to use. You can always upgrade to split panes later once you're comfortable with agent teams.
+    Using <strong>split-pane mode</strong> inside tmux gives you the best visibility into what all your teammates are doing simultaneously. Just verify Claude is already running inside of a tmux session before summoning agent agents!
   </p>
 </div>
 
@@ -263,11 +266,11 @@ claude</code></pre>
 <h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Create Your First Team</h3>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">Enter this prompt:</p>
-<pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); white-space: pre-wrap; line-height: 1.5;"><code>I want to understand the concept of "machine learning bias" from three
+<pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); white-space: pre-wrap; line-height: 1.5;"><code>I want to understand the concept of "human bias" from three
 different perspectives. Create an agent team with 3 teammates:
 
-1. "historian" - Research the history and origins of ML bias
-2. "technician" - Research the technical causes and mitigation techniques
+1. "historian" - Research the history and origins of human bias
+2. "psychologist" - Research the causes and mitigation techniques
 3. "ethicist" - Research the societal and ethical implications
 
 Each teammate should investigate their angle and report back. Have the
@@ -326,7 +329,47 @@ lead synthesize all findings into a summary.</code></pre>
 
 <p style="margin-bottom:0.75rem; line-height:1.75;">Once your team is running, you can monitor progress and interact with individual teammates.</p>
 
-<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">In-Process Mode (Default)</h3>
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Split-Pane Mode (Recommended with tmux)</h3>
+
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--code-green); border-radius: 12px; margin: 1rem 0;">
+  <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
+    <span style="color: var(--code-green);">✨</span> Automatic Layout
+  </p>
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">
+    You don't need to manually configure windows! When you launch Claude inside a tmux session with <code style="padding: 0.2rem 0.4rem; background: var(--surface-dark); border-radius: 4px; font-family: monospace; color: var(--code-text);">split-pane</code> mode, Claude will <strong>automatically</strong> slice your terminal window into side-by-side or stacked panels so you can watch all 3 agents (and the team leader) working in parallel.
+  </p>
+</div>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">To navigate between these panes, you use tmux's <strong>Prefix Key</strong>. By default, this is <kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; border: 1px solid var(--border-color);">Ctrl+B</kbd>. You press and release this prefix combo, then press a shortcut key.</p>
+
+<table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+  <thead>
+    <tr style="border-bottom: 2px solid var(--border-color);">
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Action</th>
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Shortcut / Command</th>
+    </tr>
+  </thead>
+  <tbody style="color: var(--text-secondary);">
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;"><strong>Move to an Agent's Pane</strong></td>
+      <td style="padding: 0.75rem;"><kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Ctrl+B</kbd> then <kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Arrow Key</kbd><br><small style="color: var(--text-secondary); opacity: 0.8;">(Or just click on the pane with your mouse if mouse mode is on!)</small></td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;"><strong>Zoom into One Agent (Full Screen)</strong></td>
+      <td style="padding: 0.75rem;"><kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Ctrl+B</kbd> then <kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Z</kbd><br><small style="color: var(--text-secondary); opacity: 0.8;">(Press again to unzoom and see the whole team)</small></td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;"><strong>Cycle Layout Arrangements</strong></td>
+      <td style="padding: 0.75rem;"><kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Ctrl+B</kbd> then <kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Spacebar</kbd></td>
+    </tr>
+    <tr>
+      <td style="padding: 0.75rem;"><strong>Interact with an Agent</strong></td>
+      <td style="padding: 0.75rem;">Once your cursor is in their pane, simply type your message to redirect them or ask for a status update.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">In-Process Mode (Standard Terminal)</h3>
 
 <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
   <thead>
@@ -355,31 +398,6 @@ lead synthesize all findings into a summary.</code></pre>
     <tr>
       <td style="padding: 0.75rem;">Send a message</td>
       <td style="padding: 0.75rem;">Just type and send</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Split-Pane Mode (tmux/iTerm2)</h3>
-
-<table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
-  <thead>
-    <tr style="border-bottom: 2px solid var(--border-color);">
-      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Action</th>
-      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">How To</th>
-    </tr>
-  </thead>
-  <tbody style="color: var(--text-secondary);">
-    <tr style="border-bottom: 1px solid var(--border-color);">
-      <td style="padding: 0.75rem;">Switch panes</td>
-      <td style="padding: 0.75rem;">Click on the pane</td>
-    </tr>
-    <tr style="border-bottom: 1px solid var(--border-color);">
-      <td style="padding: 0.75rem;">View all teammates</td>
-      <td style="padding: 0.75rem;">All visible at once</td>
-    </tr>
-    <tr>
-      <td style="padding: 0.75rem;">Interact with teammate</td>
-      <td style="padding: 0.75rem;">Type directly in their pane</td>
     </tr>
   </tbody>
 </table>
