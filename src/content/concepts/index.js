@@ -7,12 +7,14 @@ import buildAppSkillMcpConcept from './build-app-skill-mcp.js';
 import claudeExtensionConcept from './claude-extension.js';
 import claudeCommandsConcept from './claude-commands.js';
 import claudeSubagentsConcept from './claude-subagents.js';
+import claudeAgentsConcept from './claude-agents.js';
 import claudePluginsConcept from './claude-plugins.js';
 
 const concepts = [
   claudeExtensionConcept,
   claudeCommandsConcept,
   claudeSubagentsConcept,
+  claudeAgentsConcept,
   claudePluginsConcept,
   claudeSkillsTutorialConcept,
   claudeMcpConcept,

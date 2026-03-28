@@ -1,6 +1,6 @@
-(function(){const r=document.createElement("link").relList;if(r&&r.supports&&r.supports("modulepreload"))return;for(const n of document.querySelectorAll('link[rel="modulepreload"]'))a(n);new MutationObserver(n=>{for(const p of n)if(p.type==="childList")for(const h of p.addedNodes)h.tagName==="LINK"&&h.rel==="modulepreload"&&a(h)}).observe(document,{childList:!0,subtree:!0});function i(n){const p={};return n.integrity&&(p.integrity=n.integrity),n.referrerPolicy&&(p.referrerPolicy=n.referrerPolicy),n.crossOrigin==="use-credentials"?p.credentials="include":n.crossOrigin==="anonymous"?p.credentials="omit":p.credentials="same-origin",p}function a(n){if(n.ep)return;n.ep=!0;const p=i(n);fetch(n.href,p)}})();const ar=70,De=160,Fe=120;class nr{constructor(r,i){this.width=r,this.height=i,this.x=Math.random()*r,this.y=Math.random()*i,this.vx=(Math.random()-.5)*.4,this.vy=(Math.random()-.5)*.4,this.baseRadius=1.5+Math.random()*2,this.pulsePhase=Math.random()*Math.PI*2,this.pulseSpeed=.015+Math.random()*.025,this.isHub=Math.random()<.12,this.isHub&&(this.baseRadius*=2)}update(r){this.pulsePhase+=this.pulseSpeed;const i=this.x-r.x,a=this.y-r.y,n=Math.hypot(i,a);if(n<Fe&&n>0){const h=((Fe-n)/Fe)**2*3;this.vx+=i/n*h*.08,this.vy+=a/n*h*.08}this.vx*=.975,this.vy*=.975;const p=Math.hypot(this.vx,this.vy);p>1.5&&(this.vx=this.vx/p*1.5,this.vy=this.vy/p*1.5),this.x+=this.vx,this.y+=this.vy,this.x<0&&(this.x=this.width),this.x>this.width&&(this.x=0),this.y<0&&(this.y=this.height),this.y>this.height&&(this.y=0)}draw(r,i){const a=.5+.5*Math.sin(this.pulsePhase),n=this.baseRadius*(1+a*.6),p=(this.isHub?.7:.4)+a*.4,h=i?`rgba(176, 141, 87, ${p})`:this.isHub?`rgba(180, 100, 255, ${p})`:`rgba(0, 242, 255, ${p})`,C=i?`rgba(176, 141, 87, ${a*.12})`:this.isHub?`rgba(130, 0, 255, ${a*.1})`:`rgba(0, 242, 255, ${a*.1})`;r.beginPath(),r.arc(this.x,this.y,n*5,0,Math.PI*2),r.fillStyle=C,r.fill(),r.beginPath(),r.arc(this.x,this.y,n,0,Math.PI*2),r.fillStyle=h,r.fill()}}class ir{constructor(r,i,a,n,p){this.x1=r,this.y1=i,this.x2=a,this.y2=n,this.progress=0,this.speed=.02+Math.random()*.03,this.isLight=p,this.alive=!0}update(){this.progress+=this.speed,this.progress>=1&&(this.alive=!1)}draw(r){const i=this.x1+(this.x2-this.x1)*this.progress,a=this.y1+(this.y2-this.y1)*this.progress,n=1-this.progress;r.beginPath(),r.arc(i,a,3,0,Math.PI*2),r.fillStyle=this.isLight?`rgba(212, 160, 23, ${n})`:`rgba(255, 255, 255, ${n})`,r.fill()}}function sr(t){const r=t.getContext("2d");let i=0,a=0,n=[],p=[],h=null;const C={x:-9999,y:-9999};let k=0;function l(){i=t.width=window.innerWidth,a=t.height=window.innerHeight,n=Array.from({length:ar},()=>new nr(i,a))}function I(M){if(k--,k>0)return;k=30+Math.floor(Math.random()*60);const S=[...n].sort(()=>Math.random()-.5);for(let B=0;B<S.length-1;B++){const O=S[B],J=S[B+1];if(Math.hypot(O.x-J.x,O.y-J.y)<De){p.push(new ir(O.x,O.y,J.x,J.y,M));return}}}function T(M,S,B,O){const J=(1-B/De)*(O?.25:.35),$=r.createLinearGradient(M.x,M.y,S.x,S.y),Y=O?`rgba(176,141,87,${J*1.5})`:M.isHub?`rgba(150,50,255,${J*1.5})`:`rgba(0,242,255,${J*1.5})`,Z=O?`rgba(122,106,83,${J})`:S.isHub?`rgba(150,50,255,${J})`:`rgba(0,200,220,${J})`;$.addColorStop(0,Y),$.addColorStop(1,Z),r.beginPath(),r.moveTo(M.x,M.y),r.lineTo(S.x,S.y),r.strokeStyle=$,r.lineWidth=O?.6:.8,r.stroke()}function z(){const M=document.documentElement.classList.contains("light-mode");r.clearRect(0,0,i,a);for(let S=0;S<n.length;S++){n[S].update(C);for(let B=S+1;B<n.length;B++){const O=n[S].x-n[B].x,J=n[S].y-n[B].y,$=Math.hypot(O,J);$<De&&T(n[S],n[B],$,M)}}n.forEach(S=>S.draw(r,M)),I(M),p=p.filter(S=>S.alive),p.forEach(S=>{S.update(),S.draw(r)}),h=requestAnimationFrame(z)}function G(){cancelAnimationFrame(h),window.removeEventListener("resize",l),window.removeEventListener("mousemove",R)}function R(M){C.x=M.clientX,C.y=M.clientY}return window.addEventListener("resize",l),window.addEventListener("mousemove",R),l(),z(),{destroy:G}}function lr(t){return t&&t.__esModule&&Object.prototype.hasOwnProperty.call(t,"default")?t.default:t}var je,at;function dr(){if(at)return je;at=1;function t(e){return e instanceof Map?e.clear=e.delete=e.set=function(){throw new Error("map is read-only")}:e instanceof Set&&(e.add=e.clear=e.delete=function(){throw new Error("set is read-only")}),Object.freeze(e),Object.getOwnPropertyNames(e).forEach(o=>{const d=e[o],v=typeof d;(v==="object"||v==="function")&&!Object.isFrozen(d)&&t(d)}),e}class r{constructor(o){o.data===void 0&&(o.data={}),this.data=o.data,this.isMatchIgnored=!1}ignoreMatch(){this.isMatchIgnored=!0}}function i(e){return e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#x27;")}function a(e,...o){const d=Object.create(null);for(const v in e)d[v]=e[v];return o.forEach(function(v){for(const L in v)d[L]=v[L]}),d}const n="</span>",p=e=>!!e.scope,h=(e,{prefix:o})=>{if(e.startsWith("language:"))return e.replace("language:","language-");if(e.includes(".")){const d=e.split(".");return[`${o}${d.shift()}`,...d.map((v,L)=>`${v}${"_".repeat(L+1)}`)].join(" ")}return`${o}${e}`};class C{constructor(o,d){this.buffer="",this.classPrefix=d.classPrefix,o.walk(this)}addText(o){this.buffer+=i(o)}openNode(o){if(!p(o))return;const d=h(o.scope,{prefix:this.classPrefix});this.span(d)}closeNode(o){p(o)&&(this.buffer+=n)}value(){return this.buffer}span(o){this.buffer+=`<span class="${o}">`}}const k=(e={})=>{const o={children:[]};return Object.assign(o,e),o};class l{constructor(){this.rootNode=k(),this.stack=[this.rootNode]}get top(){return this.stack[this.stack.length-1]}get root(){return this.rootNode}add(o){this.top.children.push(o)}openNode(o){const d=k({scope:o});this.add(d),this.stack.push(d)}closeNode(){if(this.stack.length>1)return this.stack.pop()}closeAllNodes(){for(;this.closeNode(););}toJSON(){return JSON.stringify(this.rootNode,null,4)}walk(o){return this.constructor._walk(o,this.rootNode)}static _walk(o,d){return typeof d=="string"?o.addText(d):d.children&&(o.openNode(d),d.children.forEach(v=>this._walk(o,v)),o.closeNode(d)),o}static _collapse(o){typeof o!="string"&&o.children&&(o.children.every(d=>typeof d=="string")?o.children=[o.children.join("")]:o.children.forEach(d=>{l._collapse(d)}))}}class I extends l{constructor(o){super(),this.options=o}addText(o){o!==""&&this.add(o)}startScope(o){this.openNode(o)}endScope(){this.closeNode()}__addSublanguage(o,d){const v=o.root;d&&(v.scope=`language:${d}`),this.add(v)}toHTML(){return new C(this,this.options).value()}finalize(){return this.closeAllNodes(),!0}}function T(e){return e?typeof e=="string"?e:e.source:null}function z(e){return M("(?=",e,")")}function G(e){return M("(?:",e,")*")}function R(e){return M("(?:",e,")?")}function M(...e){return e.map(d=>T(d)).join("")}function S(e){const o=e[e.length-1];return typeof o=="object"&&o.constructor===Object?(e.splice(e.length-1,1),o):{}}function B(...e){return"("+(S(e).capture?"":"?:")+e.map(v=>T(v)).join("|")+")"}function O(e){return new RegExp(e.toString()+"|").exec("").length-1}function J(e,o){const d=e&&e.exec(o);return d&&d.index===0}const $=/\[(?:[^\\\]]|\\.)*\]|\(\??|\\([1-9][0-9]*)|\\./;function Y(e,{joinWith:o}){let d=0;return e.map(v=>{d+=1;const L=d;let N=T(v),g="";for(;N.length>0;){const m=$.exec(N);if(!m){g+=N;break}g+=N.substring(0,m.index),N=N.substring(m.index+m[0].length),m[0][0]==="\\"&&m[1]?g+="\\"+String(Number(m[1])+L):(g+=m[0],m[0]==="("&&d++)}return g}).map(v=>`(${v})`).join(o)}const Z=/\b\B/,ue="[a-zA-Z]\\w*",le="[a-zA-Z_]\\w*",he="\\b\\d+(\\.\\d+)?",be="(-?)(\\b0[xX][a-fA-F0-9]+|(\\b\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)",fe="\\b(0b[01]+)",Te="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|-|-=|/=|/|:|;|<<|<<=|<=|<|===|==|=|>>>=|>>=|>=|>>>|>>|>|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~",Ae=(e={})=>{const o=/^#![ ]*\//;return e.binary&&(e.begin=M(o,/.*\b/,e.binary,/\b.*/)),a({scope:"meta",begin:o,end:/$/,relevance:0,"on:begin":(d,v)=>{d.index!==0&&v.ignoreMatch()}},e)},ae={begin:"\\\\[\\s\\S]",relevance:0},Be={scope:"string",begin:"'",end:"'",illegal:"\\n",contains:[ae]},ve={scope:"string",begin:'"',end:'"',illegal:"\\n",contains:[ae]},_e={begin:/\b(a|an|the|are|I'm|isn't|don't|doesn't|won't|but|just|should|pretty|simply|enough|gonna|going|wtf|so|such|will|you|your|they|like|more)\b/},U=function(e,o,d={}){const v=a({scope:"comment",begin:e,end:o,contains:[]},d);v.contains.push({scope:"doctag",begin:"[ ]*(?=(TODO|FIXME|NOTE|BUG|OPTIMIZE|HACK|XXX):)",end:/(TODO|FIXME|NOTE|BUG|OPTIMIZE|HACK|XXX):/,excludeBegin:!0,relevance:0});const L=B("I","a","is","so","us","to","at","if","in","it","on",/[A-Za-z]+['](d|ve|re|ll|t|s|n)/,/[A-Za-z]+[-][a-z]+/,/[A-Za-z][a-z]{2,}/);return v.contains.push({begin:M(/[ ]+/,"(",L,/[.]?[:]?([.][ ]|[ ])/,"){3}")}),v},te=U("//","$"),ne=U("/\\*","\\*/"),de=U("#","$"),ge={scope:"number",begin:he,relevance:0},xe={scope:"number",begin:be,relevance:0},ut={scope:"number",begin:fe,relevance:0},ht={scope:"regexp",begin:/\/(?=[^/\n]*\/)/,end:/\/[gimuy]*/,contains:[ae,{begin:/\[/,end:/\]/,relevance:0,contains:[ae]}]},bt={scope:"title",begin:ue,relevance:0},ft={scope:"title",begin:le,relevance:0},vt={begin:"\\.\\s*"+le,relevance:0};var ke=Object.freeze({__proto__:null,APOS_STRING_MODE:Be,BACKSLASH_ESCAPE:ae,BINARY_NUMBER_MODE:ut,BINARY_NUMBER_RE:fe,COMMENT:U,C_BLOCK_COMMENT_MODE:ne,C_LINE_COMMENT_MODE:te,C_NUMBER_MODE:xe,C_NUMBER_RE:be,END_SAME_AS_BEGIN:function(e){return Object.assign(e,{"on:begin":(o,d)=>{d.data._beginMatch=o[1]},"on:end":(o,d)=>{d.data._beginMatch!==o[1]&&d.ignoreMatch()}})},HASH_COMMENT_MODE:de,IDENT_RE:ue,MATCH_NOTHING_RE:Z,METHOD_GUARD:vt,NUMBER_MODE:ge,NUMBER_RE:he,PHRASAL_WORDS_MODE:_e,QUOTE_STRING_MODE:ve,REGEXP_MODE:ht,RE_STARTERS_RE:Te,SHEBANG:Ae,TITLE_MODE:bt,UNDERSCORE_IDENT_RE:le,UNDERSCORE_TITLE_MODE:ft});function xt(e,o){e.input[e.index-1]==="."&&o.ignoreMatch()}function kt(e,o){e.className!==void 0&&(e.scope=e.className,delete e.className)}function wt(e,o){o&&e.beginKeywords&&(e.begin="\\b("+e.beginKeywords.split(" ").join("|")+")(?!\\.)(?=\\b|\\s)",e.__beforeBegin=xt,e.keywords=e.keywords||e.beginKeywords,delete e.beginKeywords,e.relevance===void 0&&(e.relevance=0))}function Ct(e,o){Array.isArray(e.illegal)&&(e.illegal=B(...e.illegal))}function St(e,o){if(e.match){if(e.begin||e.end)throw new Error("begin & end are not supported with match");e.begin=e.match,delete e.match}}function Et(e,o){e.relevance===void 0&&(e.relevance=1)}const Mt=(e,o)=>{if(!e.beforeMatch)return;if(e.starts)throw new Error("beforeMatch cannot be used with starts");const d=Object.assign({},e);Object.keys(e).forEach(v=>{delete e[v]}),e.keywords=d.keywords,e.begin=M(d.beforeMatch,z(d.begin)),e.starts={relevance:0,contains:[Object.assign(d,{endsParent:!0})]},e.relevance=0,delete d.beforeMatch},It=["of","and","for","in","not","or","if","then","parent","list","value"],Tt="keyword";function Ue(e,o,d=Tt){const v=Object.create(null);return typeof e=="string"?L(d,e.split(" ")):Array.isArray(e)?L(d,e):Object.keys(e).forEach(function(N){Object.assign(v,Ue(e[N],o,N))}),v;function L(N,g){o&&(g=g.map(m=>m.toLowerCase())),g.forEach(function(m){const f=m.split("|");v[f[0]]=[N,At(f[0],f[1])]})}}function At(e,o){return o?Number(o):Bt(e)?0:1}function Bt(e){return It.includes(e.toLowerCase())}const He={},ie=e=>{console.error(e)},Ge=(e,...o)=>{console.log(`WARN: ${e}`,...o)},ce=(e,o)=>{He[`${e}/${o}`]||(console.log(`Deprecated as of ${e}. ${o}`),He[`${e}/${o}`]=!0)},we=new Error;function We(e,o,{key:d}){let v=0;const L=e[d],N={},g={};for(let m=1;m<=o.length;m++)g[m+v]=L[m],N[m+v]=!0,v+=O(o[m-1]);e[d]=g,e[d]._emit=N,e[d]._multi=!0}function _t(e){if(Array.isArray(e.begin)){if(e.skip||e.excludeBegin||e.returnBegin)throw ie("skip, excludeBegin, returnBegin not compatible with beginScope: {}"),we;if(typeof e.beginScope!="object"||e.beginScope===null)throw ie("beginScope must be object"),we;We(e,e.begin,{key:"beginScope"}),e.begin=Y(e.begin,{joinWith:""})}}function Pt(e){if(Array.isArray(e.end)){if(e.skip||e.excludeEnd||e.returnEnd)throw ie("skip, excludeEnd, returnEnd not compatible with endScope: {}"),we;if(typeof e.endScope!="object"||e.endScope===null)throw ie("endScope must be object"),we;We(e,e.end,{key:"endScope"}),e.end=Y(e.end,{joinWith:""})}}function zt(e){e.scope&&typeof e.scope=="object"&&e.scope!==null&&(e.beginScope=e.scope,delete e.scope)}function Lt(e){zt(e),typeof e.beginScope=="string"&&(e.beginScope={_wrap:e.beginScope}),typeof e.endScope=="string"&&(e.endScope={_wrap:e.endScope}),_t(e),Pt(e)}function Nt(e){function o(g,m){return new RegExp(T(g),"m"+(e.case_insensitive?"i":"")+(e.unicodeRegex?"u":"")+(m?"g":""))}class d{constructor(){this.matchIndexes={},this.regexes=[],this.matchAt=1,this.position=0}addRule(m,f){f.position=this.position++,this.matchIndexes[this.matchAt]=f,this.regexes.push([f,m]),this.matchAt+=O(m)+1}compile(){this.regexes.length===0&&(this.exec=()=>null);const m=this.regexes.map(f=>f[1]);this.matcherRe=o(Y(m,{joinWith:"|"}),!0),this.lastIndex=0}exec(m){this.matcherRe.lastIndex=this.lastIndex;const f=this.matcherRe.exec(m);if(!f)return null;const j=f.findIndex((ye,ze)=>ze>0&&ye!==void 0),D=this.matchIndexes[j];return f.splice(0,j),Object.assign(f,D)}}class v{constructor(){this.rules=[],this.multiRegexes=[],this.count=0,this.lastIndex=0,this.regexIndex=0}getMatcher(m){if(this.multiRegexes[m])return this.multiRegexes[m];const f=new d;return this.rules.slice(m).forEach(([j,D])=>f.addRule(j,D)),f.compile(),this.multiRegexes[m]=f,f}resumingScanAtSamePosition(){return this.regexIndex!==0}considerAll(){this.regexIndex=0}addRule(m,f){this.rules.push([m,f]),f.type==="begin"&&this.count++}exec(m){const f=this.getMatcher(this.regexIndex);f.lastIndex=this.lastIndex;let j=f.exec(m);if(this.resumingScanAtSamePosition()&&!(j&&j.index===this.lastIndex)){const D=this.getMatcher(0);D.lastIndex=this.lastIndex+1,j=D.exec(m)}return j&&(this.regexIndex+=j.position+1,this.regexIndex===this.count&&this.considerAll()),j}}function L(g){const m=new v;return g.contains.forEach(f=>m.addRule(f.begin,{rule:f,type:"begin"})),g.terminatorEnd&&m.addRule(g.terminatorEnd,{type:"end"}),g.illegal&&m.addRule(g.illegal,{type:"illegal"}),m}function N(g,m){const f=g;if(g.isCompiled)return f;[kt,St,Lt,Mt].forEach(D=>D(g,m)),e.compilerExtensions.forEach(D=>D(g,m)),g.__beforeBegin=null,[wt,Ct,Et].forEach(D=>D(g,m)),g.isCompiled=!0;let j=null;return typeof g.keywords=="object"&&g.keywords.$pattern&&(g.keywords=Object.assign({},g.keywords),j=g.keywords.$pattern,delete g.keywords.$pattern),j=j||/\w+/,g.keywords&&(g.keywords=Ue(g.keywords,e.case_insensitive)),f.keywordPatternRe=o(j,!0),m&&(g.begin||(g.begin=/\B|\b/),f.beginRe=o(f.begin),!g.end&&!g.endsWithParent&&(g.end=/\B|\b/),g.end&&(f.endRe=o(f.end)),f.terminatorEnd=T(f.end)||"",g.endsWithParent&&m.terminatorEnd&&(f.terminatorEnd+=(g.end?"|":"")+m.terminatorEnd)),g.illegal&&(f.illegalRe=o(g.illegal)),g.contains||(g.contains=[]),g.contains=[].concat(...g.contains.map(function(D){return Rt(D==="self"?g:D)})),g.contains.forEach(function(D){N(D,f)}),g.starts&&N(g.starts,m),f.matcher=L(f),f}if(e.compilerExtensions||(e.compilerExtensions=[]),e.contains&&e.contains.includes("self"))throw new Error("ERR: contains `self` is not supported at the top-level of a language.  See documentation.");return e.classNameAliases=a(e.classNameAliases||{}),N(e)}function $e(e){return e?e.endsWithParent||$e(e.starts):!1}function Rt(e){return e.variants&&!e.cachedVariants&&(e.cachedVariants=e.variants.map(function(o){return a(e,{variants:null},o)})),e.cachedVariants?e.cachedVariants:$e(e)?a(e,{starts:e.starts?a(e.starts):null}):Object.isFrozen(e)?a(e):e}var Ot="11.11.1";class Jt extends Error{constructor(o,d){super(o),this.name="HTMLInjectionError",this.html=d}}const Pe=i,qe=a,Ye=Symbol("nomatch"),Dt=7,Ke=function(e){const o=Object.create(null),d=Object.create(null),v=[];let L=!0;const N="Could not find the language '{}', did you forget to load/include a language module?",g={disableAutodetect:!0,name:"Plain text",contains:[]};let m={ignoreUnescapedHTML:!1,throwUnescapedHTML:!1,noHighlightRe:/^(no-?highlight)$/i,languageDetectRe:/\blang(?:uage)?-([\w-]+)\b/i,classPrefix:"hljs-",cssSelector:"pre code",languages:null,__emitter:I};function f(s){return m.noHighlightRe.test(s)}function j(s){let u=s.className+" ";u+=s.parentNode?s.parentNode.className:"";const E=m.languageDetectRe.exec(u);if(E){const _=re(E[1]);return _||(Ge(N.replace("{}",E[1])),Ge("Falling back to no-highlight mode for this block.",s)),_?E[1]:"no-highlight"}return u.split(/\s+/).find(_=>f(_)||re(_))}function D(s,u,E){let _="",F="";typeof u=="object"?(_=s,E=u.ignoreIllegals,F=u.language):(ce("10.7.0","highlight(lang, code, ...args) has been deprecated."),ce("10.7.0",`Please use highlight(code, options) instead.
-https://github.com/highlightjs/highlight.js/issues/2277`),F=s,_=u),E===void 0&&(E=!0);const K={code:_,language:F};Se("before:highlight",K);const oe=K.result?K.result:ye(K.language,K.code,E);return oe.code=K.code,Se("after:highlight",oe),oe}function ye(s,u,E,_){const F=Object.create(null);function K(c,y){return c.keywords[y]}function oe(){if(!x.keywords){H.addText(P);return}let c=0;x.keywordPatternRe.lastIndex=0;let y=x.keywordPatternRe.exec(P),w="";for(;y;){w+=P.substring(c,y.index);const A=X.case_insensitive?y[0].toLowerCase():y[0],W=K(x,A);if(W){const[Q,rr]=W;if(H.addText(w),w="",F[A]=(F[A]||0)+1,F[A]<=Dt&&(Ie+=rr),Q.startsWith("_"))w+=y[0];else{const or=X.classNameAliases[Q]||Q;V(y[0],or)}}else w+=y[0];c=x.keywordPatternRe.lastIndex,y=x.keywordPatternRe.exec(P)}w+=P.substring(c),H.addText(w)}function Ee(){if(P==="")return;let c=null;if(typeof x.subLanguage=="string"){if(!o[x.subLanguage]){H.addText(P);return}c=ye(x.subLanguage,P,!0,ot[x.subLanguage]),ot[x.subLanguage]=c._top}else c=Le(P,x.subLanguage.length?x.subLanguage:null);x.relevance>0&&(Ie+=c.relevance),H.__addSublanguage(c._emitter,c.language)}function q(){x.subLanguage!=null?Ee():oe(),P=""}function V(c,y){c!==""&&(H.startScope(y),H.addText(c),H.endScope())}function Qe(c,y){let w=1;const A=y.length-1;for(;w<=A;){if(!c._emit[w]){w++;continue}const W=X.classNameAliases[c[w]]||c[w],Q=y[w];W?V(Q,W):(P=Q,oe(),P=""),w++}}function et(c,y){return c.scope&&typeof c.scope=="string"&&H.openNode(X.classNameAliases[c.scope]||c.scope),c.beginScope&&(c.beginScope._wrap?(V(P,X.classNameAliases[c.beginScope._wrap]||c.beginScope._wrap),P=""):c.beginScope._multi&&(Qe(c.beginScope,y),P="")),x=Object.create(c,{parent:{value:x}}),x}function tt(c,y,w){let A=J(c.endRe,w);if(A){if(c["on:end"]){const W=new r(c);c["on:end"](y,W),W.isMatchIgnored&&(A=!1)}if(A){for(;c.endsParent&&c.parent;)c=c.parent;return c}}if(c.endsWithParent)return tt(c.parent,y,w)}function Xt(c){return x.matcher.regexIndex===0?(P+=c[0],1):(Je=!0,0)}function Zt(c){const y=c[0],w=c.rule,A=new r(w),W=[w.__beforeBegin,w["on:begin"]];for(const Q of W)if(Q&&(Q(c,A),A.isMatchIgnored))return Xt(y);return w.skip?P+=y:(w.excludeBegin&&(P+=y),q(),!w.returnBegin&&!w.excludeBegin&&(P=y)),et(w,c),w.returnBegin?0:y.length}function Qt(c){const y=c[0],w=u.substring(c.index),A=tt(x,c,w);if(!A)return Ye;const W=x;x.endScope&&x.endScope._wrap?(q(),V(y,x.endScope._wrap)):x.endScope&&x.endScope._multi?(q(),Qe(x.endScope,c)):W.skip?P+=y:(W.returnEnd||W.excludeEnd||(P+=y),q(),W.excludeEnd&&(P=y));do x.scope&&H.closeNode(),!x.skip&&!x.subLanguage&&(Ie+=x.relevance),x=x.parent;while(x!==A.parent);return A.starts&&et(A.starts,c),W.returnEnd?0:y.length}function er(){const c=[];for(let y=x;y!==X;y=y.parent)y.scope&&c.unshift(y.scope);c.forEach(y=>H.openNode(y))}let Me={};function rt(c,y){const w=y&&y[0];if(P+=c,w==null)return q(),0;if(Me.type==="begin"&&y.type==="end"&&Me.index===y.index&&w===""){if(P+=u.slice(y.index,y.index+1),!L){const A=new Error(`0 width match regex (${s})`);throw A.languageName=s,A.badRule=Me.rule,A}return 1}if(Me=y,y.type==="begin")return Zt(y);if(y.type==="illegal"&&!E){const A=new Error('Illegal lexeme "'+w+'" for mode "'+(x.scope||"<unnamed>")+'"');throw A.mode=x,A}else if(y.type==="end"){const A=Qt(y);if(A!==Ye)return A}if(y.type==="illegal"&&w==="")return P+=`
-`,1;if(Oe>1e5&&Oe>y.index*3)throw new Error("potential infinite loop, way more iterations than matches");return P+=w,w.length}const X=re(s);if(!X)throw ie(N.replace("{}",s)),new Error('Unknown language: "'+s+'"');const tr=Nt(X);let Re="",x=_||tr;const ot={},H=new m.__emitter(m);er();let P="",Ie=0,se=0,Oe=0,Je=!1;try{if(X.__emitTokens)X.__emitTokens(u,H);else{for(x.matcher.considerAll();;){Oe++,Je?Je=!1:x.matcher.considerAll(),x.matcher.lastIndex=se;const c=x.matcher.exec(u);if(!c)break;const y=u.substring(se,c.index),w=rt(y,c);se=c.index+w}rt(u.substring(se))}return H.finalize(),Re=H.toHTML(),{language:s,value:Re,relevance:Ie,illegal:!1,_emitter:H,_top:x}}catch(c){if(c.message&&c.message.includes("Illegal"))return{language:s,value:Pe(u),illegal:!0,relevance:0,_illegalBy:{message:c.message,index:se,context:u.slice(se-100,se+100),mode:c.mode,resultSoFar:Re},_emitter:H};if(L)return{language:s,value:Pe(u),illegal:!1,relevance:0,errorRaised:c,_emitter:H,_top:x};throw c}}function ze(s){const u={value:Pe(s),illegal:!1,relevance:0,_top:g,_emitter:new m.__emitter(m)};return u._emitter.addText(s),u}function Le(s,u){u=u||m.languages||Object.keys(o);const E=ze(s),_=u.filter(re).filter(Ze).map(q=>ye(q,s,!1));_.unshift(E);const F=_.sort((q,V)=>{if(q.relevance!==V.relevance)return V.relevance-q.relevance;if(q.language&&V.language){if(re(q.language).supersetOf===V.language)return 1;if(re(V.language).supersetOf===q.language)return-1}return 0}),[K,oe]=F,Ee=K;return Ee.secondBest=oe,Ee}function Ft(s,u,E){const _=u&&d[u]||E;s.classList.add("hljs"),s.classList.add(`language-${_}`)}function Ne(s){let u=null;const E=j(s);if(f(E))return;if(Se("before:highlightElement",{el:s,language:E}),s.dataset.highlighted){console.log("Element previously highlighted. To highlight again, first unset `dataset.highlighted`.",s);return}if(s.children.length>0&&(m.ignoreUnescapedHTML||(console.warn("One of your code blocks includes unescaped HTML. This is a potentially serious security risk."),console.warn("https://github.com/highlightjs/highlight.js/wiki/security"),console.warn("The element with unescaped HTML:"),console.warn(s)),m.throwUnescapedHTML))throw new Jt("One of your code blocks includes unescaped HTML.",s.innerHTML);u=s;const _=u.textContent,F=E?D(_,{language:E,ignoreIllegals:!0}):Le(_);s.innerHTML=F.value,s.dataset.highlighted="yes",Ft(s,E,F.language),s.result={language:F.language,re:F.relevance,relevance:F.relevance},F.secondBest&&(s.secondBest={language:F.secondBest.language,relevance:F.secondBest.relevance}),Se("after:highlightElement",{el:s,result:F,text:_})}function jt(s){m=qe(m,s)}const Ut=()=>{Ce(),ce("10.6.0","initHighlighting() deprecated.  Use highlightAll() now.")};function Ht(){Ce(),ce("10.6.0","initHighlightingOnLoad() deprecated.  Use highlightAll() now.")}let Ve=!1;function Ce(){function s(){Ce()}if(document.readyState==="loading"){Ve||window.addEventListener("DOMContentLoaded",s,!1),Ve=!0;return}document.querySelectorAll(m.cssSelector).forEach(Ne)}function Gt(s,u){let E=null;try{E=u(e)}catch(_){if(ie("Language definition for '{}' could not be registered.".replace("{}",s)),L)ie(_);else throw _;E=g}E.name||(E.name=s),o[s]=E,E.rawDefinition=u.bind(null,e),E.aliases&&Xe(E.aliases,{languageName:s})}function Wt(s){delete o[s];for(const u of Object.keys(d))d[u]===s&&delete d[u]}function $t(){return Object.keys(o)}function re(s){return s=(s||"").toLowerCase(),o[s]||o[d[s]]}function Xe(s,{languageName:u}){typeof s=="string"&&(s=[s]),s.forEach(E=>{d[E.toLowerCase()]=u})}function Ze(s){const u=re(s);return u&&!u.disableAutodetect}function qt(s){s["before:highlightBlock"]&&!s["before:highlightElement"]&&(s["before:highlightElement"]=u=>{s["before:highlightBlock"](Object.assign({block:u.el},u))}),s["after:highlightBlock"]&&!s["after:highlightElement"]&&(s["after:highlightElement"]=u=>{s["after:highlightBlock"](Object.assign({block:u.el},u))})}function Yt(s){qt(s),v.push(s)}function Kt(s){const u=v.indexOf(s);u!==-1&&v.splice(u,1)}function Se(s,u){const E=s;v.forEach(function(_){_[E]&&_[E](u)})}function Vt(s){return ce("10.7.0","highlightBlock will be removed entirely in v12.0"),ce("10.7.0","Please use highlightElement now."),Ne(s)}Object.assign(e,{highlight:D,highlightAuto:Le,highlightAll:Ce,highlightElement:Ne,highlightBlock:Vt,configure:jt,initHighlighting:Ut,initHighlightingOnLoad:Ht,registerLanguage:Gt,unregisterLanguage:Wt,listLanguages:$t,getLanguage:re,registerAliases:Xe,autoDetection:Ze,inherit:qe,addPlugin:Yt,removePlugin:Kt}),e.debugMode=function(){L=!1},e.safeMode=function(){L=!0},e.versionString=Ot,e.regex={concat:M,lookahead:z,either:B,optional:R,anyNumberOfTimes:G};for(const s in ke)typeof ke[s]=="object"&&t(ke[s]);return Object.assign(e,ke),e},pe=Ke({});return pe.newInstance=()=>Ke({}),je=pe,pe.HighlightJS=pe,pe.default=pe,je}var cr=dr();const ee=lr(cr);function pt(t){const r=t.regex,i={},a={begin:/\$\{/,end:/\}/,contains:["self",{begin:/:-/,contains:[i]}]};Object.assign(i,{className:"variable",variants:[{begin:r.concat(/\$[\w\d#@][\w\d_]*/,"(?![\\w\\d])(?![$])")},a]});const n={className:"subst",begin:/\$\(/,end:/\)/,contains:[t.BACKSLASH_ESCAPE]},p=t.inherit(t.COMMENT(),{match:[/(^|\s)/,/#.*$/],scope:{2:"comment"}}),h={begin:/<<-?\s*(?=\w+)/,starts:{contains:[t.END_SAME_AS_BEGIN({begin:/(\w+)/,end:/(\w+)/,className:"string"})]}},C={className:"string",begin:/"/,end:/"/,contains:[t.BACKSLASH_ESCAPE,i,n]};n.contains.push(C);const k={match:/\\"/},l={className:"string",begin:/'/,end:/'/},I={match:/\\'/},T={begin:/\$?\(\(/,end:/\)\)/,contains:[{begin:/\d+#[0-9a-f]+/,className:"number"},t.NUMBER_MODE,i]},z=["fish","bash","zsh","sh","csh","ksh","tcsh","dash","scsh"],G=t.SHEBANG({binary:`(${z.join("|")})`,relevance:10}),R={className:"function",begin:/\w[\w\d_]*\s*\(\s*\)\s*\{/,returnBegin:!0,contains:[t.inherit(t.TITLE_MODE,{begin:/\w[\w\d_]*/})],relevance:0},M=["if","then","else","elif","fi","time","for","while","until","in","do","done","case","esac","coproc","function","select"],S=["true","false"],B={match:/(\/[a-z._-]+)+/},O=["break","cd","continue","eval","exec","exit","export","getopts","hash","pwd","readonly","return","shift","test","times","trap","umask","unset"],J=["alias","bind","builtin","caller","command","declare","echo","enable","help","let","local","logout","mapfile","printf","read","readarray","source","sudo","type","typeset","ulimit","unalias"],$=["autoload","bg","bindkey","bye","cap","chdir","clone","comparguments","compcall","compctl","compdescribe","compfiles","compgroups","compquote","comptags","comptry","compvalues","dirs","disable","disown","echotc","echoti","emulate","fc","fg","float","functions","getcap","getln","history","integer","jobs","kill","limit","log","noglob","popd","print","pushd","pushln","rehash","sched","setcap","setopt","stat","suspend","ttyctl","unfunction","unhash","unlimit","unsetopt","vared","wait","whence","where","which","zcompile","zformat","zftp","zle","zmodload","zparseopts","zprof","zpty","zregexparse","zsocket","zstyle","ztcp"],Y=["chcon","chgrp","chown","chmod","cp","dd","df","dir","dircolors","ln","ls","mkdir","mkfifo","mknod","mktemp","mv","realpath","rm","rmdir","shred","sync","touch","truncate","vdir","b2sum","base32","base64","cat","cksum","comm","csplit","cut","expand","fmt","fold","head","join","md5sum","nl","numfmt","od","paste","ptx","pr","sha1sum","sha224sum","sha256sum","sha384sum","sha512sum","shuf","sort","split","sum","tac","tail","tr","tsort","unexpand","uniq","wc","arch","basename","chroot","date","dirname","du","echo","env","expr","factor","groups","hostid","id","link","logname","nice","nohup","nproc","pathchk","pinky","printenv","printf","pwd","readlink","runcon","seq","sleep","stat","stdbuf","stty","tee","test","timeout","tty","uname","unlink","uptime","users","who","whoami","yes"];return{name:"Bash",aliases:["sh","zsh"],keywords:{$pattern:/\b[a-z][a-z0-9._-]+\b/,keyword:M,literal:S,built_in:[...O,...J,"set","shopt",...$,...Y]},contains:[G,t.SHEBANG(),R,T,p,h,B,C,k,l,I,i]}}function pr(t){const r=t.regex,i=new RegExp("[\\p{XID_Start}_]\\p{XID_Continue}*","u"),a=["and","as","assert","async","await","break","case","class","continue","def","del","elif","else","except","finally","for","from","global","if","import","in","is","lambda","match","nonlocal|10","not","or","pass","raise","return","try","while","with","yield"],C={$pattern:/[A-Za-z]\w+|__\w+__/,keyword:a,built_in:["__import__","abs","all","any","ascii","bin","bool","breakpoint","bytearray","bytes","callable","chr","classmethod","compile","complex","delattr","dict","dir","divmod","enumerate","eval","exec","filter","float","format","frozenset","getattr","globals","hasattr","hash","help","hex","id","input","int","isinstance","issubclass","iter","len","list","locals","map","max","memoryview","min","next","object","oct","open","ord","pow","print","property","range","repr","reversed","round","set","setattr","slice","sorted","staticmethod","str","sum","super","tuple","type","vars","zip"],literal:["__debug__","Ellipsis","False","None","NotImplemented","True"],type:["Any","Callable","Coroutine","Dict","List","Literal","Generic","Optional","Sequence","Set","Tuple","Type","Union"]},k={className:"meta",begin:/^(>>>|\.\.\.) /},l={className:"subst",begin:/\{/,end:/\}/,keywords:C,illegal:/#/},I={begin:/\{\{/,relevance:0},T={className:"string",contains:[t.BACKSLASH_ESCAPE],variants:[{begin:/([uU]|[bB]|[rR]|[bB][rR]|[rR][bB])?'''/,end:/'''/,contains:[t.BACKSLASH_ESCAPE,k],relevance:10},{begin:/([uU]|[bB]|[rR]|[bB][rR]|[rR][bB])?"""/,end:/"""/,contains:[t.BACKSLASH_ESCAPE,k],relevance:10},{begin:/([fF][rR]|[rR][fF]|[fF])'''/,end:/'''/,contains:[t.BACKSLASH_ESCAPE,k,I,l]},{begin:/([fF][rR]|[rR][fF]|[fF])"""/,end:/"""/,contains:[t.BACKSLASH_ESCAPE,k,I,l]},{begin:/([uU]|[rR])'/,end:/'/,relevance:10},{begin:/([uU]|[rR])"/,end:/"/,relevance:10},{begin:/([bB]|[bB][rR]|[rR][bB])'/,end:/'/},{begin:/([bB]|[bB][rR]|[rR][bB])"/,end:/"/},{begin:/([fF][rR]|[rR][fF]|[fF])'/,end:/'/,contains:[t.BACKSLASH_ESCAPE,I,l]},{begin:/([fF][rR]|[rR][fF]|[fF])"/,end:/"/,contains:[t.BACKSLASH_ESCAPE,I,l]},t.APOS_STRING_MODE,t.QUOTE_STRING_MODE]},z="[0-9](_?[0-9])*",G=`(\\b(${z}))?\\.(${z})|\\b(${z})\\.`,R=`\\b|${a.join("|")}`,M={className:"number",relevance:0,variants:[{begin:`(\\b(${z})|(${G}))[eE][+-]?(${z})[jJ]?(?=${R})`},{begin:`(${G})[jJ]?`},{begin:`\\b([1-9](_?[0-9])*|0+(_?0)*)[lLjJ]?(?=${R})`},{begin:`\\b0[bB](_?[01])+[lL]?(?=${R})`},{begin:`\\b0[oO](_?[0-7])+[lL]?(?=${R})`},{begin:`\\b0[xX](_?[0-9a-fA-F])+[lL]?(?=${R})`},{begin:`\\b(${z})[jJ](?=${R})`}]},S={className:"comment",begin:r.lookahead(/# type:/),end:/$/,keywords:C,contains:[{begin:/# type:/},{begin:/#/,end:/\b\B/,endsWithParent:!0}]},B={className:"params",variants:[{className:"",begin:/\(\s*\)/,skip:!0},{begin:/\(/,end:/\)/,excludeBegin:!0,excludeEnd:!0,keywords:C,contains:["self",k,M,T,t.HASH_COMMENT_MODE]}]};return l.contains=[T,M,k],{name:"Python",aliases:["py","gyp","ipython"],unicodeRegex:!0,keywords:C,illegal:/(<\/|\?)|=>/,contains:[k,M,{scope:"variable.language",match:/\bself\b/},{beginKeywords:"if",relevance:0},{match:/\bor\b/,scope:"keyword"},T,S,t.HASH_COMMENT_MODE,{match:[/\bdef/,/\s+/,i],scope:{1:"keyword",3:"title.function"},contains:[B]},{variants:[{match:[/\bclass/,/\s+/,i,/\s*/,/\(\s*/,i,/\s*\)/]},{match:[/\bclass/,/\s+/,i]}],scope:{1:"keyword",3:"title.class",6:"title.class.inherited"}},{className:"meta",begin:/^[\t ]*@/,end:/(?=#)|$/,contains:[M,B,T]}]}}function mr(t){const r={className:"attr",begin:/"(\\.|[^\\"\r\n])*"(?=\s*:)/,relevance:1.01},i={match:/[{}[\],:]/,className:"punctuation",relevance:0},a=["true","false","null"],n={scope:"literal",beginKeywords:a.join(" ")};return{name:"JSON",aliases:["jsonc"],keywords:{literal:a},contains:[r,i,t.QUOTE_STRING_MODE,n,t.C_NUMBER_MODE,t.C_LINE_COMMENT_MODE,t.C_BLOCK_COMMENT_MODE],illegal:"\\S"}}function gr(t){const r="true false yes no null",i="[\\w#;/?:@&=+$,.~*'()[\\]]+",a={className:"attr",variants:[{begin:/[\w*@][\w*@ :()\./-]*:(?=[ \t]|$)/},{begin:/"[\w*@][\w*@ :()\./-]*":(?=[ \t]|$)/},{begin:/'[\w*@][\w*@ :()\./-]*':(?=[ \t]|$)/}]},n={className:"template-variable",variants:[{begin:/\{\{/,end:/\}\}/},{begin:/%\{/,end:/\}/}]},p={className:"string",relevance:0,begin:/'/,end:/'/,contains:[{match:/''/,scope:"char.escape",relevance:0}]},h={className:"string",relevance:0,variants:[{begin:/"/,end:/"/},{begin:/\S+/}],contains:[t.BACKSLASH_ESCAPE,n]},C=t.inherit(h,{variants:[{begin:/'/,end:/'/,contains:[{begin:/''/,relevance:0}]},{begin:/"/,end:/"/},{begin:/[^\s,{}[\]]+/}]}),z={className:"number",begin:"\\b"+"[0-9]{4}(-[0-9][0-9]){0,2}"+"([Tt \\t][0-9][0-9]?(:[0-9][0-9]){2})?"+"(\\.[0-9]*)?"+"([ \\t])*(Z|[-+][0-9][0-9]?(:[0-9][0-9])?)?"+"\\b"},G={end:",",endsWithParent:!0,excludeEnd:!0,keywords:r,relevance:0},R={begin:/\{/,end:/\}/,contains:[G],illegal:"\\n",relevance:0},M={begin:"\\[",end:"\\]",contains:[G],illegal:"\\n",relevance:0},S=[a,{className:"meta",begin:"^---\\s*$",relevance:10},{className:"string",begin:"[\\|>]([1-9]?[+-])?[ ]*\\n( +)[^ ][^\\n]*\\n(\\2[^\\n]+\\n?)*"},{begin:"<%[%=-]?",end:"[%-]?%>",subLanguage:"ruby",excludeBegin:!0,excludeEnd:!0,relevance:0},{className:"type",begin:"!\\w+!"+i},{className:"type",begin:"!<"+i+">"},{className:"type",begin:"!"+i},{className:"type",begin:"!!"+i},{className:"meta",begin:"&"+t.UNDERSCORE_IDENT_RE+"$"},{className:"meta",begin:"\\*"+t.UNDERSCORE_IDENT_RE+"$"},{className:"bullet",begin:"-(?=[ ]|$)",relevance:0},t.HASH_COMMENT_MODE,{beginKeywords:r,keywords:{literal:r}},z,{className:"number",begin:t.C_NUMBER_RE+"\\b",relevance:0},R,M,p,h],B=[...S];return B.pop(),B.push(C),G.contains=B,{name:"YAML",case_insensitive:!0,aliases:["yml"],contains:S}}const nt="[A-Za-z$_][0-9A-Za-z$_]*",yr=["as","in","of","if","for","while","finally","var","new","function","do","return","void","else","break","catch","instanceof","with","throw","case","default","try","switch","continue","typeof","delete","let","yield","const","class","debugger","async","await","static","import","from","export","extends","using"],ur=["true","false","null","undefined","NaN","Infinity"],mt=["Object","Function","Boolean","Symbol","Math","Date","Number","BigInt","String","RegExp","Array","Float32Array","Float64Array","Int8Array","Uint8Array","Uint8ClampedArray","Int16Array","Int32Array","Uint16Array","Uint32Array","BigInt64Array","BigUint64Array","Set","Map","WeakSet","WeakMap","ArrayBuffer","SharedArrayBuffer","Atomics","DataView","JSON","Promise","Generator","GeneratorFunction","AsyncFunction","Reflect","Proxy","Intl","WebAssembly"],gt=["Error","EvalError","InternalError","RangeError","ReferenceError","SyntaxError","TypeError","URIError"],yt=["setInterval","setTimeout","clearInterval","clearTimeout","require","exports","eval","isFinite","isNaN","parseFloat","parseInt","decodeURI","decodeURIComponent","encodeURI","encodeURIComponent","escape","unescape"],hr=["arguments","this","super","console","window","document","localStorage","sessionStorage","module","global"],br=[].concat(yt,mt,gt);function fr(t){const r=t.regex,i=(U,{after:te})=>{const ne="</"+U[0].slice(1);return U.input.indexOf(ne,te)!==-1},a=nt,n={begin:"<>",end:"</>"},p=/<[A-Za-z0-9\\._:-]+\s*\/>/,h={begin:/<[A-Za-z0-9\\._:-]+/,end:/\/[A-Za-z0-9\\._:-]+>|\/>/,isTrulyOpeningTag:(U,te)=>{const ne=U[0].length+U.index,de=U.input[ne];if(de==="<"||de===","){te.ignoreMatch();return}de===">"&&(i(U,{after:ne})||te.ignoreMatch());let ge;const xe=U.input.substring(ne);if(ge=xe.match(/^\s*=/)){te.ignoreMatch();return}if((ge=xe.match(/^\s+extends\s+/))&&ge.index===0){te.ignoreMatch();return}}},C={$pattern:nt,keyword:yr,literal:ur,built_in:br,"variable.language":hr},k="[0-9](_?[0-9])*",l=`\\.(${k})`,I="0|[1-9](_?[0-9])*|0[0-7]*[89][0-9]*",T={className:"number",variants:[{begin:`(\\b(${I})((${l})|\\.)?|(${l}))[eE][+-]?(${k})\\b`},{begin:`\\b(${I})\\b((${l})\\b|\\.)?|(${l})\\b`},{begin:"\\b(0|[1-9](_?[0-9])*)n\\b"},{begin:"\\b0[xX][0-9a-fA-F](_?[0-9a-fA-F])*n?\\b"},{begin:"\\b0[bB][0-1](_?[0-1])*n?\\b"},{begin:"\\b0[oO][0-7](_?[0-7])*n?\\b"},{begin:"\\b0[0-7]+n?\\b"}],relevance:0},z={className:"subst",begin:"\\$\\{",end:"\\}",keywords:C,contains:[]},G={begin:".?html`",end:"",starts:{end:"`",returnEnd:!1,contains:[t.BACKSLASH_ESCAPE,z],subLanguage:"xml"}},R={begin:".?css`",end:"",starts:{end:"`",returnEnd:!1,contains:[t.BACKSLASH_ESCAPE,z],subLanguage:"css"}},M={begin:".?gql`",end:"",starts:{end:"`",returnEnd:!1,contains:[t.BACKSLASH_ESCAPE,z],subLanguage:"graphql"}},S={className:"string",begin:"`",end:"`",contains:[t.BACKSLASH_ESCAPE,z]},O={className:"comment",variants:[t.COMMENT(/\/\*\*(?!\/)/,"\\*/",{relevance:0,contains:[{begin:"(?=@[A-Za-z]+)",relevance:0,contains:[{className:"doctag",begin:"@[A-Za-z]+"},{className:"type",begin:"\\{",end:"\\}",excludeEnd:!0,excludeBegin:!0,relevance:0},{className:"variable",begin:a+"(?=\\s*(-)|$)",endsParent:!0,relevance:0},{begin:/(?=[^\n])\s/,relevance:0}]}]}),t.C_BLOCK_COMMENT_MODE,t.C_LINE_COMMENT_MODE]},J=[t.APOS_STRING_MODE,t.QUOTE_STRING_MODE,G,R,M,S,{match:/\$\d+/},T];z.contains=J.concat({begin:/\{/,end:/\}/,keywords:C,contains:["self"].concat(J)});const $=[].concat(O,z.contains),Y=$.concat([{begin:/(\s*)\(/,end:/\)/,keywords:C,contains:["self"].concat($)}]),Z={className:"params",begin:/(\s*)\(/,end:/\)/,excludeBegin:!0,excludeEnd:!0,keywords:C,contains:Y},ue={variants:[{match:[/class/,/\s+/,a,/\s+/,/extends/,/\s+/,r.concat(a,"(",r.concat(/\./,a),")*")],scope:{1:"keyword",3:"title.class",5:"keyword",7:"title.class.inherited"}},{match:[/class/,/\s+/,a],scope:{1:"keyword",3:"title.class"}}]},le={relevance:0,match:r.either(/\bJSON/,/\b[A-Z][a-z]+([A-Z][a-z]*|\d)*/,/\b[A-Z]{2,}([A-Z][a-z]+|\d)+([A-Z][a-z]*)*/,/\b[A-Z]{2,}[a-z]+([A-Z][a-z]+|\d)*([A-Z][a-z]*)*/),className:"title.class",keywords:{_:[...mt,...gt]}},he={label:"use_strict",className:"meta",relevance:10,begin:/^\s*['"]use (strict|asm)['"]/},be={variants:[{match:[/function/,/\s+/,a,/(?=\s*\()/]},{match:[/function/,/\s*(?=\()/]}],className:{1:"keyword",3:"title.function"},label:"func.def",contains:[Z],illegal:/%/},fe={relevance:0,match:/\b[A-Z][A-Z_0-9]+\b/,className:"variable.constant"};function Te(U){return r.concat("(?!",U.join("|"),")")}const Ae={match:r.concat(/\b/,Te([...yt,"super","import"].map(U=>`${U}\\s*\\(`)),a,r.lookahead(/\s*\(/)),className:"title.function",relevance:0},ae={begin:r.concat(/\./,r.lookahead(r.concat(a,/(?![0-9A-Za-z$_(])/))),end:a,excludeBegin:!0,keywords:"prototype",className:"property",relevance:0},Be={match:[/get|set/,/\s+/,a,/(?=\()/],className:{1:"keyword",3:"title.function"},contains:[{begin:/\(\)/},Z]},ve="(\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)|"+t.UNDERSCORE_IDENT_RE+")\\s*=>",_e={match:[/const|var|let/,/\s+/,a,/\s*/,/=\s*/,/(async\s*)?/,r.lookahead(ve)],keywords:"async",className:{1:"keyword",3:"title.function"},contains:[Z]};return{name:"JavaScript",aliases:["js","jsx","mjs","cjs"],keywords:C,exports:{PARAMS_CONTAINS:Y,CLASS_REFERENCE:le},illegal:/#(?![$_A-z])/,contains:[t.SHEBANG({label:"shebang",binary:"node",relevance:5}),he,t.APOS_STRING_MODE,t.QUOTE_STRING_MODE,G,R,M,S,O,{match:/\$\d+/},T,le,{scope:"attr",match:a+r.lookahead(":"),relevance:0},_e,{begin:"("+t.RE_STARTERS_RE+"|\\b(case|return|throw)\\b)\\s*",keywords:"return throw case",relevance:0,contains:[O,t.REGEXP_MODE,{className:"function",begin:ve,returnBegin:!0,end:"\\s*=>",contains:[{className:"params",variants:[{begin:t.UNDERSCORE_IDENT_RE,relevance:0},{className:null,begin:/\(\s*\)/,skip:!0},{begin:/(\s*)\(/,end:/\)/,excludeBegin:!0,excludeEnd:!0,keywords:C,contains:Y}]}]},{begin:/,/,relevance:0},{match:/\s+/,relevance:0},{variants:[{begin:n.begin,end:n.end},{match:p},{begin:h.begin,"on:begin":h.isTrulyOpeningTag,end:h.end}],subLanguage:"xml",contains:[{begin:h.begin,end:h.end,skip:!0,contains:["self"]}]}]},be,{beginKeywords:"while if switch catch for"},{begin:"\\b(?!function)"+t.UNDERSCORE_IDENT_RE+"\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)\\s*\\{",returnBegin:!0,label:"func.def",contains:[Z,t.inherit(t.TITLE_MODE,{begin:a,className:"title.function"})]},{match:/\.\.\./,relevance:0},ae,{match:"\\$"+a,relevance:0},{match:[/\bconstructor(?=\s*\()/],className:{1:"title.function"},contains:[Z]},Ae,fe,ue,Be,{match:/\$[(.]/}]}}function vr(t){const r=t.regex,i=r.concat(/[\p{L}_]/u,r.optional(/[\p{L}0-9_.-]*:/u),/[\p{L}0-9_.-]*/u),a=/[\p{L}0-9._:-]+/u,n={className:"symbol",begin:/&[a-z]+;|&#[0-9]+;|&#x[a-f0-9]+;/},p={begin:/\s/,contains:[{className:"keyword",begin:/#?[a-z_][a-z1-9_-]+/,illegal:/\n/}]},h=t.inherit(p,{begin:/\(/,end:/\)/}),C=t.inherit(t.APOS_STRING_MODE,{className:"string"}),k=t.inherit(t.QUOTE_STRING_MODE,{className:"string"}),l={endsWithParent:!0,illegal:/</,relevance:0,contains:[{className:"attr",begin:a,relevance:0},{begin:/=\s*/,relevance:0,contains:[{className:"string",endsParent:!0,variants:[{begin:/"/,end:/"/,contains:[n]},{begin:/'/,end:/'/,contains:[n]},{begin:/[^\s"'=<>`]+/}]}]}]};return{name:"HTML, XML",aliases:["html","xhtml","rss","atom","xjb","xsd","xsl","plist","wsf","svg"],case_insensitive:!0,unicodeRegex:!0,contains:[{className:"meta",begin:/<![a-z]/,end:/>/,relevance:10,contains:[p,k,C,h,{begin:/\[/,end:/\]/,contains:[{className:"meta",begin:/<![a-z]/,end:/>/,contains:[p,h,k,C]}]}]},t.COMMENT(/<!--/,/-->/,{relevance:10}),{begin:/<!\[CDATA\[/,end:/\]\]>/,relevance:10},n,{className:"meta",end:/\?>/,variants:[{begin:/<\?xml/,relevance:10,contains:[k]},{begin:/<\?[a-z][a-z0-9]+/}]},{className:"tag",begin:/<style(?=\s|>)/,end:/>/,keywords:{name:"style"},contains:[l],starts:{end:/<\/style>/,returnEnd:!0,subLanguage:["css","xml"]}},{className:"tag",begin:/<script(?=\s|>)/,end:/>/,keywords:{name:"script"},contains:[l],starts:{end:/<\/script>/,returnEnd:!0,subLanguage:["javascript","handlebars","xml"]}},{className:"tag",begin:/<>|<\/>/},{className:"tag",begin:r.concat(/</,r.lookahead(r.concat(i,r.either(/\/>/,/>/,/\s/)))),end:/\/?>/,contains:[{className:"name",begin:i,relevance:0,starts:l}]},{className:"tag",begin:r.concat(/<\//,r.lookahead(r.concat(i,/>/))),contains:[{className:"name",begin:i,relevance:0},{begin:/>/,relevance:0,endsParent:!0}]}]}}ee.registerLanguage("bash",pt);ee.registerLanguage("shell",pt);ee.registerLanguage("python",pr);ee.registerLanguage("json",mr);ee.registerLanguage("yaml",gr);ee.registerLanguage("javascript",fr);ee.registerLanguage("html",vr);const it=["display: block","padding: 1rem","border: 1px solid var(--border-color)","border-radius: 8px","font-family: 'JetBrains Mono', monospace","font-size: 0.85rem","white-space: pre-wrap","line-height: 1.5","overflow-x: hidden","margin: 0.5rem 0","box-shadow: inset 0 2px 4px rgba(0,0,0,0.15)"].join("; "),st={block:`${it}; background: var(--syntax-bg); color: var(--syntax-text)`,terminal:`${it}; background: var(--surface-dark); color: var(--code-green)`};let lt=!1;function xr(){if(lt)return;lt=!0;const t=document.createElement("style");t.textContent=`
+(function(){const r=document.createElement("link").relList;if(r&&r.supports&&r.supports("modulepreload"))return;for(const n of document.querySelectorAll('link[rel="modulepreload"]'))a(n);new MutationObserver(n=>{for(const m of n)if(m.type==="childList")for(const u of m.addedNodes)u.tagName==="LINK"&&u.rel==="modulepreload"&&a(u)}).observe(document,{childList:!0,subtree:!0});function i(n){const m={};return n.integrity&&(m.integrity=n.integrity),n.referrerPolicy&&(m.referrerPolicy=n.referrerPolicy),n.crossOrigin==="use-credentials"?m.credentials="include":n.crossOrigin==="anonymous"?m.credentials="omit":m.credentials="same-origin",m}function a(n){if(n.ep)return;n.ep=!0;const m=i(n);fetch(n.href,m)}})();const ar=70,De=160,je=120;class nr{constructor(r,i){this.width=r,this.height=i,this.x=Math.random()*r,this.y=Math.random()*i,this.vx=(Math.random()-.5)*.4,this.vy=(Math.random()-.5)*.4,this.baseRadius=1.5+Math.random()*2,this.pulsePhase=Math.random()*Math.PI*2,this.pulseSpeed=.015+Math.random()*.025,this.isHub=Math.random()<.12,this.isHub&&(this.baseRadius*=2)}update(r){this.pulsePhase+=this.pulseSpeed;const i=this.x-r.x,a=this.y-r.y,n=Math.hypot(i,a);if(n<je&&n>0){const u=((je-n)/je)**2*3;this.vx+=i/n*u*.08,this.vy+=a/n*u*.08}this.vx*=.975,this.vy*=.975;const m=Math.hypot(this.vx,this.vy);m>1.5&&(this.vx=this.vx/m*1.5,this.vy=this.vy/m*1.5),this.x+=this.vx,this.y+=this.vy,this.x<0&&(this.x=this.width),this.x>this.width&&(this.x=0),this.y<0&&(this.y=this.height),this.y>this.height&&(this.y=0)}draw(r,i){const a=.5+.5*Math.sin(this.pulsePhase),n=this.baseRadius*(1+a*.6),m=(this.isHub?.7:.4)+a*.4,u=i?`rgba(176, 141, 87, ${m})`:this.isHub?`rgba(180, 100, 255, ${m})`:`rgba(0, 242, 255, ${m})`,C=i?`rgba(176, 141, 87, ${a*.12})`:this.isHub?`rgba(130, 0, 255, ${a*.1})`:`rgba(0, 242, 255, ${a*.1})`;r.beginPath(),r.arc(this.x,this.y,n*5,0,Math.PI*2),r.fillStyle=C,r.fill(),r.beginPath(),r.arc(this.x,this.y,n,0,Math.PI*2),r.fillStyle=u,r.fill()}}class ir{constructor(r,i,a,n,m){this.x1=r,this.y1=i,this.x2=a,this.y2=n,this.progress=0,this.speed=.02+Math.random()*.03,this.isLight=m,this.alive=!0}update(){this.progress+=this.speed,this.progress>=1&&(this.alive=!1)}draw(r){const i=this.x1+(this.x2-this.x1)*this.progress,a=this.y1+(this.y2-this.y1)*this.progress,n=1-this.progress;r.beginPath(),r.arc(i,a,3,0,Math.PI*2),r.fillStyle=this.isLight?`rgba(212, 160, 23, ${n})`:`rgba(255, 255, 255, ${n})`,r.fill()}}function sr(t){const r=t.getContext("2d");let i=0,a=0,n=[],m=[],u=null;const C={x:-9999,y:-9999};let k=0;function l(){i=t.width=window.innerWidth,a=t.height=window.innerHeight,n=Array.from({length:ar},()=>new nr(i,a))}function T(M){if(k--,k>0)return;k=30+Math.floor(Math.random()*60);const S=[...n].sort(()=>Math.random()-.5);for(let B=0;B<S.length-1;B++){const O=S[B],J=S[B+1];if(Math.hypot(O.x-J.x,O.y-J.y)<De){m.push(new ir(O.x,O.y,J.x,J.y,M));return}}}function A(M,S,B,O){const J=(1-B/De)*(O?.25:.35),q=r.createLinearGradient(M.x,M.y,S.x,S.y),Y=O?`rgba(176,141,87,${J*1.5})`:M.isHub?`rgba(150,50,255,${J*1.5})`:`rgba(0,242,255,${J*1.5})`,Z=O?`rgba(122,106,83,${J})`:S.isHub?`rgba(150,50,255,${J})`:`rgba(0,200,220,${J})`;q.addColorStop(0,Y),q.addColorStop(1,Z),r.beginPath(),r.moveTo(M.x,M.y),r.lineTo(S.x,S.y),r.strokeStyle=q,r.lineWidth=O?.6:.8,r.stroke()}function _(){const M=document.documentElement.classList.contains("light-mode");r.clearRect(0,0,i,a);for(let S=0;S<n.length;S++){n[S].update(C);for(let B=S+1;B<n.length;B++){const O=n[S].x-n[B].x,J=n[S].y-n[B].y,q=Math.hypot(O,J);q<De&&A(n[S],n[B],q,M)}}n.forEach(S=>S.draw(r,M)),T(M),m=m.filter(S=>S.alive),m.forEach(S=>{S.update(),S.draw(r)}),u=requestAnimationFrame(_)}function H(){cancelAnimationFrame(u),window.removeEventListener("resize",l),window.removeEventListener("mousemove",N)}function N(M){C.x=M.clientX,C.y=M.clientY}return window.addEventListener("resize",l),window.addEventListener("mousemove",N),l(),_(),{destroy:H}}function lr(t){return t&&t.__esModule&&Object.prototype.hasOwnProperty.call(t,"default")?t.default:t}var Fe,at;function dr(){if(at)return Fe;at=1;function t(e){return e instanceof Map?e.clear=e.delete=e.set=function(){throw new Error("map is read-only")}:e instanceof Set&&(e.add=e.clear=e.delete=function(){throw new Error("set is read-only")}),Object.freeze(e),Object.getOwnPropertyNames(e).forEach(o=>{const d=e[o],v=typeof d;(v==="object"||v==="function")&&!Object.isFrozen(d)&&t(d)}),e}class r{constructor(o){o.data===void 0&&(o.data={}),this.data=o.data,this.isMatchIgnored=!1}ignoreMatch(){this.isMatchIgnored=!0}}function i(e){return e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#x27;")}function a(e,...o){const d=Object.create(null);for(const v in e)d[v]=e[v];return o.forEach(function(v){for(const L in v)d[L]=v[L]}),d}const n="</span>",m=e=>!!e.scope,u=(e,{prefix:o})=>{if(e.startsWith("language:"))return e.replace("language:","language-");if(e.includes(".")){const d=e.split(".");return[`${o}${d.shift()}`,...d.map((v,L)=>`${v}${"_".repeat(L+1)}`)].join(" ")}return`${o}${e}`};class C{constructor(o,d){this.buffer="",this.classPrefix=d.classPrefix,o.walk(this)}addText(o){this.buffer+=i(o)}openNode(o){if(!m(o))return;const d=u(o.scope,{prefix:this.classPrefix});this.span(d)}closeNode(o){m(o)&&(this.buffer+=n)}value(){return this.buffer}span(o){this.buffer+=`<span class="${o}">`}}const k=(e={})=>{const o={children:[]};return Object.assign(o,e),o};class l{constructor(){this.rootNode=k(),this.stack=[this.rootNode]}get top(){return this.stack[this.stack.length-1]}get root(){return this.rootNode}add(o){this.top.children.push(o)}openNode(o){const d=k({scope:o});this.add(d),this.stack.push(d)}closeNode(){if(this.stack.length>1)return this.stack.pop()}closeAllNodes(){for(;this.closeNode(););}toJSON(){return JSON.stringify(this.rootNode,null,4)}walk(o){return this.constructor._walk(o,this.rootNode)}static _walk(o,d){return typeof d=="string"?o.addText(d):d.children&&(o.openNode(d),d.children.forEach(v=>this._walk(o,v)),o.closeNode(d)),o}static _collapse(o){typeof o!="string"&&o.children&&(o.children.every(d=>typeof d=="string")?o.children=[o.children.join("")]:o.children.forEach(d=>{l._collapse(d)}))}}class T extends l{constructor(o){super(),this.options=o}addText(o){o!==""&&this.add(o)}startScope(o){this.openNode(o)}endScope(){this.closeNode()}__addSublanguage(o,d){const v=o.root;d&&(v.scope=`language:${d}`),this.add(v)}toHTML(){return new C(this,this.options).value()}finalize(){return this.closeAllNodes(),!0}}function A(e){return e?typeof e=="string"?e:e.source:null}function _(e){return M("(?=",e,")")}function H(e){return M("(?:",e,")*")}function N(e){return M("(?:",e,")?")}function M(...e){return e.map(d=>A(d)).join("")}function S(e){const o=e[e.length-1];return typeof o=="object"&&o.constructor===Object?(e.splice(e.length-1,1),o):{}}function B(...e){return"("+(S(e).capture?"":"?:")+e.map(v=>A(v)).join("|")+")"}function O(e){return new RegExp(e.toString()+"|").exec("").length-1}function J(e,o){const d=e&&e.exec(o);return d&&d.index===0}const q=/\[(?:[^\\\]]|\\.)*\]|\(\??|\\([1-9][0-9]*)|\\./;function Y(e,{joinWith:o}){let d=0;return e.map(v=>{d+=1;const L=d;let R=A(v),g="";for(;R.length>0;){const p=q.exec(R);if(!p){g+=R;break}g+=R.substring(0,p.index),R=R.substring(p.index+p[0].length),p[0][0]==="\\"&&p[1]?g+="\\"+String(Number(p[1])+L):(g+=p[0],p[0]==="("&&d++)}return g}).map(v=>`(${v})`).join(o)}const Z=/\b\B/,he="[a-zA-Z]\\w*",le="[a-zA-Z_]\\w*",ue="\\b\\d+(\\.\\d+)?",be="(-?)(\\b0[xX][a-fA-F0-9]+|(\\b\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)",fe="\\b(0b[01]+)",Ae="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|-|-=|/=|/|:|;|<<|<<=|<=|<|===|==|=|>>>=|>>=|>=|>>>|>>|>|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~",Ie=(e={})=>{const o=/^#![ ]*\//;return e.binary&&(e.begin=M(o,/.*\b/,e.binary,/\b.*/)),a({scope:"meta",begin:o,end:/$/,relevance:0,"on:begin":(d,v)=>{d.index!==0&&v.ignoreMatch()}},e)},ae={begin:"\\\\[\\s\\S]",relevance:0},Be={scope:"string",begin:"'",end:"'",illegal:"\\n",contains:[ae]},ve={scope:"string",begin:'"',end:'"',illegal:"\\n",contains:[ae]},ze={begin:/\b(a|an|the|are|I'm|isn't|don't|doesn't|won't|but|just|should|pretty|simply|enough|gonna|going|wtf|so|such|will|you|your|they|like|more)\b/},U=function(e,o,d={}){const v=a({scope:"comment",begin:e,end:o,contains:[]},d);v.contains.push({scope:"doctag",begin:"[ ]*(?=(TODO|FIXME|NOTE|BUG|OPTIMIZE|HACK|XXX):)",end:/(TODO|FIXME|NOTE|BUG|OPTIMIZE|HACK|XXX):/,excludeBegin:!0,relevance:0});const L=B("I","a","is","so","us","to","at","if","in","it","on",/[A-Za-z]+['](d|ve|re|ll|t|s|n)/,/[A-Za-z]+[-][a-z]+/,/[A-Za-z][a-z]{2,}/);return v.contains.push({begin:M(/[ ]+/,"(",L,/[.]?[:]?([.][ ]|[ ])/,"){3}")}),v},te=U("//","$"),ne=U("/\\*","\\*/"),de=U("#","$"),ge={scope:"number",begin:ue,relevance:0},xe={scope:"number",begin:be,relevance:0},ht={scope:"number",begin:fe,relevance:0},ut={scope:"regexp",begin:/\/(?=[^/\n]*\/)/,end:/\/[gimuy]*/,contains:[ae,{begin:/\[/,end:/\]/,relevance:0,contains:[ae]}]},bt={scope:"title",begin:he,relevance:0},ft={scope:"title",begin:le,relevance:0},vt={begin:"\\.\\s*"+le,relevance:0};var ke=Object.freeze({__proto__:null,APOS_STRING_MODE:Be,BACKSLASH_ESCAPE:ae,BINARY_NUMBER_MODE:ht,BINARY_NUMBER_RE:fe,COMMENT:U,C_BLOCK_COMMENT_MODE:ne,C_LINE_COMMENT_MODE:te,C_NUMBER_MODE:xe,C_NUMBER_RE:be,END_SAME_AS_BEGIN:function(e){return Object.assign(e,{"on:begin":(o,d)=>{d.data._beginMatch=o[1]},"on:end":(o,d)=>{d.data._beginMatch!==o[1]&&d.ignoreMatch()}})},HASH_COMMENT_MODE:de,IDENT_RE:he,MATCH_NOTHING_RE:Z,METHOD_GUARD:vt,NUMBER_MODE:ge,NUMBER_RE:ue,PHRASAL_WORDS_MODE:ze,QUOTE_STRING_MODE:ve,REGEXP_MODE:ut,RE_STARTERS_RE:Ae,SHEBANG:Ie,TITLE_MODE:bt,UNDERSCORE_IDENT_RE:le,UNDERSCORE_TITLE_MODE:ft});function xt(e,o){e.input[e.index-1]==="."&&o.ignoreMatch()}function kt(e,o){e.className!==void 0&&(e.scope=e.className,delete e.className)}function wt(e,o){o&&e.beginKeywords&&(e.begin="\\b("+e.beginKeywords.split(" ").join("|")+")(?!\\.)(?=\\b|\\s)",e.__beforeBegin=xt,e.keywords=e.keywords||e.beginKeywords,delete e.beginKeywords,e.relevance===void 0&&(e.relevance=0))}function Ct(e,o){Array.isArray(e.illegal)&&(e.illegal=B(...e.illegal))}function St(e,o){if(e.match){if(e.begin||e.end)throw new Error("begin & end are not supported with match");e.begin=e.match,delete e.match}}function Et(e,o){e.relevance===void 0&&(e.relevance=1)}const Mt=(e,o)=>{if(!e.beforeMatch)return;if(e.starts)throw new Error("beforeMatch cannot be used with starts");const d=Object.assign({},e);Object.keys(e).forEach(v=>{delete e[v]}),e.keywords=d.keywords,e.begin=M(d.beforeMatch,_(d.begin)),e.starts={relevance:0,contains:[Object.assign(d,{endsParent:!0})]},e.relevance=0,delete d.beforeMatch},Tt=["of","and","for","in","not","or","if","then","parent","list","value"],At="keyword";function Ue(e,o,d=At){const v=Object.create(null);return typeof e=="string"?L(d,e.split(" ")):Array.isArray(e)?L(d,e):Object.keys(e).forEach(function(R){Object.assign(v,Ue(e[R],o,R))}),v;function L(R,g){o&&(g=g.map(p=>p.toLowerCase())),g.forEach(function(p){const f=p.split("|");v[f[0]]=[R,It(f[0],f[1])]})}}function It(e,o){return o?Number(o):Bt(e)?0:1}function Bt(e){return Tt.includes(e.toLowerCase())}const We={},ie=e=>{console.error(e)},He=(e,...o)=>{console.log(`WARN: ${e}`,...o)},ce=(e,o)=>{We[`${e}/${o}`]||(console.log(`Deprecated as of ${e}. ${o}`),We[`${e}/${o}`]=!0)},we=new Error;function Ge(e,o,{key:d}){let v=0;const L=e[d],R={},g={};for(let p=1;p<=o.length;p++)g[p+v]=L[p],R[p+v]=!0,v+=O(o[p-1]);e[d]=g,e[d]._emit=R,e[d]._multi=!0}function zt(e){if(Array.isArray(e.begin)){if(e.skip||e.excludeBegin||e.returnBegin)throw ie("skip, excludeBegin, returnBegin not compatible with beginScope: {}"),we;if(typeof e.beginScope!="object"||e.beginScope===null)throw ie("beginScope must be object"),we;Ge(e,e.begin,{key:"beginScope"}),e.begin=Y(e.begin,{joinWith:""})}}function Pt(e){if(Array.isArray(e.end)){if(e.skip||e.excludeEnd||e.returnEnd)throw ie("skip, excludeEnd, returnEnd not compatible with endScope: {}"),we;if(typeof e.endScope!="object"||e.endScope===null)throw ie("endScope must be object"),we;Ge(e,e.end,{key:"endScope"}),e.end=Y(e.end,{joinWith:""})}}function _t(e){e.scope&&typeof e.scope=="object"&&e.scope!==null&&(e.beginScope=e.scope,delete e.scope)}function Lt(e){_t(e),typeof e.beginScope=="string"&&(e.beginScope={_wrap:e.beginScope}),typeof e.endScope=="string"&&(e.endScope={_wrap:e.endScope}),zt(e),Pt(e)}function Rt(e){function o(g,p){return new RegExp(A(g),"m"+(e.case_insensitive?"i":"")+(e.unicodeRegex?"u":"")+(p?"g":""))}class d{constructor(){this.matchIndexes={},this.regexes=[],this.matchAt=1,this.position=0}addRule(p,f){f.position=this.position++,this.matchIndexes[this.matchAt]=f,this.regexes.push([f,p]),this.matchAt+=O(p)+1}compile(){this.regexes.length===0&&(this.exec=()=>null);const p=this.regexes.map(f=>f[1]);this.matcherRe=o(Y(p,{joinWith:"|"}),!0),this.lastIndex=0}exec(p){this.matcherRe.lastIndex=this.lastIndex;const f=this.matcherRe.exec(p);if(!f)return null;const F=f.findIndex((ye,_e)=>_e>0&&ye!==void 0),D=this.matchIndexes[F];return f.splice(0,F),Object.assign(f,D)}}class v{constructor(){this.rules=[],this.multiRegexes=[],this.count=0,this.lastIndex=0,this.regexIndex=0}getMatcher(p){if(this.multiRegexes[p])return this.multiRegexes[p];const f=new d;return this.rules.slice(p).forEach(([F,D])=>f.addRule(F,D)),f.compile(),this.multiRegexes[p]=f,f}resumingScanAtSamePosition(){return this.regexIndex!==0}considerAll(){this.regexIndex=0}addRule(p,f){this.rules.push([p,f]),f.type==="begin"&&this.count++}exec(p){const f=this.getMatcher(this.regexIndex);f.lastIndex=this.lastIndex;let F=f.exec(p);if(this.resumingScanAtSamePosition()&&!(F&&F.index===this.lastIndex)){const D=this.getMatcher(0);D.lastIndex=this.lastIndex+1,F=D.exec(p)}return F&&(this.regexIndex+=F.position+1,this.regexIndex===this.count&&this.considerAll()),F}}function L(g){const p=new v;return g.contains.forEach(f=>p.addRule(f.begin,{rule:f,type:"begin"})),g.terminatorEnd&&p.addRule(g.terminatorEnd,{type:"end"}),g.illegal&&p.addRule(g.illegal,{type:"illegal"}),p}function R(g,p){const f=g;if(g.isCompiled)return f;[kt,St,Lt,Mt].forEach(D=>D(g,p)),e.compilerExtensions.forEach(D=>D(g,p)),g.__beforeBegin=null,[wt,Ct,Et].forEach(D=>D(g,p)),g.isCompiled=!0;let F=null;return typeof g.keywords=="object"&&g.keywords.$pattern&&(g.keywords=Object.assign({},g.keywords),F=g.keywords.$pattern,delete g.keywords.$pattern),F=F||/\w+/,g.keywords&&(g.keywords=Ue(g.keywords,e.case_insensitive)),f.keywordPatternRe=o(F,!0),p&&(g.begin||(g.begin=/\B|\b/),f.beginRe=o(f.begin),!g.end&&!g.endsWithParent&&(g.end=/\B|\b/),g.end&&(f.endRe=o(f.end)),f.terminatorEnd=A(f.end)||"",g.endsWithParent&&p.terminatorEnd&&(f.terminatorEnd+=(g.end?"|":"")+p.terminatorEnd)),g.illegal&&(f.illegalRe=o(g.illegal)),g.contains||(g.contains=[]),g.contains=[].concat(...g.contains.map(function(D){return Nt(D==="self"?g:D)})),g.contains.forEach(function(D){R(D,f)}),g.starts&&R(g.starts,p),f.matcher=L(f),f}if(e.compilerExtensions||(e.compilerExtensions=[]),e.contains&&e.contains.includes("self"))throw new Error("ERR: contains `self` is not supported at the top-level of a language.  See documentation.");return e.classNameAliases=a(e.classNameAliases||{}),R(e)}function qe(e){return e?e.endsWithParent||qe(e.starts):!1}function Nt(e){return e.variants&&!e.cachedVariants&&(e.cachedVariants=e.variants.map(function(o){return a(e,{variants:null},o)})),e.cachedVariants?e.cachedVariants:qe(e)?a(e,{starts:e.starts?a(e.starts):null}):Object.isFrozen(e)?a(e):e}var Ot="11.11.1";class Jt extends Error{constructor(o,d){super(o),this.name="HTMLInjectionError",this.html=d}}const Pe=i,$e=a,Ye=Symbol("nomatch"),Dt=7,Ke=function(e){const o=Object.create(null),d=Object.create(null),v=[];let L=!0;const R="Could not find the language '{}', did you forget to load/include a language module?",g={disableAutodetect:!0,name:"Plain text",contains:[]};let p={ignoreUnescapedHTML:!1,throwUnescapedHTML:!1,noHighlightRe:/^(no-?highlight)$/i,languageDetectRe:/\blang(?:uage)?-([\w-]+)\b/i,classPrefix:"hljs-",cssSelector:"pre code",languages:null,__emitter:T};function f(s){return p.noHighlightRe.test(s)}function F(s){let h=s.className+" ";h+=s.parentNode?s.parentNode.className:"";const E=p.languageDetectRe.exec(h);if(E){const z=re(E[1]);return z||(He(R.replace("{}",E[1])),He("Falling back to no-highlight mode for this block.",s)),z?E[1]:"no-highlight"}return h.split(/\s+/).find(z=>f(z)||re(z))}function D(s,h,E){let z="",j="";typeof h=="object"?(z=s,E=h.ignoreIllegals,j=h.language):(ce("10.7.0","highlight(lang, code, ...args) has been deprecated."),ce("10.7.0",`Please use highlight(code, options) instead.
+https://github.com/highlightjs/highlight.js/issues/2277`),j=s,z=h),E===void 0&&(E=!0);const K={code:z,language:j};Se("before:highlight",K);const oe=K.result?K.result:ye(K.language,K.code,E);return oe.code=K.code,Se("after:highlight",oe),oe}function ye(s,h,E,z){const j=Object.create(null);function K(c,y){return c.keywords[y]}function oe(){if(!x.keywords){W.addText(P);return}let c=0;x.keywordPatternRe.lastIndex=0;let y=x.keywordPatternRe.exec(P),w="";for(;y;){w+=P.substring(c,y.index);const I=X.case_insensitive?y[0].toLowerCase():y[0],G=K(x,I);if(G){const[Q,rr]=G;if(W.addText(w),w="",j[I]=(j[I]||0)+1,j[I]<=Dt&&(Te+=rr),Q.startsWith("_"))w+=y[0];else{const or=X.classNameAliases[Q]||Q;V(y[0],or)}}else w+=y[0];c=x.keywordPatternRe.lastIndex,y=x.keywordPatternRe.exec(P)}w+=P.substring(c),W.addText(w)}function Ee(){if(P==="")return;let c=null;if(typeof x.subLanguage=="string"){if(!o[x.subLanguage]){W.addText(P);return}c=ye(x.subLanguage,P,!0,ot[x.subLanguage]),ot[x.subLanguage]=c._top}else c=Le(P,x.subLanguage.length?x.subLanguage:null);x.relevance>0&&(Te+=c.relevance),W.__addSublanguage(c._emitter,c.language)}function $(){x.subLanguage!=null?Ee():oe(),P=""}function V(c,y){c!==""&&(W.startScope(y),W.addText(c),W.endScope())}function Qe(c,y){let w=1;const I=y.length-1;for(;w<=I;){if(!c._emit[w]){w++;continue}const G=X.classNameAliases[c[w]]||c[w],Q=y[w];G?V(Q,G):(P=Q,oe(),P=""),w++}}function et(c,y){return c.scope&&typeof c.scope=="string"&&W.openNode(X.classNameAliases[c.scope]||c.scope),c.beginScope&&(c.beginScope._wrap?(V(P,X.classNameAliases[c.beginScope._wrap]||c.beginScope._wrap),P=""):c.beginScope._multi&&(Qe(c.beginScope,y),P="")),x=Object.create(c,{parent:{value:x}}),x}function tt(c,y,w){let I=J(c.endRe,w);if(I){if(c["on:end"]){const G=new r(c);c["on:end"](y,G),G.isMatchIgnored&&(I=!1)}if(I){for(;c.endsParent&&c.parent;)c=c.parent;return c}}if(c.endsWithParent)return tt(c.parent,y,w)}function Xt(c){return x.matcher.regexIndex===0?(P+=c[0],1):(Je=!0,0)}function Zt(c){const y=c[0],w=c.rule,I=new r(w),G=[w.__beforeBegin,w["on:begin"]];for(const Q of G)if(Q&&(Q(c,I),I.isMatchIgnored))return Xt(y);return w.skip?P+=y:(w.excludeBegin&&(P+=y),$(),!w.returnBegin&&!w.excludeBegin&&(P=y)),et(w,c),w.returnBegin?0:y.length}function Qt(c){const y=c[0],w=h.substring(c.index),I=tt(x,c,w);if(!I)return Ye;const G=x;x.endScope&&x.endScope._wrap?($(),V(y,x.endScope._wrap)):x.endScope&&x.endScope._multi?($(),Qe(x.endScope,c)):G.skip?P+=y:(G.returnEnd||G.excludeEnd||(P+=y),$(),G.excludeEnd&&(P=y));do x.scope&&W.closeNode(),!x.skip&&!x.subLanguage&&(Te+=x.relevance),x=x.parent;while(x!==I.parent);return I.starts&&et(I.starts,c),G.returnEnd?0:y.length}function er(){const c=[];for(let y=x;y!==X;y=y.parent)y.scope&&c.unshift(y.scope);c.forEach(y=>W.openNode(y))}let Me={};function rt(c,y){const w=y&&y[0];if(P+=c,w==null)return $(),0;if(Me.type==="begin"&&y.type==="end"&&Me.index===y.index&&w===""){if(P+=h.slice(y.index,y.index+1),!L){const I=new Error(`0 width match regex (${s})`);throw I.languageName=s,I.badRule=Me.rule,I}return 1}if(Me=y,y.type==="begin")return Zt(y);if(y.type==="illegal"&&!E){const I=new Error('Illegal lexeme "'+w+'" for mode "'+(x.scope||"<unnamed>")+'"');throw I.mode=x,I}else if(y.type==="end"){const I=Qt(y);if(I!==Ye)return I}if(y.type==="illegal"&&w==="")return P+=`
+`,1;if(Oe>1e5&&Oe>y.index*3)throw new Error("potential infinite loop, way more iterations than matches");return P+=w,w.length}const X=re(s);if(!X)throw ie(R.replace("{}",s)),new Error('Unknown language: "'+s+'"');const tr=Rt(X);let Ne="",x=z||tr;const ot={},W=new p.__emitter(p);er();let P="",Te=0,se=0,Oe=0,Je=!1;try{if(X.__emitTokens)X.__emitTokens(h,W);else{for(x.matcher.considerAll();;){Oe++,Je?Je=!1:x.matcher.considerAll(),x.matcher.lastIndex=se;const c=x.matcher.exec(h);if(!c)break;const y=h.substring(se,c.index),w=rt(y,c);se=c.index+w}rt(h.substring(se))}return W.finalize(),Ne=W.toHTML(),{language:s,value:Ne,relevance:Te,illegal:!1,_emitter:W,_top:x}}catch(c){if(c.message&&c.message.includes("Illegal"))return{language:s,value:Pe(h),illegal:!0,relevance:0,_illegalBy:{message:c.message,index:se,context:h.slice(se-100,se+100),mode:c.mode,resultSoFar:Ne},_emitter:W};if(L)return{language:s,value:Pe(h),illegal:!1,relevance:0,errorRaised:c,_emitter:W,_top:x};throw c}}function _e(s){const h={value:Pe(s),illegal:!1,relevance:0,_top:g,_emitter:new p.__emitter(p)};return h._emitter.addText(s),h}function Le(s,h){h=h||p.languages||Object.keys(o);const E=_e(s),z=h.filter(re).filter(Ze).map($=>ye($,s,!1));z.unshift(E);const j=z.sort(($,V)=>{if($.relevance!==V.relevance)return V.relevance-$.relevance;if($.language&&V.language){if(re($.language).supersetOf===V.language)return 1;if(re(V.language).supersetOf===$.language)return-1}return 0}),[K,oe]=j,Ee=K;return Ee.secondBest=oe,Ee}function jt(s,h,E){const z=h&&d[h]||E;s.classList.add("hljs"),s.classList.add(`language-${z}`)}function Re(s){let h=null;const E=F(s);if(f(E))return;if(Se("before:highlightElement",{el:s,language:E}),s.dataset.highlighted){console.log("Element previously highlighted. To highlight again, first unset `dataset.highlighted`.",s);return}if(s.children.length>0&&(p.ignoreUnescapedHTML||(console.warn("One of your code blocks includes unescaped HTML. This is a potentially serious security risk."),console.warn("https://github.com/highlightjs/highlight.js/wiki/security"),console.warn("The element with unescaped HTML:"),console.warn(s)),p.throwUnescapedHTML))throw new Jt("One of your code blocks includes unescaped HTML.",s.innerHTML);h=s;const z=h.textContent,j=E?D(z,{language:E,ignoreIllegals:!0}):Le(z);s.innerHTML=j.value,s.dataset.highlighted="yes",jt(s,E,j.language),s.result={language:j.language,re:j.relevance,relevance:j.relevance},j.secondBest&&(s.secondBest={language:j.secondBest.language,relevance:j.secondBest.relevance}),Se("after:highlightElement",{el:s,result:j,text:z})}function Ft(s){p=$e(p,s)}const Ut=()=>{Ce(),ce("10.6.0","initHighlighting() deprecated.  Use highlightAll() now.")};function Wt(){Ce(),ce("10.6.0","initHighlightingOnLoad() deprecated.  Use highlightAll() now.")}let Ve=!1;function Ce(){function s(){Ce()}if(document.readyState==="loading"){Ve||window.addEventListener("DOMContentLoaded",s,!1),Ve=!0;return}document.querySelectorAll(p.cssSelector).forEach(Re)}function Ht(s,h){let E=null;try{E=h(e)}catch(z){if(ie("Language definition for '{}' could not be registered.".replace("{}",s)),L)ie(z);else throw z;E=g}E.name||(E.name=s),o[s]=E,E.rawDefinition=h.bind(null,e),E.aliases&&Xe(E.aliases,{languageName:s})}function Gt(s){delete o[s];for(const h of Object.keys(d))d[h]===s&&delete d[h]}function qt(){return Object.keys(o)}function re(s){return s=(s||"").toLowerCase(),o[s]||o[d[s]]}function Xe(s,{languageName:h}){typeof s=="string"&&(s=[s]),s.forEach(E=>{d[E.toLowerCase()]=h})}function Ze(s){const h=re(s);return h&&!h.disableAutodetect}function $t(s){s["before:highlightBlock"]&&!s["before:highlightElement"]&&(s["before:highlightElement"]=h=>{s["before:highlightBlock"](Object.assign({block:h.el},h))}),s["after:highlightBlock"]&&!s["after:highlightElement"]&&(s["after:highlightElement"]=h=>{s["after:highlightBlock"](Object.assign({block:h.el},h))})}function Yt(s){$t(s),v.push(s)}function Kt(s){const h=v.indexOf(s);h!==-1&&v.splice(h,1)}function Se(s,h){const E=s;v.forEach(function(z){z[E]&&z[E](h)})}function Vt(s){return ce("10.7.0","highlightBlock will be removed entirely in v12.0"),ce("10.7.0","Please use highlightElement now."),Re(s)}Object.assign(e,{highlight:D,highlightAuto:Le,highlightAll:Ce,highlightElement:Re,highlightBlock:Vt,configure:Ft,initHighlighting:Ut,initHighlightingOnLoad:Wt,registerLanguage:Ht,unregisterLanguage:Gt,listLanguages:qt,getLanguage:re,registerAliases:Xe,autoDetection:Ze,inherit:$e,addPlugin:Yt,removePlugin:Kt}),e.debugMode=function(){L=!1},e.safeMode=function(){L=!0},e.versionString=Ot,e.regex={concat:M,lookahead:_,either:B,optional:N,anyNumberOfTimes:H};for(const s in ke)typeof ke[s]=="object"&&t(ke[s]);return Object.assign(e,ke),e},me=Ke({});return me.newInstance=()=>Ke({}),Fe=me,me.HighlightJS=me,me.default=me,Fe}var cr=dr();const ee=lr(cr);function mt(t){const r=t.regex,i={},a={begin:/\$\{/,end:/\}/,contains:["self",{begin:/:-/,contains:[i]}]};Object.assign(i,{className:"variable",variants:[{begin:r.concat(/\$[\w\d#@][\w\d_]*/,"(?![\\w\\d])(?![$])")},a]});const n={className:"subst",begin:/\$\(/,end:/\)/,contains:[t.BACKSLASH_ESCAPE]},m=t.inherit(t.COMMENT(),{match:[/(^|\s)/,/#.*$/],scope:{2:"comment"}}),u={begin:/<<-?\s*(?=\w+)/,starts:{contains:[t.END_SAME_AS_BEGIN({begin:/(\w+)/,end:/(\w+)/,className:"string"})]}},C={className:"string",begin:/"/,end:/"/,contains:[t.BACKSLASH_ESCAPE,i,n]};n.contains.push(C);const k={match:/\\"/},l={className:"string",begin:/'/,end:/'/},T={match:/\\'/},A={begin:/\$?\(\(/,end:/\)\)/,contains:[{begin:/\d+#[0-9a-f]+/,className:"number"},t.NUMBER_MODE,i]},_=["fish","bash","zsh","sh","csh","ksh","tcsh","dash","scsh"],H=t.SHEBANG({binary:`(${_.join("|")})`,relevance:10}),N={className:"function",begin:/\w[\w\d_]*\s*\(\s*\)\s*\{/,returnBegin:!0,contains:[t.inherit(t.TITLE_MODE,{begin:/\w[\w\d_]*/})],relevance:0},M=["if","then","else","elif","fi","time","for","while","until","in","do","done","case","esac","coproc","function","select"],S=["true","false"],B={match:/(\/[a-z._-]+)+/},O=["break","cd","continue","eval","exec","exit","export","getopts","hash","pwd","readonly","return","shift","test","times","trap","umask","unset"],J=["alias","bind","builtin","caller","command","declare","echo","enable","help","let","local","logout","mapfile","printf","read","readarray","source","sudo","type","typeset","ulimit","unalias"],q=["autoload","bg","bindkey","bye","cap","chdir","clone","comparguments","compcall","compctl","compdescribe","compfiles","compgroups","compquote","comptags","comptry","compvalues","dirs","disable","disown","echotc","echoti","emulate","fc","fg","float","functions","getcap","getln","history","integer","jobs","kill","limit","log","noglob","popd","print","pushd","pushln","rehash","sched","setcap","setopt","stat","suspend","ttyctl","unfunction","unhash","unlimit","unsetopt","vared","wait","whence","where","which","zcompile","zformat","zftp","zle","zmodload","zparseopts","zprof","zpty","zregexparse","zsocket","zstyle","ztcp"],Y=["chcon","chgrp","chown","chmod","cp","dd","df","dir","dircolors","ln","ls","mkdir","mkfifo","mknod","mktemp","mv","realpath","rm","rmdir","shred","sync","touch","truncate","vdir","b2sum","base32","base64","cat","cksum","comm","csplit","cut","expand","fmt","fold","head","join","md5sum","nl","numfmt","od","paste","ptx","pr","sha1sum","sha224sum","sha256sum","sha384sum","sha512sum","shuf","sort","split","sum","tac","tail","tr","tsort","unexpand","uniq","wc","arch","basename","chroot","date","dirname","du","echo","env","expr","factor","groups","hostid","id","link","logname","nice","nohup","nproc","pathchk","pinky","printenv","printf","pwd","readlink","runcon","seq","sleep","stat","stdbuf","stty","tee","test","timeout","tty","uname","unlink","uptime","users","who","whoami","yes"];return{name:"Bash",aliases:["sh","zsh"],keywords:{$pattern:/\b[a-z][a-z0-9._-]+\b/,keyword:M,literal:S,built_in:[...O,...J,"set","shopt",...q,...Y]},contains:[H,t.SHEBANG(),N,A,m,u,B,C,k,l,T,i]}}function mr(t){const r=t.regex,i=new RegExp("[\\p{XID_Start}_]\\p{XID_Continue}*","u"),a=["and","as","assert","async","await","break","case","class","continue","def","del","elif","else","except","finally","for","from","global","if","import","in","is","lambda","match","nonlocal|10","not","or","pass","raise","return","try","while","with","yield"],C={$pattern:/[A-Za-z]\w+|__\w+__/,keyword:a,built_in:["__import__","abs","all","any","ascii","bin","bool","breakpoint","bytearray","bytes","callable","chr","classmethod","compile","complex","delattr","dict","dir","divmod","enumerate","eval","exec","filter","float","format","frozenset","getattr","globals","hasattr","hash","help","hex","id","input","int","isinstance","issubclass","iter","len","list","locals","map","max","memoryview","min","next","object","oct","open","ord","pow","print","property","range","repr","reversed","round","set","setattr","slice","sorted","staticmethod","str","sum","super","tuple","type","vars","zip"],literal:["__debug__","Ellipsis","False","None","NotImplemented","True"],type:["Any","Callable","Coroutine","Dict","List","Literal","Generic","Optional","Sequence","Set","Tuple","Type","Union"]},k={className:"meta",begin:/^(>>>|\.\.\.) /},l={className:"subst",begin:/\{/,end:/\}/,keywords:C,illegal:/#/},T={begin:/\{\{/,relevance:0},A={className:"string",contains:[t.BACKSLASH_ESCAPE],variants:[{begin:/([uU]|[bB]|[rR]|[bB][rR]|[rR][bB])?'''/,end:/'''/,contains:[t.BACKSLASH_ESCAPE,k],relevance:10},{begin:/([uU]|[bB]|[rR]|[bB][rR]|[rR][bB])?"""/,end:/"""/,contains:[t.BACKSLASH_ESCAPE,k],relevance:10},{begin:/([fF][rR]|[rR][fF]|[fF])'''/,end:/'''/,contains:[t.BACKSLASH_ESCAPE,k,T,l]},{begin:/([fF][rR]|[rR][fF]|[fF])"""/,end:/"""/,contains:[t.BACKSLASH_ESCAPE,k,T,l]},{begin:/([uU]|[rR])'/,end:/'/,relevance:10},{begin:/([uU]|[rR])"/,end:/"/,relevance:10},{begin:/([bB]|[bB][rR]|[rR][bB])'/,end:/'/},{begin:/([bB]|[bB][rR]|[rR][bB])"/,end:/"/},{begin:/([fF][rR]|[rR][fF]|[fF])'/,end:/'/,contains:[t.BACKSLASH_ESCAPE,T,l]},{begin:/([fF][rR]|[rR][fF]|[fF])"/,end:/"/,contains:[t.BACKSLASH_ESCAPE,T,l]},t.APOS_STRING_MODE,t.QUOTE_STRING_MODE]},_="[0-9](_?[0-9])*",H=`(\\b(${_}))?\\.(${_})|\\b(${_})\\.`,N=`\\b|${a.join("|")}`,M={className:"number",relevance:0,variants:[{begin:`(\\b(${_})|(${H}))[eE][+-]?(${_})[jJ]?(?=${N})`},{begin:`(${H})[jJ]?`},{begin:`\\b([1-9](_?[0-9])*|0+(_?0)*)[lLjJ]?(?=${N})`},{begin:`\\b0[bB](_?[01])+[lL]?(?=${N})`},{begin:`\\b0[oO](_?[0-7])+[lL]?(?=${N})`},{begin:`\\b0[xX](_?[0-9a-fA-F])+[lL]?(?=${N})`},{begin:`\\b(${_})[jJ](?=${N})`}]},S={className:"comment",begin:r.lookahead(/# type:/),end:/$/,keywords:C,contains:[{begin:/# type:/},{begin:/#/,end:/\b\B/,endsWithParent:!0}]},B={className:"params",variants:[{className:"",begin:/\(\s*\)/,skip:!0},{begin:/\(/,end:/\)/,excludeBegin:!0,excludeEnd:!0,keywords:C,contains:["self",k,M,A,t.HASH_COMMENT_MODE]}]};return l.contains=[A,M,k],{name:"Python",aliases:["py","gyp","ipython"],unicodeRegex:!0,keywords:C,illegal:/(<\/|\?)|=>/,contains:[k,M,{scope:"variable.language",match:/\bself\b/},{beginKeywords:"if",relevance:0},{match:/\bor\b/,scope:"keyword"},A,S,t.HASH_COMMENT_MODE,{match:[/\bdef/,/\s+/,i],scope:{1:"keyword",3:"title.function"},contains:[B]},{variants:[{match:[/\bclass/,/\s+/,i,/\s*/,/\(\s*/,i,/\s*\)/]},{match:[/\bclass/,/\s+/,i]}],scope:{1:"keyword",3:"title.class",6:"title.class.inherited"}},{className:"meta",begin:/^[\t ]*@/,end:/(?=#)|$/,contains:[M,B,A]}]}}function pr(t){const r={className:"attr",begin:/"(\\.|[^\\"\r\n])*"(?=\s*:)/,relevance:1.01},i={match:/[{}[\],:]/,className:"punctuation",relevance:0},a=["true","false","null"],n={scope:"literal",beginKeywords:a.join(" ")};return{name:"JSON",aliases:["jsonc"],keywords:{literal:a},contains:[r,i,t.QUOTE_STRING_MODE,n,t.C_NUMBER_MODE,t.C_LINE_COMMENT_MODE,t.C_BLOCK_COMMENT_MODE],illegal:"\\S"}}function gr(t){const r="true false yes no null",i="[\\w#;/?:@&=+$,.~*'()[\\]]+",a={className:"attr",variants:[{begin:/[\w*@][\w*@ :()\./-]*:(?=[ \t]|$)/},{begin:/"[\w*@][\w*@ :()\./-]*":(?=[ \t]|$)/},{begin:/'[\w*@][\w*@ :()\./-]*':(?=[ \t]|$)/}]},n={className:"template-variable",variants:[{begin:/\{\{/,end:/\}\}/},{begin:/%\{/,end:/\}/}]},m={className:"string",relevance:0,begin:/'/,end:/'/,contains:[{match:/''/,scope:"char.escape",relevance:0}]},u={className:"string",relevance:0,variants:[{begin:/"/,end:/"/},{begin:/\S+/}],contains:[t.BACKSLASH_ESCAPE,n]},C=t.inherit(u,{variants:[{begin:/'/,end:/'/,contains:[{begin:/''/,relevance:0}]},{begin:/"/,end:/"/},{begin:/[^\s,{}[\]]+/}]}),_={className:"number",begin:"\\b"+"[0-9]{4}(-[0-9][0-9]){0,2}"+"([Tt \\t][0-9][0-9]?(:[0-9][0-9]){2})?"+"(\\.[0-9]*)?"+"([ \\t])*(Z|[-+][0-9][0-9]?(:[0-9][0-9])?)?"+"\\b"},H={end:",",endsWithParent:!0,excludeEnd:!0,keywords:r,relevance:0},N={begin:/\{/,end:/\}/,contains:[H],illegal:"\\n",relevance:0},M={begin:"\\[",end:"\\]",contains:[H],illegal:"\\n",relevance:0},S=[a,{className:"meta",begin:"^---\\s*$",relevance:10},{className:"string",begin:"[\\|>]([1-9]?[+-])?[ ]*\\n( +)[^ ][^\\n]*\\n(\\2[^\\n]+\\n?)*"},{begin:"<%[%=-]?",end:"[%-]?%>",subLanguage:"ruby",excludeBegin:!0,excludeEnd:!0,relevance:0},{className:"type",begin:"!\\w+!"+i},{className:"type",begin:"!<"+i+">"},{className:"type",begin:"!"+i},{className:"type",begin:"!!"+i},{className:"meta",begin:"&"+t.UNDERSCORE_IDENT_RE+"$"},{className:"meta",begin:"\\*"+t.UNDERSCORE_IDENT_RE+"$"},{className:"bullet",begin:"-(?=[ ]|$)",relevance:0},t.HASH_COMMENT_MODE,{beginKeywords:r,keywords:{literal:r}},_,{className:"number",begin:t.C_NUMBER_RE+"\\b",relevance:0},N,M,m,u],B=[...S];return B.pop(),B.push(C),H.contains=B,{name:"YAML",case_insensitive:!0,aliases:["yml"],contains:S}}const nt="[A-Za-z$_][0-9A-Za-z$_]*",yr=["as","in","of","if","for","while","finally","var","new","function","do","return","void","else","break","catch","instanceof","with","throw","case","default","try","switch","continue","typeof","delete","let","yield","const","class","debugger","async","await","static","import","from","export","extends","using"],hr=["true","false","null","undefined","NaN","Infinity"],pt=["Object","Function","Boolean","Symbol","Math","Date","Number","BigInt","String","RegExp","Array","Float32Array","Float64Array","Int8Array","Uint8Array","Uint8ClampedArray","Int16Array","Int32Array","Uint16Array","Uint32Array","BigInt64Array","BigUint64Array","Set","Map","WeakSet","WeakMap","ArrayBuffer","SharedArrayBuffer","Atomics","DataView","JSON","Promise","Generator","GeneratorFunction","AsyncFunction","Reflect","Proxy","Intl","WebAssembly"],gt=["Error","EvalError","InternalError","RangeError","ReferenceError","SyntaxError","TypeError","URIError"],yt=["setInterval","setTimeout","clearInterval","clearTimeout","require","exports","eval","isFinite","isNaN","parseFloat","parseInt","decodeURI","decodeURIComponent","encodeURI","encodeURIComponent","escape","unescape"],ur=["arguments","this","super","console","window","document","localStorage","sessionStorage","module","global"],br=[].concat(yt,pt,gt);function fr(t){const r=t.regex,i=(U,{after:te})=>{const ne="</"+U[0].slice(1);return U.input.indexOf(ne,te)!==-1},a=nt,n={begin:"<>",end:"</>"},m=/<[A-Za-z0-9\\._:-]+\s*\/>/,u={begin:/<[A-Za-z0-9\\._:-]+/,end:/\/[A-Za-z0-9\\._:-]+>|\/>/,isTrulyOpeningTag:(U,te)=>{const ne=U[0].length+U.index,de=U.input[ne];if(de==="<"||de===","){te.ignoreMatch();return}de===">"&&(i(U,{after:ne})||te.ignoreMatch());let ge;const xe=U.input.substring(ne);if(ge=xe.match(/^\s*=/)){te.ignoreMatch();return}if((ge=xe.match(/^\s+extends\s+/))&&ge.index===0){te.ignoreMatch();return}}},C={$pattern:nt,keyword:yr,literal:hr,built_in:br,"variable.language":ur},k="[0-9](_?[0-9])*",l=`\\.(${k})`,T="0|[1-9](_?[0-9])*|0[0-7]*[89][0-9]*",A={className:"number",variants:[{begin:`(\\b(${T})((${l})|\\.)?|(${l}))[eE][+-]?(${k})\\b`},{begin:`\\b(${T})\\b((${l})\\b|\\.)?|(${l})\\b`},{begin:"\\b(0|[1-9](_?[0-9])*)n\\b"},{begin:"\\b0[xX][0-9a-fA-F](_?[0-9a-fA-F])*n?\\b"},{begin:"\\b0[bB][0-1](_?[0-1])*n?\\b"},{begin:"\\b0[oO][0-7](_?[0-7])*n?\\b"},{begin:"\\b0[0-7]+n?\\b"}],relevance:0},_={className:"subst",begin:"\\$\\{",end:"\\}",keywords:C,contains:[]},H={begin:".?html`",end:"",starts:{end:"`",returnEnd:!1,contains:[t.BACKSLASH_ESCAPE,_],subLanguage:"xml"}},N={begin:".?css`",end:"",starts:{end:"`",returnEnd:!1,contains:[t.BACKSLASH_ESCAPE,_],subLanguage:"css"}},M={begin:".?gql`",end:"",starts:{end:"`",returnEnd:!1,contains:[t.BACKSLASH_ESCAPE,_],subLanguage:"graphql"}},S={className:"string",begin:"`",end:"`",contains:[t.BACKSLASH_ESCAPE,_]},O={className:"comment",variants:[t.COMMENT(/\/\*\*(?!\/)/,"\\*/",{relevance:0,contains:[{begin:"(?=@[A-Za-z]+)",relevance:0,contains:[{className:"doctag",begin:"@[A-Za-z]+"},{className:"type",begin:"\\{",end:"\\}",excludeEnd:!0,excludeBegin:!0,relevance:0},{className:"variable",begin:a+"(?=\\s*(-)|$)",endsParent:!0,relevance:0},{begin:/(?=[^\n])\s/,relevance:0}]}]}),t.C_BLOCK_COMMENT_MODE,t.C_LINE_COMMENT_MODE]},J=[t.APOS_STRING_MODE,t.QUOTE_STRING_MODE,H,N,M,S,{match:/\$\d+/},A];_.contains=J.concat({begin:/\{/,end:/\}/,keywords:C,contains:["self"].concat(J)});const q=[].concat(O,_.contains),Y=q.concat([{begin:/(\s*)\(/,end:/\)/,keywords:C,contains:["self"].concat(q)}]),Z={className:"params",begin:/(\s*)\(/,end:/\)/,excludeBegin:!0,excludeEnd:!0,keywords:C,contains:Y},he={variants:[{match:[/class/,/\s+/,a,/\s+/,/extends/,/\s+/,r.concat(a,"(",r.concat(/\./,a),")*")],scope:{1:"keyword",3:"title.class",5:"keyword",7:"title.class.inherited"}},{match:[/class/,/\s+/,a],scope:{1:"keyword",3:"title.class"}}]},le={relevance:0,match:r.either(/\bJSON/,/\b[A-Z][a-z]+([A-Z][a-z]*|\d)*/,/\b[A-Z]{2,}([A-Z][a-z]+|\d)+([A-Z][a-z]*)*/,/\b[A-Z]{2,}[a-z]+([A-Z][a-z]+|\d)*([A-Z][a-z]*)*/),className:"title.class",keywords:{_:[...pt,...gt]}},ue={label:"use_strict",className:"meta",relevance:10,begin:/^\s*['"]use (strict|asm)['"]/},be={variants:[{match:[/function/,/\s+/,a,/(?=\s*\()/]},{match:[/function/,/\s*(?=\()/]}],className:{1:"keyword",3:"title.function"},label:"func.def",contains:[Z],illegal:/%/},fe={relevance:0,match:/\b[A-Z][A-Z_0-9]+\b/,className:"variable.constant"};function Ae(U){return r.concat("(?!",U.join("|"),")")}const Ie={match:r.concat(/\b/,Ae([...yt,"super","import"].map(U=>`${U}\\s*\\(`)),a,r.lookahead(/\s*\(/)),className:"title.function",relevance:0},ae={begin:r.concat(/\./,r.lookahead(r.concat(a,/(?![0-9A-Za-z$_(])/))),end:a,excludeBegin:!0,keywords:"prototype",className:"property",relevance:0},Be={match:[/get|set/,/\s+/,a,/(?=\()/],className:{1:"keyword",3:"title.function"},contains:[{begin:/\(\)/},Z]},ve="(\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)|"+t.UNDERSCORE_IDENT_RE+")\\s*=>",ze={match:[/const|var|let/,/\s+/,a,/\s*/,/=\s*/,/(async\s*)?/,r.lookahead(ve)],keywords:"async",className:{1:"keyword",3:"title.function"},contains:[Z]};return{name:"JavaScript",aliases:["js","jsx","mjs","cjs"],keywords:C,exports:{PARAMS_CONTAINS:Y,CLASS_REFERENCE:le},illegal:/#(?![$_A-z])/,contains:[t.SHEBANG({label:"shebang",binary:"node",relevance:5}),ue,t.APOS_STRING_MODE,t.QUOTE_STRING_MODE,H,N,M,S,O,{match:/\$\d+/},A,le,{scope:"attr",match:a+r.lookahead(":"),relevance:0},ze,{begin:"("+t.RE_STARTERS_RE+"|\\b(case|return|throw)\\b)\\s*",keywords:"return throw case",relevance:0,contains:[O,t.REGEXP_MODE,{className:"function",begin:ve,returnBegin:!0,end:"\\s*=>",contains:[{className:"params",variants:[{begin:t.UNDERSCORE_IDENT_RE,relevance:0},{className:null,begin:/\(\s*\)/,skip:!0},{begin:/(\s*)\(/,end:/\)/,excludeBegin:!0,excludeEnd:!0,keywords:C,contains:Y}]}]},{begin:/,/,relevance:0},{match:/\s+/,relevance:0},{variants:[{begin:n.begin,end:n.end},{match:m},{begin:u.begin,"on:begin":u.isTrulyOpeningTag,end:u.end}],subLanguage:"xml",contains:[{begin:u.begin,end:u.end,skip:!0,contains:["self"]}]}]},be,{beginKeywords:"while if switch catch for"},{begin:"\\b(?!function)"+t.UNDERSCORE_IDENT_RE+"\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)\\s*\\{",returnBegin:!0,label:"func.def",contains:[Z,t.inherit(t.TITLE_MODE,{begin:a,className:"title.function"})]},{match:/\.\.\./,relevance:0},ae,{match:"\\$"+a,relevance:0},{match:[/\bconstructor(?=\s*\()/],className:{1:"title.function"},contains:[Z]},Ie,fe,he,Be,{match:/\$[(.]/}]}}function vr(t){const r=t.regex,i=r.concat(/[\p{L}_]/u,r.optional(/[\p{L}0-9_.-]*:/u),/[\p{L}0-9_.-]*/u),a=/[\p{L}0-9._:-]+/u,n={className:"symbol",begin:/&[a-z]+;|&#[0-9]+;|&#x[a-f0-9]+;/},m={begin:/\s/,contains:[{className:"keyword",begin:/#?[a-z_][a-z1-9_-]+/,illegal:/\n/}]},u=t.inherit(m,{begin:/\(/,end:/\)/}),C=t.inherit(t.APOS_STRING_MODE,{className:"string"}),k=t.inherit(t.QUOTE_STRING_MODE,{className:"string"}),l={endsWithParent:!0,illegal:/</,relevance:0,contains:[{className:"attr",begin:a,relevance:0},{begin:/=\s*/,relevance:0,contains:[{className:"string",endsParent:!0,variants:[{begin:/"/,end:/"/,contains:[n]},{begin:/'/,end:/'/,contains:[n]},{begin:/[^\s"'=<>`]+/}]}]}]};return{name:"HTML, XML",aliases:["html","xhtml","rss","atom","xjb","xsd","xsl","plist","wsf","svg"],case_insensitive:!0,unicodeRegex:!0,contains:[{className:"meta",begin:/<![a-z]/,end:/>/,relevance:10,contains:[m,k,C,u,{begin:/\[/,end:/\]/,contains:[{className:"meta",begin:/<![a-z]/,end:/>/,contains:[m,u,k,C]}]}]},t.COMMENT(/<!--/,/-->/,{relevance:10}),{begin:/<!\[CDATA\[/,end:/\]\]>/,relevance:10},n,{className:"meta",end:/\?>/,variants:[{begin:/<\?xml/,relevance:10,contains:[k]},{begin:/<\?[a-z][a-z0-9]+/}]},{className:"tag",begin:/<style(?=\s|>)/,end:/>/,keywords:{name:"style"},contains:[l],starts:{end:/<\/style>/,returnEnd:!0,subLanguage:["css","xml"]}},{className:"tag",begin:/<script(?=\s|>)/,end:/>/,keywords:{name:"script"},contains:[l],starts:{end:/<\/script>/,returnEnd:!0,subLanguage:["javascript","handlebars","xml"]}},{className:"tag",begin:/<>|<\/>/},{className:"tag",begin:r.concat(/</,r.lookahead(r.concat(i,r.either(/\/>/,/>/,/\s/)))),end:/\/?>/,contains:[{className:"name",begin:i,relevance:0,starts:l}]},{className:"tag",begin:r.concat(/<\//,r.lookahead(r.concat(i,/>/))),contains:[{className:"name",begin:i,relevance:0},{begin:/>/,relevance:0,endsParent:!0}]}]}}ee.registerLanguage("bash",mt);ee.registerLanguage("shell",mt);ee.registerLanguage("python",mr);ee.registerLanguage("json",pr);ee.registerLanguage("yaml",gr);ee.registerLanguage("javascript",fr);ee.registerLanguage("html",vr);const it=["display: block","padding: 1rem","border: 1px solid var(--border-color)","border-radius: 8px","font-family: 'JetBrains Mono', monospace","font-size: 0.85rem","white-space: pre-wrap","line-height: 1.5","overflow-x: hidden","margin: 0.5rem 0","box-shadow: inset 0 2px 4px rgba(0,0,0,0.15)"].join("; "),st={block:`${it}; background: var(--syntax-bg); color: var(--syntax-text)`,terminal:`${it}; background: var(--surface-dark); color: var(--code-green)`};let lt=!1;function xr(){if(lt)return;lt=!0;const t=document.createElement("style");t.textContent=`
 
     /* keyword — pink-red #f92672
        Vim: Keyword Conditional Statement Operator Type Tag Define PreProc rubyControl */
@@ -75,7 +75,7 @@ https://github.com/highlightjs/highlight.js/issues/2277`),F=s,_=u),E===void 0&&(
       color: var(--syntax-text) !important;
     }
 
-  `,document.head.appendChild(t)}function dt(t){t&&(xr(),t.querySelectorAll("pre").forEach(r=>{const i=r.style.color||"",a=r.style.background||"",p=(r.textContent||"").trimStart()[0],h=i.includes("code-green")||a.includes("surface-dark")||p==="❯"||p==="$";if((h?st.terminal:st.block).split(";").forEach(k=>{const[l,...I]=k.split(":");if(!l)return;const T=l.trim(),z=T.replace(/-([a-z])/g,(G,R)=>R.toUpperCase());T==="font-size"&&r.style.fontSize||T==="line-height"&&r.style.lineHeight||(r.style[z]=I.join(":").trim())}),!h){const k=r.querySelector("code")||r;k.classList.contains("hljs")||ee.highlightElement(k)}}),t.querySelectorAll("code").forEach(r=>{if(r.closest("pre"))return;const a=(r.style.background||"").includes("surface-dark");r.style.fontSize="0.85rem",r.style.fontFamily="'JetBrains Mono', monospace",r.style.lineHeight="1.5",!a&&!r.classList.contains("hljs")&&(r.style.background="var(--syntax-bg)",r.style.color="var(--syntax-text)",ee.highlightElement(r))}),t.querySelectorAll("pre").forEach(r=>{r.style.fontSize||(r.style.fontSize="0.85rem"),r.style.lineHeight||(r.style.lineHeight="1.5")}))}const kr={vite:"^7.3.1"},wr={"highlight.js":"^11.11.1",three:"^0.183.2"},ct={devDependencies:kr,dependencies:wr},Cr={id:"claude-skills-tutorial",title:"Claude Skills",category:"",tags:[""],tabs:[{label:"Overview",content:`
+  `,document.head.appendChild(t)}function dt(t){t&&(xr(),t.querySelectorAll("pre").forEach(r=>{const i=r.style.color||"",a=r.style.background||"",m=(r.textContent||"").trimStart()[0],u=i.includes("code-green")||a.includes("surface-dark")||m==="❯"||m==="$";if((u?st.terminal:st.block).split(";").forEach(k=>{const[l,...T]=k.split(":");if(!l)return;const A=l.trim(),_=A.replace(/-([a-z])/g,(H,N)=>N.toUpperCase());A==="font-size"&&r.style.fontSize||A==="line-height"&&r.style.lineHeight||(r.style[_]=T.join(":").trim())}),!u){const k=r.querySelector("code")||r;k.classList.contains("hljs")||ee.highlightElement(k)}}),t.querySelectorAll("code").forEach(r=>{if(r.closest("pre"))return;const a=(r.style.background||"").includes("surface-dark");r.style.fontSize="0.85rem",r.style.fontFamily="'JetBrains Mono', monospace",r.style.lineHeight="1.5",!a&&!r.classList.contains("hljs")&&(r.style.background="var(--syntax-bg)",r.style.color="var(--syntax-text)",ee.highlightElement(r))}),t.querySelectorAll("pre").forEach(r=>{r.style.fontSize||(r.style.fontSize="0.85rem"),r.style.lineHeight||(r.style.lineHeight="1.5")}))}const kr={vite:"^7.3.1"},wr={"highlight.js":"^11.11.1",three:"^0.183.2"},ct={devDependencies:kr,dependencies:wr},Cr={id:"claude-skills-tutorial",title:"Claude Skills",category:"",tags:[""],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:1rem; line-height:1.75;">Whether you're a complete beginner looking to build your first website, or an experienced developer looking to speed up your workflow, getting started with Claude Skills is easier than you think. In this simple guide, we'll watch Claude Skills in action as it guides us through building a website, taking our input at each step. Let's go!</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">A skill is a set of instructions — packaged as a simple folder — that teaches Claude how to handle specific tasks or workflows.</p>
@@ -625,7 +625,7 @@ Access the prompts and configuration files here:
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
   <iframe src="https://www.youtube.com/embed/PpvoOyYAMZs" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Build Web App with AI Tutorial"></iframe>
 </div>
-`,interactiveType:"custom"},Ir={id:"ai-engineering",title:"AI Engineering",category:"",tags:[""],tabs:[{label:"Overview",content:`
+`,interactiveType:"custom"},Tr={id:"ai-engineering",title:"AI Engineering",category:"",tags:[""],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:0.75rem; line-height:1.75;">AI Engineering refers to the process of building applications on top of foundation models.</p>
 <p style="margin-bottom:1rem; line-height:1.75;">The model as a service makes it easier to leverage AI to build applications. Models are exposed via APIs that receive user queries and return model outputs.
 Without these APIs, using an AI model required the infrastructure to host and serve this model. These APIs give you access to powerful models via single API calls.</p>
@@ -634,7 +634,7 @@ Without these APIs, using an AI model required the infrastructure to host and se
 
 This page is currently under development. Please check back soon.
 
-`}],interactiveType:"custom"},Tr={id:"build-app-skill-mcp",title:"Agent Skills + MCP",category:"Tutorial",tags:["Agentic","Firebase","GitHub"],tabs:[{label:"Overview",content:`
+`}],interactiveType:"custom"},Ar={id:"build-app-skill-mcp",title:"Agent Skills + MCP",category:"Tutorial",tags:["Agentic","Firebase","GitHub"],tabs:[{label:"Overview",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Build a URL Tracker App with AI Agents Skills &amp; MCP</strong>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Have you ever saved a bunch of URLs to read later — articles, docs, videos — and then a few days later wondered <em>"where did that link go?"</em> You scroll through tabs, dig through your notes app, check your browser history… and still can't find it.</p>
@@ -1167,7 +1167,7 @@ Requirements:
 </div>
 
 
-`}],interactiveType:"custom"},Ar={id:"claude-extension",title:"Claude Extension",category:"",tags:[],tabs:[{label:"Features",content:`
+`}],interactiveType:"custom"},Ir={id:"claude-extension",title:"Claude Extension",category:"",tags:[],tabs:[{label:"Features",content:`
 <style>
 .cc-table-wrap { width:100%; margin-top:1.5rem; border-radius:12px; overflow: visible; }
 .cc-table { width:100%; border-collapse:collapse; font-size:0.85rem; font-family:'Outfit', sans-serif; line-height:1.5; table-layout:auto; letter-spacing:0.01em; }
@@ -1427,17 +1427,159 @@ EOF</pre>
   </ul>
 </div>
 <div style="height: 10rem;"></div>
-  `,interactiveType:"custom"},_r={id:"claude-subagents",title:"Claude Subagents",tabs:[{label:"Overview",content:`
-        <p style="margin-bottom:1rem; line-height:1.75;">Subagents are specialized AI assistants that handle specific types of tasks. Each subagent runs in its own context window with a custom system prompt, specific tool access, and independent permissions. When Claude encounters a task that matches a subagent’s description, it delegates to that subagent, which works independently and returns results.</p>
+  `,interactiveType:"custom"},zr={id:"claude-subagents",title:"Claude Subagents",tabs:[{label:"Overview",content:`
+        <p style="margin-bottom:1rem; line-height:1.75;">Subagents are specialized AI assistants that handle specific types of tasks. Each subagent runs in its own context window with a custom system prompt, specific tool access, and independent permissions. They handle discrete tasks independently and return results to the main agent. When Claude encounters a task that matches a subagent’s description, it delegates to that subagent, which works independently and returns results.</p>
         <p style="margin-bottom:1.5rem; font-style: italic; color: var(--text-secondary); line-height:1.6;">
           Note: If you need multiple agents working in parallel and communicating with each other, see agent teams instead. Subagents work within a single session; agent teams coordinate across separate sessions.
         </p>
-        <p>Claude uses each subagent’s description to decide when to delegate tasks. When you create a subagent, write a clear description so Claude knows when to use it.</p>
+        <p>Claude uses each subagent’s description to decide when to delegate tasks. When you create a subagent, write a clear description so Claude knows when to use it. The key word is isolation. A subagent is an isolated Claude instance that works on a task independently and returns only the results to your main conversation. Use subagents when you need parallel execution or want to isolate heavy computational work. Best for: preventing context pollution, specialized deep dives.</p>
+
+        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+          <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">How is it Different From Everything Else?</strong>
+          <p style="margin-bottom: 1.5rem; line-height: 1.6; color: var(--text-secondary);">Here's the mental model for all the pieces:</p>
+          
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 1rem; line-height: 1.6;">
+              <code style="color: var(--accent-primary); font-weight: bold;">CLAUDE.md</code> &mdash; Establish project context and conventions that Claude always knows
+            </li>
+            <li style="margin-bottom: 1rem; line-height: 1.6;">
+              <code style="color: var(--accent-primary); font-weight: bold;">Slash Commands</code> &mdash; Create explicit shortcuts for workflows you want to trigger on demand
+            </li>
+            <li style="margin-bottom: 1rem; line-height: 1.6;">
+              <code style="color: var(--accent-primary); font-weight: bold;">Subagents</code> &mdash; Offload parallel or isolated work to specialized agents
+            </li>
+            <li style="margin-bottom: 1rem; line-height: 1.6;">
+              <code style="color: var(--accent-primary); font-weight: bold;">Hooks</code> &mdash; Enforce rules and automate repetitive actions at key lifecycle events
+            </li>
+            <li style="margin-bottom: 1rem; line-height: 1.6;">
+              <code style="color: var(--accent-primary); font-weight: bold;">MCP</code> &mdash; Connect external systems and make their capabilities available as commands
+            </li>
+            <li style="margin-bottom: 1rem; line-height: 1.6;">
+              <code style="color: var(--accent-primary); font-weight: bold;">Skills</code> &mdash; Define automatic behaviors that activate based on task context
+            </li>
+          </ul>
+        </div>
+      `},{label:"Scenario",content:`
+        <div style="margin-bottom: 2.5rem;">
+          <h2 style="margin-bottom: 1.5rem; color: var(--accent-primary); font-size: 1.4rem;">The Scenario</h2>
+          <p style="margin-bottom: 1.5rem; line-height: 1.6;">You're an <strong>investigative journalist</strong> at the NYT or WSJ. Your editor walks over and says:</p>
+          
+          <blockquote style="margin: 0 0 2rem 0; padding: 1.25rem 1.5rem; background: var(--surface-color); border-left: 4px solid var(--accent-primary); border-radius: 0 8px 8px 0; font-style: italic; line-height: 1.6; color: var(--text-primary);">
+            "I need a full investigative piece on the surge in corporate bankruptcies this year &mdash; background research, court document analysis, expert source quotes, a competitor comparison on how we've covered it differently from the other paper, and a polished first draft ready for my desk by 4pm."
+          </blockquote>
+
+          <p style="margin-bottom: 2rem; line-height: 1.6;">Five distinct jobs. Let's break each one down.</p>
+
+          <div style="margin: 2rem 0; display: flex; justify-content: center; background: rgba(0,0,0,0.2); border-radius: 12px; padding: 1rem;">
+            <img src="/knowledgelab/images/subagent.png" alt="Claude Subagent Mental Model" style="width: 100%; max-width: 800px; border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+          </div>
+        </div>
+
+        <div style="margin-bottom: 3rem;">
+          <div style="margin-bottom: 2rem; padding: 1.5rem; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0, 242, 255, 0.02);">
+            <header style="margin-bottom: 1rem;">
+              <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: var(--text-primary);">Subtask 1 &mdash; Background Research Sweep</h3>
+            </header>
+            <p style="margin-bottom: 1rem; line-height: 1.6; font-size: 0.95rem;"><strong>What needs to happen:</strong> Dig through hundreds of news articles, SEC filings, court records, and economic data from the past 18 months to build a factual foundation &mdash; key numbers, timelines, companies involved.</p>
+            <p style="margin-bottom: 1rem; line-height: 1.6; font-size: 0.95rem;"><strong>Use subagent or main?</strong> &rarr; <span style="color: var(--accent-primary); font-weight: bold;">Subagent</span></p>
+            <p style="margin-bottom: 0; line-height: 1.6; font-size: 0.95rem; color: var(--text-secondary);"><strong>Why in plain English:</strong> Imagine your intern spending three hours photocopying records and spreading 400 pages across your desk while you're trying to think about the story's angle. That's what happens in the main conversation. Instead, you send them to the archive room. They come back with a two-page brief: <em>"Here are the 12 biggest bankruptcies, the spike started in Q2, and here are the three root causes cited most often."</em> Your desk never got messy.</p>
+          </div>
+
+          <div style="margin-bottom: 2rem; padding: 1.5rem; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0, 242, 255, 0.02);">
+            <header style="margin-bottom: 1rem;">
+              <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: var(--text-primary);">Subtask 2 &mdash; Court Document Analysis</h3>
+            </header>
+            <p style="margin-bottom: 1rem; line-height: 1.6; font-size: 0.95rem;"><strong>What needs to happen:</strong> Read through dense legal filings from 8 different bankruptcy cases &mdash; hundreds of pages of exhibits, creditor lists, and judge rulings &mdash; and extract only what's newsworthy.</p>
+            <p style="margin-bottom: 1rem; line-height: 1.6; font-size: 0.95rem;"><strong>Use subagent or main?</strong> &rarr; <span style="color: var(--accent-primary); font-weight: bold;">Subagent, running at the same time as Subtask 1</span></p>
+            <p style="margin-bottom: 0; line-height: 1.6; font-size: 0.95rem; color: var(--text-secondary);"><strong>Why in plain English:</strong> This is the same logic as the archive room, just a different room. Legal documents are noisy, repetitive, and long. You don't want to watch Claude read through boilerplate legalese line by line &mdash; you want the three sentences that matter. A separate colleague handles this simultaneously while the first is in the archive. Both report back at the same time. You've saved hours.</p>
+          </div>
+
+          <div style="margin-bottom: 2rem; padding: 1.5rem; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0, 242, 255, 0.02);">
+            <header style="margin-bottom: 1rem;">
+              <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: var(--text-primary);">Subtask 3 &mdash; Competitor Coverage Comparison (NYT vs WSJ)</h3>
+            </header>
+            <p style="margin-bottom: 1rem; line-height: 1.6; font-size: 0.95rem;"><strong>What needs to happen:</strong> Pull recent articles from both papers on this topic, map out which angles each took, which sources each cited, and identify the gap your story can fill.</p>
+            <p style="margin-bottom: 1rem; line-height: 1.6; font-size: 0.95rem;"><strong>Use subagent or main?</strong> &rarr; <span style="color: var(--accent-primary); font-weight: bold;">Subagent, also in parallel</span></p>
+            <p style="margin-bottom: 0; line-height: 1.6; font-size: 0.95rem; color: var(--text-secondary);"><strong>Why in plain English:</strong> This is pure reading and comparing &mdash; mechanical work a researcher does, not you. You just need the conclusion: <em>"WSJ focused on retail sector bankruptcies; NYT covered the macro picture; neither has talked to a bankruptcy judge directly."</em> That one sentence tells you exactly what your story's edge is. The subagent read 30 articles to get you there. You read none of them.</p>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 3rem; border-top: 1px solid var(--border-color); padding-top: 3rem;">
+          <div style="margin-bottom: 2rem; padding: 1.5rem; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(255, 0, 255, 0.02);">
+            <header style="margin-bottom: 1rem;">
+              <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: var(--text-primary);">Subtask 4 &mdash; Drafting Expert Source Quotes</h3>
+            </header>
+            <p style="margin-bottom: 1rem; line-height: 1.6; font-size: 0.95rem;"><strong>What needs to happen:</strong> You have three economists and a bankruptcy judge lined up. Claude helps you draft the questions, then shape their responses into tight, attributed quotes that fit the story's narrative.</p>
+            <p style="margin-bottom: 1rem; line-height: 1.6; font-size: 0.95rem;"><strong>Use subagent or main?</strong> &rarr; <span style="color: var(--accent-magenta); font-weight: bold;">Main conversation</span></p>
+            <p style="margin-bottom: 0; line-height: 1.6; font-size: 0.95rem; color: var(--text-secondary);"><strong>Why in plain English:</strong> This is collaborative craft. You might say mid-draft: <em>"That quote is too academic &mdash; make it land harder"</em> or <em>"Actually, move the judge's quote to the lede."</em> This isn't a research job &mdash; it's a writing conversation between you and Claude. You want to see every sentence appear, react to it, and steer it. This belongs on your desk.</p>
+          </div>
+
+          <div style="margin-bottom: 2rem; padding: 1.5rem; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(255, 0, 255, 0.02);">
+            <header style="margin-bottom: 1rem;">
+              <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: var(--text-primary);">Subtask 5 &mdash; Writing the First Draft</h3>
+            </header>
+            <p style="margin-bottom: 1rem; line-height: 1.6; font-size: 0.95rem;"><strong>What needs to happen:</strong> Take all the assembled research and write the full 1,200-word article &mdash; lede, nut graf, supporting sections, kicker &mdash; in the publication's house style.</p>
+            <p style="margin-bottom: 1rem; line-height: 1.6; font-size: 0.95rem;"><strong>Use subagent or main?</strong> &rarr; <span style="color: var(--accent-magenta); font-weight: bold;">Main conversation</span></p>
+            <p style="margin-bottom: 0; line-height: 1.6; font-size: 0.95rem; color: var(--text-secondary);"><strong>Why in plain English:</strong> A first draft is not a research task. It's an act of judgment &mdash; choosing which fact leads, which source gets the second paragraph, what the story's emotional core is. You want to read it as it's being written, catch when Claude picks the wrong angle, and redirect in real time. This is the most important thing you're doing today. It stays on your desk.</p>
+          </div>
+        </div>
+
+        <div style="margin-top: 3.5rem; border-top: 1px solid var(--border-color); padding-top: 2.5rem;">
+          <h3 style="margin-bottom: 1.5rem; color: var(--text-primary); font-size: 1.2rem;">The Journalist's Decision Table</h3>
+          <div style="overflow-x: auto; margin-bottom: 2rem;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+              <thead>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <th style="padding: 0.75rem; text-align: left; color: var(--accent-primary);">Task</th>
+                  <th style="padding: 0.75rem; text-align: left; color: var(--accent-primary);">Where</th>
+                  <th style="padding: 0.75rem; text-align: left; color: var(--accent-primary);">Why</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 1rem;">Research sweep (400+ sources)</td>
+                  <td style="padding: 1rem;"><span style="color: var(--accent-primary); font-weight: bold;">Subagent</span></td>
+                  <td style="padding: 1rem;">You want the summary, not the raw pile</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 1rem;">Court document analysis</td>
+                  <td style="padding: 1rem;"><span style="color: var(--accent-primary); font-weight: bold;">Subagent</span></td>
+                  <td style="padding: 1rem;">Dense, mechanical, run in parallel</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 1rem;">Competitor coverage comparison</td>
+                  <td style="padding: 1rem;"><span style="color: var(--accent-primary); font-weight: bold;">Subagent</span></td>
+                  <td style="padding: 1rem;">Pure reading work &mdash; just give me the gap</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 1rem;">Shaping expert quotes</td>
+                  <td style="padding: 1rem;"><span style="color: var(--accent-magenta); font-weight: bold;">Main conversation</span></td>
+                  <td style="padding: 1rem;">Iterative, craft-driven, needs your eye</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 1rem;">Writing the first draft</td>
+                  <td style="padding: 1rem;"><span style="color: var(--accent-magenta); font-weight: bold;">Main conversation</span></td>
+                  <td style="padding: 1rem;">Too important &mdash; you guide every paragraph</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="padding: 1.5rem; background: rgba(0, 242, 255, 0.05); border: 1px solid var(--border-color); border-radius: 12px; text-align: center;">
+            <h4 style="margin-bottom: 0.75rem; color: var(--accent-primary);">The Journalist's Golden Rule</h4>
+            <p style="margin: 0; line-height: 1.6; font-size: 1.1rem; color: var(--text-primary);">
+              If the task is about <strong>finding and filtering information</strong> &rarr; subagent. If the task is about <strong>judgment, voice, and craft</strong> &rarr; main conversation.
+            </p>
+            <p style="margin-top: 1rem; font-size: 0.95rem; color: var(--text-secondary); font-style: italic;">
+              Research is the back office. Writing is the desk. Great journalism needs both &mdash; but they should never be in the same room at the same time.
+            </p>
+          </div>
+        </div>
       `},{label:"Built-in",content:`
         <p>Claude Code includes several built-in subagents that are optimized for common engineering workflows:</p>
 
         <div style="margin-top: 1.5rem;">
-          <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">1) Explore</strong>
+          <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">1. Explore</strong>
           <p>A fast, read-only agent optimized for searching and analyzing codebases.</p>
           <div style="padding: 0.75rem 1rem; background: var(--surface-color); border-radius: 4px; margin: 0.75rem 0;">
             <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5;">
@@ -1446,10 +1588,9 @@ EOF</pre>
             </ul>
           </div>
           <p style="font-size: 0.95rem; line-height: 1.5;">Claude delegates to Explore when it needs to search or understand a codebase without making changes. This keeps exploration results out of your main session context.</p>
-          <p style="font-size: 0.9rem; font-style: italic; opacity: 0.8;">Available thoroughness levels: quick, medium, or very thorough.</p>
         </div>
         <div style="margin-top: 1.5rem;">
-          <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">2) Plan</strong>
+          <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">2. Plan</strong>
           <p>A research-focused agent used during plan mode to gather context before presenting a plan.</p>
           <div style="padding: 0.75rem 1rem; background: var(--surface-color); border-radius: 4px; margin: 0.75rem 0;">
             <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5;">
@@ -1457,7 +1598,7 @@ EOF</pre>
               <li><strong>Purpose:</strong> Codebase research for planning</li>
             </ul>
           </div>
-          <p style="font-size: 0.95rem; line-height: 1.5;">Used when Claude needs to understand your codebase during a planning phase. This prevents infinite nesting (subagents cannot spawn other subagents) while still gathering necessary context.</p>
+          <p style="font-size: 0.95rem; line-height: 1.5;">Used when Claude needs to understand your codebase during a planning phase.</p>
         </div>
 
         <div style="margin-top: 2rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem;">
@@ -1465,7 +1606,7 @@ EOF</pre>
           
           <div style="margin-bottom: 2rem;">
             <strong style="display:block; margin-bottom:0.75rem; font-size: 1rem; color: var(--text-primary);">Option 1: The <code>/agents</code> command (recommended)</strong>
-            <p style="line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 0.75rem;">Use the <code>/agents</code> slash command inside an interactive session to browse all available subagents in a searchable menu.</p>
+            <p style="line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 0.75rem;">Use the <code>/agents</code> slash command inside an interactive session to browse all available subagents.</p>
             <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);">/agents</code>
           </div>
 
@@ -1514,7 +1655,7 @@ EOF</pre>
           <div style="margin-bottom: 2.5rem;">
             <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--text-primary);">Step 3 — Execute: Final Implementation</strong>
             <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1rem;">> Implement the dark mode plan we just approved</code>
-            <p style="margin-bottom: 1rem;">The general-purpose subagent handles complex file creations in isolated contexts:</p>
+            <p style="margin-bottom: 1rem;">Claude delegates this task to a General-purpose subagent. A capable agent for complex, multi-step tasks that require both exploration and action:</p>
             <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); font-size: 0.85rem; margin-bottom: 1rem;">// src/hooks/useDarkMode.ts
 export function useDarkMode() {
   const [dark, setDark] = useState(() => localStorage.getItem('theme') === 'dark');
@@ -1608,13 +1749,42 @@ export function useDarkMode() {
         <div style="margin-bottom: 2.5rem;">
           <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">8) Save and try it out</strong>
           <p style="margin-bottom: 1rem;">Review the configuration summary. Press <code>s</code> or <code>Enter</code> to save. The subagent is available immediately. Try it:</p>
-          <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1rem;">Use the code-improver agent to suggest improvements in this project</code>
-          <p style="font-size: 0.95rem; line-height: 1.6;">Claude delegates to your new subagent, which scans the codebase and returns improvement suggestions.</p>
+          <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1rem;">Use the code-improver agent to suggest improvements for the file "index.html"</code>
+          
+          <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1rem;">⏺ code-improver(Review index.html for improvements)
+  ⎿  Done (3 tool uses · 18.2k tokens · 1m 38s)
+  (ctrl+o to expand)
+
+⏺ The code-improver agent completed its review of index.html. Here's a summary:
+
+  Key Findings
+
+  Total Issues Found: 12
+  - High Priority: 6 (Accessibility, SEO, Icons, Landmarks, Forms, Modals)
+  - Medium Priority: 3 (Timer accessibility, Modal overlays, Element clarity)
+  - Low Priority: 3 (DOCTYPE case, Quote consistency, Data attributes)
+
+  Top Recommendations
+
+  1. Accessibility — Add ARIA labels, roles, and states throughout (e.g., aria-label, role="dialog", aria-expanded)
+  2. Icon Consistency — Replace Unicode emojis (🌙, ⏱️ , ✕) with inline SVGs for consistent rendering
+  3. SEO Meta Tags — Add meta description, Open Graph tags, and Twitter Card meta tags
+  4. Landmark Roles — Add role="main", role="navigation", role="banner" for screen reader navigation
+  5. Modal Accessibility — Add role="dialog", aria-modal="true", and proper focus management
+
+  CSS Additions Needed
+
+  The review also suggests adding these CSS classes:
+  .sr-only { /* Screen reader only text */ }
+  .skip-link { /* Keyboard skip navigation */ }
+
+  The code is structurally sound but needs accessibility improvements to meet WCAG 2.1 AA standards. Would you like me to implement any of these suggestions?</code>
+          <p style="font-size: 0.95rem; line-height: 1.6;">Claude delegates to your new subagent, which scans the specific file and returns a detailed summary of findings and recommendations.</p>
         </div>
 
         <div style="margin-top: 3rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem;">
           <p style="margin-bottom: 1rem; line-height: 1.6; color: var(--text-secondary);">You now have a subagent you can use in any project on your machine to analyze codebases and suggest improvements.</p>
-          <p style="line-height: 1.6; color: var(--text-secondary); font-size: 0.9rem;">You can also create subagents manually as Markdown files, define them via CLI flags, or distribute them through plugins. The following sections cover all configuration options.</p>
+          <p style="line-height: 1.6; color: var(--text-secondary); font-size: 0.9rem;">You can also create subagents manually as Markdown files, define them via CLI flags, or distribute them through plugins. The next sections covers few of the configuration options.</p>
         </div>
       `},{label:"Config",content:`
         <div style="margin-top: 0.5rem;">
@@ -1828,6 +1998,13 @@ memory: user
                 <li>Proactive learning: Instruct your agent to update its memory in its markdown prompt.</li>
               </ul>
             </div>
+
+            <div style="margin-top: 2rem; padding: 1.25rem; background: rgba(0, 242, 255, 0.03); border: 1px solid rgba(0, 242, 255, 0.1); border-radius: 8px;">
+              <p style="margin: 0; line-height: 1.6; font-size: 0.95rem; color: var(--text-secondary);">
+                There are many more customizable subagent configurations available. For more details on advanced settings, check out the official documentation: 
+                <a href="https://code.claude.com/docs/en/sub-agents#configure-subagents" target="_blank" style="color: var(--accent-primary); text-decoration: none; font-weight: bold; border-bottom: 1px dashed var(--accent-primary);">Configure Subagents</a>.
+              </p>
+            </div>
           </div>
         </div>
       `},{label:"Working with Subagents",content:`
@@ -1873,7 +2050,7 @@ Have the code-reviewer subagent look at my recent changes</code>
           
           <div style="margin-bottom: 2rem;">
             <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--text-primary);">Isolate high-volume operations</strong>
-            <p style="margin-bottom: 1rem; line-height: 1.6;">One of the most effective uses for subagents is isolating operations that produce large amounts of output. Running tests, fetching documentation, or processing log files can consume significant context. By delegating these to a subagent, the verbose output stays in the subagent’s context while only the relevant summary returns to your main conversation.</p>
+            <p style="margin-bottom: 1rem; line-height: 1.6;">One of the most effective uses for subagents is isolating operations that produce large amounts of output. By delegating these to a subagent, the verbose output stays in the subagent’s context while only the relevant summary returns to your main conversation.</p>
             <div style="padding: 0.75rem 1rem; background: var(--surface-color); border-left: 3px solid var(--accent-primary); border-radius: 0 4px 4px 0; font-style: italic; font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
               "Use a subagent to run the test suite and report only the failing tests with their error messages"
             </div>
@@ -1899,6 +2076,10 @@ Have the code-reviewer subagent look at my recent changes</code>
 
           <div style="margin-top: 3.5rem; border-top: 1px solid var(--border-color); padding-top: 2rem;">
             <strong style="display:block; margin-bottom:1.5rem; font-size:1.2rem; color: var(--accent-primary);">Choose between subagents and main conversation</strong>
+            
+            <p style="margin-bottom: 2rem; padding: 1rem 1.25rem; background: var(--surface-color); border-left: 4px solid var(--accent-primary); border-radius: 0 8px 8px 0; font-style: italic; line-height: 1.6; color: var(--text-secondary); font-size: 1rem;">
+              "Think of your main conversation as your desk &mdash; the space where you do your main work and think clearly. A subagent is like sending a colleague to another room to do some research or grunt work. They go away, do the job, and come back with only the answer you need. Your desk stays clean the whole time."
+            </p>
             
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
               <div style="padding: 1.25rem; background: rgba(0, 242, 255, 0.03); border: 1px solid rgba(0, 242, 255, 0.1); border-radius: 8px;">
@@ -2100,7 +2281,878 @@ exit 0</code>
           <code style="display: block; padding: 0.75rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 1rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.5;">chmod +x ./scripts/validate-readonly-query.sh</code>
           <p style="margin-top: 1rem; line-height: 1.6; color: var(--text-tertiary); font-size: 0.9rem;">The hook receives JSON via stdin with the Bash command in <code>tool_input.command</code>. Exit code 2 blocks the operation and feeds the error message back to Claude. See <a href="#" style="color: var(--accent-primary);">Hooks</a> for details on exit codes and <a href="#" style="color: var(--accent-primary);">Hook input</a> for the complete input schema.</p>
         </div>
-      `}],interactiveType:"custom"},Pr={id:"claude-plugins",title:"Claude Plugins",category:"Tutorial",tags:["Plugins","Marketplace","Claude Code"],tabs:[{label:"Overview",content:`
+      `}],interactiveType:"custom"},Pr={id:"claude-agents",title:"Claude Agents",category:"AI Tools",tags:["agents","multi-agent","orchestration","tutorial"],tabs:[{label:"Overview",content:`
+<p style="margin-bottom:1rem; line-height:1.75;">Agent teams let you coordinate <strong>multiple Claude Code instances working together</strong>. One session acts as the team lead, coordinating work, assigning tasks, and synthesizing results. Teammates work independently, each in its own context window, and can communicate directly with each other.</p>
+
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1rem 0;">
+  <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
+    &#x1F5DE; Think of it like a newsroom
+  </p>
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">An <strong>editor-in-chief</strong> (the Team Lead) assigns three reporters to research different angles of a story <em>in parallel</em>. Each reporter works independently, then submits findings. The editor synthesizes everything into the final piece &mdash; simultaneously, not one at a time.</p>
+</div>
+
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-secondary); border-radius: 12px; margin: 1rem 0;">
+  <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
+    &#x26A1; How this differs from Subagents
+  </p>
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">Unlike <a href="#" data-goto-concept="claude-subagents" style="color: var(--accent-primary); text-decoration: underline;">subagents</a> which run <em>inside</em> one session and only report back to the main agent, <strong>agent teammates are fully independent Claude Code sessions</strong> &mdash; each with its own context window, project files, and the ability to message other teammates directly.</p>
+</div>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);">Prerequisites</h3>
+<ul style="margin: 0 0 1.5rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
+  <li style="margin-bottom: 0.25rem;">Claude Code <strong>v2.1.32</strong> or later (<code style="padding: 0.1rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--syntax-text); font-family: monospace;">claude --version</code> to check)</li>
+  <li style="margin-bottom: 0.25rem;">A terminal &mdash; macOS Terminal, iTerm2, or any Linux terminal</li>
+  <li style="margin-bottom: 0.25rem;">Optional: <code style="padding: 0.1rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--syntax-text); font-family: monospace;">tmux</code> for split-pane display (covered in Step 2)</li>
+</ul>
+
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1rem 0;">
+  <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
+    <span style="color: var(--accent-primary);">⚡</span> Key Difference from Subagents
+  </p>
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">
+    Unlike <a href="#" data-goto-concept="claude-subagents" style="color: var(--accent-primary); text-decoration: underline;">subagents</a> which run within a single session and only report back to the main agent, <strong>agent teammates can communicate directly with each other</strong> and share a task list for coordination.
+  </p>
+</div>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">What You'll Build</h3>
+<p style="margin-bottom:0.75rem; line-height:1.75;">A simple <strong>Research Team</strong> that works in parallel to analyze a topic from multiple angles. Perfect for learning because:</p>
+
+<ul style="margin: 0 0 1.5rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
+  <li style="margin-bottom: 0.25rem;">✅ No coding required</li>
+  <li style="margin-bottom: 0.25rem;">✅ Clear, measurable outputs</li>
+  <li style="margin-bottom: 0.25rem;">✅ Easy to verify results</li>
+  <li style="margin-bottom: 0.25rem;">✅ Demonstrates parallel coordination</li>
+</ul>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">When to Use Agent Teams</h3>
+
+<table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+  <thead>
+    <tr style="border-bottom: 2px solid var(--border-color);">
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">&#x2705; Best For</th>
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">&#x274C; Avoid When</th>
+    </tr>
+  </thead>
+  <tbody style="color: var(--text-secondary);">
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;">Research & review (parallel exploration)</td>
+      <td style="padding: 0.75rem;">Sequential tasks with dependencies</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;">New modules/features (separate files)</td>
+      <td style="padding: 0.75rem;">Same-file edits (conflict risk)</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;">Debugging with competing hypotheses</td>
+      <td style="padding: 0.75rem;">Routine tasks (token overhead)</td>
+    </tr>
+    <tr>
+      <td style="padding: 0.75rem;">Cross-layer coordination (frontend/backend/tests)</td>
+      <td style="padding: 0.75rem;">Work requiring frequent handoffs</td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="margin-top: 2rem; display: flex; justify-content: flex-end; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="1" class="tutorial-nav-link">
+    Next: Step 1 – Enable Agent Teams <span>→</span>
+  </a>
+</div>
+`},{label:"Step 1 – Enable",content:`
+<h2 style="margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 1 — Enable Agent Teams</h2>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Agent teams are an <strong>experimental feature</strong> that must be enabled with an environment variable before you can use them. Without this flag, Claude Code will not offer team coordination — it will just run as a normal single session.</p>
+
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 0 0 1.5rem 0;">
+  <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
+    <span style="color: var(--accent-primary);">📋</span> Before you begin
+  </p>
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">You need <strong>Claude Code v2.1.32 or later</strong>. Run the command below to check your version. If it's older, run <code style="padding: 0.1rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--syntax-text); font-family: monospace;">npm update -g @anthropic-ai/claude-code</code> to upgrade.</p>
+</div>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">Check your installed version:</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>claude --version</code></pre>
+<p style="margin-bottom:1.5rem; font-size:0.85rem; color: var(--text-secondary); font-style:italic;">Expected output: <code style="color: var(--syntax-text); background: var(--syntax-bg); padding: 0.1rem 0.3rem; border-radius:3px;">Claude Code 2.1.32</code> (or higher)</p>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Option A: settings.json <span style="font-size:0.8rem; color: var(--accent-primary); font-weight:400;">(Recommended — persists across sessions)</span></h3>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">Open or create your Claude Code global settings file:</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code># macOS/Linux — open in nano text editor
+nano ~/.claude.json
+
+# Or use VS Code
+code ~/.claude.json</code></pre>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">Add (or merge) this content into the file:</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  }
+}</code></pre>
+<p style="margin-bottom:1.5rem; font-size:0.85rem; color: var(--text-secondary); line-height:1.6;">Save and close. This flag is read every time Claude Code starts, so you only need to set it once.</p>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Option B: Shell environment variable <span style="font-size:0.8rem; color: var(--text-secondary); font-weight:400;">(Current terminal only)</span></h3>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">For a quick one-time test, export the variable in your current terminal:</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1</code></pre>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">To make it permanent, add the same line to your shell profile and reload it:</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>echo 'export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1' >> ~/.zshrc
+source ~/.zshrc   # reload (use ~/.bashrc if on bash)</code></pre>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Verify it's enabled</h3>
+<p style="margin-bottom:0.5rem; line-height:1.75;">Start Claude Code — you should see a note in the startup banner confirming agent teams are active:</p>
+<pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); line-height: 1.5;"><code>claude
+# ✓ Agent teams: enabled (experimental)</code></pre>
+<p style="margin-bottom:1rem; font-size:0.85rem; color: var(--text-secondary); font-style:italic;">If you don't see this, double-check the env variable is set before launching Claude.</p>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="0" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Overview
+  </a>
+  <a href="#" data-goto-tab="2" class="tutorial-nav-link">
+    Next: Step 2 – Display Modes <span>→</span>
+  </a>
+</div>
+`},{label:"Step 2 – Display",content:`
+<h2 style="margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 2 — Choose Your Display Mode</h2>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">Agent teams support two display modes for viewing and interacting with teammates:</p>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Mode Comparison</h3>
+
+<table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+  <thead>
+    <tr style="border-bottom: 2px solid var(--border-color);">
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Mode</th>
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Description</th>
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Best For</th>
+    </tr>
+  </thead>
+  <tbody style="color: var(--text-secondary);">
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem; font-weight: 600; color: var(--accent-primary);">In-Process</td>
+      <td style="padding: 0.75rem;">All teammates run in your main terminal. Use <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">Shift+Down</code> to cycle through them.</td>
+      <td style="padding: 0.75rem;">Any terminal, beginners, quick tasks</td>
+    </tr>
+    <tr>
+      <td style="padding: 0.75rem; font-weight: 600; color: var(--accent-primary);">Split Panes</td>
+      <td style="padding: 0.75rem;">Each teammate gets its own pane. See everyone at once.</td>
+      <td style="padding: 0.75rem;">tmux or iTerm2 users, complex workflows</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Installing tmux for Split Panes</h3>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;"><strong>macOS:</strong></p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; white-space: pre-wrap; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>brew install tmux</code></pre>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;"><strong>Ubuntu/Debian:</strong></p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; white-space: pre-wrap; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>sudo apt install tmux</code></pre>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;"><strong>Fedora:</strong></p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; white-space: pre-wrap; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>sudo dnf install tmux</code></pre>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Configuring Display Mode</h3>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">The default is <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">"auto"</code> (uses split panes if in tmux, in-process otherwise). Override in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude.json</code>:</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; white-space: pre-wrap; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>{
+  "teammateMode": "in-process"
+}</code></pre>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">Or force for a single session:</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; white-space: pre-wrap; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>claude --teammate-mode in-process</code></pre>
+
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1rem 0;">
+  <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
+    <span style="color: var(--accent-primary);">💡</span> Tip for Beginners
+  </p>
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">
+    Start with <strong>in-process mode</strong> — it works in any terminal and is simpler to use. You can always upgrade to split panes later once you're comfortable with agent teams.
+  </p>
+</div>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="1" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Step 1
+  </a>
+  <a href="#" data-goto-tab="3" class="tutorial-nav-link">
+    Next: Step 3 – First Team <span>→</span>
+  </a>
+</div>
+`},{label:"Step 3 – First Team",content:`
+<h2 style="margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 3 — Your First Agent Team</h2>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">Let's create a <strong>Research Team</strong> that analyzes a topic from multiple perspectives in parallel.</p>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Launch Claude Code</h3>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; white-space: pre-wrap; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>cd ~/your-project-directory
+claude</code></pre>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Create Your First Team</h3>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">Enter this prompt:</p>
+<pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); white-space: pre-wrap; line-height: 1.5;"><code>I want to understand the concept of "machine learning bias" from three
+different perspectives. Create an agent team with 3 teammates:
+
+1. "historian" - Research the history and origins of ML bias
+2. "technician" - Research the technical causes and mitigation techniques
+3. "ethicist" - Research the societal and ethical implications
+
+Each teammate should investigate their angle and report back. Have the
+lead synthesize all findings into a summary.</code></pre>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">What Happens Next</h3>
+
+<ol style="margin: 0.5rem 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
+  <li style="margin-bottom: 0.5rem;"><strong>Claude creates a team</strong> with a shared task list</li>
+  <li style="margin-bottom: 0.5rem;"><strong>Spawns 3 teammates</strong> (historian, technician, ethicist)</li>
+  <li style="margin-bottom: 0.5rem;"><strong>Each teammate works independently</strong> on their assigned task</li>
+  <li style="margin-bottom: 0.5rem;"><strong>The lead waits</strong> for all to complete</li>
+  <li style="margin-bottom: 0.5rem;"><strong>The lead synthesizes</strong> all findings</li>
+</ol>
+
+
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">The Architecture</h3>
+
+<div style="background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; overflow-x: auto;">
+  <pre style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.4; color: var(--text-secondary); white-space: pre;"><code style="color: var(--accent-primary);">┌────────────────────────────────────────────────────────────┐</code>
+<code style="color: var(--accent-primary);">│</code><code style="color: var(--text-primary);">                       YOU (Team Lead)                      </code><code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code><code style="color: var(--text-secondary);">                 assigns tasks & synthesizes                </code><code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>                                                            <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--accent-secondary);">┌────────────┐      ┌────────────┐      ┌────────────┐</code>    <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--accent-secondary);">│</code> <code style="color: var(--text-primary);">Historian</code>  <code style="color: var(--accent-secondary);">│</code>      <code style="color: var(--accent-secondary);">│</code> <code style="color: var(--text-primary);">Technician</code> <code style="color: var(--accent-secondary);">│</code>      <code style="color: var(--accent-secondary);">│</code>  <code style="color: var(--text-primary);">Ethicist</code>  <code style="color: var(--accent-secondary);">│</code>    <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--accent-secondary);">│</code> <code style="color: var(--text-secondary);">(Teammate)</code> <code style="color: var(--accent-secondary);">│</code>      <code style="color: var(--accent-secondary);">│</code> <code style="color: var(--text-secondary);">(Teammate)</code> <code style="color: var(--accent-secondary);">│</code>      <code style="color: var(--accent-secondary);">│</code> <code style="color: var(--text-secondary);">(Teammate)</code> <code style="color: var(--accent-secondary);">│</code>    <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--accent-secondary);">└────────────┘      └────────────┘      └────────────┘</code>    <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>         <code style="color: var(--text-secondary);">▲                  ▲                   ▲</code>           <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>         <code style="color: var(--text-secondary);">│                  │                   │</code>           <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>         <code style="color: var(--text-secondary);">└──────────┬───────┴─────────┬─────────┘</code>           <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>                    <code style="color: var(--text-secondary);">│                 │</code>                     <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>          <code style="color: var(--code-green);">┌─────────┴─────────────────┴─────────┐</code>           <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>          <code style="color: var(--code-green);">│</code>          <code style="color: var(--text-primary);">Shared Task List</code>           <code style="color: var(--code-green);">│</code>           <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>          <code style="color: var(--code-green);">│</code>  <code style="color: var(--text-secondary);">• Task 1: Pending</code>                  <code style="color: var(--code-green);">│</code>           <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>          <code style="color: var(--code-green);">│</code>  <code style="color: var(--text-secondary);">• Task 2: In Progress</code>              <code style="color: var(--code-green);">│</code>           <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>          <code style="color: var(--code-green);">│</code>  <code style="color: var(--text-secondary);">• Task 3: Completed</code>                <code style="color: var(--code-green);">│</code>           <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>          <code style="color: var(--code-green);">└─────────────────────────────────────┘</code>           <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">└────────────────────────────────────────────────────────────┘</code></pre>
+</div>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="2" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Step 2
+  </a>
+  <a href="#" data-goto-tab="4" class="tutorial-nav-link">
+    Next: Step 4 – Interact <span>→</span>
+  </a>
+</div>
+`},{label:"Step 4 – Interact",content:`
+<h2 style="margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 4 — Interact with Your Team</h2>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">Once your team is running, you can monitor progress and interact with individual teammates.</p>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">In-Process Mode (Default)</h3>
+
+<table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+  <thead>
+    <tr style="border-bottom: 2px solid var(--border-color);">
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Action</th>
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">How To</th>
+    </tr>
+  </thead>
+  <tbody style="color: var(--text-secondary);">
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;">Cycle through teammates</td>
+      <td style="padding: 0.75rem;"><kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Shift+Down</kbd></td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;">View teammate's session</td>
+      <td style="padding: 0.75rem;"><kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Enter</kbd></td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;">Interrupt current turn</td>
+      <td style="padding: 0.75rem;"><kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Escape</kbd></td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;">Toggle task list</td>
+      <td style="padding: 0.75rem;"><kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Ctrl+T</kbd></td>
+    </tr>
+    <tr>
+      <td style="padding: 0.75rem;">Send a message</td>
+      <td style="padding: 0.75rem;">Just type and send</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Split-Pane Mode (tmux/iTerm2)</h3>
+
+<table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+  <thead>
+    <tr style="border-bottom: 2px solid var(--border-color);">
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Action</th>
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">How To</th>
+    </tr>
+  </thead>
+  <tbody style="color: var(--text-secondary);">
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;">Switch panes</td>
+      <td style="padding: 0.75rem;">Click on the pane</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;">View all teammates</td>
+      <td style="padding: 0.75rem;">All visible at once</td>
+    </tr>
+    <tr>
+      <td style="padding: 0.75rem;">Interact with teammate</td>
+      <td style="padding: 0.75rem;">Type directly in their pane</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Talking to Teammates Directly</h3>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">You can message any teammate to give additional instructions:</p>
+<pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); white-space: pre-wrap;"><code>Ask the historian teammate to focus specifically on
+facial recognition bias in the last decade.</code></pre>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">Or switch to that teammate and type directly:</p>
+<pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); white-space: pre-wrap;"><code>Add a section about IBM's early work on this topic and
+how it influenced current practices.</code></pre>
+
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1rem 0;">
+  <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
+    <span style="color: var(--accent-primary);">💡</span> Key Insight
+  </p>
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">
+    Each teammate is a <strong>full, independent Claude Code session</strong> with its own context window. They load project context (CLAUDE.md, MCP servers, skills) but <strong>don't inherit the lead's conversation history</strong>.
+  </p>
+</div>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="3" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Step 3
+  </a>
+  <a href="#" data-goto-tab="5" class="tutorial-nav-link">
+    Next: Step 5 – Tasks <span>→</span>
+  </a>
+</div>
+`},{label:"Step 5 – Tasks",content:`
+<h2 style="margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 5 — Manage Tasks</h2>
+
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 0 0 1.5rem 0;">
+  <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
+    &#x1F4CB; What is the Shared Task List?
+  </p>
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">Think of it like a Kanban board that every teammate can see. Tasks move from <strong>Pending &rarr; In Progress &rarr; Completed</strong>. Teammates self-assign unclaimed tasks when they finish their current work &mdash; no manual hand-off needed.</p>
+</div>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">The shared task list coordinates work across the team. Tasks have three states: <strong>pending</strong>, <strong>in progress</strong>, and <strong>completed</strong>.</p>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">How Task Assignment Works</h3>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;"><strong>Lead assigns:</strong> Tell the lead which task to give to which teammate</p>
+<pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); white-space: pre-wrap;"><code>Assign the security review task to the reviewer teammate</code></pre>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;"><strong>Self-claim:</strong> After finishing a task, a teammate picks up the next unassigned, unblocked task</p>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Creating Task Dependencies</h3>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">You can specify that some tasks must complete before others:</p>
+<pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); white-space: pre-wrap;"><code>Create an agent team to build a REST API. The work has dependencies:
+
+1. First, "architect" teammate designs the API schema
+2. Then, "backend" teammate implements endpoints (depends on architect)
+3. Finally, "tester" teammate writes integration tests (depends on backend)
+
+Create the team and set up the task dependencies.</code></pre>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">How Dependencies Work</h3>
+<div style="background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; overflow-x: auto;">
+  <pre style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.5; color: var(--text-secondary); white-space: pre;"><code style="color: var(--text-primary);">Task 1: Design API</code> <code style="color: var(--accent-primary);">──────────────►</code> <code style="color: var(--code-green);">Completed</code>
+                                    <code style="color: var(--accent-primary);">│</code>
+                                    <code style="color: var(--accent-primary);">▼</code>
+<code style="color: var(--text-primary);">Task 2: Implement</code> <code style="color: var(--text-secondary);">(blocked)</code> <code style="color: var(--accent-primary);">─────►</code> <code style="color: var(--accent-secondary);">In Progress</code>
+                                    <code style="color: var(--accent-primary);">│</code>
+                                    <code style="color: var(--accent-primary);">▼</code>
+<code style="color: var(--text-primary);">Task 3: Write tests</code> <code style="color: var(--text-secondary);">(blocked)</code> <code style="color: var(--accent-primary);">────►</code> <code style="color: var(--text-secondary);">Pending</code></pre>
+</div>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">When Task 1 completes, Task 2 automatically unblocks. When Task 2 completes, Task 3 unblocks.</p>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Practical Example: Parallel Code Review</h3>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">A common use case is having multiple reviewers work independently:</p>
+<pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); white-space: pre-wrap;"><code>Create an agent team to review the codebase. Spawn three reviewers:
+
+1. "security-reviewer" - Focus on security vulnerabilities, input
+   validation, authentication issues
+2. "performance-reviewer" - Focus on algorithmic complexity, memory
+   usage, database queries
+3. "test-reviewer" - Focus on test coverage, edge cases, test quality
+
+Each should review independently and report findings. The lead should
+compile a prioritized action list.</code></pre>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">Each reviewer works from the same codebase but applies a different filter. The lead synthesizes findings after all finish.</p>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="4" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Step 4
+  </a>
+  <a href="#" data-goto-tab="6" class="tutorial-nav-link">
+    Next: Step 6 – Plan Approval <span>→</span>
+  </a>
+</div>
+`},{label:"Step 6 – Approval",content:`
+<h2 style="margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 6 — Approval Mode</h2>
+
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 0 0 1.5rem 0;">
+  <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
+    &#x1F6E1; Why use Plan Approval?
+  </p>
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">By default, teammates can read <em>and</em> write files. Approval mode makes a teammate <strong>read-only first</strong>: it proposes what it plans to do, and only proceeds once you say &ldquo;yes.&rdquo; Use this for risky changes so you stay in control.</p>
+</div>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">For complex or risky tasks, you can require teammates to <strong>plan before implementing</strong>. The teammate works in read-only plan mode until the lead approves.</p>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Requesting Plan Approval</h3>
+<pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); white-space: pre-wrap;"><code>Spawn an "architect" teammate to refactor the authentication module.
+Require plan approval before they make any changes.</code></pre>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">The Approval Flow</h3>
+<div style="background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; overflow-x: auto;">
+  <pre style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.4; color: var(--text-secondary); white-space: pre;"><code style="color: var(--accent-primary);">┌─────────────────────────────────────────────────────────┐</code>
+<code style="color: var(--accent-primary);">│</code>                   <code style="color: var(--accent-secondary);">TEAMMATE (Read-Only)</code>                  <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--border-color);">┌─────────────────────────────────────────────────┐</code>    <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--border-color);">│</code>  <code style="color: var(--text-primary);">PLAN MODE</code>                                      <code style="color: var(--border-color);">│</code>    <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--border-color);">│</code>  <code style="color: var(--text-secondary);">• Analyzes the code</code>                             <code style="color: var(--border-color);">│</code>    <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--border-color);">│</code>  <code style="color: var(--text-secondary);">• Proposes approach</code>                             <code style="color: var(--border-color);">│</code>    <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--border-color);">│</code>  <code style="color: var(--text-secondary);">• Creates implementation plan</code>                   <code style="color: var(--border-color);">│</code>    <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--border-color);">└─────────────────────────────────────────────────┘</code>    <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>                         <code style="color: var(--accent-primary);">│</code>                                <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>                         <code style="color: var(--accent-primary);">▼</code>                                <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>                <code style="color: var(--text-primary);">Plan Approval Request</code>               <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>                         <code style="color: var(--accent-primary);">│</code>                                <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">└─────────────────────────┼───────────────────────────────┘</code>
+                          <code style="color: var(--accent-primary);">│</code>
+                          <code style="color: var(--accent-primary);">▼</code>
+<code style="color: var(--accent-primary);">┌─────────────────────────┼───────────────────────────────┐</code>
+<code style="color: var(--accent-primary);">│</code>                    <code style="color: var(--text-primary);">TEAM LEAD (YOU)</code>                      <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--border-color);">┌─────────────────────────────────────────────────┐</code>    <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--border-color);">│</code>  <code style="color: var(--text-primary);">REVIEWING PLAN</code>                                 <code style="color: var(--border-color);">│</code>    <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--border-color);">│</code>  <code style="color: var(--text-secondary);">• Checks for risks</code>                              <code style="color: var(--border-color);">│</code>    <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--border-color);">│</code>  <code style="color: var(--text-secondary);">• Validates approach</code>                            <code style="color: var(--border-color);">│</code>    <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--border-color);">└─────────────────────────────────────────────────┘</code>    <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>          <code style="color: var(--accent-primary);">│</code>                      <code style="color: var(--accent-primary);">│</code>                         <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>     <code style="color: var(--code-green);">APPROVE</code>                 <code style="color: var(--accent-secondary);">REJECT</code>                        <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>          <code style="color: var(--accent-primary);">│</code>                      <code style="color: var(--accent-primary);">│</code>                         <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>          <code style="color: var(--accent-primary);">▼</code>                      <code style="color: var(--accent-primary);">▼</code>                         <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--code-green);">┌──────────────┐</code>      <code style="color: var(--accent-secondary);">┌──────────────┐</code>                 <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--code-green);">│</code> <code style="color: var(--text-primary);">IMPLEMENT</code>    <code style="color: var(--code-green);">│</code>      <code style="color: var(--accent-secondary);">│</code> <code style="color: var(--text-primary);">FEEDBACK</code>     <code style="color: var(--accent-secondary);">│</code>                 <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--code-green);">│</code><code style="color: var(--text-secondary);">(Write Mode)</code>  <code style="color: var(--code-green);">│</code>      <code style="color: var(--accent-secondary);">│</code><code style="color: var(--text-secondary);">(Try Again)</code>   <code style="color: var(--accent-secondary);">│</code>                 <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--code-green);">└──────────────┘</code>      <code style="color: var(--accent-secondary);">└──────────────┘</code>                 <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">└─────────────────────────────────────────────────────────┘</code></pre>
+</div>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Controlling Approval Decisions</h3>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">Give the lead criteria for approval:</p>
+<pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); white-space: pre-wrap;"><code>Tell the lead to only approve plans that include test coverage
+and don't modify the database schema.</code></pre>
+
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1rem 0;">
+  <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
+    <span style="color: var(--accent-primary);">💡</span> When to Use Plan Approval
+  </p>
+  <ul style="margin: 0 0 0 1.5rem; color: var(--text-secondary); line-height: 1.5;">
+    <li style="margin-bottom: 0.25rem;">Refactoring critical systems</li>
+    <li style="margin-bottom: 0.25rem;">Making database schema changes</li>
+    <li style="margin-bottom: 0.25rem;">Modifying authentication/authorization</li>
+    <li style="margin-bottom: 0.25rem;">Large-scale code reorganization</li>
+    <li>Any change with significant blast radius</li>
+  </ul>
+</div>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="5" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Step 5
+  </a>
+  <a href="#" data-goto-tab="7" class="tutorial-nav-link">
+    Next: Step 7 – Cleanup <span>→</span>
+  </a>
+</div>
+`},{label:"Step 7 – Cleanup",content:`
+<h2 style="margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 7 — Cleanup</h2>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">When you're done with your team, clean up properly to release resources.</p>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Shutdown a Specific Teammate</h3>
+<pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); white-space: pre-wrap;"><code>Ask the researcher teammate to shut down</code></pre>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">The lead sends a shutdown request. The teammate can approve (exit gracefully) or reject with an explanation.</p>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Clean Up the Entire Team</h3>
+<pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); white-space: pre-wrap;"><code>Clean up the team</code></pre>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">This removes shared team resources. <strong>All teammates must be shut down first</strong> or the cleanup will fail.</p>
+
+<div style="padding: 1rem; background: rgba(255, 200, 50, 0.1); border: 1px solid rgba(255, 200, 50, 0.3); border-radius: 8px; margin: 1rem 0;">
+  <p style="margin: 0; line-height:1.6; color: var(--text-primary);">
+    <strong style="color: var(--accent-primary);">⚠️ Important:</strong> Always use the lead to clean up. Teammates should not run cleanup because their team context may not resolve correctly, potentially leaving resources in an inconsistent state.
+  </p>
+</div>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Cleanup Checklist</h3>
+<ol style="margin: 0.5rem 0 1.5rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
+  <li style="margin-bottom: 0.4rem;">Tell each teammate to shut down: <em>"Ask the historian to shut down"</em></li>
+  <li style="margin-bottom: 0.4rem;">Wait for each teammate to confirm they've exited</li>
+  <li style="margin-bottom: 0.4rem;">Ask the lead to clean up the team: <em>"Clean up the team"</em></li>
+  <li style="margin-bottom: 0.4rem;">Exit the lead session: type <code style="padding: 0.1rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--syntax-text); font-family: monospace;">/exit</code> or press <kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Ctrl+C</kbd></li>
+</ol>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Token Costs</h3>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">Agent teams use <strong>significantly more tokens</strong> than a single session. Each teammate has its own context window.</p>
+
+<table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+  <thead>
+    <tr style="border-bottom: 2px solid var(--border-color);">
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Use Teams When</th>
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Use Single Session When</th>
+    </tr>
+  </thead>
+  <tbody style="color: var(--text-secondary);">
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;">Parallel exploration adds real value</td>
+      <td style="padding: 0.75rem;">Sequential tasks with dependencies</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;">Tasks are truly independent</td>
+      <td style="padding: 0.75rem;">Same-file edits needed</td>
+    </tr>
+    <tr>
+      <td style="padding: 0.75rem;">Coordination overhead is worth it</td>
+      <td style="padding: 0.75rem;">Routine tasks (token cost matters)</td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="6" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Step 6
+  </a>
+  <a href="#" data-goto-tab="8" class="tutorial-nav-link">
+    Next: Step 8 – Troubleshoot <span>→</span>
+  </a>
+</div>
+`},{label:"Step 8 – Troubleshoot",content:`
+<h2 style="margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 8 — Troubleshoot</h2>
+
+<p style="margin-bottom:1rem; line-height:1.75;">If something doesn't work as expected, the issue usually falls into one of the categories below. Each problem includes a plain-English explanation of <em>why</em> it happens and how to fix it.</p>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Teammates Not Appearing</h3>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;"><strong>Symptoms:</strong> You asked for a team but don't see teammates.</p>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;"><strong>Solutions:</strong></p>
+<ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
+  <li style="margin-bottom: 0.25rem;">In in-process mode, teammates may already be running but not visible. Press <kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Shift+Down</kbd> to cycle through active teammates.</li>
+  <li style="margin-bottom: 0.25rem;">Check that the task was complex enough to warrant a team.</li>
+  <li style="margin-bottom: 0.25rem;">If you requested split panes, verify tmux is installed: <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">which tmux</code></li>
+</ul>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Too Many Permission Prompts</h3>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;"><strong>Symptoms:</strong> Teammates keep asking for permissions.</p>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;"><strong>Solution:</strong> Pre-approve common operations in your permission settings before spawning teammates.</p>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Teammates Stopping on Errors</h3>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;"><strong>Symptoms:</strong> Teammate stops after encountering an error.</p>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;"><strong>Solutions:</strong></p>
+<ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
+  <li style="margin-bottom: 0.25rem;">Check their output using <kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Shift+Down</kbd></li>
+  <li style="margin-bottom: 0.25rem;">Give them additional instructions directly</li>
+  <li style="margin-bottom: 0.25rem;">Spawn a replacement teammate to continue the work</li>
+</ul>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Lead Shuts Down Before Work Is Done</h3>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;"><strong>Symptoms:</strong> The lead decides the team is finished before all tasks are complete.</p>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;"><strong>Solution:</strong></p>
+<pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); white-space: pre-wrap;"><code>Wait for your teammates to complete their tasks before proceeding</code></pre>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Orphaned tmux Sessions</h3>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;"><strong>Symptoms:</strong> tmux session persists after team ends.</p>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;"><strong>Solution:</strong></p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; white-space: pre-wrap; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>tmux ls
+tmux kill-session -t &lt;session-name&gt;</code></pre>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="7" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Step 7
+  </a>
+  <a href="#" data-goto-tab="9" class="tutorial-nav-link">
+    Next: Best Practices <span>→</span>
+  </a>
+</div>
+`},{label:"Best Practices",content:`
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Best Practices for Agent Teams</strong>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">1. Give Teammates Enough Context</h3>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">Teammates load project context automatically (CLAUDE.md, MCP servers, skills) but <strong>don't inherit the lead's conversation history</strong>. Include task-specific details in the spawn prompt:</p>
+<pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); white-space: pre-wrap;"><code>Spawn a security reviewer teammate with the prompt: "Review the
+authentication module at src/auth/ for security vulnerabilities. Focus
+on token handling, session management, and input validation. The app
+uses JWT tokens stored in httpOnly cookies. Report any issues with
+severity ratings."</code></pre>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">2. Choose an Appropriate Team Size</h3>
+
+<ul style="margin: 0.5rem 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
+  <li style="margin-bottom: 0.25rem;"><strong>Start with 3-5 teammates</strong> — balances parallelism with coordination</li>
+  <li style="margin-bottom: 0.25rem;"><strong>5-6 tasks per teammate</strong> keeps everyone productive without context switching</li>
+  <li style="margin-bottom: 0.25rem;"><strong>More teammates ≠ faster work</strong> — coordination overhead increases</li>
+  <li style="margin-bottom: 0.25rem;">Three focused teammates often outperform five scattered ones</li>
+</ul>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">3. Size Tasks Appropriately</h3>
+
+<table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+  <thead>
+    <tr style="border-bottom: 2px solid var(--border-color);">
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Size</th>
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Problem</th>
+    </tr>
+  </thead>
+  <tbody style="color: var(--text-secondary);">
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem; font-weight: 600; color: #ff6b6b;">Too Small</td>
+      <td style="padding: 0.75rem;">Coordination overhead exceeds the benefit</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem; font-weight: 600; color: #ffd93d;">Too Large</td>
+      <td style="padding: 0.75rem;">Teammates work too long without check-ins, increasing risk of wasted effort</td>
+    </tr>
+    <tr>
+      <td style="padding: 0.75rem; font-weight: 600; color: var(--accent-primary);">Just Right</td>
+      <td style="padding: 0.75rem;">Self-contained units producing a clear deliverable (function, test file, review)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">4. Avoid File Conflicts</h3>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">Two teammates editing the same file leads to overwrites. Break work so each teammate owns a different set of files.</p>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">5. Monitor and Steer</h3>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">Check in on teammates' progress, redirect approaches that aren't working, and synthesize findings as they come in. Letting a team run unattended too long increases wasted effort.</p>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">6. Start with Research and Review</h3>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">If you're new to agent teams, start with tasks that have clear boundaries and don't require writing code: reviewing a PR, researching a library, or investigating a bug. These show the value of parallel exploration without coordination challenges.</p>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="8" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Step 8
+  </a>
+  <a href="#" data-goto-tab="10" class="tutorial-nav-link">
+    Next: Quick Reference <span>→</span>
+  </a>
+</div>
+`},{label:"Quick Reference",content:`
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Quick Reference Card</strong>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Essential Commands</h3>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; white-space: pre-wrap; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); white-space: pre;"><code># Create a team
+"Create an agent team with [N] teammates to [task description]"
+
+# Assign specific roles
+"Spawn teammates: one focused on [A], one on [B], one on [C]"
+
+# Specify a model
+"Create a team using Sonnet for each teammate"
+
+# Require plan approval
+"Require plan approval before making changes"
+
+# Talk to a teammate
+"Ask the [name] teammate to [additional instruction]"
+
+# Shut down a teammate
+"Ask the [name] teammate to shut down"
+
+# Clean up
+"Clean up the team"</code></pre>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Keyboard Shortcuts (In-Process Mode)</h3>
+
+<table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+  <thead>
+    <tr style="border-bottom: 2px solid var(--border-color);">
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Key</th>
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Action</th>
+    </tr>
+  </thead>
+  <tbody style="color: var(--text-secondary);">
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;"><kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Shift+Down</kbd></td>
+      <td style="padding: 0.75rem;">Cycle to next teammate</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;"><kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Enter</kbd></td>
+      <td style="padding: 0.75rem;">View teammate session</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;"><kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Escape</kbd></td>
+      <td style="padding: 0.75rem;">Interrupt current turn</td>
+    </tr>
+    <tr>
+      <td style="padding: 0.75rem;"><kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Ctrl+T</kbd></td>
+      <td style="padding: 0.75rem;">Toggle task list</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Architecture Summary</h3>
+
+<table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+  <thead>
+    <tr style="border-bottom: 2px solid var(--border-color);">
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Component</th>
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Role</th>
+    </tr>
+  </thead>
+  <tbody style="color: var(--text-secondary);">
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem; font-weight: 600;">Team Lead</td>
+      <td style="padding: 0.75rem;">Main session that creates the team, spawns teammates, coordinates work</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem; font-weight: 600;">Teammates</td>
+      <td style="padding: 0.75rem;">Independent Claude instances working on assigned tasks</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem; font-weight: 600;">Task List</td>
+      <td style="padding: 0.75rem;">Shared list of work items that teammates claim and complete</td>
+    </tr>
+    <tr>
+      <td style="padding: 0.75rem; font-weight: 600;">Mailbox</td>
+      <td style="padding: 0.75rem;">Messaging system for communication between agents</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Where Files Are Stored</h3>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; white-space: pre-wrap; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>~/.claude/teams/{team-name}/config.json  # Team configuration
+~/.claude/tasks/{team-name}/              # Task list directory</code></pre>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="9" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Best Practices
+  </a>
+  <a href="#" data-goto-tab="11" class="tutorial-nav-link">
+    Next: Resources <span>→</span>
+  </a>
+</div>
+`},{label:"Resources",content:`
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Resources & Further Reading</strong>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Official Documentation</h3>
+
+<ul style="margin: 0.5rem 0 1rem 0; color: var(--text-secondary); line-height: 1.75; list-style: none; padding: 0;">
+  <li style="margin-bottom: 0.5rem;">
+    <a href="https://code.claude.com/docs/en/agent-teams" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">Agent Teams Documentation</a>
+    <span style="display: block; margin-left: 1.5rem; font-size: 0.9rem;">Complete reference for orchestrating teams of Claude Code sessions</span>
+  </li>
+  <li style="margin-bottom: 0.5rem;">
+    <a href="https://code.claude.com/docs/en/sub-agents" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">Subagents Documentation</a>
+    <span style="display: block; margin-left: 1.5rem; font-size: 0.9rem;">Lightweight delegation within a single session</span>
+  </li>
+  <li style="margin-bottom: 0.5rem;">
+    <a href="https://code.claude.com/docs/en/overview" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">Claude Code Overview</a>
+    <span style="display: block; margin-left: 1.5rem; font-size: 0.9rem;">Getting started with Claude Code</span>
+  </li>
+</ul>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Related Tutorials</h3>
+
+<ul style="margin: 0.5rem 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
+  <li style="margin-bottom: 0.5rem;">
+    <a href="#" data-goto-concept="claude-subagents" style="color: var(--accent-primary); text-decoration: underline;">Claude Subagents</a> — Learn about lightweight task delegation
+  </li>
+  <li style="margin-bottom: 0.5rem;">
+    <a href="#" data-goto-concept="claude-skills-tutorial" style="color: var(--accent-primary); text-decoration: underline;">Claude Skills</a> — Create reusable instruction sets
+  </li>
+  <li style="margin-bottom: 0.5rem;">
+    <a href="#" data-goto-concept="claude-mcp" style="color: var(--accent-primary); text-decoration: underline;">Claude MCP</a> — Extend Claude with external tools
+  </li>
+</ul>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Key Concepts from This Tutorial</h3>
+
+<table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+  <thead>
+    <tr style="border-bottom: 2px solid var(--border-color);">
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Concept</th>
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Description</th>
+    </tr>
+  </thead>
+  <tbody style="color: var(--text-secondary);">
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem; font-weight: 600;">Team Lead</td>
+      <td style="padding: 0.75rem;">Main Claude session that coordinates the team</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem; font-weight: 600;">Teammates</td>
+      <td style="padding: 0.75rem;">Independent Claude instances with own context windows</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem; font-weight: 600;">Task List</td>
+      <td style="padding: 0.75rem;">Shared coordination mechanism (pending, in progress, completed)</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem; font-weight: 600;">Plan Approval</td>
+      <td style="padding: 0.75rem;">Teammate plans before implementing (for risky work)</td>
+    </tr>
+    <tr>
+      <td style="padding: 0.75rem; font-weight: 600;">In-Process vs Split Panes</td>
+      <td style="padding: 0.75rem;">Two display modes for viewing teammates</td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1rem 0;">
+  <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
+    <span style="color: var(--accent-primary);">🎓</span> Next Steps for Your Learning
+  </p>
+  <ol style="margin: 0 0 0 1.5rem; color: var(--text-secondary); line-height: 1.75;">
+    <li style="margin-bottom: 0.25rem;">Try a parallel code review on your current project</li>
+    <li style="margin-bottom: 0.25rem;">Experiment with task dependencies for multi-stage workflows</li>
+    <li style="margin-bottom: 0.25rem;">Use plan approval for risky changes</li>
+    <li style="margin-bottom: 0.25rem;">Compare agent teams with subagents to understand when each approach fits</li>
+  </ol>
+</div>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="10" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Quick Reference
+  </a>
+  <a href="#" data-goto-tab="0" class="tutorial-nav-link">
+    Start Over: Overview <span>→</span>
+  </a>
+</div>
+`}],interactiveType:"custom"},_r={id:"claude-plugins",title:"Claude Plugins",category:"Tutorial",tags:["Plugins","Marketplace","Claude Code"],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:1rem; line-height:1.75;"><strong>Claude Plugins</strong> are like app bundles — a single package that installs multiple commands, tools, and behaviors all at once.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Plugins can bundle MCPs, skills, hooks, and commands into a single download. Instead of installing each piece separately, you get everything you need in one package.</p>
@@ -3058,7 +4110,7 @@ git push -u origin main</code></pre>
     <span>←</span> Previous: Share
   </a>
 </div>
-`}],interactiveType:"custom"},me=[Ar,Br,_r,Pr,Cr,Sr,Er,Tr,Mr,Ir],b={isActive:!1,isLocked:!1,isMinimized:!1,timer:{duration:1500,remaining:1500,interval:null,isRunning:!1},stats:{streak:0,cardsToday:0,focusMinutes:0,lastStudyDate:null}},zr={activeConcept:null,resetContentScroll(){const t=document.getElementById("content-area");t&&(t.scrollTop=0);const r=document.querySelector(".tutorial-tab-content");r&&(r.scrollTop=0)},init(){this.renderSidebar(),this.setupEventListeners(),this.initTheme(),this.initStudyMode(),this.initTechStackModal();const t=window.location.hash.substring(1);t&&me.some(r=>r.id===t)?this.selectConcept(t):this.renderWelcome(),sr(document.getElementById("constellation-bg"))},renderWelcome(){document.getElementById("constellation-bg").style.display="";const t=this.getConceptOfTheDay(),r=document.getElementById("content-area");r.classList.remove("content-area--tabbed"),r.innerHTML=`
+`}],interactiveType:"custom"},pe=[Ir,Br,zr,Pr,_r,Cr,Sr,Er,Ar,Mr,Tr],b={isActive:!1,isLocked:!1,isMinimized:!1,timer:{duration:1500,remaining:1500,interval:null,isRunning:!1},stats:{streak:0,cardsToday:0,focusMinutes:0,lastStudyDate:null}},Lr={activeConcept:null,resetContentScroll(){const t=document.getElementById("content-area");t&&(t.scrollTop=0);const r=document.querySelector(".tutorial-tab-content");r&&(r.scrollTop=0)},init(){this.renderSidebar(),this.setupEventListeners(),this.initTheme(),this.initStudyMode(),this.initTechStackModal();const t=window.location.hash.substring(1);t&&pe.some(r=>r.id===t)?this.selectConcept(t):this.renderWelcome(),sr(document.getElementById("constellation-bg"))},renderWelcome(){document.getElementById("constellation-bg").style.display="";const t=this.getConceptOfTheDay(),r=document.getElementById("content-area");r.classList.remove("content-area--tabbed"),r.innerHTML=`
       <div class="cotd-ticker">
         <span class="cotd-label">Skill of the Day</span>
         <div class="ticker-track">
@@ -3069,10 +4121,10 @@ git push -u origin main</code></pre>
         <h2>Welcome to Knowledge Lab</h2>
         <p>Select a tutorial from the sidebar to begin your interactive learning journey.</p>
       </div>
-    `,r.querySelector(".cotd-ticker").addEventListener("click",()=>{this.selectConcept(t.id)});const i=r.querySelector(".ticker-text"),a=r.querySelector(".ticker-track").offsetWidth;i.style.setProperty("--start-x",a+"px")},getConceptOfTheDay(){const t=Math.floor(Date.now()/864e5);return me[t%me.length]},initTheme(){localStorage.getItem("theme")==="light"&&(document.documentElement.classList.add("light-mode"),document.querySelector("#theme-toggle .icon").textContent="☀️"),localStorage.getItem("sidebar")==="collapsed"&&document.getElementById("app").classList.add("sidebar-collapsed")},renderSidebar(){const t=document.getElementById("concept-list");t.innerHTML=me.map(r=>`
+    `,r.querySelector(".cotd-ticker").addEventListener("click",()=>{this.selectConcept(t.id)});const i=r.querySelector(".ticker-text"),a=r.querySelector(".ticker-track").offsetWidth;i.style.setProperty("--start-x",a+"px")},getConceptOfTheDay(){const t=Math.floor(Date.now()/864e5);return pe[t%pe.length]},initTheme(){localStorage.getItem("theme")==="light"&&(document.documentElement.classList.add("light-mode"),document.querySelector("#theme-toggle .icon").textContent="☀️"),localStorage.getItem("sidebar")==="collapsed"&&document.getElementById("app").classList.add("sidebar-collapsed")},renderSidebar(){const t=document.getElementById("concept-list");t.innerHTML=pe.map(r=>`
       <li class="nav-item" data-id="${r.id}">${r.title}</li>
-    `).join("")},isMobile(){return window.innerWidth<=640},closeMobileSidebar(){document.getElementById("app").classList.remove("sidebar-open")},setupEventListeners(){document.getElementById("concept-list").addEventListener("click",t=>{if(t.target.classList.contains("nav-item")){const r=t.target.dataset.id;this.isMobile()&&this.closeMobileSidebar(),this.selectConcept(r)}}),document.getElementById("sidebar-toggle").addEventListener("click",()=>{const t=document.getElementById("app");if(this.isMobile())t.classList.toggle("sidebar-open");else{const r=t.classList.toggle("sidebar-collapsed");localStorage.setItem("sidebar",r?"collapsed":"open")}}),document.getElementById("app").addEventListener("click",t=>{this.isMobile()&&t.target===document.getElementById("app")&&this.closeMobileSidebar()}),document.getElementById("theme-toggle").addEventListener("click",()=>{const t=document.documentElement.classList.toggle("light-mode"),r=document.querySelector("#theme-toggle .icon");r.textContent=t?"☀️":"🌙",localStorage.setItem("theme",t?"light":"dark")}),document.getElementById("home-link").addEventListener("click",()=>{this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(t=>t.classList.remove("active")),window.location.hash&&history.replaceState(null,"",window.location.pathname+window.location.search),this.isMobile()&&this.closeMobileSidebar(),this.renderWelcome()}),document.getElementById("concept-search").addEventListener("input",t=>{const r=t.target.value.toLowerCase();document.querySelectorAll(".nav-item").forEach(a=>{const n=a.textContent.toLowerCase();a.style.display=n.includes(r)?"block":"none"})}),window.addEventListener("hashchange",()=>{const t=window.location.hash.substring(1);t&&me.some(r=>r.id===t)?(!this.activeConcept||this.activeConcept.id!==t)&&this.selectConcept(t):t||(this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(r=>r.classList.remove("active")),this.renderWelcome())}),window.addEventListener("message",async t=>{if(t.origin!==window.location.origin||t.data?.type!=="knowledgeLabFlowchartFullscreenToggle")return;const r=document.querySelector(".flowchart-embed");if(r)try{document.fullscreenElement===r?await document.exitFullscreen():document.fullscreenElement||await r.requestFullscreen()}catch(i){console.error("Flowchart fullscreen toggle failed:",i)}finally{r.querySelector("iframe")?.contentWindow?.postMessage({type:"knowledgeLabFlowchartFullscreenState",isFullscreen:document.fullscreenElement===r},window.location.origin)}}),document.addEventListener("fullscreenchange",()=>{const t=document.querySelector(".flowchart-embed");t?.querySelector("iframe")?.contentWindow?.postMessage({type:"knowledgeLabFlowchartFullscreenState",isFullscreen:document.fullscreenElement===t},window.location.origin)})},selectConcept(t){const r=me.find(a=>a.id===t);if(!r)return;window.location.hash!==`#${t}`&&(window.location.hash=t),document.getElementById("constellation-bg").style.display="none",this.activeConcept=r,document.querySelectorAll(".nav-item").forEach(a=>a.classList.remove("active"));const i=document.querySelector(`[data-id="${t}"]`);i&&i.classList.add("active"),this.renderConcept(r),this.resetContentScroll()},renderConcept(t){const r=document.getElementById("content-area");if(t.tabs&&t.tabs.length>0){r.classList.add("content-area--tabbed");const i=t.tabs.map((n,p)=>`<button class="tutorial-tab-btn${p===0?" active":""}" data-tab="${p}">${n.label}</button>`).join(""),a=t.tabs.map((n,p)=>`<div class="tutorial-tab-panel${p===0?" active":""}" data-panel="${p}">
-          <div class="concept-content" id="concept-description-${p}">
+    `).join("")},isMobile(){return window.innerWidth<=640},closeMobileSidebar(){document.getElementById("app").classList.remove("sidebar-open")},setupEventListeners(){document.getElementById("concept-list").addEventListener("click",t=>{if(t.target.classList.contains("nav-item")){const r=t.target.dataset.id;this.isMobile()&&this.closeMobileSidebar(),this.selectConcept(r)}}),document.getElementById("sidebar-toggle").addEventListener("click",()=>{const t=document.getElementById("app");if(this.isMobile())t.classList.toggle("sidebar-open");else{const r=t.classList.toggle("sidebar-collapsed");localStorage.setItem("sidebar",r?"collapsed":"open")}}),document.getElementById("app").addEventListener("click",t=>{this.isMobile()&&t.target===document.getElementById("app")&&this.closeMobileSidebar()}),document.getElementById("theme-toggle").addEventListener("click",()=>{const t=document.documentElement.classList.toggle("light-mode"),r=document.querySelector("#theme-toggle .icon");r.textContent=t?"☀️":"🌙",localStorage.setItem("theme",t?"light":"dark")}),document.getElementById("home-link").addEventListener("click",()=>{this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(t=>t.classList.remove("active")),window.location.hash&&history.replaceState(null,"",window.location.pathname+window.location.search),this.isMobile()&&this.closeMobileSidebar(),this.renderWelcome()}),document.getElementById("concept-search").addEventListener("input",t=>{const r=t.target.value.toLowerCase();document.querySelectorAll(".nav-item").forEach(a=>{const n=a.textContent.toLowerCase();a.style.display=n.includes(r)?"block":"none"})}),window.addEventListener("hashchange",()=>{const t=window.location.hash.substring(1);t&&pe.some(r=>r.id===t)?(!this.activeConcept||this.activeConcept.id!==t)&&this.selectConcept(t):t||(this.activeConcept=null,document.querySelectorAll(".nav-item").forEach(r=>r.classList.remove("active")),this.renderWelcome())}),window.addEventListener("message",async t=>{if(t.origin!==window.location.origin||t.data?.type!=="knowledgeLabFlowchartFullscreenToggle")return;const r=document.querySelector(".flowchart-embed");if(r)try{document.fullscreenElement===r?await document.exitFullscreen():document.fullscreenElement||await r.requestFullscreen()}catch(i){console.error("Flowchart fullscreen toggle failed:",i)}finally{r.querySelector("iframe")?.contentWindow?.postMessage({type:"knowledgeLabFlowchartFullscreenState",isFullscreen:document.fullscreenElement===r},window.location.origin)}}),document.addEventListener("fullscreenchange",()=>{const t=document.querySelector(".flowchart-embed");t?.querySelector("iframe")?.contentWindow?.postMessage({type:"knowledgeLabFlowchartFullscreenState",isFullscreen:document.fullscreenElement===t},window.location.origin)})},selectConcept(t){const r=pe.find(a=>a.id===t);if(!r)return;window.location.hash!==`#${t}`&&(window.location.hash=t),document.getElementById("constellation-bg").style.display="none",this.activeConcept=r,document.querySelectorAll(".nav-item").forEach(a=>a.classList.remove("active"));const i=document.querySelector(`[data-id="${t}"]`);i&&i.classList.add("active"),this.renderConcept(r),this.resetContentScroll()},renderConcept(t){const r=document.getElementById("content-area");if(t.tabs&&t.tabs.length>0){r.classList.add("content-area--tabbed");const i=t.tabs.map((n,m)=>`<button class="tutorial-tab-btn${m===0?" active":""}" data-tab="${m}">${n.label}</button>`).join(""),a=t.tabs.map((n,m)=>`<div class="tutorial-tab-panel${m===0?" active":""}" data-panel="${m}">
+          <div class="concept-content" id="concept-description-${m}">
             ${n.content}
           </div>
         </div>`).join("");r.innerHTML=`
@@ -3080,7 +4132,7 @@ git push -u origin main</code></pre>
           <nav class="tutorial-tabs" role="tablist">${i}</nav>
           <div class="tutorial-tab-content">${a}</div>
         </article>
-      `,this.initTabs(),t.tabs.forEach((n,p)=>{const h=document.getElementById(`concept-description-${p}`);h&&(dt(h),this.attachCopyButtonsTo(h))})}else{r.classList.remove("content-area--tabbed");const i=t.description||"Add your description here...",a=i.trim().startsWith("<")?i:i.split(`
+      `,this.initTabs(),t.tabs.forEach((n,m)=>{const u=document.getElementById(`concept-description-${m}`);u&&(dt(u),this.attachCopyButtonsTo(u))})}else{r.classList.remove("content-area--tabbed");const i=t.description||"Add your description here...",a=i.trim().startsWith("<")?i:i.split(`
 
 `).map(n=>`<p>${n}</p>`).join("");r.innerHTML=`
         <article class="concept-card">
@@ -3095,7 +4147,7 @@ git push -u origin main</code></pre>
           </div>
         </article>
       `,dt(document.getElementById("concept-description")),this.attachCopyButtons()}},initTabs(){const t=document.querySelectorAll(".tutorial-tab-btn"),r=document.querySelectorAll(".tutorial-tab-panel"),i=a=>{t.forEach(n=>n.classList.remove("active")),r.forEach(n=>n.classList.remove("active")),t[a].classList.add("active"),r[a].classList.add("active"),t[a].scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"}),this.resetContentScroll()};t.forEach(a=>{a.addEventListener("click",()=>i(Number(a.dataset.tab)))}),document.querySelectorAll("[data-goto-tab]").forEach(a=>{a.addEventListener("click",n=>{n.preventDefault(),i(Number(a.dataset.gotoTab))})}),document.querySelectorAll("[data-goto-concept]").forEach(a=>{a.addEventListener("click",n=>{n.preventDefault(),typeof this.selectConcept=="function"&&this.selectConcept(a.dataset.gotoConcept)})})},attachCopyButtons(){const t=document.getElementById("concept-description");t&&this.attachCopyButtonsTo(t)},attachCopyButtonsTo(t){if(!t)return;const r=t.querySelectorAll("pre, code"),i=new Set;r.forEach(a=>{if(a.closest(".code-wrapper"))return;let n=null;if(a.tagName==="PRE")n=a;else{const l=a;if(!(l.style.display==="block"||l.parentNode&&l.parentNode.tagName==="PRE"||l.textContent.includes(`
-`)))return;n=l.parentNode&&l.parentNode.tagName==="PRE"?l.parentNode:l}if(!n||i.has(n)||n.parentNode&&n.parentNode.classList?.contains("code-wrapper"))return;i.add(n);const p=document.createElement("div");p.className="code-wrapper",n.parentNode.insertBefore(p,n),p.appendChild(n);const h=document.createElement("button");h.className="copy-btn",h.setAttribute("title","Copy to clipboard");const C='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>',k='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';h.innerHTML=C,p.appendChild(h),h.addEventListener("click",()=>{const I=n.textContent.replace(/^❯\s+/,"");navigator.clipboard.writeText(I).then(()=>{h.innerHTML=k,h.classList.add("copied"),setTimeout(()=>{h.innerHTML=C,h.classList.remove("copied")},2e3)})})})},initTechStackModal(){const t=document.getElementById("tech-stack-btn"),r=document.getElementById("tech-stack-overlay"),i=document.getElementById("close-tech-stack"),a=document.getElementById("tech-stack-list");if(!t||!r||!i||!a)return;const n={...ct.dependencies||{},...ct.devDependencies||{}},p=[{name:"Vanilla JavaScript",desc:"Core application logic, ECMAScript modules, DOM manipulation, and dynamic rendering.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M14.5 9h-5l-.5-5h7l-.5 5zm-5 4h5l-.5 4.5-2 1.5-2-1.5-.2-2h2.2l.1 1.2 1 .8 1-.8.2-1.2h-3.8z"></path></svg>'},{name:"Vanilla CSS3 & HTML5",desc:"Custom glassmorphism styling, responsive grid layout, and semantic structure.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M15 9h-6l-.5-4h7.5l-.5 4zm-6 4h6l-.5 4.5-2.5 1.5-2.5-1.5-.2-2h2.2l.1 1.2 1.2.8 1.2-.8.2-1.2h-4.6z"></path></svg>'},{name:"HTML5 Canvas API",desc:"Custom performant animations including the Neural Constellation and Zen Flow backgrounds.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.268-.652-.053-.877.215-.225.542-.31 1.051-.31h2.438c2.66 0 4.853-2.192 4.853-4.853C21.5 6.756 17.244 2 12 2z"></path></svg>'}];n.vite&&p.push({name:"Vite ("+n.vite.replace(/[\^\~]/,"")+")",desc:"Next-generation frontend tooling providing ultra-fast builds and Hot Module Replacement.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>'}),p.push({name:"GitHub Pages",desc:"Automated CI/CD deployment via GitHub Actions pipeline using the deployed build.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>'}),a.innerHTML=p.map(k=>`
+`)))return;n=l.parentNode&&l.parentNode.tagName==="PRE"?l.parentNode:l}if(!n||i.has(n)||n.parentNode&&n.parentNode.classList?.contains("code-wrapper"))return;i.add(n);const m=document.createElement("div");m.className="code-wrapper",n.parentNode.insertBefore(m,n),m.appendChild(n);const u=document.createElement("button");u.className="copy-btn",u.setAttribute("title","Copy to clipboard");const C='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>',k='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';u.innerHTML=C,m.appendChild(u),u.addEventListener("click",()=>{const T=n.textContent.replace(/^❯\s+/,"");navigator.clipboard.writeText(T).then(()=>{u.innerHTML=k,u.classList.add("copied"),setTimeout(()=>{u.innerHTML=C,u.classList.remove("copied")},2e3)})})})},initTechStackModal(){const t=document.getElementById("tech-stack-btn"),r=document.getElementById("tech-stack-overlay"),i=document.getElementById("close-tech-stack"),a=document.getElementById("tech-stack-list");if(!t||!r||!i||!a)return;const n={...ct.dependencies||{},...ct.devDependencies||{}},m=[{name:"Vanilla JavaScript",desc:"Core application logic, ECMAScript modules, DOM manipulation, and dynamic rendering.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M14.5 9h-5l-.5-5h7l-.5 5zm-5 4h5l-.5 4.5-2 1.5-2-1.5-.2-2h2.2l.1 1.2 1 .8 1-.8.2-1.2h-3.8z"></path></svg>'},{name:"Vanilla CSS3 & HTML5",desc:"Custom glassmorphism styling, responsive grid layout, and semantic structure.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M15 9h-6l-.5-4h7.5l-.5 4zm-6 4h6l-.5 4.5-2.5 1.5-2.5-1.5-.2-2h2.2l.1 1.2 1.2.8 1.2-.8.2-1.2h-4.6z"></path></svg>'},{name:"HTML5 Canvas API",desc:"Custom performant animations including the Neural Constellation and Zen Flow backgrounds.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.268-.652-.053-.877.215-.225.542-.31 1.051-.31h2.438c2.66 0 4.853-2.192 4.853-4.853C21.5 6.756 17.244 2 12 2z"></path></svg>'}];n.vite&&m.push({name:"Vite ("+n.vite.replace(/[\^\~]/,"")+")",desc:"Next-generation frontend tooling providing ultra-fast builds and Hot Module Replacement.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>'}),m.push({name:"GitHub Pages",desc:"Automated CI/CD deployment via GitHub Actions pipeline using the deployed build.",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>'}),a.innerHTML=m.map(k=>`
       <li class="tech-stack-item">
         <div class="tech-stack-icon-wrapper">
           ${k.icon}
@@ -3105,4 +4157,4 @@ git push -u origin main</code></pre>
           <span class="tech-stack-desc">${k.desc}</span>
         </div>
       </li>
-    `).join("");const h=()=>{r.classList.remove("hidden"),r.offsetWidth,r.classList.add("active")},C=()=>{r.classList.remove("active"),setTimeout(()=>{r.classList.contains("active")||r.classList.add("hidden")},300)};t.addEventListener("click",h),i.addEventListener("click",C),r.addEventListener("click",k=>{k.target===r&&C()})},initStudyMode(){this.loadStudyStats(),this.updateStudyMetrics(),this.initZenFlow(),document.getElementById("study-mode-btn").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("exit-study").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("timer-toggle").addEventListener("click",()=>{this.toggleTimer()}),document.getElementById("timer-reset").addEventListener("click",()=>{this.resetTimer()}),document.querySelectorAll(".preset-btn").forEach(t=>{t.addEventListener("click",r=>{const i=parseInt(r.target.dataset.time);this.setTimerDuration(i)})}),document.getElementById("minimize-study").addEventListener("click",()=>{this.minimizeStudy()}),document.getElementById("expand-study").addEventListener("click",()=>{this.expandStudy()}),document.getElementById("mini-stop-btn").addEventListener("click",()=>{this.expandStudy(),this.toggleStudyMode()}),document.getElementById("lock-screen-btn").addEventListener("click",()=>{this.lockScreen()}),document.getElementById("unlock-screen-btn").addEventListener("click",()=>{this.unlockScreen()})},loadStudyStats(){const t=localStorage.getItem("studyStats");t&&(b.stats=JSON.parse(t),this.updateStreak())},saveStudyStats(){localStorage.setItem("studyStats",JSON.stringify(b.stats))},updateStreak(){const t=new Date().toDateString(),r=b.stats.lastStudyDate;if(r){const i=new Date(r),a=new Date;a.setDate(a.getDate()-1),i.toDateString()===a.toDateString()||i.toDateString()!==t&&(b.stats.streak=0)}},updateStudyMetrics(){const t=document.getElementById("study-streak"),r=document.getElementById("study-cards"),i=document.getElementById("study-minutes");t&&(t.textContent=b.stats.streak),r&&(r.textContent=b.stats.cardsToday),i&&(i.textContent=b.stats.focusMinutes)},toggleStudyMode(){b.isActive=!b.isActive;const t=document.getElementById("study-mode-overlay"),r=document.querySelector(".zen-flow-bg");if(b.isActive){if(b.isMinimized){this.expandStudy();return}t.classList.remove("hidden"),t.classList.add("active"),r.style.opacity="1",this.updateStreak(),this.saveStudyStats()}else this.expandStudy(),t.classList.remove("active"),r.style.opacity="0",this.resetTimer(),setTimeout(()=>{t.classList.add("hidden")},500)},setTimerDuration(t){b.timer.duration=t*60,b.timer.remaining=t*60,document.querySelectorAll(".preset-btn").forEach(r=>{r.classList.toggle("active",parseInt(r.dataset.time)===t)}),this.updateTimerDisplay()},toggleTimer(){b.timer.isRunning?this.pauseTimer():this.startTimer()},startTimer(){b.timer.isRunning=!0,document.getElementById("timer-toggle").textContent="Pause",document.querySelector(".timer-wrapper").classList.add("active"),document.getElementById("lock-screen-btn").classList.remove("hidden"),b.timer.interval=setInterval(()=>{b.timer.remaining--,this.updateTimerDisplay(),b.timer.remaining<=0&&this.completeTimer()},1e3)},pauseTimer(){b.timer.isRunning=!1,document.getElementById("timer-toggle").textContent="Resume",document.querySelector(".timer-wrapper").classList.remove("active"),document.getElementById("lock-screen-btn").classList.add("hidden"),clearInterval(b.timer.interval),b.isLocked&&this.unlockScreen()},resetTimer(){this.pauseTimer(),b.timer.remaining=b.timer.duration,document.getElementById("timer-toggle").textContent="Start Focus",document.getElementById("timer-status").textContent="Ready to focus",document.getElementById("lock-screen-btn").classList.add("hidden"),this.updateTimerDisplay()},completeTimer(){this.pauseTimer(),document.getElementById("timer-status").textContent="Focus complete! Great work!",b.stats.focusMinutes+=Math.floor(b.timer.duration/60),this.updateStreakDate(),this.saveStudyStats(),this.updateStudyMetrics(),"Notification"in window&&Notification.permission==="granted"&&new Notification("Focus Session Complete",{body:"Great job! Take a break.",icon:"/vite.svg"})},updateTimerDisplay(){const t=Math.floor(b.timer.remaining/60),r=b.timer.remaining%60,i=`${t.toString().padStart(2,"0")}:${r.toString().padStart(2,"0")}`;document.getElementById("timer-minutes").textContent=t.toString().padStart(2,"0"),document.getElementById("timer-seconds").textContent=r.toString().padStart(2,"0"),document.getElementById("mini-timer-display").textContent=i;const a=b.timer.remaining/b.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${a}%`;const n=b.timer.remaining/b.timer.duration,h=2*Math.PI*130*(1-n);document.getElementById("timer-progress").style.strokeDashoffset=h,b.timer.isRunning?document.getElementById("timer-status").textContent="Stay focused...":document.getElementById("timer-status").textContent="Ready to focus"},minimizeStudy(){b.isMinimized=!0;const t=document.getElementById("study-mode-overlay"),r=document.querySelector(".zen-flow-bg");t.classList.remove("active"),r.style.opacity="0",setTimeout(()=>t.classList.add("hidden"),500),document.getElementById("mini-timer").classList.remove("hidden");const i=Math.floor(b.timer.remaining/60),a=b.timer.remaining%60;document.getElementById("mini-timer-display").textContent=`${i.toString().padStart(2,"0")}:${a.toString().padStart(2,"0")}`;const n=b.timer.remaining/b.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${n}%`},expandStudy(){if(b.isMinimized=!1,document.getElementById("mini-timer").classList.add("hidden"),b.isActive){const t=document.getElementById("study-mode-overlay"),r=document.querySelector(".zen-flow-bg");t.classList.remove("hidden"),t.classList.add("active"),r.style.opacity="1"}},lockScreen(){b.isLocked=!0,document.getElementById("study-mode-overlay").classList.add("study-locked"),document.getElementById("unlock-screen-overlay").classList.remove("hidden")},unlockScreen(){b.isLocked=!1,document.getElementById("study-mode-overlay").classList.remove("study-locked"),document.getElementById("unlock-screen-overlay").classList.add("hidden")},updateStreakDate(){const t=new Date().toDateString(),r=b.stats.lastStudyDate;if(r!==t){const i=new Date;i.setDate(i.getDate()-1),r===i.toDateString()?b.stats.streak++:b.stats.streak=1,b.stats.lastStudyDate=t}},initZenFlow(){const t=document.getElementById("zen-flow-canvas"),r=t.getContext("2d");let i,a,n=[];const p=()=>{i=t.width=window.innerWidth,a=t.height=window.innerHeight,h()},h=()=>{n=[];const k=30;for(let l=0;l<k;l++)n.push({x:Math.random()*i,y:Math.random()*a,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,radius:Math.random()*80+40,hue:Math.random()*60+170,alpha:Math.random()*.1+.05,pulse:Math.random()*Math.PI*2})},C=()=>{if(!b.isActive){requestAnimationFrame(C);return}r.clearRect(0,0,i,a);const k=document.documentElement.classList.contains("light-mode");if(n.forEach(l=>{l.x+=l.vx,l.y+=l.vy,l.x<-l.radius&&(l.x=i+l.radius),l.x>i+l.radius&&(l.x=-l.radius),l.y<-l.radius&&(l.y=a+l.radius),l.y>a+l.radius&&(l.y=-l.radius),l.pulse+=.02;const I=r.createRadialGradient(l.x,l.y,0,l.x,l.y,l.radius),T=l.radius*(1+Math.sin(l.pulse)*.1);k?(I.addColorStop(0,`hsla(40, 30%, 70%, ${l.alpha*.5})`),I.addColorStop(.5,`hsla(40, 20%, 80%, ${l.alpha*.2})`),I.addColorStop(1,"transparent")):(I.addColorStop(0,`hsla(${l.hue}, 70%, 50%, ${l.alpha})`),I.addColorStop(.5,`hsla(${l.hue}, 70%, 50%, ${l.alpha*.3})`),I.addColorStop(1,"transparent")),r.beginPath(),r.arc(l.x,l.y,T,0,Math.PI*2),r.fillStyle=I,r.fill()}),b.timer.isRunning){const l=Date.now()/1e3,I=150+Math.sin(l*.5)*20,T=r.createRadialGradient(i/2,a/2,0,i/2,a/2,I);k?(T.addColorStop(0,"hsla(40, 30%, 75%, 0.05)"),T.addColorStop(1,"transparent")):(T.addColorStop(0,"hsla(180, 70%, 50%, 0.03)"),T.addColorStop(1,"transparent")),r.beginPath(),r.arc(i/2,a/2,I,0,Math.PI*2),r.fillStyle=T,r.fill()}requestAnimationFrame(C)};window.addEventListener("resize",p),p(),C()}};document.addEventListener("DOMContentLoaded",()=>zr.init());
+    `).join("");const u=()=>{r.classList.remove("hidden"),r.offsetWidth,r.classList.add("active")},C=()=>{r.classList.remove("active"),setTimeout(()=>{r.classList.contains("active")||r.classList.add("hidden")},300)};t.addEventListener("click",u),i.addEventListener("click",C),r.addEventListener("click",k=>{k.target===r&&C()})},initStudyMode(){this.loadStudyStats(),this.updateStudyMetrics(),this.initZenFlow(),document.getElementById("study-mode-btn").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("exit-study").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("timer-toggle").addEventListener("click",()=>{this.toggleTimer()}),document.getElementById("timer-reset").addEventListener("click",()=>{this.resetTimer()}),document.querySelectorAll(".preset-btn").forEach(t=>{t.addEventListener("click",r=>{const i=parseInt(r.target.dataset.time);this.setTimerDuration(i)})}),document.getElementById("minimize-study").addEventListener("click",()=>{this.minimizeStudy()}),document.getElementById("expand-study").addEventListener("click",()=>{this.expandStudy()}),document.getElementById("mini-stop-btn").addEventListener("click",()=>{this.expandStudy(),this.toggleStudyMode()}),document.getElementById("lock-screen-btn").addEventListener("click",()=>{this.lockScreen()}),document.getElementById("unlock-screen-btn").addEventListener("click",()=>{this.unlockScreen()})},loadStudyStats(){const t=localStorage.getItem("studyStats");t&&(b.stats=JSON.parse(t),this.updateStreak())},saveStudyStats(){localStorage.setItem("studyStats",JSON.stringify(b.stats))},updateStreak(){const t=new Date().toDateString(),r=b.stats.lastStudyDate;if(r){const i=new Date(r),a=new Date;a.setDate(a.getDate()-1),i.toDateString()===a.toDateString()||i.toDateString()!==t&&(b.stats.streak=0)}},updateStudyMetrics(){const t=document.getElementById("study-streak"),r=document.getElementById("study-cards"),i=document.getElementById("study-minutes");t&&(t.textContent=b.stats.streak),r&&(r.textContent=b.stats.cardsToday),i&&(i.textContent=b.stats.focusMinutes)},toggleStudyMode(){b.isActive=!b.isActive;const t=document.getElementById("study-mode-overlay"),r=document.querySelector(".zen-flow-bg");if(b.isActive){if(b.isMinimized){this.expandStudy();return}t.classList.remove("hidden"),t.classList.add("active"),r.style.opacity="1",this.updateStreak(),this.saveStudyStats()}else this.expandStudy(),t.classList.remove("active"),r.style.opacity="0",this.resetTimer(),setTimeout(()=>{t.classList.add("hidden")},500)},setTimerDuration(t){b.timer.duration=t*60,b.timer.remaining=t*60,document.querySelectorAll(".preset-btn").forEach(r=>{r.classList.toggle("active",parseInt(r.dataset.time)===t)}),this.updateTimerDisplay()},toggleTimer(){b.timer.isRunning?this.pauseTimer():this.startTimer()},startTimer(){b.timer.isRunning=!0,document.getElementById("timer-toggle").textContent="Pause",document.querySelector(".timer-wrapper").classList.add("active"),document.getElementById("lock-screen-btn").classList.remove("hidden"),b.timer.interval=setInterval(()=>{b.timer.remaining--,this.updateTimerDisplay(),b.timer.remaining<=0&&this.completeTimer()},1e3)},pauseTimer(){b.timer.isRunning=!1,document.getElementById("timer-toggle").textContent="Resume",document.querySelector(".timer-wrapper").classList.remove("active"),document.getElementById("lock-screen-btn").classList.add("hidden"),clearInterval(b.timer.interval),b.isLocked&&this.unlockScreen()},resetTimer(){this.pauseTimer(),b.timer.remaining=b.timer.duration,document.getElementById("timer-toggle").textContent="Start Focus",document.getElementById("timer-status").textContent="Ready to focus",document.getElementById("lock-screen-btn").classList.add("hidden"),this.updateTimerDisplay()},completeTimer(){this.pauseTimer(),document.getElementById("timer-status").textContent="Focus complete! Great work!",b.stats.focusMinutes+=Math.floor(b.timer.duration/60),this.updateStreakDate(),this.saveStudyStats(),this.updateStudyMetrics(),"Notification"in window&&Notification.permission==="granted"&&new Notification("Focus Session Complete",{body:"Great job! Take a break.",icon:"/vite.svg"})},updateTimerDisplay(){const t=Math.floor(b.timer.remaining/60),r=b.timer.remaining%60,i=`${t.toString().padStart(2,"0")}:${r.toString().padStart(2,"0")}`;document.getElementById("timer-minutes").textContent=t.toString().padStart(2,"0"),document.getElementById("timer-seconds").textContent=r.toString().padStart(2,"0"),document.getElementById("mini-timer-display").textContent=i;const a=b.timer.remaining/b.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${a}%`;const n=b.timer.remaining/b.timer.duration,u=2*Math.PI*130*(1-n);document.getElementById("timer-progress").style.strokeDashoffset=u,b.timer.isRunning?document.getElementById("timer-status").textContent="Stay focused...":document.getElementById("timer-status").textContent="Ready to focus"},minimizeStudy(){b.isMinimized=!0;const t=document.getElementById("study-mode-overlay"),r=document.querySelector(".zen-flow-bg");t.classList.remove("active"),r.style.opacity="0",setTimeout(()=>t.classList.add("hidden"),500),document.getElementById("mini-timer").classList.remove("hidden");const i=Math.floor(b.timer.remaining/60),a=b.timer.remaining%60;document.getElementById("mini-timer-display").textContent=`${i.toString().padStart(2,"0")}:${a.toString().padStart(2,"0")}`;const n=b.timer.remaining/b.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${n}%`},expandStudy(){if(b.isMinimized=!1,document.getElementById("mini-timer").classList.add("hidden"),b.isActive){const t=document.getElementById("study-mode-overlay"),r=document.querySelector(".zen-flow-bg");t.classList.remove("hidden"),t.classList.add("active"),r.style.opacity="1"}},lockScreen(){b.isLocked=!0,document.getElementById("study-mode-overlay").classList.add("study-locked"),document.getElementById("unlock-screen-overlay").classList.remove("hidden")},unlockScreen(){b.isLocked=!1,document.getElementById("study-mode-overlay").classList.remove("study-locked"),document.getElementById("unlock-screen-overlay").classList.add("hidden")},updateStreakDate(){const t=new Date().toDateString(),r=b.stats.lastStudyDate;if(r!==t){const i=new Date;i.setDate(i.getDate()-1),r===i.toDateString()?b.stats.streak++:b.stats.streak=1,b.stats.lastStudyDate=t}},initZenFlow(){const t=document.getElementById("zen-flow-canvas"),r=t.getContext("2d");let i,a,n=[];const m=()=>{i=t.width=window.innerWidth,a=t.height=window.innerHeight,u()},u=()=>{n=[];const k=30;for(let l=0;l<k;l++)n.push({x:Math.random()*i,y:Math.random()*a,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,radius:Math.random()*80+40,hue:Math.random()*60+170,alpha:Math.random()*.1+.05,pulse:Math.random()*Math.PI*2})},C=()=>{if(!b.isActive){requestAnimationFrame(C);return}r.clearRect(0,0,i,a);const k=document.documentElement.classList.contains("light-mode");if(n.forEach(l=>{l.x+=l.vx,l.y+=l.vy,l.x<-l.radius&&(l.x=i+l.radius),l.x>i+l.radius&&(l.x=-l.radius),l.y<-l.radius&&(l.y=a+l.radius),l.y>a+l.radius&&(l.y=-l.radius),l.pulse+=.02;const T=r.createRadialGradient(l.x,l.y,0,l.x,l.y,l.radius),A=l.radius*(1+Math.sin(l.pulse)*.1);k?(T.addColorStop(0,`hsla(40, 30%, 70%, ${l.alpha*.5})`),T.addColorStop(.5,`hsla(40, 20%, 80%, ${l.alpha*.2})`),T.addColorStop(1,"transparent")):(T.addColorStop(0,`hsla(${l.hue}, 70%, 50%, ${l.alpha})`),T.addColorStop(.5,`hsla(${l.hue}, 70%, 50%, ${l.alpha*.3})`),T.addColorStop(1,"transparent")),r.beginPath(),r.arc(l.x,l.y,A,0,Math.PI*2),r.fillStyle=T,r.fill()}),b.timer.isRunning){const l=Date.now()/1e3,T=150+Math.sin(l*.5)*20,A=r.createRadialGradient(i/2,a/2,0,i/2,a/2,T);k?(A.addColorStop(0,"hsla(40, 30%, 75%, 0.05)"),A.addColorStop(1,"transparent")):(A.addColorStop(0,"hsla(180, 70%, 50%, 0.03)"),A.addColorStop(1,"transparent")),r.beginPath(),r.arc(i/2,a/2,T,0,Math.PI*2),r.fillStyle=A,r.fill()}requestAnimationFrame(C)};window.addEventListener("resize",m),m(),C()}};document.addEventListener("DOMContentLoaded",()=>Lr.init());
