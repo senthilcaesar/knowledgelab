@@ -406,11 +406,11 @@ lead synthesize all findings into a summary.</code></pre>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">You can message any teammate to give additional instructions:</p>
 <pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); white-space: pre-wrap;"><code>Ask the historian teammate to focus specifically on
-facial recognition bias in the last decade.</code></pre>
+stereotype and anchoring bias in the last decade.</code></pre>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">Or switch to that teammate and type directly:</p>
-<pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); white-space: pre-wrap;"><code>Add a section about IBM's early work on this topic and
-how it influenced current practices.</code></pre>
+<pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); white-space: pre-wrap;"><code>Add a section about researchers early work on implicit bias and
+discriminatory behavior and how it influenced current practices.</code></pre>
 
 <div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1rem 0;">
   <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
@@ -521,38 +521,61 @@ compile a prioritized action list.</code></pre>
 Require plan approval before they make any changes.</code></pre>
 
 <h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">The Approval Flow</h3>
-<div style="background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; overflow-x: auto;">
-  <pre style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.4; color: var(--text-secondary); white-space: pre;"><code style="color: var(--accent-primary);">┌─────────────────────────────────────────────────────────┐</code>
-<code style="color: var(--accent-primary);">│</code>                   <code style="color: var(--accent-secondary);">TEAMMATE (Read-Only)</code>                  <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--border-color);">┌─────────────────────────────────────────────────┐</code>    <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--border-color);">│</code>  <code style="color: var(--text-primary);">PLAN MODE</code>                                      <code style="color: var(--border-color);">│</code>    <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--border-color);">│</code>  <code style="color: var(--text-secondary);">• Analyzes the code</code>                             <code style="color: var(--border-color);">│</code>    <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--border-color);">│</code>  <code style="color: var(--text-secondary);">• Proposes approach</code>                             <code style="color: var(--border-color);">│</code>    <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--border-color);">│</code>  <code style="color: var(--text-secondary);">• Creates implementation plan</code>                   <code style="color: var(--border-color);">│</code>    <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--border-color);">└─────────────────────────────────────────────────┘</code>    <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>                         <code style="color: var(--accent-primary);">│</code>                                <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>                         <code style="color: var(--accent-primary);">▼</code>                                <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>                <code style="color: var(--text-primary);">Plan Approval Request</code>               <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>                         <code style="color: var(--accent-primary);">│</code>                                <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">└─────────────────────────┼───────────────────────────────┘</code>
-                          <code style="color: var(--accent-primary);">│</code>
-                          <code style="color: var(--accent-primary);">▼</code>
-<code style="color: var(--accent-primary);">┌─────────────────────────┼───────────────────────────────┐</code>
-<code style="color: var(--accent-primary);">│</code>                    <code style="color: var(--text-primary);">TEAM LEAD (YOU)</code>                      <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--border-color);">┌─────────────────────────────────────────────────┐</code>    <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--border-color);">│</code>  <code style="color: var(--text-primary);">REVIEWING PLAN</code>                                 <code style="color: var(--border-color);">│</code>    <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--border-color);">│</code>  <code style="color: var(--text-secondary);">• Checks for risks</code>                              <code style="color: var(--border-color);">│</code>    <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--border-color);">│</code>  <code style="color: var(--text-secondary);">• Validates approach</code>                            <code style="color: var(--border-color);">│</code>    <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--border-color);">└─────────────────────────────────────────────────┘</code>    <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>          <code style="color: var(--accent-primary);">│</code>                      <code style="color: var(--accent-primary);">│</code>                         <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>     <code style="color: var(--code-green);">APPROVE</code>                 <code style="color: var(--accent-secondary);">REJECT</code>                        <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>          <code style="color: var(--accent-primary);">│</code>                      <code style="color: var(--accent-primary);">│</code>                         <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>          <code style="color: var(--accent-primary);">▼</code>                      <code style="color: var(--accent-primary);">▼</code>                         <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--code-green);">┌──────────────┐</code>      <code style="color: var(--accent-secondary);">┌──────────────┐</code>                 <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--code-green);">│</code> <code style="color: var(--text-primary);">IMPLEMENT</code>    <code style="color: var(--code-green);">│</code>      <code style="color: var(--accent-secondary);">│</code> <code style="color: var(--text-primary);">FEEDBACK</code>     <code style="color: var(--accent-secondary);">│</code>                 <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--code-green);">│</code><code style="color: var(--text-secondary);">(Write Mode)</code>  <code style="color: var(--code-green);">│</code>      <code style="color: var(--accent-secondary);">│</code><code style="color: var(--text-secondary);">(Try Again)</code>   <code style="color: var(--accent-secondary);">│</code>                 <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--code-green);">└──────────────┘</code>      <code style="color: var(--accent-secondary);">└──────────────┘</code>                 <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">└─────────────────────────────────────────────────────────┘</code></pre>
+<div style="background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; font-family: 'JetBrains Mono', monospace;">
+  <div style="border: 2px solid rgba(176, 141, 87, 0.75); padding: 0.9rem 1.1rem 1.5rem; position: relative;">
+    <div style="text-align: center; font-size: 1.05rem; font-weight: 700; color: var(--text-primary); letter-spacing: 0.01em; margin-bottom: 0.9rem;">TEAMMATE (Read-Only)</div>
+
+    <div style="border: 2px solid rgba(67, 52, 34, 0.14); padding: 1rem 1.15rem; margin: 0 auto; max-width: 92%; background: rgba(255,255,255,0.02);">
+      <div style="font-size: 1.02rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.55rem;">PLAN MODE</div>
+      <ul style="margin: 0; padding-left: 1.3rem; color: var(--text-secondary); line-height: 1.6;">
+        <li>Analyzes the code</li>
+        <li>Proposes approach</li>
+        <li>Creates implementation plan</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="text-align: center; color: rgba(176, 141, 87, 0.9); margin: 0.75rem 0 1rem; line-height: 1;">
+    <div style="font-size: 1.2rem;">│</div>
+    <div style="font-size: 1.2rem;">▼</div>
+    <div style="margin-top: 0.35rem; font-size: 0.98rem; font-weight: 500; color: var(--text-primary);">Plan Approval Request</div>
+    <div style="margin-top: 0.35rem; font-size: 1.2rem;">│</div>
+    <div style="font-size: 1.2rem;">▼</div>
+  </div>
+
+  <div style="border: 2px solid rgba(176, 141, 87, 0.75); padding: 0.9rem 1.1rem 1.35rem;">
+    <div style="text-align: center; font-size: 1.05rem; font-weight: 700; color: var(--text-primary); letter-spacing: 0.01em; margin-bottom: 0.9rem;">TEAM LEAD (YOU)</div>
+
+    <div style="border: 2px solid rgba(67, 52, 34, 0.14); padding: 1rem 1.15rem; margin: 0 auto 1rem; max-width: 92%; background: rgba(255,255,255,0.02);">
+      <div style="font-size: 1.02rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.55rem;">REVIEWING PLAN</div>
+      <ul style="margin: 0; padding-left: 1.3rem; color: var(--text-secondary); line-height: 1.6;">
+        <li>Checks for risks</li>
+        <li>Validates approach</li>
+      </ul>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(180px, 1fr)); gap: 1.5rem; align-items: start;">
+      <div style="text-align: center;">
+        <div style="color: #4f8f4f; font-weight: 700; margin-bottom: 0.4rem;">APPROVE</div>
+        <div style="color: rgba(176, 141, 87, 0.9); font-size: 1.15rem; line-height: 1;">│</div>
+        <div style="color: rgba(176, 141, 87, 0.9); font-size: 1.15rem; line-height: 1;">▼</div>
+        <div style="display: inline-block; margin-top: 0.5rem; padding: 0.8rem 1rem; border: 2px solid rgba(79, 143, 79, 0.8); color: var(--text-primary); text-align: left;">
+          <div style="font-weight: 700; margin-bottom: 0.25rem;">IMPLEMENT</div>
+          <div style="color: var(--text-secondary);">(Write Mode)</div>
+        </div>
+      </div>
+
+      <div style="text-align: center;">
+        <div style="color: #d96b6b; font-weight: 700; margin-bottom: 0.4rem;">REJECT</div>
+        <div style="color: rgba(176, 141, 87, 0.9); font-size: 1.15rem; line-height: 1;">│</div>
+        <div style="color: rgba(176, 141, 87, 0.9); font-size: 1.15rem; line-height: 1;">▼</div>
+        <div style="display: inline-block; margin-top: 0.5rem; padding: 0.8rem 1rem; border: 2px solid rgba(217, 107, 107, 0.75); color: var(--text-primary); text-align: left;">
+          <div style="font-weight: 700; margin-bottom: 0.25rem;">FEEDBACK</div>
+          <div style="color: var(--text-secondary);">(Try Again)</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Controlling Approval Decisions</h3>
@@ -746,15 +769,15 @@ severity ratings."</code></pre>
   </thead>
   <tbody style="color: var(--text-secondary);">
     <tr style="border-bottom: 1px solid var(--border-color);">
-      <td style="padding: 0.75rem; font-weight: 600; color: #ff6b6b;">Too Small</td>
+      <td style="padding: 0.75rem; font-weight: 600; color: #c65a5a;">Too Small</td>
       <td style="padding: 0.75rem;">Coordination overhead exceeds the benefit</td>
     </tr>
     <tr style="border-bottom: 1px solid var(--border-color);">
-      <td style="padding: 0.75rem; font-weight: 600; color: #ffd93d;">Too Large</td>
+      <td style="padding: 0.75rem; font-weight: 600; color: #a67c38;">Too Large</td>
       <td style="padding: 0.75rem;">Teammates work too long without check-ins, increasing risk of wasted effort</td>
     </tr>
     <tr>
-      <td style="padding: 0.75rem; font-weight: 600; color: var(--accent-primary);">Just Right</td>
+      <td style="padding: 0.75rem; font-weight: 600; color: #4f8f4f;">Just Right</td>
       <td style="padding: 0.75rem;">Self-contained units producing a clear deliverable (function, test file, review)</td>
     </tr>
   </tbody>

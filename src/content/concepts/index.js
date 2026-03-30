@@ -9,6 +9,7 @@ import claudeCommandsConcept from './claude-commands.js';
 import claudeSubagentsConcept from './claude-subagents.js';
 import claudeAgentsConcept from './claude-agents.js';
 import claudePluginsConcept from './claude-plugins.js';
+import claudeDesignerStackConcept from './claude-designer-stack.js';
 
 const concepts = [
   claudeExtensionConcept,
@@ -16,6 +17,7 @@ const concepts = [
   claudeSubagentsConcept,
   claudeAgentsConcept,
   claudePluginsConcept,
+  claudeDesignerStackConcept,
   claudeSkillsTutorialConcept,
   claudeMcpConcept,
   claudeCodeUiux21stDevConcept,
