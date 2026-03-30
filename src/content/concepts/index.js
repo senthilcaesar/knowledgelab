@@ -17,11 +17,11 @@ const concepts = [
   claudeSubagentsConcept,
   claudeAgentsConcept,
   claudePluginsConcept,
-  claudeDesignerStackConcept,
   claudeSkillsTutorialConcept,
   claudeMcpConcept,
   claudeCodeUiux21stDevConcept,
   buildAppSkillMcpConcept,
+  claudeDesignerStackConcept,
   buildWebappAiConcept,
   aiEngineeringConcept,
 ];
