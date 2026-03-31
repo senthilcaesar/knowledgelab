@@ -56,8 +56,9 @@ cp -R skills/* ~/.claude/skills/</code></pre>
 </div>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">Skills load on demand — unlike <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> (which loads into every conversation) or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">slash commands</code> (which require explicit invocation).</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">You can think of <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> as providing the cumulative knowledge that makes the agent genuinely useful from the very first interaction.</p>
 
-<p style="line-height:1.75;">If you find yourself explaining the same thing to Claude repeatedly, that's a skill waiting to be written.</p>
+<p style="margin-bottom:1rem; line-height:1.75; font-weight: 600; color: var(--accent-primary);">If you find yourself explaining the same thing to Claude repeatedly, that's a skill waiting to be written.</p>
 
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="0" class="tutorial-nav-link previous">
