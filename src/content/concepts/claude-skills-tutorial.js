@@ -227,11 +227,14 @@ EOF</code></pre>
   </li>
   <li style="margin-bottom: 0.5rem;"><strong>GitHub Community Repos:</strong>
     <ul style="margin: 0.5rem 0 0 1.5rem; list-style-type: disc;">
-      <li style="margin-bottom: 0.25rem;"><a href="https://github.com/sickn33/antigravity-awesome-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">antigravity-awesome-skills</a></li>
-      <li style="margin-bottom: 0.25rem;"><a href="https://github.com/affaan-m/everything-claude-code" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">everything-claude-code</a></li>
-      <li style="margin-bottom: 0.25rem;"><a href="https://github.com/ComposioHQ/awesome-claude-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">awesome-claude-skills</a></li>
-      <li style="margin-bottom: 0.25rem;"><a href="https://github.com/obra/superpowers" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">superpowers</a></li>
-      <li style="margin-bottom: 0.25rem;"><a href="https://github.com/PleasePrompto/notebooklm-skill" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">notebooklm-skill</a></li>
+      <li style="margin-bottom: 0.25rem;"><a href="https://github.com/sickn33/antigravity-awesome-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Antigravity Awesome Skills</a></li>
+      <li style="margin-bottom: 0.25rem;"><a href="https://github.com/affaan-m/everything-claude-code" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Everything Claude Code</a></li>
+      <li style="margin-bottom: 0.25rem;"><a href="https://github.com/ComposioHQ/awesome-claude-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Awesome Claude Skills</a></li>
+      <li style="margin-bottom: 0.25rem;"><a href="https://github.com/hesreallyhim/awesome-claude-code" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Awesome Claude Code</a></li>
+      <li style="margin-bottom: 0.25rem;"><a href="https://github.com/obra/superpowers" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Superpowers</a></li>
+      <li style="margin-bottom: 0.25rem;"><a href="https://github.com/PleasePrompto/notebooklm-skill" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">NotebookLM Skills</a></li>
+      <li style="margin-bottom: 0.25rem;"><a href="https://github.com/kepano/obsidian-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Obsidian Skills</a></li>
+      <li style="margin-bottom: 0.25rem;"><a href="https://github.com/gsd-build/get-shit-done" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Get Shit done</a></li>
     </ul>
   </li>
 </ul>
