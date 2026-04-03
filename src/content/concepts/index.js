@@ -1,3 +1,4 @@
+import claudeFolderConcept from './claude-folder.js';
 import claudeSkillsTutorialConcept from './claude-skills-tutorial.js';
 import claudeMcpConcept from './claude-mcp.js';
 import claudeCodeUiux21stDevConcept from './claude-code-uiux-21st-dev.js';
@@ -12,6 +13,7 @@ import claudePluginsConcept from './claude-plugins.js';
 import claudeDesignerStackConcept from './claude-designer-stack.js';
 
 const concepts = [
+  claudeFolderConcept,
   claudeExtensionConcept,
   claudeCommandsConcept,
   claudeSubagentsConcept,
