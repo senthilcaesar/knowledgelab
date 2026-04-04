@@ -1,6 +1,6 @@
 const claudeFolderConcept = {
   id: 'claude-folder',
-  title: 'The .claude Folder',
+  title: 'Claude Code Configuration',
   category: '',
   tags: [''],
   tabs: [
@@ -1772,7 +1772,7 @@ Key files I'm currently editing:
 <p style="margin-bottom:1rem; line-height:1.75;">An interactive flowchart showing the relationships between all the config files in the <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude</code> folder.</p>
 
 <div style="width: 100%; height: 650px; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; margin-bottom: 1.5rem; background: var(--surface-color);">
-  <iframe src="${import.meta.env.BASE_URL}claude-folder-flowchart.html" style="width: 100%; height: 100%; border: none; border-radius: 8px;"></iframe>
+  <iframe src="${import.meta.env.BASE_URL}claude-code-config-flowchart.html" style="width: 100%; height: 100%; border: none; border-radius: 8px;"></iframe>
 </div>
 
 <div style="margin-top: 2rem; display: flex; justify-content: flex-start; border-top: 1px solid var(--border-color); padding-top: 1rem;">
