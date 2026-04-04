@@ -1,5 +1,5 @@
 const claudeFolderConcept = {
-  id: 'claude-folder',
+  id: 'claude-code-configuration',
   title: 'Claude Code Configuration',
   category: '',
   tags: [''],
