@@ -1131,6 +1131,7 @@ alias ccommit="claude -p '/commit'"</code></pre>
 
 <hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
 
+
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 1 — Set Up the Directory</strong>
 
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); line-height: 1.6;"><code>mkdir -p .claude/rules</code></pre>
@@ -1184,23 +1185,9 @@ alias ccommit="claude -p '/commit'"</code></pre>
 
 <p style="margin-bottom:1rem; line-height:1.75;">This is where <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code> becomes genuinely powerful. Add a <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">paths:</code> field in YAML frontmatter and the rule only loads when Claude is working on matching files.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;">This rule only activates when Claude works on files matching the pattern. Your API guidelines stay out of the way when you're editing React components.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Rules without frontmatter apply unconditionally.</p>
 
-<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/api/endpoints.md</code></strong> — only applies to FastAPI route files:</p>
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>---
-paths:
-  - "app/routers/**/*.py"
-  - "app/api/**/*.py"
----
-
-# FastAPI Endpoint Rules
-
-- Every endpoint must have a Pydantic request and response schema
-- Use \`HTTPException\` with appropriate status codes — never return raw dicts for errors
-- All endpoints must be \`async def\`
-- Add an OpenAPI \`summary\` and \`description\` to every route decorator
-- Validate input at the router level, not inside services
-- Log every incoming request with its correlation ID</code></pre>
+<p style="margin-bottom:1rem; line-height:1.75;">For Python, you could create <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/testing.md</code> that only applies when Claude is editing files in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">tests/</code>, keeping your testing rules separate from your general rules.</p>
 
 <p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/testing.md</code></strong> — only applies when editing test files:</p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>---
