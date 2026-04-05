@@ -130,7 +130,7 @@ npx skills add https://github.com/anthropics/skills --skill skill-creator -a cla
 
 <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
 
-<p style="margin-bottom: 0.5rem; line-height: 1.75; font-size: 1.25rem;"><strong>brand-guideline skill example:</strong></p>
+<p style="margin-bottom: 0.5rem; line-height: 1.75; font-size: 1.25rem;"><strong>[brand-guideline skill example]</strong></p>
 <p style="margin-bottom: 1rem; line-height: 1.75;">Your web app can look like it was built by Anthropic — in one prompt.</p>
 
 <p style="margin-bottom: 1rem; line-height: 1.75;">There's an official brand-guidelines skill that knows every Anthropic design token — the coral accent, the warm neutrals, the typography, the spacing system. All of it.</p>
