@@ -46,11 +46,11 @@ const claudeDesignerStackConcept = {
 
 <p style="margin-bottom: 1rem; line-height: 1.75;">Five of the skills can be installed using the <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">npx skills</code> CLI, pointing at Anthropic's public GitHub repository. Run these commands in your terminal:</p>
 
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.5;">npx skills add https://github.com/anthropics/skills --skills frontend-design
-npx skills add https://github.com/anthropics/skills --skills theme-factory
-npx skills add https://github.com/anthropics/skills --skills brand-guidelines
-npx skills add https://github.com/anthropics/skills --skills canvas-design
-npx skills add https://github.com/anthropics/skills --skills skill-creator</pre>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.5;">npx skills add https://github.com/anthropics/skills --skill frontend-design -a claude-code
+npx skills add https://github.com/anthropics/skills --skill theme-factory -a claude-code
+npx skills add https://github.com/anthropics/skills --skill brand-guidelines -a claude-code
+npx skills add https://github.com/anthropics/skills --skill canvas-design -a claude-code
+npx skills add https://github.com/anthropics/skills --skill skill-creator -a claude-code</pre>
 
 <p style="margin-bottom: 1rem; line-height: 1.75;">You can also install them all at once in the Claude Code terminal using the plugin marketplace:</p>
 
