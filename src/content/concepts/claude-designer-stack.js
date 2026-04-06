@@ -85,7 +85,6 @@ npx skills add https://github.com/anthropics/skills --skill skill-creator -a cla
 
 <p style="margin-bottom: 1rem; line-height: 1.75;">This is the closest thing to a guided walkthrough — useful if you're not sure how to frame your request. Once you answer, Claude makes all remaining design decisions itself (aesthetic direction, fonts, layout, animations) and generates the code without further questions.</p>
 `,
-
     },
     {
       label: '2. theme-factory',
@@ -142,7 +141,7 @@ npx skills add https://github.com/anthropics/skills --skill skill-creator -a cla
 <pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">claude</pre>
 
 <p style="margin-bottom: 0.5rem; line-height: 1.75;"><strong>Step 3 — Run this single prompt:</strong></p>
-<pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">Apply Anthropic's brand UI guidelines to this web app. Restyle the color theme using official Anthropic brand colors. Make the landing page match Anthropic's visual identity.</pre>
+<pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">Restyle this web app's landing page to match Anthropic's visual identity. Use Anthropic's official brand guidelines colors, typography, and spacing. Preserve all existing functionality and layout structure — only change the visual styling.</pre>
 
 <p style="margin-bottom: 1rem; line-height: 1.75;">Claude reads the skill file, pulls the defined hex values and spacing rules — then rewrites your CSS.</p>
 `,
