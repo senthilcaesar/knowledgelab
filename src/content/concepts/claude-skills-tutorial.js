@@ -235,6 +235,7 @@ EOF</code></pre>
       <li style="margin-bottom: 0.25rem;"><a href="https://github.com/PleasePrompto/notebooklm-skill" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">NotebookLM Skills</a></li>
       <li style="margin-bottom: 0.25rem;"><a href="https://github.com/kepano/obsidian-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Obsidian Skills</a></li>
       <li style="margin-bottom: 0.25rem;"><a href="https://github.com/gsd-build/get-shit-done" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Get Shit done</a></li>
+      <li style="margin-bottom: 0.25rem;"><a href="https://github.com/addyosmani/agent-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Agent Skills</a></li>
     </ul>
   </li>
 </ul>
