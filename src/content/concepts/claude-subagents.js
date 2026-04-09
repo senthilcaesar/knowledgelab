@@ -5,11 +5,59 @@ const claudeSubagentsConcept = {
     {
       label: 'Overview',
       content: `
-        <p style="margin-bottom:1rem; line-height:1.75;">Subagents are specialized AI assistants that handle specific types of tasks. Each subagent runs in its own context window with a custom system prompt, specific tool access, and independent permissions. They handle discrete tasks independently and return results to the main agent. When Claude encounters a task that matches a subagent’s description, it delegates to that subagent, which works independently and returns results.</p>
+        <p style="margin-bottom:1rem; line-height:1.75;">A subagent is an isolated Claude instance with its own context window. It takes a task, does the work, and returns only the result. Subagents are self-contained agents that operate with their own context windows. When Claude spawns a subagent, that assistant works independently to read files, explore code, or make changes. When it completes its task, the subagent returns only the relevant results to the main conversation.</p>
+        
+        <p style="margin-bottom:1rem; line-height:1.75;">Each subagent starts fresh, unburdened by the history of the conversation or invoked skills. Multiple subagents can run in parallel, and each can have different permissions: a research subagent might have read-only access, while an implementation subagent gets full editing capabilities.</p>
+
         <p style="margin-bottom:1.5rem; font-style: italic; color: var(--text-secondary); line-height:1.6;">
           Note: If you need multiple agents working in parallel and communicating with each other, see agent teams instead. Subagents work within a single session; agent teams coordinate across separate sessions.
         </p>
-        <p>Claude uses each subagent’s description to decide when to delegate tasks. When you create a subagent, write a clear description so Claude knows when to use it. The key word is isolation. A subagent is an isolated Claude instance that works on a task independently and returns only the results to your main conversation. Use subagents when you need parallel execution or want to isolate heavy computational work. Best for: preventing context pollution, specialized deep dives.</p>
+
+        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+          <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">When should you use subagents?</strong>
+          <p style="margin-bottom: 1.5rem; line-height: 1.6; color: var(--text-secondary);">Certain categories of work benefit clearly from subagent delegation. Learning to recognize them makes the feature far more effective.</p>
+
+          <div style="margin-bottom: 1.5rem; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0, 242, 255, 0.02);">
+            <strong style="display:block; margin-bottom:0.5rem; font-size:1rem; color: var(--text-primary);">Research-heavy tasks</strong>
+            <p style="margin-bottom: 0.75rem; line-height: 1.6; font-size: 0.95rem;">When understanding how something works is a prerequisite to changing it, a subagent can explore the codebase and return a summary rather than dumping dozens of files into the conversation.</p>
+            <p style="margin-bottom: 0.35rem; font-size: 0.9rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">The signal:</strong> Gathering context requires reading dozens of files.</p>
+            <p style="margin: 0; font-size: 0.9rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">The benefit:</strong> The main conversation stays clean, and synthesized findings arrive instead of raw content.</p>
+          </div>
+
+          <div style="margin-bottom: 1.5rem; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0, 242, 255, 0.02);">
+            <strong style="display:block; margin-bottom:0.5rem; font-size:1rem; color: var(--text-primary);">Multiple independent tasks</strong>
+            <p style="margin-bottom: 0.75rem; line-height: 1.6; font-size: 0.95rem;">When fixing errors across several files, updating patterns in multiple components, or making changes that don't depend on each other, parallel subagents complete the task faster.</p>
+            <p style="margin-bottom: 0.35rem; font-size: 0.9rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">The signal:</strong> Sub-tasks have no dependencies between them.</p>
+            <p style="margin: 0; font-size: 0.9rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">The benefit:</strong> Three subagents working simultaneously generally finish the task in less time.</p>
+          </div>
+
+          <div style="margin-bottom: 1.5rem; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0, 242, 255, 0.02);">
+            <strong style="display:block; margin-bottom:0.5rem; font-size:1rem; color: var(--text-primary);">Fresh perspective needed</strong>
+            <p style="margin-bottom: 0.75rem; line-height: 1.6; font-size: 0.95rem;">When a task benefits from an unbiased look — like auditing code the main conversation just wrote — a subagent starts fresh, free from any assumptions baked into the current context.</p>
+            <p style="margin-bottom: 0.35rem; font-size: 0.9rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">The signal:</strong> You want a second pair of eyes on work already done.</p>
+            <p style="margin: 0; font-size: 0.9rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">The benefit:</strong> Catches issues the main conversation might rationalize away.</p>
+          </div>
+
+           <div style="margin-bottom: 2rem; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0, 242, 255, 0.02);">
+            <strong style="display:block; margin-bottom:0.5rem; font-size:1rem; color: var(--text-primary);">Pipeline workflows</strong>
+            <p style="margin-bottom: 0.75rem; line-height: 1.6; font-size: 0.95rem;">When a task has distinct phases (i.e., design, then implement, then test), each stage benefits from focused attention.</p>
+            <p style="margin-bottom: 0.35rem; font-size: 0.9rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">The signal:</strong> Sequential stages with clear handoffs.</p>
+            <p style="margin: 0; font-size: 0.9rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">The benefit:</strong> Each subagent concentrates on its phase, without context from other stages creating noise.</p>
+          </div>
+
+          <div style="margin: 1.5rem 0; padding: 1rem 1.25rem; background: rgba(0, 242, 255, 0.05); border-left: 4px solid var(--accent-primary); border-radius: 0 8px 8px 0;">
+            <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--text-primary);">
+              <strong style="color: var(--accent-primary);">Pro-tip:</strong> When a task requires exploring ten or more files, or involves three or more independent pieces of work, that's a strong signal to direct Claude toward subagents.
+            </p>
+          </div>
+
+          <div style="margin-bottom: 2rem; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0, 242, 255, 0.02);">
+            <strong style="display:block; margin-bottom:0.5rem; font-size:1rem; color: var(--text-primary);">Verification before committing</strong>
+            <p style="margin-bottom: 0.75rem; line-height: 1.6; font-size: 0.95rem;">Before finalizing changes, an independent subagent can verify the implementation isn't overfitting to tests or missing edge cases.</p>
+            <p style="margin-bottom: 0.35rem; font-size: 0.9rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">The signal:</strong> A second opinion is warranted before committing code.</p>
+            <p style="margin: 0; font-size: 0.9rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">The benefit:</strong> Catches issues that familiarity with the code might obscure.</p>
+          </div>
+        </div>
 
         <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
           <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">How is it Different From Everything Else?</strong>
@@ -35,6 +83,198 @@ const claudeSubagentsConcept = {
               <code style="color: var(--accent-primary); font-weight: bold;">Skills</code> &mdash; Define automatic behaviors that activate based on task context
             </li>
           </ul>
+        </div>
+      `
+    },
+    {
+      label: 'Invocation',
+      content: `
+        <div style="margin-bottom: 2.5rem;">
+          <h2 style="margin-bottom: 1.5rem; color: var(--accent-primary); font-size: 1.4rem;">How to direct subagent usage</h2>
+          <p style="margin-bottom: 1.5rem; line-height: 1.75;">Several methods exist for invoking subagents, ranging from simple conversation to automated workflows. The right starting point depends on the workflow, and sophistication can be layered on as patterns emerge.</p>
+        </div>
+
+        <div style="margin-bottom: 3rem;">
+          <h3 style="margin-bottom: 1rem; color: var(--text-primary); font-size: 1.2rem;">Conversational invocation</h3>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">The most flexible approach is simply asking Claude to use subagents in conversation. This works across all Claude Code interfaces: terminal, VS Code, JetBrains, the web, and desktop applications.</p>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Natural language patterns that reliably invoke subagents include:</p>
+
+          <ul style="margin: 0 0 1.5rem 0; padding-left: 1.5rem; line-height: 2;">
+            <li style="margin-bottom: 0.5rem; color: var(--text-secondary); font-style: italic;">"Use a subagent to explore how authentication works in this codebase"</li>
+            <li style="margin-bottom: 0.5rem; color: var(--text-secondary); font-style: italic;">"Have a separate agent review this code for security issues"</li>
+            <li style="margin-bottom: 0.5rem; color: var(--text-secondary); font-style: italic;">"Research this in parallel. Check the API routes, database models, and frontend components simultaneously"</li>
+            <li style="color: var(--text-secondary); font-style: italic;">"Spin up subagents to fix these TypeScript errors across the different packages"</li>
+          </ul>
+
+          <p style="margin-bottom: 1.5rem; line-height: 1.75;">Being explicit matters. Specify the scope, request parallel execution when tasks are independent, and describe the desired output.</p>
+
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Here's an effective prompt structure:</p>
+
+          <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1.5rem;">Use subagents to explore this codebase in parallel:
+
+1. Find all API endpoints and summarize their purposes
+2. Identify the database schema and relationships
+3. Map out the authentication flow
+
+Return a summary of each, not the full file contents.</code>
+
+          <p style="margin-bottom: 1.5rem; line-height: 1.75;">This prompt works because it clearly defines three independent tasks, explicitly requests parallel execution, and specifies the output format. Claude understands the intent and spawns appropriate subagents.</p>
+
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Tips for effective conversational invocation include:</p>
+
+          <ul style="margin: 0 0 1.5rem 0; padding-left: 1.5rem; line-height: 1.8; list-style: none;">
+            <li style="margin-bottom: 1rem; padding-left: 0.5rem; border-left: 3px solid var(--accent-primary);">
+              <strong style="color: var(--text-primary);">Scope tasks clearly.</strong> <span style="color: var(--text-secondary);">"Explore how payments work" beats "explore everything."</span>
+            </li>
+            <li style="margin-bottom: 1rem; padding-left: 0.5rem; border-left: 3px solid var(--accent-primary);">
+              <strong style="color: var(--text-primary);">Request parallelization explicitly.</strong> <span style="color: var(--text-secondary);">Say "these can run in parallel" or "work on all three simultaneously."</span>
+            </li>
+            <li style="margin-bottom: 1rem; padding-left: 0.5rem; border-left: 3px solid var(--accent-primary);">
+              <strong style="color: var(--text-primary);">Specify what should be returned.</strong> <span style="color: var(--text-secondary);">Summaries, specific findings, or recommendations. Naming the output format helps Claude deliver it.</span>
+            </li>
+            <li style="margin-bottom: 0; padding-left: 0.5rem; border-left: 3px solid var(--accent-primary);">
+              <strong style="color: var(--text-primary);">Ask for fresh context when unbiased analysis matters.</strong> <span style="color: var(--text-secondary);">"Use a subagent that does not see our previous discussion" ensures clean evaluation.</span>
+            </li>
+          </ul>
+
+          <div style="margin-top: 2rem; padding: 1rem 1.25rem; background: rgba(0, 242, 255, 0.05); border-left: 4px solid var(--accent-primary); border-radius: 0 8px 8px 0;">
+            <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--text-primary);">
+              <strong style="color: var(--accent-primary);">Pro-tip:</strong> When a subagent is taking a while, <code>Ctrl+B</code> sends it to the background. The conversation can continue while it runs, and results surface automatically when it finishes. The <code>/tasks</code> command shows anything running in the background.
+            </p>
+          </div>
+        </div>
+
+        <div style="margin-top: 3rem;">
+          <h3 style="margin-bottom: 1rem; color: var(--accent-primary); font-size: 1.2rem;">CLAUDE.md instructions</h3>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Custom subagents define who the specialists are. CLAUDE.md files define the rules for when Claude should reach for them. If every code review should go through a read-only subagent, or every architecture question should trigger a research pass first, CLAUDE.md is where that policy lives. Claude reads it at the start of every conversation, so the behavior stays consistent across sessions and teammates without anyone needing to remember to ask.</p>
+
+          <p style="margin-bottom: 0.75rem; line-height: 1.75;">CLAUDE.md is a good fit for subagent instructions when:</p>
+          <ul style="margin: 0 0 1.5rem 1.5rem; line-height: 1.75; color: var(--text-secondary);">
+            <li style="margin-bottom: 0.4rem;">Code reviews should always use read-only subagents</li>
+            <li style="margin-bottom: 0.4rem;">The project has specific research patterns Claude should follow</li>
+            <li style="margin-bottom: 0.4rem;">Consistent behavior is needed across team members and sessions</li>
+          </ul>
+
+          <p style="margin-bottom: 0.75rem; line-height: 1.75;">Here's an example of a simple CLAUDE.md file that triggers a subagent given specific conditions:</p>
+          <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6; font-size: 0.9rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1.5rem;">## Code review standards
+
+When asked to review code, ALWAYS use a subagent with READ-ONLY access
+(Glob, Grep, Read only). The review should ALWAYS check for:
+- Security vulnerabilities
+- Performance issues
+- Adherence to project patterns in /docs/architecture.md
+
+Return findings as a prioritized list with file:line references.</code>
+
+          <p style="margin-bottom: 1rem; line-height: 1.75;">With the above CLAUDE.md file, every code review request automatically uses the defined pattern, eliminating the need to specify it each time.</p>
+
+          <p style="margin-bottom: 2rem; line-height: 1.75; color: var(--text-secondary); font-size: 0.95rem;">For more on CLAUDE.md files, see Customizing Claude Code for your codebase: setting up a CLAUDE.md file and our Claude Code CLAUDE.md file docs.</p>
+        </div>
+
+        <div style="margin-top: 3rem;">
+          <h3 style="margin-bottom: 1rem; color: var(--accent-primary); font-size: 1.2rem;">Skills</h3>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">For complex multi-step workflows that run repeatedly, skills provide a reusable interface. Define a skill once in <code>.claude/skills/</code>, then invoke it with <code>/skill-name</code> or let Claude load it automatically when a task matches its description.</p>
+
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Skills differ from CLAUDE.md files in scope. CLAUDE.md files are always loaded and shapes every interaction. A skill is loaded on demand, either because it was invoked explicitly or because Claude matched the current task to the skill's description field. That makes skills the right place for workflows that should be available but not applied to every prompt.</p>
+
+          <p style="margin-bottom: 0.75rem; line-height: 1.75;">Skills fit well when:</p>
+          <ul style="margin: 0 0 1.5rem 1.5rem; line-height: 1.75; color: var(--text-secondary);">
+            <li style="margin-bottom: 0.4rem;">Certain actions get run regularly</li>
+            <li style="margin-bottom: 0.4rem;">Different team members need access to the same complex operation</li>
+            <li style="margin-bottom: 0.4rem;">Standardizing how certain tasks are performed across the team matters</li>
+          </ul>
+
+          <p style="margin-bottom: 0.75rem; line-height: 1.75;">Here's an example of a deep-review skill for comprehensive code review:</p>
+          <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6; font-size: 0.9rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1.5rem;"># .claude/skills/deep-review/SKILL.md
+
+---
+name: deep-review
+description: Comprehensive code review that checks security,
+  performance, and style in parallel. Use when reviewing staged
+  changes before a commit or PR.
+---
+
+Run three parallel subagent reviews on the staged changes:
+
+1. Security review - check for vulnerabilities, injection risks,
+   authentication issues, and sensitive data exposure
+2. Performance review - check for N+1 queries, unnecessary iterations,
+   memory leaks, and blocking operations
+3. Style review - check for consistency with project patterns
+   documented in /docs/style-guide.md
+
+Synthesize findings into a single summary with priority-ranked issues.
+Each issue should include the file, line number, and recommended fix.</code>
+
+          <p style="margin-bottom: 1rem; line-height: 1.75;">In the code snippet above, <code>/deep-review</code> triggers a three-part subagent analysis on demand. Because the description mentions reviewing staged changes before commits, Claude can also reach for this skill automatically when that context comes up.</p>
+
+          <p style="margin-bottom: 1rem; line-height: 1.75;">A skill is a directory, not a single file. Alongside SKILL.md, it can hold templates Claude fills in, example outputs showing the expected format, or scripts Claude executes as part of the workflow. The legacy <code>.claude/commands/format</code> was a single flat file, so everything had to live in the prompt itself.</p>
+
+          <p style="margin-bottom: 2rem; line-height: 1.75; color: var(--text-secondary); font-size: 0.95rem;">For more on using skills with Claude Code, see our Claude Code skills docs.</p>
+        </div>
+
+        <div style="margin-top: 3rem;">
+          <h3 style="margin-bottom: 1rem; color: var(--accent-primary); font-size: 1.2rem;">Hooks</h3>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Hooks are user-defined shell commands, HTTP endpoints, or LLM prompts that execute automatically at specific points in Claude Code's lifecycle. Hooks can automate subagent workflows based on events. Hooks trigger on specific actions and run subagent tasks without manual invocation.</p>
+
+          <p style="margin-bottom: 0.75rem; line-height: 1.75;">Hooks are the right tool when:</p>
+          <ul style="margin: 0 0 1.5rem 1.5rem; line-height: 1.75; color: var(--text-secondary);">
+            <li style="margin-bottom: 0.4rem;">Every commit should be reviewed automatically before it's created</li>
+            <li style="margin-bottom: 0.4rem;">Security checks should run without anyone remembering to ask</li>
+            <li style="margin-bottom: 0.4rem;">CI-like quality gates belong in the local development process</li>
+          </ul>
+
+          <p style="margin-bottom: 0.75rem; line-height: 1.75;">Here is an example of a Stop hook that blocks Claude from ending its turn until a test is passed:</p>
+          <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6; font-size: 0.9rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1.5rem;">{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\\"$CLAUDE_PROJECT_DIR\\"/.claude/hooks/check-tests.sh"
+          }
+        ]
+      }
+    ]
+  }
+}</code>
+
+          <p style="margin-bottom: 0.75rem; line-height: 1.75;">And the script at <code>.claude/hooks/check-tests.sh</code>:</p>
+          <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6; font-size: 0.9rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1.5rem;">#!/bin/bash
+INPUT=$(cat)
+STOP_HOOK_ACTIVE=$(echo "$INPUT" | jq -r '.stop_hook_active // false')
+
+# Don't loop forever — if we already blocked once this turn, let it through
+if [ "$STOP_HOOK_ACTIVE" = "true" ]; then
+  exit 0
+fi
+
+if ! npm test --silent > /dev/null 2>&1; then
+  jq -n '{
+    decision: "block",
+    reason: "Tests are failing. Run \`npm test\` to see the failures and fix them before finishing."
+  }'
+  exit 0
+fi
+
+exit 0</code>
+
+          <p style="margin-bottom: 1rem; line-height: 1.75;">When Claude finishes its turn, the Stop event fires. The script runs the test suite—if tests fail, it returns JSON with <code>decision: "block"</code> and a reason. Claude Code reads that, doesn't let Claude stop, and feeds the reason back into the conversation as instruction to keep working. The <code>stop_hook_active</code> guard at the top prevents infinite loops: if Claude is already continuing because of a previous stop-hook block, the script lets it exit.</p>
+
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Hooks represent the most automated approach to subagent orchestration. Conversational invocation or CLAUDE.md instructions are the better starting point; hooks come later, as workflows mature.</p>
+
+          <p style="margin-bottom: 0; line-height: 1.75; color: var(--text-secondary); font-size: 0.95rem;">
+            For complete hooks configuration, see
+            <a href="https://claude.com/blog/how-to-configure-hooks" target="_blank" rel="noopener noreferrer">
+              Claude Code power user customization: how to configure hooks
+            </a>
+            or
+            <a href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener noreferrer">
+            our Claude Code hooks docs.
+            </a>
+          </p>
+
         </div>
       `
     },
@@ -293,6 +533,8 @@ export function useDarkMode() {
     {
       label: 'Create your own',
       content: `
+        <p style="margin-bottom: 1.25rem; line-height: 1.75;">Custom subagents live as markdown files in <code>.claude/agents/</code> (project-level, shared with the team) or <code>~/.claude/agents/</code> (user-level, available across all projects). Each one gets its own system prompt, tool permissions, and optionally its own model.</p>
+
         <p style="margin-bottom: 2rem; line-height: 1.75;">Subagents are defined in Markdown files with YAML frontmatter. You can create them easily using the <code>/agents</code> command.</p>
 
         <div style="margin-bottom: 2.5rem;">
@@ -375,6 +617,17 @@ export function useDarkMode() {
           <p style="margin-bottom: 1rem; line-height: 1.6; color: var(--text-secondary);">You now have a subagent you can use in any project on your machine to analyze codebases and suggest improvements.</p>
           <p style="line-height: 1.6; color: var(--text-secondary); font-size: 0.9rem;">You can also create subagents manually as Markdown files, define them via CLI flags, or distribute them through plugins. The next sections covers few of the configuration options.</p>
         </div>
+
+        <div style="margin-top: 2rem; padding: 1rem 1.25rem; background: rgba(0, 242, 255, 0.05); border-left: 4px solid var(--accent-primary); border-radius: 0 8px 8px 0;">
+          <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--text-primary);">
+            <strong style="color: var(--accent-primary);">Pro-tip:</strong> The <code>description</code> field is what Claude uses to decide when to delegate. Be specific about the trigger conditions, not just the capability. <em>"Reviews code for security issues before commits"</em> routes better than <em>"security expert."</em>
+          </p>
+        </div>
+
+        <p style="margin-top: 1.25rem; line-height: 1.75; font-size: 0.95rem; color: var(--text-secondary);">
+          For the full configuration reference, including permission modes and how project and user subagents interact, see
+          <a href="https://code.claude.com/docs/en/sub-agents" target="_blank" rel="noopener noreferrer" style="color: var(--accent-primary); text-decoration: none; border-bottom: 1px solid currentColor;">Claude Code subagents docs</a>.
+        </p>
       `
     },
     {
@@ -881,6 +1134,62 @@ exit 0</code>
           <p style="margin-top: 1rem; margin-bottom: 1rem; line-height: 1.6; color: var(--text-secondary);">Make the script executable:</p>
           <code style="display: block; padding: 0.75rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 1rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.5;">chmod +x ./scripts/validate-readonly-query.sh</code>
           <p style="margin-top: 1rem; line-height: 1.6; color: var(--text-tertiary); font-size: 0.9rem;">The hook receives JSON via stdin with the Bash command in <code>tool_input.command</code>. Exit code 2 blocks the operation and feeds the error message back to Claude. See <a href="#" style="color: var(--accent-primary);">Hooks</a> for details on exit codes and <a href="#" style="color: var(--accent-primary);">Hook input</a> for the complete input schema.</p>
+        </div>
+      `
+    },
+    {
+      label: 'Practical patterns',
+      content: `
+        <div style="margin-bottom: 0.5rem;">
+          <p style="margin-bottom: 2rem; line-height: 1.75;">The following patterns demonstrate subagent direction applied to common scenarios.</p>
+
+          <div style="margin-bottom: 3rem;">
+            <h3 style="margin-bottom: 0.75rem; color: var(--accent-primary); font-size: 1.2rem;">Research before implementing</h3>
+            <p style="margin-bottom: 1rem; line-height: 1.75;">When adding a feature to unfamiliar code, delegating research to a subagent first keeps the implementation discussion informed rather than exploratory, for example:</p>
+            <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6; font-size: 0.9rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1.25rem;">Before I implement user notifications, use a subagent to research:
+- How are emails currently sent in this codebase?
+- What notification patterns already exist?
+- Where should new notification logic live based on the current architecture?
+
+Summarize findings, then we'll plan the implementation together.</code>
+            <p style="line-height: 1.75; color: var(--text-secondary);">A synthesized summary arrives instead of twenty files of raw context, and the implementation discussion starts from a solid foundation.</p>
+          </div>
+
+          <div style="margin-bottom: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+            <h3 style="margin-bottom: 0.75rem; color: var(--accent-primary); font-size: 1.2rem;">Parallel modifications</h3>
+            <p style="margin-bottom: 1rem; line-height: 1.75;">When the same pattern needs updating across multiple files, parallel subagents finish faster and maintain focus, for example:</p>
+            <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6; font-size: 0.9rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1.25rem;">Use parallel subagents to update the error handling in these files:
+- src/api/users.ts
+- src/api/orders.ts
+- src/api/products.ts
+
+Each should follow the pattern established in src/api/auth.ts.
+Work on all three simultaneously.</code>
+            <p style="line-height: 1.75; color: var(--text-secondary);">Three subagents working in parallel complete in roughly the time one would take. Each focuses on its file without context from the others creating confusion or inconsistency.</p>
+          </div>
+
+          <div style="margin-bottom: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+            <h3 style="margin-bottom: 0.75rem; color: var(--accent-primary); font-size: 1.2rem;">Independent review</h3>
+            <p style="margin-bottom: 1rem; line-height: 1.75;">After implementing something complex, verification from a subagent that hasn't been influenced by the implementation journey catches what familiarity obscures, for example:</p>
+            <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6; font-size: 0.9rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1.25rem;">Use a fresh subagent with read-only access to review my implementation of the payment flow. It should not see our previous discussion. I want an unbiased review.
+
+Check for: security vulnerabilities, unhandled edge cases, and error handling gaps. Be critical.</code>
+            <p style="line-height: 1.75; color: var(--text-secondary);">The review subagent evaluates the code without knowing what tradeoffs were considered, what approaches were rejected, or what assumptions were made. This outside perspective surfaces issues the main conversation might miss.</p>
+          </div>
+
+          <div style="padding-top: 2rem; border-top: 1px solid var(--border-color);">
+            <h3 style="margin-bottom: 0.75rem; color: var(--accent-primary); font-size: 1.2rem;">Pipeline workflow</h3>
+            <p style="margin-bottom: 1rem; line-height: 1.75;">For multi-stage tasks, chaining subagents with explicit handoffs between phases keeps each stage focused, for example:</p>
+            <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6; font-size: 0.9rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1.25rem;">Let's build this feature as a pipeline:
+
+1. First subagent: Design the API contract and write it to docs/api-spec.md
+2. Second subagent: Implement the backend endpoints based on that spec
+3. Third subagent: Write integration tests for the implementation
+
+Each stage should complete before the next begins. Use the output
+files as the handoff mechanism between stages.</code>
+            <p style="line-height: 1.75; color: var(--text-secondary);">Using a pipeline workflow, each stage in the task receives focused context. The design subagent isn't distracted by implementation concerns, the implementation subagent works from a clean spec, and the testing subagent evaluates the result independently.</p>
+          </div>
         </div>
       `
     }
