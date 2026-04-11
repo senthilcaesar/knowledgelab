@@ -153,16 +153,26 @@ Make it feel like a top-tier product (Stripe / Linear / Apple-level quality).</p
   
   <!-- Terminal Body -->
   <div style="padding: 1.5rem; line-height: 1.6;">
-    <div style="color: #f8f8f2; margin-bottom: 1.5rem;">
-      <p style="color: #ae81ff; margin-bottom: 0.5rem; font-weight: bold;">[FOUND] AWESOME DESIGN.md</p>
-      <p style="color: #a0a0b0; font-size: 0.9rem;">Design system inspirations from popular websites. Drop one into your project and let coding agents build matching UI.</p>
+    <div style="margin-bottom: 1.5rem;">
+      <p style="color: #ae81ff; margin-bottom: 0.5rem; font-weight: bold;">[01] AWESOME DESIGN.md</p>
+      <p style="color: #a0a0b0; font-size: 0.9rem; margin-bottom: 0.5rem;">Design system inspirations from popular websites. Drop one into your project and let coding agents build matching UI.</p>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="color: #27c93f;">➜</span> 
+        <a href="https://getdesign.md/" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-size: 0.85rem; word-break: break-all;">https://getdesign.md/</a>
+      </div>
+    </div>
+    
+    <div style="margin-bottom: 1.5rem;">
+      <p style="color: #ae81ff; margin-bottom: 0.5rem; font-weight: bold;">[02] What is DESIGN.md?</p>
+      <p style="color: #a0a0b0; font-size: 0.9rem; margin-bottom: 0.5rem;">A design system document that AI agents read to generate consistent UI across your project.</p>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="color: #27c93f;">➜</span> 
+        <a href="https://stitch.withgoogle.com/docs/design-md/overview" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-size: 0.85rem; word-break: break-all;">https://stitch.withgoogle.com/docs/design-md/overview</a>
+      </div>
     </div>
     
     <div>
       <span style="color: #27c93f;">➜</span> <span style="color: #00f2ff;">~</span> 
-      <a href="https://getdesign.md/" target="_blank" style="display: inline-block; margin-left: 0.5rem; padding: 0.4rem 0.8rem; background: var(--accent-primary); color: #000; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 0.85rem; transition: transform 0.2s;">
-        visit https://getdesign.md/
-      </a>
       <span style="display: inline-block; width: 8px; height: 18px; background: var(--accent-primary); vertical-align: middle; margin-left: 4px; animation: terminal-blink 1s step-end infinite;"></span>
     </div>
   </div>
