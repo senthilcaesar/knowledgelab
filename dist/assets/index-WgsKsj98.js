@@ -1,6 +1,6 @@
-(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const i of document.querySelectorAll('link[rel="modulepreload"]'))a(i);new MutationObserver(i=>{for(const m of i)if(m.type==="childList")for(const u of m.addedNodes)u.tagName==="LINK"&&u.rel==="modulepreload"&&a(u)}).observe(document,{childList:!0,subtree:!0});function n(i){const m={};return i.integrity&&(m.integrity=i.integrity),i.referrerPolicy&&(m.referrerPolicy=i.referrerPolicy),i.crossOrigin==="use-credentials"?m.credentials="include":i.crossOrigin==="anonymous"?m.credentials="omit":m.credentials="same-origin",m}function a(i){if(i.ep)return;i.ep=!0;const m=n(i);fetch(i.href,m)}})();const at=70,Je=160,je=120;class nt{constructor(t,n){this.width=t,this.height=n,this.x=Math.random()*t,this.y=Math.random()*n,this.vx=(Math.random()-.5)*.4,this.vy=(Math.random()-.5)*.4,this.baseRadius=1.5+Math.random()*2,this.pulsePhase=Math.random()*Math.PI*2,this.pulseSpeed=.015+Math.random()*.025,this.isHub=Math.random()<.12,this.isHub&&(this.baseRadius*=2)}update(t){this.pulsePhase+=this.pulseSpeed;const n=this.x-t.x,a=this.y-t.y,i=Math.hypot(n,a);if(i<je&&i>0){const u=((je-i)/je)**2*3;this.vx+=n/i*u*.08,this.vy+=a/i*u*.08}this.vx*=.975,this.vy*=.975;const m=Math.hypot(this.vx,this.vy);m>1.5&&(this.vx=this.vx/m*1.5,this.vy=this.vy/m*1.5),this.x+=this.vx,this.y+=this.vy,this.x<0&&(this.x=this.width),this.x>this.width&&(this.x=0),this.y<0&&(this.y=this.height),this.y>this.height&&(this.y=0)}draw(t,n){const a=.5+.5*Math.sin(this.pulsePhase),i=this.baseRadius*(1+a*.6),m=(this.isHub?.7:.4)+a*.4,u=n?`rgba(176, 141, 87, ${m})`:this.isHub?`rgba(180, 100, 255, ${m})`:`rgba(0, 242, 255, ${m})`,C=n?`rgba(176, 141, 87, ${a*.12})`:this.isHub?`rgba(130, 0, 255, ${a*.1})`:`rgba(0, 242, 255, ${a*.1})`;t.beginPath(),t.arc(this.x,this.y,i*5,0,Math.PI*2),t.fillStyle=C,t.fill(),t.beginPath(),t.arc(this.x,this.y,i,0,Math.PI*2),t.fillStyle=u,t.fill()}}class it{constructor(t,n,a,i,m){this.x1=t,this.y1=n,this.x2=a,this.y2=i,this.progress=0,this.speed=.02+Math.random()*.03,this.isLight=m,this.alive=!0}update(){this.progress+=this.speed,this.progress>=1&&(this.alive=!1)}draw(t){const n=this.x1+(this.x2-this.x1)*this.progress,a=this.y1+(this.y2-this.y1)*this.progress,i=1-this.progress;t.beginPath(),t.arc(n,a,3,0,Math.PI*2),t.fillStyle=this.isLight?`rgba(212, 160, 23, ${i})`:`rgba(255, 255, 255, ${i})`,t.fill()}}function st(r){const t=r.getContext("2d");let n=0,a=0,i=[],m=[],u=null;const C={x:-9999,y:-9999};let k=0;function l(){n=r.width=window.innerWidth,a=r.height=window.innerHeight,i=Array.from({length:at},()=>new nt(n,a))}function A(M){if(k--,k>0)return;k=30+Math.floor(Math.random()*60);const S=[...i].sort(()=>Math.random()-.5);for(let z=0;z<S.length-1;z++){const O=S[z],D=S[z+1];if(Math.hypot(O.x-D.x,O.y-D.y)<Je){m.push(new it(O.x,O.y,D.x,D.y,M));return}}}function T(M,S,z,O){const D=(1-z/Je)*(O?.25:.35),q=t.createLinearGradient(M.x,M.y,S.x,S.y),$=O?`rgba(176,141,87,${D*1.5})`:M.isHub?`rgba(150,50,255,${D*1.5})`:`rgba(0,242,255,${D*1.5})`,Q=O?`rgba(122,106,83,${D})`:S.isHub?`rgba(150,50,255,${D})`:`rgba(0,200,220,${D})`;q.addColorStop(0,$),q.addColorStop(1,Q),t.beginPath(),t.moveTo(M.x,M.y),t.lineTo(S.x,S.y),t.strokeStyle=q,t.lineWidth=O?.6:.8,t.stroke()}function L(){const M=document.documentElement.classList.contains("light-mode");t.clearRect(0,0,n,a);for(let S=0;S<i.length;S++){i[S].update(C);for(let z=S+1;z<i.length;z++){const O=i[S].x-i[z].x,D=i[S].y-i[z].y,q=Math.hypot(O,D);q<Je&&T(i[S],i[z],q,M)}}i.forEach(S=>S.draw(t,M)),A(M),m=m.filter(S=>S.alive),m.forEach(S=>{S.update(),S.draw(t)}),u=requestAnimationFrame(L)}function H(){cancelAnimationFrame(u),window.removeEventListener("resize",l),window.removeEventListener("mousemove",N)}function N(M){C.x=M.clientX,C.y=M.clientY}return window.addEventListener("resize",l),window.addEventListener("mousemove",N),l(),L(),{destroy:H}}function lt(r){return r&&r.__esModule&&Object.prototype.hasOwnProperty.call(r,"default")?r.default:r}var Ue,ar;function dt(){if(ar)return Ue;ar=1;function r(e){return e instanceof Map?e.clear=e.delete=e.set=function(){throw new Error("map is read-only")}:e instanceof Set&&(e.add=e.clear=e.delete=function(){throw new Error("set is read-only")}),Object.freeze(e),Object.getOwnPropertyNames(e).forEach(o=>{const d=e[o],f=typeof d;(f==="object"||f==="function")&&!Object.isFrozen(d)&&r(d)}),e}class t{constructor(o){o.data===void 0&&(o.data={}),this.data=o.data,this.isMatchIgnored=!1}ignoreMatch(){this.isMatchIgnored=!0}}function n(e){return e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#x27;")}function a(e,...o){const d=Object.create(null);for(const f in e)d[f]=e[f];return o.forEach(function(f){for(const _ in f)d[_]=f[_]}),d}const i="</span>",m=e=>!!e.scope,u=(e,{prefix:o})=>{if(e.startsWith("language:"))return e.replace("language:","language-");if(e.includes(".")){const d=e.split(".");return[`${o}${d.shift()}`,...d.map((f,_)=>`${f}${"_".repeat(_+1)}`)].join(" ")}return`${o}${e}`};class C{constructor(o,d){this.buffer="",this.classPrefix=d.classPrefix,o.walk(this)}addText(o){this.buffer+=n(o)}openNode(o){if(!m(o))return;const d=u(o.scope,{prefix:this.classPrefix});this.span(d)}closeNode(o){m(o)&&(this.buffer+=i)}value(){return this.buffer}span(o){this.buffer+=`<span class="${o}">`}}const k=(e={})=>{const o={children:[]};return Object.assign(o,e),o};class l{constructor(){this.rootNode=k(),this.stack=[this.rootNode]}get top(){return this.stack[this.stack.length-1]}get root(){return this.rootNode}add(o){this.top.children.push(o)}openNode(o){const d=k({scope:o});this.add(d),this.stack.push(d)}closeNode(){if(this.stack.length>1)return this.stack.pop()}closeAllNodes(){for(;this.closeNode(););}toJSON(){return JSON.stringify(this.rootNode,null,4)}walk(o){return this.constructor._walk(o,this.rootNode)}static _walk(o,d){return typeof d=="string"?o.addText(d):d.children&&(o.openNode(d),d.children.forEach(f=>this._walk(o,f)),o.closeNode(d)),o}static _collapse(o){typeof o!="string"&&o.children&&(o.children.every(d=>typeof d=="string")?o.children=[o.children.join("")]:o.children.forEach(d=>{l._collapse(d)}))}}class A extends l{constructor(o){super(),this.options=o}addText(o){o!==""&&this.add(o)}startScope(o){this.openNode(o)}endScope(){this.closeNode()}__addSublanguage(o,d){const f=o.root;d&&(f.scope=`language:${d}`),this.add(f)}toHTML(){return new C(this,this.options).value()}finalize(){return this.closeAllNodes(),!0}}function T(e){return e?typeof e=="string"?e:e.source:null}function L(e){return M("(?=",e,")")}function H(e){return M("(?:",e,")*")}function N(e){return M("(?:",e,")?")}function M(...e){return e.map(d=>T(d)).join("")}function S(e){const o=e[e.length-1];return typeof o=="object"&&o.constructor===Object?(e.splice(e.length-1,1),o):{}}function z(...e){return"("+(S(e).capture?"":"?:")+e.map(f=>T(f)).join("|")+")"}function O(e){return new RegExp(e.toString()+"|").exec("").length-1}function D(e,o){const d=e&&e.exec(o);return d&&d.index===0}const q=/\[(?:[^\\\]]|\\.)*\]|\(\??|\\([1-9][0-9]*)|\\./;function $(e,{joinWith:o}){let d=0;return e.map(f=>{d+=1;const _=d;let R=T(f),g="";for(;R.length>0;){const p=q.exec(R);if(!p){g+=R;break}g+=R.substring(0,p.index),R=R.substring(p.index+p[0].length),p[0][0]==="\\"&&p[1]?g+="\\"+String(Number(p[1])+_):(g+=p[0],p[0]==="("&&d++)}return g}).map(f=>`(${f})`).join(o)}const Q=/\b\B/,he="[a-zA-Z]\\w*",le="[a-zA-Z_]\\w*",ue="\\b\\d+(\\.\\d+)?",be="(-?)(\\b0[xX][a-fA-F0-9]+|(\\b\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)",ve="\\b(0b[01]+)",Te="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|-|-=|/=|/|:|;|<<|<<=|<=|<|===|==|=|>>>=|>>=|>=|>>>|>>|>|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~",Ie=(e={})=>{const o=/^#![ ]*\//;return e.binary&&(e.begin=M(o,/.*\b/,e.binary,/\b.*/)),a({scope:"meta",begin:o,end:/$/,relevance:0,"on:begin":(d,f)=>{d.index!==0&&f.ignoreMatch()}},e)},ae={begin:"\\\\[\\s\\S]",relevance:0},ze={scope:"string",begin:"'",end:"'",illegal:"\\n",contains:[ae]},fe={scope:"string",begin:'"',end:'"',illegal:"\\n",contains:[ae]},Be={begin:/\b(a|an|the|are|I'm|isn't|don't|doesn't|won't|but|just|should|pretty|simply|enough|gonna|going|wtf|so|such|will|you|your|they|like|more)\b/},F=function(e,o,d={}){const f=a({scope:"comment",begin:e,end:o,contains:[]},d);f.contains.push({scope:"doctag",begin:"[ ]*(?=(TODO|FIXME|NOTE|BUG|OPTIMIZE|HACK|XXX):)",end:/(TODO|FIXME|NOTE|BUG|OPTIMIZE|HACK|XXX):/,excludeBegin:!0,relevance:0});const _=z("I","a","is","so","us","to","at","if","in","it","on",/[A-Za-z]+['](d|ve|re|ll|t|s|n)/,/[A-Za-z]+[-][a-z]+/,/[A-Za-z][a-z]{2,}/);return f.contains.push({begin:M(/[ ]+/,"(",_,/[.]?[:]?([.][ ]|[ ])/,"){3}")}),f},re=F("//","$"),ne=F("/\\*","\\*/"),de=F("#","$"),ge={scope:"number",begin:ue,relevance:0},xe={scope:"number",begin:be,relevance:0},hr={scope:"number",begin:ve,relevance:0},ur={scope:"regexp",begin:/\/(?=[^/\n]*\/)/,end:/\/[gimuy]*/,contains:[ae,{begin:/\[/,end:/\]/,relevance:0,contains:[ae]}]},br={scope:"title",begin:he,relevance:0},vr={scope:"title",begin:le,relevance:0},fr={begin:"\\.\\s*"+le,relevance:0};var ke=Object.freeze({__proto__:null,APOS_STRING_MODE:ze,BACKSLASH_ESCAPE:ae,BINARY_NUMBER_MODE:hr,BINARY_NUMBER_RE:ve,COMMENT:F,C_BLOCK_COMMENT_MODE:ne,C_LINE_COMMENT_MODE:re,C_NUMBER_MODE:xe,C_NUMBER_RE:be,END_SAME_AS_BEGIN:function(e){return Object.assign(e,{"on:begin":(o,d)=>{d.data._beginMatch=o[1]},"on:end":(o,d)=>{d.data._beginMatch!==o[1]&&d.ignoreMatch()}})},HASH_COMMENT_MODE:de,IDENT_RE:he,MATCH_NOTHING_RE:Q,METHOD_GUARD:fr,NUMBER_MODE:ge,NUMBER_RE:ue,PHRASAL_WORDS_MODE:Be,QUOTE_STRING_MODE:fe,REGEXP_MODE:ur,RE_STARTERS_RE:Te,SHEBANG:Ie,TITLE_MODE:br,UNDERSCORE_IDENT_RE:le,UNDERSCORE_TITLE_MODE:vr});function xr(e,o){e.input[e.index-1]==="."&&o.ignoreMatch()}function kr(e,o){e.className!==void 0&&(e.scope=e.className,delete e.className)}function wr(e,o){o&&e.beginKeywords&&(e.begin="\\b("+e.beginKeywords.split(" ").join("|")+")(?!\\.)(?=\\b|\\s)",e.__beforeBegin=xr,e.keywords=e.keywords||e.beginKeywords,delete e.beginKeywords,e.relevance===void 0&&(e.relevance=0))}function Cr(e,o){Array.isArray(e.illegal)&&(e.illegal=z(...e.illegal))}function Sr(e,o){if(e.match){if(e.begin||e.end)throw new Error("begin & end are not supported with match");e.begin=e.match,delete e.match}}function Er(e,o){e.relevance===void 0&&(e.relevance=1)}const Mr=(e,o)=>{if(!e.beforeMatch)return;if(e.starts)throw new Error("beforeMatch cannot be used with starts");const d=Object.assign({},e);Object.keys(e).forEach(f=>{delete e[f]}),e.keywords=d.keywords,e.begin=M(d.beforeMatch,L(d.begin)),e.starts={relevance:0,contains:[Object.assign(d,{endsParent:!0})]},e.relevance=0,delete d.beforeMatch},Ar=["of","and","for","in","not","or","if","then","parent","list","value"],Tr="keyword";function Fe(e,o,d=Tr){const f=Object.create(null);return typeof e=="string"?_(d,e.split(" ")):Array.isArray(e)?_(d,e):Object.keys(e).forEach(function(R){Object.assign(f,Fe(e[R],o,R))}),f;function _(R,g){o&&(g=g.map(p=>p.toLowerCase())),g.forEach(function(p){const v=p.split("|");f[v[0]]=[R,Ir(v[0],v[1])]})}}function Ir(e,o){return o?Number(o):zr(e)?0:1}function zr(e){return Ar.includes(e.toLowerCase())}const We={},ie=e=>{console.error(e)},He=(e,...o)=>{console.log(`WARN: ${e}`,...o)},ce=(e,o)=>{We[`${e}/${o}`]||(console.log(`Deprecated as of ${e}. ${o}`),We[`${e}/${o}`]=!0)},we=new Error;function Ge(e,o,{key:d}){let f=0;const _=e[d],R={},g={};for(let p=1;p<=o.length;p++)g[p+f]=_[p],R[p+f]=!0,f+=O(o[p-1]);e[d]=g,e[d]._emit=R,e[d]._multi=!0}function Br(e){if(Array.isArray(e.begin)){if(e.skip||e.excludeBegin||e.returnBegin)throw ie("skip, excludeBegin, returnBegin not compatible with beginScope: {}"),we;if(typeof e.beginScope!="object"||e.beginScope===null)throw ie("beginScope must be object"),we;Ge(e,e.begin,{key:"beginScope"}),e.begin=$(e.begin,{joinWith:""})}}function Pr(e){if(Array.isArray(e.end)){if(e.skip||e.excludeEnd||e.returnEnd)throw ie("skip, excludeEnd, returnEnd not compatible with endScope: {}"),we;if(typeof e.endScope!="object"||e.endScope===null)throw ie("endScope must be object"),we;Ge(e,e.end,{key:"endScope"}),e.end=$(e.end,{joinWith:""})}}function Lr(e){e.scope&&typeof e.scope=="object"&&e.scope!==null&&(e.beginScope=e.scope,delete e.scope)}function _r(e){Lr(e),typeof e.beginScope=="string"&&(e.beginScope={_wrap:e.beginScope}),typeof e.endScope=="string"&&(e.endScope={_wrap:e.endScope}),Br(e),Pr(e)}function Rr(e){function o(g,p){return new RegExp(T(g),"m"+(e.case_insensitive?"i":"")+(e.unicodeRegex?"u":"")+(p?"g":""))}class d{constructor(){this.matchIndexes={},this.regexes=[],this.matchAt=1,this.position=0}addRule(p,v){v.position=this.position++,this.matchIndexes[this.matchAt]=v,this.regexes.push([v,p]),this.matchAt+=O(p)+1}compile(){this.regexes.length===0&&(this.exec=()=>null);const p=this.regexes.map(v=>v[1]);this.matcherRe=o($(p,{joinWith:"|"}),!0),this.lastIndex=0}exec(p){this.matcherRe.lastIndex=this.lastIndex;const v=this.matcherRe.exec(p);if(!v)return null;const U=v.findIndex((ye,Le)=>Le>0&&ye!==void 0),J=this.matchIndexes[U];return v.splice(0,U),Object.assign(v,J)}}class f{constructor(){this.rules=[],this.multiRegexes=[],this.count=0,this.lastIndex=0,this.regexIndex=0}getMatcher(p){if(this.multiRegexes[p])return this.multiRegexes[p];const v=new d;return this.rules.slice(p).forEach(([U,J])=>v.addRule(U,J)),v.compile(),this.multiRegexes[p]=v,v}resumingScanAtSamePosition(){return this.regexIndex!==0}considerAll(){this.regexIndex=0}addRule(p,v){this.rules.push([p,v]),v.type==="begin"&&this.count++}exec(p){const v=this.getMatcher(this.regexIndex);v.lastIndex=this.lastIndex;let U=v.exec(p);if(this.resumingScanAtSamePosition()&&!(U&&U.index===this.lastIndex)){const J=this.getMatcher(0);J.lastIndex=this.lastIndex+1,U=J.exec(p)}return U&&(this.regexIndex+=U.position+1,this.regexIndex===this.count&&this.considerAll()),U}}function _(g){const p=new f;return g.contains.forEach(v=>p.addRule(v.begin,{rule:v,type:"begin"})),g.terminatorEnd&&p.addRule(g.terminatorEnd,{type:"end"}),g.illegal&&p.addRule(g.illegal,{type:"illegal"}),p}function R(g,p){const v=g;if(g.isCompiled)return v;[kr,Sr,_r,Mr].forEach(J=>J(g,p)),e.compilerExtensions.forEach(J=>J(g,p)),g.__beforeBegin=null,[wr,Cr,Er].forEach(J=>J(g,p)),g.isCompiled=!0;let U=null;return typeof g.keywords=="object"&&g.keywords.$pattern&&(g.keywords=Object.assign({},g.keywords),U=g.keywords.$pattern,delete g.keywords.$pattern),U=U||/\w+/,g.keywords&&(g.keywords=Fe(g.keywords,e.case_insensitive)),v.keywordPatternRe=o(U,!0),p&&(g.begin||(g.begin=/\B|\b/),v.beginRe=o(v.begin),!g.end&&!g.endsWithParent&&(g.end=/\B|\b/),g.end&&(v.endRe=o(v.end)),v.terminatorEnd=T(v.end)||"",g.endsWithParent&&p.terminatorEnd&&(v.terminatorEnd+=(g.end?"|":"")+p.terminatorEnd)),g.illegal&&(v.illegalRe=o(g.illegal)),g.contains||(g.contains=[]),g.contains=[].concat(...g.contains.map(function(J){return Nr(J==="self"?g:J)})),g.contains.forEach(function(J){R(J,v)}),g.starts&&R(g.starts,p),v.matcher=_(v),v}if(e.compilerExtensions||(e.compilerExtensions=[]),e.contains&&e.contains.includes("self"))throw new Error("ERR: contains `self` is not supported at the top-level of a language.  See documentation.");return e.classNameAliases=a(e.classNameAliases||{}),R(e)}function qe(e){return e?e.endsWithParent||qe(e.starts):!1}function Nr(e){return e.variants&&!e.cachedVariants&&(e.cachedVariants=e.variants.map(function(o){return a(e,{variants:null},o)})),e.cachedVariants?e.cachedVariants:qe(e)?a(e,{starts:e.starts?a(e.starts):null}):Object.isFrozen(e)?a(e):e}var Or="11.11.1";class Dr extends Error{constructor(o,d){super(o),this.name="HTMLInjectionError",this.html=d}}const Pe=n,Ye=a,$e=Symbol("nomatch"),Jr=7,Ke=function(e){const o=Object.create(null),d=Object.create(null),f=[];let _=!0;const R="Could not find the language '{}', did you forget to load/include a language module?",g={disableAutodetect:!0,name:"Plain text",contains:[]};let p={ignoreUnescapedHTML:!1,throwUnescapedHTML:!1,noHighlightRe:/^(no-?highlight)$/i,languageDetectRe:/\blang(?:uage)?-([\w-]+)\b/i,classPrefix:"hljs-",cssSelector:"pre code",languages:null,__emitter:A};function v(s){return p.noHighlightRe.test(s)}function U(s){let h=s.className+" ";h+=s.parentNode?s.parentNode.className:"";const E=p.languageDetectRe.exec(h);if(E){const B=te(E[1]);return B||(He(R.replace("{}",E[1])),He("Falling back to no-highlight mode for this block.",s)),B?E[1]:"no-highlight"}return h.split(/\s+/).find(B=>v(B)||te(B))}function J(s,h,E){let B="",j="";typeof h=="object"?(B=s,E=h.ignoreIllegals,j=h.language):(ce("10.7.0","highlight(lang, code, ...args) has been deprecated."),ce("10.7.0",`Please use highlight(code, options) instead.
-https://github.com/highlightjs/highlight.js/issues/2277`),j=s,B=h),E===void 0&&(E=!0);const K={code:B,language:j};Se("before:highlight",K);const oe=K.result?K.result:ye(K.language,K.code,E);return oe.code=K.code,Se("after:highlight",oe),oe}function ye(s,h,E,B){const j=Object.create(null);function K(c,y){return c.keywords[y]}function oe(){if(!x.keywords){W.addText(P);return}let c=0;x.keywordPatternRe.lastIndex=0;let y=x.keywordPatternRe.exec(P),w="";for(;y;){w+=P.substring(c,y.index);const I=X.case_insensitive?y[0].toLowerCase():y[0],G=K(x,I);if(G){const[Z,tt]=G;if(W.addText(w),w="",j[I]=(j[I]||0)+1,j[I]<=Jr&&(Ae+=tt),Z.startsWith("_"))w+=y[0];else{const ot=X.classNameAliases[Z]||Z;V(y[0],ot)}}else w+=y[0];c=x.keywordPatternRe.lastIndex,y=x.keywordPatternRe.exec(P)}w+=P.substring(c),W.addText(w)}function Ee(){if(P==="")return;let c=null;if(typeof x.subLanguage=="string"){if(!o[x.subLanguage]){W.addText(P);return}c=ye(x.subLanguage,P,!0,or[x.subLanguage]),or[x.subLanguage]=c._top}else c=_e(P,x.subLanguage.length?x.subLanguage:null);x.relevance>0&&(Ae+=c.relevance),W.__addSublanguage(c._emitter,c.language)}function Y(){x.subLanguage!=null?Ee():oe(),P=""}function V(c,y){c!==""&&(W.startScope(y),W.addText(c),W.endScope())}function Ze(c,y){let w=1;const I=y.length-1;for(;w<=I;){if(!c._emit[w]){w++;continue}const G=X.classNameAliases[c[w]]||c[w],Z=y[w];G?V(Z,G):(P=Z,oe(),P=""),w++}}function er(c,y){return c.scope&&typeof c.scope=="string"&&W.openNode(X.classNameAliases[c.scope]||c.scope),c.beginScope&&(c.beginScope._wrap?(V(P,X.classNameAliases[c.beginScope._wrap]||c.beginScope._wrap),P=""):c.beginScope._multi&&(Ze(c.beginScope,y),P="")),x=Object.create(c,{parent:{value:x}}),x}function rr(c,y,w){let I=D(c.endRe,w);if(I){if(c["on:end"]){const G=new t(c);c["on:end"](y,G),G.isMatchIgnored&&(I=!1)}if(I){for(;c.endsParent&&c.parent;)c=c.parent;return c}}if(c.endsWithParent)return rr(c.parent,y,w)}function Xr(c){return x.matcher.regexIndex===0?(P+=c[0],1):(De=!0,0)}function Qr(c){const y=c[0],w=c.rule,I=new t(w),G=[w.__beforeBegin,w["on:begin"]];for(const Z of G)if(Z&&(Z(c,I),I.isMatchIgnored))return Xr(y);return w.skip?P+=y:(w.excludeBegin&&(P+=y),Y(),!w.returnBegin&&!w.excludeBegin&&(P=y)),er(w,c),w.returnBegin?0:y.length}function Zr(c){const y=c[0],w=h.substring(c.index),I=rr(x,c,w);if(!I)return $e;const G=x;x.endScope&&x.endScope._wrap?(Y(),V(y,x.endScope._wrap)):x.endScope&&x.endScope._multi?(Y(),Ze(x.endScope,c)):G.skip?P+=y:(G.returnEnd||G.excludeEnd||(P+=y),Y(),G.excludeEnd&&(P=y));do x.scope&&W.closeNode(),!x.skip&&!x.subLanguage&&(Ae+=x.relevance),x=x.parent;while(x!==I.parent);return I.starts&&er(I.starts,c),G.returnEnd?0:y.length}function et(){const c=[];for(let y=x;y!==X;y=y.parent)y.scope&&c.unshift(y.scope);c.forEach(y=>W.openNode(y))}let Me={};function tr(c,y){const w=y&&y[0];if(P+=c,w==null)return Y(),0;if(Me.type==="begin"&&y.type==="end"&&Me.index===y.index&&w===""){if(P+=h.slice(y.index,y.index+1),!_){const I=new Error(`0 width match regex (${s})`);throw I.languageName=s,I.badRule=Me.rule,I}return 1}if(Me=y,y.type==="begin")return Qr(y);if(y.type==="illegal"&&!E){const I=new Error('Illegal lexeme "'+w+'" for mode "'+(x.scope||"<unnamed>")+'"');throw I.mode=x,I}else if(y.type==="end"){const I=Zr(y);if(I!==$e)return I}if(y.type==="illegal"&&w==="")return P+=`
-`,1;if(Oe>1e5&&Oe>y.index*3)throw new Error("potential infinite loop, way more iterations than matches");return P+=w,w.length}const X=te(s);if(!X)throw ie(R.replace("{}",s)),new Error('Unknown language: "'+s+'"');const rt=Rr(X);let Ne="",x=B||rt;const or={},W=new p.__emitter(p);et();let P="",Ae=0,se=0,Oe=0,De=!1;try{if(X.__emitTokens)X.__emitTokens(h,W);else{for(x.matcher.considerAll();;){Oe++,De?De=!1:x.matcher.considerAll(),x.matcher.lastIndex=se;const c=x.matcher.exec(h);if(!c)break;const y=h.substring(se,c.index),w=tr(y,c);se=c.index+w}tr(h.substring(se))}return W.finalize(),Ne=W.toHTML(),{language:s,value:Ne,relevance:Ae,illegal:!1,_emitter:W,_top:x}}catch(c){if(c.message&&c.message.includes("Illegal"))return{language:s,value:Pe(h),illegal:!0,relevance:0,_illegalBy:{message:c.message,index:se,context:h.slice(se-100,se+100),mode:c.mode,resultSoFar:Ne},_emitter:W};if(_)return{language:s,value:Pe(h),illegal:!1,relevance:0,errorRaised:c,_emitter:W,_top:x};throw c}}function Le(s){const h={value:Pe(s),illegal:!1,relevance:0,_top:g,_emitter:new p.__emitter(p)};return h._emitter.addText(s),h}function _e(s,h){h=h||p.languages||Object.keys(o);const E=Le(s),B=h.filter(te).filter(Qe).map(Y=>ye(Y,s,!1));B.unshift(E);const j=B.sort((Y,V)=>{if(Y.relevance!==V.relevance)return V.relevance-Y.relevance;if(Y.language&&V.language){if(te(Y.language).supersetOf===V.language)return 1;if(te(V.language).supersetOf===Y.language)return-1}return 0}),[K,oe]=j,Ee=K;return Ee.secondBest=oe,Ee}function jr(s,h,E){const B=h&&d[h]||E;s.classList.add("hljs"),s.classList.add(`language-${B}`)}function Re(s){let h=null;const E=U(s);if(v(E))return;if(Se("before:highlightElement",{el:s,language:E}),s.dataset.highlighted){console.log("Element previously highlighted. To highlight again, first unset `dataset.highlighted`.",s);return}if(s.children.length>0&&(p.ignoreUnescapedHTML||(console.warn("One of your code blocks includes unescaped HTML. This is a potentially serious security risk."),console.warn("https://github.com/highlightjs/highlight.js/wiki/security"),console.warn("The element with unescaped HTML:"),console.warn(s)),p.throwUnescapedHTML))throw new Dr("One of your code blocks includes unescaped HTML.",s.innerHTML);h=s;const B=h.textContent,j=E?J(B,{language:E,ignoreIllegals:!0}):_e(B);s.innerHTML=j.value,s.dataset.highlighted="yes",jr(s,E,j.language),s.result={language:j.language,re:j.relevance,relevance:j.relevance},j.secondBest&&(s.secondBest={language:j.secondBest.language,relevance:j.secondBest.relevance}),Se("after:highlightElement",{el:s,result:j,text:B})}function Ur(s){p=Ye(p,s)}const Fr=()=>{Ce(),ce("10.6.0","initHighlighting() deprecated.  Use highlightAll() now.")};function Wr(){Ce(),ce("10.6.0","initHighlightingOnLoad() deprecated.  Use highlightAll() now.")}let Ve=!1;function Ce(){function s(){Ce()}if(document.readyState==="loading"){Ve||window.addEventListener("DOMContentLoaded",s,!1),Ve=!0;return}document.querySelectorAll(p.cssSelector).forEach(Re)}function Hr(s,h){let E=null;try{E=h(e)}catch(B){if(ie("Language definition for '{}' could not be registered.".replace("{}",s)),_)ie(B);else throw B;E=g}E.name||(E.name=s),o[s]=E,E.rawDefinition=h.bind(null,e),E.aliases&&Xe(E.aliases,{languageName:s})}function Gr(s){delete o[s];for(const h of Object.keys(d))d[h]===s&&delete d[h]}function qr(){return Object.keys(o)}function te(s){return s=(s||"").toLowerCase(),o[s]||o[d[s]]}function Xe(s,{languageName:h}){typeof s=="string"&&(s=[s]),s.forEach(E=>{d[E.toLowerCase()]=h})}function Qe(s){const h=te(s);return h&&!h.disableAutodetect}function Yr(s){s["before:highlightBlock"]&&!s["before:highlightElement"]&&(s["before:highlightElement"]=h=>{s["before:highlightBlock"](Object.assign({block:h.el},h))}),s["after:highlightBlock"]&&!s["after:highlightElement"]&&(s["after:highlightElement"]=h=>{s["after:highlightBlock"](Object.assign({block:h.el},h))})}function $r(s){Yr(s),f.push(s)}function Kr(s){const h=f.indexOf(s);h!==-1&&f.splice(h,1)}function Se(s,h){const E=s;f.forEach(function(B){B[E]&&B[E](h)})}function Vr(s){return ce("10.7.0","highlightBlock will be removed entirely in v12.0"),ce("10.7.0","Please use highlightElement now."),Re(s)}Object.assign(e,{highlight:J,highlightAuto:_e,highlightAll:Ce,highlightElement:Re,highlightBlock:Vr,configure:Ur,initHighlighting:Fr,initHighlightingOnLoad:Wr,registerLanguage:Hr,unregisterLanguage:Gr,listLanguages:qr,getLanguage:te,registerAliases:Xe,autoDetection:Qe,inherit:Ye,addPlugin:$r,removePlugin:Kr}),e.debugMode=function(){_=!1},e.safeMode=function(){_=!0},e.versionString=Or,e.regex={concat:M,lookahead:L,either:z,optional:N,anyNumberOfTimes:H};for(const s in ke)typeof ke[s]=="object"&&r(ke[s]);return Object.assign(e,ke),e},me=Ke({});return me.newInstance=()=>Ke({}),Ue=me,me.HighlightJS=me,me.default=me,Ue}var ct=dt();const ee=lt(ct);function mr(r){const t=r.regex,n={},a={begin:/\$\{/,end:/\}/,contains:["self",{begin:/:-/,contains:[n]}]};Object.assign(n,{className:"variable",variants:[{begin:t.concat(/\$[\w\d#@][\w\d_]*/,"(?![\\w\\d])(?![$])")},a]});const i={className:"subst",begin:/\$\(/,end:/\)/,contains:[r.BACKSLASH_ESCAPE]},m=r.inherit(r.COMMENT(),{match:[/(^|\s)/,/#.*$/],scope:{2:"comment"}}),u={begin:/<<-?\s*(?=\w+)/,starts:{contains:[r.END_SAME_AS_BEGIN({begin:/(\w+)/,end:/(\w+)/,className:"string"})]}},C={className:"string",begin:/"/,end:/"/,contains:[r.BACKSLASH_ESCAPE,n,i]};i.contains.push(C);const k={match:/\\"/},l={className:"string",begin:/'/,end:/'/},A={match:/\\'/},T={begin:/\$?\(\(/,end:/\)\)/,contains:[{begin:/\d+#[0-9a-f]+/,className:"number"},r.NUMBER_MODE,n]},L=["fish","bash","zsh","sh","csh","ksh","tcsh","dash","scsh"],H=r.SHEBANG({binary:`(${L.join("|")})`,relevance:10}),N={className:"function",begin:/\w[\w\d_]*\s*\(\s*\)\s*\{/,returnBegin:!0,contains:[r.inherit(r.TITLE_MODE,{begin:/\w[\w\d_]*/})],relevance:0},M=["if","then","else","elif","fi","time","for","while","until","in","do","done","case","esac","coproc","function","select"],S=["true","false"],z={match:/(\/[a-z._-]+)+/},O=["break","cd","continue","eval","exec","exit","export","getopts","hash","pwd","readonly","return","shift","test","times","trap","umask","unset"],D=["alias","bind","builtin","caller","command","declare","echo","enable","help","let","local","logout","mapfile","printf","read","readarray","source","sudo","type","typeset","ulimit","unalias"],q=["autoload","bg","bindkey","bye","cap","chdir","clone","comparguments","compcall","compctl","compdescribe","compfiles","compgroups","compquote","comptags","comptry","compvalues","dirs","disable","disown","echotc","echoti","emulate","fc","fg","float","functions","getcap","getln","history","integer","jobs","kill","limit","log","noglob","popd","print","pushd","pushln","rehash","sched","setcap","setopt","stat","suspend","ttyctl","unfunction","unhash","unlimit","unsetopt","vared","wait","whence","where","which","zcompile","zformat","zftp","zle","zmodload","zparseopts","zprof","zpty","zregexparse","zsocket","zstyle","ztcp"],$=["chcon","chgrp","chown","chmod","cp","dd","df","dir","dircolors","ln","ls","mkdir","mkfifo","mknod","mktemp","mv","realpath","rm","rmdir","shred","sync","touch","truncate","vdir","b2sum","base32","base64","cat","cksum","comm","csplit","cut","expand","fmt","fold","head","join","md5sum","nl","numfmt","od","paste","ptx","pr","sha1sum","sha224sum","sha256sum","sha384sum","sha512sum","shuf","sort","split","sum","tac","tail","tr","tsort","unexpand","uniq","wc","arch","basename","chroot","date","dirname","du","echo","env","expr","factor","groups","hostid","id","link","logname","nice","nohup","nproc","pathchk","pinky","printenv","printf","pwd","readlink","runcon","seq","sleep","stat","stdbuf","stty","tee","test","timeout","tty","uname","unlink","uptime","users","who","whoami","yes"];return{name:"Bash",aliases:["sh","zsh"],keywords:{$pattern:/\b[a-z][a-z0-9._-]+\b/,keyword:M,literal:S,built_in:[...O,...D,"set","shopt",...q,...$]},contains:[H,r.SHEBANG(),N,T,m,u,z,C,k,l,A,n]}}function mt(r){const t=r.regex,n=new RegExp("[\\p{XID_Start}_]\\p{XID_Continue}*","u"),a=["and","as","assert","async","await","break","case","class","continue","def","del","elif","else","except","finally","for","from","global","if","import","in","is","lambda","match","nonlocal|10","not","or","pass","raise","return","try","while","with","yield"],C={$pattern:/[A-Za-z]\w+|__\w+__/,keyword:a,built_in:["__import__","abs","all","any","ascii","bin","bool","breakpoint","bytearray","bytes","callable","chr","classmethod","compile","complex","delattr","dict","dir","divmod","enumerate","eval","exec","filter","float","format","frozenset","getattr","globals","hasattr","hash","help","hex","id","input","int","isinstance","issubclass","iter","len","list","locals","map","max","memoryview","min","next","object","oct","open","ord","pow","print","property","range","repr","reversed","round","set","setattr","slice","sorted","staticmethod","str","sum","super","tuple","type","vars","zip"],literal:["__debug__","Ellipsis","False","None","NotImplemented","True"],type:["Any","Callable","Coroutine","Dict","List","Literal","Generic","Optional","Sequence","Set","Tuple","Type","Union"]},k={className:"meta",begin:/^(>>>|\.\.\.) /},l={className:"subst",begin:/\{/,end:/\}/,keywords:C,illegal:/#/},A={begin:/\{\{/,relevance:0},T={className:"string",contains:[r.BACKSLASH_ESCAPE],variants:[{begin:/([uU]|[bB]|[rR]|[bB][rR]|[rR][bB])?'''/,end:/'''/,contains:[r.BACKSLASH_ESCAPE,k],relevance:10},{begin:/([uU]|[bB]|[rR]|[bB][rR]|[rR][bB])?"""/,end:/"""/,contains:[r.BACKSLASH_ESCAPE,k],relevance:10},{begin:/([fF][rR]|[rR][fF]|[fF])'''/,end:/'''/,contains:[r.BACKSLASH_ESCAPE,k,A,l]},{begin:/([fF][rR]|[rR][fF]|[fF])"""/,end:/"""/,contains:[r.BACKSLASH_ESCAPE,k,A,l]},{begin:/([uU]|[rR])'/,end:/'/,relevance:10},{begin:/([uU]|[rR])"/,end:/"/,relevance:10},{begin:/([bB]|[bB][rR]|[rR][bB])'/,end:/'/},{begin:/([bB]|[bB][rR]|[rR][bB])"/,end:/"/},{begin:/([fF][rR]|[rR][fF]|[fF])'/,end:/'/,contains:[r.BACKSLASH_ESCAPE,A,l]},{begin:/([fF][rR]|[rR][fF]|[fF])"/,end:/"/,contains:[r.BACKSLASH_ESCAPE,A,l]},r.APOS_STRING_MODE,r.QUOTE_STRING_MODE]},L="[0-9](_?[0-9])*",H=`(\\b(${L}))?\\.(${L})|\\b(${L})\\.`,N=`\\b|${a.join("|")}`,M={className:"number",relevance:0,variants:[{begin:`(\\b(${L})|(${H}))[eE][+-]?(${L})[jJ]?(?=${N})`},{begin:`(${H})[jJ]?`},{begin:`\\b([1-9](_?[0-9])*|0+(_?0)*)[lLjJ]?(?=${N})`},{begin:`\\b0[bB](_?[01])+[lL]?(?=${N})`},{begin:`\\b0[oO](_?[0-7])+[lL]?(?=${N})`},{begin:`\\b0[xX](_?[0-9a-fA-F])+[lL]?(?=${N})`},{begin:`\\b(${L})[jJ](?=${N})`}]},S={className:"comment",begin:t.lookahead(/# type:/),end:/$/,keywords:C,contains:[{begin:/# type:/},{begin:/#/,end:/\b\B/,endsWithParent:!0}]},z={className:"params",variants:[{className:"",begin:/\(\s*\)/,skip:!0},{begin:/\(/,end:/\)/,excludeBegin:!0,excludeEnd:!0,keywords:C,contains:["self",k,M,T,r.HASH_COMMENT_MODE]}]};return l.contains=[T,M,k],{name:"Python",aliases:["py","gyp","ipython"],unicodeRegex:!0,keywords:C,illegal:/(<\/|\?)|=>/,contains:[k,M,{scope:"variable.language",match:/\bself\b/},{beginKeywords:"if",relevance:0},{match:/\bor\b/,scope:"keyword"},T,S,r.HASH_COMMENT_MODE,{match:[/\bdef/,/\s+/,n],scope:{1:"keyword",3:"title.function"},contains:[z]},{variants:[{match:[/\bclass/,/\s+/,n,/\s*/,/\(\s*/,n,/\s*\)/]},{match:[/\bclass/,/\s+/,n]}],scope:{1:"keyword",3:"title.class",6:"title.class.inherited"}},{className:"meta",begin:/^[\t ]*@/,end:/(?=#)|$/,contains:[M,z,T]}]}}function pt(r){const t={className:"attr",begin:/"(\\.|[^\\"\r\n])*"(?=\s*:)/,relevance:1.01},n={match:/[{}[\],:]/,className:"punctuation",relevance:0},a=["true","false","null"],i={scope:"literal",beginKeywords:a.join(" ")};return{name:"JSON",aliases:["jsonc"],keywords:{literal:a},contains:[t,n,r.QUOTE_STRING_MODE,i,r.C_NUMBER_MODE,r.C_LINE_COMMENT_MODE,r.C_BLOCK_COMMENT_MODE],illegal:"\\S"}}function gt(r){const t="true false yes no null",n="[\\w#;/?:@&=+$,.~*'()[\\]]+",a={className:"attr",variants:[{begin:/[\w*@][\w*@ :()\./-]*:(?=[ \t]|$)/},{begin:/"[\w*@][\w*@ :()\./-]*":(?=[ \t]|$)/},{begin:/'[\w*@][\w*@ :()\./-]*':(?=[ \t]|$)/}]},i={className:"template-variable",variants:[{begin:/\{\{/,end:/\}\}/},{begin:/%\{/,end:/\}/}]},m={className:"string",relevance:0,begin:/'/,end:/'/,contains:[{match:/''/,scope:"char.escape",relevance:0}]},u={className:"string",relevance:0,variants:[{begin:/"/,end:/"/},{begin:/\S+/}],contains:[r.BACKSLASH_ESCAPE,i]},C=r.inherit(u,{variants:[{begin:/'/,end:/'/,contains:[{begin:/''/,relevance:0}]},{begin:/"/,end:/"/},{begin:/[^\s,{}[\]]+/}]}),L={className:"number",begin:"\\b"+"[0-9]{4}(-[0-9][0-9]){0,2}"+"([Tt \\t][0-9][0-9]?(:[0-9][0-9]){2})?"+"(\\.[0-9]*)?"+"([ \\t])*(Z|[-+][0-9][0-9]?(:[0-9][0-9])?)?"+"\\b"},H={end:",",endsWithParent:!0,excludeEnd:!0,keywords:t,relevance:0},N={begin:/\{/,end:/\}/,contains:[H],illegal:"\\n",relevance:0},M={begin:"\\[",end:"\\]",contains:[H],illegal:"\\n",relevance:0},S=[a,{className:"meta",begin:"^---\\s*$",relevance:10},{className:"string",begin:"[\\|>]([1-9]?[+-])?[ ]*\\n( +)[^ ][^\\n]*\\n(\\2[^\\n]+\\n?)*"},{begin:"<%[%=-]?",end:"[%-]?%>",subLanguage:"ruby",excludeBegin:!0,excludeEnd:!0,relevance:0},{className:"type",begin:"!\\w+!"+n},{className:"type",begin:"!<"+n+">"},{className:"type",begin:"!"+n},{className:"type",begin:"!!"+n},{className:"meta",begin:"&"+r.UNDERSCORE_IDENT_RE+"$"},{className:"meta",begin:"\\*"+r.UNDERSCORE_IDENT_RE+"$"},{className:"bullet",begin:"-(?=[ ]|$)",relevance:0},r.HASH_COMMENT_MODE,{beginKeywords:t,keywords:{literal:t}},L,{className:"number",begin:r.C_NUMBER_RE+"\\b",relevance:0},N,M,m,u],z=[...S];return z.pop(),z.push(C),H.contains=z,{name:"YAML",case_insensitive:!0,aliases:["yml"],contains:S}}const nr="[A-Za-z$_][0-9A-Za-z$_]*",yt=["as","in","of","if","for","while","finally","var","new","function","do","return","void","else","break","catch","instanceof","with","throw","case","default","try","switch","continue","typeof","delete","let","yield","const","class","debugger","async","await","static","import","from","export","extends","using"],ht=["true","false","null","undefined","NaN","Infinity"],pr=["Object","Function","Boolean","Symbol","Math","Date","Number","BigInt","String","RegExp","Array","Float32Array","Float64Array","Int8Array","Uint8Array","Uint8ClampedArray","Int16Array","Int32Array","Uint16Array","Uint32Array","BigInt64Array","BigUint64Array","Set","Map","WeakSet","WeakMap","ArrayBuffer","SharedArrayBuffer","Atomics","DataView","JSON","Promise","Generator","GeneratorFunction","AsyncFunction","Reflect","Proxy","Intl","WebAssembly"],gr=["Error","EvalError","InternalError","RangeError","ReferenceError","SyntaxError","TypeError","URIError"],yr=["setInterval","setTimeout","clearInterval","clearTimeout","require","exports","eval","isFinite","isNaN","parseFloat","parseInt","decodeURI","decodeURIComponent","encodeURI","encodeURIComponent","escape","unescape"],ut=["arguments","this","super","console","window","document","localStorage","sessionStorage","module","global"],bt=[].concat(yr,pr,gr);function vt(r){const t=r.regex,n=(F,{after:re})=>{const ne="</"+F[0].slice(1);return F.input.indexOf(ne,re)!==-1},a=nr,i={begin:"<>",end:"</>"},m=/<[A-Za-z0-9\\._:-]+\s*\/>/,u={begin:/<[A-Za-z0-9\\._:-]+/,end:/\/[A-Za-z0-9\\._:-]+>|\/>/,isTrulyOpeningTag:(F,re)=>{const ne=F[0].length+F.index,de=F.input[ne];if(de==="<"||de===","){re.ignoreMatch();return}de===">"&&(n(F,{after:ne})||re.ignoreMatch());let ge;const xe=F.input.substring(ne);if(ge=xe.match(/^\s*=/)){re.ignoreMatch();return}if((ge=xe.match(/^\s+extends\s+/))&&ge.index===0){re.ignoreMatch();return}}},C={$pattern:nr,keyword:yt,literal:ht,built_in:bt,"variable.language":ut},k="[0-9](_?[0-9])*",l=`\\.(${k})`,A="0|[1-9](_?[0-9])*|0[0-7]*[89][0-9]*",T={className:"number",variants:[{begin:`(\\b(${A})((${l})|\\.)?|(${l}))[eE][+-]?(${k})\\b`},{begin:`\\b(${A})\\b((${l})\\b|\\.)?|(${l})\\b`},{begin:"\\b(0|[1-9](_?[0-9])*)n\\b"},{begin:"\\b0[xX][0-9a-fA-F](_?[0-9a-fA-F])*n?\\b"},{begin:"\\b0[bB][0-1](_?[0-1])*n?\\b"},{begin:"\\b0[oO][0-7](_?[0-7])*n?\\b"},{begin:"\\b0[0-7]+n?\\b"}],relevance:0},L={className:"subst",begin:"\\$\\{",end:"\\}",keywords:C,contains:[]},H={begin:".?html`",end:"",starts:{end:"`",returnEnd:!1,contains:[r.BACKSLASH_ESCAPE,L],subLanguage:"xml"}},N={begin:".?css`",end:"",starts:{end:"`",returnEnd:!1,contains:[r.BACKSLASH_ESCAPE,L],subLanguage:"css"}},M={begin:".?gql`",end:"",starts:{end:"`",returnEnd:!1,contains:[r.BACKSLASH_ESCAPE,L],subLanguage:"graphql"}},S={className:"string",begin:"`",end:"`",contains:[r.BACKSLASH_ESCAPE,L]},O={className:"comment",variants:[r.COMMENT(/\/\*\*(?!\/)/,"\\*/",{relevance:0,contains:[{begin:"(?=@[A-Za-z]+)",relevance:0,contains:[{className:"doctag",begin:"@[A-Za-z]+"},{className:"type",begin:"\\{",end:"\\}",excludeEnd:!0,excludeBegin:!0,relevance:0},{className:"variable",begin:a+"(?=\\s*(-)|$)",endsParent:!0,relevance:0},{begin:/(?=[^\n])\s/,relevance:0}]}]}),r.C_BLOCK_COMMENT_MODE,r.C_LINE_COMMENT_MODE]},D=[r.APOS_STRING_MODE,r.QUOTE_STRING_MODE,H,N,M,S,{match:/\$\d+/},T];L.contains=D.concat({begin:/\{/,end:/\}/,keywords:C,contains:["self"].concat(D)});const q=[].concat(O,L.contains),$=q.concat([{begin:/(\s*)\(/,end:/\)/,keywords:C,contains:["self"].concat(q)}]),Q={className:"params",begin:/(\s*)\(/,end:/\)/,excludeBegin:!0,excludeEnd:!0,keywords:C,contains:$},he={variants:[{match:[/class/,/\s+/,a,/\s+/,/extends/,/\s+/,t.concat(a,"(",t.concat(/\./,a),")*")],scope:{1:"keyword",3:"title.class",5:"keyword",7:"title.class.inherited"}},{match:[/class/,/\s+/,a],scope:{1:"keyword",3:"title.class"}}]},le={relevance:0,match:t.either(/\bJSON/,/\b[A-Z][a-z]+([A-Z][a-z]*|\d)*/,/\b[A-Z]{2,}([A-Z][a-z]+|\d)+([A-Z][a-z]*)*/,/\b[A-Z]{2,}[a-z]+([A-Z][a-z]+|\d)*([A-Z][a-z]*)*/),className:"title.class",keywords:{_:[...pr,...gr]}},ue={label:"use_strict",className:"meta",relevance:10,begin:/^\s*['"]use (strict|asm)['"]/},be={variants:[{match:[/function/,/\s+/,a,/(?=\s*\()/]},{match:[/function/,/\s*(?=\()/]}],className:{1:"keyword",3:"title.function"},label:"func.def",contains:[Q],illegal:/%/},ve={relevance:0,match:/\b[A-Z][A-Z_0-9]+\b/,className:"variable.constant"};function Te(F){return t.concat("(?!",F.join("|"),")")}const Ie={match:t.concat(/\b/,Te([...yr,"super","import"].map(F=>`${F}\\s*\\(`)),a,t.lookahead(/\s*\(/)),className:"title.function",relevance:0},ae={begin:t.concat(/\./,t.lookahead(t.concat(a,/(?![0-9A-Za-z$_(])/))),end:a,excludeBegin:!0,keywords:"prototype",className:"property",relevance:0},ze={match:[/get|set/,/\s+/,a,/(?=\()/],className:{1:"keyword",3:"title.function"},contains:[{begin:/\(\)/},Q]},fe="(\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)|"+r.UNDERSCORE_IDENT_RE+")\\s*=>",Be={match:[/const|var|let/,/\s+/,a,/\s*/,/=\s*/,/(async\s*)?/,t.lookahead(fe)],keywords:"async",className:{1:"keyword",3:"title.function"},contains:[Q]};return{name:"JavaScript",aliases:["js","jsx","mjs","cjs"],keywords:C,exports:{PARAMS_CONTAINS:$,CLASS_REFERENCE:le},illegal:/#(?![$_A-z])/,contains:[r.SHEBANG({label:"shebang",binary:"node",relevance:5}),ue,r.APOS_STRING_MODE,r.QUOTE_STRING_MODE,H,N,M,S,O,{match:/\$\d+/},T,le,{scope:"attr",match:a+t.lookahead(":"),relevance:0},Be,{begin:"("+r.RE_STARTERS_RE+"|\\b(case|return|throw)\\b)\\s*",keywords:"return throw case",relevance:0,contains:[O,r.REGEXP_MODE,{className:"function",begin:fe,returnBegin:!0,end:"\\s*=>",contains:[{className:"params",variants:[{begin:r.UNDERSCORE_IDENT_RE,relevance:0},{className:null,begin:/\(\s*\)/,skip:!0},{begin:/(\s*)\(/,end:/\)/,excludeBegin:!0,excludeEnd:!0,keywords:C,contains:$}]}]},{begin:/,/,relevance:0},{match:/\s+/,relevance:0},{variants:[{begin:i.begin,end:i.end},{match:m},{begin:u.begin,"on:begin":u.isTrulyOpeningTag,end:u.end}],subLanguage:"xml",contains:[{begin:u.begin,end:u.end,skip:!0,contains:["self"]}]}]},be,{beginKeywords:"while if switch catch for"},{begin:"\\b(?!function)"+r.UNDERSCORE_IDENT_RE+"\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)\\s*\\{",returnBegin:!0,label:"func.def",contains:[Q,r.inherit(r.TITLE_MODE,{begin:a,className:"title.function"})]},{match:/\.\.\./,relevance:0},ae,{match:"\\$"+a,relevance:0},{match:[/\bconstructor(?=\s*\()/],className:{1:"title.function"},contains:[Q]},Ie,ve,he,ze,{match:/\$[(.]/}]}}function ft(r){const t=r.regex,n=t.concat(/[\p{L}_]/u,t.optional(/[\p{L}0-9_.-]*:/u),/[\p{L}0-9_.-]*/u),a=/[\p{L}0-9._:-]+/u,i={className:"symbol",begin:/&[a-z]+;|&#[0-9]+;|&#x[a-f0-9]+;/},m={begin:/\s/,contains:[{className:"keyword",begin:/#?[a-z_][a-z1-9_-]+/,illegal:/\n/}]},u=r.inherit(m,{begin:/\(/,end:/\)/}),C=r.inherit(r.APOS_STRING_MODE,{className:"string"}),k=r.inherit(r.QUOTE_STRING_MODE,{className:"string"}),l={endsWithParent:!0,illegal:/</,relevance:0,contains:[{className:"attr",begin:a,relevance:0},{begin:/=\s*/,relevance:0,contains:[{className:"string",endsParent:!0,variants:[{begin:/"/,end:/"/,contains:[i]},{begin:/'/,end:/'/,contains:[i]},{begin:/[^\s"'=<>`]+/}]}]}]};return{name:"HTML, XML",aliases:["html","xhtml","rss","atom","xjb","xsd","xsl","plist","wsf","svg"],case_insensitive:!0,unicodeRegex:!0,contains:[{className:"meta",begin:/<![a-z]/,end:/>/,relevance:10,contains:[m,k,C,u,{begin:/\[/,end:/\]/,contains:[{className:"meta",begin:/<![a-z]/,end:/>/,contains:[m,u,k,C]}]}]},r.COMMENT(/<!--/,/-->/,{relevance:10}),{begin:/<!\[CDATA\[/,end:/\]\]>/,relevance:10},i,{className:"meta",end:/\?>/,variants:[{begin:/<\?xml/,relevance:10,contains:[k]},{begin:/<\?[a-z][a-z0-9]+/}]},{className:"tag",begin:/<style(?=\s|>)/,end:/>/,keywords:{name:"style"},contains:[l],starts:{end:/<\/style>/,returnEnd:!0,subLanguage:["css","xml"]}},{className:"tag",begin:/<script(?=\s|>)/,end:/>/,keywords:{name:"script"},contains:[l],starts:{end:/<\/script>/,returnEnd:!0,subLanguage:["javascript","handlebars","xml"]}},{className:"tag",begin:/<>|<\/>/},{className:"tag",begin:t.concat(/</,t.lookahead(t.concat(n,t.either(/\/>/,/>/,/\s/)))),end:/\/?>/,contains:[{className:"name",begin:n,relevance:0,starts:l}]},{className:"tag",begin:t.concat(/<\//,t.lookahead(t.concat(n,/>/))),contains:[{className:"name",begin:n,relevance:0},{begin:/>/,relevance:0,endsParent:!0}]}]}}ee.registerLanguage("bash",mr);ee.registerLanguage("shell",mr);ee.registerLanguage("python",mt);ee.registerLanguage("json",pt);ee.registerLanguage("yaml",gt);ee.registerLanguage("javascript",vt);ee.registerLanguage("html",ft);const ir=["display: block","padding: 1rem","border: 1px solid var(--border-color)","border-radius: 8px","font-family: 'JetBrains Mono', monospace","font-size: 0.85rem","white-space: pre-wrap","line-height: 1.5","overflow-x: hidden","margin: 0.5rem 0","box-shadow: inset 0 2px 4px rgba(0,0,0,0.15)"].join("; "),sr={block:`${ir}; background: var(--syntax-bg); color: var(--syntax-text)`,terminal:`${ir}; background: var(--surface-dark); color: var(--code-green)`};let lr=!1;function xt(){if(lr)return;lr=!0;const r=document.createElement("style");r.textContent=`
+(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const i of document.querySelectorAll('link[rel="modulepreload"]'))a(i);new MutationObserver(i=>{for(const m of i)if(m.type==="childList")for(const u of m.addedNodes)u.tagName==="LINK"&&u.rel==="modulepreload"&&a(u)}).observe(document,{childList:!0,subtree:!0});function n(i){const m={};return i.integrity&&(m.integrity=i.integrity),i.referrerPolicy&&(m.referrerPolicy=i.referrerPolicy),i.crossOrigin==="use-credentials"?m.credentials="include":i.crossOrigin==="anonymous"?m.credentials="omit":m.credentials="same-origin",m}function a(i){if(i.ep)return;i.ep=!0;const m=n(i);fetch(i.href,m)}})();const at=70,Ue=160,Oe=120;class it{constructor(t,n){this.width=t,this.height=n,this.x=Math.random()*t,this.y=Math.random()*n,this.vx=(Math.random()-.5)*.4,this.vy=(Math.random()-.5)*.4,this.baseRadius=1.5+Math.random()*2,this.pulsePhase=Math.random()*Math.PI*2,this.pulseSpeed=.015+Math.random()*.025,this.isHub=Math.random()<.12,this.isHub&&(this.baseRadius*=2)}update(t){this.pulsePhase+=this.pulseSpeed;const n=this.x-t.x,a=this.y-t.y,i=Math.hypot(n,a);if(i<Oe&&i>0){const u=((Oe-i)/Oe)**2*3;this.vx+=n/i*u*.08,this.vy+=a/i*u*.08}this.vx*=.975,this.vy*=.975;const m=Math.hypot(this.vx,this.vy);m>1.5&&(this.vx=this.vx/m*1.5,this.vy=this.vy/m*1.5),this.x+=this.vx,this.y+=this.vy,this.x<0&&(this.x=this.width),this.x>this.width&&(this.x=0),this.y<0&&(this.y=this.height),this.y>this.height&&(this.y=0)}draw(t,n){const a=.5+.5*Math.sin(this.pulsePhase),i=this.baseRadius*(1+a*.6),m=(this.isHub?.7:.4)+a*.4,u=n?`rgba(176, 141, 87, ${m})`:this.isHub?`rgba(180, 100, 255, ${m})`:`rgba(0, 242, 255, ${m})`,C=n?`rgba(176, 141, 87, ${a*.12})`:this.isHub?`rgba(130, 0, 255, ${a*.1})`:`rgba(0, 242, 255, ${a*.1})`;t.beginPath(),t.arc(this.x,this.y,i*5,0,Math.PI*2),t.fillStyle=C,t.fill(),t.beginPath(),t.arc(this.x,this.y,i,0,Math.PI*2),t.fillStyle=u,t.fill()}}class nt{constructor(t,n,a,i,m){this.x1=t,this.y1=n,this.x2=a,this.y2=i,this.progress=0,this.speed=.02+Math.random()*.03,this.isLight=m,this.alive=!0}update(){this.progress+=this.speed,this.progress>=1&&(this.alive=!1)}draw(t){const n=this.x1+(this.x2-this.x1)*this.progress,a=this.y1+(this.y2-this.y1)*this.progress,i=1-this.progress;t.beginPath(),t.arc(n,a,3,0,Math.PI*2),t.fillStyle=this.isLight?`rgba(212, 160, 23, ${i})`:`rgba(255, 255, 255, ${i})`,t.fill()}}function st(r){const t=r.getContext("2d");let n=0,a=0,i=[],m=[],u=null;const C={x:-9999,y:-9999};let k=0;function l(){n=r.width=window.innerWidth,a=r.height=window.innerHeight,i=Array.from({length:at},()=>new it(n,a))}function A(T){if(k--,k>0)return;k=30+Math.floor(Math.random()*60);const S=[...i].sort(()=>Math.random()-.5);for(let I=0;I<S.length-1;I++){const D=S[I],N=S[I+1];if(Math.hypot(D.x-N.x,D.y-N.y)<Ue){m.push(new nt(D.x,D.y,N.x,N.y,T));return}}}function M(T,S,I,D){const N=(1-I/Ue)*(D?.25:.35),q=t.createLinearGradient(T.x,T.y,S.x,S.y),$=D?`rgba(176,141,87,${N*1.5})`:T.isHub?`rgba(150,50,255,${N*1.5})`:`rgba(0,242,255,${N*1.5})`,X=D?`rgba(122,106,83,${N})`:S.isHub?`rgba(150,50,255,${N})`:`rgba(0,200,220,${N})`;q.addColorStop(0,$),q.addColorStop(1,X),t.beginPath(),t.moveTo(T.x,T.y),t.lineTo(S.x,S.y),t.strokeStyle=q,t.lineWidth=D?.6:.8,t.stroke()}function L(){const T=document.documentElement.classList.contains("light-mode");t.clearRect(0,0,n,a);for(let S=0;S<i.length;S++){i[S].update(C);for(let I=S+1;I<i.length;I++){const D=i[S].x-i[I].x,N=i[S].y-i[I].y,q=Math.hypot(D,N);q<Ue&&M(i[S],i[I],q,T)}}i.forEach(S=>S.draw(t,T)),A(T),m=m.filter(S=>S.alive),m.forEach(S=>{S.update(),S.draw(t)}),u=requestAnimationFrame(L)}function H(){cancelAnimationFrame(u),window.removeEventListener("resize",l),window.removeEventListener("mousemove",j)}function j(T){C.x=T.clientX,C.y=T.clientY}return window.addEventListener("resize",l),window.addEventListener("mousemove",j),l(),L(),{destroy:H}}function lt(r){return r&&r.__esModule&&Object.prototype.hasOwnProperty.call(r,"default")?r.default:r}var Je,ar;function dt(){if(ar)return Je;ar=1;function r(e){return e instanceof Map?e.clear=e.delete=e.set=function(){throw new Error("map is read-only")}:e instanceof Set&&(e.add=e.clear=e.delete=function(){throw new Error("set is read-only")}),Object.freeze(e),Object.getOwnPropertyNames(e).forEach(o=>{const d=e[o],f=typeof d;(f==="object"||f==="function")&&!Object.isFrozen(d)&&r(d)}),e}class t{constructor(o){o.data===void 0&&(o.data={}),this.data=o.data,this.isMatchIgnored=!1}ignoreMatch(){this.isMatchIgnored=!0}}function n(e){return e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#x27;")}function a(e,...o){const d=Object.create(null);for(const f in e)d[f]=e[f];return o.forEach(function(f){for(const _ in f)d[_]=f[_]}),d}const i="</span>",m=e=>!!e.scope,u=(e,{prefix:o})=>{if(e.startsWith("language:"))return e.replace("language:","language-");if(e.includes(".")){const d=e.split(".");return[`${o}${d.shift()}`,...d.map((f,_)=>`${f}${"_".repeat(_+1)}`)].join(" ")}return`${o}${e}`};class C{constructor(o,d){this.buffer="",this.classPrefix=d.classPrefix,o.walk(this)}addText(o){this.buffer+=n(o)}openNode(o){if(!m(o))return;const d=u(o.scope,{prefix:this.classPrefix});this.span(d)}closeNode(o){m(o)&&(this.buffer+=i)}value(){return this.buffer}span(o){this.buffer+=`<span class="${o}">`}}const k=(e={})=>{const o={children:[]};return Object.assign(o,e),o};class l{constructor(){this.rootNode=k(),this.stack=[this.rootNode]}get top(){return this.stack[this.stack.length-1]}get root(){return this.rootNode}add(o){this.top.children.push(o)}openNode(o){const d=k({scope:o});this.add(d),this.stack.push(d)}closeNode(){if(this.stack.length>1)return this.stack.pop()}closeAllNodes(){for(;this.closeNode(););}toJSON(){return JSON.stringify(this.rootNode,null,4)}walk(o){return this.constructor._walk(o,this.rootNode)}static _walk(o,d){return typeof d=="string"?o.addText(d):d.children&&(o.openNode(d),d.children.forEach(f=>this._walk(o,f)),o.closeNode(d)),o}static _collapse(o){typeof o!="string"&&o.children&&(o.children.every(d=>typeof d=="string")?o.children=[o.children.join("")]:o.children.forEach(d=>{l._collapse(d)}))}}class A extends l{constructor(o){super(),this.options=o}addText(o){o!==""&&this.add(o)}startScope(o){this.openNode(o)}endScope(){this.closeNode()}__addSublanguage(o,d){const f=o.root;d&&(f.scope=`language:${d}`),this.add(f)}toHTML(){return new C(this,this.options).value()}finalize(){return this.closeAllNodes(),!0}}function M(e){return e?typeof e=="string"?e:e.source:null}function L(e){return T("(?=",e,")")}function H(e){return T("(?:",e,")*")}function j(e){return T("(?:",e,")?")}function T(...e){return e.map(d=>M(d)).join("")}function S(e){const o=e[e.length-1];return typeof o=="object"&&o.constructor===Object?(e.splice(e.length-1,1),o):{}}function I(...e){return"("+(S(e).capture?"":"?:")+e.map(f=>M(f)).join("|")+")"}function D(e){return new RegExp(e.toString()+"|").exec("").length-1}function N(e,o){const d=e&&e.exec(o);return d&&d.index===0}const q=/\[(?:[^\\\]]|\\.)*\]|\(\??|\\([1-9][0-9]*)|\\./;function $(e,{joinWith:o}){let d=0;return e.map(f=>{d+=1;const _=d;let R=M(f),g="";for(;R.length>0;){const p=q.exec(R);if(!p){g+=R;break}g+=R.substring(0,p.index),R=R.substring(p.index+p[0].length),p[0][0]==="\\"&&p[1]?g+="\\"+String(Number(p[1])+_):(g+=p[0],p[0]==="("&&d++)}return g}).map(f=>`(${f})`).join(o)}const X=/\b\B/,he="[a-zA-Z]\\w*",le="[a-zA-Z_]\\w*",ue="\\b\\d+(\\.\\d+)?",be="(-?)(\\b0[xX][a-fA-F0-9]+|(\\b\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)",ve="\\b(0b[01]+)",Me="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|-|-=|/=|/|:|;|<<|<<=|<=|<|===|==|=|>>>=|>>=|>=|>>>|>>|>|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~",ze=(e={})=>{const o=/^#![ ]*\//;return e.binary&&(e.begin=T(o,/.*\b/,e.binary,/\b.*/)),a({scope:"meta",begin:o,end:/$/,relevance:0,"on:begin":(d,f)=>{d.index!==0&&f.ignoreMatch()}},e)},ae={begin:"\\\\[\\s\\S]",relevance:0},Ie={scope:"string",begin:"'",end:"'",illegal:"\\n",contains:[ae]},fe={scope:"string",begin:'"',end:'"',illegal:"\\n",contains:[ae]},Pe={begin:/\b(a|an|the|are|I'm|isn't|don't|doesn't|won't|but|just|should|pretty|simply|enough|gonna|going|wtf|so|such|will|you|your|they|like|more)\b/},F=function(e,o,d={}){const f=a({scope:"comment",begin:e,end:o,contains:[]},d);f.contains.push({scope:"doctag",begin:"[ ]*(?=(TODO|FIXME|NOTE|BUG|OPTIMIZE|HACK|XXX):)",end:/(TODO|FIXME|NOTE|BUG|OPTIMIZE|HACK|XXX):/,excludeBegin:!0,relevance:0});const _=I("I","a","is","so","us","to","at","if","in","it","on",/[A-Za-z]+['](d|ve|re|ll|t|s|n)/,/[A-Za-z]+[-][a-z]+/,/[A-Za-z][a-z]{2,}/);return f.contains.push({begin:T(/[ ]+/,"(",_,/[.]?[:]?([.][ ]|[ ])/,"){3}")}),f},re=F("//","$"),ie=F("/\\*","\\*/"),de=F("#","$"),ge={scope:"number",begin:ue,relevance:0},xe={scope:"number",begin:be,relevance:0},hr={scope:"number",begin:ve,relevance:0},ur={scope:"regexp",begin:/\/(?=[^/\n]*\/)/,end:/\/[gimuy]*/,contains:[ae,{begin:/\[/,end:/\]/,relevance:0,contains:[ae]}]},br={scope:"title",begin:he,relevance:0},vr={scope:"title",begin:le,relevance:0},fr={begin:"\\.\\s*"+le,relevance:0};var ke=Object.freeze({__proto__:null,APOS_STRING_MODE:Ie,BACKSLASH_ESCAPE:ae,BINARY_NUMBER_MODE:hr,BINARY_NUMBER_RE:ve,COMMENT:F,C_BLOCK_COMMENT_MODE:ie,C_LINE_COMMENT_MODE:re,C_NUMBER_MODE:xe,C_NUMBER_RE:be,END_SAME_AS_BEGIN:function(e){return Object.assign(e,{"on:begin":(o,d)=>{d.data._beginMatch=o[1]},"on:end":(o,d)=>{d.data._beginMatch!==o[1]&&d.ignoreMatch()}})},HASH_COMMENT_MODE:de,IDENT_RE:he,MATCH_NOTHING_RE:X,METHOD_GUARD:fr,NUMBER_MODE:ge,NUMBER_RE:ue,PHRASAL_WORDS_MODE:Pe,QUOTE_STRING_MODE:fe,REGEXP_MODE:ur,RE_STARTERS_RE:Me,SHEBANG:ze,TITLE_MODE:br,UNDERSCORE_IDENT_RE:le,UNDERSCORE_TITLE_MODE:vr});function xr(e,o){e.input[e.index-1]==="."&&o.ignoreMatch()}function kr(e,o){e.className!==void 0&&(e.scope=e.className,delete e.className)}function wr(e,o){o&&e.beginKeywords&&(e.begin="\\b("+e.beginKeywords.split(" ").join("|")+")(?!\\.)(?=\\b|\\s)",e.__beforeBegin=xr,e.keywords=e.keywords||e.beginKeywords,delete e.beginKeywords,e.relevance===void 0&&(e.relevance=0))}function Cr(e,o){Array.isArray(e.illegal)&&(e.illegal=I(...e.illegal))}function Sr(e,o){if(e.match){if(e.begin||e.end)throw new Error("begin & end are not supported with match");e.begin=e.match,delete e.match}}function Er(e,o){e.relevance===void 0&&(e.relevance=1)}const Tr=(e,o)=>{if(!e.beforeMatch)return;if(e.starts)throw new Error("beforeMatch cannot be used with starts");const d=Object.assign({},e);Object.keys(e).forEach(f=>{delete e[f]}),e.keywords=d.keywords,e.begin=T(d.beforeMatch,L(d.begin)),e.starts={relevance:0,contains:[Object.assign(d,{endsParent:!0})]},e.relevance=0,delete d.beforeMatch},Ar=["of","and","for","in","not","or","if","then","parent","list","value"],Mr="keyword";function Fe(e,o,d=Mr){const f=Object.create(null);return typeof e=="string"?_(d,e.split(" ")):Array.isArray(e)?_(d,e):Object.keys(e).forEach(function(R){Object.assign(f,Fe(e[R],o,R))}),f;function _(R,g){o&&(g=g.map(p=>p.toLowerCase())),g.forEach(function(p){const v=p.split("|");f[v[0]]=[R,zr(v[0],v[1])]})}}function zr(e,o){return o?Number(o):Ir(e)?0:1}function Ir(e){return Ar.includes(e.toLowerCase())}const We={},ne=e=>{console.error(e)},He=(e,...o)=>{console.log(`WARN: ${e}`,...o)},ce=(e,o)=>{We[`${e}/${o}`]||(console.log(`Deprecated as of ${e}. ${o}`),We[`${e}/${o}`]=!0)},we=new Error;function Ge(e,o,{key:d}){let f=0;const _=e[d],R={},g={};for(let p=1;p<=o.length;p++)g[p+f]=_[p],R[p+f]=!0,f+=D(o[p-1]);e[d]=g,e[d]._emit=R,e[d]._multi=!0}function Pr(e){if(Array.isArray(e.begin)){if(e.skip||e.excludeBegin||e.returnBegin)throw ne("skip, excludeBegin, returnBegin not compatible with beginScope: {}"),we;if(typeof e.beginScope!="object"||e.beginScope===null)throw ne("beginScope must be object"),we;Ge(e,e.begin,{key:"beginScope"}),e.begin=$(e.begin,{joinWith:""})}}function Br(e){if(Array.isArray(e.end)){if(e.skip||e.excludeEnd||e.returnEnd)throw ne("skip, excludeEnd, returnEnd not compatible with endScope: {}"),we;if(typeof e.endScope!="object"||e.endScope===null)throw ne("endScope must be object"),we;Ge(e,e.end,{key:"endScope"}),e.end=$(e.end,{joinWith:""})}}function Lr(e){e.scope&&typeof e.scope=="object"&&e.scope!==null&&(e.beginScope=e.scope,delete e.scope)}function _r(e){Lr(e),typeof e.beginScope=="string"&&(e.beginScope={_wrap:e.beginScope}),typeof e.endScope=="string"&&(e.endScope={_wrap:e.endScope}),Pr(e),Br(e)}function Rr(e){function o(g,p){return new RegExp(M(g),"m"+(e.case_insensitive?"i":"")+(e.unicodeRegex?"u":"")+(p?"g":""))}class d{constructor(){this.matchIndexes={},this.regexes=[],this.matchAt=1,this.position=0}addRule(p,v){v.position=this.position++,this.matchIndexes[this.matchAt]=v,this.regexes.push([v,p]),this.matchAt+=D(p)+1}compile(){this.regexes.length===0&&(this.exec=()=>null);const p=this.regexes.map(v=>v[1]);this.matcherRe=o($(p,{joinWith:"|"}),!0),this.lastIndex=0}exec(p){this.matcherRe.lastIndex=this.lastIndex;const v=this.matcherRe.exec(p);if(!v)return null;const J=v.findIndex((ye,Le)=>Le>0&&ye!==void 0),U=this.matchIndexes[J];return v.splice(0,J),Object.assign(v,U)}}class f{constructor(){this.rules=[],this.multiRegexes=[],this.count=0,this.lastIndex=0,this.regexIndex=0}getMatcher(p){if(this.multiRegexes[p])return this.multiRegexes[p];const v=new d;return this.rules.slice(p).forEach(([J,U])=>v.addRule(J,U)),v.compile(),this.multiRegexes[p]=v,v}resumingScanAtSamePosition(){return this.regexIndex!==0}considerAll(){this.regexIndex=0}addRule(p,v){this.rules.push([p,v]),v.type==="begin"&&this.count++}exec(p){const v=this.getMatcher(this.regexIndex);v.lastIndex=this.lastIndex;let J=v.exec(p);if(this.resumingScanAtSamePosition()&&!(J&&J.index===this.lastIndex)){const U=this.getMatcher(0);U.lastIndex=this.lastIndex+1,J=U.exec(p)}return J&&(this.regexIndex+=J.position+1,this.regexIndex===this.count&&this.considerAll()),J}}function _(g){const p=new f;return g.contains.forEach(v=>p.addRule(v.begin,{rule:v,type:"begin"})),g.terminatorEnd&&p.addRule(g.terminatorEnd,{type:"end"}),g.illegal&&p.addRule(g.illegal,{type:"illegal"}),p}function R(g,p){const v=g;if(g.isCompiled)return v;[kr,Sr,_r,Tr].forEach(U=>U(g,p)),e.compilerExtensions.forEach(U=>U(g,p)),g.__beforeBegin=null,[wr,Cr,Er].forEach(U=>U(g,p)),g.isCompiled=!0;let J=null;return typeof g.keywords=="object"&&g.keywords.$pattern&&(g.keywords=Object.assign({},g.keywords),J=g.keywords.$pattern,delete g.keywords.$pattern),J=J||/\w+/,g.keywords&&(g.keywords=Fe(g.keywords,e.case_insensitive)),v.keywordPatternRe=o(J,!0),p&&(g.begin||(g.begin=/\B|\b/),v.beginRe=o(v.begin),!g.end&&!g.endsWithParent&&(g.end=/\B|\b/),g.end&&(v.endRe=o(v.end)),v.terminatorEnd=M(v.end)||"",g.endsWithParent&&p.terminatorEnd&&(v.terminatorEnd+=(g.end?"|":"")+p.terminatorEnd)),g.illegal&&(v.illegalRe=o(g.illegal)),g.contains||(g.contains=[]),g.contains=[].concat(...g.contains.map(function(U){return jr(U==="self"?g:U)})),g.contains.forEach(function(U){R(U,v)}),g.starts&&R(g.starts,p),v.matcher=_(v),v}if(e.compilerExtensions||(e.compilerExtensions=[]),e.contains&&e.contains.includes("self"))throw new Error("ERR: contains `self` is not supported at the top-level of a language.  See documentation.");return e.classNameAliases=a(e.classNameAliases||{}),R(e)}function qe(e){return e?e.endsWithParent||qe(e.starts):!1}function jr(e){return e.variants&&!e.cachedVariants&&(e.cachedVariants=e.variants.map(function(o){return a(e,{variants:null},o)})),e.cachedVariants?e.cachedVariants:qe(e)?a(e,{starts:e.starts?a(e.starts):null}):Object.isFrozen(e)?a(e):e}var Dr="11.11.1";class Nr extends Error{constructor(o,d){super(o),this.name="HTMLInjectionError",this.html=d}}const Be=n,Ye=a,$e=Symbol("nomatch"),Ur=7,Ke=function(e){const o=Object.create(null),d=Object.create(null),f=[];let _=!0;const R="Could not find the language '{}', did you forget to load/include a language module?",g={disableAutodetect:!0,name:"Plain text",contains:[]};let p={ignoreUnescapedHTML:!1,throwUnescapedHTML:!1,noHighlightRe:/^(no-?highlight)$/i,languageDetectRe:/\blang(?:uage)?-([\w-]+)\b/i,classPrefix:"hljs-",cssSelector:"pre code",languages:null,__emitter:A};function v(s){return p.noHighlightRe.test(s)}function J(s){let h=s.className+" ";h+=s.parentNode?s.parentNode.className:"";const E=p.languageDetectRe.exec(h);if(E){const P=te(E[1]);return P||(He(R.replace("{}",E[1])),He("Falling back to no-highlight mode for this block.",s)),P?E[1]:"no-highlight"}return h.split(/\s+/).find(P=>v(P)||te(P))}function U(s,h,E){let P="",O="";typeof h=="object"?(P=s,E=h.ignoreIllegals,O=h.language):(ce("10.7.0","highlight(lang, code, ...args) has been deprecated."),ce("10.7.0",`Please use highlight(code, options) instead.
+https://github.com/highlightjs/highlight.js/issues/2277`),O=s,P=h),E===void 0&&(E=!0);const K={code:P,language:O};Se("before:highlight",K);const oe=K.result?K.result:ye(K.language,K.code,E);return oe.code=K.code,Se("after:highlight",oe),oe}function ye(s,h,E,P){const O=Object.create(null);function K(c,y){return c.keywords[y]}function oe(){if(!x.keywords){W.addText(B);return}let c=0;x.keywordPatternRe.lastIndex=0;let y=x.keywordPatternRe.exec(B),w="";for(;y;){w+=B.substring(c,y.index);const z=Q.case_insensitive?y[0].toLowerCase():y[0],G=K(x,z);if(G){const[Z,tt]=G;if(W.addText(w),w="",O[z]=(O[z]||0)+1,O[z]<=Ur&&(Ae+=tt),Z.startsWith("_"))w+=y[0];else{const ot=Q.classNameAliases[Z]||Z;V(y[0],ot)}}else w+=y[0];c=x.keywordPatternRe.lastIndex,y=x.keywordPatternRe.exec(B)}w+=B.substring(c),W.addText(w)}function Ee(){if(B==="")return;let c=null;if(typeof x.subLanguage=="string"){if(!o[x.subLanguage]){W.addText(B);return}c=ye(x.subLanguage,B,!0,or[x.subLanguage]),or[x.subLanguage]=c._top}else c=_e(B,x.subLanguage.length?x.subLanguage:null);x.relevance>0&&(Ae+=c.relevance),W.__addSublanguage(c._emitter,c.language)}function Y(){x.subLanguage!=null?Ee():oe(),B=""}function V(c,y){c!==""&&(W.startScope(y),W.addText(c),W.endScope())}function Ze(c,y){let w=1;const z=y.length-1;for(;w<=z;){if(!c._emit[w]){w++;continue}const G=Q.classNameAliases[c[w]]||c[w],Z=y[w];G?V(Z,G):(B=Z,oe(),B=""),w++}}function er(c,y){return c.scope&&typeof c.scope=="string"&&W.openNode(Q.classNameAliases[c.scope]||c.scope),c.beginScope&&(c.beginScope._wrap?(V(B,Q.classNameAliases[c.beginScope._wrap]||c.beginScope._wrap),B=""):c.beginScope._multi&&(Ze(c.beginScope,y),B="")),x=Object.create(c,{parent:{value:x}}),x}function rr(c,y,w){let z=N(c.endRe,w);if(z){if(c["on:end"]){const G=new t(c);c["on:end"](y,G),G.isMatchIgnored&&(z=!1)}if(z){for(;c.endsParent&&c.parent;)c=c.parent;return c}}if(c.endsWithParent)return rr(c.parent,y,w)}function Qr(c){return x.matcher.regexIndex===0?(B+=c[0],1):(Ne=!0,0)}function Xr(c){const y=c[0],w=c.rule,z=new t(w),G=[w.__beforeBegin,w["on:begin"]];for(const Z of G)if(Z&&(Z(c,z),z.isMatchIgnored))return Qr(y);return w.skip?B+=y:(w.excludeBegin&&(B+=y),Y(),!w.returnBegin&&!w.excludeBegin&&(B=y)),er(w,c),w.returnBegin?0:y.length}function Zr(c){const y=c[0],w=h.substring(c.index),z=rr(x,c,w);if(!z)return $e;const G=x;x.endScope&&x.endScope._wrap?(Y(),V(y,x.endScope._wrap)):x.endScope&&x.endScope._multi?(Y(),Ze(x.endScope,c)):G.skip?B+=y:(G.returnEnd||G.excludeEnd||(B+=y),Y(),G.excludeEnd&&(B=y));do x.scope&&W.closeNode(),!x.skip&&!x.subLanguage&&(Ae+=x.relevance),x=x.parent;while(x!==z.parent);return z.starts&&er(z.starts,c),G.returnEnd?0:y.length}function et(){const c=[];for(let y=x;y!==Q;y=y.parent)y.scope&&c.unshift(y.scope);c.forEach(y=>W.openNode(y))}let Te={};function tr(c,y){const w=y&&y[0];if(B+=c,w==null)return Y(),0;if(Te.type==="begin"&&y.type==="end"&&Te.index===y.index&&w===""){if(B+=h.slice(y.index,y.index+1),!_){const z=new Error(`0 width match regex (${s})`);throw z.languageName=s,z.badRule=Te.rule,z}return 1}if(Te=y,y.type==="begin")return Xr(y);if(y.type==="illegal"&&!E){const z=new Error('Illegal lexeme "'+w+'" for mode "'+(x.scope||"<unnamed>")+'"');throw z.mode=x,z}else if(y.type==="end"){const z=Zr(y);if(z!==$e)return z}if(y.type==="illegal"&&w==="")return B+=`
+`,1;if(De>1e5&&De>y.index*3)throw new Error("potential infinite loop, way more iterations than matches");return B+=w,w.length}const Q=te(s);if(!Q)throw ne(R.replace("{}",s)),new Error('Unknown language: "'+s+'"');const rt=Rr(Q);let je="",x=P||rt;const or={},W=new p.__emitter(p);et();let B="",Ae=0,se=0,De=0,Ne=!1;try{if(Q.__emitTokens)Q.__emitTokens(h,W);else{for(x.matcher.considerAll();;){De++,Ne?Ne=!1:x.matcher.considerAll(),x.matcher.lastIndex=se;const c=x.matcher.exec(h);if(!c)break;const y=h.substring(se,c.index),w=tr(y,c);se=c.index+w}tr(h.substring(se))}return W.finalize(),je=W.toHTML(),{language:s,value:je,relevance:Ae,illegal:!1,_emitter:W,_top:x}}catch(c){if(c.message&&c.message.includes("Illegal"))return{language:s,value:Be(h),illegal:!0,relevance:0,_illegalBy:{message:c.message,index:se,context:h.slice(se-100,se+100),mode:c.mode,resultSoFar:je},_emitter:W};if(_)return{language:s,value:Be(h),illegal:!1,relevance:0,errorRaised:c,_emitter:W,_top:x};throw c}}function Le(s){const h={value:Be(s),illegal:!1,relevance:0,_top:g,_emitter:new p.__emitter(p)};return h._emitter.addText(s),h}function _e(s,h){h=h||p.languages||Object.keys(o);const E=Le(s),P=h.filter(te).filter(Xe).map(Y=>ye(Y,s,!1));P.unshift(E);const O=P.sort((Y,V)=>{if(Y.relevance!==V.relevance)return V.relevance-Y.relevance;if(Y.language&&V.language){if(te(Y.language).supersetOf===V.language)return 1;if(te(V.language).supersetOf===Y.language)return-1}return 0}),[K,oe]=O,Ee=K;return Ee.secondBest=oe,Ee}function Or(s,h,E){const P=h&&d[h]||E;s.classList.add("hljs"),s.classList.add(`language-${P}`)}function Re(s){let h=null;const E=J(s);if(v(E))return;if(Se("before:highlightElement",{el:s,language:E}),s.dataset.highlighted){console.log("Element previously highlighted. To highlight again, first unset `dataset.highlighted`.",s);return}if(s.children.length>0&&(p.ignoreUnescapedHTML||(console.warn("One of your code blocks includes unescaped HTML. This is a potentially serious security risk."),console.warn("https://github.com/highlightjs/highlight.js/wiki/security"),console.warn("The element with unescaped HTML:"),console.warn(s)),p.throwUnescapedHTML))throw new Nr("One of your code blocks includes unescaped HTML.",s.innerHTML);h=s;const P=h.textContent,O=E?U(P,{language:E,ignoreIllegals:!0}):_e(P);s.innerHTML=O.value,s.dataset.highlighted="yes",Or(s,E,O.language),s.result={language:O.language,re:O.relevance,relevance:O.relevance},O.secondBest&&(s.secondBest={language:O.secondBest.language,relevance:O.secondBest.relevance}),Se("after:highlightElement",{el:s,result:O,text:P})}function Jr(s){p=Ye(p,s)}const Fr=()=>{Ce(),ce("10.6.0","initHighlighting() deprecated.  Use highlightAll() now.")};function Wr(){Ce(),ce("10.6.0","initHighlightingOnLoad() deprecated.  Use highlightAll() now.")}let Ve=!1;function Ce(){function s(){Ce()}if(document.readyState==="loading"){Ve||window.addEventListener("DOMContentLoaded",s,!1),Ve=!0;return}document.querySelectorAll(p.cssSelector).forEach(Re)}function Hr(s,h){let E=null;try{E=h(e)}catch(P){if(ne("Language definition for '{}' could not be registered.".replace("{}",s)),_)ne(P);else throw P;E=g}E.name||(E.name=s),o[s]=E,E.rawDefinition=h.bind(null,e),E.aliases&&Qe(E.aliases,{languageName:s})}function Gr(s){delete o[s];for(const h of Object.keys(d))d[h]===s&&delete d[h]}function qr(){return Object.keys(o)}function te(s){return s=(s||"").toLowerCase(),o[s]||o[d[s]]}function Qe(s,{languageName:h}){typeof s=="string"&&(s=[s]),s.forEach(E=>{d[E.toLowerCase()]=h})}function Xe(s){const h=te(s);return h&&!h.disableAutodetect}function Yr(s){s["before:highlightBlock"]&&!s["before:highlightElement"]&&(s["before:highlightElement"]=h=>{s["before:highlightBlock"](Object.assign({block:h.el},h))}),s["after:highlightBlock"]&&!s["after:highlightElement"]&&(s["after:highlightElement"]=h=>{s["after:highlightBlock"](Object.assign({block:h.el},h))})}function $r(s){Yr(s),f.push(s)}function Kr(s){const h=f.indexOf(s);h!==-1&&f.splice(h,1)}function Se(s,h){const E=s;f.forEach(function(P){P[E]&&P[E](h)})}function Vr(s){return ce("10.7.0","highlightBlock will be removed entirely in v12.0"),ce("10.7.0","Please use highlightElement now."),Re(s)}Object.assign(e,{highlight:U,highlightAuto:_e,highlightAll:Ce,highlightElement:Re,highlightBlock:Vr,configure:Jr,initHighlighting:Fr,initHighlightingOnLoad:Wr,registerLanguage:Hr,unregisterLanguage:Gr,listLanguages:qr,getLanguage:te,registerAliases:Qe,autoDetection:Xe,inherit:Ye,addPlugin:$r,removePlugin:Kr}),e.debugMode=function(){_=!1},e.safeMode=function(){_=!0},e.versionString=Dr,e.regex={concat:T,lookahead:L,either:I,optional:j,anyNumberOfTimes:H};for(const s in ke)typeof ke[s]=="object"&&r(ke[s]);return Object.assign(e,ke),e},me=Ke({});return me.newInstance=()=>Ke({}),Je=me,me.HighlightJS=me,me.default=me,Je}var ct=dt();const ee=lt(ct);function mr(r){const t=r.regex,n={},a={begin:/\$\{/,end:/\}/,contains:["self",{begin:/:-/,contains:[n]}]};Object.assign(n,{className:"variable",variants:[{begin:t.concat(/\$[\w\d#@][\w\d_]*/,"(?![\\w\\d])(?![$])")},a]});const i={className:"subst",begin:/\$\(/,end:/\)/,contains:[r.BACKSLASH_ESCAPE]},m=r.inherit(r.COMMENT(),{match:[/(^|\s)/,/#.*$/],scope:{2:"comment"}}),u={begin:/<<-?\s*(?=\w+)/,starts:{contains:[r.END_SAME_AS_BEGIN({begin:/(\w+)/,end:/(\w+)/,className:"string"})]}},C={className:"string",begin:/"/,end:/"/,contains:[r.BACKSLASH_ESCAPE,n,i]};i.contains.push(C);const k={match:/\\"/},l={className:"string",begin:/'/,end:/'/},A={match:/\\'/},M={begin:/\$?\(\(/,end:/\)\)/,contains:[{begin:/\d+#[0-9a-f]+/,className:"number"},r.NUMBER_MODE,n]},L=["fish","bash","zsh","sh","csh","ksh","tcsh","dash","scsh"],H=r.SHEBANG({binary:`(${L.join("|")})`,relevance:10}),j={className:"function",begin:/\w[\w\d_]*\s*\(\s*\)\s*\{/,returnBegin:!0,contains:[r.inherit(r.TITLE_MODE,{begin:/\w[\w\d_]*/})],relevance:0},T=["if","then","else","elif","fi","time","for","while","until","in","do","done","case","esac","coproc","function","select"],S=["true","false"],I={match:/(\/[a-z._-]+)+/},D=["break","cd","continue","eval","exec","exit","export","getopts","hash","pwd","readonly","return","shift","test","times","trap","umask","unset"],N=["alias","bind","builtin","caller","command","declare","echo","enable","help","let","local","logout","mapfile","printf","read","readarray","source","sudo","type","typeset","ulimit","unalias"],q=["autoload","bg","bindkey","bye","cap","chdir","clone","comparguments","compcall","compctl","compdescribe","compfiles","compgroups","compquote","comptags","comptry","compvalues","dirs","disable","disown","echotc","echoti","emulate","fc","fg","float","functions","getcap","getln","history","integer","jobs","kill","limit","log","noglob","popd","print","pushd","pushln","rehash","sched","setcap","setopt","stat","suspend","ttyctl","unfunction","unhash","unlimit","unsetopt","vared","wait","whence","where","which","zcompile","zformat","zftp","zle","zmodload","zparseopts","zprof","zpty","zregexparse","zsocket","zstyle","ztcp"],$=["chcon","chgrp","chown","chmod","cp","dd","df","dir","dircolors","ln","ls","mkdir","mkfifo","mknod","mktemp","mv","realpath","rm","rmdir","shred","sync","touch","truncate","vdir","b2sum","base32","base64","cat","cksum","comm","csplit","cut","expand","fmt","fold","head","join","md5sum","nl","numfmt","od","paste","ptx","pr","sha1sum","sha224sum","sha256sum","sha384sum","sha512sum","shuf","sort","split","sum","tac","tail","tr","tsort","unexpand","uniq","wc","arch","basename","chroot","date","dirname","du","echo","env","expr","factor","groups","hostid","id","link","logname","nice","nohup","nproc","pathchk","pinky","printenv","printf","pwd","readlink","runcon","seq","sleep","stat","stdbuf","stty","tee","test","timeout","tty","uname","unlink","uptime","users","who","whoami","yes"];return{name:"Bash",aliases:["sh","zsh"],keywords:{$pattern:/\b[a-z][a-z0-9._-]+\b/,keyword:T,literal:S,built_in:[...D,...N,"set","shopt",...q,...$]},contains:[H,r.SHEBANG(),j,M,m,u,I,C,k,l,A,n]}}function mt(r){const t=r.regex,n=new RegExp("[\\p{XID_Start}_]\\p{XID_Continue}*","u"),a=["and","as","assert","async","await","break","case","class","continue","def","del","elif","else","except","finally","for","from","global","if","import","in","is","lambda","match","nonlocal|10","not","or","pass","raise","return","try","while","with","yield"],C={$pattern:/[A-Za-z]\w+|__\w+__/,keyword:a,built_in:["__import__","abs","all","any","ascii","bin","bool","breakpoint","bytearray","bytes","callable","chr","classmethod","compile","complex","delattr","dict","dir","divmod","enumerate","eval","exec","filter","float","format","frozenset","getattr","globals","hasattr","hash","help","hex","id","input","int","isinstance","issubclass","iter","len","list","locals","map","max","memoryview","min","next","object","oct","open","ord","pow","print","property","range","repr","reversed","round","set","setattr","slice","sorted","staticmethod","str","sum","super","tuple","type","vars","zip"],literal:["__debug__","Ellipsis","False","None","NotImplemented","True"],type:["Any","Callable","Coroutine","Dict","List","Literal","Generic","Optional","Sequence","Set","Tuple","Type","Union"]},k={className:"meta",begin:/^(>>>|\.\.\.) /},l={className:"subst",begin:/\{/,end:/\}/,keywords:C,illegal:/#/},A={begin:/\{\{/,relevance:0},M={className:"string",contains:[r.BACKSLASH_ESCAPE],variants:[{begin:/([uU]|[bB]|[rR]|[bB][rR]|[rR][bB])?'''/,end:/'''/,contains:[r.BACKSLASH_ESCAPE,k],relevance:10},{begin:/([uU]|[bB]|[rR]|[bB][rR]|[rR][bB])?"""/,end:/"""/,contains:[r.BACKSLASH_ESCAPE,k],relevance:10},{begin:/([fF][rR]|[rR][fF]|[fF])'''/,end:/'''/,contains:[r.BACKSLASH_ESCAPE,k,A,l]},{begin:/([fF][rR]|[rR][fF]|[fF])"""/,end:/"""/,contains:[r.BACKSLASH_ESCAPE,k,A,l]},{begin:/([uU]|[rR])'/,end:/'/,relevance:10},{begin:/([uU]|[rR])"/,end:/"/,relevance:10},{begin:/([bB]|[bB][rR]|[rR][bB])'/,end:/'/},{begin:/([bB]|[bB][rR]|[rR][bB])"/,end:/"/},{begin:/([fF][rR]|[rR][fF]|[fF])'/,end:/'/,contains:[r.BACKSLASH_ESCAPE,A,l]},{begin:/([fF][rR]|[rR][fF]|[fF])"/,end:/"/,contains:[r.BACKSLASH_ESCAPE,A,l]},r.APOS_STRING_MODE,r.QUOTE_STRING_MODE]},L="[0-9](_?[0-9])*",H=`(\\b(${L}))?\\.(${L})|\\b(${L})\\.`,j=`\\b|${a.join("|")}`,T={className:"number",relevance:0,variants:[{begin:`(\\b(${L})|(${H}))[eE][+-]?(${L})[jJ]?(?=${j})`},{begin:`(${H})[jJ]?`},{begin:`\\b([1-9](_?[0-9])*|0+(_?0)*)[lLjJ]?(?=${j})`},{begin:`\\b0[bB](_?[01])+[lL]?(?=${j})`},{begin:`\\b0[oO](_?[0-7])+[lL]?(?=${j})`},{begin:`\\b0[xX](_?[0-9a-fA-F])+[lL]?(?=${j})`},{begin:`\\b(${L})[jJ](?=${j})`}]},S={className:"comment",begin:t.lookahead(/# type:/),end:/$/,keywords:C,contains:[{begin:/# type:/},{begin:/#/,end:/\b\B/,endsWithParent:!0}]},I={className:"params",variants:[{className:"",begin:/\(\s*\)/,skip:!0},{begin:/\(/,end:/\)/,excludeBegin:!0,excludeEnd:!0,keywords:C,contains:["self",k,T,M,r.HASH_COMMENT_MODE]}]};return l.contains=[M,T,k],{name:"Python",aliases:["py","gyp","ipython"],unicodeRegex:!0,keywords:C,illegal:/(<\/|\?)|=>/,contains:[k,T,{scope:"variable.language",match:/\bself\b/},{beginKeywords:"if",relevance:0},{match:/\bor\b/,scope:"keyword"},M,S,r.HASH_COMMENT_MODE,{match:[/\bdef/,/\s+/,n],scope:{1:"keyword",3:"title.function"},contains:[I]},{variants:[{match:[/\bclass/,/\s+/,n,/\s*/,/\(\s*/,n,/\s*\)/]},{match:[/\bclass/,/\s+/,n]}],scope:{1:"keyword",3:"title.class",6:"title.class.inherited"}},{className:"meta",begin:/^[\t ]*@/,end:/(?=#)|$/,contains:[T,I,M]}]}}function pt(r){const t={className:"attr",begin:/"(\\.|[^\\"\r\n])*"(?=\s*:)/,relevance:1.01},n={match:/[{}[\],:]/,className:"punctuation",relevance:0},a=["true","false","null"],i={scope:"literal",beginKeywords:a.join(" ")};return{name:"JSON",aliases:["jsonc"],keywords:{literal:a},contains:[t,n,r.QUOTE_STRING_MODE,i,r.C_NUMBER_MODE,r.C_LINE_COMMENT_MODE,r.C_BLOCK_COMMENT_MODE],illegal:"\\S"}}function gt(r){const t="true false yes no null",n="[\\w#;/?:@&=+$,.~*'()[\\]]+",a={className:"attr",variants:[{begin:/[\w*@][\w*@ :()\./-]*:(?=[ \t]|$)/},{begin:/"[\w*@][\w*@ :()\./-]*":(?=[ \t]|$)/},{begin:/'[\w*@][\w*@ :()\./-]*':(?=[ \t]|$)/}]},i={className:"template-variable",variants:[{begin:/\{\{/,end:/\}\}/},{begin:/%\{/,end:/\}/}]},m={className:"string",relevance:0,begin:/'/,end:/'/,contains:[{match:/''/,scope:"char.escape",relevance:0}]},u={className:"string",relevance:0,variants:[{begin:/"/,end:/"/},{begin:/\S+/}],contains:[r.BACKSLASH_ESCAPE,i]},C=r.inherit(u,{variants:[{begin:/'/,end:/'/,contains:[{begin:/''/,relevance:0}]},{begin:/"/,end:/"/},{begin:/[^\s,{}[\]]+/}]}),L={className:"number",begin:"\\b"+"[0-9]{4}(-[0-9][0-9]){0,2}"+"([Tt \\t][0-9][0-9]?(:[0-9][0-9]){2})?"+"(\\.[0-9]*)?"+"([ \\t])*(Z|[-+][0-9][0-9]?(:[0-9][0-9])?)?"+"\\b"},H={end:",",endsWithParent:!0,excludeEnd:!0,keywords:t,relevance:0},j={begin:/\{/,end:/\}/,contains:[H],illegal:"\\n",relevance:0},T={begin:"\\[",end:"\\]",contains:[H],illegal:"\\n",relevance:0},S=[a,{className:"meta",begin:"^---\\s*$",relevance:10},{className:"string",begin:"[\\|>]([1-9]?[+-])?[ ]*\\n( +)[^ ][^\\n]*\\n(\\2[^\\n]+\\n?)*"},{begin:"<%[%=-]?",end:"[%-]?%>",subLanguage:"ruby",excludeBegin:!0,excludeEnd:!0,relevance:0},{className:"type",begin:"!\\w+!"+n},{className:"type",begin:"!<"+n+">"},{className:"type",begin:"!"+n},{className:"type",begin:"!!"+n},{className:"meta",begin:"&"+r.UNDERSCORE_IDENT_RE+"$"},{className:"meta",begin:"\\*"+r.UNDERSCORE_IDENT_RE+"$"},{className:"bullet",begin:"-(?=[ ]|$)",relevance:0},r.HASH_COMMENT_MODE,{beginKeywords:t,keywords:{literal:t}},L,{className:"number",begin:r.C_NUMBER_RE+"\\b",relevance:0},j,T,m,u],I=[...S];return I.pop(),I.push(C),H.contains=I,{name:"YAML",case_insensitive:!0,aliases:["yml"],contains:S}}const ir="[A-Za-z$_][0-9A-Za-z$_]*",yt=["as","in","of","if","for","while","finally","var","new","function","do","return","void","else","break","catch","instanceof","with","throw","case","default","try","switch","continue","typeof","delete","let","yield","const","class","debugger","async","await","static","import","from","export","extends","using"],ht=["true","false","null","undefined","NaN","Infinity"],pr=["Object","Function","Boolean","Symbol","Math","Date","Number","BigInt","String","RegExp","Array","Float32Array","Float64Array","Int8Array","Uint8Array","Uint8ClampedArray","Int16Array","Int32Array","Uint16Array","Uint32Array","BigInt64Array","BigUint64Array","Set","Map","WeakSet","WeakMap","ArrayBuffer","SharedArrayBuffer","Atomics","DataView","JSON","Promise","Generator","GeneratorFunction","AsyncFunction","Reflect","Proxy","Intl","WebAssembly"],gr=["Error","EvalError","InternalError","RangeError","ReferenceError","SyntaxError","TypeError","URIError"],yr=["setInterval","setTimeout","clearInterval","clearTimeout","require","exports","eval","isFinite","isNaN","parseFloat","parseInt","decodeURI","decodeURIComponent","encodeURI","encodeURIComponent","escape","unescape"],ut=["arguments","this","super","console","window","document","localStorage","sessionStorage","module","global"],bt=[].concat(yr,pr,gr);function vt(r){const t=r.regex,n=(F,{after:re})=>{const ie="</"+F[0].slice(1);return F.input.indexOf(ie,re)!==-1},a=ir,i={begin:"<>",end:"</>"},m=/<[A-Za-z0-9\\._:-]+\s*\/>/,u={begin:/<[A-Za-z0-9\\._:-]+/,end:/\/[A-Za-z0-9\\._:-]+>|\/>/,isTrulyOpeningTag:(F,re)=>{const ie=F[0].length+F.index,de=F.input[ie];if(de==="<"||de===","){re.ignoreMatch();return}de===">"&&(n(F,{after:ie})||re.ignoreMatch());let ge;const xe=F.input.substring(ie);if(ge=xe.match(/^\s*=/)){re.ignoreMatch();return}if((ge=xe.match(/^\s+extends\s+/))&&ge.index===0){re.ignoreMatch();return}}},C={$pattern:ir,keyword:yt,literal:ht,built_in:bt,"variable.language":ut},k="[0-9](_?[0-9])*",l=`\\.(${k})`,A="0|[1-9](_?[0-9])*|0[0-7]*[89][0-9]*",M={className:"number",variants:[{begin:`(\\b(${A})((${l})|\\.)?|(${l}))[eE][+-]?(${k})\\b`},{begin:`\\b(${A})\\b((${l})\\b|\\.)?|(${l})\\b`},{begin:"\\b(0|[1-9](_?[0-9])*)n\\b"},{begin:"\\b0[xX][0-9a-fA-F](_?[0-9a-fA-F])*n?\\b"},{begin:"\\b0[bB][0-1](_?[0-1])*n?\\b"},{begin:"\\b0[oO][0-7](_?[0-7])*n?\\b"},{begin:"\\b0[0-7]+n?\\b"}],relevance:0},L={className:"subst",begin:"\\$\\{",end:"\\}",keywords:C,contains:[]},H={begin:".?html`",end:"",starts:{end:"`",returnEnd:!1,contains:[r.BACKSLASH_ESCAPE,L],subLanguage:"xml"}},j={begin:".?css`",end:"",starts:{end:"`",returnEnd:!1,contains:[r.BACKSLASH_ESCAPE,L],subLanguage:"css"}},T={begin:".?gql`",end:"",starts:{end:"`",returnEnd:!1,contains:[r.BACKSLASH_ESCAPE,L],subLanguage:"graphql"}},S={className:"string",begin:"`",end:"`",contains:[r.BACKSLASH_ESCAPE,L]},D={className:"comment",variants:[r.COMMENT(/\/\*\*(?!\/)/,"\\*/",{relevance:0,contains:[{begin:"(?=@[A-Za-z]+)",relevance:0,contains:[{className:"doctag",begin:"@[A-Za-z]+"},{className:"type",begin:"\\{",end:"\\}",excludeEnd:!0,excludeBegin:!0,relevance:0},{className:"variable",begin:a+"(?=\\s*(-)|$)",endsParent:!0,relevance:0},{begin:/(?=[^\n])\s/,relevance:0}]}]}),r.C_BLOCK_COMMENT_MODE,r.C_LINE_COMMENT_MODE]},N=[r.APOS_STRING_MODE,r.QUOTE_STRING_MODE,H,j,T,S,{match:/\$\d+/},M];L.contains=N.concat({begin:/\{/,end:/\}/,keywords:C,contains:["self"].concat(N)});const q=[].concat(D,L.contains),$=q.concat([{begin:/(\s*)\(/,end:/\)/,keywords:C,contains:["self"].concat(q)}]),X={className:"params",begin:/(\s*)\(/,end:/\)/,excludeBegin:!0,excludeEnd:!0,keywords:C,contains:$},he={variants:[{match:[/class/,/\s+/,a,/\s+/,/extends/,/\s+/,t.concat(a,"(",t.concat(/\./,a),")*")],scope:{1:"keyword",3:"title.class",5:"keyword",7:"title.class.inherited"}},{match:[/class/,/\s+/,a],scope:{1:"keyword",3:"title.class"}}]},le={relevance:0,match:t.either(/\bJSON/,/\b[A-Z][a-z]+([A-Z][a-z]*|\d)*/,/\b[A-Z]{2,}([A-Z][a-z]+|\d)+([A-Z][a-z]*)*/,/\b[A-Z]{2,}[a-z]+([A-Z][a-z]+|\d)*([A-Z][a-z]*)*/),className:"title.class",keywords:{_:[...pr,...gr]}},ue={label:"use_strict",className:"meta",relevance:10,begin:/^\s*['"]use (strict|asm)['"]/},be={variants:[{match:[/function/,/\s+/,a,/(?=\s*\()/]},{match:[/function/,/\s*(?=\()/]}],className:{1:"keyword",3:"title.function"},label:"func.def",contains:[X],illegal:/%/},ve={relevance:0,match:/\b[A-Z][A-Z_0-9]+\b/,className:"variable.constant"};function Me(F){return t.concat("(?!",F.join("|"),")")}const ze={match:t.concat(/\b/,Me([...yr,"super","import"].map(F=>`${F}\\s*\\(`)),a,t.lookahead(/\s*\(/)),className:"title.function",relevance:0},ae={begin:t.concat(/\./,t.lookahead(t.concat(a,/(?![0-9A-Za-z$_(])/))),end:a,excludeBegin:!0,keywords:"prototype",className:"property",relevance:0},Ie={match:[/get|set/,/\s+/,a,/(?=\()/],className:{1:"keyword",3:"title.function"},contains:[{begin:/\(\)/},X]},fe="(\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)|"+r.UNDERSCORE_IDENT_RE+")\\s*=>",Pe={match:[/const|var|let/,/\s+/,a,/\s*/,/=\s*/,/(async\s*)?/,t.lookahead(fe)],keywords:"async",className:{1:"keyword",3:"title.function"},contains:[X]};return{name:"JavaScript",aliases:["js","jsx","mjs","cjs"],keywords:C,exports:{PARAMS_CONTAINS:$,CLASS_REFERENCE:le},illegal:/#(?![$_A-z])/,contains:[r.SHEBANG({label:"shebang",binary:"node",relevance:5}),ue,r.APOS_STRING_MODE,r.QUOTE_STRING_MODE,H,j,T,S,D,{match:/\$\d+/},M,le,{scope:"attr",match:a+t.lookahead(":"),relevance:0},Pe,{begin:"("+r.RE_STARTERS_RE+"|\\b(case|return|throw)\\b)\\s*",keywords:"return throw case",relevance:0,contains:[D,r.REGEXP_MODE,{className:"function",begin:fe,returnBegin:!0,end:"\\s*=>",contains:[{className:"params",variants:[{begin:r.UNDERSCORE_IDENT_RE,relevance:0},{className:null,begin:/\(\s*\)/,skip:!0},{begin:/(\s*)\(/,end:/\)/,excludeBegin:!0,excludeEnd:!0,keywords:C,contains:$}]}]},{begin:/,/,relevance:0},{match:/\s+/,relevance:0},{variants:[{begin:i.begin,end:i.end},{match:m},{begin:u.begin,"on:begin":u.isTrulyOpeningTag,end:u.end}],subLanguage:"xml",contains:[{begin:u.begin,end:u.end,skip:!0,contains:["self"]}]}]},be,{beginKeywords:"while if switch catch for"},{begin:"\\b(?!function)"+r.UNDERSCORE_IDENT_RE+"\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)\\s*\\{",returnBegin:!0,label:"func.def",contains:[X,r.inherit(r.TITLE_MODE,{begin:a,className:"title.function"})]},{match:/\.\.\./,relevance:0},ae,{match:"\\$"+a,relevance:0},{match:[/\bconstructor(?=\s*\()/],className:{1:"title.function"},contains:[X]},ze,ve,he,Ie,{match:/\$[(.]/}]}}function ft(r){const t=r.regex,n=t.concat(/[\p{L}_]/u,t.optional(/[\p{L}0-9_.-]*:/u),/[\p{L}0-9_.-]*/u),a=/[\p{L}0-9._:-]+/u,i={className:"symbol",begin:/&[a-z]+;|&#[0-9]+;|&#x[a-f0-9]+;/},m={begin:/\s/,contains:[{className:"keyword",begin:/#?[a-z_][a-z1-9_-]+/,illegal:/\n/}]},u=r.inherit(m,{begin:/\(/,end:/\)/}),C=r.inherit(r.APOS_STRING_MODE,{className:"string"}),k=r.inherit(r.QUOTE_STRING_MODE,{className:"string"}),l={endsWithParent:!0,illegal:/</,relevance:0,contains:[{className:"attr",begin:a,relevance:0},{begin:/=\s*/,relevance:0,contains:[{className:"string",endsParent:!0,variants:[{begin:/"/,end:/"/,contains:[i]},{begin:/'/,end:/'/,contains:[i]},{begin:/[^\s"'=<>`]+/}]}]}]};return{name:"HTML, XML",aliases:["html","xhtml","rss","atom","xjb","xsd","xsl","plist","wsf","svg"],case_insensitive:!0,unicodeRegex:!0,contains:[{className:"meta",begin:/<![a-z]/,end:/>/,relevance:10,contains:[m,k,C,u,{begin:/\[/,end:/\]/,contains:[{className:"meta",begin:/<![a-z]/,end:/>/,contains:[m,u,k,C]}]}]},r.COMMENT(/<!--/,/-->/,{relevance:10}),{begin:/<!\[CDATA\[/,end:/\]\]>/,relevance:10},i,{className:"meta",end:/\?>/,variants:[{begin:/<\?xml/,relevance:10,contains:[k]},{begin:/<\?[a-z][a-z0-9]+/}]},{className:"tag",begin:/<style(?=\s|>)/,end:/>/,keywords:{name:"style"},contains:[l],starts:{end:/<\/style>/,returnEnd:!0,subLanguage:["css","xml"]}},{className:"tag",begin:/<script(?=\s|>)/,end:/>/,keywords:{name:"script"},contains:[l],starts:{end:/<\/script>/,returnEnd:!0,subLanguage:["javascript","handlebars","xml"]}},{className:"tag",begin:/<>|<\/>/},{className:"tag",begin:t.concat(/</,t.lookahead(t.concat(n,t.either(/\/>/,/>/,/\s/)))),end:/\/?>/,contains:[{className:"name",begin:n,relevance:0,starts:l}]},{className:"tag",begin:t.concat(/<\//,t.lookahead(t.concat(n,/>/))),contains:[{className:"name",begin:n,relevance:0},{begin:/>/,relevance:0,endsParent:!0}]}]}}ee.registerLanguage("bash",mr);ee.registerLanguage("shell",mr);ee.registerLanguage("python",mt);ee.registerLanguage("json",pt);ee.registerLanguage("yaml",gt);ee.registerLanguage("javascript",vt);ee.registerLanguage("html",ft);const nr=["display: block","padding: 1rem","border: 1px solid var(--border-color)","border-radius: 8px","font-family: 'JetBrains Mono', monospace","font-size: 0.85rem","white-space: pre-wrap","line-height: 1.5","overflow-x: hidden","margin: 0.5rem 0","box-shadow: inset 0 2px 4px rgba(0,0,0,0.15)"].join("; "),sr={block:`${nr}; background: var(--syntax-bg); color: var(--syntax-text)`,terminal:`${nr}; background: var(--surface-dark); color: var(--code-green)`};let lr=!1;function xt(){if(lr)return;lr=!0;const r=document.createElement("style");r.textContent=`
 
     /* keyword — pink-red #f92672
        Vim: Keyword Conditional Statement Operator Type Tag Define PreProc rubyControl */
@@ -75,350 +75,1663 @@ https://github.com/highlightjs/highlight.js/issues/2277`),j=s,B=h),E===void 0&&(
       color: var(--syntax-text) !important;
     }
 
-  `,document.head.appendChild(r)}function dr(r){r&&(xt(),r.querySelectorAll("pre").forEach(t=>{const n=t.style.color||"",a=t.style.background||"",m=(t.textContent||"").trimStart()[0],u=n.includes("code-green")||a.includes("surface-dark")||m==="❯"||m==="$";if((u?sr.terminal:sr.block).split(";").forEach(k=>{const[l,...A]=k.split(":");if(!l)return;const T=l.trim(),L=T.replace(/-([a-z])/g,(H,N)=>N.toUpperCase());T==="font-size"&&t.style.fontSize||T==="line-height"&&t.style.lineHeight||(t.style[L]=A.join(":").trim())}),!u){const k=t.querySelector("code")||t;k.classList.contains("hljs")||ee.highlightElement(k)}}),r.querySelectorAll("code").forEach(t=>{if(t.closest("pre"))return;const a=(t.style.background||"").includes("surface-dark");t.style.fontSize="0.85rem",t.style.fontFamily="'JetBrains Mono', monospace",t.style.lineHeight="1.5",!a&&!t.classList.contains("hljs")&&(t.style.background="var(--syntax-bg)",t.style.color="var(--syntax-text)",ee.highlightElement(t))}),r.querySelectorAll("pre").forEach(t=>{t.style.fontSize||(t.style.fontSize="0.85rem"),t.style.lineHeight||(t.style.lineHeight="1.5")}))}const kt={vite:"^7.3.1"},wt={"highlight.js":"^11.11.1",three:"^0.183.2"},cr={devDependencies:kt,dependencies:wt},Ct={id:"claude-folder",title:"The .claude Folder",category:"",tags:[""],tabs:[{label:"Overview",content:`
-<p style="margin-bottom:1rem; line-height:1.75;">When you use Claude Code inside a project, it creates a hidden folder called <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude</code> inside your project directory. Think of this folder as Claude's "brain" for your project. Everything in it tells Claude how to behave, what it is allowed to do, and what shortcuts you have set up.</p>
+  `,document.head.appendChild(r)}function dr(r){r&&(xt(),r.querySelectorAll("pre").forEach(t=>{const n=t.style.color||"",a=t.style.background||"",m=(t.textContent||"").trimStart()[0],u=n.includes("code-green")||a.includes("surface-dark")||m==="❯"||m==="$";if((u?sr.terminal:sr.block).split(";").forEach(k=>{const[l,...A]=k.split(":");if(!l)return;const M=l.trim(),L=M.replace(/-([a-z])/g,(H,j)=>j.toUpperCase());M==="font-size"&&t.style.fontSize||M==="line-height"&&t.style.lineHeight||(t.style[L]=A.join(":").trim())}),!u){const k=t.querySelector("code")||t;k.classList.contains("hljs")||ee.highlightElement(k)}}),r.querySelectorAll("code").forEach(t=>{if(t.closest("pre"))return;const a=(t.style.background||"").includes("surface-dark");t.style.fontSize="0.85rem",t.style.fontFamily="'JetBrains Mono', monospace",t.style.lineHeight="1.5",!a&&!t.classList.contains("hljs")&&(t.style.background="var(--syntax-bg)",t.style.color="var(--syntax-text)",ee.highlightElement(t))}),r.querySelectorAll("pre").forEach(t=>{t.style.fontSize||(t.style.fontSize="0.85rem"),t.style.lineHeight||(t.style.lineHeight="1.5")}))}const kt={vite:"^7.3.1"},wt={"highlight.js":"^11.11.1",three:"^0.183.2"},cr={devDependencies:kt,dependencies:wt},Ct={id:"claude-code-configuration",title:"Claude Code Configuration",category:"",tags:[""],tabs:[{label:"Overview",content:`
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">A Complete Beginner's Guide to Claude Code Configuration</strong>
 
-<p style="margin-bottom:1rem; line-height:1.75;">You do not have to create this folder yourself. Claude Code creates it for you the first time you run <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/init</code> inside a project. But once it exists, you can edit every file in it using any text editor — no coding required.</p>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">What is Claude Code, really?</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">Claude Code is an AI coding assistant that lives in your terminal. You type instructions in plain English, and it reads your code, edits files, runs commands, and helps you build things — all without you leaving the command line.</p>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">The Folder Layout at a Glance</strong>
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre; line-height: 1.6;"><code>your-project/
-├── CLAUDE.md          ← Claude's instructions for this project
-├── CLAUDE.local.md    ← Your personal notes (not shared with team)
+<p style="margin-bottom:1rem; line-height:1.75;">But here is the thing that makes Claude Code different from a simple chatbot: it has a memory system. You can teach it about your project once, set rules for how it should behave, and give it shortcuts for your most common tasks. It will remember all of that across every session, for every developer on your team.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">That memory system is built from a handful of plain text files. Understanding those files is the key to getting genuinely useful work out of Claude Code.</p>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">The problem Claude Code solves</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">Every time you start a new Claude Code session, it begins with a completely blank slate. It does not remember that you prefer Google-style docstrings. It does not know your database runs on port 5433. It does not know that your team uses a specific branch naming convention, or that there is a tricky workaround in your authentication module.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Without any configuration, you end up repeating yourself constantly — explaining the same context at the start of every conversation, re-establishing your preferences, reminding Claude not to touch certain files. This gets old very fast.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">The configuration files solve this by encoding everything Claude needs to know once, upfront. From that point on, every session starts with Claude already briefed on your project.</p>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">The two kinds of configuration</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">Before looking at individual files, it helps to understand that Claude Code has two fundamentally different things it needs to know:</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>What Claude should know</strong> — context about your project, your coding conventions, your architecture, your team's rules. This is documentation you write for Claude the same way you'd write documentation for a new teammate.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>What Claude is allowed to do</strong> — permissions, tool access, environment variables, which commands it can run without asking. This is the safety layer that controls Claude's behaviour at runtime.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">The first kind lives in Markdown files (<code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.md</code>). The second kind lives in JSON files (<code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.json</code>). Once you understand that split, the whole system clicks into place.</p>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Where the files live</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">Claude Code uses files in three locations. Together they form a layered system where more specific settings override broader ones.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>Inside your project</strong> — files that are specific to this codebase and shared with your team via version control. This is where most of your configuration lives.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>In your home directory</strong> (<code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/</code>) — files that apply to every project you work on, across your whole machine. Good for personal preferences that follow you everywhere.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>On your machine only</strong> — certain files are intentionally never committed to git. They contain your personal notes, your local environment details, and anything else that should not be imposed on teammates.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">The diagram below shows exactly where each file lives and how the layers relate.</p>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">The Complete File Map</strong>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre; line-height: 1.6;"><code>your-project/
+│
+├── CLAUDE.md                        ← Team project context (committed)
+├── CLAUDE.local.md                  ← Your personal notes (gitignored)
+│
 └── .claude/
-    ├── settings.json  ← Permission rules &amp; technical config
-    ├── commands/      ← Your custom shortcut commands
-    │   └── review.md  ← e.g. /project:review
-    └── rules/         ← Modular topic-specific guidelines
-        ├── code-style.md
-        └── testing.md
+    ├── settings.json                ← Team tool permissions &amp; config (committed)
+    ├── settings.local.json          ← Your personal settings (gitignored)
+    │
+    ├── rules/
+    │   ├── code-style.md            ← Global rule, loads every session
+    │   ├── testing.md               ← paths: tests/**/*.py
+    │   ├── git.md                   ← Global rule, loads every session
+    │   └── api/
+    │       └── endpoints.md         ← paths: app/routers/**/*.py
+    │
+    ├── commands/
+    │   ├── review.md                ← /review
+    │   ├── test-gen.md              ← /test-gen
+    │   ├── commit.md                ← /commit
+    │   └── debug.md                 ← /debug
+    │
+    ├── agents/                      ← Specialized subagents
+    │   └── code-reviewer.md
+    │
+    └── .mcp.json                    ← External tool integrations
 
-# Plus, globally (applies to ALL your projects):
-~/.claude/
-├── CLAUDE.md          ← Your personal preferences everywhere
-└── settings.json      ← Your global permission defaults</code></pre>
+~/.claude/                           ← Global (applies to ALL projects)
+    ├── CLAUDE.md                    ← Personal preferences &amp; style
+    ├── settings.json                ← Global model &amp; tool defaults
+    ├── commands/                    ← Commands available in every project
+    └── skills/                      ← Skills available in every project</code></pre>
 
-<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1rem 0;">
-  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">💡 <strong>Key idea:</strong> CLAUDE.md files are like a permanent sticky note. Every time a new session starts, Claude reads them — so your instructions never need to be retyped.</p>
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">The six configuration files, explained plainly</strong>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);"><code style="color: var(--code-text);">CLAUDE.md</code> — the project briefing</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">This is the most important file. It is a plain Markdown document that Claude reads automatically at the start of every session. Think of it as the briefing document you would write for a new developer joining the team — except Claude reads it every single time, so it never forgets.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">You put things in here that would cause mistakes if Claude didn't know them: your build commands, your architecture decisions, your naming conventions, which files are off-limits. Anything you find yourself explaining at the start of every conversation belongs here.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">It lives in your project root and is committed to git, so the whole team benefits. It is written in plain English — no special syntax required.</p>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);"><code style="color: var(--code-text);">CLAUDE.local.md</code> — your personal notes</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">Same format as <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code>, but never committed to git. It sits alongside <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> in your project root and is invisible to your teammates.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">This is where you put things that are specific to your machine: your local server port, the path to your virtual environment, your sandbox API URL, whatever feature you are currently working on. Because it is gitignored by default, you can write freely without worrying about polluting the shared project context.</p>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);"><code style="color: var(--code-text);">settings.json</code> — the permission layer</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">Where <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> tells Claude what to know, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code> tells Claude what it is allowed to do. This JSON file controls which tools Claude can run without asking for your approval, which commands are blocked entirely, what environment variables to set at startup, and which AI model to use.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">The most important section is <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">permissions</code>. You can allow certain commands to run silently (like <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">pytest</code> or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">git</code>) and explicitly deny others (like reading your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.env</code> file). This is the file that makes Claude safe to use on a real codebase.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">It is committed to git so your team shares the same baseline permissions.</p>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);"><code style="color: var(--code-text);">settings.local.json</code> — your personal permission overrides</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">The personal counterpart to <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code>. Also gitignored. Use it for permission tweaks that only make sense on your machine — like allowing Claude to access a local docs directory that only you have, or bypassing permission prompts during a focused debugging session you're running solo.</p>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);"><code style="color: var(--code-text);">.claude/rules/*.md</code> — modular, scoped instructions</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">As your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> grows, you will want to break it into separate files — one for code style, one for testing conventions, one for API design rules. The <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">rules/</code> directory is where those go.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Each file is a plain Markdown document covering one topic. The real power is path scoping: you can add YAML frontmatter to a rules file so it only loads when Claude is working with certain files. Your API rules only appear when Claude touches your router files. Your test conventions only appear when Claude touches files in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">tests/</code>. This keeps Claude's context lean and focused.</p>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);"><code style="color: var(--code-text);">.claude/commands/*.md</code> — slash command shortcuts</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">Any prompt you type more than once a week probably belongs here. Create a Markdown file, write your prompt inside it, save it as <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">review.md</code>, and from that point on you can type <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/review</code> to run it instantly.</p>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">How it all loads together</strong>
+<p style="margin-bottom:0.75rem; line-height:1.75;">When you start a Claude Code session in a project, this is the order in which everything loads:</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>1. ~/.claude/CLAUDE.md          your global personal defaults
+2. ~/.claude/settings.json      your global tool preferences
+3. CLAUDE.md                    the team's project briefing
+4. .claude/settings.json        the team's permission rules
+5. .claude/rules/*.md           modular rule files (global ones)
+6. CLAUDE.local.md              your personal project notes
+7. .claude/settings.local.json  your personal permission overrides
+
+   + path-scoped rules load on demand as Claude opens matching files
+   + commands load on demand when you type /command-name</code></pre>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Everything from steps 1–7 is in Claude's context before you type your first message. Commands and path-scoped rules join the context as needed during the session.</p>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">How to get started in five minutes</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">You do not need to create any of this manually. Run this single command inside your project's claude terminal:</p>
+
+<pre style="
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  background: var(--syntax-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin: 0.25rem 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  color: var(--syntax-text);
+  white-space: pre;
+  line-height: 1.2;
+"><code>/init</code></pre>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Claude will examine your codebase — reading your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">package.json</code> or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">pyproject.toml</code>, scanning your directory structure, detecting your test framework — and generate a starter <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> that reflects what it finds. From there, you edit it like any other text file and build up the other pieces as you discover you need them.</p>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">A good order to build things up:</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>1</strong> — let <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/init</code> create your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code>. Edit it to add anything it missed. Add your personal local notes to <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code>.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>2</strong> — set up <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code> with permissions. Allow the commands you use constantly (like <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">pytest</code>). Deny access to your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.env</code> file.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>3</strong> — create your first custom command for whatever task you repeat most. Probably <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/commit</code> or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/review</code>.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>When <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> grows past 150 lines</strong> — start moving sections into <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">rules/*.md</code> files. Add <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">paths:</code> frontmatter to the ones that only apply to specific parts of your codebase.</p>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">The one thing to remember</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">All of these files are plain text. There is no special tooling, no build step, no compiler. A Markdown file is a Markdown file. A JSON file is a JSON file. You can open any of them in your editor right now and start writing.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">The sophistication is in how Claude reads them — not in how you write them. Write clearly, be specific, and Claude will follow what you write. That is the whole system.</p>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Here's the full overview of how everything fits together.</p>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">What Each File Does (One-Line Summary)</strong>
+<div style="overflow-x:auto; margin-bottom:1rem;">
+  <table style="width:100%; border-collapse: collapse; min-width: 640px; border: 1px solid var(--border-color);">
+    <thead>
+      <tr style="background: var(--surface-color);">
+        <th style="padding: 0.75rem; border: 1px solid var(--border-color); text-align:left;">File</th>
+        <th style="padding: 0.75rem; border: 1px solid var(--border-color); text-align:left;">Controls</th>
+        <th style="padding: 0.75rem; border: 1px solid var(--border-color); text-align:left;">Committed?</th>
+        <th style="padding: 0.75rem; border: 1px solid var(--border-color); text-align:left;">Scope</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><code style="color: var(--code-text);">CLAUDE.md</code></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">What Claude <em>knows</em> about the project</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">✅ Yes</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Project team</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><code style="color: var(--code-text);">CLAUDE.local.md</code></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Your personal context, WIP notes, local URLs</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">❌ No</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Just you</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><code style="color: var(--code-text);">.claude/settings.json</code></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Permissions, tools, model, env vars</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">✅ Yes</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Project team</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><code style="color: var(--code-text);">.claude/settings.local.json</code></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Your personal permission overrides</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">❌ No</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Just you</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><code style="color: var(--code-text);">.claude/rules/*.md</code></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Modular instructions, optionally path-scoped</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">✅ Yes</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Project team</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><code style="color: var(--code-text);">.claude/commands/*.md</code></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Reusable <code style="color: var(--code-text);">/slash</code> command shortcuts</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">✅ Yes</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Project team</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><code style="color: var(--code-text);">.claude/agents/*.md</code></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Specialized subagent definitions</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">✅ Yes</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Project team</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><code style="color: var(--code-text);">.claude/.mcp.json</code></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">MCP server integrations (GitHub, Postgres…)</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">✅ Yes</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Project team</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><code style="color: var(--code-text);">~/.claude/CLAUDE.md</code></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Personal style defaults for all projects</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">N/A</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Just you</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><code style="color: var(--code-text);">~/.claude/settings.json</code></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Global model &amp; tool preferences</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">N/A</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Just you</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><code style="color: var(--code-text);">~/.claude/commands/</code></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Personal commands in every project</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">N/A</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Just you</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
-<div style="margin-top: 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.75rem;">
-  ${[["📄","CLAUDE.md","Permanent instruction manual"],["⚙️","settings.json","Permission rulebook"],["⚡","commands/*.md","Custom slash shortcuts"],["📋","rules/*.md","Topic-specific guidelines"],["🔒","CLAUDE.local.md","Your private notes"]].map(([r,t,n])=>`
-  <div style="padding: 0.9rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 10px; text-align: center;">
-    <div style="font-size: 1.5rem; margin-bottom: 0.4rem;">${r}</div>
-    <div style="font-family: monospace; font-size: 0.78rem; color: var(--accent-primary); margin-bottom: 0.25rem;">${t}</div>
-    <div style="font-size: 0.78rem; color: var(--text-secondary); line-height: 1.4;">${n}</div>
-  </div>`).join("")}
-</div>
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">How They Layer Together</strong>
+<p style="margin-bottom:0.75rem; line-height:1.75;">Every Claude Code session loads files in this order — later layers have higher priority:</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>1. Managed policy CLAUDE.md        (org-wide, if your team uses it)
+2. ~/.claude/CLAUDE.md             (your global personal defaults)
+3. ~/.claude/settings.json         (your global tool settings)
+4. project CLAUDE.md               (team project context)
+5. .claude/settings.json           (team permission rules)
+6. .claude/rules/*.md              (modular team rules)
+7. CLAUDE.local.md                 (your personal project notes)
+8. .claude/settings.local.json     (your personal permission overrides)</code></pre>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Slash commands and agents load on demand, not at startup.</p>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">The Mental Model: Three Layers of Ownership</strong>
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>What the whole team shares</strong> (committed to git):<br><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> + <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code> + <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">rules/*.md</code> + <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">commands/*.md</code></p>
+
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>What only you see</strong> (gitignored):<br><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> + <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.local.json</code></p>
+
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>What follows you across all projects</strong> (in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/</code>):<br>Your global <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code>, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code>, and personal <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">commands/</code></p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Think of it as: the team sets the rules, you add your personal layer on top, and your global defaults underpin everything.</p>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">The "What Goes Where" Decision Rule</strong>
+<ul style="margin: 0 0 0 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+  <li><strong>Does it affect the whole team?</strong> → <code style="color: var(--code-text);">CLAUDE.md</code> or <code style="color: var(--code-text);">rules/*.md</code></li>
+  <li><strong>Is it a permission or tool setting?</strong> → <code style="color: var(--code-text);">settings.json</code></li>
+  <li><strong>Is it your personal machine/local setup?</strong> → <code style="color: var(--code-text);">CLAUDE.local.md</code> or <code style="color: var(--code-text);">settings.local.json</code></li>
+  <li><strong>Do you type it more than twice per week?</strong> → <code style="color: var(--code-text);">commands/*.md</code></li>
+  <li><strong>Does it only matter for certain file types?</strong> → <code style="color: var(--code-text);">rules/*.md</code> with <code style="color: var(--code-text);">paths:</code> frontmatter</li>
+  <li><strong>Do you want it in every project you work on?</strong> → <code style="color: var(--code-text);">~/.claude/</code> (global files)</li>
+</ul>
 
 <div style="margin-top: 2rem; display: flex; justify-content: flex-end; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="1" class="tutorial-nav-link">Next: CLAUDE.md <span>→</span></a>
 </div>
 `},{label:"CLAUDE.md",content:`
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">📄 CLAUDE.md — The Permanent Instruction Manual</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">What is <code style="color: var(--code-text);">CLAUDE.md</code>?</strong>
 
-<p style="margin-bottom:1rem; line-height:1.75;">CLAUDE.md is the most important file in your project's .claude setup. It is a plain text file written in Markdown — a simple formatting language — where you write instructions that Claude reads at the beginning of <strong>every session</strong>. You never have to paste the same instructions into the chat again; they are always there.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> is a plain markdown file that Claude Code reads at the start of every session. Whatever you put in it gets injected into the model's context automatically — no prompting required. Think of it as a standing brief: every time you open a session in a project, Claude already knows your preferred code style, how the project is structured, which commands to run, and any rules you've set for how it should behave.</p>
 
-<strong style="display:block; margin-top:1rem; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">When it is loaded</strong>
-<p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">Automatically at the start of every new Claude Code session. Claude also re-loads it after the <code style="padding: 0.15rem 0.35rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/compact</code> command. The file is loaded <em>in full</em> — not summarised — so every instruction you write is always in front of Claude.</p>
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
-<strong style="display:block; margin-top:1rem; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Where to put it</strong>
-<div style="overflow-x: auto; margin-bottom: 1rem;">
-<table style="width:100%; border-collapse: collapse; font-size: 0.85rem;">
-  <thead>
-    <tr style="background: var(--surface-color);">
-      <th style="padding: 0.6rem 0.8rem; text-align:left; border: 1px solid var(--border-color); color: var(--text-primary);">Location</th>
-      <th style="padding: 0.6rem 0.8rem; text-align:left; border: 1px solid var(--border-color); color: var(--text-primary);">Who sees it</th>
-      <th style="padding: 0.6rem 0.8rem; text-align:left; border: 1px solid var(--border-color); color: var(--text-primary);">Best for</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="padding: 0.5rem 0.8rem; border: 1px solid var(--border-color); font-family: monospace; font-size: 0.8rem; color: var(--code-text);">./CLAUDE.md</td>
-      <td style="padding: 0.5rem 0.8rem; border: 1px solid var(--border-color); color: var(--text-secondary);">Your whole team (checked into git)</td>
-      <td style="padding: 0.5rem 0.8rem; border: 1px solid var(--border-color); color: var(--text-secondary);">Coding standards, project commands, architecture notes</td>
-    </tr>
-    <tr style="background: var(--surface-color);">
-      <td style="padding: 0.5rem 0.8rem; border: 1px solid var(--border-color); font-family: monospace; font-size: 0.8rem; color: var(--code-text);">~/.claude/CLAUDE.md</td>
-      <td style="padding: 0.5rem 0.8rem; border: 1px solid var(--border-color); color: var(--text-secondary);">Only you, across all projects</td>
-      <td style="padding: 0.5rem 0.8rem; border: 1px solid var(--border-color); color: var(--text-secondary);">Personal style preferences, favourite shortcuts</td>
-    </tr>
-    <tr>
-      <td style="padding: 0.5rem 0.8rem; border: 1px solid var(--border-color); font-family: monospace; font-size: 0.8rem; color: var(--code-text);">./CLAUDE.local.md</td>
-      <td style="padding: 0.5rem 0.8rem; border: 1px solid var(--border-color); color: var(--text-secondary);">Only you, in this project</td>
-      <td style="padding: 0.5rem 0.8rem; border: 1px solid var(--border-color); color: var(--text-secondary);">Your sandbox URLs, personal test data</td>
-    </tr>
-  </tbody>
-</table>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Why is it needed?</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">Claude starts every session with no memory of the last one. It doesn't know your code style preferences. It doesn't know how to run your tests. It doesn't know that your team uses a specific branch naming convention or that there's a quirky workaround in your authentication module. You end up repeating yourself. Or worse, you forget to mention something important and spend time fixing code that didn't follow your conventions. <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> fixes that — Claude reads it automatically, so your preferences persist across sessions.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">In short: <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code> controls <strong>how Claude behaves</strong> (permissions, tools, env). <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> controls <strong>what Claude knows</strong> (your project, your rules, your context).</p>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 1 — The File Hierarchy (Where to Put It)</strong>
+<p style="margin-bottom:0.75rem; line-height:1.75;">There are two levels:</p>
+<ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+  <li><code style="color: var(--code-text);">~/.claude/CLAUDE.md</code> — your personal <strong>global preferences</strong>, applied to every project</li>
+  <li><code style="color: var(--code-text);">&lt;project-root&gt;/CLAUDE.md</code> — <strong>project-specific</strong> context, committed to the repo and shared with your team</li>
+</ul>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Keeping these separate means you maintain your global file once and update project files as those projects evolve. Team members who open the same repository get the same project context automatically.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>Rule of thumb:</strong> Put personal preferences (your coding style, communication preferences) in the global file. Put everything project-specific in the project file.</p>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 2 — How to Generate Your First One</strong>
+<p style="margin-bottom:0.75rem; line-height:1.75;">The fastest way to get started is the <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/init</code> command. Run it inside your project:</p>
+
+<pre style="
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  background: var(--syntax-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin: 0.25rem 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  color: var(--syntax-text);
+  white-space: pre;
+  line-height: 1.2;
+"><code>cd your-project-folder</code></pre>
+
+<pre style="
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  background: var(--syntax-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin: 0.25rem 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  color: var(--syntax-text);
+  white-space: pre;
+  line-height: 1.2;
+"><code>claude</code></pre>
+
+<pre style="
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  background: var(--syntax-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin: 0.25rem 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  color: var(--syntax-text);
+  white-space: pre;
+  line-height: 1.2;
+"><code>/init</code></pre>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Claude examines your codebase — reading package files, existing documentation, configuration files, and code structure — then generates a <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> tailored to your project. The generated file typically includes build commands, test instructions, key directories, and coding conventions it detected. Think of <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/init</code> as a starting point, not a finished product. The generated <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> captures obvious patterns but may miss nuances specific to your workflow. Review what Claude produces and refine it based on your team's actual practices.</p>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 3 — What Goes Inside</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">Write instructions that would cause mistakes if missing. Everything else is noise.</p>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>Include:</strong></p>
+<ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+  <li>Build, test, and lint commands (exact invocations, not just tool names)</li>
+  <li>Architecture decisions that affect how code should be written or organized</li>
+  <li>Coding conventions specific to your project (naming patterns, file structure rules)</li>
+  <li>Environment setup requirements (required env vars, expected services)</li>
+  <li>Common pitfalls or patterns Claude should know to avoid</li>
+  <li>Monorepo structure and which packages own which responsibilities</li>
+</ul>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>Omit:</strong></p>
+<ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+  <li>Things Claude already knows (standard Python syntax, common library APIs)</li>
+  <li>Obvious reminders like "write clean code" or "add comments"</li>
+</ul>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 4 — A Complete Example for a Python Project</strong>
+<p style="margin-bottom:0.75rem; line-height:1.75;">Here's what a well-structured <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> looks like for a Python backend project:</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code># Project: My FastAPI Service
+
+This is a Python FastAPI service for managing customer invoices.
+Uses PostgreSQL for storage and Redis for caching.
+
+## Common Commands
+
+### Run the app
+uvicorn app.main:app --reload
+
+### Run tests
+pytest tests/ -v
+pytest tests/test_api.py::test_specific_case -v   # single test
+
+### Lint &amp; format
+ruff check . --fix
+black .
+
+### Type check
+mypy app/
+
+### Database migrations
+alembic upgrade head
+alembic revision --autogenerate -m "description"
+
+## Architecture
+
+- \`app/\` — main application code
+- \`app/routers/\` — FastAPI route handlers (one file per domain)
+- \`app/services/\` — business logic; never access DB directly
+- \`app/models/\` — SQLAlchemy ORM models
+- \`app/schemas/\` — Pydantic schemas for request/response validation
+- \`tests/\` — pytest tests mirroring the app/ structure
+
+Routers call services. Services call models. Never skip layers.
+
+## Coding Conventions
+
+- Use type hints on all functions
+- Pydantic v2 style (model_config, not class Config)
+- Prefer named exceptions over generic Exception
+- All services must be async
+- Use \`snake_case\` for variables/functions, \`PascalCase\` for classes
+
+## Important Rules
+
+- NEVER modify files under \`alembic/versions/\` directly
+- Always run \`mypy app/\` before considering a change complete
+- Do not add third-party libraries without asking first
+- \`.env\` file is gitignored — never commit secrets
+
+## Current Focus
+
+Working on the invoice PDF export feature in \`app/services/export.py\`.</code></pre>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 5 — The <code style="color: var(--code-text);">@include</code> Feature (Advanced)</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">Memory files can include other files using <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">@</code> notation. Included files are processed recursively and inserted before the file that references them:</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre; line-height: 1.6;"><code># CLAUDE.md
+@./docs/architecture.md
+@~/shared/style-guide.md</code></pre>
+
+<p style="margin-bottom:1rem; line-height:1.75;">This is great for Python projects — you can keep your architecture docs in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">docs/</code> and just reference them rather than copying content into <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code>.</p>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Tips &amp; Tricks</strong>
+<ol style="margin: 0 0 1rem 1.4rem; color: var(--text-secondary); line-height: 1.85;">
+  <li><strong>Be specific, not vague</strong> — "Functions should be under 40 lines; if longer, extract helper functions" is something Claude can act on. "Write good code" does nothing.</li>
+  <li><strong>Keep it short</strong> — The file counts toward Claude's context window, so length matters. A bloated <code style="color: var(--code-text);">CLAUDE.md</code> that runs thousands of tokens long will eat into the space available for actual conversation, code review, and reasoning. The goal is signal density: every line should earn its place. Aim for under 500 words.</li>
+  <li><strong>Use emphasis for critical rules</strong> — For rules that absolutely must be followed, phrases like "IMPORTANT: Never modify the migrations folder directly" or "YOU MUST run tests before committing" can help draw attention. Use it sparingly — if everything is marked IMPORTANT, nothing is.</li>
+  <li><strong>Add a "Current Focus" section</strong> — Add a "Current Focus" section and update it regularly to steer Claude toward what's relevant right now. This is particularly useful when working on a long feature over multiple sessions.</li>
+  <li><strong>Document domain-specific terms</strong> — Claude Code excels at understanding general programming principles, but it might lack context for your business domain. Project-specific jargon, obscure entity names, and acronyms can confuse the agent. Documenting domain-specific terms helps AI agents navigate the codebase and edit the correct files.</li>
+  <li><strong>Never put secrets in <code style="color: var(--code-text);">CLAUDE.md</code></strong> — Don't include sensitive information, API keys, credentials, or database connection strings — especially if you commit to version control. Since <code style="color: var(--code-text);">CLAUDE.md</code> becomes part of Claude's system prompt, treat it as documentation that could be shared publicly.</li>
+  <li><strong>Evolve it as you work</strong> — The most valuable updates often come from code reviews. When a PR reveals a convention that wasn't documented, or a reviewer catches a pattern violation, that's a signal to update <code style="color: var(--code-text);">CLAUDE.md</code>.</li>
+  <li><strong>Don't duplicate your README</strong> — If something is already in your README or a <code style="color: var(--code-text);">/docs</code> folder, don't copy it into <code style="color: var(--code-text);">CLAUDE.md</code>. Either reference the file or trust that Claude can read it when needed.</li>
+</ol>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Quick Comparison: <code style="color: var(--code-text);">CLAUDE.md</code> vs <code style="color: var(--code-text);">settings.json</code></strong>
+<div style="overflow-x:auto; margin-bottom:1rem;">
+  <table style="width:100%; border-collapse: collapse; min-width: 520px; border: 1px solid var(--border-color);">
+    <thead>
+      <tr style="background: var(--surface-color);">
+        <th style="padding: 0.75rem; border: 1px solid var(--border-color); text-align:left;"></th>
+        <th style="padding: 0.75rem; border: 1px solid var(--border-color); text-align:left;"><code style="color: var(--code-text);">CLAUDE.md</code></th>
+        <th style="padding: 0.75rem; border: 1px solid var(--border-color); text-align:left;"><code style="color: var(--code-text);">settings.json</code></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><strong>Format</strong></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Markdown (human-readable)</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">JSON</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><strong>Purpose</strong></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">What Claude <em>knows</em></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">How Claude <em>behaves</em></td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><strong>Controls</strong></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Project context, conventions, commands</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Permissions, tools, env vars, model</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><strong>Audience</strong></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Claude + your teammates</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Claude Code runtime</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><strong>Commit to repo?</strong></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Yes</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Project version yes, local version no</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
-<strong style="display:block; margin-top:1rem; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Example CLAUDE.md for a Python project</strong>
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code># My Python API Project
-
-## Stack
-Python 3.11 + FastAPI + PostgreSQL + pytest
-
-## Commands
-- Run server: uvicorn main:app --reload
-- Run tests: pytest -v
-- Lint: ruff check .
-
-## Style rules
-- Type-hint every function parameter and return value.
-- Prefer async functions for all database calls.
-- Never commit credentials — use .env for secrets.</code></pre>
-
-<strong style="display:block; margin-top:1.25rem; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Pro tips</strong>
-<ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.8;">
-  <li>Keep the file <strong>under 200 lines</strong>. Longer files reduce how well Claude follows instructions.</li>
-  <li>Be specific: <em>"Use 2-space indentation"</em> is better than <em>"format code nicely"</em>.</li>
-  <li>Run <code style="padding: 0.1rem 0.3rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/memory</code> inside a session to check which CLAUDE.md files are currently loaded.</li>
-  <li>Use <code style="padding: 0.1rem 0.3rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/init</code> to auto-generate a starter CLAUDE.md from your existing project.</li>
-</ul>
+<p style="margin-bottom:0; line-height:1.75;">The two files work together — <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> tells Claude about <em>your world</em>, and <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code> tells Claude Code what it's <em>allowed to do</em>.</p>
 
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="0" class="tutorial-nav-link previous"><span>←</span> Previous: Overview</a>
   <a href="#" data-goto-tab="2" class="tutorial-nav-link">Next: settings.json <span>→</span></a>
 </div>
 `},{label:"settings.json",content:`
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">⚙️ .claude/settings.json — The Permission Rulebook</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">What is <code style="color: var(--code-text);">settings.json</code>?</strong>
 
-<p style="margin-bottom:1rem; line-height:1.75;">While CLAUDE.md is about <em>instructions</em> (the "what" and "why"), <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code> is about <em>technical permissions</em> — the "how". This JSON file tells Claude Code which tools it can use freely, which require your permission each time, and which are completely off-limits.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">While <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> handles instructions and context, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code> gives you <em>programmatic control</em> over Claude's behavior — managing permissions, environment variables, and advanced features that go beyond simple instructions.</p>
 
-<strong style="display:block; margin-top:1rem; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Settings hierarchy (who overrides whom)</strong>
-<div style="overflow-x: auto; margin-bottom: 1rem;">
-<table style="width:100%; border-collapse: collapse; font-size: 0.85rem;">
-  <thead>
-    <tr style="background: var(--surface-color);">
-      <th style="padding: 0.6rem 0.8rem; border: 1px solid var(--border-color); color: var(--text-primary);">Priority</th>
-      <th style="padding: 0.6rem 0.8rem; border: 1px solid var(--border-color); color: var(--text-primary);">File location</th>
-      <th style="padding: 0.6rem 0.8rem; border: 1px solid var(--border-color); color: var(--text-primary);">Scope</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td style="padding:0.5rem 0.8rem; border:1px solid var(--border-color); color:var(--accent-primary); font-weight:600;">1 — Highest</td><td style="padding:0.5rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Managed settings (IT-deployed)</td><td style="padding:0.5rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Whole organisation — cannot be overridden</td></tr>
-    <tr style="background:var(--surface-color);"><td style="padding:0.5rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">2</td><td style="padding:0.5rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; font-size:0.8rem; color:var(--code-text);">.claude/settings.local.json</td><td style="padding:0.5rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Just you, in this project</td></tr>
-    <tr><td style="padding:0.5rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">3</td><td style="padding:0.5rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; font-size:0.8rem; color:var(--code-text);">.claude/settings.json</td><td style="padding:0.5rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Your whole team in this project</td></tr>
-    <tr style="background:var(--surface-color);"><td style="padding:0.5rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">4 — Lowest</td><td style="padding:0.5rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; font-size:0.8rem; color:var(--code-text);">~/.claude/settings.json</td><td style="padding:0.5rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Just you, across all projects</td></tr>
-  </tbody>
-</table>
-</div>
+<p style="margin-bottom:0.75rem; line-height:1.75;">Think of it like this:</p>
+<ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+  <li><code style="color: var(--code-text);">CLAUDE.md</code> → <em>what</em> you tell Claude to do (instructions in plain English)</li>
+  <li><code style="color: var(--code-text);">settings.json</code> → <em>how</em> Claude is allowed to behave (rules, tools, environment)</li>
+</ul>
 
-<strong style="display:block; margin-top:1rem; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">permissions — allow and deny lists</strong>
-<p style="margin-bottom:0.5rem; color: var(--text-secondary); line-height:1.75;">The most important section. You list which terminal commands and file operations Claude is allowed to run without asking, and which it must never do.</p>
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>{
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Why is it needed?</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">Every time you start a new Claude Code session, you're essentially starting from scratch. Without global instructions, you'll find yourself repeatedly explaining your coding standards or re-establishing project context. Global settings solve this by creating persistent configuration that applies across all sessions.</p>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 1 — The Three Files (Configuration Hierarchy)</strong>
+<p style="margin-bottom:0.75rem; line-height:1.75;">Claude Code reads settings from three JSON files at different scopes:</p>
+
+<ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+  <li><code style="color: var(--code-text);">~/.claude/settings.json</code> — <strong>global</strong>, your personal baseline for all projects</li>
+  <li><code style="color: var(--code-text);">&lt;project-root&gt;/.claude/settings.json</code> — <strong>project</strong>, team-shared settings (commit to repo)</li>
+  <li><code style="color: var(--code-text);">&lt;project-root&gt;/.claude/settings.local.json</code> — <strong>local</strong>, personal overrides (add to <code style="color: var(--code-text);">.gitignore</code>)</li>
+</ul>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Values merge with local taking priority — local overrides project, project overrides global.</p>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>Rule of thumb for beginners:</strong></p>
+<ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+  <li>Start with <code style="color: var(--code-text);">~/.claude/settings.json</code> for your personal defaults</li>
+  <li>Use <code style="color: var(--code-text);">.claude/settings.json</code> in each project for team-shared rules</li>
+  <li>Use <code style="color: var(--code-text);">.claude/settings.local.json</code> for secrets and personal tweaks you don't want committed</li>
+</ul>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 2 — The Most Important Setting: Permissions</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">Permissions control which tools and commands Claude Code can execute — this is arguably the most important setting for both productivity and security.</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>{
   "permissions": {
     "allow": [
-      "Bash(python manage.py test *)",  // always allow running tests
-      "Bash(git status)",
-      "Bash(git diff *)",
-      "Read(./src/**)"                  // always allow reading src folder
+      "Bash(npm run lint)",
+      "Bash(npm run test *)",
+      "Read(~/.zshrc)"
     ],
     "deny": [
-      "Read(./.env)",                   // NEVER read the .env secrets file
+      "Bash(curl *)",
+      "Read(./.env)",
       "Read(./.env.*)",
-      "Bash(rm -rf *)",                 // NEVER delete files recursively
-      "Bash(curl *)"                    // NEVER make network requests
+      "Read(./secrets/**)"
     ]
   }
 }</code></pre>
 
-<strong style="display:block; margin-top:1rem; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">hooks — run code automatically</strong>
-<p style="margin-bottom:0.5rem; color: var(--text-secondary); line-height:1.75;">Hooks let you run a terminal command whenever Claude does something. For example, automatically format a file after Claude edits it.</p>
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>{
-  "hooks": [{
-    "matcher": "Edit",
-    "hooks": [{
-      "type": "command",
-      "command": "python -m black \\"$CLAUDE_FILE_PATHS\\""
-    }]
-  }]
+<p style="margin-bottom:1rem; line-height:1.75;">Commands in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">allow</code> run without confirmation prompts, while those in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">deny</code> are completely blocked. You can use wildcards (<code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">*</code>) for pattern matching.</p>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">For a Python project, you'd typically allow:</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>{
+  "permissions": {
+    "allow": [
+      "Bash(python *)",
+      "Bash(pytest *)",
+      "Bash(pip install *)",
+      "Bash(git *)",
+      "Read(**)",
+      "Write(**)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)"
+    ]
+  }
 }</code></pre>
 
-<strong style="display:block; margin-top:1rem; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">model — choose which AI model to use</strong>
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text);"><code>{ "model": "claude-sonnet-4-6" }</code></pre>
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
-<div style="padding: 1rem; background: rgba(255,100,100,0.07); border: 1px solid rgba(255,100,100,0.2); border-left: 4px solid #f87171; border-radius: 10px; margin: 1rem 0;">
-  <p style="margin:0; line-height:1.75; font-size:0.9rem;">🔒 <strong>Security tip:</strong> Always add your <code style="color:var(--code-text);">.env</code> file to the deny list. This prevents Claude from accidentally reading API keys or database passwords.</p>
-</div>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 3 — Model Selection</strong>
+<p style="margin-bottom:0.75rem; line-height:1.75;">Control which AI model Claude Code uses and how deeply it reasons:</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>{
+  "model": "claude-sonnet-4-6",
+  "effortLevel": "high",
+  "alwaysThinkingEnabled": true
+}</code></pre>
+
+<ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+  <li><code style="color: var(--code-text);">effortLevel</code>: <code style="color: var(--code-text);">low</code> (quick responses), <code style="color: var(--code-text);">medium</code> (standard), or <code style="color: var(--code-text);">high</code> (deep reasoning)</li>
+</ul>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 4 — Environment Variables</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">Any environment variable can be configured in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code> under the <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">env</code> key to apply it to every session or roll it out to your team.</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>{
+  "env": {
+    "PYTHONPATH": "/your/project/src",
+    "ENVIRONMENT": "development",
+    "LOG_LEVEL": "DEBUG"
+  }
+}</code></pre>
+
+<p style="margin-bottom:1rem; line-height:1.75;">This is great for Python projects — you won't need to export <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">PYTHONPATH</code> manually every time.</p>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 5 — MCP Servers (Extend Claude with Tools)</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">MCP servers extend Claude Code with external tools. Configure them in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code> to auto-start when Claude launches:</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/me/docs"]
+    },
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres"],
+      "env": {
+        "DATABASE_URL": "postgresql://user:pass@localhost:5432/mydb"
+      }
+    }
+  }
+}</code></pre>
+<p style="margin-bottom:1rem; line-height:1.75;">Servers start automatically when Claude Code launches and stop when it exits.</p>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 6 — Attribution &amp; Git Settings</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">Control how Claude Code attributes its contributions to commits and pull requests:</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>{
+  "attribution": {
+    "commits": true,
+    "pullRequests": true
+  }
+}</code></pre>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">A Complete Starter Config for a Python Developer</strong>
+<p style="margin-bottom:0.75rem; line-height:1.75;">Here's a practical <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/settings.json</code> to get you started:</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>{
+  "model": "claude-sonnet-4-6",
+  "effortLevel": "medium",
+  "permissions": {
+    "allow": [
+      "Bash(python *)",
+      "Bash(pytest *)",
+      "Bash(pip *)",
+      "Bash(git *)",
+      "Bash(ruff *)",
+      "Bash(black *)",
+      "Read(**)",
+      "Write(**)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)"
+    ]
+  },
+  "env": {
+    "PYTHONPATH": "./src",
+    "LOG_LEVEL": "DEBUG"
+  },
+  "attribution": {
+    "commits": true,
+    "pullRequests": false
+  }
+}</code></pre>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Tips &amp; Tricks</strong>
+<ol style="margin: 0 0 1rem 1.4rem; color: var(--text-secondary); line-height: 1.85;">
+  <li><strong>Don't commit secrets</strong> — always put API keys in <code style="color: var(--code-text);">.claude/settings.local.json</code> and add it to <code style="color: var(--code-text);">.gitignore</code></li>
+  <li><strong>Use wildcards smartly</strong> — <code style="color: var(--code-text);">Bash(pytest *)</code> lets Claude run any pytest variant without prompting you every time</li>
+  <li><strong>Deny your <code style="color: var(--code-text);">.env</code> files</strong> — always deny access to <code style="color: var(--code-text);">.env</code> files and any directories containing secrets or credentials as a security best practice</li>
+  <li><strong>Check your merged config</strong> — use <code style="color: var(--code-text);">/status</code> inside Claude Code to see each configuration layer (managed, user, project) along with its origin. If a settings file contains errors, <code style="color: var(--code-text);">/status</code> reports the issue so you can fix it.</li>
+  <li><strong>Arrays replace, objects merge</strong> — settings merge with a last-writer-wins strategy at the field level: arrays are replaced (not appended), objects are deep-merged. So if your project <code style="color: var(--code-text);">settings.json</code> has a <code style="color: var(--code-text);">permissions.allow</code> array, it replaces — not adds to — your global one.</li>
+  <li><strong>Restart after changes</strong> — if you manually modify <code style="color: var(--code-text);">settings.json</code> and changes don't take effect, close all Claude Code windows, open a new terminal window, and run <code style="color: var(--code-text);">claude</code> again.</li>
+</ol>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<p style="margin-bottom:0; line-height:1.75;">The most impactful thing you can do as a beginner is set up your <strong>permissions</strong> correctly and define your <strong>env variables</strong> — those two alone will save you a lot of repetitive prompting during Python development.</p>
 
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="1" class="tutorial-nav-link previous"><span>←</span> Previous: CLAUDE.md</a>
   <a href="#" data-goto-tab="3" class="tutorial-nav-link">Next: commands/*.md <span>→</span></a>
 </div>
 `},{label:"commands/*.md",content:`
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">⚡ .claude/commands/*.md — Custom Slash Commands</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">What Are Custom Commands?</strong>
 
-<p style="margin-bottom:1rem; line-height:1.75;">The <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">commands/</code> folder lets you create your own slash commands — shortcuts you can type in the Claude Code chat that instantly run a pre-written prompt. Instead of typing the same code review instructions every time, you create a file <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/commands/review.md</code> and then type <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/project:review</code> to run it instantly.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Custom commands are your own reusable shortcuts — stored as Markdown files — that you can trigger instantly by typing <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/command-name</code> in Claude Code. Instead of typing out a long, repetitive prompt every session, you write it once in a file and call it with a single slash.</p>
 
-<strong style="display:block; margin-top:1rem; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">When it is invoked</strong>
-<p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">Only when you <strong>explicitly type</strong> the slash command in the chat. Unlike CLAUDE.md (which loads automatically), command files sit quietly until you call them.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Think of them as custom spells for your most common development tasks.</p>
 
-<strong style="display:block; margin-top:1rem; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">How to create a command</strong>
-<ol style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.8;">
-  <li>Create the folder: <code style="padding: 0.1rem 0.3rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/commands/</code></li>
-  <li>Create a file with the command name as the filename (e.g. <code style="padding: 0.1rem 0.3rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">review.md</code>)</li>
-  <li>Write your instructions in plain English inside the file</li>
-  <li>Use <code style="padding: 0.1rem 0.3rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/project:review</code> in the chat to run it</li>
-</ol>
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
-<div style="padding: 0.75rem 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-secondary);">
-  📌 <strong>Naming rule:</strong> The file name becomes the command name. <code style="color:var(--code-text);">review.md</code> → <code style="color:var(--accent-primary);">/project:review</code> &nbsp;|&nbsp; <code style="color:var(--code-text);">fix-bug.md</code> → <code style="color:var(--accent-primary);">/project:fix-bug</code>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">⚠️ Important: Commands → Skills (The Modern Way)</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">Before diving in, here's something every beginner needs to know upfront:</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>Custom commands have been merged into skills.</strong> A file at <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/commands/deploy.md</code> and a skill at <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/skills/deploy/SKILL.md</code> both create <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/deploy</code> and work the same way. Your existing <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/commands/</code> files keep working. Skills add optional features: a directory for supporting files, frontmatter to control whether you or Claude invokes them, and the ability for Claude to load them automatically when relevant.</p>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>What this means for you as a beginner:</strong></p>
+<ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+  <li><code style="color: var(--code-text);">.claude/commands/*.md</code> still works perfectly — use it, it's simpler</li>
+  <li><code style="color: var(--code-text);">.claude/skills/&lt;name&gt;/SKILL.md</code> is the modern approach with more features</li>
+  <li>This guide covers both, starting with the simpler commands format</li>
+</ul>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 1 — Where Commands Live (The Two Locations)</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">Project commands are stored in a <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/commands/</code> directory right inside your project's repository. The great thing about this is that they get checked into version control, so anyone who clones the repo gets the same set of standard commands.</p>
+
+<div style="overflow-x:auto; margin-bottom:1rem;">
+  <table style="width:100%; border-collapse: collapse; min-width: 420px; border: 1px solid var(--border-color);">
+    <thead>
+      <tr style="background: var(--surface-color);">
+        <th style="padding: 0.75rem; border: 1px solid var(--border-color); text-align:left;">Location</th>
+        <th style="padding: 0.75rem; border: 1px solid var(--border-color); text-align:left;">Path</th>
+        <th style="padding: 0.75rem; border: 1px solid var(--border-color); text-align:left;">Scope</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><strong>Personal</strong></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><code style="color: var(--code-text);">~/.claude/commands/</code></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">All your projects</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><strong>Project</strong></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><code style="color: var(--code-text);">.claude/commands/</code></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">This project only (commit to repo)</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
-<strong style="display:block; margin-top:1rem; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Example 1 — Code review command</strong>
-<p style="margin-bottom:0.25rem; font-size:0.82rem; color:var(--text-secondary);">File: <code style="color:var(--code-text);">.claude/commands/review.md</code></p>
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>Review the code I've selected and check for:
-- Any obvious bugs or logic errors
-- Missing error handling (try/except blocks)
-- Functions that are too long (over 30 lines)
-- Any variable names that are unclear
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
-Give me a brief summary, then list issues by priority.
-Be concise — no need to re-explain correct parts.</code></pre>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 2 — How to Create Your First Command</strong>
+<p style="margin-bottom:0.75rem; line-height:1.75;">It's just three steps:</p>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Example 2 — Fix a GitHub issue (using $ARGUMENTS)</strong>
-<p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Place <code style="padding: 0.1rem 0.3rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">$ARGUMENTS</code> in your file. Whatever the user types after the command name gets inserted there.</p>
-<p style="margin-bottom:0.25rem; font-size:0.82rem; color:var(--text-secondary);">File: <code style="color:var(--code-text);">.claude/commands/fix-issue.md</code></p>
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>Fix GitHub issue #$ARGUMENTS following our project conventions.
-Steps: read the issue, find relevant code, implement the fix,
-add tests, and summarise what you changed and why.</code></pre>
-<p style="margin-bottom:1rem; font-size:0.85rem; color:var(--text-secondary);">Use: type <code style="color:var(--accent-primary);">/project:fix-issue 42</code> — Claude will fix issue #42.</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code># 1. Create the commands directory
+mkdir -p .claude/commands
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Example 3 — Git commit (with frontmatter)</strong>
+# 2. Create a markdown file — the filename IS the command name
+touch .claude/commands/review.md
+
+# 3. Write your prompt inside it (plain English)</code></pre>
+
+<p style="margin-bottom:1rem; line-height:1.75;">The filename becomes the slash command name — <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">commit.md</code> becomes <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/commit</code>.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Then inside Claude Code, just type <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/review</code> and it runs.</p>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 3 — Anatomy of a Command File</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">A command file has two parts: optional <strong>frontmatter</strong> (metadata) and the <strong>prompt body</strong>.</p>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Simplest possible command (no frontmatter)</strong>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>Review this Python file for:
+1. PEP 8 style violations
+2. Missing type hints
+3. Functions over 20 lines
+4. Bare \`except:\` clauses
+5. Any obvious logic errors
+
+Be concise. List issues with line numbers.</code></pre>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Save as <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/commands/review.md</code> → use as <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/review</code></p>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Command with frontmatter</strong>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>---
-allowed-tools: Bash(git status:*), Bash(git diff *), Bash(git commit *)
-description: Create a meaningful git commit
+description: Review Python code for style, types, and quality issues
+allowed-tools: Read, Grep
+argument-hint: [filename or leave blank for current file]
 ---
 
-Look at the current git status and diff, then write a clear,
-descriptive commit message following the Conventional Commits format.
-Then commit the staged changes.</code></pre>
+Review $ARGUMENTS for:
+1. PEP 8 style violations  
+2. Missing type hints
+3. Functions over 20 lines
+4. Bare \`except:\` clauses
+5. Any obvious logic errors
 
-<div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem;">
-  <p style="margin:0; font-size:0.88rem; color:var(--text-secondary); line-height:1.6;">🌍 <strong>Global commands:</strong> Commands placed in <code style="color:var(--code-text);">~/.claude/commands/</code> are available across every project, not just the current one.</p>
+Be concise. List issues with line numbers.</code></pre>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Frontmatter fields explained</strong>
+<div style="overflow-x:auto; margin-bottom:1rem;">
+  <table style="width:100%; border-collapse: collapse; min-width: 480px; border: 1px solid var(--border-color);">
+    <thead>
+      <tr style="background: var(--surface-color);">
+        <th style="padding: 0.75rem; border: 1px solid var(--border-color); text-align:left;">Field</th>
+        <th style="padding: 0.75rem; border: 1px solid var(--border-color); text-align:left;">Purpose</th>
+        <th style="padding: 0.75rem; border: 1px solid var(--border-color); text-align:left;">Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><code style="color: var(--code-text);">description</code></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Shown in autocomplete when you type <code style="color: var(--code-text);">/</code></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><code style="color: var(--code-text);">"Run full test suite"</code></td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><code style="color: var(--code-text);">allowed-tools</code></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Tools Claude can use without asking</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><code style="color: var(--code-text);">Read, Bash, Grep</code></td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><code style="color: var(--code-text);">argument-hint</code></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Hint shown after the command name</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><code style="color: var(--code-text);">[filename]</code></td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><code style="color: var(--code-text);">model</code></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Override the model for this command</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><code style="color: var(--code-text);">claude-opus-4-6</code></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 4 — Using <code style="color: var(--code-text);">$ARGUMENTS</code></strong>
+<p style="margin-bottom:1rem; line-height:1.75;">You can use the <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">$ARGUMENTS</code> string to place user-supplied arguments into the prompt.</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>---
+description: Run a specific pytest test by name
+allowed-tools: Bash(pytest *)
+argument-hint: [test name or file path]
+---
+
+Run the following test and show me the full output including any tracebacks:
+
+pytest $ARGUMENTS -v -s</code></pre>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Usage: <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/run-test tests/test_api.py::test_login</code></p>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">You can also use multiple positional arguments with <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">$1</code>, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">$2</code>:</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>---
+argument-hint: [source_file] [target_module]
+description: Move a Python function to another module
+---
+
+Move the function or class from $1 into $2.
+Update all imports across the codebase.
+Run mypy after to confirm no type errors were introduced.</code></pre>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 5 — Running Bash Commands Inside a Command File</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">You can embed shell commands that get executed when the command runs using backtick syntax with <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">!</code>:</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>---
+description: Smart git commit with conventional message
+allowed-tools: Bash(git *)
+---
+
+Here is the current diff:
+
+&lt;diff&gt;
+!\`git diff --cached\`
+&lt;/diff&gt;
+
+Write a conventional commit message (feat/fix/chore/docs/refactor/test)
+following this format:
+  type(scope): short description
+
+Then run \`git commit -m "&lt;your message&gt;"\`.</code></pre>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Save as <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/commands/commit.md</code> → use as <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/commit</code></p>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 6 — Practical Python Examples</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">Here are ready-to-use commands for Python development. Create these in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/commands/</code>:</p>
+
+<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="color: var(--code-text);">review.md</code></strong> — Code review</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>---
+description: Review Python file for quality, style, and correctness
+allowed-tools: Read, Grep
+argument-hint: [filename]
+---
+
+Review $ARGUMENTS (or the current file if no argument given).
+
+Check for:
+- Missing type hints on functions/methods
+- Bare \`except:\` without exception type
+- Functions longer than 30 lines (suggest splitting)
+- Unused imports
+- Hardcoded values that should be constants or env vars
+- Missing docstrings on public functions
+- PEP 8 violations
+
+Format output as a bulleted list with line numbers.</code></pre>
+
+<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="color: var(--code-text);">test-gen.md</code></strong> — Generate tests</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>---
+description: Generate pytest tests for a Python file or function
+allowed-tools: Read, Write, Bash(pytest *)
+argument-hint: [filename or function name]
+---
+
+Generate comprehensive pytest tests for: $ARGUMENTS
+
+Requirements:
+- Use pytest fixtures where appropriate
+- Cover happy path, edge cases, and error cases
+- Use \`pytest.mark.parametrize\` for multiple input scenarios
+- Mock external dependencies with \`unittest.mock\`
+- Follow the existing test structure in tests/
+- Run the generated tests and fix any failures</code></pre>
+
+<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="color: var(--code-text);">docstring.md</code></strong> — Add docstrings</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>---
+description: Add Google-style docstrings to all undocumented functions
+allowed-tools: Read, Write, Grep
+argument-hint: [file or directory]
+---
+
+Add Google-style docstrings to all public functions and classes
+in $ARGUMENTS that are missing them.
+
+Format:
+"""Summary line.
+
+Args:
+    param_name (type): Description.
+
+Returns:
+    type: Description.
+
+Raises:
+    ExceptionType: When this happens.
+"""
+
+Do not modify existing docstrings. Only add where missing.</code></pre>
+
+<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="color: var(--code-text);">debug.md</code></strong> — Debug an error</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>---
+description: Debug an error by tracing it through the codebase
+allowed-tools: Read, Grep, Bash(python *), Bash(pytest *)
+argument-hint: [paste error message or describe the bug]
+---
+
+Debug this issue: $ARGUMENTS
+
+Steps:
+1. Identify the root cause by tracing the error through relevant files
+2. Explain what is going wrong and why
+3. Propose a fix
+4. Implement the fix
+5. Run the relevant test to confirm it is resolved</code></pre>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 7 — Personal Global Commands</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">For commands you want in <strong>every</strong> project, put them in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/commands/</code>:</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>mkdir -p ~/.claude/commands</code></pre>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">Good candidates for your global commands:</p>
+<ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+  <li><code style="color: var(--code-text);">/standup</code> — summarize what changed in git today</li>
+  <li><code style="color: var(--code-text);">/explain</code> — explain any code with an analogy</li>
+  <li><code style="color: var(--code-text);">/refactor</code> — general refactoring prompt</li>
+  <li><code style="color: var(--code-text);">/commit</code> — smart commit message generator</li>
+</ul>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Tips &amp; Tricks</strong>
+<ol style="margin: 0 0 1rem 1.4rem; color: var(--text-secondary); line-height: 1.85;">
+  <li><strong>Tab autocomplete works</strong> — Slash commands appear in autocomplete when you type <code style="color: var(--code-text);">/</code>. The <code style="color: var(--code-text);">description</code> frontmatter is what shows up there, so write it clearly.</li>
+  <li><strong>Chain commands into shell aliases</strong> — You can skip the interactive prompt entirely with <code style="color: var(--code-text);">claude -p</code>. Add aliases to your <code style="color: var(--code-text);">.zshrc</code> or <code style="color: var(--code-text);">.bashrc</code>:</li>
+</ol>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>alias clint="claude -p '/lint'"
+alias ccommit="claude -p '/commit'"</code></pre>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Now <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">ccommit</code> runs your commit command without opening the interactive session.</p>
+
+<ol start="3" style="margin: 0 0 1rem 1.4rem; color: var(--text-secondary); line-height: 1.85;">
+  <li><strong>Use <code style="color: var(--code-text);">!</code> to inject live shell output</strong> — Embedding <code style="color: var(--code-text);">!</code>backtick<code style="color: var(--code-text);">command</code>backtick<code style="color: var(--code-text);"></code> inside your prompt runs a shell command and injects its output into the context before Claude sees the prompt. Great for injecting <code style="color: var(--code-text);">git diff</code>, <code style="color: var(--code-text);">pytest</code> output, or environment info.</li>
+  <li><strong>Keep command files focused</strong> — One command, one job. If a command does three unrelated things, split it into three files.</li>
+  <li><strong>Check available commands anytime</strong> — The <code style="color: var(--code-text);">/help</code> command shows all available slash commands, including your custom commands from <code style="color: var(--code-text);">.claude/commands/</code> and <code style="color: var(--code-text);">~/.claude/commands/</code> directories.</li>
+  <li><strong>Evolve commands from real friction</strong> — The best commands come from noticing what you type repeatedly. When you write the same long prompt three times in a week, that's a command waiting to be made.</li>
+</ol>
+
+<div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Quick Comparison: Commands vs CLAUDE.md vs settings.json</strong>
+<div style="overflow-x:auto; margin-bottom:1rem;">
+  <table style="width:100%; border-collapse: collapse; min-width: 560px; border: 1px solid var(--border-color);">
+    <thead>
+      <tr style="background: var(--surface-color);">
+        <th style="padding: 0.75rem; border: 1px solid var(--border-color); text-align:left;"></th>
+        <th style="padding: 0.75rem; border: 1px solid var(--border-color); text-align:left;"><code style="color: var(--code-text);">commands/*.md</code></th>
+        <th style="padding: 0.75rem; border: 1px solid var(--border-color); text-align:left;"><code style="color: var(--code-text);">CLAUDE.md</code></th>
+        <th style="padding: 0.75rem; border: 1px solid var(--border-color); text-align:left;"><code style="color: var(--code-text);">settings.json</code></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><strong>What it is</strong></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Reusable prompt shortcuts</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Persistent project context</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Runtime configuration</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><strong>You trigger it</strong></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Manually with <code style="color: var(--code-text);">/name</code></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Automatic every session</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Automatic always</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><strong>Best for</strong></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Repetitive multi-step tasks</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Conventions, architecture</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Permissions, tools, env</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><strong>Format</strong></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Markdown + optional frontmatter</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Plain markdown</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">JSON</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><strong>Commit to repo?</strong></td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Yes (project commands)</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Yes</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Project yes, local no</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p style="margin-bottom:0; line-height:1.75;">The three files work as a team: <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code> controls what Claude <em>can</em> do, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> tells Claude what it <em>should know</em>, and <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">commands/*.md</code> gives you instant <em>shortcuts</em> for your most common workflows.</p>
 
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="2" class="tutorial-nav-link previous"><span>←</span> Previous: settings.json</a>
   <a href="#" data-goto-tab="4" class="tutorial-nav-link">Next: rules/*.md <span>→</span></a>
 </div>
 `},{label:"rules/*.md",content:`
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">📋 .claude/rules/*.md — Modular Topic-Specific Guidelines</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">What Is <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code>?</strong>
 
-<p style="margin-bottom:1rem; line-height:1.75;">The <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">rules/</code> folder is a more organised way to write instructions than cramming everything into a single CLAUDE.md file. Instead of one long file, you create separate, focused files — one per topic. Rules files are loaded the same way as CLAUDE.md — <strong>automatically at the start of every session.</strong></p>
+<p style="margin-bottom:1rem; line-height:1.75;">The <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code> directory is a modular alternative to monolithic <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> files. Instead of cramming everything into one file, you organize instructions into multiple markdown files that Claude loads as project memory. Every <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.md</code> file in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code> automatically becomes part of your project context — no configuration needed.</p>
 
-<strong style="display:block; margin-top:1rem; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">When rules files are loaded</strong>
-<ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.8;">
-  <li><strong>Rules without a path filter:</strong> loaded at session start, every time, just like CLAUDE.md.</li>
-  <li><strong>Rules with a <code style="color:var(--code-text);">paths:</code> filter:</strong> loaded only when Claude opens a file matching the specified pattern. This saves context space in large projects.</li>
-</ul>
+<p style="margin-bottom:1rem; line-height:1.75;">Think of it as the evolution of <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code>. Once your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> grows too long, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code> is how you split it up intelligently.</p>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Example structure</strong>
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); line-height: 1.6;"><code>.claude/
-└── rules/
-    ├── code-style.md  ← loaded every session
-    ├── testing.md     ← loaded every session
-    └── api-rules.md   ← loaded only when editing API files</code></pre>
+<hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Example 1 — Code style rules (always loaded)</strong>
-<p style="margin-bottom:0.25rem; font-size:0.82rem; color:var(--text-secondary);">File: <code style="color:var(--code-text);">.claude/rules/code-style.md</code></p>
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code># Code Style Rules
-- Always use 4-space indentation (PEP 8).
-- Maximum line length: 88 characters.
-- Write a one-line docstring for every function.
-- Name variables clearly — avoid abbreviations like 'x' or 'tmp'.
-- Group imports: stdlib first, then third-party, then local.</code></pre>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Why Is It Needed?</strong>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Example 2 — API rules (only loaded for API files)</strong>
-<p style="margin-bottom:0.25rem; font-size:0.82rem; color:var(--text-secondary);">File: <code style="color:var(--code-text);">.claude/rules/api-rules.md</code></p>
+<p style="margin-bottom:1rem; line-height:1.75;">The problem: your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> file has grown unwieldy. React patterns mixed with API guidelines mixed with testing rules. Everything loads every session, even when you're only working on database migrations.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Claude's context window isn't flat. Different sources of information receive different priority levels. When everything is marked important, Claude struggles to determine what's actually relevant to the current task. The result: instructions get ignored, context becomes noisy, and Claude's behavior becomes unpredictable. <strong>High priority everywhere = priority nowhere.</strong></p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Rules files solve this by letting you scope instructions to only the files where they're relevant.</p>
+
+<hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
+
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">How It Compares to <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code></strong>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Rules without <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">paths</code> frontmatter are loaded at launch with the same priority as <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/CLAUDE.md</code>. Rules can be scoped to specific files using YAML frontmatter with the <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">paths</code> field. These conditional rules only apply when Claude is working with files matching the specified patterns.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Rules load into context every session or when matching files are opened. For task-specific instructions that don't need to be in context all the time, use skills instead, which only load when you invoke them or when Claude determines they're relevant to your prompt.</p>
+
+<hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
+
+
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 1 — Set Up the Directory</strong>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); line-height: 1.6;"><code>mkdir -p .claude/rules</code></pre>
+
+<p style="margin-bottom:1rem; line-height:1.75;">That's it. Every <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.md</code> file you put there is automatically picked up by Claude Code.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Place markdown files in your project's <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code> directory. Each file should cover one topic, with a descriptive filename like <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">testing.md</code> or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">api-design.md</code>. All <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.md</code> files are discovered recursively, so you can organize rules into subdirectories like <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">frontend/</code> or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">backend/</code>.</p>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">A well-organized Python project might look like this:</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); line-height: 1.6;"><code>your-project/
+├── CLAUDE.md                    ← short, always-true project overview
+└── .claude/
+    └── rules/
+        ├── code-style.md        ← Python style and formatting rules
+        ├── testing.md           ← pytest conventions
+        ├── security.md          ← security checklist
+        ├── git.md               ← commit and branch conventions
+        └── api/
+            └── endpoints.md     ← FastAPI-specific rules</code></pre>
+
+<hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
+
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 2 — Global Rules (No Frontmatter)</strong>
+
+<p style="margin-bottom:1rem; line-height:1.75;">The simplest kind — a plain markdown file with no YAML header. It loads every session for every file, just like <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code>.</p>
+
+<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/code-style.md</code></strong></p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code># Python Code Style
+
+- Use type hints on all function signatures
+- Max function length: 30 lines. Longer = extract a helper.
+- Prefer named exceptions over bare \`except:\`
+- Use \`snake_case\` for functions/variables, \`PascalCase\` for classes
+- All public functions and classes must have Google-style docstrings
+- Use \`black\` for formatting, \`ruff\` for linting
+- No \`print()\` in production code — use \`logging\`</code></pre>
+
+<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/git.md</code></strong></p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code># Git Conventions
+
+- Branch names: \`feat/\`, \`fix/\`, \`chore/\`, \`docs/\` prefixes
+- Commit format: \`type(scope): short description\` (Conventional Commits)
+- Never commit directly to \`main\` — always use a branch
+- Run \`pytest\` and \`mypy\` before committing
+- NEVER modify files under \`alembic/versions/\` directly</code></pre>
+
+<hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
+
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 3 — Path-Scoped Rules (The Superpower)</strong>
+
+<p style="margin-bottom:1rem; line-height:1.75;">This is where <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code> becomes genuinely powerful. Add a <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">paths:</code> field in YAML frontmatter and the rule only loads when Claude is working on matching files.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Rules without frontmatter apply unconditionally.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">For Python, you could create <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/testing.md</code> that only applies when Claude is editing files in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">tests/</code>, keeping your testing rules separate from your general rules.</p>
+
+<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/testing.md</code></strong> — only applies when editing test files:</p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>---
 paths:
-  - "src/api/**/*.py"
+  - "tests/**/*.py"
+  - "test_*.py"
+  - "*_test.py"
 ---
 
-# API Development Rules
-These rules apply only when editing files inside src/api/.
-- Every endpoint must validate its input before processing.
-- Return consistent error responses: {error: string, code: int}
-- Always check authentication before accessing user data.
-- Log every request with its status code.</code></pre>
+# pytest Conventions
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Path filtering patterns</strong>
-<div style="overflow-x: auto; margin-bottom: 1rem;">
-<table style="width:100%; border-collapse: collapse; font-size: 0.82rem;">
-  <thead><tr style="background: var(--surface-color);">
-    <th style="padding:0.5rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary);">Pattern</th>
-    <th style="padding:0.5rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary);">Which files it matches</th>
-  </tr></thead>
-  <tbody>
-    <tr><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; color:var(--code-text);">**/*.py</td><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">All Python files, anywhere in the project</td></tr>
-    <tr style="background:var(--surface-color);"><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; color:var(--code-text);">src/**/*</td><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">All files inside the src/ folder</td></tr>
-    <tr><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; color:var(--code-text);">*.md</td><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Markdown files in the project root only</td></tr>
-    <tr style="background:var(--surface-color);"><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; color:var(--code-text);">src/api/**/*.py</td><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Python files specifically inside src/api/</td></tr>
-  </tbody>
-</table>
+- Use fixtures for anything used in more than one test
+- Use \`pytest.mark.parametrize\` for multiple input scenarios
+- Mock all external services with \`unittest.mock\` or \`pytest-mock\`
+- Every test must have a docstring explaining what it verifies
+- Test filenames mirror the source file: \`app/services/auth.py\` → \`tests/services/test_auth.py\`
+- Never use real DB connections in unit tests — use SQLite in-memory or mocks</code></pre>
+
+<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/migrations.md</code></strong> — only applies when working with Alembic:</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>---
+paths:
+  - "alembic/**/*.py"
+  - "alembic/versions/**"
+---
+
+# Alembic Migration Rules
+
+- NEVER modify existing migration files — always create a new one
+- Always include both \`upgrade()\` and \`downgrade()\` functions
+- Run \`alembic check\` after generating to verify consistency
+- Migration filenames must be descriptive: use \`--message\` flag
+- Always test the downgrade path before merging</code></pre>
+
+<hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
+
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 4 — Using Glob Patterns Correctly</strong>
+
+<p style="margin-bottom:1rem; line-height:1.75;">A common mistake: unquoted glob patterns starting with <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">*</code> or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">{</code> are reserved indicators in YAML and will silently fail. Always quote your patterns.</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code># ❌ WRONG — unquoted patterns will silently fail
+---
+paths:
+  - **/*.py
+  - {src,lib}/**
+---
+
+# ✅ CORRECT — always quote glob patterns
+---
+paths:
+  - "**/*.py"
+  - "{src,lib}/**"
+---</code></pre>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">Common patterns and what they match:</p>
+
+<div style="overflow-x:auto; margin-bottom:1rem;">
+  <table style="width:100%; border-collapse:collapse; font-size:0.82rem;">
+    <thead>
+      <tr style="background: var(--surface-color);">
+        <th style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary); text-align:left;">Pattern</th>
+        <th style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary); text-align:left;">Matches</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; color:var(--code-text);">"src/api/**/*.py"</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">All Python files in src/api and subdirectories</td>
+      </tr>
+      <tr style="background: var(--surface-color);">
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; color:var(--code-text);">"*.test.py"</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">All test files in any directory</td>
+      </tr>
+      <tr>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; color:var(--code-text);">"src/models/*.py"</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Only direct children of models (not nested)</td>
+      </tr>
+      <tr style="background: var(--surface-color);">
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; color:var(--code-text);">"**/*.css"</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">All CSS files anywhere in the project</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
-<div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem;">
-  <p style="margin:0; font-size:0.88rem; color:var(--text-secondary); line-height:1.6;">✅ <strong>When to use rules/ vs CLAUDE.md:</strong> Use CLAUDE.md for a high-level project overview. Use rules/ when your instructions grow long enough to need organisation — for example, separate files per team, per language, or per feature area.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">You can specify multiple patterns and use brace expansion to match multiple extensions in one pattern:</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>---
+paths:
+  - "src/**/*.{ts,tsx}"
+  - "lib/**/*.ts"
+  - "tests/**/*.test.ts"
+---</code></pre>
+
+<hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
+
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 5 — Know the Current Limitation</strong>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Path-scoped rules defined in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code> with a <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">paths:</code> frontmatter are only injected into context when Claude <strong>reads</strong> a file matching the pattern. They are not injected when Claude <strong>writes or creates</strong> a file matching the same pattern. This means rules targeting file creation conventions are silently ignored when a new file is created, because Claude never sees the rule at the time of writing.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>Workaround for new file creation:</strong> As a practical fix, put your most critical "file creation" rules (e.g., required headers, boilerplate structure) into a global rule file without <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">paths:</code> frontmatter, so they're always in context regardless of whether Claude is reading or writing.</p>
+
+<hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
+
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 6 — Sharing Rules Across Projects</strong>
+
+<p style="margin-bottom:1rem; line-height:1.75;">The <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code> directory supports symlinks, allowing you to maintain a single source of rules shared across multiple projects:</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code># Symlink a shared rules directory
+ln -s ~/shared-claude-rules .claude/rules/shared
+
+# Symlink individual rule files
+ln -s ~/company-standards/security.md .claude/rules/security.md</code></pre>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Symlinks are resolved and their contents load normally. Circular symlinks are detected and handled gracefully.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">This is great for teams — maintain one canonical rules repository and symlink it into each project.</p>
+
+<hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
+
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">A Complete Python Project Setup</strong>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">Here's a full rules structure for a FastAPI + pytest Python project:</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); line-height: 1.6;"><code>.claude/
+└── rules/
+    ├── code-style.md        ← global (no paths), loads always
+    ├── git.md               ← global, loads always
+    ├── security.md          ← global, loads always
+    ├── testing.md           ← paths: tests/**/*.py
+    ├── api/
+    │   └── endpoints.md     ← paths: app/routers/**/*.py
+    └── db/
+        └── migrations.md    ← paths: alembic/**/*.py</code></pre>
+
+<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/security.md</code></strong> (global — always loaded):</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code># Security Rules
+
+- Never log passwords, tokens, or PII
+- Always validate and sanitize user inputs before DB operations
+- Use parameterized queries — never f-string SQL
+- Secrets must come from environment variables, never hardcoded
+- NEVER commit \`.env\` files or API keys
+- Rate-limit all public endpoints</code></pre>
+
+<hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
+
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Tips &amp; Tricks</strong>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>1. Verify what's actually loaded</strong> — Run <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/memory</code> inside Claude Code to see which rules files are currently in context. This is your debugging tool when rules don't seem to be applying.</p>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>2. Keep each rule file under 50 lines</strong> — Target under 200 lines per <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> file. Longer files consume more context and reduce adherence. If your instructions are growing large, split them using <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code> files. Apply the same discipline to each rules file.</p>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>3. One topic per file</strong> — name files after what they govern: <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">testing.md</code>, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">security.md</code>, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">api-design.md</code>. Never mix concerns in one rules file.</p>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>4. Path-scoped rules are loaded on Read</strong> — because of the current limitation with Write, don't rely on path-scoped rules alone to enforce new-file conventions. Back them up with a global rule for the most critical requirements.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>5. Don't duplicate your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code></strong> — Use <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> for what applies everywhere: routing logic, quality standards, coordination protocols. Keep it lean — everything here competes for high-priority attention. Use rules for what applies to specific areas: API patterns for API files, test requirements for test files.</p>
+
+<hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
+
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Full Comparison: All Four Config Files</strong>
+
+<div style="overflow-x:auto; margin-bottom:1rem;">
+  <table style="width:100%; border-collapse:collapse; font-size:0.82rem;">
+    <thead>
+      <tr style="background: var(--surface-color);">
+        <th style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary); text-align:left;"></th>
+        <th style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary); text-align:left;"><code style="color:var(--code-text);">settings.json</code></th>
+        <th style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary); text-align:left;"><code style="color:var(--code-text);">CLAUDE.md</code></th>
+        <th style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary); text-align:left;"><code style="color:var(--code-text);">commands/*.md</code></th>
+        <th style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary); text-align:left;"><code style="color:var(--code-text);">rules/*.md</code></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary);"><strong>Controls</strong></td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Permissions, tools, env</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Project context &amp; conventions</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Reusable prompt shortcuts</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Modular, scoped instructions</td>
+      </tr>
+      <tr style="background: var(--surface-color);">
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary);"><strong>Loaded</strong></td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Always (runtime)</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Every session</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">On-demand (you type <code style="color:var(--code-text);">/cmd</code>)</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Every session or on file match</td>
+      </tr>
+      <tr>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary);"><strong>Path-scoped?</strong></td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">No</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">No</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">No</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">✅ Yes</td>
+      </tr>
+      <tr style="background: var(--surface-color);">
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary);"><strong>Best for</strong></td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Security &amp; tool access</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Short always-true project facts</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Repetitive multi-step tasks</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Growing rule sets per domain</td>
+      </tr>
+      <tr>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary);"><strong>Commit to repo?</strong></td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Project yes, local no</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Yes</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Yes</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Yes</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+
+<p style="margin-bottom:1rem; line-height:1.75;">The four files work as a layered system: <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code> is the enforcement layer, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> is the project briefing, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">commands/</code> are your workflow shortcuts, and <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">rules/</code> is your scalable, organized instruction library.</p>
 
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="3" class="tutorial-nav-link previous"><span>←</span> Previous: commands/*.md</a>
   <a href="#" data-goto-tab="5" class="tutorial-nav-link">Next: CLAUDE.local.md <span>→</span></a>
 </div>
 `},{label:"CLAUDE.local.md",content:`
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">🔒 CLAUDE.local.md — Your Private Notes</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">What Is <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code>?</strong>
 
-<p style="margin-bottom:1rem; line-height:1.75;">CLAUDE.local.md is your personal version of CLAUDE.md for the current project. It works identically to CLAUDE.md — Claude reads it automatically at session start — but it lives alongside CLAUDE.md in the project root and is meant to be added to <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.gitignore</code> so it is <strong>never committed</strong> to the repository.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> is your <strong>personal, private instruction file</strong> for a specific project. It lives alongside <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> in your project root but is never committed to version control — it exists only on your machine, for your eyes only.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75; color: var(--text-secondary);">Use it for anything that applies only to you: your local machine paths, your personal development server URLs, your preferred debug flags, or instructions that are just for your workflow — not your teammates.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>Local instructions</strong> live at <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">./CLAUDE.local.md</code> — personal project-specific preferences you add to <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.gitignore</code>. Typical use cases: your sandbox URLs, preferred test data, personal notes about the codebase.</p>
 
-<strong style="display:block; margin-top:1rem; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">When it is loaded</strong>
-<p style="margin-bottom:1rem; line-height:1.75; color: var(--text-secondary);">Automatically at session start, alongside CLAUDE.md. If both files exist and their instructions conflict, <strong>CLAUDE.local.md is read last</strong> — so your personal notes take precedence over the shared instructions at the same directory level.</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">Think of it this way:</p>
+<ul style="margin:0 0 1rem 1.5rem; color:var(--text-secondary); line-height:1.8;">
+  <li><code style="color:var(--code-text);">CLAUDE.md</code> is the <strong>team contract</strong> — shared with everyone via git</li>
+  <li><code style="color:var(--code-text);">CLAUDE.local.md</code> is your <strong>personal sticky note</strong> on that contract — visible only to you</li>
+</ul>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">How to set it up</strong>
-<ol style="margin: 0 0 0.75rem 1.5rem; color: var(--text-secondary); line-height: 1.8;">
-  <li>Create the file in your project root: <code style="padding: 0.1rem 0.3rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code></li>
-  <li>Add it to <code style="padding: 0.1rem 0.3rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.gitignore</code> so it is never pushed to the repository</li>
-  <li>Write your personal notes inside it in plain Markdown</li>
-</ol>
+<hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
 
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code># .gitignore
-CLAUDE.local.md           # add this line
-.claude/settings.local.json</code></pre>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Why Is It Needed?</strong>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Example CLAUDE.local.md</strong>
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code># My personal dev setup
+<p style="margin-bottom:1rem; line-height:1.75;">Every developer on a team has slightly different local setups. You might be running a local database on a different port than your colleague, using a different Python virtual environment path, pointing at a sandbox API instead of staging, or have personal debugging habits you don't want to impose on the whole team.</p>
 
-## Local URLs
-- Backend API: http://localhost:8000
-- Frontend: http://localhost:5173
-- Admin panel: http://localhost:8000/admin
+<p style="margin-bottom:1rem; line-height:1.75;"><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> is gitignored by default, meaning changes to it stay local to your machine and never affect what teammates see.</p>
 
-## My preferences
-- Always show full stack traces when there's an error.
-- I'm on macOS — use 'open' to open URLs, not 'xdg-open'.
-- My Python virtualenv is at: ~/venvs/myproject/</code></pre>
+<p style="margin-bottom:1rem; line-height:1.75;">Without <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code>, you'd have two bad options: either clutter the shared <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> with your personal quirks, or repeat your personal context to Claude at the start of every session. <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> is the clean solution for both.</p>
 
-<div style="padding: 1rem; background: rgba(255,100,100,0.07); border: 1px solid rgba(255,100,100,0.2); border-left: 4px solid #f87171; border-radius: 10px; margin: 0.75rem 0 1rem;">
-  <p style="margin:0; line-height:1.75; font-size:0.9rem;">🔐 <strong>Privacy reminder:</strong> CLAUDE.local.md is for personal convenience. Don't put real production passwords here — use a proper secrets manager. This file is purely for your local dev notes.</p>
+<hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
+
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 1 — Create the File and Gitignore It</strong>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code># In your project root
+touch CLAUDE.local.md</code></pre>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Then make sure it's gitignored. Claude Code gitignores it by default, but verify by checking your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.gitignore</code>:</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code># Confirm it's excluded from git
+echo "CLAUDE.local.md" &gt;&gt; .gitignore</code></pre>
+
+<p style="margin-bottom:1rem; line-height:1.75;">You can verify it's not being tracked:</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>git status  # CLAUDE.local.md should NOT appear here</code></pre>
+
+<hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
+
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 2 — The Loading Order (How It Fits In)</strong>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">The full loading order, from lowest to highest priority, is:</p>
+<ul style="margin:0 0 1rem 1.5rem; color:var(--text-secondary); line-height:1.8;">
+  <li><code style="color:var(--code-text);">CLAUDE.md</code>, <code style="color:var(--code-text);">.claude/CLAUDE.md</code>, and <code style="color:var(--code-text);">.claude/rules/*.md</code> in each directory from the filesystem root down to your current directory — files closer to your CWD are higher priority</li>
+  <li><code style="color:var(--code-text);">CLAUDE.local.md</code> in each directory from root to CWD — same traversal order, but gitignored by default</li>
+</ul>
+
+<p style="margin-bottom:1rem; line-height:1.75;">All of these load together at session start. <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> doesn't <em>override</em> <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> — both are in context simultaneously. If they conflict, Claude uses the more specific instruction.</p>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">The full picture:</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>Loaded every session (lowest → highest priority):
+  1. ~/.claude/CLAUDE.md         ← your global personal defaults
+  2. CLAUDE.md                   ← team-shared project context
+  3. .claude/rules/*.md          ← modular team rules
+  4. CLAUDE.local.md             ← YOUR personal project overrides ✅</code></pre>
+
+<hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
+
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 3 — What to Put In It</strong>
+
+<p style="margin-bottom:1rem; line-height:1.75;">The golden rule: <strong>anything you wouldn't want a teammate to see or be affected by.</strong></p>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">Here's a breakdown by category:</p>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Local Environment Details</strong>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>## My Local Environment
+
+- Python venv: \`source ~/.venvs/myproject/bin/activate\`
+- Local DB runs on port 5433 (not the default 5432)
+- Redis is on port 6380 on my machine
+- I use \`python -m pytest\` not bare \`pytest\` (PATH issue with my setup)</code></pre>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Personal Sandbox / Dev URLs</strong>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>## My Dev URLs
+
+- Local API: http://localhost:8001
+- Local frontend: http://localhost:3001
+- My personal staging environment: https://senthil-staging.myapp.io
+- DO NOT use https://staging.myapp.io — that's the shared one</code></pre>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Personal Test Data</strong>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>## My Test Fixtures
+
+- Use user ID \`usr_test_senthil_001\` for integration tests
+- Test database: \`myproject_dev_senthil\` (NOT myproject_dev — that's shared)
+- Stripe test card: 4242... (last 4: 4242)
+- My test webhook secret is in ~/.secrets/stripe_test_webhook</code></pre>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Work-in-Progress Notes</strong>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>## Current Focus
+
+Working on the invoice PDF export feature. The relevant files are:
+- app/services/export.py (main logic)
+- app/templates/invoice.html (Jinja2 template)
+- tests/test_export.py (currently failing — that's OK, WIP)
+
+The tricky part: we're using WeasyPrint but my local install
+needs \`brew install pango\` first. Docs don't mention this.</code></pre>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Personal Debugging Preferences</strong>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>## My Debugging Style
+
+- I prefer verbose logging during development — set LOG_LEVEL=DEBUG
+- When debugging, always add \`breakpoint()\` rather than print statements
+- I use \`ipdb\` not \`pdb\` — it's installed in my venv
+- For DB queries, always print the generated SQL first so I can see it</code></pre>
+
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Machine-Specific Paths</strong>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>## My Machine Paths
+
+- Shared company docs: ~/Documents/company-wiki/
+- Design assets: ~/Dropbox/Projects/myproject/assets/
+- Reference the backend API repo at: ~/code/myproject-api/</code></pre>
+
+<hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
+
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 4 — A Complete Example for a Python Developer</strong>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Here's a realistic <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> for a FastAPI project:</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code># My Local Setup Notes
+
+## Environment
+
+- Activate venv: \`source ~/.venvs/fastapi-proj/bin/activate\`
+- I use Python 3.12.3 — \`python3.12\` not \`python\`
+- Local postgres runs on port 5433 (my laptop has two PG versions)
+- DATABASE_URL for local: \`postgresql://senthil:@localhost:5433/myproject_local\`
+
+## My Dev URLs
+
+- API: http://localhost:8001 (I run on 8001 to avoid clash with another project)
+- Docs: http://localhost:8001/docs
+
+## Current Task
+
+Implementing the \`/reports/export\` endpoint (GitHub issue #142).
+Key files I'm currently editing:
+- app/routers/reports.py
+- app/services/report_export.py (new file, doesn't exist yet)
+
+## Personal Notes
+
+- The \`auth\` module has a known issue on my machine with token refresh.
+  Ignore it for now — it's being fixed in PR #138 (not merged yet).
+- When running alembic, always use:
+  \`alembic -x env=local upgrade head\`
+  (the -x env=local flag selects my local .env file)
+
+## Test Data
+
+- My test user: \`test_senthil@example.com\` / \`test1234\`
+- My test workspace ID: \`ws_01JA2KTEST_LOCAL\`
+
+## DO NOT
+
+- Don't run \`docker-compose up\` — I run services natively
+- Don't use the shared staging DB for testing</code></pre>
+
+<hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
+
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 5 — The <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">#</code> Shortcut (Quick Additions During a Session)</strong>
+
+<p style="margin-bottom:1rem; line-height:1.75;">The fastest way to add a memory during a session is by starting your input with the <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">#</code> character. Claude will prompt you to select which memory file (<code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code>) to store it in.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">So if you discover something mid-session — like a tricky workaround — you can just type:</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code># On my machine, always use python3.12 not python</code></pre>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Claude will ask whether to save it to <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code>. Pick <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> for anything personal.</p>
+
+<hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
+
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">⚠️ One Important Note: Deprecation Warning</strong>
+
+<p style="margin-bottom:1rem; line-height:1.75;"><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> has been deprecated in favor of using imports, which work better across multiple git worktrees.</p>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">What this means in practice:</p>
+<ul style="margin:0 0 1rem 1.5rem; color:var(--text-secondary); line-height:1.8;">
+  <li>It still <strong>works</strong> and is still widely used</li>
+  <li>The modern equivalent is using <code style="color:var(--code-text);">@imports</code> inside <code style="color:var(--code-text);">CLAUDE.md</code> to pull in a local file that's gitignored</li>
+  <li>If you use git worktrees heavily, the import approach is more robust</li>
+</ul>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">The <strong>import-based alternative</strong> looks like this:</p>
+
+<p style="margin-bottom:0.25rem; line-height:1.75;">In your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> (committed):</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>@./CLAUDE.local.md</code></pre>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Then <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> is added to <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.gitignore</code> and contains all your personal notes as before. The result is functionally identical — the difference is that the import approach composes more predictably when you have multiple worktrees of the same repo.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">For most solo developers and small teams, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> placed directly in the project root is perfectly fine and simpler to understand.</p>
+
+<hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
+
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Tips &amp; Tricks</strong>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>1. Treat it as a living document</strong> — update it whenever you discover something specific to your machine. It compounds in value over time.</p>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>2. Never put real secrets in it</strong> — even though it's gitignored, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> is still a plaintext file on disk. Reference environment variable <em>names</em> only, not their values. Use <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.env</code> files for actual secrets.</p>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>3. Use it for "current focus"</strong> — a <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">## Current Task</code> section that you update each time you sit down to work is incredibly effective. Claude immediately knows what you're working on without you having to explain it.</p>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>4. Verify with <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/memory</code></strong> — run <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/memory</code> inside Claude Code to see all loaded memory files including <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code>. This is your debugging tool if things aren't loading as expected.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>5. Keep it short</strong> — the same context window rules apply here. Aim for under 100 lines. If it's growing large, you're probably putting things in it that belong in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code>.</p>
+
+<hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
+
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Full Comparison: All Five Config Files</strong>
+
+<div style="overflow-x:auto; margin-bottom:1rem;">
+  <table style="width:100%; border-collapse:collapse; font-size:0.82rem;">
+    <thead>
+      <tr style="background: var(--surface-color);">
+        <th style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary); text-align:left;"></th>
+        <th style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary); text-align:left;"><code style="color:var(--code-text);">settings.json</code></th>
+        <th style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary); text-align:left;"><code style="color:var(--code-text);">CLAUDE.md</code></th>
+        <th style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary); text-align:left;"><code style="color:var(--code-text);">rules/*.md</code></th>
+        <th style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary); text-align:left;"><code style="color:var(--code-text);">commands/*.md</code></th>
+        <th style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary); text-align:left;"><code style="color:var(--code-text);">CLAUDE.local.md</code></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary);"><strong>Controls</strong></td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Permissions, tools, env</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Team project context</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Modular scoped rules</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Reusable shortcuts</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Personal local context</td>
+      </tr>
+      <tr style="background: var(--surface-color);">
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary);"><strong>Committed to git?</strong></td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Project yes, local no</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">✅ Yes</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">✅ Yes</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">✅ Yes</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">❌ Never</td>
+      </tr>
+      <tr>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary);"><strong>Who sees it?</strong></td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Team</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Team</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Team</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Team</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Only you</td>
+      </tr>
+      <tr style="background: var(--surface-color);">
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary);"><strong>Loaded</strong></td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Always (runtime)</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Every session</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Every session / file match</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">On-demand</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Every session</td>
+      </tr>
+      <tr>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary);"><strong>Best for</strong></td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Security &amp; tool access</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Architecture, conventions</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Domain-specific rules</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Repetitive tasks</td>
+        <td style="padding:0.6rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Your sandbox, WIP notes, local paths</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">CLAUDE.local.md vs settings.local.json</strong>
-<div style="overflow-x: auto; margin-bottom: 1rem;">
-<table style="width:100%; border-collapse: collapse; font-size: 0.85rem;">
-  <thead><tr style="background: var(--surface-color);">
-    <th style="padding:0.5rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary);">File</th>
-    <th style="padding:0.5rem 0.8rem; border:1px solid var(--border-color); color:var(--text-primary);">What to put in it</th>
-  </tr></thead>
-  <tbody>
-    <tr><td style="padding:0.5rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; font-size:0.8rem; color:var(--code-text);">CLAUDE.local.md</td><td style="padding:0.5rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Personal instructions, local URLs, your preferred workflow notes</td></tr>
-    <tr style="background:var(--surface-color);"><td style="padding:0.5rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; font-size:0.8rem; color:var(--code-text);">.claude/settings.local.json</td><td style="padding:0.5rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Personal permission overrides (allow/deny rules specific to your machine)</td></tr>
-  </tbody>
-</table>
-</div>
-<p style="margin-bottom:1rem; line-height:1.75; color: var(--text-secondary);">Both files are gitignored automatically — neither is shared with the team.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> is the private complement to everything else in the system — it's where <em>your</em> reality lives, separate from the team's shared contract.</p>
 
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="4" class="tutorial-nav-link previous"><span>←</span> Previous: rules/*.md</a>
@@ -499,12 +1812,12 @@ CLAUDE.local.md           # add this line
   <a href="#" data-goto-tab="7" class="tutorial-nav-link">Next: Visual Outline <span>→</span></a>
 </div>
 `},{label:"Visual Outline",content:`
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">🗺️ Visual Outline</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Visual Outline</strong>
 
-<p style="margin-bottom:1rem; line-height:1.75;">An interactive flowchart showing the relationships between all the config files in the <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude</code> folder.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">An interactive flowchart showing the relationships between all the config files.</p>
 
 <div style="width: 100%; height: 650px; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; margin-bottom: 1.5rem; background: var(--surface-color);">
-  <iframe src="./claude-folder-flowchart.html" style="width: 100%; height: 100%; border: none; border-radius: 8px;"></iframe>
+  <iframe src="/knowledgelab/claude-code-config-flowchart.html" style="width: 100%; height: 100%; border: none; border-radius: 8px;"></iframe>
 </div>
 
 <div style="margin-top: 2rem; display: flex; justify-content: flex-start; border-top: 1px solid var(--border-color); padding-top: 1rem;">
@@ -719,6 +2032,7 @@ EOF</code></pre>
       <li style="margin-bottom: 0.25rem;"><a href="https://github.com/PleasePrompto/notebooklm-skill" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">NotebookLM Skills</a></li>
       <li style="margin-bottom: 0.25rem;"><a href="https://github.com/kepano/obsidian-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Obsidian Skills</a></li>
       <li style="margin-bottom: 0.25rem;"><a href="https://github.com/gsd-build/get-shit-done" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Get Shit done</a></li>
+      <li style="margin-bottom: 0.25rem;"><a href="https://github.com/addyosmani/agent-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Agent Skills</a></li>
     </ul>
   </li>
 </ul>
@@ -929,7 +2243,7 @@ EOF</code></pre>
     <span>←</span> Previous: Stitch
   </a>
 </div>
-`}],interactiveType:"custom"},Mt={id:"claude-code-uiux-21st-dev",title:"Claude UI Stack",category:"Tutorial",tags:["Claude Code","UI/UX","21st.dev"],tabs:[{label:"Overview",content:`
+`}],interactiveType:"custom"},Tt={id:"claude-code-uiux-21st-dev",title:"Claude UI Stack",category:"Tutorial",tags:["Claude Code","UI/UX","21st.dev"],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:1rem; line-height:1.75;">This setup helps you create <strong>production-quality websites</strong> by combining three powerful ingredients:</p>
 
 <ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
@@ -1038,9 +2352,62 @@ Make it feel like a top-tier product (Stripe / Linear / Apple-level quality).</p
   </ul>
 </div>
 
-<div style="margin-top: 2rem; display: flex; justify-content: flex-start; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="2" class="tutorial-nav-link previous">
     <span>←</span> Previous: Install UI/UX + 21st.dev
+  </a>
+  <a href="#" data-goto-tab="4" class="tutorial-nav-link">
+    Next: Resources <span>→</span>
+  </a>
+</div>
+`},{label:"Resources",content:`
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Resources]</strong>
+
+<div style="background: #0d0d12; border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; font-family: 'JetBrains Mono', monospace; box-shadow: 0 20px 40px rgba(0,0,0,0.4); margin: 1rem 0 2rem;">
+  <!-- Terminal Header -->
+  <div style="background: rgba(255,255,255,0.05); padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--border-color);">
+    <div style="width: 10px; height: 10px; border-radius: 50%; background: #ff5f56;"></div>
+    <div style="width: 10px; height: 10px; border-radius: 50%; background: #ffbd2e;"></div>
+    <div style="width: 10px; height: 10px; border-radius: 50%; background: #27c93f;"></div>
+    <span style="margin-left: 0.5rem; font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8;">zsh — build-ui</span>
+  </div>
+  
+  <!-- Terminal Body -->
+  <div style="padding: 1.5rem; line-height: 1.6;">
+    <div style="margin-bottom: 1.5rem;">
+      <p style="color: #ae81ff; margin-bottom: 0.5rem; font-weight: bold;">[01] AWESOME DESIGN.md</p>
+      <p style="color: #a0a0b0; font-size: 0.9rem; margin-bottom: 0.5rem;">Design system inspirations from popular websites. Drop one into your project and let coding agents build matching UI.</p>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="color: #27c93f;">➜</span> 
+        <a href="https://getdesign.md/" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-size: 0.85rem; word-break: break-all;">https://getdesign.md/</a>
+      </div>
+    </div>
+    
+    <div style="margin-bottom: 1.5rem;">
+      <p style="color: #ae81ff; margin-bottom: 0.5rem; font-weight: bold;">[02] What is DESIGN.md?</p>
+      <p style="color: #a0a0b0; font-size: 0.9rem; margin-bottom: 0.5rem;">A design system document that AI agents read to generate consistent UI across your project.</p>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="color: #27c93f;">➜</span> 
+        <a href="https://stitch.withgoogle.com/docs/design-md/overview" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-size: 0.85rem; word-break: break-all;">https://stitch.withgoogle.com/docs/design-md/overview</a>
+      </div>
+    </div>
+    
+    <div>
+      <span style="color: #27c93f;">➜</span> <span style="color: #00f2ff;">~</span> 
+      <span style="display: inline-block; width: 8px; height: 18px; background: var(--accent-primary); vertical-align: middle; margin-left: 4px; animation: terminal-blink 1s step-end infinite;"></span>
+    </div>
+  </div>
+</div>
+
+<style>
+@keyframes terminal-blink {
+  50% { opacity: 0; }
+}
+</style>
+
+<div style="margin-top: 2rem; display: flex; justify-content: flex-start; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="3" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Prompt Template
   </a>
 </div>
 `}],interactiveType:"custom"},At={id:"build-webapp-ai",title:"Build Web App with AI",category:"",tags:[""],description:`
@@ -1064,7 +2431,7 @@ Access the prompts and configuration files here:
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
   <iframe src="https://www.youtube.com/embed/PpvoOyYAMZs" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Build Web App with AI Tutorial"></iframe>
 </div>
-`,interactiveType:"custom"},Tt={id:"ai-engineering",title:"AI Engineering",category:"",tags:[""],tabs:[{label:"Overview",content:`
+`,interactiveType:"custom"},Mt={id:"ai-engineering",title:"AI Engineering",category:"",tags:[""],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:0.75rem; line-height:1.75;">AI Engineering refers to the process of building applications on top of foundation models.</p>
 <p style="margin-bottom:1rem; line-height:1.75;">The model as a service makes it easier to leverage AI to build applications. Models are exposed via APIs that receive user queries and return model outputs.
 Without these APIs, using an AI model required the infrastructure to host and serve this model. These APIs give you access to powerful models via single API calls.</p>
@@ -1073,7 +2440,7 @@ Without these APIs, using an AI model required the infrastructure to host and se
 
 This page is currently under development. Please check back soon.
 
-`}],interactiveType:"custom"},It={id:"build-app-skill-mcp",title:"Agent Skills + MCP",category:"Tutorial",tags:["Agentic","Firebase","GitHub"],tabs:[{label:"Overview",content:`
+`}],interactiveType:"custom"},zt={id:"build-app-skill-mcp",title:"Agent Skills + MCP",category:"Tutorial",tags:["Agentic","Firebase","GitHub"],tabs:[{label:"Overview",content:`
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Build a URL Tracker App with AI Agents Skills &amp; MCP</strong>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Have you ever saved a bunch of URLs to read later — articles, docs, videos — and then a few days later wondered <em>"where did that link go?"</em> You scroll through tabs, dig through your notes app, check your browser history… and still can't find it.</p>
@@ -1599,14 +2966,76 @@ Requirements:
   <img src="/knowledgelab/images/tech-stack.png" alt="Tech Stack Modal Preview" style="max-width: 100%; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 8px 32px rgba(0,0,0,0.3); object-fit: cover;">
 </div>
 
-<div style="margin-top: 2rem; display: flex; justify-content: flex-start; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="4" class="tutorial-nav-link previous">
     <span>←</span> Previous: Step 4
+  </a>
+  <a href="#" data-goto-tab="6" class="tutorial-nav-link">
+    Next: Resources <span>→</span>
   </a>
 </div>
 
 
-`}],interactiveType:"custom"},zt={id:"claude-extension",title:"Claude Extension",category:"",tags:[],tabs:[{label:"Features",content:`
+`},{label:"Resources",content:`<div style="background: #0d0d12; border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; font-family: 'JetBrains Mono', monospace; box-shadow: 0 20px 40px rgba(0,0,0,0.4); margin: 0;">
+  <!-- Terminal Header -->
+  <div style="background: rgba(255,255,255,0.05); padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--border-color);">
+    <div style="width: 10px; height: 10px; border-radius: 50%; background: #ff5f56;"></div>
+    <div style="width: 10px; height: 10px; border-radius: 50%; background: #ffbd2e;"></div>
+    <div style="width: 10px; height: 10px; border-radius: 50%; background: #27c93f;"></div>
+    <span style="margin-left: 0.5rem; font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8;">zsh — build-ui</span>
+  </div>
+  
+  <!-- Terminal Body -->
+  <div style="padding: 1.5rem 1.5rem 0.75rem; line-height: 1.6;">
+    <div style="margin-bottom: 1.5rem;">
+      <p style="color: #ae81ff; margin-bottom: 0.5rem; font-weight: bold;">[01] AI Agent Skills for Firebase</p>
+      <p style="color: #a0a0b0; font-size: 0.9rem; margin-bottom: 0.5rem;">Learn how to add Firebase expertise to your AI agents (Antigravity, Claude Code, etc.).</p>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="color: #27c93f;">➜</span> 
+        <a href="https://firebase.google.com/docs/ai-assistance/agent-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-size: 0.85rem; word-break: break-all;">https://firebase.google.com/docs/ai-assistance/agent-skills</a>
+      </div>
+    </div>
+    
+    <div style="margin-bottom: 1.5rem;">
+      <p style="color: #ae81ff; margin-bottom: 0.5rem; font-weight: bold;">[02] Firebase MCP Server</p>
+      <p style="color: #a0a0b0; font-size: 0.9rem; margin-bottom: 0.5rem;">Official Model Context Protocol server for managing Firebase projects.</p>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="color: #27c93f;">➜</span> 
+        <a href="https://firebase.google.com/docs/ai-assistance/mcp-server" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-size: 0.85rem; word-break: break-all;">https://firebase.google.com/docs/ai-assistance/mcp-server</a>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 1.5rem;">
+      <p style="color: #ae81ff; margin-bottom: 0.5rem; font-weight: bold;">[03] Gemini CLI Firebase Extension</p>
+      <p style="color: #a0a0b0; font-size: 0.9rem; margin-bottom: 0.5rem;">Integrate Firebase project management directly into your Gemini CLI.</p>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="color: #27c93f;">➜</span> 
+        <a href="https://firebase.google.com/docs/ai-assistance/gcli-extension" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-size: 0.85rem; word-break: break-all;">https://firebase.google.com/docs/ai-assistance/gcli-extension</a>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 0;">
+      <p style="color: #ae81ff; margin-bottom: 0.5rem; font-weight: bold;">[04] Blog: AI Agent Skills for Firebase</p>
+      <p style="color: #a0a0b0; font-size: 0.9rem; margin-bottom: 0.5rem;">The official announcement and vision for AI-powered Firebase development.</p>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="color: #27c93f;">➜</span> 
+        <a href="https://firebase.blog/posts/2026/02/ai-agent-skills-for-firebase" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-size: 0.85rem; word-break: break-all;">https://firebase.blog/posts/2026/02/ai-agent-skills-for-firebase</a>
+      </div>
+    </div>
+    <div style="margin-top: 0.75rem;">
+      <span style="color: #27c93f;">➜</span> <span style="color: #00f2ff;">~</span> 
+      <span style="display: inline-block; width: 8px; height: 18px; background: var(--accent-primary); vertical-align: middle; margin-left: 4px; animation: terminal-blink 1s step-end infinite;"></span>
+    </div>
+  </div>
+</div>
+
+<style>
+@keyframes terminal-blink {
+  50% { opacity: 0; }
+}
+</style>
+
+`}],interactiveType:"custom"},It={id:"claude-extension",title:"Claude Extension",category:"",tags:[],tabs:[{label:"Features",content:`
 <style>
 .cc-table-wrap { width:100%; margin-top:1.5rem; border-radius:12px; overflow: visible; }
 .cc-table { width:100%; border-collapse:collapse; font-size:0.85rem; font-family:'Outfit', sans-serif; line-height:1.5; table-layout:auto; letter-spacing:0.01em; }
@@ -1817,7 +3246,7 @@ Requirements:
 <div class="flowchart-embed" style="width: 100%; height: calc(100vh - 160px); min-height: 700px; overflow: hidden; background: var(--syntax-bg); border-radius: 12px; border: 1px solid var(--border-color);">
   <iframe src="/knowledgelab/flowchart.html" style="width: 100%; height: 100%; border: none;" title="Decision Flowchart" allow="fullscreen" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
 </div>
-      `}],interactiveType:"custom"},Bt={id:"claude-commands",title:"Claude Commands",description:`
+      `}],interactiveType:"custom"},Pt={id:"claude-commands",title:"Claude Commands",description:`
 <p style="margin-bottom:1rem; line-height:1.75;">Claude Commands (also called slash commands) are a feature of Claude Code. Think of them like custom keyboard shortcuts or macros, but for your AI workflow.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Instead of typing out a long, detailed instruction every time you want Claude to do something repetitive, you save that instruction as a simple Markdown file and call it up with a quick <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/command-name</code>.</p>
@@ -1866,12 +3295,60 @@ EOF</pre>
   </ul>
 </div>
 <div style="height: 10rem;"></div>
-  `,interactiveType:"custom"},Pt={id:"claude-subagents",title:"Claude Subagents",tabs:[{label:"Overview",content:`
-        <p style="margin-bottom:1rem; line-height:1.75;">Subagents are specialized AI assistants that handle specific types of tasks. Each subagent runs in its own context window with a custom system prompt, specific tool access, and independent permissions. They handle discrete tasks independently and return results to the main agent. When Claude encounters a task that matches a subagent’s description, it delegates to that subagent, which works independently and returns results.</p>
+  `,interactiveType:"custom"},Bt={id:"claude-subagents",title:"Claude Subagents",tabs:[{label:"Overview",content:`
+        <p style="margin-bottom:1rem; line-height:1.75;">A subagent is an isolated Claude instance with its own context window. It takes a task, does the work, and returns only the result. Subagents are self-contained agents that operate with their own context windows. When Claude spawns a subagent, that assistant works independently to read files, explore code, or make changes. When it completes its task, the subagent returns only the relevant results to the main conversation.</p>
+        
+        <p style="margin-bottom:1rem; line-height:1.75;">Each subagent starts fresh, unburdened by the history of the conversation or invoked skills. Multiple subagents can run in parallel, and each can have different permissions: a research subagent might have read-only access, while an implementation subagent gets full editing capabilities.</p>
+
         <p style="margin-bottom:1.5rem; font-style: italic; color: var(--text-secondary); line-height:1.6;">
           Note: If you need multiple agents working in parallel and communicating with each other, see agent teams instead. Subagents work within a single session; agent teams coordinate across separate sessions.
         </p>
-        <p>Claude uses each subagent’s description to decide when to delegate tasks. When you create a subagent, write a clear description so Claude knows when to use it. The key word is isolation. A subagent is an isolated Claude instance that works on a task independently and returns only the results to your main conversation. Use subagents when you need parallel execution or want to isolate heavy computational work. Best for: preventing context pollution, specialized deep dives.</p>
+
+        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+          <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">When should you use subagents?</strong>
+          <p style="margin-bottom: 1.5rem; line-height: 1.6; color: var(--text-secondary);">Certain categories of work benefit clearly from subagent delegation. Learning to recognize them makes the feature far more effective.</p>
+
+          <div style="margin-bottom: 1.5rem; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0, 242, 255, 0.02);">
+            <strong style="display:block; margin-bottom:0.5rem; font-size:1rem; color: var(--text-primary);">Research-heavy tasks</strong>
+            <p style="margin-bottom: 0.75rem; line-height: 1.6; font-size: 0.95rem;">When understanding how something works is a prerequisite to changing it, a subagent can explore the codebase and return a summary rather than dumping dozens of files into the conversation.</p>
+            <p style="margin-bottom: 0.35rem; font-size: 0.9rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">The signal:</strong> Gathering context requires reading dozens of files.</p>
+            <p style="margin: 0; font-size: 0.9rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">The benefit:</strong> The main conversation stays clean, and synthesized findings arrive instead of raw content.</p>
+          </div>
+
+          <div style="margin-bottom: 1.5rem; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0, 242, 255, 0.02);">
+            <strong style="display:block; margin-bottom:0.5rem; font-size:1rem; color: var(--text-primary);">Multiple independent tasks</strong>
+            <p style="margin-bottom: 0.75rem; line-height: 1.6; font-size: 0.95rem;">When fixing errors across several files, updating patterns in multiple components, or making changes that don't depend on each other, parallel subagents complete the task faster.</p>
+            <p style="margin-bottom: 0.35rem; font-size: 0.9rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">The signal:</strong> Sub-tasks have no dependencies between them.</p>
+            <p style="margin: 0; font-size: 0.9rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">The benefit:</strong> Three subagents working simultaneously generally finish the task in less time.</p>
+          </div>
+
+          <div style="margin-bottom: 1.5rem; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0, 242, 255, 0.02);">
+            <strong style="display:block; margin-bottom:0.5rem; font-size:1rem; color: var(--text-primary);">Fresh perspective needed</strong>
+            <p style="margin-bottom: 0.75rem; line-height: 1.6; font-size: 0.95rem;">When a task benefits from an unbiased look — like auditing code the main conversation just wrote — a subagent starts fresh, free from any assumptions baked into the current context.</p>
+            <p style="margin-bottom: 0.35rem; font-size: 0.9rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">The signal:</strong> You want a second pair of eyes on work already done.</p>
+            <p style="margin: 0; font-size: 0.9rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">The benefit:</strong> Catches issues the main conversation might rationalize away.</p>
+          </div>
+
+           <div style="margin-bottom: 2rem; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0, 242, 255, 0.02);">
+            <strong style="display:block; margin-bottom:0.5rem; font-size:1rem; color: var(--text-primary);">Pipeline workflows</strong>
+            <p style="margin-bottom: 0.75rem; line-height: 1.6; font-size: 0.95rem;">When a task has distinct phases (i.e., design, then implement, then test), each stage benefits from focused attention.</p>
+            <p style="margin-bottom: 0.35rem; font-size: 0.9rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">The signal:</strong> Sequential stages with clear handoffs.</p>
+            <p style="margin: 0; font-size: 0.9rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">The benefit:</strong> Each subagent concentrates on its phase, without context from other stages creating noise.</p>
+          </div>
+
+          <div style="margin: 1.5rem 0; padding: 1rem 1.25rem; background: rgba(0, 242, 255, 0.05); border-left: 4px solid var(--accent-primary); border-radius: 0 8px 8px 0;">
+            <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--text-primary);">
+              <strong style="color: var(--accent-primary);">Pro-tip:</strong> When a task requires exploring ten or more files, or involves three or more independent pieces of work, that's a strong signal to direct Claude toward subagents.
+            </p>
+          </div>
+
+          <div style="margin-bottom: 2rem; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0, 242, 255, 0.02);">
+            <strong style="display:block; margin-bottom:0.5rem; font-size:1rem; color: var(--text-primary);">Verification before committing</strong>
+            <p style="margin-bottom: 0.75rem; line-height: 1.6; font-size: 0.95rem;">Before finalizing changes, an independent subagent can verify the implementation isn't overfitting to tests or missing edge cases.</p>
+            <p style="margin-bottom: 0.35rem; font-size: 0.9rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">The signal:</strong> A second opinion is warranted before committing code.</p>
+            <p style="margin: 0; font-size: 0.9rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">The benefit:</strong> Catches issues that familiarity with the code might obscure.</p>
+          </div>
+        </div>
 
         <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
           <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">How is it Different From Everything Else?</strong>
@@ -1897,6 +3374,194 @@ EOF</pre>
               <code style="color: var(--accent-primary); font-weight: bold;">Skills</code> &mdash; Define automatic behaviors that activate based on task context
             </li>
           </ul>
+        </div>
+      `},{label:"Invocation",content:`
+        <div style="margin-bottom: 2.5rem;">
+          <h2 style="margin-bottom: 1.5rem; color: var(--accent-primary); font-size: 1.4rem;">How to direct subagent usage</h2>
+          <p style="margin-bottom: 1.5rem; line-height: 1.75;">Several methods exist for invoking subagents, ranging from simple conversation to automated workflows. The right starting point depends on the workflow, and sophistication can be layered on as patterns emerge.</p>
+        </div>
+
+        <div style="margin-bottom: 3rem;">
+          <h3 style="margin-bottom: 1rem; color: var(--text-primary); font-size: 1.2rem;">Conversational invocation</h3>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">The most flexible approach is simply asking Claude to use subagents in conversation. This works across all Claude Code interfaces: terminal, VS Code, JetBrains, the web, and desktop applications.</p>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Natural language patterns that reliably invoke subagents include:</p>
+
+          <ul style="margin: 0 0 1.5rem 0; padding-left: 1.5rem; line-height: 2;">
+            <li style="margin-bottom: 0.5rem; color: var(--text-secondary); font-style: italic;">"Use a subagent to explore how authentication works in this codebase"</li>
+            <li style="margin-bottom: 0.5rem; color: var(--text-secondary); font-style: italic;">"Have a separate agent review this code for security issues"</li>
+            <li style="margin-bottom: 0.5rem; color: var(--text-secondary); font-style: italic;">"Research this in parallel. Check the API routes, database models, and frontend components simultaneously"</li>
+            <li style="color: var(--text-secondary); font-style: italic;">"Spin up subagents to fix these TypeScript errors across the different packages"</li>
+          </ul>
+
+          <p style="margin-bottom: 1.5rem; line-height: 1.75;">Being explicit matters. Specify the scope, request parallel execution when tasks are independent, and describe the desired output.</p>
+
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Here's an effective prompt structure:</p>
+
+          <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1.5rem;">Use subagents to explore this codebase in parallel:
+
+1. Find all API endpoints and summarize their purposes
+2. Identify the database schema and relationships
+3. Map out the authentication flow
+
+Return a summary of each, not the full file contents.</code>
+
+          <p style="margin-bottom: 1.5rem; line-height: 1.75;">This prompt works because it clearly defines three independent tasks, explicitly requests parallel execution, and specifies the output format. Claude understands the intent and spawns appropriate subagents.</p>
+
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Tips for effective conversational invocation include:</p>
+
+          <ul style="margin: 0 0 1.5rem 0; padding-left: 1.5rem; line-height: 1.8; list-style: none;">
+            <li style="margin-bottom: 1rem; padding-left: 0.5rem; border-left: 3px solid var(--accent-primary);">
+              <strong style="color: var(--text-primary);">Scope tasks clearly.</strong> <span style="color: var(--text-secondary);">"Explore how payments work" beats "explore everything."</span>
+            </li>
+            <li style="margin-bottom: 1rem; padding-left: 0.5rem; border-left: 3px solid var(--accent-primary);">
+              <strong style="color: var(--text-primary);">Request parallelization explicitly.</strong> <span style="color: var(--text-secondary);">Say "these can run in parallel" or "work on all three simultaneously."</span>
+            </li>
+            <li style="margin-bottom: 1rem; padding-left: 0.5rem; border-left: 3px solid var(--accent-primary);">
+              <strong style="color: var(--text-primary);">Specify what should be returned.</strong> <span style="color: var(--text-secondary);">Summaries, specific findings, or recommendations. Naming the output format helps Claude deliver it.</span>
+            </li>
+            <li style="margin-bottom: 0; padding-left: 0.5rem; border-left: 3px solid var(--accent-primary);">
+              <strong style="color: var(--text-primary);">Ask for fresh context when unbiased analysis matters.</strong> <span style="color: var(--text-secondary);">"Use a subagent that does not see our previous discussion" ensures clean evaluation.</span>
+            </li>
+          </ul>
+
+          <div style="margin-top: 2rem; padding: 1rem 1.25rem; background: rgba(0, 242, 255, 0.05); border-left: 4px solid var(--accent-primary); border-radius: 0 8px 8px 0;">
+            <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--text-primary);">
+              <strong style="color: var(--accent-primary);">Pro-tip:</strong> When a subagent is taking a while, <code>Ctrl+B</code> sends it to the background. The conversation can continue while it runs, and results surface automatically when it finishes. The <code>/tasks</code> command shows anything running in the background.
+            </p>
+          </div>
+        </div>
+
+        <div style="margin-top: 3rem;">
+          <h3 style="margin-bottom: 1rem; color: var(--accent-primary); font-size: 1.2rem;">CLAUDE.md instructions</h3>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Custom subagents define who the specialists are. CLAUDE.md files define the rules for when Claude should reach for them. If every code review should go through a read-only subagent, or every architecture question should trigger a research pass first, CLAUDE.md is where that policy lives. Claude reads it at the start of every conversation, so the behavior stays consistent across sessions and teammates without anyone needing to remember to ask.</p>
+
+          <p style="margin-bottom: 0.75rem; line-height: 1.75;">CLAUDE.md is a good fit for subagent instructions when:</p>
+          <ul style="margin: 0 0 1.5rem 1.5rem; line-height: 1.75; color: var(--text-secondary);">
+            <li style="margin-bottom: 0.4rem;">Code reviews should always use read-only subagents</li>
+            <li style="margin-bottom: 0.4rem;">The project has specific research patterns Claude should follow</li>
+            <li style="margin-bottom: 0.4rem;">Consistent behavior is needed across team members and sessions</li>
+          </ul>
+
+          <p style="margin-bottom: 0.75rem; line-height: 1.75;">Here's an example of a simple CLAUDE.md file that triggers a subagent given specific conditions:</p>
+          <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6; font-size: 0.9rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1.5rem;">## Code review standards
+
+When asked to review code, ALWAYS use a subagent with READ-ONLY access
+(Glob, Grep, Read only). The review should ALWAYS check for:
+- Security vulnerabilities
+- Performance issues
+- Adherence to project patterns in /docs/architecture.md
+
+Return findings as a prioritized list with file:line references.</code>
+
+          <p style="margin-bottom: 1rem; line-height: 1.75;">With the above CLAUDE.md file, every code review request automatically uses the defined pattern, eliminating the need to specify it each time.</p>
+
+          <p style="margin-bottom: 2rem; line-height: 1.75; color: var(--text-secondary); font-size: 0.95rem;">For more on CLAUDE.md files, see Customizing Claude Code for your codebase: setting up a CLAUDE.md file and our Claude Code CLAUDE.md file docs.</p>
+        </div>
+
+        <div style="margin-top: 3rem;">
+          <h3 style="margin-bottom: 1rem; color: var(--accent-primary); font-size: 1.2rem;">Skills</h3>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">For complex multi-step workflows that run repeatedly, skills provide a reusable interface. Define a skill once in <code>.claude/skills/</code>, then invoke it with <code>/skill-name</code> or let Claude load it automatically when a task matches its description.</p>
+
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Skills differ from CLAUDE.md files in scope. CLAUDE.md files are always loaded and shapes every interaction. A skill is loaded on demand, either because it was invoked explicitly or because Claude matched the current task to the skill's description field. That makes skills the right place for workflows that should be available but not applied to every prompt.</p>
+
+          <p style="margin-bottom: 0.75rem; line-height: 1.75;">Skills fit well when:</p>
+          <ul style="margin: 0 0 1.5rem 1.5rem; line-height: 1.75; color: var(--text-secondary);">
+            <li style="margin-bottom: 0.4rem;">Certain actions get run regularly</li>
+            <li style="margin-bottom: 0.4rem;">Different team members need access to the same complex operation</li>
+            <li style="margin-bottom: 0.4rem;">Standardizing how certain tasks are performed across the team matters</li>
+          </ul>
+
+          <p style="margin-bottom: 0.75rem; line-height: 1.75;">Here's an example of a deep-review skill for comprehensive code review:</p>
+          <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6; font-size: 0.9rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1.5rem;"># .claude/skills/deep-review/SKILL.md
+
+---
+name: deep-review
+description: Comprehensive code review that checks security,
+  performance, and style in parallel. Use when reviewing staged
+  changes before a commit or PR.
+---
+
+Run three parallel subagent reviews on the staged changes:
+
+1. Security review - check for vulnerabilities, injection risks,
+   authentication issues, and sensitive data exposure
+2. Performance review - check for N+1 queries, unnecessary iterations,
+   memory leaks, and blocking operations
+3. Style review - check for consistency with project patterns
+   documented in /docs/style-guide.md
+
+Synthesize findings into a single summary with priority-ranked issues.
+Each issue should include the file, line number, and recommended fix.</code>
+
+          <p style="margin-bottom: 1rem; line-height: 1.75;">In the code snippet above, <code>/deep-review</code> triggers a three-part subagent analysis on demand. Because the description mentions reviewing staged changes before commits, Claude can also reach for this skill automatically when that context comes up.</p>
+
+          <p style="margin-bottom: 1rem; line-height: 1.75;">A skill is a directory, not a single file. Alongside SKILL.md, it can hold templates Claude fills in, example outputs showing the expected format, or scripts Claude executes as part of the workflow. The legacy <code>.claude/commands/format</code> was a single flat file, so everything had to live in the prompt itself.</p>
+
+          <p style="margin-bottom: 2rem; line-height: 1.75; color: var(--text-secondary); font-size: 0.95rem;">For more on using skills with Claude Code, see our Claude Code skills docs.</p>
+        </div>
+
+        <div style="margin-top: 3rem;">
+          <h3 style="margin-bottom: 1rem; color: var(--accent-primary); font-size: 1.2rem;">Hooks</h3>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Hooks are user-defined shell commands, HTTP endpoints, or LLM prompts that execute automatically at specific points in Claude Code's lifecycle. Hooks can automate subagent workflows based on events. Hooks trigger on specific actions and run subagent tasks without manual invocation.</p>
+
+          <p style="margin-bottom: 0.75rem; line-height: 1.75;">Hooks are the right tool when:</p>
+          <ul style="margin: 0 0 1.5rem 1.5rem; line-height: 1.75; color: var(--text-secondary);">
+            <li style="margin-bottom: 0.4rem;">Every commit should be reviewed automatically before it's created</li>
+            <li style="margin-bottom: 0.4rem;">Security checks should run without anyone remembering to ask</li>
+            <li style="margin-bottom: 0.4rem;">CI-like quality gates belong in the local development process</li>
+          </ul>
+
+          <p style="margin-bottom: 0.75rem; line-height: 1.75;">Here is an example of a Stop hook that blocks Claude from ending its turn until a test is passed:</p>
+          <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6; font-size: 0.9rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1.5rem;">{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\\"$CLAUDE_PROJECT_DIR\\"/.claude/hooks/check-tests.sh"
+          }
+        ]
+      }
+    ]
+  }
+}</code>
+
+          <p style="margin-bottom: 0.75rem; line-height: 1.75;">And the script at <code>.claude/hooks/check-tests.sh</code>:</p>
+          <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6; font-size: 0.9rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1.5rem;">#!/bin/bash
+INPUT=$(cat)
+STOP_HOOK_ACTIVE=$(echo "$INPUT" | jq -r '.stop_hook_active // false')
+
+# Don't loop forever — if we already blocked once this turn, let it through
+if [ "$STOP_HOOK_ACTIVE" = "true" ]; then
+  exit 0
+fi
+
+if ! npm test --silent > /dev/null 2>&1; then
+  jq -n '{
+    decision: "block",
+    reason: "Tests are failing. Run \`npm test\` to see the failures and fix them before finishing."
+  }'
+  exit 0
+fi
+
+exit 0</code>
+
+          <p style="margin-bottom: 1rem; line-height: 1.75;">When Claude finishes its turn, the Stop event fires. The script runs the test suite—if tests fail, it returns JSON with <code>decision: "block"</code> and a reason. Claude Code reads that, doesn't let Claude stop, and feeds the reason back into the conversation as instruction to keep working. The <code>stop_hook_active</code> guard at the top prevents infinite loops: if Claude is already continuing because of a previous stop-hook block, the script lets it exit.</p>
+
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Hooks represent the most automated approach to subagent orchestration. Conversational invocation or CLAUDE.md instructions are the better starting point; hooks come later, as workflows mature.</p>
+
+          <p style="margin-bottom: 0; line-height: 1.75; color: var(--text-secondary); font-size: 0.95rem;">
+            For complete hooks configuration, see
+            <a href="https://claude.com/blog/how-to-configure-hooks" target="_blank" rel="noopener noreferrer">
+              Claude Code power user customization: how to configure hooks
+            </a>
+            or
+            <a href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener noreferrer">
+            our Claude Code hooks docs.
+            </a>
+          </p>
+
         </div>
       `},{label:"Scenario",content:`
         <div style="margin-bottom: 2.5rem;">
@@ -2143,6 +3808,8 @@ export function useDarkMode() {
           </div>
         </div>
       `},{label:"Create your own",content:`
+        <p style="margin-bottom: 1.25rem; line-height: 1.75;">Custom subagents live as markdown files in <code>.claude/agents/</code> (project-level, shared with the team) or <code>~/.claude/agents/</code> (user-level, available across all projects). Each one gets its own system prompt, tool permissions, and optionally its own model.</p>
+
         <p style="margin-bottom: 2rem; line-height: 1.75;">Subagents are defined in Markdown files with YAML frontmatter. You can create them easily using the <code>/agents</code> command.</p>
 
         <div style="margin-bottom: 2.5rem;">
@@ -2225,6 +3892,17 @@ export function useDarkMode() {
           <p style="margin-bottom: 1rem; line-height: 1.6; color: var(--text-secondary);">You now have a subagent you can use in any project on your machine to analyze codebases and suggest improvements.</p>
           <p style="line-height: 1.6; color: var(--text-secondary); font-size: 0.9rem;">You can also create subagents manually as Markdown files, define them via CLI flags, or distribute them through plugins. The next sections covers few of the configuration options.</p>
         </div>
+
+        <div style="margin-top: 2rem; padding: 1rem 1.25rem; background: rgba(0, 242, 255, 0.05); border-left: 4px solid var(--accent-primary); border-radius: 0 8px 8px 0;">
+          <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--text-primary);">
+            <strong style="color: var(--accent-primary);">Pro-tip:</strong> The <code>description</code> field is what Claude uses to decide when to delegate. Be specific about the trigger conditions, not just the capability. <em>"Reviews code for security issues before commits"</em> routes better than <em>"security expert."</em>
+          </p>
+        </div>
+
+        <p style="margin-top: 1.25rem; line-height: 1.75; font-size: 0.95rem; color: var(--text-secondary);">
+          For the full configuration reference, including permission modes and how project and user subagents interact, see
+          <a href="https://code.claude.com/docs/en/sub-agents" target="_blank" rel="noopener noreferrer" style="color: var(--accent-primary); text-decoration: none; border-bottom: 1px solid currentColor;">Claude Code subagents docs</a>.
+        </p>
       `},{label:"Config",content:`
         <div style="margin-top: 0.5rem;">
           <h3 style="margin-bottom: 1rem; color: var(--accent-primary); font-size: 1.2rem;">1. Choose the subagent scope</h3>
@@ -2720,7 +4398,564 @@ exit 0</code>
           <code style="display: block; padding: 0.75rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 1rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.5;">chmod +x ./scripts/validate-readonly-query.sh</code>
           <p style="margin-top: 1rem; line-height: 1.6; color: var(--text-tertiary); font-size: 0.9rem;">The hook receives JSON via stdin with the Bash command in <code>tool_input.command</code>. Exit code 2 blocks the operation and feeds the error message back to Claude. See <a href="#" style="color: var(--accent-primary);">Hooks</a> for details on exit codes and <a href="#" style="color: var(--accent-primary);">Hook input</a> for the complete input schema.</p>
         </div>
-      `}],interactiveType:"custom"},Lt={id:"claude-agents",title:"Claude Agents",category:"AI Tools",tags:["agents","multi-agent","orchestration","tutorial"],tabs:[{label:"Overview",content:`
+      `},{label:"Practical patterns",content:`
+        <div style="margin-bottom: 0.5rem;">
+          <p style="margin-bottom: 2rem; line-height: 1.75;">The following patterns demonstrate subagent direction applied to common scenarios.</p>
+
+          <div style="margin-bottom: 3rem;">
+            <h3 style="margin-bottom: 0.75rem; color: var(--accent-primary); font-size: 1.2rem;">Research before implementing</h3>
+            <p style="margin-bottom: 1rem; line-height: 1.75;">When adding a feature to unfamiliar code, delegating research to a subagent first keeps the implementation discussion informed rather than exploratory, for example:</p>
+            <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6; font-size: 0.9rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1.25rem;">Before I implement user notifications, use a subagent to research:
+- How are emails currently sent in this codebase?
+- What notification patterns already exist?
+- Where should new notification logic live based on the current architecture?
+
+Summarize findings, then we'll plan the implementation together.</code>
+            <p style="line-height: 1.75; color: var(--text-secondary);">A synthesized summary arrives instead of twenty files of raw context, and the implementation discussion starts from a solid foundation.</p>
+          </div>
+
+          <div style="margin-bottom: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+            <h3 style="margin-bottom: 0.75rem; color: var(--accent-primary); font-size: 1.2rem;">Parallel modifications</h3>
+            <p style="margin-bottom: 1rem; line-height: 1.75;">When the same pattern needs updating across multiple files, parallel subagents finish faster and maintain focus, for example:</p>
+            <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6; font-size: 0.9rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1.25rem;">Use parallel subagents to update the error handling in these files:
+- src/api/users.ts
+- src/api/orders.ts
+- src/api/products.ts
+
+Each should follow the pattern established in src/api/auth.ts.
+Work on all three simultaneously.</code>
+            <p style="line-height: 1.75; color: var(--text-secondary);">Three subagents working in parallel complete in roughly the time one would take. Each focuses on its file without context from the others creating confusion or inconsistency.</p>
+          </div>
+
+          <div style="margin-bottom: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+            <h3 style="margin-bottom: 0.75rem; color: var(--accent-primary); font-size: 1.2rem;">Independent review</h3>
+            <p style="margin-bottom: 1rem; line-height: 1.75;">After implementing something complex, verification from a subagent that hasn't been influenced by the implementation journey catches what familiarity obscures, for example:</p>
+            <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6; font-size: 0.9rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1.25rem;">Use a fresh subagent with read-only access to review my implementation of the payment flow. It should not see our previous discussion. I want an unbiased review.
+
+Check for: security vulnerabilities, unhandled edge cases, and error handling gaps. Be critical.</code>
+            <p style="line-height: 1.75; color: var(--text-secondary);">The review subagent evaluates the code without knowing what tradeoffs were considered, what approaches were rejected, or what assumptions were made. This outside perspective surfaces issues the main conversation might miss.</p>
+          </div>
+
+          <div style="padding-top: 2rem; border-top: 1px solid var(--border-color);">
+            <h3 style="margin-bottom: 0.75rem; color: var(--accent-primary); font-size: 1.2rem;">Pipeline workflow</h3>
+            <p style="margin-bottom: 1rem; line-height: 1.75;">For multi-stage tasks, chaining subagents with explicit handoffs between phases keeps each stage focused, for example:</p>
+            <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6; font-size: 0.9rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1.25rem;">Let's build this feature as a pipeline:
+
+1. First subagent: Design the API contract and write it to docs/api-spec.md
+2. Second subagent: Implement the backend endpoints based on that spec
+3. Third subagent: Write integration tests for the implementation
+
+Each stage should complete before the next begins. Use the output
+files as the handoff mechanism between stages.</code>
+            <p style="line-height: 1.75; color: var(--text-secondary);">Using a pipeline workflow, each stage in the task receives focused context. The design subagent isn't distracted by implementation concerns, the implementation subagent works from a clean spec, and the testing subagent evaluates the result independently.</p>
+          </div>
+        </div>
+      `}],interactiveType:"custom"},Lt={id:"claude-hooks",title:"Claude Hooks",tabs:[{label:"Overview",content:`
+        <p style="margin-bottom:1rem; line-height:1.75;">Even a smooth Claude Code workflow accumulates friction points over time. Every time Claude writes a file, Prettier needs to run manually. Every time it runs npm test, the same permission prompt appears. Every session starts with pasting the same boilerplate project context into the first message.</p>
+
+        <p style="margin-bottom:1rem; line-height:1.75;">The good news? <a href="https://code.claude.com/docs/en/hooks-guide" target="_blank" style="color: var(--accent-primary);">Hooks</a> eliminate these friction points. They act as triggers you can configure to fire before or after certain actions, allowing you to inject custom logic, scripts, and commands directly into Claude's operations.</p>
+
+        <p style="margin-bottom:2rem; line-height:1.75;">This article covers advanced configuration for developers already familiar with Claude Code basics. By the end of this article, you'll understand the eight hook types, when to use each one, how to configure them, and how to debug them when things go wrong.</p>
+
+        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+          <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">What is a hook?</strong>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">A hook is a custom shell command that you create to execute automatically when a targeted event occurs in your Claude Code session, such as when Claude is about to write a file or when you submit a prompt. You can designate hooks for a huge range of things: intercepting actions before they execute, injecting agent context, automating approvals, or blocking operations before they happen.</p>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Hooks are configured in your settings files using a JSON structure with event names, matchers (to filter which tools trigger the hook), and the commands to run. They execute in your local environment with your user permissions, receiving information about the triggering event via stdin and communicating back through exit codes and stdout. This gives you precise control over Claude Code behavior without modifying the tool itself.</p>
+        </div>
+
+        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+          <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">Why use hooks in Claude Code?</strong>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Hooks solve three categories of problems.</p>
+
+          <div style="margin-bottom: 1.25rem; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0, 242, 255, 0.02);">
+            <strong style="display:block; margin-bottom:0.5rem; font-size:1rem; color: var(--text-primary);">Eliminate repetitive manual steps</strong>
+            <p style="margin: 0; line-height: 1.6; font-size: 0.95rem;">Instead of running your formatter after every file change, a PostToolUse hook handles it automatically. Instead of approving npm test for the hundredth time, a PermissionRequest hook auto-approves it.</p>
+          </div>
+
+          <div style="margin-bottom: 1.25rem; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0, 242, 255, 0.02);">
+            <strong style="display:block; margin-bottom:0.5rem; font-size:1rem; color: var(--text-primary);">Enforce project-specific rules automatically</strong>
+            <p style="margin: 0; line-height: 1.6; font-size: 0.95rem;">You can block dangerous commands before they execute, validate file paths before writes, or ensure naming conventions are followed. These guardrails run every time, not only when you remember to check.</p>
+          </div>
+
+          <div style="margin-bottom: 0; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0, 242, 255, 0.02);">
+            <strong style="display:block; margin-bottom:0.5rem; font-size:1rem; color: var(--text-primary);">Inject dynamic context without manual effort</strong>
+            <p style="margin: 0; line-height: 1.6; font-size: 0.95rem;">A SessionStart hook can feed Claude your current git status and TODO list. A UserPromptSubmit hook can append your sprint priorities to every request. Claude stays informed without you repeating yourself.</p>
+          </div>
+        </div>
+
+        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+          <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">Hook reference</strong>
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem; line-height: 1.6;">
+              <thead>
+                <tr style="border-bottom: 2px solid var(--border-color);">
+                  <th style="text-align: left; padding: 0.65rem 1rem; color: var(--accent-primary); font-weight: 700; white-space: nowrap;">Hook</th>
+                  <th style="text-align: left; padding: 0.65rem 1rem; color: var(--accent-primary); font-weight: 700;">When it fires</th>
+                  <th style="text-align: left; padding: 0.65rem 1rem; color: var(--accent-primary); font-weight: 700;">Common uses</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 0.65rem 1rem; white-space: nowrap; font-family: monospace; color: var(--text-primary);">PreToolUse</td>
+                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">Before a tool executes</td>
+                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">Block dangerous commands, validate file paths, auto-approve safe operations</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color); background: rgba(0,242,255,0.02);">
+                  <td style="padding: 0.65rem 1rem; white-space: nowrap; font-family: monospace; color: var(--text-primary);">PermissionRequest</td>
+                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">Before a permission dialog appears</td>
+                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">Auto-approve test commands, block access to sensitive files</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 0.65rem 1rem; white-space: nowrap; font-family: monospace; color: var(--text-primary);">PostToolUse</td>
+                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">After a tool completes</td>
+                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">Run formatters, trigger linters, log file changes</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color); background: rgba(0,242,255,0.02);">
+                  <td style="padding: 0.65rem 1rem; white-space: nowrap; font-family: monospace; color: var(--text-primary);">PreCompact</td>
+                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">Before context compaction</td>
+                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">Back up transcripts, preserve important decisions</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 0.65rem 1rem; white-space: nowrap; font-family: monospace; color: var(--text-primary);">SessionStart</td>
+                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">When a session begins or resumes</td>
+                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">Inject git status, load TODO lists, set environment context</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color); background: rgba(0,242,255,0.02);">
+                  <td style="padding: 0.65rem 1rem; white-space: nowrap; font-family: monospace; color: var(--text-primary);">Stop</td>
+                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">When Claude finishes responding</td>
+                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">Verify task completion, run tests, generate summaries</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 0.65rem 1rem; white-space: nowrap; font-family: monospace; color: var(--text-primary);">SubagentStop</td>
+                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">When a subagent completes</td>
+                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">Validate subagent output, trigger follow-up actions</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.65rem 1rem; white-space: nowrap; font-family: monospace; color: var(--text-primary);">UserPromptSubmit</td>
+                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">When you submit a prompt</td>
+                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">Inject sprint context, validate requests, add dynamic context</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `},{label:"Hook Types",content:`
+        <p style="margin-bottom:1.5rem; line-height:1.75;">Claude Code provides eight hook events that cover the full lifecycle of a session, from startup through tool execution to completion. Each fires at a specific moment, giving you precise control over when your automation runs. Choosing the right hook depends on what you want to accomplish.</p>
+
+        <div style="margin-bottom: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+          <strong style="display:block; margin-bottom:0.75rem; font-size:1.15rem; color: var(--accent-primary);">PreToolUse</strong>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">This is the most commonly used hook, firing after Claude chooses a tool to use but before the tool actually executes. Your script can inspect the planned action and approve it, block it, request user confirmation, or modify the parameters, using a matcher to filter which tools trigger this hook.</p>
+          <p style="margin-bottom: 0.75rem; line-height: 1.6;">This PreToolUse hook example evaluates file writes before they execute. Claude reviews the planned action against the specified criteria and can approve, block, or flag concerns based on the prompt logic.</p>
+          <pre style="background: var(--syntax-bg, #0d1117); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; font-size: 0.85rem; line-height: 1.6;"><code style="color: var(--text-primary);">{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/path/to/validate-file-path.sh"
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+          <p style="margin-bottom: 0.5rem; font-weight: 600; color: var(--text-secondary); font-size: 0.9rem;">When to use PreToolUse:</p>
+          <ul style="margin: 0 0 0 1.25rem; line-height: 1.8; font-size: 0.95rem; color: var(--text-secondary);">
+            <li>Blocking dangerous Bash commands like rm -rf or force pushes</li>
+            <li>Auto-approving safe, repetitive operations to reduce prompt fatigue</li>
+            <li>Validating file paths before writes to prevent accidental overwrites</li>
+            <li>Modifying tool inputs to inject project-specific defaults</li>
+          </ul>
+        </div>
+
+        <div style="margin-bottom: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+          <strong style="display:block; margin-bottom:0.75rem; font-size:1.15rem; color: var(--accent-primary);">PermissionRequest</strong>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">This hook fires when Claude would normally show a permission dialog. This hook intercepts the moment before you would see a confirmation prompt, letting your script decide whether to allow, deny, or still ask the user.</p>
+          <pre style="background: var(--syntax-bg, #0d1117); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; font-size: 0.85rem; line-height: 1.6;"><code style="color: var(--text-primary);">{
+  "hooks": {
+    "PermissionRequest": [
+      {
+        "matcher": "Bash(npm test*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/path/to/validate-test-command.sh"
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+          <p style="margin-bottom: 0.75rem; line-height: 1.6;">This example auto-approves any Bash command starting with npm test. The matcher pattern can include arguments for finer control.</p>
+          <p style="margin-bottom: 0.5rem; font-weight: 600; color: var(--text-secondary); font-size: 0.9rem;">When to use PermissionRequest:</p>
+          <ul style="margin: 0 0 0 1.25rem; line-height: 1.8; font-size: 0.95rem; color: var(--text-secondary);">
+            <li>Auto-approving test commands you run dozens of times per session</li>
+            <li>Blocking write access to production configuration files</li>
+            <li>Allowing read operations on specific directories without prompts</li>
+            <li>Denying any command that matches a dangerous pattern</li>
+          </ul>
+        </div>
+
+        <div style="margin-bottom: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+          <strong style="display:block; margin-bottom:0.75rem; font-size:1.15rem; color: var(--accent-primary);">PostToolUse</strong>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Fires immediately after a tool completes successfully. Your script receives information about what happened, including the tool output, using matchers to filter which tools trigger it.</p>
+          <p style="margin-bottom: 0.75rem; line-height: 1.6;">This example of PostToolUse runs Prettier on any file Claude writes or edits. The pipe syntax in the matcher means it triggers for both Write and Edit tools.</p>
+          <pre style="background: var(--syntax-bg, #0d1117); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; font-size: 0.85rem; line-height: 1.6;"><code style="color: var(--text-primary);">{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "prettier --write \\"$CLAUDE_TOOL_INPUT_FILE_PATH\\""
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+          <p style="margin-bottom: 0.5rem; font-weight: 600; color: var(--text-secondary); font-size: 0.9rem;">When to use PostToolUse:</p>
+          <ul style="margin: 0 0 0 1.25rem; line-height: 1.8; font-size: 0.95rem; color: var(--text-secondary);">
+            <li>Running Prettier, Black, or gofmt after every file write to enforce formatting</li>
+            <li>Logging all file modifications to an audit trail</li>
+            <li>Triggering linters and showing warnings after code changes</li>
+            <li>Sending notifications when certain operations complete</li>
+          </ul>
+        </div>
+
+        <div style="margin-bottom: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+          <strong style="display:block; margin-bottom:0.75rem; font-size:1.15rem; color: var(--accent-primary);">PreCompact</strong>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Fires before Claude compacts the conversation context to free up space. Compaction summarizes older parts of the conversation, which means some details get lost. This hook gives you a chance to preserve information before that happens.</p>
+          <p style="margin-bottom: 0.75rem; line-height: 1.6;">This PreCompact example backs up the transcript before automatic compaction. The matcher can be "auto" or "manual" so you can distinguish between automatic compaction and user-triggered compaction events.</p>
+          <pre style="background: var(--syntax-bg, #0d1117); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; font-size: 0.85rem; line-height: 1.6;"><code style="color: var(--text-primary);">{
+  "hooks": {
+    "PreCompact": [
+      {
+        "matcher": "auto",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/path/to/backup-transcript.sh"
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+          <p style="margin-bottom: 0.5rem; font-weight: 600; color: var(--text-secondary); font-size: 0.9rem;">When to use PreCompact:</p>
+          <ul style="margin: 0 0 0 1.25rem; line-height: 1.8; font-size: 0.95rem; color: var(--text-secondary);">
+            <li>Backing up the full transcript to a file before summarization</li>
+            <li>Extracting and saving important decisions or code snippets</li>
+            <li>Logging session milestones for later review</li>
+          </ul>
+        </div>
+
+        <div style="margin-bottom: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+          <strong style="display:block; margin-bottom:0.75rem; font-size:1.15rem; color: var(--accent-primary);">SessionStart</strong>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Fires when Claude Code starts a new session or resumes an existing one. Whatever your script outputs gets added to the conversation context, so Claude starts with that information already loaded.</p>
+          <pre style="background: var(--syntax-bg, #0d1117); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; font-size: 0.85rem; line-height: 1.6;"><code style="color: var(--text-primary);">{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "git status --short &amp;&amp; echo '---' &amp;&amp; cat TODO.md"
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+          <p style="margin-bottom: 0.75rem; line-height: 1.6;">Every session starts with Claude knowing your current git status and TODO list. Stdout automatically becomes context.</p>
+          <p style="margin-bottom: 0.5rem; font-weight: 600; color: var(--text-secondary); font-size: 0.9rem;">When to use SessionStart:</p>
+          <ul style="margin: 0 0 0 1.25rem; line-height: 1.8; font-size: 0.95rem; color: var(--text-secondary);">
+            <li>Feeding Claude your current git branch and recent commits</li>
+            <li>Loading the contents of your TODO list or sprint backlog</li>
+            <li>Injecting environment-specific configuration details</li>
+          </ul>
+        </div>
+
+        <div style="margin-bottom: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+          <strong style="display:block; margin-bottom:0.75rem; font-size:1.15rem; color: var(--accent-primary);">Stop</strong>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Fires when Claude finishes responding and would normally wait for your next input. Your script can inspect what Claude produced and decide whether the task is truly complete.</p>
+          <p style="margin-bottom: 0.75rem; line-height: 1.6;">The script can return JSON with "continue": true to make Claude continue working, which is useful for multi-step workflows:</p>
+          <pre style="background: var(--syntax-bg, #0d1117); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; font-size: 0.85rem; line-height: 1.6;"><code style="color: var(--text-primary);">{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Review whether the task is complete. If all requirements are met, respond with 'complete'. If work remains, respond with 'continue' and specify what still needs to be done."
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+          <p style="margin-bottom: 0.5rem; font-weight: 600; color: var(--text-secondary); font-size: 0.9rem;">When to use Stop:</p>
+          <ul style="margin: 0 0 0 1.25rem; line-height: 1.8; font-size: 0.95rem; color: var(--text-secondary);">
+            <li>Forcing Claude to continue until all items in a checklist are done</li>
+            <li>Verifying that tests pass before considering a task complete</li>
+            <li>Triggering summary generation at the end of a session</li>
+            <li>Checking that generated code compiles before stopping</li>
+          </ul>
+        </div>
+
+        <div style="margin-bottom: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+          <strong style="display:block; margin-bottom:0.75rem; font-size:1.15rem; color: var(--accent-primary);">SubagentStop</strong>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">This hook fires whenever a subagent created via the Task tool finishes. Works the same way as Stop, but triggers specifically when a subagent completes its action (rather than the main agent). The configuration of SubagentStop mirrors the Stop hook structure:</p>
+          <pre style="background: var(--syntax-bg, #0d1117); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; font-size: 0.85rem; line-height: 1.6;"><code style="color: var(--text-primary);">{
+  "hooks": {
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Evaluate the subagent's output. Verify the task was completed correctly and the results meet quality standards. If the output is satisfactory, respond with 'accept'. If issues exist, respond with 'reject' and explain what needs to be fixed."
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+          <p style="margin-bottom: 0.5rem; font-weight: 600; color: var(--text-secondary); font-size: 0.9rem;">When to use SubagentStop:</p>
+          <ul style="margin: 0 0 0 1.25rem; line-height: 1.8; font-size: 0.95rem; color: var(--text-secondary);">
+            <li>Validating that subagent output meets quality criteria</li>
+            <li>Triggering follow-up actions based on subagent results</li>
+            <li>Logging subagent activity for debugging or auditing</li>
+          </ul>
+        </div>
+
+        <div style="margin-bottom: 0; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+          <strong style="display:block; margin-bottom:0.75rem; font-size:1.15rem; color: var(--accent-primary);">UserPromptSubmit</strong>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Fires when you submit a prompt, before Claude processes it. Whatever your script outputs via stdout gets added to Claude's context along with your prompt, which makes UserPromptSubmit useful for dynamically injecting information that Claude should consider.</p>
+          <p style="margin-bottom: 0.75rem; line-height: 1.6;">In this example, every time you submit a prompt, Claude receives the contents of your sprint context file. This keeps Claude informed about current priorities without you needing to restate them.</p>
+          <pre style="background: var(--syntax-bg, #0d1117); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; font-size: 0.85rem; line-height: 1.6;"><code style="color: var(--text-primary);">{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat ./current-sprint-context.md"
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+          <p style="margin-bottom: 0.5rem; font-weight: 600; color: var(--text-secondary); font-size: 0.9rem;">When to use UserPromptSubmit:</p>
+          <ul style="margin: 0 0 0 1.25rem; line-height: 1.8; font-size: 0.95rem; color: var(--text-secondary);">
+            <li>Injecting current sprint context or project priorities with every prompt</li>
+            <li>Validating prompts before they reach Claude</li>
+            <li>Blocking certain types of requests based on content</li>
+            <li>Adding dynamic context like recent error logs or test results</li>
+          </ul>
+        </div>
+      `},{label:"Configuration",content:`
+        <div style="margin-bottom: 2rem;">
+          <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">Configuration and file locations</strong>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Hooks live in JSON settings files at three levels. Project-level hooks go in .claude/settings.json within your repository, making them shareable with your team. User-level hooks go in ~/.claude/settings.json and apply across all your projects. Local project hooks go in .claude/settings.local.json for personal configuration you don't want to commit.</p>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Project-level settings take precedence over user-level settings. There are also enterprise-managed policy settings available for organizational control. For complete details, see the Claude Code settings information.</p>
+
+          <div style="background: rgba(0, 242, 255, 0.06); border: 1px solid var(--accent-primary); border-radius: 10px; padding: 1.1rem 1.25rem; margin-bottom: 1.5rem;">
+            <strong style="color: var(--accent-primary); font-size: 0.9rem;">💡 Pro tip</strong>
+            <p style="margin: 0.5rem 0 0; line-height: 1.6; font-size: 0.95rem;">This is the same file where you can set granular permissions for Claude actions, at the project, user, or local levels. For example, you can explicitly allow Claude to read all files in a directory so that you don't have to approve it every time, or block any modification of sensitive files.</p>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+          <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">Matcher syntax</strong>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Matchers are how you filter which tools can trigger your hook. They only apply to PreToolUse, PostToolUse, and PermissionRequest hooks.</p>
+          <p style="margin-bottom: 0.75rem; line-height: 1.6;">Simple string matching works exactly as you'd expect: "Write" matches only the Write tool.</p>
+          <p style="margin-bottom: 0.5rem; line-height: 1.6;">For example:</p>
+          <pre style="background: var(--syntax-bg, #0d1117); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; font-size: 0.85rem; line-height: 1.6;"><code style="color: var(--text-primary);">{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "your-command-here"
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">The pipe syntax lets you match multiple tools: "Write|Edit" triggers for either, whereas wildcards match everything: "*" or an empty string matches all tools.</p>
+
+          <div style="background: rgba(255, 193, 7, 0.06); border: 1px solid rgba(255, 193, 7, 0.4); border-radius: 10px; padding: 1.1rem 1.25rem; margin-bottom: 1.5rem;">
+            <strong style="color: #f5c842; font-size: 0.9rem;">⚠️ Note</strong>
+            <p style="margin: 0.5rem 0 0; line-height: 1.6; font-size: 0.95rem;">Matchers are case sensitive, so "bash" won't be matched to the Bash tool.</p>
+          </div>
+
+          <p style="margin-bottom: 1rem; line-height: 1.75;">For finer control, argument patterns like "Bash(npm test*)" can match specific command arguments. MCP tool patterns follow the format "mcp__memory__.*" for Model Context Protocol tools.</p>
+        </div>
+
+        <div style="margin-bottom: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+          <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">What hooks receive</strong>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">All hooks receive JSON via stdin containing session information and event-specific data. Common fields include: session_id, transcript_path, cwd, permission_mode, and hook_event_name.</p>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Additionally, tool-related hooks also receive tool_name and tool_input. This data lets your scripts make informed decisions about how to respond.</p>
+        </div>
+
+        <div style="margin-bottom: 0; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+          <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">How hooks respond</strong>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Exit codes determine the basic outcome. Exit code 0 means success, and stdout either gets processed for JSON or added to context. Exit code 2 means a blocking error: stderr becomes the error message and the action gets prevented.</p>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Other exit codes indicate non-blocking errors, with stderr shown in verbose mode.</p>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Beyond exit codes, hooks can return structured JSON for more control. Fields include: decision (approve, block, allow, or deny), reason (explanation shown to Claude), continue (for Stop hooks to force continuation), and updatedInput (to modify tool parameters before execution).</p>
+        </div>
+      `},{label:"Security & Debugging",content:`
+        <div style="margin-bottom: 2rem;">
+          <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">Environment and execution</strong>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Hooks have access to environment variables, including: CLAUDE_PROJECT_DIR for the project root path, CLAUDE_CODE_REMOTE which is true for web environments, and CLAUDE_ENV_FILE for SessionStart hooks to persist variables. Standard environment variables from your shell are also accessible.</p>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Also of note: Hooks have a 60-second default timeout, configurable per hook. When multiple hooks match an event, they run in parallel. Identical commands are automatically deduplicated.</p>
+        </div>
+
+        <div style="margin-bottom: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+          <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">Security considerations</strong>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Hooks execute arbitrary shell commands with your user permissions. Claude Code includes a safeguard: direct edits to hook configuration files require review in the /hooks menu before taking effect. This prevents malicious code from silently adding hooks to your configuration.</p>
+          <p style="margin-bottom: 1.25rem; line-height: 1.75;">However, if you configure and approve hooks, they will execute at your permission levels.</p>
+
+          <div style="background: rgba(0, 242, 255, 0.06); border: 1px solid var(--accent-primary); border-radius: 10px; padding: 1.1rem 1.25rem; margin-bottom: 1.5rem;">
+            <strong style="color: var(--accent-primary); font-size: 0.9rem;">💡 Pro tip</strong>
+            <p style="margin: 0.5rem 0 0; line-height: 1.6; font-size: 0.95rem;">Before you run any commands in an environment, consider the risks. If you're going to run commands with hooks, consider good practices like: validating and sanitizing inputs from stdin, quoting shell variables to prevent injection, using absolute paths for scripts, and avoiding processing sensitive files like .env or credentials.</p>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+          <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">Debugging and testing</strong>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Claude Code logs everything to transcript files, which provides visibility into tool calls and responses without any setup. Every hook receives a transcript_path field pointing to a JSONL file containing the full session history. You can use a SessionStart hook to log where each transcript lives:</p>
+
+          <pre style="background: var(--syntax-bg, #0d1117); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; font-size: 0.85rem; line-height: 1.6;"><code style="color: var(--text-primary);">{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '"Session: " + .transcript_path' >> ~/.claude/sessions.log"
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+
+          <p style="margin-bottom: 0.75rem; line-height: 1.75;">Then tail that transcript to watch Claude work in real time:</p>
+          <pre style="background: var(--syntax-bg, #0d1117); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1.25rem; font-size: 0.85rem; line-height: 1.6;"><code style="color: var(--text-primary);">tail -f /path/to/transcript.jsonl | jq</code></pre>
+
+          <p style="margin-bottom: 1rem; line-height: 1.75;">For hook-specific debugging, add logging to your hook scripts. The transcript files will show what Claude did, but not why your hook took the action to approve or block something.</p>
+          <p style="margin-bottom: 0.75rem; line-height: 1.75;">With a little extra effort you can add a small bash script that will wrap your tools and log the additional information. For example, log-wrapper.sh:</p>
+
+          <pre style="background: var(--syntax-bg, #0d1117); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; font-size: 0.85rem; line-height: 1.6;"><code style="color: var(--text-primary);">#!/bin/bash
+LOG=~/.claude/hooks.log
+INPUT=$(cat)
+TOOL=$(echo "$INPUT" | jq -r '.tool_name // "n/a"')
+EVENT=$(echo "$INPUT" | jq -r '.hook_event_name // "n/a"')
+echo "=== $(date) | $EVENT | $TOOL ===" >> "$LOG"
+echo "$INPUT" | "$1"
+CODE=$?
+echo "Exit: $CODE" >> "$LOG"
+exit $CODE</code></pre>
+
+          <p style="margin-bottom: 0.75rem; line-height: 1.75;">This small wrapper script captures stdin into a variable, logs the timestamp and tool name, then pipes the input to your actual tool.</p>
+          <p style="margin-bottom: 0.75rem; line-height: 1.75;">Once you have log-wrapper.sh written, you would then prepend it to the tool call in the hook:</p>
+
+          <pre style="background: var(--syntax-bg, #0d1117); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; font-size: 0.85rem; line-height: 1.6;"><code style="color: var(--text-primary);">{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "log-wrapper.sh your-tool-command.py"
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+
+          <div style="background: rgba(0, 242, 255, 0.06); border: 1px solid var(--accent-primary); border-radius: 10px; padding: 1.1rem 1.25rem;">
+            <strong style="color: var(--accent-primary); font-size: 0.9rem;">💡 Pro tip</strong>
+            <p style="margin: 0.5rem 0 0; line-height: 1.6; font-size: 0.95rem;">For more debugging tips, check out the <a href="https://code.claude.com/docs/en/debugging" target="_blank" style="color: var(--accent-primary);">Claude Code debugging documentation</a>.</p>
+          </div>
+        </div>
+      `},{label:"Building your own",content:`
+        <p style="margin-bottom:1.5rem; line-height:1.75;">Start with one simple hook that solves an actual friction point in your workflow. The PostToolUse formatter hook is a good first choice since the feedback is immediate and visible. Once that works, expand based on what you learn.</p>
+
+        <p style="margin-bottom:1.5rem; line-height:1.75;">For complete reference documentation including all available fields and advanced patterns, see the <a href="https://code.claude.com/docs/en/hooks-guide" target="_blank" style="color: var(--accent-primary);">official hooks documentation</a>.</p>
+
+        <p style="margin-bottom:2rem; line-height:1.75;">Hooks let you shape Claude Code to match your workflow rather than adapting your workflow to the tool. When you invest in configuring hooks, it pays off every session.</p>
+
+        <div style="padding-top: 2rem; border-top: 1px solid var(--border-color);">
+          <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">Hooks at a glance</strong>
+
+          <div style="overflow-x: auto; margin-bottom: 2rem;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+              <thead>
+                <tr style="border-bottom: 2px solid var(--border-color);">
+                  <th style="text-align: left; padding: 0.75rem 1rem; color: var(--text-secondary); font-weight: 600; white-space: nowrap;">Hook</th>
+                  <th style="text-align: left; padding: 0.75rem 1rem; color: var(--text-secondary); font-weight: 600;">When it fires</th>
+                  <th style="text-align: left; padding: 0.75rem 1rem; color: var(--text-secondary); font-weight: 600;">Primary use</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 0.75rem 1rem; color: var(--accent-primary); font-weight: 600; white-space: nowrap;">PreToolUse</td>
+                  <td style="padding: 0.75rem 1rem; color: var(--text-secondary);">Before a tool executes</td>
+                  <td style="padding: 0.75rem 1rem; color: var(--text-secondary);">Block, approve, or modify planned actions</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 0.75rem 1rem; color: var(--accent-primary); font-weight: 600; white-space: nowrap;">PermissionRequest</td>
+                  <td style="padding: 0.75rem 1rem; color: var(--text-secondary);">Before a permission dialog appears</td>
+                  <td style="padding: 0.75rem 1rem; color: var(--text-secondary);">Auto-approve or deny permission requests</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 0.75rem 1rem; color: var(--accent-primary); font-weight: 600; white-space: nowrap;">PostToolUse</td>
+                  <td style="padding: 0.75rem 1rem; color: var(--text-secondary);">After a tool completes</td>
+                  <td style="padding: 0.75rem 1rem; color: var(--text-secondary);">Run formatters, linters, audit logs</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 0.75rem 1rem; color: var(--accent-primary); font-weight: 600; white-space: nowrap;">PreCompact</td>
+                  <td style="padding: 0.75rem 1rem; color: var(--text-secondary);">Before context compaction</td>
+                  <td style="padding: 0.75rem 1rem; color: var(--text-secondary);">Back up transcripts, save decisions</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 0.75rem 1rem; color: var(--accent-primary); font-weight: 600; white-space: nowrap;">SessionStart</td>
+                  <td style="padding: 0.75rem 1rem; color: var(--text-secondary);">When a session begins or resumes</td>
+                  <td style="padding: 0.75rem 1rem; color: var(--text-secondary);">Inject git status, TODOs, environment info</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 0.75rem 1rem; color: var(--accent-primary); font-weight: 600; white-space: nowrap;">Stop</td>
+                  <td style="padding: 0.75rem 1rem; color: var(--text-secondary);">When Claude finishes responding</td>
+                  <td style="padding: 0.75rem 1rem; color: var(--text-secondary);">Verify task completion, force continuation</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 0.75rem 1rem; color: var(--accent-primary); font-weight: 600; white-space: nowrap;">SubagentStop</td>
+                  <td style="padding: 0.75rem 1rem; color: var(--text-secondary);">When a subagent finishes</td>
+                  <td style="padding: 0.75rem 1rem; color: var(--text-secondary);">Validate subagent output quality</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.75rem 1rem; color: var(--accent-primary); font-weight: 600; white-space: nowrap;">UserPromptSubmit</td>
+                  <td style="padding: 0.75rem 1rem; color: var(--text-secondary);">When you submit a prompt</td>
+                  <td style="padding: 0.75rem 1rem; color: var(--text-secondary);">Inject sprint context, validate prompts</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p style="margin-top: 1.5rem; line-height: 1.75; color: var(--text-secondary);">Start using hooks to customize your Claude Code workflows today. See the <a href="https://code.claude.com/docs/en/hooks-guide" target="_blank" style="color: var(--accent-primary);">official hooks documentation</a> for the full configuration reference.</p>
+        </div>
+      `}]},_t={id:"claude-agents",title:"Claude Agents",category:"AI Tools",tags:["agents","multi-agent","orchestration","tutorial"],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:1rem; line-height:1.75;">Agent teams let you coordinate <strong>multiple Claude Code instances working together</strong>. One session acts as the team lead, coordinating work, assigning tasks, and synthesizing results. Teammates work independently, each in its own context window, and can communicate directly with each other.</p>
 
 <div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1rem 0;">
@@ -3665,7 +5900,7 @@ severity ratings."</code></pre>
     Start Over: Overview <span>→</span>
   </a>
 </div>
-`}],interactiveType:"custom"},_t={id:"claude-plugins",title:"Claude Plugins",category:"Tutorial",tags:["Plugins","Marketplace","Claude Code"],tabs:[{label:"Overview",content:`
+`}],interactiveType:"custom"},Rt={id:"claude-plugins",title:"Claude Plugins",category:"Tutorial",tags:["Plugins","Marketplace","Claude Code"],tabs:[{label:"Overview",content:`
 <p style="margin-bottom:1rem; line-height:1.75;"><strong>Claude Plugins</strong> are like app bundles — a single package that installs multiple commands, tools, and behaviors all at once.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Plugins can bundle MCPs, skills, hooks, and commands into a single download. Instead of installing each piece separately, you get everything you need in one package.</p>
@@ -4623,7 +6858,7 @@ git push -u origin main</code></pre>
     <span>←</span> Previous: Share
   </a>
 </div>
-`}],interactiveType:"custom"},Rt={id:"claude-designer-stack",title:"Claude Designer Stack",category:"Tutorial",tags:["Claude Code","Design","Skills"],tabs:[{label:"Overview",content:`
+`}],interactiveType:"custom"},jt={id:"claude-designer-stack",title:"Claude Designer Stack",category:"Tutorial",tags:["Claude Code","Design","Skills"],tabs:[{label:"Overview",content:`
 <h1 style="margin-bottom: 1rem; color: var(--text-primary);">Claude Code Designer Skills</h1>
 
 <p style="margin-bottom: 0.5rem; line-height: 1.75;">This post covers six design-focused skills from Anthropic's official <a href="https://github.com/anthropics/skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">skills repository</a>. For each skill, we will cover:</p>
@@ -4655,11 +6890,11 @@ git push -u origin main</code></pre>
 
 <p style="margin-bottom: 1rem; line-height: 1.75;">Five of the skills can be installed using the <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">npx skills</code> CLI, pointing at Anthropic's public GitHub repository. Run these commands in your terminal:</p>
 
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.5;">npx skills add https://github.com/anthropics/skills --skills frontend-design
-npx skills add https://github.com/anthropics/skills --skills theme-factory
-npx skills add https://github.com/anthropics/skills --skills brand-guidelines
-npx skills add https://github.com/anthropics/skills --skills canvas-design
-npx skills add https://github.com/anthropics/skills --skills skill-creator</pre>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.5;">npx skills add https://github.com/anthropics/skills --skill frontend-design -a claude-code
+npx skills add https://github.com/anthropics/skills --skill theme-factory -a claude-code
+npx skills add https://github.com/anthropics/skills --skill brand-guidelines -a claude-code
+npx skills add https://github.com/anthropics/skills --skill canvas-design -a claude-code
+npx skills add https://github.com/anthropics/skills --skill skill-creator -a claude-code</pre>
 
 <p style="margin-bottom: 1rem; line-height: 1.75;">You can also install them all at once in the Claude Code terminal using the plugin marketplace:</p>
 
@@ -4723,6 +6958,24 @@ npx skills add https://github.com/anthropics/skills --skills skill-creator</pre>
 <div style="padding: 1rem 1.1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 10px; margin: 1rem 0;">
   <p style="margin: 0; line-height: 1.75; color: var(--text-secondary);"><strong>Tip:</strong> This skill is most powerful as a finishing step — build first with <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">frontend-design</code> or <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">theme-factory</code>, then apply <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">brand-guidelines</code> as a final pass.</p>
 </div>
+
+<hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
+
+<p style="margin-bottom: 0.5rem; line-height: 1.75; font-size: 1.25rem;"><strong>[brand-guideline skill example]</strong></p>
+<p style="margin-bottom: 1rem; line-height: 1.75;">Your web app can look like it was built by Anthropic — in one prompt.</p>
+
+<p style="margin-bottom: 1rem; line-height: 1.75;">There's an official brand-guidelines skill that knows every Anthropic design token — the coral accent, the warm neutrals, the typography, the spacing system. All of it.</p>
+
+<p style="margin-bottom: 0.5rem; line-height: 1.75;"><strong>Step 1 — Install the brand skill</strong></p>
+<pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">npx skills add anthropics/skills --skill brand-guidelines -a claude-code</pre>
+
+<p style="margin-bottom: 0.5rem; line-height: 1.75;"><strong>Step 2 — Open Claude Code in your project terminal</strong></p>
+<pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">claude</pre>
+
+<p style="margin-bottom: 0.5rem; line-height: 1.75;"><strong>Step 3 — Run this single prompt:</strong></p>
+<pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">Restyle this web app's landing page to match Anthropic's visual identity. Use Anthropic's official brand guidelines colors, typography, and spacing. Preserve all existing functionality and layout structure — only change the visual styling.</pre>
+
+<p style="margin-bottom: 1rem; line-height: 1.75;">Claude reads the skill file, pulls the defined hex values and spacing rules — then rewrites your CSS.</p>
 `},{label:"4. canvas-design",content:`
 <h2 style="margin-bottom: 1rem; color: var(--text-primary);">4. canvas-design</h2>
 
@@ -4950,7 +7203,7 @@ skill-creator     →  Whole workflow packaged as "prompt-app-builder.skill"</pr
 </ul>
 
 <p style="margin-bottom: 1rem; line-height: 1.75;"><em>Skills are a living system — Anthropic is actively adding new ones. Check the repo regularly, and use <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">skill-creator</code> to build your own domain-specific workflows on top of these foundations.</em></p>
-`}],interactiveType:"custom"},pe=[Ct,zt,Bt,Pt,Lt,_t,St,Et,Mt,It,Rt,At,Tt],b={isActive:!1,isLocked:!1,isMinimized:!1,timer:{duration:1500,remaining:1500,interval:null,isRunning:!1},stats:{streak:0,cardsToday:0,focusMinutes:0,lastStudyDate:null}},Nt={activeConcept:null,resetContentScroll(){const r=document.getElementById("content-area");r&&(r.scrollTop=0);const t=document.querySelector(".tutorial-tab-content");t&&(t.scrollTop=0)},init(){this.renderSidebar(),this.setupEventListeners(),this.initTheme(),this.initStudyMode(),this.initTechStackModal();const r=window.location.hash.substring(1);r&&pe.some(t=>t.id===r)?this.selectConcept(r):this.renderWelcome(),st(document.getElementById("constellation-bg"))},renderWelcome(){document.getElementById("constellation-bg").style.display="";const r=this.getConceptOfTheDay(),t=document.getElementById("content-area");t.classList.remove("content-area--tabbed"),t.innerHTML=`
+`}],interactiveType:"custom"},pe=[Ct,It,Pt,Bt,Lt,_t,Rt,St,Et,Tt,zt,jt,At,Mt],b={isActive:!1,isLocked:!1,isMinimized:!1,timer:{duration:1500,remaining:1500,interval:null,isRunning:!1},stats:{streak:0,cardsToday:0,focusMinutes:0,lastStudyDate:null}},Dt={activeConcept:null,resetContentScroll(){const r=document.getElementById("content-area");r&&(r.scrollTop=0);const t=document.querySelector(".tutorial-tab-content");t&&(t.scrollTop=0)},init(){this.renderSidebar(),this.setupEventListeners(),this.initTheme(),this.initStudyMode(),this.initTechStackModal();const r=window.location.hash.substring(1);r&&pe.some(t=>t.id===r)?this.selectConcept(r):this.renderWelcome(),st(document.getElementById("constellation-bg"))},renderWelcome(){document.getElementById("constellation-bg").style.display="";const r=this.getConceptOfTheDay(),t=document.getElementById("content-area");t.classList.remove("content-area--tabbed"),t.innerHTML=`
       <div class="cotd-ticker">
         <span class="cotd-label">Skill of the Day</span>
         <div class="ticker-track">
@@ -4997,4 +7250,4 @@ skill-creator     →  Whole workflow packaged as "prompt-app-builder.skill"</pr
           <span class="tech-stack-desc">${k.desc}</span>
         </div>
       </li>
-    `).join("");const u=()=>{t.classList.remove("hidden"),t.offsetWidth,t.classList.add("active")},C=()=>{t.classList.remove("active"),setTimeout(()=>{t.classList.contains("active")||t.classList.add("hidden")},300)};r.addEventListener("click",u),n.addEventListener("click",C),t.addEventListener("click",k=>{k.target===t&&C()})},initStudyMode(){this.loadStudyStats(),this.updateStudyMetrics(),this.initZenFlow(),document.getElementById("study-mode-btn").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("exit-study").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("timer-toggle").addEventListener("click",()=>{this.toggleTimer()}),document.getElementById("timer-reset").addEventListener("click",()=>{this.resetTimer()}),document.querySelectorAll(".preset-btn").forEach(r=>{r.addEventListener("click",t=>{const n=parseInt(t.target.dataset.time);this.setTimerDuration(n)})}),document.getElementById("minimize-study").addEventListener("click",()=>{this.minimizeStudy()}),document.getElementById("expand-study").addEventListener("click",()=>{this.expandStudy()}),document.getElementById("mini-stop-btn").addEventListener("click",()=>{this.expandStudy(),this.toggleStudyMode()}),document.getElementById("lock-screen-btn").addEventListener("click",()=>{this.lockScreen()}),document.getElementById("unlock-screen-btn").addEventListener("click",()=>{this.unlockScreen()})},loadStudyStats(){const r=localStorage.getItem("studyStats");r&&(b.stats=JSON.parse(r),this.updateStreak())},saveStudyStats(){localStorage.setItem("studyStats",JSON.stringify(b.stats))},updateStreak(){const r=new Date().toDateString(),t=b.stats.lastStudyDate;if(t){const n=new Date(t),a=new Date;a.setDate(a.getDate()-1),n.toDateString()===a.toDateString()||n.toDateString()!==r&&(b.stats.streak=0)}},updateStudyMetrics(){const r=document.getElementById("study-streak"),t=document.getElementById("study-cards"),n=document.getElementById("study-minutes");r&&(r.textContent=b.stats.streak),t&&(t.textContent=b.stats.cardsToday),n&&(n.textContent=b.stats.focusMinutes)},toggleStudyMode(){b.isActive=!b.isActive;const r=document.getElementById("study-mode-overlay"),t=document.querySelector(".zen-flow-bg");if(b.isActive){if(b.isMinimized){this.expandStudy();return}r.classList.remove("hidden"),r.classList.add("active"),t.style.opacity="1",this.updateStreak(),this.saveStudyStats()}else this.expandStudy(),r.classList.remove("active"),t.style.opacity="0",this.resetTimer(),setTimeout(()=>{r.classList.add("hidden")},500)},setTimerDuration(r){b.timer.duration=r*60,b.timer.remaining=r*60,document.querySelectorAll(".preset-btn").forEach(t=>{t.classList.toggle("active",parseInt(t.dataset.time)===r)}),this.updateTimerDisplay()},toggleTimer(){b.timer.isRunning?this.pauseTimer():this.startTimer()},startTimer(){b.timer.isRunning=!0,document.getElementById("timer-toggle").textContent="Pause",document.querySelector(".timer-wrapper").classList.add("active"),document.getElementById("lock-screen-btn").classList.remove("hidden"),b.timer.interval=setInterval(()=>{b.timer.remaining--,this.updateTimerDisplay(),b.timer.remaining<=0&&this.completeTimer()},1e3)},pauseTimer(){b.timer.isRunning=!1,document.getElementById("timer-toggle").textContent="Resume",document.querySelector(".timer-wrapper").classList.remove("active"),document.getElementById("lock-screen-btn").classList.add("hidden"),clearInterval(b.timer.interval),b.isLocked&&this.unlockScreen()},resetTimer(){this.pauseTimer(),b.timer.remaining=b.timer.duration,document.getElementById("timer-toggle").textContent="Start Focus",document.getElementById("timer-status").textContent="Ready to focus",document.getElementById("lock-screen-btn").classList.add("hidden"),this.updateTimerDisplay()},completeTimer(){this.pauseTimer(),document.getElementById("timer-status").textContent="Focus complete! Great work!",b.stats.focusMinutes+=Math.floor(b.timer.duration/60),this.updateStreakDate(),this.saveStudyStats(),this.updateStudyMetrics(),"Notification"in window&&Notification.permission==="granted"&&new Notification("Focus Session Complete",{body:"Great job! Take a break.",icon:"/vite.svg"})},updateTimerDisplay(){const r=Math.floor(b.timer.remaining/60),t=b.timer.remaining%60,n=`${r.toString().padStart(2,"0")}:${t.toString().padStart(2,"0")}`;document.getElementById("timer-minutes").textContent=r.toString().padStart(2,"0"),document.getElementById("timer-seconds").textContent=t.toString().padStart(2,"0"),document.getElementById("mini-timer-display").textContent=n;const a=b.timer.remaining/b.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${a}%`;const i=b.timer.remaining/b.timer.duration,u=2*Math.PI*130*(1-i);document.getElementById("timer-progress").style.strokeDashoffset=u,b.timer.isRunning?document.getElementById("timer-status").textContent="Stay focused...":document.getElementById("timer-status").textContent="Ready to focus"},minimizeStudy(){b.isMinimized=!0;const r=document.getElementById("study-mode-overlay"),t=document.querySelector(".zen-flow-bg");r.classList.remove("active"),t.style.opacity="0",setTimeout(()=>r.classList.add("hidden"),500),document.getElementById("mini-timer").classList.remove("hidden");const n=Math.floor(b.timer.remaining/60),a=b.timer.remaining%60;document.getElementById("mini-timer-display").textContent=`${n.toString().padStart(2,"0")}:${a.toString().padStart(2,"0")}`;const i=b.timer.remaining/b.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${i}%`},expandStudy(){if(b.isMinimized=!1,document.getElementById("mini-timer").classList.add("hidden"),b.isActive){const r=document.getElementById("study-mode-overlay"),t=document.querySelector(".zen-flow-bg");r.classList.remove("hidden"),r.classList.add("active"),t.style.opacity="1"}},lockScreen(){b.isLocked=!0,document.getElementById("study-mode-overlay").classList.add("study-locked"),document.getElementById("unlock-screen-overlay").classList.remove("hidden")},unlockScreen(){b.isLocked=!1,document.getElementById("study-mode-overlay").classList.remove("study-locked"),document.getElementById("unlock-screen-overlay").classList.add("hidden")},updateStreakDate(){const r=new Date().toDateString(),t=b.stats.lastStudyDate;if(t!==r){const n=new Date;n.setDate(n.getDate()-1),t===n.toDateString()?b.stats.streak++:b.stats.streak=1,b.stats.lastStudyDate=r}},initZenFlow(){const r=document.getElementById("zen-flow-canvas"),t=r.getContext("2d");let n,a,i=[];const m=()=>{n=r.width=window.innerWidth,a=r.height=window.innerHeight,u()},u=()=>{i=[];const k=30;for(let l=0;l<k;l++)i.push({x:Math.random()*n,y:Math.random()*a,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,radius:Math.random()*80+40,hue:Math.random()*60+170,alpha:Math.random()*.1+.05,pulse:Math.random()*Math.PI*2})},C=()=>{if(!b.isActive){requestAnimationFrame(C);return}t.clearRect(0,0,n,a);const k=document.documentElement.classList.contains("light-mode");if(i.forEach(l=>{l.x+=l.vx,l.y+=l.vy,l.x<-l.radius&&(l.x=n+l.radius),l.x>n+l.radius&&(l.x=-l.radius),l.y<-l.radius&&(l.y=a+l.radius),l.y>a+l.radius&&(l.y=-l.radius),l.pulse+=.02;const A=t.createRadialGradient(l.x,l.y,0,l.x,l.y,l.radius),T=l.radius*(1+Math.sin(l.pulse)*.1);k?(A.addColorStop(0,`hsla(40, 30%, 70%, ${l.alpha*.5})`),A.addColorStop(.5,`hsla(40, 20%, 80%, ${l.alpha*.2})`),A.addColorStop(1,"transparent")):(A.addColorStop(0,`hsla(${l.hue}, 70%, 50%, ${l.alpha})`),A.addColorStop(.5,`hsla(${l.hue}, 70%, 50%, ${l.alpha*.3})`),A.addColorStop(1,"transparent")),t.beginPath(),t.arc(l.x,l.y,T,0,Math.PI*2),t.fillStyle=A,t.fill()}),b.timer.isRunning){const l=Date.now()/1e3,A=150+Math.sin(l*.5)*20,T=t.createRadialGradient(n/2,a/2,0,n/2,a/2,A);k?(T.addColorStop(0,"hsla(40, 30%, 75%, 0.05)"),T.addColorStop(1,"transparent")):(T.addColorStop(0,"hsla(180, 70%, 50%, 0.03)"),T.addColorStop(1,"transparent")),t.beginPath(),t.arc(n/2,a/2,A,0,Math.PI*2),t.fillStyle=T,t.fill()}requestAnimationFrame(C)};window.addEventListener("resize",m),m(),C()}};document.addEventListener("DOMContentLoaded",()=>Nt.init());
+    `).join("");const u=()=>{t.classList.remove("hidden"),t.offsetWidth,t.classList.add("active")},C=()=>{t.classList.remove("active"),setTimeout(()=>{t.classList.contains("active")||t.classList.add("hidden")},300)};r.addEventListener("click",u),n.addEventListener("click",C),t.addEventListener("click",k=>{k.target===t&&C()})},initStudyMode(){this.loadStudyStats(),this.updateStudyMetrics(),this.initZenFlow(),document.getElementById("study-mode-btn").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("exit-study").addEventListener("click",()=>{this.toggleStudyMode()}),document.getElementById("timer-toggle").addEventListener("click",()=>{this.toggleTimer()}),document.getElementById("timer-reset").addEventListener("click",()=>{this.resetTimer()}),document.querySelectorAll(".preset-btn").forEach(r=>{r.addEventListener("click",t=>{const n=parseInt(t.target.dataset.time);this.setTimerDuration(n)})}),document.getElementById("minimize-study").addEventListener("click",()=>{this.minimizeStudy()}),document.getElementById("expand-study").addEventListener("click",()=>{this.expandStudy()}),document.getElementById("mini-stop-btn").addEventListener("click",()=>{this.expandStudy(),this.toggleStudyMode()}),document.getElementById("lock-screen-btn").addEventListener("click",()=>{this.lockScreen()}),document.getElementById("unlock-screen-btn").addEventListener("click",()=>{this.unlockScreen()})},loadStudyStats(){const r=localStorage.getItem("studyStats");r&&(b.stats=JSON.parse(r),this.updateStreak())},saveStudyStats(){localStorage.setItem("studyStats",JSON.stringify(b.stats))},updateStreak(){const r=new Date().toDateString(),t=b.stats.lastStudyDate;if(t){const n=new Date(t),a=new Date;a.setDate(a.getDate()-1),n.toDateString()===a.toDateString()||n.toDateString()!==r&&(b.stats.streak=0)}},updateStudyMetrics(){const r=document.getElementById("study-streak"),t=document.getElementById("study-cards"),n=document.getElementById("study-minutes");r&&(r.textContent=b.stats.streak),t&&(t.textContent=b.stats.cardsToday),n&&(n.textContent=b.stats.focusMinutes)},toggleStudyMode(){b.isActive=!b.isActive;const r=document.getElementById("study-mode-overlay"),t=document.querySelector(".zen-flow-bg");if(b.isActive){if(b.isMinimized){this.expandStudy();return}r.classList.remove("hidden"),r.classList.add("active"),t.style.opacity="1",this.updateStreak(),this.saveStudyStats()}else this.expandStudy(),r.classList.remove("active"),t.style.opacity="0",this.resetTimer(),setTimeout(()=>{r.classList.add("hidden")},500)},setTimerDuration(r){b.timer.duration=r*60,b.timer.remaining=r*60,document.querySelectorAll(".preset-btn").forEach(t=>{t.classList.toggle("active",parseInt(t.dataset.time)===r)}),this.updateTimerDisplay()},toggleTimer(){b.timer.isRunning?this.pauseTimer():this.startTimer()},startTimer(){b.timer.isRunning=!0,document.getElementById("timer-toggle").textContent="Pause",document.querySelector(".timer-wrapper").classList.add("active"),document.getElementById("lock-screen-btn").classList.remove("hidden"),b.timer.interval=setInterval(()=>{b.timer.remaining--,this.updateTimerDisplay(),b.timer.remaining<=0&&this.completeTimer()},1e3)},pauseTimer(){b.timer.isRunning=!1,document.getElementById("timer-toggle").textContent="Resume",document.querySelector(".timer-wrapper").classList.remove("active"),document.getElementById("lock-screen-btn").classList.add("hidden"),clearInterval(b.timer.interval),b.isLocked&&this.unlockScreen()},resetTimer(){this.pauseTimer(),b.timer.remaining=b.timer.duration,document.getElementById("timer-toggle").textContent="Start Focus",document.getElementById("timer-status").textContent="Ready to focus",document.getElementById("lock-screen-btn").classList.add("hidden"),this.updateTimerDisplay()},completeTimer(){this.pauseTimer(),document.getElementById("timer-status").textContent="Focus complete! Great work!",b.stats.focusMinutes+=Math.floor(b.timer.duration/60),this.updateStreakDate(),this.saveStudyStats(),this.updateStudyMetrics(),"Notification"in window&&Notification.permission==="granted"&&new Notification("Focus Session Complete",{body:"Great job! Take a break.",icon:"/vite.svg"})},updateTimerDisplay(){const r=Math.floor(b.timer.remaining/60),t=b.timer.remaining%60,n=`${r.toString().padStart(2,"0")}:${t.toString().padStart(2,"0")}`;document.getElementById("timer-minutes").textContent=r.toString().padStart(2,"0"),document.getElementById("timer-seconds").textContent=t.toString().padStart(2,"0"),document.getElementById("mini-timer-display").textContent=n;const a=b.timer.remaining/b.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${a}%`;const i=b.timer.remaining/b.timer.duration,u=2*Math.PI*130*(1-i);document.getElementById("timer-progress").style.strokeDashoffset=u,b.timer.isRunning?document.getElementById("timer-status").textContent="Stay focused...":document.getElementById("timer-status").textContent="Ready to focus"},minimizeStudy(){b.isMinimized=!0;const r=document.getElementById("study-mode-overlay"),t=document.querySelector(".zen-flow-bg");r.classList.remove("active"),t.style.opacity="0",setTimeout(()=>r.classList.add("hidden"),500),document.getElementById("mini-timer").classList.remove("hidden");const n=Math.floor(b.timer.remaining/60),a=b.timer.remaining%60;document.getElementById("mini-timer-display").textContent=`${n.toString().padStart(2,"0")}:${a.toString().padStart(2,"0")}`;const i=b.timer.remaining/b.timer.duration*100;document.getElementById("mini-timer-progress").style.width=`${i}%`},expandStudy(){if(b.isMinimized=!1,document.getElementById("mini-timer").classList.add("hidden"),b.isActive){const r=document.getElementById("study-mode-overlay"),t=document.querySelector(".zen-flow-bg");r.classList.remove("hidden"),r.classList.add("active"),t.style.opacity="1"}},lockScreen(){b.isLocked=!0,document.getElementById("study-mode-overlay").classList.add("study-locked"),document.getElementById("unlock-screen-overlay").classList.remove("hidden")},unlockScreen(){b.isLocked=!1,document.getElementById("study-mode-overlay").classList.remove("study-locked"),document.getElementById("unlock-screen-overlay").classList.add("hidden")},updateStreakDate(){const r=new Date().toDateString(),t=b.stats.lastStudyDate;if(t!==r){const n=new Date;n.setDate(n.getDate()-1),t===n.toDateString()?b.stats.streak++:b.stats.streak=1,b.stats.lastStudyDate=r}},initZenFlow(){const r=document.getElementById("zen-flow-canvas"),t=r.getContext("2d");let n,a,i=[];const m=()=>{n=r.width=window.innerWidth,a=r.height=window.innerHeight,u()},u=()=>{i=[];const k=30;for(let l=0;l<k;l++)i.push({x:Math.random()*n,y:Math.random()*a,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,radius:Math.random()*80+40,hue:Math.random()*60+170,alpha:Math.random()*.1+.05,pulse:Math.random()*Math.PI*2})},C=()=>{if(!b.isActive){requestAnimationFrame(C);return}t.clearRect(0,0,n,a);const k=document.documentElement.classList.contains("light-mode");if(i.forEach(l=>{l.x+=l.vx,l.y+=l.vy,l.x<-l.radius&&(l.x=n+l.radius),l.x>n+l.radius&&(l.x=-l.radius),l.y<-l.radius&&(l.y=a+l.radius),l.y>a+l.radius&&(l.y=-l.radius),l.pulse+=.02;const A=t.createRadialGradient(l.x,l.y,0,l.x,l.y,l.radius),M=l.radius*(1+Math.sin(l.pulse)*.1);k?(A.addColorStop(0,`hsla(40, 30%, 70%, ${l.alpha*.5})`),A.addColorStop(.5,`hsla(40, 20%, 80%, ${l.alpha*.2})`),A.addColorStop(1,"transparent")):(A.addColorStop(0,`hsla(${l.hue}, 70%, 50%, ${l.alpha})`),A.addColorStop(.5,`hsla(${l.hue}, 70%, 50%, ${l.alpha*.3})`),A.addColorStop(1,"transparent")),t.beginPath(),t.arc(l.x,l.y,M,0,Math.PI*2),t.fillStyle=A,t.fill()}),b.timer.isRunning){const l=Date.now()/1e3,A=150+Math.sin(l*.5)*20,M=t.createRadialGradient(n/2,a/2,0,n/2,a/2,A);k?(M.addColorStop(0,"hsla(40, 30%, 75%, 0.05)"),M.addColorStop(1,"transparent")):(M.addColorStop(0,"hsla(180, 70%, 50%, 0.03)"),M.addColorStop(1,"transparent")),t.beginPath(),t.arc(n/2,a/2,A,0,Math.PI*2),t.fillStyle=M,t.fill()}requestAnimationFrame(C)};window.addEventListener("resize",m),m(),C()}};document.addEventListener("DOMContentLoaded",()=>Dt.init());

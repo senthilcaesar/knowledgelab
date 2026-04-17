@@ -45,8 +45,8 @@ body {
   position: absolute;
   top: 0;
   left: 50%;
-  width: 2000px;
-  height: 1134px;
+  width: 2800px;
+  height: 1320px;
   transform-origin: top center;
 }
 
@@ -77,11 +77,12 @@ body {
   marker-end: url(#arrowhead-active);
 }
 
-.node-layer { position: relative; min-height: 1134px; z-index: 2; }
+.node-layer { position: relative; min-height: 1320px; z-index: 2; }
 
 .node {
   position: absolute;
   width: 340px;
+  height: 140px;
   padding: 16px 20px 18px;
   border-radius: 18px;
   border: 1.5px solid color-mix(in srgb, var(--accent) 80%, white 20%);
@@ -171,7 +172,7 @@ body {
 .note-panel {
   position: fixed;
   right: 24px;
-  bottom: 24px;
+  top: 24px;
   width: min(380px, calc(100vw - 40px));
   padding: 16px 18px;
   border-radius: 16px;
@@ -227,7 +228,7 @@ body {
 
 @media (max-width: 740px) {
   .fs-toggle { top: 16px; left: 16px; width: 44px; height: 44px; border-radius: 12px; }
-  .note-panel { right: 12px; left: 12px; bottom: 12px; width: auto; padding: 14px; }
+  .note-panel { right: 12px; left: 12px; top: 12px; width: auto; padding: 14px; }
 }
 </style>
 </head>
@@ -239,14 +240,13 @@ body {
   <button class="fs-toggle" id="fsToggle" title="Toggle Fullscreen">
     <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-          </svg>
+    </svg>
   </button>
 
-  <div class="chart-stage" style="width: 2000px; height: 1134px;">
+  <div class="chart-stage">
 
     <!-- ── SVG CONNECTIONS ── -->
-    <svg class="connections" viewBox="0 0 2000 1134" preserveAspectRatio="none" aria-hidden="true">
-      
+    <svg class="connections" viewBox="0 0 2800 1320" preserveAspectRatio="none" aria-hidden="true">
       <defs>
         <marker id="arrowhead" markerWidth="12" markerHeight="12" refX="8.5" refY="3.5" orient="auto" markerUnits="strokeWidth">
           <path d="M 0 0 L 7 3.5 L 0 7 z" fill="rgba(200,180,255,0.55)"/>
@@ -257,72 +257,68 @@ body {
       </defs>
 
       <!-- Root → Q1 (what are you trying to do?) -->
-      
-
       <!-- Q1 → 4 branches via horizontal spread at y=260 then down -->
       <!-- Q1 → instructions branch -->
-      
+      <path class="line" data-edge="q1-instructions" d="M 1440 180 C 1440 220, 450 260, 450 300"/>
       <!-- Q1 → permissions branch -->
-      
+      <path class="line" data-edge="q1-permissions" d="M 1480 180 C 1480 220, 1150 260, 1150 300"/>
       <!-- Q1 → shortcuts branch -->
-      
+      <path class="line" data-edge="q1-shortcuts" d="M 1520 180 C 1520 220, 1850 260, 1850 300"/>
       <!-- Q1 → organise branch -->
-      
+      <path class="line" data-edge="q1-organise" d="M 1560 180 C 1560 220, 2550 260, 2550 300"/>
 
       <!-- Instructions → Q2 (scope) -->
-      
+      <path class="line" data-edge="inst-q2" d="M 450 440 L 450 560"/>
       <!-- Q2 → global CLAUDE.md -->
-      
+      <path class="line" data-edge="q2-global-inst" d="M 405 700 C 405 740, 250 780, 250 820"/>
       <!-- Q2 → Q3 private? -->
-      
+      <path class="line" data-edge="q2-q3" d="M 495 700 C 495 740, 650 780, 650 820"/>
 
       <!-- Q3 → CLAUDE.local.md -->
-      
+      <path class="line" data-edge="q3-local" d="M 590 960 C 590 1000, 450 1040, 450 1080"/>
       <!-- Q3 → CLAUDE.md project -->
-      
+      <path class="line" data-edge="q3-project-claudemd" d="M 710 960 C 710 1000, 850 1040, 850 1080"/>
 
       <!-- Permissions → Q4 (scope) -->
-      
+      <path class="line" data-edge="perm-q4" d="M 1150 440 L 1150 560"/>
       <!-- Q4 → global settings -->
-      
+      <path class="line" data-edge="q4-global-settings" d="M 1105 700 C 1105 740, 950 780, 950 820"/>
       <!-- Q4 → project settings -->
-      
+      <path class="line" data-edge="q4-project-settings" d="M 1195 700 C 1195 740, 1350 780, 1350 820"/>
 
       <!-- Shortcuts → commands -->
-      
+      <path class="line" data-edge="shortcuts-commands" d="M 1850 440 L 1850 560"/>
       <!-- commands → Q5 (arguments?) -->
-      
+      <path class="line" data-edge="commands-q5" d="M 1850 700 L 1850 820"/>
       <!-- Q5 → with arguments -->
-      
+      <path class="line" data-edge="q5-args" d="M 1790 960 C 1790 1000, 1650 1040, 1650 1080"/>
       <!-- Q5 → plain -->
-      
+      <path class="line" data-edge="q5-plain" d="M 1910 960 C 1910 1000, 2050 1040, 2050 1080"/>
 
       <!-- Organise → rules -->
-      
+      <path class="line" data-edge="organise-rules" d="M 2550 440 L 2550 560"/>
       <!-- rules → Q6 (path scoped?) -->
-      
+      <path class="line" data-edge="rules-q6" d="M 2550 700 L 2550 820"/>
       <!-- Q6 → scoped rules -->
-      
+      <path class="line" data-edge="q6-scoped" d="M 2490 960 C 2490 1000, 2350 1040, 2350 1080"/>
       <!-- Q6 → always loaded -->
-      
+      <path class="line" data-edge="q6-always" d="M 2610 960 C 2610 1000, 2700 1040, 2700 1080"/>
     </svg>
 
     <!-- ── NODES ── -->
     <div class="node-layer">
 
       <!-- Q1 DECISION -->
-      <!-- Q1 DECISION (Now ROOT) -->
-      <article class="node node-root active" data-node="q1" style="--accent:#5e4a9a; top:40px; left:830px; width:340px;">
-        <button type="button" aria-pressed="true">
+      <article class="node node-decision active" data-node="q1" style="--accent:#4a4070; top:40px; left:1330px; width:340px;">
+        <button type="button" aria-pressed="false">
           <span class="node-title">What are you trying to do?</span>
           <span class="node-subtitle">Choose a path below</span>
-          <span class="node-meta">~/.claude/  &amp;  .claude/</span>
         </button>
       </article>
 
       <!-- BRANCH HEADERS: row 3 -->
       <!-- Instructions -->
-      <article class="node" data-node="instructions" style="--accent:#0b6e6e; --title:#a0f0e8; --subtitle:#5acfc4; top:200px; left:80px; width:340px;">
+      <article class="node" data-node="instructions" style="--accent:#0b6e6e; --title:#a0f0e8; --subtitle:#5acfc4; top:300px; left:280px;">
         <button type="button" aria-pressed="false">
           <span class="node-title">Give Claude instructions</span>
           <span class="node-subtitle">Persistent guidance for your sessions</span>
@@ -330,7 +326,7 @@ body {
       </article>
 
       <!-- Permissions -->
-      <article class="node" data-node="permissions" style="--accent:#6e3a0b; --title:#ffd0a0; --subtitle:#ffaa55; top:200px; left:660px; width:340px;">
+      <article class="node" data-node="permissions" style="--accent:#6e3a0b; --title:#ffd0a0; --subtitle:#ffaa55; top:300px; left:980px;">
         <button type="button" aria-pressed="false">
           <span class="node-title">Control what Claude can do</span>
           <span class="node-subtitle">Allow, deny, or ask for commands</span>
@@ -338,7 +334,7 @@ body {
       </article>
 
       <!-- Shortcuts -->
-      <article class="node" data-node="shortcuts" style="--accent:#1a6e1a; --title:#a8f0a0; --subtitle:#5cd45c; top:200px; left:1140px; width:340px;">
+      <article class="node" data-node="shortcuts" style="--accent:#1a6e1a; --title:#a8f0a0; --subtitle:#5cd45c; top:300px; left:1680px;">
         <button type="button" aria-pressed="false">
           <span class="node-title">Create a slash command shortcut</span>
           <span class="node-subtitle">Run a saved prompt with /project:name</span>
@@ -346,7 +342,7 @@ body {
       </article>
 
       <!-- Organise -->
-      <article class="node" data-node="organise" style="--accent:#4a1a8a; --title:#d0b0ff; --subtitle:#a875f5; top:200px; left:1560px; width:340px;">
+      <article class="node" data-node="organise" style="--accent:#4a1a8a; --title:#d0b0ff; --subtitle:#a875f5; top:300px; left:2380px;">
         <button type="button" aria-pressed="false">
           <span class="node-title">Organise growing instructions</span>
           <span class="node-subtitle">Split into topic-focused files</span>
@@ -355,14 +351,14 @@ body {
 
       <!-- ── INSTRUCTIONS BRANCH ── -->
       <!-- Q2: scope -->
-      <article class="node node-decision" data-node="q2-inst" style="--accent:#0a5a5a; top:420px; left:110px; width:280px;">
+      <article class="node node-decision" data-node="q2-inst" style="--accent:#0a5a5a; top:560px; left:310px; width:280px;">
         <button type="button" aria-pressed="false">
           <span class="node-title">All projects or just this one?</span>
         </button>
       </article>
 
       <!-- Global CLAUDE.md -->
-      <article class="node has-note" data-node="global-claudemd" style="--accent:#0a5a5a; --title:#9ee8e0; --subtitle:#4bbdb5; top:640px; left:40px; width:300px;">
+      <article class="node has-note" data-node="global-claudemd" style="--accent:#0a5a5a; --title:#9ee8e0; --subtitle:#4bbdb5; top:820px; left:100px; width:300px;">
         <button type="button" aria-pressed="false">
           <span class="node-title">~/.claude/CLAUDE.md</span>
           <span class="node-subtitle">Applies to all your projects</span>
@@ -371,14 +367,14 @@ body {
       </article>
 
       <!-- Q3: private? -->
-      <article class="node node-decision" data-node="q3-private" style="--accent:#0a5a5a; top:640px; left:380px; width:280px;">
+      <article class="node node-decision" data-node="q3-private" style="--accent:#0a5a5a; top:820px; left:510px; width:280px;">
         <button type="button" aria-pressed="false">
           <span class="node-title">Just for you, or for the project?</span>
         </button>
       </article>
 
       <!-- CLAUDE.local.md -->
-      <article class="node has-note" data-node="local-claudemd" style="--accent:#7a5500; --title:#ffe0a0; --subtitle:#ffb840; top:860px; left:210px; width:290px;">
+      <article class="node has-note" data-node="local-claudemd" style="--accent:#7a5500; --title:#ffe0a0; --subtitle:#ffb840; top:1080px; left:305px; width:290px;">
         <button type="button" aria-pressed="false">
           <span class="node-title">CLAUDE.local.md</span>
           <span class="node-subtitle">Private notes, gitignored</span>
@@ -387,7 +383,7 @@ body {
       </article>
 
       <!-- CLAUDE.md project -->
-      <article class="node has-note" data-node="project-claudemd" style="--accent:#0a5a5a; --title:#9ee8e0; --subtitle:#4bbdb5; top:860px; left:540px; width:290px;">
+      <article class="node has-note" data-node="project-claudemd" style="--accent:#0a5a5a; --title:#9ee8e0; --subtitle:#4bbdb5; top:1080px; left:705px; width:290px;">
         <button type="button" aria-pressed="false">
           <span class="node-title">CLAUDE.md</span>
           <span class="node-subtitle">Shared project instructions</span>
@@ -397,14 +393,14 @@ body {
 
       <!-- ── PERMISSIONS BRANCH ── -->
       <!-- Q4: scope -->
-      <article class="node node-decision" data-node="q4-perm" style="--accent:#5a3008; top:420px; left:690px; width:280px;">
+      <article class="node node-decision" data-node="q4-perm" style="--accent:#5a3008; top:560px; left:1010px; width:280px;">
         <button type="button" aria-pressed="false">
           <span class="node-title">All projects or just this one?</span>
         </button>
       </article>
 
       <!-- Global settings -->
-      <article class="node has-note" data-node="global-settings" style="--accent:#6e3a0b; --title:#ffd0a0; --subtitle:#ffaa55; top:640px; left:510px; width:300px;">
+      <article class="node has-note" data-node="global-settings" style="--accent:#6e3a0b; --title:#ffd0a0; --subtitle:#ffaa55; top:820px; left:800px; width:300px;">
         <button type="button" aria-pressed="false">
           <span class="node-title">~/.claude/settings.json</span>
           <span class="node-subtitle">Applies to all your projects</span>
@@ -413,7 +409,7 @@ body {
       </article>
 
       <!-- Project settings -->
-      <article class="node has-note" data-node="project-settings" style="--accent:#6e3a0b; --title:#ffd0a0; --subtitle:#ffaa55; top:640px; left:850px; width:300px;">
+      <article class="node has-note" data-node="project-settings" style="--accent:#6e3a0b; --title:#ffd0a0; --subtitle:#ffaa55; top:820px; left:1200px; width:300px;">
         <button type="button" aria-pressed="false">
           <span class="node-title">.claude/settings.json</span>
           <span class="node-subtitle">Scoped to this project only</span>
@@ -423,7 +419,7 @@ body {
 
       <!-- ── SHORTCUTS BRANCH ── -->
       <!-- Commands folder -->
-      <article class="node" data-node="commands-folder" style="--accent:#186018; --title:#a8efa0; --subtitle:#5cd45c; top:420px; left:1160px; width:300px;">
+      <article class="node" data-node="commands-folder" style="--accent:#186018; --title:#a8efa0; --subtitle:#5cd45c; top:560px; left:1700px; width:300px;">
         <button type="button" aria-pressed="false">
           <span class="node-title">.claude/commands/name.md</span>
           <span class="node-subtitle">Invoke with /project:name</span>
@@ -431,14 +427,14 @@ body {
       </article>
 
       <!-- Q5: arguments? -->
-      <article class="node node-decision" data-node="q5-args-q" style="--accent:#145014; top:640px; left:1170px; width:280px;">
+      <article class="node node-decision" data-node="q5-args-q" style="--accent:#145014; top:820px; left:1710px; width:280px;">
         <button type="button" aria-pressed="false">
           <span class="node-title">Does it need user input?</span>
         </button>
       </article>
 
       <!-- With $ARGUMENTS -->
-      <article class="node has-note" data-node="with-args" style="--accent:#186018; --title:#a8efa0; --subtitle:#5cd45c; top:860px; left:1010px; width:290px;">
+      <article class="node has-note" data-node="with-args" style="--accent:#186018; --title:#a8efa0; --subtitle:#5cd45c; top:1080px; left:1505px; width:290px;">
         <button type="button" aria-pressed="false">
           <span class="node-title">Use $ARGUMENTS</span>
           <span class="node-subtitle">User text inserted into prompt</span>
@@ -447,7 +443,7 @@ body {
       </article>
 
       <!-- Plain command -->
-      <article class="node has-note" data-node="plain-command" style="--accent:#186018; --title:#a8efa0; --subtitle:#5cd45c; top:860px; left:1340px; width:290px;">
+      <article class="node has-note" data-node="plain-command" style="--accent:#186018; --title:#a8efa0; --subtitle:#5cd45c; top:1080px; left:1905px; width:290px;">
         <button type="button" aria-pressed="false">
           <span class="node-title">Plain instructions</span>
           <span class="node-subtitle">Static prompt, no variables</span>
@@ -457,7 +453,7 @@ body {
 
       <!-- ── ORGANISE BRANCH ── -->
       <!-- Rules folder -->
-      <article class="node" data-node="rules-folder" style="--accent:#400a80; --title:#d0b0ff; --subtitle:#a070f0; top:420px; left:1580px; width:300px;">
+      <article class="node" data-node="rules-folder" style="--accent:#400a80; --title:#d0b0ff; --subtitle:#a070f0; top:560px; left:2400px; width:300px;">
         <button type="button" aria-pressed="false">
           <span class="node-title">.claude/rules/topic.md</span>
           <span class="node-subtitle">One file per topic area</span>
@@ -465,14 +461,14 @@ body {
       </article>
 
       <!-- Q6: path scoped? -->
-      <article class="node node-decision" data-node="q6-scope" style="--accent:#380870; top:640px; left:1590px; width:280px;">
+      <article class="node node-decision" data-node="q6-scope" style="--accent:#380870; top:820px; left:2410px; width:280px;">
         <button type="button" aria-pressed="false">
           <span class="node-title">Only for certain file types?</span>
         </button>
       </article>
 
       <!-- Scoped rules -->
-      <article class="node has-note" data-node="scoped-rules" style="--accent:#4a1a8a; --title:#d0b0ff; --subtitle:#a875f5; top:860px; left:1430px; width:290px;">
+      <article class="node has-note" data-node="scoped-rules" style="--accent:#4a1a8a; --title:#d0b0ff; --subtitle:#a875f5; top:1080px; left:2205px; width:290px;">
         <button type="button" aria-pressed="false">
           <span class="node-title">Add paths: filter</span>
           <span class="node-subtitle">Loads only for matched files</span>
@@ -481,7 +477,7 @@ body {
       </article>
 
       <!-- Always loaded rules -->
-      <article class="node has-note" data-node="always-rules" style="--accent:#4a1a8a; --title:#d0b0ff; --subtitle:#a875f5; top:860px; left:1760px; width:160px;">
+      <article class="node has-note" data-node="always-rules" style="--accent:#4a1a8a; --title:#d0b0ff; --subtitle:#a875f5; top:1080px; left:2620px; width:160px;">
         <button type="button" aria-pressed="false">
           <span class="node-title">Always loaded</span>
           <span class="node-subtitle">No filter</span>
@@ -572,8 +568,8 @@ const notePanel        = document.getElementById("notePanel");
 const notePanelHeading = document.getElementById("notePanelHeading");
 const notePanelBody    = document.getElementById("notePanelBody");
 
-const CHART_WIDTH  = 1480;
-const CHART_HEIGHT = 1134;
+const CHART_WIDTH  = 2800;
+const CHART_HEIGHT = 1320;
 
 function renderNote(key) {
   const note = noteContent[key];

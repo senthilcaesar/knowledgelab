@@ -140,8 +140,6 @@ Make it feel like a top-tier product (Stripe / Linear / Apple-level quality).</p
     {
       label: 'Resources',
       content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Resources]</strong>
-
 <div style="background: #0d0d12; border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; font-family: 'JetBrains Mono', monospace; box-shadow: 0 20px 40px rgba(0,0,0,0.4); margin: 1rem 0 2rem;">
   <!-- Terminal Header -->
   <div style="background: rgba(255,255,255,0.05); padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--border-color);">

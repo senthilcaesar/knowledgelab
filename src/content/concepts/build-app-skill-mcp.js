@@ -552,14 +552,81 @@ Requirements:
   <img src="/knowledgelab/images/tech-stack.png" alt="Tech Stack Modal Preview" style="max-width: 100%; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 8px 32px rgba(0,0,0,0.3); object-fit: cover;">
 </div>
 
-<div style="margin-top: 2rem; display: flex; justify-content: flex-start; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="4" class="tutorial-nav-link previous">
     <span>←</span> Previous: Step 4
+  </a>
+  <a href="#" data-goto-tab="6" class="tutorial-nav-link">
+    Next: Resources <span>→</span>
   </a>
 </div>
 
 
 `,
+      },
+      {
+        label: 'Resources',
+        
+        content: `<div style="background: #0d0d12; border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; font-family: 'JetBrains Mono', monospace; box-shadow: 0 20px 40px rgba(0,0,0,0.4); margin: 0;">
+  <!-- Terminal Header -->
+  <div style="background: rgba(255,255,255,0.05); padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--border-color);">
+    <div style="width: 10px; height: 10px; border-radius: 50%; background: #ff5f56;"></div>
+    <div style="width: 10px; height: 10px; border-radius: 50%; background: #ffbd2e;"></div>
+    <div style="width: 10px; height: 10px; border-radius: 50%; background: #27c93f;"></div>
+    <span style="margin-left: 0.5rem; font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8;">zsh — build-ui</span>
+  </div>
+  
+  <!-- Terminal Body -->
+  <div style="padding: 1.5rem 1.5rem 0.75rem; line-height: 1.6;">
+    <div style="margin-bottom: 1.5rem;">
+      <p style="color: #ae81ff; margin-bottom: 0.5rem; font-weight: bold;">[01] AI Agent Skills for Firebase</p>
+      <p style="color: #a0a0b0; font-size: 0.9rem; margin-bottom: 0.5rem;">Learn how to add Firebase expertise to your AI agents (Antigravity, Claude Code, etc.).</p>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="color: #27c93f;">➜</span> 
+        <a href="https://firebase.google.com/docs/ai-assistance/agent-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-size: 0.85rem; word-break: break-all;">https://firebase.google.com/docs/ai-assistance/agent-skills</a>
+      </div>
+    </div>
+    
+    <div style="margin-bottom: 1.5rem;">
+      <p style="color: #ae81ff; margin-bottom: 0.5rem; font-weight: bold;">[02] Firebase MCP Server</p>
+      <p style="color: #a0a0b0; font-size: 0.9rem; margin-bottom: 0.5rem;">Official Model Context Protocol server for managing Firebase projects.</p>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="color: #27c93f;">➜</span> 
+        <a href="https://firebase.google.com/docs/ai-assistance/mcp-server" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-size: 0.85rem; word-break: break-all;">https://firebase.google.com/docs/ai-assistance/mcp-server</a>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 1.5rem;">
+      <p style="color: #ae81ff; margin-bottom: 0.5rem; font-weight: bold;">[03] Gemini CLI Firebase Extension</p>
+      <p style="color: #a0a0b0; font-size: 0.9rem; margin-bottom: 0.5rem;">Integrate Firebase project management directly into your Gemini CLI.</p>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="color: #27c93f;">➜</span> 
+        <a href="https://firebase.google.com/docs/ai-assistance/gcli-extension" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-size: 0.85rem; word-break: break-all;">https://firebase.google.com/docs/ai-assistance/gcli-extension</a>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 0;">
+      <p style="color: #ae81ff; margin-bottom: 0.5rem; font-weight: bold;">[04] Blog: AI Agent Skills for Firebase</p>
+      <p style="color: #a0a0b0; font-size: 0.9rem; margin-bottom: 0.5rem;">The official announcement and vision for AI-powered Firebase development.</p>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="color: #27c93f;">➜</span> 
+        <a href="https://firebase.blog/posts/2026/02/ai-agent-skills-for-firebase" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-size: 0.85rem; word-break: break-all;">https://firebase.blog/posts/2026/02/ai-agent-skills-for-firebase</a>
+      </div>
+    </div>
+    <div style="margin-top: 0.75rem;">
+      <span style="color: #27c93f;">➜</span> <span style="color: #00f2ff;">~</span> 
+      <span style="display: inline-block; width: 8px; height: 18px; background: var(--accent-primary); vertical-align: middle; margin-left: 4px; animation: terminal-blink 1s step-end infinite;"></span>
+    </div>
+  </div>
+</div>
+
+<style>
+@keyframes terminal-blink {
+  50% { opacity: 0; }
+}
+</style>
+
+`
       },
     ],
     interactiveType: 'custom',

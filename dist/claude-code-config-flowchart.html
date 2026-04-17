@@ -1,0 +1,963 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Claude Code Config — Decision Tree</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg: #1a1a1f;
+  --panel: rgba(40, 40, 50, 0.84);
+  --panel-border: rgba(255, 255, 255, 0.12);
+  --text: #f0ecf8;
+  --muted: #b8b0cc;
+  --line: rgba(200, 180, 255, 0.35);
+  --line-active: #c9b8ff;
+  --shadow: 0 22px 48px rgba(0, 0, 0, 0.36);
+}
+* { box-sizing: border-box; }
+html { height: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Manrope", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 20% 10%, rgba(120, 80, 255, 0.07), transparent 35%),
+    radial-gradient(circle at 80% 80%, rgba(0, 160, 120, 0.05), transparent 35%),
+    linear-gradient(180deg, #1e1b28 0%, #1a1a1f 100%);
+  overflow: hidden;
+}
+.page { width: 100%; min-height: 100vh; margin: 0; padding: 0; overflow-x: hidden; }
+.chart-shell { position: relative; min-height: 100vh; overflow: visible; }
+.chart-grid { position: relative; padding: 0; min-height: 100vh; overflow: visible; }
+.chart-stage {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 3200px;
+  height: 1380px;
+  transform-origin: top center;
+}
+.connections {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+.line {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 180ms ease, stroke-width 180ms ease, opacity 180ms ease;
+  opacity: 0.7;
+  marker-end: url(#arrowhead);
+}
+.line.active {
+  stroke: var(--line-active);
+  stroke-width: 3.5;
+  opacity: 1;
+  filter: drop-shadow(0 0 8px rgba(200, 184, 255, 0.45));
+  marker-end: url(#arrowhead-active);
+}
+.node-layer { position: relative; min-height: 1380px; z-index: 2; }
+.node {
+  position: absolute;
+  width: 300px;
+  padding: 15px 18px 17px;
+  border-radius: 16px;
+  border: 1.5px solid color-mix(in srgb, var(--accent) 80%, white 20%);
+  background: linear-gradient(
+    155deg,
+    color-mix(in srgb, var(--accent) 42%, #0e0c14 58%) 0%,
+    color-mix(in srgb, var(--accent) 60%, #0e0c14 40%) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    0 14px 24px rgba(0,0,0,0.24);
+  color: var(--title);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, filter 180ms ease;
+  cursor: pointer;
+}
+.node-root {
+  --title: #1e1730;
+  --subtitle: #4a3e70;
+  background:
+    radial-gradient(circle at 14% 16%, rgba(255,255,255,0.44), transparent 28%),
+    linear-gradient(160deg, rgba(240,235,255,0.98) 0%, rgba(218,210,240,0.97) 100%);
+  border-color: rgba(255,255,255,0.5);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.42), 0 22px 38px rgba(0,0,0,0.28), 0 0 24px rgba(200,180,255,0.14);
+}
+.node-root .node-meta { background: rgba(50,35,80,0.12); color: #3d2f60; }
+.node button { all: unset; display: block; cursor: pointer; width: 100%; }
+.node:hover, .node:focus-within, .node.active {
+  transform: translateY(-3px) scale(1.015);
+  border-color: color-mix(in srgb, var(--accent) 65%, white 35%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.11), 0 22px 32px rgba(0,0,0,0.3);
+  filter: saturate(1.12);
+}
+.node-decision {
+  --title: #f0ecf8;
+  --subtitle: #c0b8d8;
+  width: 260px;
+  border-radius: 12px;
+  border-style: dashed;
+  background: rgba(36, 32, 56, 0.72);
+}
+.node-title {
+  display: block;
+  font-family: 'Shantell Sans', cursive;
+  font-size: clamp(1.15rem, 1.6vw, 1.75rem);
+  line-height: 1.1;
+  font-weight: 550;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.node-subtitle {
+  display: block;
+  margin-top: 5px;
+  font-size: clamp(0.82rem, 1.05vw, 0.96rem);
+  font-weight: 600;
+  color: var(--subtitle);
+  line-height: 1.28;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.node-meta {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 10px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.9);
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+  font-family: 'SFMono-Regular','Consolas',monospace;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.gitignore-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 6px;
+  margin-left: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 160, 50, 0.18);
+  color: rgba(255, 185, 100, 0.95);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+/* NOTE PANEL */
+.note-panel {
+  position: fixed;
+  top: 24px;
+  width: min(400px, calc(100vw - 40px));
+  padding: 18px 20px;
+  border-radius: 18px;
+  border: 1px solid rgba(200,180,255,0.2);
+  background: rgba(18,15,28,0.96);
+  color: rgba(240,235,255,0.96);
+  box-shadow: 0 24px 48px rgba(0,0,0,0.48);
+  backdrop-filter: blur(16px);
+  z-index: 2500;
+  transition: opacity 0.2s, left 0.2s ease, right 0.2s ease;
+}
+.note-panel.is-hidden { opacity: 0; pointer-events: none; }
+.note-panel.panel-right { right: 24px; left: auto; }
+.note-panel.panel-left { left: 24px; right: auto; }
+.note-panel-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #c9b8ff;
+}
+.note-panel-heading {
+  display: block;
+  margin-bottom: 10px;
+  font-family: "Shantell Sans", cursive;
+  font-size: 1.3rem;
+  line-height: 1.1;
+  color: #e0d4ff;
+}
+.note-panel p { margin: 0 0 8px; font-size: 0.93rem; line-height: 1.58; color: rgba(220,210,240,0.92); }
+.note-panel p:last-child { margin-bottom: 0; }
+.note-panel code { font-family: 'SFMono-Regular','Consolas',monospace; font-size: 0.85rem; color: #c9b8ff; background: rgba(180,160,255,0.13); padding: 1px 5px; border-radius: 4px; }
+.note-example {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  font-family: 'SFMono-Regular','Consolas',monospace;
+  font-size: 0.8rem;
+  color: rgba(200,190,230,0.85);
+  line-height: 1.6;
+  white-space: pre;
+}
+.tag-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+.ntag { font-size: 0.75rem; padding: 3px 9px; border-radius: 999px; font-weight: 700; }
+.ntag-g { background: rgba(60,180,100,0.18); color: #7fe8a8; }
+.ntag-a { background: rgba(230,140,30,0.18); color: #f5c065; }
+.ntag-b { background: rgba(60,120,230,0.18); color: #8ab8f5; }
+.ntag-m { background: rgba(255,255,255,0.08); color: rgba(200,190,230,0.8); }
+
+/* FS TOGGLE */
+.fs-toggle {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  width: 50px;
+  height: 50px;
+  background: rgba(36,32,56,0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(200,180,255,0.2);
+  border-radius: 14px;
+  color: #c0b4e8;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 3000;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+.fs-toggle:hover { background: rgba(56,48,88,0.95); transform: translateY(-2px); border-color: #c9b8ff; color: #c9b8ff; }
+
+/* legend */
+.legend {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  background: rgba(18,15,28,0.88);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 999px;
+  padding: 8px 20px;
+  z-index: 2000;
+  backdrop-filter: blur(12px);
+  font-size: 0.8rem;
+  color: rgba(200,190,230,0.7);
+}
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+
+@media (max-width: 740px) {
+  .fs-toggle { top: 12px; left: 12px; width: 42px; height: 42px; border-radius: 10px; }
+  .note-panel,
+  .note-panel.panel-left,
+  .note-panel.panel-right { right: 10px; left: 10px; top: 10px; width: auto; padding: 14px 16px; }
+  .legend { display: none; }
+}
+</style>
+</head>
+<body>
+<main class="page">
+<section class="chart-shell">
+<div class="chart-grid">
+
+<button class="fs-toggle" id="fsToggle" title="Toggle Fullscreen">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+  </svg>
+</button>
+
+<div class="chart-stage">
+
+<!-- ── SVG CONNECTIONS ── -->
+<svg class="connections" viewBox="0 0 3200 1380" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="7.5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 6 3 L 0 6 z" fill="rgba(200,180,255,0.5)"/>
+    </marker>
+    <marker id="arrowhead-active" markerWidth="10" markerHeight="10" refX="7.5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 6 3 L 0 6 z" fill="#c9b8ff"/>
+    </marker>
+  </defs>
+
+  <!-- ROOT → three main branches -->
+  <path class="line" data-edge="root-ctx" data-from="root" data-to="ctx-branch" d=""/>
+  <path class="line" data-edge="root-perm" data-from="root" data-to="perm-branch" d=""/>
+  <path class="line" data-edge="root-cmd" data-from="root" data-to="cmd-branch" d=""/>
+
+  <!-- ── CONTEXT BRANCH ── -->
+  <path class="line" data-edge="ctx-q2" data-from="ctx-branch" data-to="ctx-q2" d=""/>
+  <!-- Q2 → team vs personal vs global -->
+  <path class="line" data-edge="q2-team" data-from="ctx-q2" data-to="ctx-team" d=""/>
+  <path class="line" data-edge="q2-personal" data-from="ctx-q2" data-to="ctx-personal" d=""/>
+  <path class="line" data-edge="q2-global" data-from="ctx-q2" data-to="ctx-global" d=""/>
+
+  <!-- team → Q3 (what kind?) -->
+  <path class="line" data-edge="team-q3" data-from="ctx-team" data-to="team-q3" d=""/>
+  <!-- Q3 → project CLAUDE.md or rules -->
+  <path class="line" data-edge="q3-claudemd" data-from="team-q3" data-to="project-claudemd" d=""/>
+  <path class="line" data-edge="q3-rules" data-from="team-q3" data-to="rules-leaf" d=""/>
+
+  <!-- personal → CLAUDE.local.md -->
+  <path class="line" data-edge="personal-local" data-from="ctx-personal" data-to="local-claudemd" d=""/>
+
+  <!-- global → global CLAUDE.md -->
+  <path class="line" data-edge="global-gclaudemd" data-from="ctx-global" data-to="global-claudemd" d=""/>
+
+  <!-- ── PERMISSIONS BRANCH ── -->
+  <path class="line" data-edge="perm-q4" data-from="perm-branch" data-to="perm-q4" d=""/>
+  <!-- Q4 → team, personal, global -->
+  <path class="line" data-edge="q4-team" data-from="perm-q4" data-to="perm-team" d=""/>
+  <path class="line" data-edge="q4-personal" data-from="perm-q4" data-to="perm-personal" d=""/>
+  <path class="line" data-edge="q4-global" data-from="perm-q4" data-to="perm-global" d=""/>
+
+  <!-- team settings → deny section -->
+  <path class="line" data-edge="team-settings-deny" data-from="perm-team" data-to="project-settings" d=""/>
+  <!-- personal settings -->
+  <path class="line" data-edge="personal-settings" data-from="perm-personal" data-to="local-settings" d=""/>
+  <!-- global settings -->
+  <path class="line" data-edge="global-settings-node" data-from="perm-global" data-to="global-settings" d=""/>
+
+  <!-- ── COMMANDS BRANCH ── -->
+  <path class="line" data-edge="cmd-q5" data-from="cmd-branch" data-to="cmd-q5" d=""/>
+  <!-- Q5 → team vs global -->
+  <path class="line" data-edge="q5-team" data-from="cmd-q5" data-to="cmd-team" d=""/>
+  <path class="line" data-edge="q5-global" data-from="cmd-q5" data-to="cmd-global" d=""/>
+
+  <!-- team commands → Q6 (arguments?) -->
+  <path class="line" data-edge="team-cmd-q6" data-from="cmd-team" data-to="cmd-q6" d=""/>
+  <!-- Q6 → with args, plain, with tools -->
+  <path class="line" data-edge="q6-args" data-from="cmd-q6" data-to="with-args" d=""/>
+  <path class="line" data-edge="q6-plain" data-from="cmd-q6" data-to="plain-cmd" d=""/>
+  <path class="line" data-edge="q6-tools" data-from="cmd-q6" data-to="cmd-tools" d=""/>
+
+  <!-- global commands (leaf) -->
+  <path class="line" data-edge="global-cmd-leaf" data-from="cmd-global" data-to="global-cmd" d=""/>
+</svg>
+
+<!-- ── NODES ── -->
+<div class="node-layer">
+
+<!-- ROOT -->
+<article class="node node-root active" data-node="root" style="top:40px; left:1440px; width:340px;">
+  <button type="button">
+    <span class="node-title">What are you trying to do?</span>
+    <span class="node-subtitle">Choose a path — hover to explore</span>
+  </button>
+</article>
+
+<!-- ── BRANCH HEADERS row 2 ── -->
+<article class="node" data-node="ctx-branch" style="--accent:#0a6060; --title:#9ee8e0; --subtitle:#4bbdb5; top:280px; left:310px; width:340px;">
+  <button type="button">
+    <span class="node-title">Give Claude context</span>
+    <span class="node-subtitle">Persistent instructions &amp; knowledge</span>
+  </button>
+</article>
+
+<article class="node" data-node="perm-branch" style="--accent:#6e3a0b; --title:#ffd0a0; --subtitle:#ffaa55; top:280px; left:1440px; width:340px;">
+  <button type="button">
+    <span class="node-title">Control what Claude can do</span>
+    <span class="node-subtitle">Allow, deny, and configure tools</span>
+  </button>
+</article>
+
+<article class="node" data-node="cmd-branch" style="--accent:#186018; --title:#a8f0a0; --subtitle:#5cd45c; top:280px; left:2560px; width:340px;">
+  <button type="button">
+    <span class="node-title">Create a reusable shortcut</span>
+    <span class="node-subtitle">Save prompts as /slash commands</span>
+  </button>
+</article>
+
+<!-- ── CONTEXT Q2 ── -->
+<article class="node node-decision" data-node="ctx-q2" style="--accent:#0a5050; top:520px; left:360px; width:240px;">
+  <button type="button">
+    <span class="node-title">Who sees this context?</span>
+  </button>
+</article>
+
+<!-- ── CONTEXT SCOPE DECISIONS ── -->
+<article class="node" data-node="ctx-team" style="--accent:#0a6060; --title:#9ee8e0; --subtitle:#4bbdb5; top:780px; left:90px; width:260px;">
+  <button type="button">
+    <span class="node-title">Whole team</span>
+    <span class="node-subtitle">Committed to git</span>
+  </button>
+</article>
+
+<article class="node" data-node="ctx-personal" style="--accent:#7a5500; --title:#ffe0a0; --subtitle:#ffb840; top:780px; left:360px; width:260px;">
+  <button type="button">
+    <span class="node-title">Just me, this project</span>
+    <span class="node-subtitle">Gitignored, private</span>
+  </button>
+</article>
+
+<article class="node" data-node="ctx-global" style="--accent:#0a6060; --title:#9ee8e0; --subtitle:#4bbdb5; top:780px; left:630px; width:260px;">
+  <button type="button">
+    <span class="node-title">Me, all projects</span>
+    <span class="node-subtitle">Global personal defaults</span>
+  </button>
+</article>
+
+<!-- Q3: what kind of team context? -->
+<article class="node node-decision" data-node="team-q3" style="--accent:#084848; top:1020px; left:100px; width:240px;">
+  <button type="button">
+    <span class="node-title">What kind?</span>
+  </button>
+</article>
+
+<!-- LEAF: project CLAUDE.md -->
+<article class="node has-note" data-node="project-claudemd" style="--accent:#0a6060; --title:#9ee8e0; --subtitle:#4bbdb5; top:1240px; left:20px; width:240px;">
+  <button type="button">
+    <span class="node-title">CLAUDE.md</span>
+    <span class="node-subtitle">Briefing, commands, conventions</span>
+    <span class="node-meta">project root</span>
+  </button>
+</article>
+
+<!-- LEAF: rules -->
+<article class="node has-note" data-node="rules-leaf" style="--accent:#4a1a8a; --title:#d0b0ff; --subtitle:#a875f5; top:1240px; left:300px; width:240px;">
+  <button type="button">
+    <span class="node-title">.claude/rules/*.md</span>
+    <span class="node-subtitle">Modular, path-scoped rules</span>
+    <span class="node-meta">topic files</span>
+  </button>
+</article>
+
+<!-- LEAF: CLAUDE.local.md -->
+<article class="node has-note" data-node="local-claudemd" style="--accent:#7a5500; --title:#ffe0a0; --subtitle:#ffb840; top:1240px; left:580px; width:260px;">
+  <button type="button">
+    <span class="node-title">CLAUDE.local.md</span>
+    <span class="node-subtitle">Private notes, sandbox URLs</span>
+    <span class="node-meta">project root</span>
+    <span class="gitignore-badge">gitignored</span>
+  </button>
+</article>
+
+<!-- LEAF: global CLAUDE.md -->
+<article class="node has-note" data-node="global-claudemd" style="--accent:#0a6060; --title:#9ee8e0; --subtitle:#4bbdb5; top:1240px; left:860px; width:260px;">
+  <button type="button">
+    <span class="node-title">~/.claude/CLAUDE.md</span>
+    <span class="node-subtitle">Style, preferences, all projects</span>
+    <span class="node-meta">global scope</span>
+  </button>
+</article>
+
+<!-- ── PERMISSIONS Q4 ── -->
+<article class="node node-decision" data-node="perm-q4" style="--accent:#5a2e08; top:520px; left:1470px; width:240px;">
+  <button type="button">
+    <span class="node-title">Who does this apply to?</span>
+  </button>
+</article>
+
+<!-- PERM SCOPE -->
+<article class="node" data-node="perm-team" style="--accent:#6e3a0b; --title:#ffd0a0; --subtitle:#ffaa55; top:780px; left:1200px; width:260px;">
+  <button type="button">
+    <span class="node-title">Whole team</span>
+    <span class="node-subtitle">Committed to git</span>
+  </button>
+</article>
+<article class="node" data-node="perm-personal" style="--accent:#7a5500; --title:#ffe0a0; --subtitle:#ffb840; top:780px; left:1480px; width:260px;">
+  <button type="button">
+    <span class="node-title">Just me, this project</span>
+    <span class="node-subtitle">Gitignored overrides</span>
+  </button>
+</article>
+<article class="node" data-node="perm-global" style="--accent:#6e3a0b; --title:#ffd0a0; --subtitle:#ffaa55; top:780px; left:1760px; width:260px;">
+  <button type="button">
+    <span class="node-title">Me, all projects</span>
+    <span class="node-subtitle">Global defaults</span>
+  </button>
+</article>
+
+<!-- LEAF: .claude/settings.json -->
+<article class="node has-note" data-node="project-settings" style="--accent:#6e3a0b; --title:#ffd0a0; --subtitle:#ffaa55; top:1240px; left:1190px; width:270px;">
+  <button type="button">
+    <span class="node-title">.claude/settings.json</span>
+    <span class="node-subtitle">Allow, deny, model, hooks</span>
+    <span class="node-meta">project scope</span>
+  </button>
+</article>
+
+<!-- LEAF: settings.local.json -->
+<article class="node has-note" data-node="local-settings" style="--accent:#7a5500; --title:#ffe0a0; --subtitle:#ffb840; top:1240px; left:1480px; width:270px;">
+  <button type="button">
+    <span class="node-title">settings.local.json</span>
+    <span class="node-subtitle">Personal permission overrides</span>
+    <span class="node-meta">project scope</span>
+    <span class="gitignore-badge">gitignored</span>
+  </button>
+</article>
+
+<!-- LEAF: global settings -->
+<article class="node has-note" data-node="global-settings" style="--accent:#6e3a0b; --title:#ffd0a0; --subtitle:#ffaa55; top:1240px; left:1770px; width:270px;">
+  <button type="button">
+    <span class="node-title">~/.claude/settings.json</span>
+    <span class="node-subtitle">Global model &amp; tool defaults</span>
+    <span class="node-meta">global scope</span>
+  </button>
+</article>
+
+<!-- ── COMMANDS Q5 ── -->
+<article class="node node-decision" data-node="cmd-q5" style="--accent:#145014; top:520px; left:2590px; width:260px;">
+  <button type="button">
+    <span class="node-title">Who uses this shortcut?</span>
+  </button>
+</article>
+
+<!-- CMD SCOPE -->
+<article class="node" data-node="cmd-team" style="--accent:#186018; --title:#a8f0a0; --subtitle:#5cd45c; top:780px; left:2380px; width:260px;">
+  <button type="button">
+    <span class="node-title">Team &amp; project</span>
+    <span class="node-subtitle">Committed to git</span>
+  </button>
+</article>
+<article class="node" data-node="cmd-global" style="--accent:#186018; --title:#a8f0a0; --subtitle:#5cd45c; top:780px; left:2840px; width:260px;">
+  <button type="button">
+    <span class="node-title">Me, all projects</span>
+    <span class="node-subtitle">Global personal shortcuts</span>
+  </button>
+</article>
+
+<!-- Q6: what kind of command? -->
+<article class="node node-decision" data-node="cmd-q6" style="--accent:#104010; top:1020px; left:2380px; width:240px;">
+  <button type="button">
+    <span class="node-title">What Kind?</span>
+  </button>
+</article>
+
+<!-- LEAF: with $ARGUMENTS -->
+<article class="node has-note" data-node="with-args" style="--accent:#186018; --title:#a8f0a0; --subtitle:#5cd45c; top:1240px; left:2090px; width:260px;">
+  <button type="button">
+    <span class="node-title">Use $ARGUMENTS</span>
+    <span class="node-subtitle">User text injected into prompt</span>
+    <span class="node-meta">/review auth.py</span>
+  </button>
+</article>
+
+<!-- LEAF: plain command -->
+<article class="node has-note" data-node="plain-cmd" style="--accent:#186018; --title:#a8f0a0; --subtitle:#5cd45c; top:1240px; left:2370px; width:260px;">
+  <button type="button">
+    <span class="node-title">Plain prompt</span>
+    <span class="node-subtitle">Static instructions, no input</span>
+    <span class="node-meta">/commit</span>
+  </button>
+</article>
+
+<!-- LEAF: with frontmatter tools -->
+<article class="node has-note" data-node="cmd-tools" style="--accent:#186018; --title:#a8f0a0; --subtitle:#5cd45c; top:1240px; left:2650px; width:260px;">
+  <button type="button">
+    <span class="node-title">Add frontmatter</span>
+    <span class="node-subtitle">Lock tools, model, description</span>
+    <span class="node-meta">allowed-tools:</span>
+  </button>
+</article>
+
+<!-- LEAF: global commands -->
+<article class="node has-note" data-node="global-cmd" style="--accent:#186018; --title:#a8f0a0; --subtitle:#5cd45c; top:1240px; left:2920px; width:260px;">
+  <button type="button">
+    <span class="node-title">~/.claude/commands/</span>
+    <span class="node-subtitle">Available in every project</span>
+    <span class="node-meta">global scope</span>
+  </button>
+</article>
+
+</div><!-- /node-layer -->
+</div><!-- /chart-stage -->
+
+</div><!-- /chart-grid -->
+</section><!-- /chart-shell -->
+
+<!-- NOTE PANEL -->
+<aside class="note-panel is-hidden" id="notePanel" aria-live="polite">
+  <span class="note-panel-label">Config file</span>
+  <span class="note-panel-heading" id="notePanelHeading"></span>
+  <div id="notePanelBody"></div>
+</aside>
+
+<!-- LEGEND -->
+<div class="legend">
+  <span><span class="legend-dot" style="background:#5dcaa5"></span>Context files</span>
+  <span><span class="legend-dot" style="background:#ef9f27"></span>Permission files</span>
+  <span><span class="legend-dot" style="background:#63c455"></span>Command files</span>
+  <span><span class="legend-dot" style="background:#9070e0"></span>Rules files</span>
+  <span style="border-left:1px solid rgba(255,255,255,0.12);padding-left:16px;font-size:0.75rem;opacity:0.6">hover a node to explore</span>
+</div>
+
+</main>
+
+<script>
+const noteContent = {
+  "root": {
+    heading: "Start here",
+    body: `<p>Claude Code uses plain text files to remember your project, control what it can do, and run your favourite prompts with a single command. Hover any node to explore which file to use.</p>`,
+    tags: []
+  },
+  "ctx-branch": {
+    heading: "Give Claude context",
+    body: `<p>Claude starts every session with a blank slate. These files encode what Claude needs to know — your tech stack, commands, conventions — so you never have to repeat yourself.</p>`,
+    tags: [{t:"auto-loaded every session",c:"ntag-b"},{t:"plain Markdown",c:"ntag-m"}]
+  },
+  "perm-branch": {
+    heading: "Control what Claude can do",
+    body: `<p>The <code>settings.json</code> family controls which tools Claude runs silently, which are blocked, which model to use, and environment variables. This is Claude's safety layer.</p>`,
+    tags: [{t:"JSON format",c:"ntag-m"},{t:"loaded at runtime",c:"ntag-b"}]
+  },
+  "cmd-branch": {
+    heading: "Create a reusable shortcut",
+    body: `<p>Any prompt you type more than twice a week belongs in a command file. Write it once in Markdown, save it as <code>review.md</code>, and run it instantly with <code>/review</code>.</p>`,
+    tags: [{t:"invoked manually",c:"ntag-m"},{t:"Markdown format",c:"ntag-m"}]
+  },
+  "project-claudemd": {
+    heading: "CLAUDE.md",
+    body: `<p>The most important file. Lives in your project root and is committed to git. Claude reads it automatically at the start of every session — no prompting needed.</p><p>Include: build/test commands, project architecture, coding conventions, files Claude should never touch.</p>`,
+    example: `## Commands
+pytest tests/ -v
+ruff check . --fix
+mypy app/
+
+## Architecture
+app/routers/ → services/ → models/
+Never skip layers.
+
+## Rules
+- Type hints on all functions
+- NEVER modify alembic/versions/`,
+    tags: [{t:"committed",c:"ntag-g"},{t:"auto-loaded",c:"ntag-b"},{t:"team sees it",c:"ntag-b"}]
+  },
+  "rules-leaf": {
+    heading: ".claude/rules/*.md",
+    body: `<p>When <code>CLAUDE.md</code> grows past ~150 lines, split it into topic files here. The killer feature: add <code>paths:</code> frontmatter and a rule only loads when Claude works on matching files.</p>`,
+    example: `---
+paths:
+  - "tests/**/*.py"
+---
+
+# Testing rules
+- Use pytest fixtures
+- Mock all external services
+- Every test needs a docstring`,
+    tags: [{t:"committed",c:"ntag-g"},{t:"path-scoped option",c:"ntag-b"},{t:"modular",c:"ntag-m"}]
+  },
+  "local-claudemd": {
+    heading: "CLAUDE.local.md",
+    body: `<p>Same format as <code>CLAUDE.md</code> but never committed to git. Your private notes for this project — local ports, virtualenv paths, sandbox URLs, whatever you're currently working on.</p>`,
+    example: `## My local setup
+DB on port 5433 (not default 5432)
+venv: source ~/.venvs/proj/bin/activate
+
+## Current task
+Working on invoice export (#142)
+Key file: app/services/export.py
+
+## DO NOT
+Don't run docker-compose up — I run
+services natively`,
+    tags: [{t:"gitignored",c:"ntag-a"},{t:"only you",c:"ntag-a"},{t:"auto-loaded",c:"ntag-b"}]
+  },
+  "global-claudemd": {
+    heading: "~/.claude/CLAUDE.md",
+    body: `<p>Your personal defaults that follow you into every project on your machine. Write it once, benefit in every repo you open. Good for coding style preferences and communication habits.</p>`,
+    example: `## My coding style
+- Type hints always
+- Google-style docstrings
+- Prefer named exceptions
+
+## Communication
+Be concise. Skip preamble.
+Explain non-obvious decisions.`,
+    tags: [{t:"only you",c:"ntag-a"},{t:"all projects",c:"ntag-b"},{t:"auto-loaded",c:"ntag-b"}]
+  },
+  "project-settings": {
+    heading: ".claude/settings.json",
+    body: `<p>The team's safety and configuration layer. Controls which commands Claude runs silently, which are blocked outright, the default model, and environment variables. Always deny your <code>.env</code> files here.</p>`,
+    example: `{
+  "permissions": {
+    "allow": [
+      "Bash(pytest *)",
+      "Bash(git *)",
+      "Bash(ruff *)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)"
+    ]
+  },
+  "model": "claude-sonnet-4-6"
+}`,
+    tags: [{t:"committed",c:"ntag-g"},{t:"team sees it",c:"ntag-b"},{t:"JSON",c:"ntag-m"}]
+  },
+  "local-settings": {
+    heading: "settings.local.json",
+    body: `<p>Personal permission overrides that never get committed. Use it to allow access to a local docs folder only you have, or to bypass confirmation prompts during a focused solo debug session.</p>`,
+    example: `{
+  "permissions": {
+    "allow": [
+      "Read(~/company-docs/**)"
+    ]
+  }
+}`,
+    tags: [{t:"gitignored",c:"ntag-a"},{t:"only you",c:"ntag-a"},{t:"JSON",c:"ntag-m"}]
+  },
+  "global-settings": {
+    heading: "~/.claude/settings.json",
+    body: `<p>Global model preference and environment variables that apply to every project on your machine. Set your preferred model once here and forget about it.</p>`,
+    example: `{
+  "model": "claude-sonnet-4-6",
+  "effortLevel": "medium",
+  "env": {
+    "LOG_LEVEL": "DEBUG",
+    "PYTHONPATH": "./src"
+  }
+}`,
+    tags: [{t:"only you",c:"ntag-a"},{t:"all projects",c:"ntag-b"},{t:"JSON",c:"ntag-m"}]
+  },
+  "with-args": {
+    heading: "Commands with $ARGUMENTS",
+    body: `<p>Put <code>$ARGUMENTS</code> anywhere in your <code>.md</code> file and whatever you type after the slash command gets inserted there. Perfect for parameterised workflows.</p>`,
+    example: `---
+description: Run a specific pytest test
+allowed-tools: Bash(pytest *)
+argument-hint: [test path]
+---
+
+Run and show full output:
+pytest $ARGUMENTS -v -s
+
+# Usage: /test tests/api/test_auth.py`,
+    tags: [{t:"committed",c:"ntag-g"},{t:"dynamic input",c:"ntag-b"}]
+  },
+  "plain-cmd": {
+    heading: "Plain slash commands",
+    body: `<p>A Markdown file with your prompt. No variables, no frontmatter — just instructions. Create <code>.claude/commands/commit.md</code> and type <code>/commit</code> to instantly run your commit workflow.</p>`,
+    example: `# .claude/commands/commit.md
+
+Review git diff --cached and write
+a conventional commit message:
+  type(scope): short description
+
+Then run git commit -m "your message".`,
+    tags: [{t:"committed",c:"ntag-g"},{t:"static prompt",c:"ntag-m"}]
+  },
+  "cmd-tools": {
+    heading: "Commands with frontmatter",
+    body: `<p>Add YAML frontmatter to give a command metadata, restrict which tools it can use, override the model, or add argument hints. Appears in autocomplete with the description.</p>`,
+    example: `---
+description: Deep code review for Python
+allowed-tools: Read, Grep, Bash(ruff *)
+model: claude-opus-4-6
+argument-hint: [filename]
+---
+
+Review $ARGUMENTS for:
+1. Missing type hints
+2. Bare except: clauses
+3. Functions over 30 lines
+4. Security issues`,
+    tags: [{t:"committed",c:"ntag-g"},{t:"YAML frontmatter",c:"ntag-m"},{t:"tool-restricted",c:"ntag-b"}]
+  },
+  "global-cmd": {
+    heading: "~/.claude/commands/",
+    body: `<p>Command files stored in your home directory are available in every project you open. Perfect for universal shortcuts like <code>/commit</code>, <code>/explain</code>, or <code>/standup</code> — write once, use everywhere.</p>`,
+    example: `~/.claude/commands/
+├── commit.md    → /commit
+├── explain.md   → /explain
+├── standup.md   → /standup
+└── review.md    → /review
+
+# These work in every repo`,
+    tags: [{t:"only you",c:"ntag-a"},{t:"all projects",c:"ntag-b"},{t:"Markdown",c:"ntag-m"}]
+  }
+};
+
+const edgesByNode = {
+  "root":             ["root-ctx","root-perm","root-cmd"],
+  "ctx-branch":       ["root-ctx","ctx-q2"],
+  "perm-branch":      ["root-perm","perm-q4"],
+  "cmd-branch":       ["root-cmd","cmd-q5"],
+  "ctx-q2":           ["root-ctx","ctx-q2","q2-team","q2-personal","q2-global"],
+  "ctx-team":         ["root-ctx","ctx-q2","q2-team","team-q3"],
+  "ctx-personal":     ["root-ctx","ctx-q2","q2-personal","personal-local"],
+  "ctx-global":       ["root-ctx","ctx-q2","q2-global","global-gclaudemd"],
+  "team-q3":          ["root-ctx","ctx-q2","q2-team","team-q3","q3-claudemd","q3-rules"],
+  "project-claudemd": ["root-ctx","ctx-q2","q2-team","team-q3","q3-claudemd"],
+  "rules-leaf":       ["root-ctx","ctx-q2","q2-team","team-q3","q3-rules"],
+  "local-claudemd":   ["root-ctx","ctx-q2","q2-personal","personal-local"],
+  "global-claudemd":  ["root-ctx","ctx-q2","q2-global","global-gclaudemd"],
+  "perm-q4":          ["root-perm","perm-q4","q4-team","q4-personal","q4-global"],
+  "perm-team":        ["root-perm","perm-q4","q4-team","team-settings-deny"],
+  "perm-personal":    ["root-perm","perm-q4","q4-personal","personal-settings"],
+  "perm-global":      ["root-perm","perm-q4","q4-global","global-settings-node"],
+  "project-settings": ["root-perm","perm-q4","q4-team","team-settings-deny"],
+  "local-settings":   ["root-perm","perm-q4","q4-personal","personal-settings"],
+  "global-settings":  ["root-perm","perm-q4","q4-global","global-settings-node"],
+  "cmd-q5":           ["root-cmd","cmd-q5","q5-team","q5-global"],
+  "cmd-team":         ["root-cmd","cmd-q5","q5-team","team-cmd-q6"],
+  "cmd-global":       ["root-cmd","cmd-q5","q5-global","global-cmd-leaf"],
+  "cmd-q6":           ["root-cmd","cmd-q5","q5-team","team-cmd-q6","q6-args","q6-plain","q6-tools"],
+  "with-args":        ["root-cmd","cmd-q5","q5-team","team-cmd-q6","q6-args"],
+  "plain-cmd":        ["root-cmd","cmd-q5","q5-team","team-cmd-q6","q6-plain"],
+  "cmd-tools":        ["root-cmd","cmd-q5","q5-team","team-cmd-q6","q6-tools"],
+  "global-cmd":       ["root-cmd","cmd-q5","q5-global","global-cmd-leaf"],
+};
+
+const nodes  = Array.from(document.querySelectorAll(".node"));
+const lines  = Array.from(document.querySelectorAll(".line"));
+const notePanel   = document.getElementById("notePanel");
+const noteHeading = document.getElementById("notePanelHeading");
+const noteBody    = document.getElementById("notePanelBody");
+const nodeMap = new Map(nodes.map((node) => [node.dataset.node, node]));
+
+function getNodeAnchor(nodeEl, anchor) {
+  const x = nodeEl.offsetLeft + nodeEl.offsetWidth / 2;
+  if (anchor === "top") {
+    return { x, y: nodeEl.offsetTop };
+  }
+  return { x, y: nodeEl.offsetTop + nodeEl.offsetHeight };
+}
+
+function buildConnectorPath(start, end) {
+  const deltaY = end.y - start.y;
+  const curve = Math.max(44, Math.min(160, Math.abs(deltaY) * 0.52 || 80));
+  const c1y = start.y + curve;
+  const c2y = end.y - curve;
+  return `M ${start.x} ${start.y} C ${start.x} ${c1y}, ${end.x} ${c2y}, ${end.x} ${end.y}`;
+}
+
+function updateConnections() {
+  lines.forEach((line) => {
+    const fromNode = nodeMap.get(line.dataset.from);
+    const toNode = nodeMap.get(line.dataset.to);
+    if (!fromNode || !toNode) return;
+    const start = getNodeAnchor(fromNode, "bottom");
+    const end = getNodeAnchor(toNode, "top");
+    line.setAttribute("d", buildConnectorPath(start, end));
+  });
+}
+
+function positionNotePanel(nodeEl) {
+  if (!notePanel) return;
+  const vw = window.visualViewport?.width || window.innerWidth;
+  const isMobile = vw <= 740;
+  notePanel.classList.remove("panel-left", "panel-right");
+  if (isMobile || !nodeEl) {
+    notePanel.classList.add("panel-right");
+    return;
+  }
+  const rect = nodeEl.getBoundingClientRect();
+  const nodeCenter = rect.left + rect.width / 2;
+  const showOnLeft = nodeCenter > vw / 2;
+  notePanel.classList.add(showOnLeft ? "panel-left" : "panel-right");
+}
+
+function renderNote(key) {
+  const note = noteContent[key];
+  if (!note) { notePanel.classList.add("is-hidden"); return; }
+  noteHeading.textContent = note.heading;
+  let html = note.body || '';
+  if (note.example) {
+    html += `<div class="note-example">${note.example.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`;
+  }
+  if (note.tags && note.tags.length) {
+    html += `<div class="tag-row">${note.tags.map(t=>`<span class="ntag ${t.c}">${t.t}</span>`).join('')}</div>`;
+  }
+  noteBody.innerHTML = html;
+  notePanel.classList.remove("is-hidden");
+}
+
+function activate(key, nodeEl) {
+  const activeEdges = new Set(edgesByNode[key] || []);
+  nodes.forEach(n => n.classList.toggle("active", n.dataset.node === key));
+  lines.forEach(l => l.classList.toggle("active", activeEdges.has(l.dataset.edge)));
+  positionNotePanel(nodeEl);
+  renderNote(key);
+}
+
+nodes.forEach(node => {
+  const key = node.dataset.node;
+  const btn = node.querySelector("button");
+  node.addEventListener("mouseenter", () => activate(key, node));
+  if (btn) {
+    btn.addEventListener("focus", () => activate(key, node));
+    btn.addEventListener("click", () => activate(key, node));
+  }
+});
+
+// ── RESPONSIVE SCALING ──
+const CHART_W = 3200, CHART_H = 1380;
+function handleResize() {
+  const stage = document.querySelector(".chart-stage");
+  const grid  = document.querySelector(".chart-grid");
+  const svg   = document.querySelector(".connections");
+  if (!stage || !grid) return;
+  const vw = window.visualViewport?.width  || window.innerWidth;
+  const vh = window.visualViewport?.height || window.innerHeight;
+  document.body.style.overflow = "hidden";
+  stage.style.position = "absolute";
+  stage.style.left = "50%";
+  stage.style.width  = `${CHART_W}px`;
+  stage.style.height = `${CHART_H}px`;
+  if (svg) svg.setAttribute("viewBox", `0 0 ${CHART_W} ${CHART_H}`);
+  updateConnections();
+  const isMobile = vw <= 740;
+  const hPad = document.fullscreenElement ? 16 : isMobile ? 10 : 20;
+  const vPad = document.fullscreenElement ? 24 : isMobile ? 16 : 40;
+  const avW = Math.max(320, vw - hPad);
+  const avH = Math.max(320, vh - vPad);
+  const scaleW = avW / CHART_W;
+  const scaleH = avH / CHART_H;
+  const maxScale = document.fullscreenElement ? 1.3 : isMobile ? 0.7 : 1.05;
+  const minScale = isMobile ? 0.24 : 0.3;
+  const scale = Math.max(minScale, Math.min(maxScale, scaleW, scaleH));
+  const scaledH = CHART_H * scale;
+  const baseY   = document.fullscreenElement ? 16 : isMobile ? 8 : 14;
+  const nudge   = document.fullscreenElement ? 8 : isMobile ? 2 : 4;
+  const yOffset = Math.max(baseY, (avH - scaledH) / 2 + nudge);
+  stage.style.transform = `translateX(-50%) translateY(${yOffset}px) scale(${scale})`;
+  grid.style.height = `${Math.max(vh, scaledH + yOffset * 2)}px`;
+  grid.style.minHeight = `${vh}px`;
+  const activeNode = document.querySelector(".node.active");
+  if (activeNode) positionNotePanel(activeNode);
+}
+if (window.ResizeObserver) {
+  const ro = new ResizeObserver(() => requestAnimationFrame(handleResize));
+  ro.observe(document.documentElement);
+  ro.observe(document.body);
+}
+window.visualViewport?.addEventListener("resize", handleResize);
+window.addEventListener("resize", handleResize);
+window.addEventListener("load", handleResize);
+document.fonts?.ready?.then(() => handleResize());
+handleResize();
+
+// Fullscreen
+const fsBtn = document.getElementById("fsToggle");
+function setFsState(isFs) {
+  fsBtn.title = isFs ? "Exit fullscreen" : "Toggle fullscreen";
+  fsBtn.innerHTML = isFs
+    ? '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14h6v6M20 10h-6V4M14 10l7-7M10 14l-7 7"/></svg>'
+    : '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>';
+}
+fsBtn.addEventListener("click", () => {
+  if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(()=>{});
+  else document.exitFullscreen();
+});
+document.addEventListener("fullscreenchange", () => { setFsState(!!document.fullscreenElement); setTimeout(handleResize,100); });
+
+activate("root", document.querySelector('[data-node="root"]'));
+setFsState(false);
+</script>
+</body>
+</html>
