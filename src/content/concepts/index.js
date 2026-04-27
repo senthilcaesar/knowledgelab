@@ -12,6 +12,7 @@ import claudeHooksConcept from './claude-hooks.js';
 import claudeAgentsConcept from './claude-agents.js';
 import claudePluginsConcept from './claude-plugins.js';
 import claudeDesignerStackConcept from './claude-designer-stack.js';
+import aiAgentWorkflowsConcept from './ai-agent-workflows.js';
 
 const concepts = [
   claudeFolderConcept,
@@ -27,6 +28,7 @@ const concepts = [
   buildAppSkillMcpConcept,
   claudeDesignerStackConcept,
   buildWebappAiConcept,
+  aiAgentWorkflowsConcept,
   aiEngineeringConcept,
 ];
 
