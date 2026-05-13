@@ -1,43 +1,53 @@
 :root {
-  --bg-color: #050507;
-  --surface-color: rgba(255, 255, 255, 0.03);
-  --surface-hover: rgba(255, 255, 255, 0.08);
-  --border-color: rgba(255, 255, 255, 0.1);
-  --text-primary: #f0f0f5;
-  --text-secondary: #a0a0b0;
-  --accent-primary: #00f2ff;
-  --accent-secondary: #7000ff;
-  --accent-magenta: #ff00ea;
-  --code-text: #00a8b5;
-  --code-text-secondary: #7a7a8a;
+  /* ── Catppuccin Frappé ───────────────────────────────────────────────
+   * Base      #303446   Mantle    #292c3c   Crust     #232634
+   * Surface0  #414559   Surface1  #51576d   Surface2  #626880
+   * Overlay0  #737994   Overlay1  #838ba7   Overlay2  #949cbb
+   * Text      #c6d0f5   Subtext1  #b5bfe2   Subtext0  #a5adce
+   * Mauve     #ca9ee6   Blue      #8caaee   Lavender  #babbf1
+   * Sapphire  #85c1dc   Sky       #99d1db   Teal      #81c8be
+   * Green     #a6d189   Yellow    #e5c890   Peach     #ef9f76
+   * Red       #e78284   Maroon    #ea999c   Flamingo  #eebebe
+   * ─────────────────────────────────────────────────────────────────── */
+  --bg-color: #303446;                       /* Base */
+  --surface-color: rgba(65, 69, 89, 0.5);   /* Surface0 @ 50% */
+  --surface-hover: rgba(81, 87, 109, 0.6);  /* Surface1 @ 60% */
+  --border-color: rgba(115, 121, 148, 0.4); /* Overlay0 @ 40% */
+  --text-primary: #c6d0f5;                  /* Text */
+  --text-secondary: #a5adce;                /* Subtext0 */
+  --accent-primary: #ca9ee6;               /* Mauve */
+  --accent-secondary: #8caaee;             /* Blue */
+  --accent-magenta: #ef9f76;              /* Peach */
+  --code-text: #81c8be;                    /* Teal */
+  --code-text-secondary: #626880;          /* Surface2 */
   --sidebar-width: 280px;
   --glass-blur: 16px;
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Syntax Highlighting — authentic Monokai (from Vim colorscheme)
-   * Keyword    = #f92672  Conditional Statement Operator Type Tag
-   * String     = #e6db74  String Label
-   * Constant   = #ae81ff  Boolean Number Float SpecialChar
-   * Comment    = #75715e  italic
-   * Function   = #a6e22e  Function name
-   * Identifier = #66d9ef  italic  Identifier StorageClass built-ins
-   * Params     = #fd971f  italic  block params / decorators
+  /* Syntax Highlighting — Catppuccin Frappé
+   * Keyword    = #ca9ee6  Mauve
+   * String     = #a6d189  Green
+   * Constant   = #ef9f76  Peach
+   * Comment    = #737994  Overlay0 (italic)
+   * Function   = #8caaee  Blue
+   * Identifier = #81c8be  Teal (italic)
+   * Params     = #e5c890  Yellow (italic)
    */
-  --syntax-bg:         #272822;
-  --syntax-text:       #f8f8f2;
-  --syntax-keyword:    #f92672;  /* keyword / operator / type  */
-  --syntax-string:     #e6db74;  /* strings, labels            */
-  --syntax-constant:   #ae81ff;  /* numbers, booleans          */
-  --syntax-comment:    #75715e;  /* comments (italic)          */
-  --syntax-function:   #a6e22e;  /* function names             */
-  --syntax-identifier: #66d9ef;  /* identifiers / built-ins (cyan italic) */
-  --syntax-params:     #fd971f;  /* params / decorators (orange italic)  */
+  --syntax-bg:         #292c3c;            /* Mantle */
+  --syntax-text:       #c6d0f5;            /* Text */
+  --syntax-keyword:    #ca9ee6;            /* Mauve  — keyword / operator / type */
+  --syntax-string:     #a6d189;            /* Green  — strings, labels           */
+  --syntax-constant:   #ef9f76;            /* Peach  — numbers, booleans         */
+  --syntax-comment:    #737994;            /* Overlay0 — comments (italic)       */
+  --syntax-function:   #8caaee;            /* Blue   — function names            */
+  --syntax-identifier: #81c8be;            /* Teal   — identifiers / built-ins   */
+  --syntax-params:     #e5c890;            /* Yellow — params / decorators       */
 
   /* Code block surface colors */
-  --surface-dark: #1a1a1a;        /* terminal/output blocks */
-  --surface-light: rgba(255,255,255,0.04); /* command/input blocks */
-  --code-green: #00ff00;          /* terminal output text */
+  --surface-dark: #232634;                  /* Crust — terminal/output blocks */
+  --surface-light: rgba(65, 69, 89, 0.3);  /* Surface0 — command/input blocks */
+  --code-green: #a6d189;                   /* Green — terminal output text */
 }
 
 :root.light-mode {
@@ -144,15 +154,15 @@ h1, h2, h3 {
   height: 100vh;
   width: 100vw;
   background-image: 
-    radial-gradient(circle at 10% 10%, rgba(112, 0, 255, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 90% 90%, rgba(0, 242, 255, 0.15) 0%, transparent 40%);
+    radial-gradient(circle at 10% 10%, rgba(140, 170, 238, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 90% 90%, rgba(202, 158, 230, 0.15) 0%, transparent 40%);
 }
 
 /* Sidebar */
 .sidebar {
   width: var(--sidebar-width);
   height: 100%;
-  background: rgba(10, 10, 15, 0.8);
+  background: rgba(41, 44, 60, 0.85);
   backdrop-filter: blur(var(--glass-blur));
   border-right: 1px solid var(--border-color);
   display: flex;
@@ -227,9 +237,9 @@ h1, h2, h3 {
 }
 
 .nav-item.active {
-  background: rgba(0, 242, 255, 0.1);
+  background: rgba(202, 158, 230, 0.1);
   color: var(--accent-primary);
-  border-color: rgba(0, 242, 255, 0.3);
+  border-color: rgba(202, 158, 230, 0.3);
 }
 
 /* Main Content */
@@ -327,7 +337,7 @@ h1, h2, h3 {
 #concept-search:focus {
   border-color: var(--accent-primary);
   background: var(--surface-hover);
-  box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
+  box-shadow: 0 0 20px rgba(202, 158, 230, 0.1);
 }
 
 .welcome-card {
@@ -445,13 +455,13 @@ h1, h2, h3 {
   overflow: hidden;
   position: relative;
   transition: var(--transition-fast);
-  box-shadow: 0 0 20px rgba(0, 242, 255, 0.08), inset 0 0 30px rgba(0, 242, 255, 0.03);
+  box-shadow: 0 0 20px rgba(202, 158, 230, 0.08), inset 0 0 30px rgba(202, 158, 230, 0.03);
   animation: slideIn 0.5s ease-out;
 }
 
 .cotd-ticker:hover {
   background: var(--surface-hover);
-  box-shadow: 0 0 30px rgba(0, 242, 255, 0.18);
+  box-shadow: 0 0 30px rgba(202, 158, 230, 0.18);
   transform: translateY(-2px);
 }
 
@@ -522,7 +532,7 @@ h1, h2, h3 {
 }
 
 .copy-btn.copied {
-  background: rgba(0, 242, 255, 0.1);
+  background: rgba(202, 158, 230, 0.1);
   border-color: var(--accent-primary);
   color: var(--accent-primary);
 }
@@ -1049,7 +1059,7 @@ h1, h2, h3 {
   border-radius: 100px;
   cursor: pointer;
   backdrop-filter: blur(12px);
-  box-shadow: 0 4px 24px rgba(0, 242, 255, 0.15), 0 0 0 1px rgba(0, 242, 255, 0.1);
+  box-shadow: 0 4px 24px rgba(202, 158, 230, 0.15), 0 0 0 1px rgba(202, 158, 230, 0.1);
   transition: var(--transition-fast);
   position: relative;
   overflow: hidden;
@@ -1057,7 +1067,7 @@ h1, h2, h3 {
 
 .mini-timer-inner:hover {
   background: var(--surface-hover);
-  box-shadow: 0 6px 32px rgba(0, 242, 255, 0.25);
+  box-shadow: 0 6px 32px rgba(202, 158, 230, 0.25);
   transform: translateY(-2px);
 }
 
@@ -1289,12 +1299,12 @@ h1, h2, h3 {
 .primary-btn {
   background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
   color: #000;
-  box-shadow: 0 4px 20px rgba(0, 242, 255, 0.3);
+  box-shadow: 0 4px 20px rgba(202, 158, 230, 0.3);
 }
 
 .primary-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 30px rgba(0, 242, 255, 0.4);
+  box-shadow: 0 6px 30px rgba(202, 158, 230, 0.4);
 }
 
 :root.light-mode .primary-btn {
@@ -1341,7 +1351,7 @@ h1, h2, h3 {
 }
 
 .preset-btn.active {
-  background: rgba(0, 242, 255, 0.15);
+  background: rgba(202, 158, 230, 0.15);
   border-color: var(--accent-primary);
   color: var(--accent-primary);
 }
@@ -1402,7 +1412,7 @@ h1, h2, h3 {
   position: absolute;
   top: 1.5rem;
   padding: 0.4rem 1rem;
-  background: rgba(0, 242, 255, 0.1);
+  background: rgba(202, 158, 230, 0.1);
   border-radius: 20px;
   font-family: 'Inter', sans-serif;
   font-weight: 600;
@@ -1563,7 +1573,7 @@ h1, h2, h3 {
 }
 
 .view-switch.active {
-  background: rgba(0, 242, 255, 0.15);
+  background: rgba(202, 158, 230, 0.15);
   border-color: var(--accent-primary);
   color: var(--accent-primary);
 }
@@ -1816,7 +1826,7 @@ h1, h2, h3 {
 
 .tech-stack-item:hover {
   background: var(--surface-hover);
-  border-color: rgba(0, 242, 255, 0.3);
+  border-color: rgba(202, 158, 230, 0.3);
   transform: translateX(4px);
 }
 
@@ -1946,9 +1956,9 @@ h1, h2, h3 {
 .tutorial-tab-btn.active {
   color: var(--accent-primary);
   font-weight: 650;
-  background: rgba(0, 242, 255, 0.06);
+  background: rgba(202, 158, 230, 0.06);
   border-color: var(--border-color);
-  border-bottom-color: rgba(0, 242, 255, 0.06);
+  border-bottom-color: rgba(202, 158, 230, 0.06);
 }
 
 /* ── Content panel ── */
