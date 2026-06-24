@@ -7,12 +7,13 @@ const claudeCodeUiux21stDevConcept = {
     {
       label: 'Overview',
       content: `
-<p style="margin-bottom:1rem; line-height:1.75;">This setup helps you create <strong>production-quality websites</strong> by combining three powerful ingredients:</p>
+<p style="margin-bottom:1rem; line-height:1.75;">This setup helps you create <strong>production-quality websites</strong> by combining four powerful ingredients:</p>
 
 <ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
   <li style="margin-bottom: 0.35rem;"><strong>Claude Code</strong> for structure, implementation, and execution</li>
   <li style="margin-bottom: 0.35rem;"><strong><a href="https://www.uupm.cc/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">UI/UX Pro Max</a></strong> skill for stronger taste and visual direction</li>
   <li style="margin-bottom: 0.35rem;"><strong><a href="https://21st.dev/magic" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">21st.dev</a></strong> for polished, production-ready components</li>
+  <li style="margin-bottom: 0.35rem;"><strong><a href="https://www.tasteskill.dev/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Taste Skill</a></strong> for premium, anti-boilerplate design rules and guidelines</li>
 </ul>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Claude Code <em>may</em> pick some of these up implicitly, but explicitly adding them usually leads to much stronger results.</p>
@@ -88,6 +89,45 @@ claude mcp list</pre>
     <span>←</span> Previous: Install Claude Code
   </a>
   <a href="#" data-goto-tab="3" class="tutorial-nav-link">
+    Next: Taste Skill <span>→</span>
+  </a>
+</div>
+`,
+    },
+    {
+      label: 'Taste Skill',
+      content: `
+<strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">Taste Skill</strong>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">Taste Skill is an open-source, portable design constraints framework (<code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">SKILL.md</code>) designed to stop AI coding agents from generating generic, uninspired "AI-slop" user interfaces. It enforces strict guidelines on layouts, grids, typography, animations, and color palettes, ensuring your AI outputs look like high-end, premium SaaS products.</p>
+
+<div style="margin: 1rem 0; padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px;">
+  <p style="margin-bottom:0.5rem;"><strong>Official Links:</strong></p>
+  <ul style="margin: 0; padding-left: 1.25rem; line-height: 1.75;">
+    <li>Website: <a href="https://www.tasteskill.dev/" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">https://www.tasteskill.dev/</a></li>
+    <li>GitHub: <a href="https://github.com/leonxlnx/taste-skill" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">https://github.com/leonxlnx/taste-skill</a></li>
+  </ul>
+</div>
+
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>Installation Command:</strong></p>
+<p style="margin-bottom:0.5rem; line-height: 1.75; color: var(--text-secondary);">To install the default core frontend skill in your project root, run:</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.5;">npx skills add https://github.com/Leonxlnx/taste-skill --skill "design-taste-frontend"</pre>
+
+<p style="margin-bottom:0.5rem; line-height: 1.75; color: var(--text-secondary);">Alternatively, you can install the full bundle of all available skills at once:</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1.5rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.5;">npx skills add Leonxlnx/taste-skill</pre>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>Example Prompts to Try:</strong></p>
+<p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Once added to your workspace, agents that support <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">SKILL.md</code> will automatically read and follow the constraints. Try prompting them:</p>
+<ul style="margin: 0 0 1.5rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
+  <li style="margin-bottom: 0.5rem;"><em>"Build a clean dashboard for our analytics app. Adhere to the Taste Skill design principles."</em></li>
+  <li style="margin-bottom: 0.5rem;"><em>"Refactor the design of this login page. Use the Taste Skill guidelines to improve layout, spacing, and micro-interactions."</em></li>
+</ul>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="2" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Install UI/UX + 21st.dev
+  </a>
+  <a href="#" data-goto-tab="4" class="tutorial-nav-link">
     Next: Prompt Template <span>→</span>
   </a>
 </div>
@@ -103,7 +143,7 @@ claude mcp list</pre>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.5;">Build a modern, high-end website for [DESCRIBE YOUR PRODUCT].
 
 Requirements:
-- Use UI/UX Pro Max design system for layout, spacing, and structure
+- Use UI/UX Pro Max design system or Taste Skill for layout, spacing, and structure
 - Use 21st.dev components and assets for UI elements
 - Prioritize clean, production-level design (not generic AI styling)
 - Include subtle animations/interactions where appropriate
@@ -128,10 +168,10 @@ Make it feel like a top-tier product (Stripe / Linear / Apple-level quality).</p
 </div>
 
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
-  <a href="#" data-goto-tab="2" class="tutorial-nav-link previous">
-    <span>←</span> Previous: Install UI/UX + 21st.dev
+  <a href="#" data-goto-tab="3" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Taste Skill
   </a>
-  <a href="#" data-goto-tab="4" class="tutorial-nav-link">
+  <a href="#" data-goto-tab="5" class="tutorial-nav-link">
     Next: Resources <span>→</span>
   </a>
 </div>
@@ -183,7 +223,7 @@ Make it feel like a top-tier product (Stripe / Linear / Apple-level quality).</p
 </style>
 
 <div style="margin-top: 2rem; display: flex; justify-content: flex-start; border-top: 1px solid var(--border-color); padding-top: 1rem;">
-  <a href="#" data-goto-tab="3" class="tutorial-nav-link previous">
+  <a href="#" data-goto-tab="4" class="tutorial-nav-link previous">
     <span>←</span> Previous: Prompt Template
   </a>
 </div>

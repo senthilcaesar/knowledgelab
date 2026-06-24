@@ -9,11 +9,12 @@ const claudeMcpConcept = {
         content: `
 <p style="margin-bottom:1rem; line-height:1.75;">The Model Context Protocol (<a href="https://modelcontextprotocol.io/docs/getting-started/intro" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">MCP</a>) is an open standard that enables Claude to interact with external tools and data sources. This modular architecture allows you to extend Claude's capabilities with specialized services.</p>
 
-<p style="margin-bottom:0.75rem; line-height:1.75;">In this section, we will configure Claude to connect to <strong>three</strong> powerful MCP servers:</p>
+<p style="margin-bottom:0.75rem; line-height:1.75;">In this section, we will configure Claude to connect to <strong>four</strong> powerful MCP servers:</p>
 <ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
   <li style="margin-bottom: 0.5rem;"><strong>21st.dev Magic:</strong> Create modern, production-ready UI components.</li>
   <li style="margin-bottom: 0.5rem;"><strong>Supadata:</strong> Advanced web and video scraping capabilities.</li>
   <li style="margin-bottom: 0.5rem;"><strong>Stitch:</strong> Generates UIs for mobile and web applications.</li>
+  <li style="margin-bottom: 0.5rem;"><strong>shadcn:</strong> Browse and install shadcn/ui components directly into your local codebase.</li>
 </ul>
 
 <div style="margin-top: 2rem; display: flex; justify-content: flex-end; border-top: 1px solid var(--border-color); padding-top: 1rem;">
@@ -152,6 +153,59 @@ const claudeMcpConcept = {
     <span>←</span> Previous: Supadata
   </a>
   <a href="#" data-goto-tab="4" class="tutorial-nav-link">
+    Next: shadcn <span>→</span>
+  </a>
+</div>
+`,
+      },
+      {
+        label: 'shadcn',
+        content: `
+<strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">shadcn MCP</strong>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">The shadcn Model Context Protocol (MCP) server allows Claude Code to browse, search, and install components, blocks, and templates directly from shadcn/ui registries. This live connection ensures the AI generates correct code using accurate component props, configurations, and dependencies on the first try without hallucinations.</p>
+
+<div style="margin: 1rem 0; padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px;">
+  <p style="margin-bottom:0.5rem;"><strong>Official Links:</strong></p>
+  <ul style="margin: 0; padding-left: 1.25rem; line-height: 1.75;">
+    <li>Website: <a href="https://ui.shadcn.com/" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">https://ui.shadcn.com/</a></li>
+    <li>GitHub: <a href="https://github.com/shadcn-ui/ui" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">https://github.com/shadcn-ui/ui</a></li>
+  </ul>
+</div>
+
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>Global Installation Command:</strong></p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.85rem; line-height: 1.5;">claude mcp add shadcn --scope user -- npx -y shadcn@latest mcp</pre>
+
+<p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">Alternatively, you can configure it for a specific project/client using the shadcn CLI:</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.85rem; line-height: 1.5;">npx shadcn@latest mcp init --client claude</pre>
+
+<p style="margin-bottom:0.5rem; line-height: 1.75; color: var(--text-secondary);">Your global configuration file (<code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">~/.claude.json</code>) should contain the following entry:</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.85rem; line-height: 1.5;">{
+  "mcpServers": {
+    "shadcn": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "shadcn@latest",
+        "mcp"
+      ]
+    }
+  }
+}</pre>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>Example Prompts to Try:</strong></p>
+<p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Ensure your project is initialized with shadcn/ui (i.e. has a valid <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">components.json</code> file). Then try asking Claude:</p>
+<ul style="margin: 0 0 1.5rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
+  <li style="margin-bottom: 0.5rem;"><em>"Show me all available components in the shadcn registry."</em></li>
+  <li style="margin-bottom: 0.5rem;"><em>"Add the button, dialog, and card components to my project."</em></li>
+  <li style="margin-bottom: 0.5rem;"><em>"Create a contact form using components from the shadcn registry."</em></li>
+</ul>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="3" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Stitch
+  </a>
+  <a href="#" data-goto-tab="5" class="tutorial-nav-link">
     Next: Tool Reference <span>→</span>
   </a>
 </div>
@@ -172,8 +226,9 @@ const claudeMcpConcept = {
 
      supadata: npx -y @supadata/mcp - ✓ Connected
      magic: npx -y @21st-dev/magic@latest - ✓ Connected
+     shadcn: npx -y shadcn@latest mcp - ✓ Connected
 
-⏺ MCP Servers (2 connected):
+⏺ MCP Servers (3 connected):
 
   ┌──────────┬───────────────────────────────┬─────────────┐
   │  Server  │            Command            │   Status    │
@@ -181,6 +236,8 @@ const claudeMcpConcept = {
   │ supadata │ npx -y @supadata/mcp          │ ✓ Connected │
   ├──────────┼───────────────────────────────┼─────────────┤
   │ magic    │ npx -y @21st-dev/magic@latest │ ✓ Connected │
+  ├──────────┼───────────────────────────────┼─────────────┤
+  │ shadcn   │ npx -y shadcn@latest mcp      │ ✓ Connected │
   └──────────┴───────────────────────────────┴─────────────┘
 
   Available Tools
@@ -197,11 +254,17 @@ const claudeMcpConcept = {
   - 21st_magic_component_builder — Build new UI components from library
   - 21st_magic_component_inspiration — Browse UI component examples
   - 21st_magic_component_refiner — Redesign/improve existing UI components
-  - logo_search — Search for company logos in JSX/TSX/SVG formats</pre>
+  - logo_search — Search for company logos in JSX/TSX/SVG formats
+
+  shadcn — Interact with shadcn/ui registries:
+  - list_components — List all components available in the registry
+  - search_components — Search components by name or description
+  - get_component_details — Get detail of specific component
+  - add_item — Add components to the local workspace</pre>
 
 <div style="margin-top: 2rem; display: flex; justify-content: flex-start; border-top: 1px solid var(--border-color); padding-top: 1rem;">
-  <a href="#" data-goto-tab="3" class="tutorial-nav-link previous">
-    <span>←</span> Previous: Stitch
+  <a href="#" data-goto-tab="4" class="tutorial-nav-link previous">
+    <span>←</span> Previous: shadcn
   </a>
 </div>
 `,

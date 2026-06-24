@@ -192,6 +192,7 @@ h1, h2, h3 {
   letter-spacing: -1px;
   cursor: pointer;
   transition: var(--transition-fast);
+  white-space: nowrap;
 }
 
 .sidebar-header h1:hover {
@@ -204,6 +205,8 @@ h1, h2, h3 {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  display: inline-block;
+  padding-right: 4px; /* Prevent trailing letter clipping (e.g. 'b' in Lab) with background-clip: text */
 }
 
 .nav-menu {
