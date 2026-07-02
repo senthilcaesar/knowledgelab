@@ -1976,6 +1976,7 @@ h1, h2, h3 {
 }
 
 .tutorial-tab-content {
+  padding-top: 1.25rem;
   padding-bottom: clamp(6rem, 18vh, 10rem);
   scroll-padding-bottom: clamp(6rem, 18vh, 10rem);
 }
@@ -2030,6 +2031,56 @@ h1, h2, h3 {
 .tutorial-nav-link:hover {
   background: var(--surface-hover);
   transform: translateY(-2px);
+}
+
+/* Novel GitHub Button and Subtle Hover Animation */
+.github-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, rgba(202, 158, 230, 0.08) 0%, rgba(140, 170, 238, 0.08) 100%);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 0.55rem 1.15rem;
+  border-radius: 20px;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  letter-spacing: 0.02em;
+}
+
+.github-link-btn:hover {
+  border-color: var(--accent-primary);
+  background: linear-gradient(135deg, rgba(202, 158, 230, 0.15) 0%, rgba(140, 170, 238, 0.15) 100%);
+  box-shadow: 0 4px 12px rgba(202, 158, 230, 0.15);
+}
+
+.github-link-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  opacity: 0.85;
+  transition: opacity 0.25s ease;
+}
+
+.github-link-btn:hover svg {
+  opacity: 1;
+}
+
+:root.light-mode .github-link-btn {
+  background: linear-gradient(135deg, rgba(176, 141, 87, 0.05) 0%, rgba(125, 107, 93, 0.05) 100%);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 8px rgba(67, 52, 34, 0.03);
+}
+
+:root.light-mode .github-link-btn:hover {
+  border-color: var(--accent-primary);
+  background: linear-gradient(135deg, rgba(176, 141, 87, 0.12) 0%, rgba(125, 107, 93, 0.12) 100%);
+  box-shadow: 0 4px 12px rgba(176, 141, 87, 0.1);
 }
 
 .tutorial-nav-link.previous {
