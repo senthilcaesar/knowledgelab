@@ -9,7 +9,7 @@ const claudeDesignerStackConcept = {
       content: `
 <h1 style="margin-bottom: 1rem; color: var(--text-primary);">Claude Code Designer Skills</h1>
 
-<p style="margin-bottom: 0.5rem; line-height: 1.75;">This post covers six design-focused skills from Anthropic's official <a href="https://github.com/anthropics/skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">skills repository</a>. For each skill, we will cover:</p>
+<p style="margin-bottom: 0.5rem; line-height: 1.75;">This post covers five design-focused skills from Anthropic's official <a href="https://github.com/anthropics/skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">skills repository</a>. For each skill, we will cover:</p>
 
 <ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
   <li><strong>What it does</strong>: Its core purpose and capabilities</li>
@@ -18,7 +18,7 @@ const claudeDesignerStackConcept = {
   <li><strong>Real example prompts</strong>: Practical ways to use it in your workflow</li>
 </ul>
 
-<p style="margin-bottom: 1rem; line-height: 1.75;">At the end, we'll see how all six can work together to design a complete site from scratch.</p>
+<p style="margin-bottom: 1rem; line-height: 1.75;">At the end, we'll see how all five can work together to design a complete site from scratch.</p>
 `,
     },
     {
@@ -204,11 +204,11 @@ Using that philosophy as a guide, Claude creates the actual artwork — museum-q
     {
       label: 'Combine All 5',
       content: `
-<h2 style="margin-bottom: 1rem; color: var(--text-primary);">Combining All 6 Skills: Building "Prompt Shelf" from Scratch</h2>
+<h2 style="margin-bottom: 1rem; color: var(--text-primary);">Combining All 5 Skills: Building "Prompt Shelf" from Scratch</h2>
 
 <p style="margin-bottom: 1rem; line-height: 1.75;">Let's walk through a real-world example — <strong>Prompt Shelf</strong>, a web-based repository for storing, searching, and organizing AI prompts.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.75;">Here's exactly how all six skills are invoked in sequence to go from blank canvas to production-ready app.</p>
+<p style="margin-bottom: 1rem; line-height: 1.75;">Here's exactly how all five skills are invoked in sequence to go from blank canvas to production-ready app.</p>
 
 <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
 
