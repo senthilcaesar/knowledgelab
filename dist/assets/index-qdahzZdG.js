@@ -2049,6 +2049,10 @@ EOF</code></pre>
 <strong id="resources" style="display:block; margin-bottom:0.75rem; font-size:1rem;">Resources</strong>
 
 <p style="margin-top: 0.25rem; text-align: left;">
+  <a href="https://www.deeplearning.ai/courses/agent-skills-with-anthropic" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">Agent Skills with Anthropic (DeepLearning.AI)</a>
+</p>
+
+<p style="margin-top: 0.25rem; text-align: left;">
   <a href="https://anthropic.skilljar.com/introduction-to-agent-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">Introduction to agent skills</a>
 </p>
 
@@ -7018,7 +7022,7 @@ git push -u origin main</code></pre>
 `}],interactiveType:"custom"},Dt={id:"claude-designer-stack",title:"Claude Designer Stack",category:"Tutorial",tags:["Claude Code","Design","Skills"],tabs:[{label:"Overview",content:`
 <h1 style="margin-bottom: 1rem; color: var(--text-primary);">Claude Code Designer Skills</h1>
 
-<p style="margin-bottom: 0.5rem; line-height: 1.75;">This post covers six design-focused skills from Anthropic's official <a href="https://github.com/anthropics/skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">skills repository</a>. For each skill, we will cover:</p>
+<p style="margin-bottom: 0.5rem; line-height: 1.75;">This post covers five design-focused skills from Anthropic's official <a href="https://github.com/anthropics/skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">skills repository</a>. For each skill, we will cover:</p>
 
 <ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
   <li><strong>What it does</strong>: Its core purpose and capabilities</li>
@@ -7027,7 +7031,7 @@ git push -u origin main</code></pre>
   <li><strong>Real example prompts</strong>: Practical ways to use it in your workflow</li>
 </ul>
 
-<p style="margin-bottom: 1rem; line-height: 1.75;">At the end, we'll see how all six can work together to design a complete site from scratch.</p>
+<p style="margin-bottom: 1rem; line-height: 1.75;">At the end, we'll see how all five can work together to design a complete site from scratch.</p>
 `},{label:"What Are Skills?",content:`
 <h2 style="margin-bottom: 1rem; color: var(--text-primary);">What Are Claude Code Skills?</h2>
 
@@ -7045,17 +7049,22 @@ git push -u origin main</code></pre>
 `},{label:"Installing",content:`
 <h2 style="margin-bottom: 1rem; color: var(--text-primary);">Installing the Skills</h2>
 
-<p style="margin-bottom: 1rem; line-height: 1.75;">Five of the skills can be installed using the <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">npx skills</code> CLI, pointing at Anthropic's public GitHub repository. Run these commands in your terminal:</p>
+<p style="margin-bottom: 1rem; line-height: 1.75;">The official way to install these skills in Claude Code is Anthropic's plugin marketplace. First register the marketplace, then install the plugin that bundles the five design skills:</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.5;">/plugin marketplace add anthropics/skills
+/plugin install example-skills@anthropic-agent-skills</pre>
+
+<p style="margin-bottom: 1rem; line-height: 1.75;">All five skills — <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">frontend-design</code>, <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">theme-factory</code>, <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">brand-guidelines</code>, <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">canvas-design</code>, and <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">skill-creator</code> — ship inside the <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">example-skills</code> plugin. Anthropic's document skills (Word, Excel, PowerPoint, PDF) live in a separate plugin you can add the same way:</p>
+
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.5;">/plugin install document-skills@anthropic-agent-skills</pre>
+
+<p style="margin-bottom: 1rem; line-height: 1.75;">Prefer a per-skill install from the terminal? The community <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">npx skills</code> CLI can pull individual skills straight from the repo (this is a third-party tool, not Anthropic's official method):</p>
 
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.5;">npx skills add https://github.com/anthropics/skills --skill frontend-design -a claude-code
 npx skills add https://github.com/anthropics/skills --skill theme-factory -a claude-code
 npx skills add https://github.com/anthropics/skills --skill brand-guidelines -a claude-code
 npx skills add https://github.com/anthropics/skills --skill canvas-design -a claude-code
 npx skills add https://github.com/anthropics/skills --skill skill-creator -a claude-code</pre>
-
-<p style="margin-bottom: 1rem; line-height: 1.75;">You can also install them all at once in the Claude Code terminal using the plugin marketplace:</p>
-
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.5;">/plugin marketplace add anthropics/skills</pre>
 
 `},{label:"1. frontend-design",content:`
 <h2 style="margin-bottom: 1rem; color: var(--text-primary);">1. frontend-design</h2>
@@ -7118,13 +7127,14 @@ npx skills add https://github.com/anthropics/skills --skill skill-creator -a cla
 
 <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
 
-<p style="margin-bottom: 0.5rem; line-height: 1.75; font-size: 1.25rem;"><strong>[brand-guideline skill example]</strong></p>
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Worked Example: Rebrand a Web App in One Prompt</h3>
 <p style="margin-bottom: 1rem; line-height: 1.75;">Your web app can look like it was built by Anthropic — in one prompt.</p>
 
 <p style="margin-bottom: 1rem; line-height: 1.75;">There's an official brand-guidelines skill that knows every Anthropic design token — the coral accent, the warm neutrals, the typography, the spacing system. All of it.</p>
 
 <p style="margin-bottom: 0.5rem; line-height: 1.75;"><strong>Step 1 — Install the brand skill</strong></p>
-<pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">npx skills add anthropics/skills --skill brand-guidelines -a claude-code</pre>
+<pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">/plugin marketplace add anthropics/skills
+/plugin install example-skills@anthropic-agent-skills</pre>
 
 <p style="margin-bottom: 0.5rem; line-height: 1.75;"><strong>Step 2 — Open Claude Code in your project terminal</strong></p>
 <pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">claude</pre>
@@ -7181,11 +7191,11 @@ Using that philosophy as a guide, Claude creates the actual artwork — museum-q
 <pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"My skill isn't triggering reliably — help me optimize the description"</pre>
 <pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Run evaluations on my draft skill and help me improve it"</pre>
 `},{label:"Combine All 5",content:`
-<h2 style="margin-bottom: 1rem; color: var(--text-primary);">Combining All 6 Skills: Building "Prompt Shelf" from Scratch</h2>
+<h2 style="margin-bottom: 1rem; color: var(--text-primary);">Combining All 5 Skills: Building "Prompt Shelf" from Scratch</h2>
 
 <p style="margin-bottom: 1rem; line-height: 1.75;">Let's walk through a real-world example — <strong>Prompt Shelf</strong>, a web-based repository for storing, searching, and organizing AI prompts.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.75;">Here's exactly how all six skills are invoked in sequence to go from blank canvas to production-ready app.</p>
+<p style="margin-bottom: 1rem; line-height: 1.75;">Here's exactly how all five skills are invoked in sequence to go from blank canvas to production-ready app.</p>
 
 <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
 
@@ -7298,6 +7308,53 @@ brand-guidelines  →  Final brand consistency pass
 skill-creator     →  Whole workflow packaged as "prompt-app-builder.skill"</pre>
 
 <p style="margin-bottom: 1rem; line-height: 1.75;">Each skill hands off a concrete artifact to the next: the philosophy informs the theme, the theme feeds the frontend build, brand-guidelines polishes the result, and skill-creator makes the whole pipeline reproducible.</p>
+`},{label:"Which Skill?",content:`
+<h2 style="margin-bottom: 1rem; color: var(--text-primary);">Which Skill Should I Reach For?</h2>
+
+<p style="margin-bottom: 1rem; line-height: 1.75;">All five overlap a little. The fastest way to pick the right one is by <em>what you actually want to produce</em>:</p>
+
+<table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+  <thead>
+    <tr style="border-bottom: 2px solid var(--border-color);">
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">I want to…</th>
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Reach for</th>
+      <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">What you get</th>
+    </tr>
+  </thead>
+  <tbody style="color: var(--text-secondary);">
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;">Build working UI code — components, pages, dashboards, React/HTML/CSS</td>
+      <td style="padding: 0.75rem;"><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">frontend-design</code></td>
+      <td style="padding: 0.75rem;">Production-ready front-end code</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;">Apply a consistent color + font system to something I already have (slides, docs, HTML)</td>
+      <td style="padding: 0.75rem;"><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">theme-factory</code></td>
+      <td style="padding: 0.75rem;">A named theme (palette + font pairing), applied</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;">Make it carry Anthropic's own look-and-feel</td>
+      <td style="padding: 0.75rem;"><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">brand-guidelines</code></td>
+      <td style="padding: 0.75rem;">Anthropic's brand tokens applied as a finishing pass</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;">Create static visual art — posters, prints, infographics — as PNG/PDF</td>
+      <td style="padding: 0.75rem;"><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">canvas-design</code></td>
+      <td style="padding: 0.75rem;">High-fidelity <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">.png</code> / <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">.pdf</code> artwork</td>
+    </tr>
+    <tr>
+      <td style="padding: 0.75rem;">Turn a repeatable workflow into my own reusable skill</td>
+      <td style="padding: 0.75rem;"><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">skill-creator</code></td>
+      <td style="padding: 0.75rem;">A packaged, distributable skill</td>
+    </tr>
+  </tbody>
+</table>
+
+<p style="margin-bottom: 0.5rem; line-height: 1.75;">Two quick disambiguations that trip people up:</p>
+<ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
+  <li><strong><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">frontend-design</code> vs <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">canvas-design</code></strong> — code you can run vs. a static image you can hang. If it has to be interactive, it's <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">frontend-design</code>.</li>
+  <li><strong><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">theme-factory</code> vs <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">brand-guidelines</code></strong> — <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">theme-factory</code> gives you <em>any</em> aesthetic (10 presets or a custom one); <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">brand-guidelines</code> gives you Anthropic's <em>specific</em> brand. Want your <em>own</em> company's brand? Use <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">theme-factory</code> or build a custom skill with <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">skill-creator</code>.</li>
+</ul>
 `},{label:"Quick Reference",content:`
 <h2 style="margin-bottom: 1rem; color: var(--text-primary);">Quick Reference: How to Call Each Skill</h2>
 

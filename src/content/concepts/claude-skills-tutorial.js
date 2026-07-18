@@ -256,6 +256,10 @@ EOF</code></pre>
 <strong id="resources" style="display:block; margin-bottom:0.75rem; font-size:1rem;">Resources</strong>
 
 <p style="margin-top: 0.25rem; text-align: left;">
+  <a href="https://www.deeplearning.ai/courses/agent-skills-with-anthropic" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">Agent Skills with Anthropic (DeepLearning.AI)</a>
+</p>
+
+<p style="margin-top: 0.25rem; text-align: left;">
   <a href="https://anthropic.skilljar.com/introduction-to-agent-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">Introduction to agent skills</a>
 </p>
 
