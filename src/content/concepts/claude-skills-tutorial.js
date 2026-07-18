@@ -273,6 +273,10 @@ EOF</code></pre>
   </ul>
 </div>
 
+<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
+  <img src="/knowledgelab/images/prebuilt.png" alt="Claude Pre-built Skills" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+</div>
+
 <p style="margin-bottom:1.25rem; line-height:1.75;">You can check out the official skills folder in the Anthropic repository to see their implementations, instructions, and scripts:</p>
 
 <p style="text-align: left; margin-bottom: 1.5rem;">
