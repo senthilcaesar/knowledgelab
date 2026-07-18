@@ -444,63 +444,7 @@ h1, h2, h3 {
   opacity: 0.8;
 }
 
-/* Concept of the Day ticker */
-.cotd-ticker {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  margin-bottom: 1.5rem;
-  padding: 0.85rem 1.5rem;
-  background: var(--surface-color);
-  border: 1px solid var(--accent-primary);
-  border-radius: 16px;
-  cursor: pointer;
-  overflow: hidden;
-  position: relative;
-  transition: var(--transition-fast);
-  box-shadow: 0 0 20px rgba(202, 158, 230, 0.08), inset 0 0 30px rgba(202, 158, 230, 0.03);
-  animation: slideIn 0.5s ease-out;
-}
 
-.cotd-ticker:hover {
-  background: var(--surface-hover);
-  box-shadow: 0 0 30px rgba(202, 158, 230, 0.18);
-  transform: translateY(-2px);
-}
-
-.cotd-label {
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent-primary);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.ticker-track {
-  flex: 1;
-  overflow: hidden;
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-}
-
-.ticker-text {
-  display: inline-block;
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  white-space: nowrap;
-  animation: tickerScroll 8s linear infinite;
-  padding-right: 4rem;
-}
-
-@keyframes tickerScroll {
-  0%   { transform: translateX(var(--start-x, 100vw)); }
-  100% { transform: translateX(-100%); }
-}
 
 /* Code Blocks & Copy Button */
 .code-wrapper {
@@ -549,19 +493,7 @@ h1, h2, h3 {
   background: rgba(0, 0, 0, 0.08);
 }
 
-/* Light mode overrides for ticker */
-:root.light-mode .cotd-ticker {
-  border-color: var(--accent-primary);
-  box-shadow: 0 0 20px rgba(176, 141, 87, 0.12);
-}
 
-:root.light-mode .cotd-ticker:hover {
-  box-shadow: 0 0 30px rgba(176, 141, 87, 0.25);
-}
-
-:root.light-mode .cotd-label {
-  color: var(--accent-primary);
-}
 
 /* ==============================================
    RESPONSIVE: Tablet (641px – 1024px)
@@ -711,20 +643,7 @@ h1, h2, h3 {
     margin-bottom: 1.25rem;
   }
 
-  /* Ticker: stack label above track on very small screens */
-  .cotd-ticker {
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    padding: 0.75rem 1rem;
-  }
 
-  .cotd-label {
-    font-size: 0.7rem;
-  }
-
-  .ticker-text {
-    font-size: 0.95rem;
-  }
 
   /* Sidebar header padding */
   .sidebar-header {

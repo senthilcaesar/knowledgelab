@@ -9,7 +9,10 @@ const claudeSkillsTutorialConcept = {
         content: `
 <p style="margin-bottom:1rem; line-height:1.75;">Whether you're a complete beginner looking to build your first website, or an experienced developer looking to speed up your workflow, getting started with Claude Skills is easier than you think. In this simple guide, we'll watch Claude Skills in action as it guides us through building a website, taking our input at each step. Let's go!</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;">A skill is a set of instructions — packaged as a simple folder — that teaches Claude how to handle specific tasks or workflows.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">A skill is a set of instructions - packaged as a simple folder - that teaches Claude how to handle specific tasks or workflows.
+A skill is a folder of organized files consisting of instructions, scripts, assets and resources that agents can discover to perform a specific task accurately.</p>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Agent Skills are a lightweight, open format for extending AI agent capabilities.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Skills are powerful when you have repeatable workflows: generating frontend designs from specs, conducting research with consistent methodology or creating documents that follow your team's style guide. For more details on Skills check out the <a href="#" data-goto-tab="6" style="color: var(--accent-primary); text-decoration: underline;">resources section</a>.</p>
 <p style="line-height:1.75;">Instead of repeating instructions every time you ask Claude to review a pull request or write a commit message, you write a skill once and Claude applies it whenever the task comes up.</p>
@@ -271,6 +274,9 @@ EOF</code></pre>
 </p>
 <p style="margin-top: 0.25rem; text-align: left;">
   <a href="https://claude.com/blog/improving-frontend-design-through-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">Best practices for building richer, more customized frontend design with Claude and Skills</a>
+</p>
+<p style="margin-top: 0.25rem; text-align: left;">
+  <a href="https://claude.com/blog/skills-explained" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">Skills explained</a>
 </p>
 `,
       },

@@ -33,10 +33,9 @@ concepts/
 
 - **`main.js`** holds a `concepts` array (the data source) and an `app` object with methods:
   - `init()` — entry point, called on `DOMContentLoaded`
-  - `renderWelcome()` — renders the home screen with the "Concept of the Day" ticker
+  - `renderWelcome()` — renders the welcome screen
   - `renderSidebar()` — populates the nav list from `concepts`
   - `selectConcept(id)` — loads a concept card into the main content area
-  - `getConceptOfTheDay()` — picks a random concept once per 24h, persisted in `localStorage`
   - `initTheme()` — restores theme + sidebar state from `localStorage`
   - `setupEventListeners()` — all click/input handlers
 
@@ -47,7 +46,6 @@ concepts/
 - 🌙 **Dark / Light theme toggle** (top-right button) — persisted in `localStorage`
   - Dark: futuristic neon (cyan, violet, magenta)
   - Light: warm "Parchment" reading theme (`#fcf8e8`, ink-brown text)
-- 📰 **Concept of the Day ticker** — scrolling banner on the home screen; refreshes every 24h; clickable to open that concept
 - 🧠 **Neural Constellation Web** — live canvas animation in the background (home screen only)
 - 🔲 **Sidebar toggle** (`‹` button in top-bar) — collapses/expands with smooth CSS transition; persisted in `localStorage`
 - 🏠 **Home navigation** — clicking "KnowledgeLab" title resets to the welcome screen
@@ -74,7 +72,6 @@ Edit the `concepts` array in `src/main.js`:
 |------------|----------------------------------|
 | `theme`    | `'light'` or `'dark'`           |
 | `sidebar`  | `'collapsed'` or `'open'`       |
-| `cotd`     | `{ id, timestamp }` JSON object |
 
 ## Dev Commands
 

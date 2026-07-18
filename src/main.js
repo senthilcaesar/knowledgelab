@@ -63,39 +63,14 @@ const app = {
   renderWelcome() {
     // Restore constellation on home screen
     document.getElementById('constellation-bg').style.display = '';
-    const cotd = this.getConceptOfTheDay();
     const contentArea = document.getElementById('content-area');
     contentArea.classList.remove('content-area--tabbed');
     contentArea.innerHTML = `
-      <div class="cotd-ticker">
-        <span class="cotd-label">Skill of the Day</span>
-        <div class="ticker-track">
-          <span class="ticker-text">${cotd.title}</span>
-        </div>
-      </div>
       <div class="welcome-card">
         <h2>Welcome to Knowledge Lab</h2>
         <p>Select a tutorial from the sidebar to begin your interactive learning journey.</p>
       </div>
     `;
-
-    // Make the ticker clickable to open the concept
-    contentArea.querySelector('.cotd-ticker').addEventListener('click', () => {
-      this.selectConcept(cotd.id);
-    });
-
-    // Pin the start position to the exact right edge of the track (no dead zone)
-    const tickerText = contentArea.querySelector('.ticker-text');
-    const trackWidth = contentArea.querySelector('.ticker-track').offsetWidth;
-    tickerText.style.setProperty('--start-x', trackWidth + 'px');
-  },
-
-  getConceptOfTheDay() {
-    // Deterministic: divide epoch ms by ms-per-day to get a stable daily index.
-    // Every user on the same calendar day (UTC) sees the exact same concept.
-    // Changes automatically at midnight UTC — no localStorage needed.
-    const dayIndex = Math.floor(Date.now() / (24 * 60 * 60 * 1000));
-    return concepts[dayIndex % concepts.length];
   },
 
   initTheme() {
@@ -479,13 +454,18 @@ const app = {
       },
       {
         name: 'Vanilla CSS3 & HTML5',
-        desc: 'Custom glassmorphism styling, responsive grid layout, and semantic structure.',
+        desc: 'Custom glassmorphism styling, responsive layouts, and semantic HTML5 structure.',
         icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M15 9h-6l-.5-4h7.5l-.5 4zm-6 4h6l-.5 4.5-2.5 1.5-2.5-1.5-.2-2h2.2l.1 1.2 1.2.8 1.2-.8.2-1.2h-4.6z"></path></svg>',
       },
       {
         name: 'HTML5 Canvas API',
         desc: 'Custom performant animations including the Neural Constellation and Zen Flow backgrounds.',
         icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.268-.652-.053-.877.215-.225.542-.31 1.051-.31h2.438c2.66 0 4.853-2.192 4.853-4.853C21.5 6.756 17.244 2 12 2z"></path></svg>',
+      },
+      {
+        name: 'Google Fonts',
+        desc: 'Futuristic/technical headers using Outfit and high-readability body text using Inter.',
+        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>',
       },
     ];
 
@@ -494,6 +474,14 @@ const app = {
         name: 'Vite (' + deps.vite.replace(/[\^\~]/, '') + ')',
         desc: 'Next-generation frontend tooling providing ultra-fast builds and Hot Module Replacement.',
         icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>',
+      });
+    }
+
+    if (deps['highlight.js']) {
+      stack.push({
+        name: 'Highlight.js (' + deps['highlight.js'].replace(/[\^\~]/, '') + ')',
+        desc: 'Lightweight syntax highlighter for code snippets and terminal commands in tutorials.',
+        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"></path></svg>',
       });
     }
 
