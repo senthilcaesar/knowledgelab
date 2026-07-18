@@ -205,15 +205,55 @@ EOF</code></pre>
     <span>←</span> Previous: Step 3
   </a>
   <a href="#" data-goto-tab="5" class="tutorial-nav-link">
-    Next: Step 5 – Find Skills <span>→</span>
+    Next: Step 5 – Pre-built Skills <span>→</span>
   </a>
 </div>
 `,
       },
       {
-        label: 'Step 5 – Find Skills',
+        label: 'Step 5 – Pre-built Skills',
         content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 5 – Where to Find Skills]</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 5 – Pre-built Skills & Document Skills]</strong>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Anthropic hosts a set of official pre-built skills to extend Claude's utility out of the box. These include automation templates for common workflows, developer tools, and document processing capabilities.</p>
+
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1.25rem 0;">
+  <p style="margin-bottom: 0.75rem; line-height:1.75; color: var(--text-primary); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem;">
+    <span>📄</span> Document Skills:
+  </p>
+  <p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Claude has several pre-built skills dedicated to translating Microsoft Office and Adobe Document formats into clean Markdown:</p>
+  <ul style="margin: 0 0 0 1.5rem; color: var(--text-secondary); line-height: 1.6; font-family: monospace; font-size: 0.85rem;">
+    <li style="margin-bottom: 0.25rem;"><strong>docx</strong> — Parses Word files into structured Markdown.</li>
+    <li style="margin-bottom: 0.25rem;"><strong>pdf</strong> — Extracts and formats text and structures from PDF files.</li>
+    <li style="margin-bottom: 0.25rem;"><strong>pptx</strong> — Translates PowerPoint slides into readable outline text.</li>
+    <li style="margin-bottom: 0;"><strong>xlsx</strong> — Converts complex spreadsheet rows and tables into Markdown tables.</li>
+  </ul>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
+  <img src="/knowledgelab/images/prebuilt.png" alt="Claude Pre-built Skills" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+</div>
+
+<p style="margin-bottom:1.25rem; line-height:1.75;">You can check out the official skills folder in the Anthropic repository to see their implementations, instructions, and scripts:</p>
+
+<p style="text-align: left; margin-bottom: 1.5rem;">
+  <a href="https://github.com/anthropics/skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">Explore the Anthropic Skills Repository on GitHub</a>
+</p>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="4" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Step 4
+  </a>
+  <a href="#" data-goto-tab="6" class="tutorial-nav-link">
+    Next: Step 6 – Find Skills <span>→</span>
+  </a>
+</div>
+`,
+      },
+      {
+        label: 'Step 6 – Find Skills',
+        content: `
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 6 – Where to Find Skills]</strong>
 
 <p style="margin: 0.5rem 0; line-height:1.75;">You can find more skills to use with Claude Code in the following places:</p>
 
@@ -244,48 +284,8 @@ EOF</code></pre>
 </ul>
 
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
-  <a href="#" data-goto-tab="4" class="tutorial-nav-link previous">
-    <span>←</span> Previous: Step 4
-  </a>
-  <a href="#" data-goto-tab="6" class="tutorial-nav-link">
-    Next: Pre-built Skills <span>→</span>
-  </a>
-</div>
-`,
-      },
-      {
-        label: 'Pre-built Skills',
-        content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Pre-built Skills & Document Skills]</strong>
-
-<p style="margin-bottom:1rem; line-height:1.75;">Anthropic hosts a set of official pre-built skills to extend Claude's utility out of the box. These include automation templates for common workflows, developer tools, and document processing capabilities.</p>
-
-<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1.25rem 0;">
-  <p style="margin-bottom: 0.75rem; line-height:1.75; color: var(--text-primary); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem;">
-    <span>📄</span> Document Skills:
-  </p>
-  <p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Claude has several pre-built skills dedicated to translating Microsoft Office and Adobe Document formats into clean Markdown:</p>
-  <ul style="margin: 0 0 0 1.5rem; color: var(--text-secondary); line-height: 1.6; font-family: monospace; font-size: 0.85rem;">
-    <li style="margin-bottom: 0.25rem;"><strong>docx</strong> — Parses Word files into structured Markdown.</li>
-    <li style="margin-bottom: 0.25rem;"><strong>pdf</strong> — Extracts and formats text and structures from PDF files.</li>
-    <li style="margin-bottom: 0.25rem;"><strong>pptx</strong> — Translates PowerPoint slides into readable outline text.</li>
-    <li style="margin-bottom: 0;"><strong>xlsx</strong> — Converts complex spreadsheet rows and tables into Markdown tables.</li>
-  </ul>
-</div>
-
-<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
-  <img src="/knowledgelab/images/prebuilt.png" alt="Claude Pre-built Skills" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
-</div>
-
-<p style="margin-bottom:1.25rem; line-height:1.75;">You can check out the official skills folder in the Anthropic repository to see their implementations, instructions, and scripts:</p>
-
-<p style="text-align: left; margin-bottom: 1.5rem;">
-  <a href="https://github.com/anthropics/skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">Explore the Anthropic Skills Repository on GitHub</a>
-</p>
-
-<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="5" class="tutorial-nav-link previous">
-    <span>←</span> Previous: Step 5
+    <span>←</span> Previous: Step 5 – Pre-built Skills
   </a>
   <a href="#" data-goto-tab="7" class="tutorial-nav-link">
     Next: Resources <span>→</span>
