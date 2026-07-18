@@ -14,7 +14,7 @@ A skill is a folder of organized files consisting of instructions, scripts, asse
 
 <p style="margin-bottom:1rem; line-height:1.75;">Agent Skills are a lightweight, open format for extending AI agent capabilities.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Skills are powerful when you have repeatable workflows: generating frontend designs from specs, conducting research with consistent methodology or creating documents that follow your team's style guide. For more details on Skills check out the <a href="#" data-goto-tab="6" style="color: var(--accent-primary); text-decoration: underline;">resources section</a>.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Skills are powerful when you have repeatable workflows: generating frontend designs from specs, conducting research with consistent methodology or creating documents that follow your team's style guide. For more details on Skills check out the <a href="#" data-goto-tab="7" style="color: var(--accent-primary); text-decoration: underline;">resources section</a>.</p>
 <p style="line-height:1.75;">Instead of repeating instructions every time you ask Claude to review a pull request or write a commit message, you write a skill once and Claude applies it whenever the task comes up.</p>
 
 <div style="margin-top: 2rem; display: flex; justify-content: flex-end; border-top: 1px solid var(--border-color); padding-top: 1rem;">
@@ -248,6 +248,42 @@ EOF</code></pre>
     <span>←</span> Previous: Step 4
   </a>
   <a href="#" data-goto-tab="6" class="tutorial-nav-link">
+    Next: Pre-built Skills <span>→</span>
+  </a>
+</div>
+`,
+      },
+      {
+        label: 'Pre-built Skills',
+        content: `
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Pre-built Skills & Document Skills]</strong>
+
+<p style="margin-bottom:1rem; line-height:1.75;">Anthropic hosts a set of official pre-built skills to extend Claude's utility out of the box. These include automation templates for common workflows, developer tools, and document processing capabilities.</p>
+
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1.25rem 0;">
+  <p style="margin-bottom: 0.75rem; line-height:1.75; color: var(--text-primary); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem;">
+    <span>📄</span> Document Skills:
+  </p>
+  <p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Claude has several pre-built skills dedicated to translating Microsoft Office and Adobe Document formats into clean Markdown:</p>
+  <ul style="margin: 0 0 0 1.5rem; color: var(--text-secondary); line-height: 1.6; font-family: monospace; font-size: 0.85rem;">
+    <li style="margin-bottom: 0.25rem;"><strong>docx</strong> — Parses Word files into structured Markdown.</li>
+    <li style="margin-bottom: 0.25rem;"><strong>pdf</strong> — Extracts and formats text and structures from PDF files.</li>
+    <li style="margin-bottom: 0.25rem;"><strong>pptx</strong> — Translates PowerPoint slides into readable outline text.</li>
+    <li style="margin-bottom: 0;"><strong>xlsx</strong> — Converts complex spreadsheet rows and tables into Markdown tables.</li>
+  </ul>
+</div>
+
+<p style="margin-bottom:1.25rem; line-height:1.75;">You can check out the official skills folder in the Anthropic repository to see their implementations, instructions, and scripts:</p>
+
+<p style="text-align: left; margin-bottom: 1.5rem;">
+  <a href="https://github.com/anthropics/skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">Explore the Anthropic Skills Repository on GitHub</a>
+</p>
+
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="5" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Step 5
+  </a>
+  <a href="#" data-goto-tab="7" class="tutorial-nav-link">
     Next: Resources <span>→</span>
   </a>
 </div>
