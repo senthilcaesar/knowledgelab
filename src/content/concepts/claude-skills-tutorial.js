@@ -1,12 +1,12 @@
 const claudeSkillsTutorialConcept = {
-    id: 'claude-skills-tutorial',
-    title: 'Claude Skills',
-    category: '',
-    tags: [''],
-    tabs: [
-      {
-        label: 'Overview',
-        content: `
+  id: "claude-skills-tutorial",
+  title: "Claude Skills",
+  category: "AI Tools",
+  tags: ["claude", "skills"],
+  tabs: [
+    {
+      label: "Overview",
+      content: `
 <p style="margin-bottom:1rem; line-height:1.75;">Whether you're a complete beginner looking to build your first website, or an experienced developer looking to speed up your workflow, getting started with Claude Skills is easier than you think. In this simple guide, we'll watch Claude Skills in action as it guides us through building a website, taking our input at each step. Let's go!</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">A skill is a set of instructions - packaged as a simple folder - that teaches Claude how to handle specific tasks or workflows.
@@ -23,20 +23,20 @@ A skill is a folder of organized files consisting of instructions, scripts, asse
   </a>
 </div>
 `,
-      },
-      {
-        label: 'Step 1 – Setup',
-        content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 1 – Download & Install the Skills Repo]</strong>
+    },
+    {
+      label: "Step 1 – Setup",
+      content: `
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 1 – Install Skills from the Official Repo]</strong>
 
-<p style="margin-bottom:0.5rem; line-height:1.75;">To kick things off, clone the Claude Skills repo and copy the skill folders into <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code>:</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">The recommended way to install Anthropic's official skills is through the <strong>plugin marketplace</strong>, from inside Claude Code:</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap;"><code>/plugin marketplace add anthropics/skills
+/plugin install &lt;skill-name&gt;@anthropics-skills</code></pre>
 
-<p style="margin: 0.5rem 0; line-height:1.75;">If the directory does not exist yet, create it first:</p>
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text);"><code>mkdir -p ~/.claude/skills</code></pre>
-
-<p style="margin: 0.5rem 0; line-height:1.75;">Then run:</p>
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap;"><code>git clone https://github.com/anthropics/skills.git
-cp -R skills/* ~/.claude/skills/</code></pre>
+<p style="margin: 0.5rem 0; line-height:1.75;">Alternatively, you can clone the repo and copy skill folders manually into <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code> (note: in the repo, the skill folders live inside a nested <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">skills/</code> subdirectory):</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap;"><code>mkdir -p ~/.claude/skills
+git clone https://github.com/anthropics/skills.git
+cp -R skills/skills/* ~/.claude/skills/</code></pre>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">Each skill lives in a <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">SKILL.md</code> file with a name and description in its frontmatter. Claude uses the description to match skills to requests.</p>
 
@@ -48,6 +48,8 @@ cp -R skills/* ~/.claude/skills/</code></pre>
   <li style="margin-bottom: 0.25rem;">When should Claude use it?</li>
 </ul>
 
+<p style="margin-bottom:0.5rem; line-height:1.75;">Anthropic's authoring guidelines add a few hard rules: write the description in the <strong>third person</strong> ("Reviews Python code…", not "I can help you…") and include concrete trigger phrases ("Use when the user mentions PDFs, forms, or extraction"). The <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">name</code> is limited to 64 characters (lowercase letters, numbers, and hyphens) and the <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">description</code> to 1,024 characters.</p>
+
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; align-items: center;">
   <img src="/knowledgelab/images/gitskill.png" alt="Git Skill Frontmatter" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
 </div>
@@ -58,7 +60,7 @@ cp -R skills/* ~/.claude/skills/</code></pre>
   <img src="/knowledgelab/images/claude-skills.png" alt="Terminal Skills Placement" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
 </div>
 
-<p style="margin-bottom:0.5rem; line-height:1.75;">Skills load on demand — unlike <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> (which loads into every conversation) or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">slash commands</code> (which require explicit invocation).</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">Skills load on demand — unlike <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code>, which loads into every conversation. Custom slash commands have been merged into the skills system: a skill can be invoked automatically by Claude when your request matches its description, or explicitly by typing <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/skill-name</code>. Add <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">disable-model-invocation: true</code> to the frontmatter if a skill should only run when called explicitly.</p>
 <p style="margin-bottom:0.5rem; line-height:1.75;">You can think of <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> as providing the cumulative knowledge that makes the agent genuinely useful from the very first interaction.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75; font-weight: 600; color: var(--accent-primary);">If you find yourself explaining the same thing to Claude repeatedly, that's a skill waiting to be written.</p>
@@ -72,10 +74,10 @@ cp -R skills/* ~/.claude/skills/</code></pre>
   </a>
 </div>
 `,
-      },
-      {
-        label: 'Step 2 – Launch Claude',
-        content: `
+    },
+    {
+      label: "Step 2 – Launch Claude",
+      content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 2 – Launch Claude in Your Terminal]</strong>
 
 <p style="margin-bottom:0.75rem; line-height:1.75;">If you are new to Claude Code, please install it by following the instructions at <a href="https://code.claude.com/docs/en/quickstart" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">https://code.claude.com/docs/en/quickstart</a>.</p>
@@ -85,6 +87,8 @@ cp -R skills/* ~/.claude/skills/</code></pre>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text);"><code>ollama launch claude --model glm-4.7:cloud</code></pre>
 
 <p style="margin: 0.5rem 0; line-height:1.75;"><em>Note: Since I am practicing and learning to use Claude Code, I don't want to pay for an Anthropic API key yet. Because of this, I will be launching Claude using an open source free model via Ollama!</em></p>
+
+<p style="margin: 0.5rem 0; line-height:1.75;"><em>Caveat: this Ollama integration is a third-party feature (Ollama v0.14+ implements Anthropic API compatibility) — Anthropic does not officially support running Claude Code with non-Anthropic models. Skills still load and run, but how reliably they trigger automatically depends on the model you choose. Everything else in this tutorial works the same with the standard <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">claude</code> launch.</em></p>
 
 <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; align-items: center;">
   <img src="/knowledgelab/images/skill1.png" alt="Terminal Skills Execution" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
@@ -99,10 +103,10 @@ cp -R skills/* ~/.claude/skills/</code></pre>
   </a>
 </div>
 `,
-      },
-      {
-        label: 'Step 3 – Call a Skill',
-        content: `
+    },
+    {
+      label: "Step 3 – Call a Skill",
+      content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 3 – Call the Skill]</strong>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">To know what skills are available, just ask Claude in the terminal:</p>
@@ -146,7 +150,7 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
     <li style="margin-bottom: 0.25rem;">Enterprise (managed settings) - managed-settings.json</li>
     <li style="margin-bottom: 0.25rem;">Personal (your home directory) - ~/.claude/skills</li>
     <li style="margin-bottom: 0.25rem;">Project (your project directory) - .claude/skills</li>
-    <li style="margin-bottom: 0;">Plugins (installed plugins) - .claude-plugin/plugin.json</li>
+    <li style="margin-bottom: 0;">Plugins (installed plugins) - each plugin's skills/ directory</li>
   </ul>
 </div>
 
@@ -159,10 +163,10 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
   </a>
 </div>
 `,
-      },
-      {
-        label: 'Step 4 – Create a skill',
-        content: `
+    },
+    {
+      label: "Step 4 – Create a skill",
+      content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 4 – Create Your Own Skill]</strong>
 <p style="margin-bottom:0.75rem; line-height:1.75;">Building your first skill is the best way to understand how Claude thinks. Let's create a <strong>Python Code Reviewer</strong> skill.</p>
 
@@ -175,7 +179,8 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.5;"><code>cat > ~/.claude/skills/py-review/SKILL.md << 'EOF'
 ---
 name: py-review
-description: Reviews Python code for style, bugs, and best practices
+description: Reviews Python code for style, bugs, and best practices. Use when the user asks for a Python code review or mentions PEP 8, linting, or code quality.
+argument-hint: [file-path]
 ---
 You are reviewing Python code. For any file or snippet provided via $ARGUMENTS:
 1. Check for PEP 8 style violations
@@ -200,6 +205,18 @@ EOF</code></pre>
   <strong>Pro tip:</strong> Add a <code style="color: var(--code-text);">scripts/</code> subfolder in your skill directory for Python helper scripts. Claude will run them externally — only the output enters the context window, not the script itself.
 </p>
 
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1.25rem 0;">
+  <p style="margin-bottom: 0.75rem; line-height:1.75; color: var(--text-primary); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem;">
+    <span>✅</span> Official authoring best practices:
+  </p>
+  <ul style="margin: 0 0 0 1.5rem; color: var(--text-secondary); line-height: 1.6; font-size: 0.9rem;">
+    <li style="margin-bottom: 0.35rem;">Keep <code style="color: var(--code-text);">SKILL.md</code> under <strong>500 lines</strong> — move long reference material into separate files (e.g. <code style="color: var(--code-text);">reference.md</code>) linked from SKILL.md, so Claude loads them only when needed (progressive disclosure).</li>
+    <li style="margin-bottom: 0.35rem;">Write the description in the third person with concrete trigger phrases.</li>
+    <li style="margin-bottom: 0.35rem;"><code style="color: var(--code-text);">argument-hint</code> documents expected arguments; <code style="color: var(--code-text);">$ARGUMENTS</code> in the body expands to whatever you type after the slash command.</li>
+    <li style="margin-bottom: 0;">Other useful frontmatter: <code style="color: var(--code-text);">allowed-tools</code> pre-approves the tools the skill needs; <code style="color: var(--code-text);">disable-model-invocation: true</code> makes a skill slash-command-only.</li>
+  </ul>
+</div>
+
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="3" class="tutorial-nav-link previous">
     <span>←</span> Previous: Step 3
@@ -209,10 +226,10 @@ EOF</code></pre>
   </a>
 </div>
 `,
-      },
-      {
-        label: 'Step 5 – Pre-built Skills',
-        content: `
+    },
+    {
+      label: "Step 5 – Pre-built Skills",
+      content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 5 – Pre-built Skills & Document Skills]</strong>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Anthropic hosts a set of official pre-built skills to extend Claude's utility out of the box. These include automation templates for common workflows, developer tools, and document processing capabilities.</p>
@@ -221,12 +238,12 @@ EOF</code></pre>
   <p style="margin-bottom: 0.75rem; line-height:1.75; color: var(--text-primary); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem;">
     <span>📄</span> Document Skills:
   </p>
-  <p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Claude has several pre-built skills dedicated to translating Microsoft Office and Adobe Document formats into clean Markdown:</p>
+  <p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Claude ships with pre-built skills for creating, editing, and reading Microsoft Office and PDF documents — these are bundled into Claude Code by default, so no installation is needed:</p>
   <ul style="margin: 0 0 0 1.5rem; color: var(--text-secondary); line-height: 1.6; font-family: monospace; font-size: 0.85rem;">
-    <li style="margin-bottom: 0.25rem;"><strong>docx</strong> — Parses Word files into structured Markdown.</li>
-    <li style="margin-bottom: 0.25rem;"><strong>pdf</strong> — Extracts and formats text and structures from PDF files.</li>
-    <li style="margin-bottom: 0.25rem;"><strong>pptx</strong> — Translates PowerPoint slides into readable outline text.</li>
-    <li style="margin-bottom: 0;"><strong>xlsx</strong> — Converts complex spreadsheet rows and tables into Markdown tables.</li>
+    <li style="margin-bottom: 0.25rem;"><strong>docx</strong> — Creates and edits Word documents (tables, headers/footers, tracked changes, TOCs) and extracts their content.</li>
+    <li style="margin-bottom: 0.25rem;"><strong>pdf</strong> — Creates PDFs, merges/splits files, fills forms, and extracts text and structure.</li>
+    <li style="margin-bottom: 0.25rem;"><strong>pptx</strong> — Builds PowerPoint decks from scratch or from templates (layouts, speaker notes, charts) and reads existing slides.</li>
+    <li style="margin-bottom: 0;"><strong>xlsx</strong> — Creates and edits spreadsheets with formulas, formatting, and multiple sheets, and reads tabular data.</li>
   </ul>
 </div>
 
@@ -249,10 +266,10 @@ EOF</code></pre>
   </a>
 </div>
 `,
-      },
-      {
-        label: 'Step 6 – Find Skills',
-        content: `
+    },
+    {
+      label: "Step 6 – Find Skills",
+      content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 6 – Where to Find Skills]</strong>
 
 <p style="margin: 0.5rem 0; line-height:1.75;">You can find more skills to use with Claude Code in the following places:</p>
@@ -292,10 +309,10 @@ EOF</code></pre>
   </a>
 </div>
 `,
-      },
-      {
-        label: 'Resources',
-        content: `
+    },
+    {
+      label: "Resources",
+      content: `
 <strong id="resources" style="display:block; margin-bottom:0.75rem; font-size:1rem;">Resources</strong>
 
 <p style="margin-top: 0.25rem; text-align: left;">
@@ -319,9 +336,9 @@ EOF</code></pre>
   <a href="https://claude.com/blog/skills-explained" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600;">Skills explained</a>
 </p>
 `,
-      },
-    ],
-    interactiveType: 'custom',
-  };
+    },
+  ],
+  interactiveType: "custom",
+};
 
 export default claudeSkillsTutorialConcept;
