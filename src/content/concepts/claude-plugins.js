@@ -1,11 +1,11 @@
 const claudePluginsConcept = {
-  id: 'claude-plugins',
-  title: 'Claude Plugins',
-  category: 'Tutorial',
-  tags: ['Plugins', 'Marketplace', 'Claude Code'],
+  id: "claude-plugins",
+  title: "Claude Plugins",
+  category: "Tutorial",
+  tags: ["Plugins", "Marketplace", "Claude Code"],
   tabs: [
     {
-      label: 'Overview',
+      label: "Overview",
       content: `
 <p style="margin-bottom:1rem; line-height:1.75;"><strong>Claude Plugins</strong> are like app bundles — a single package that installs multiple commands, tools, and behaviors all at once.</p>
 
@@ -15,34 +15,63 @@ const claudePluginsConcept = {
 
 <div style="margin-top: 1.5rem; margin-bottom: 2rem;">
   <strong style="display:block; margin-bottom:1rem; font-size:1.05rem; color: var(--accent-primary);">What Can a Plugin Contain?</strong>
-  <p style="margin-bottom:1rem; line-height:1.75;">A Claude plugin can include slash commands, MCPs, hooks, and skills — all packaged together and shared across projects or teams.</p>
+  <p style="margin-bottom:1rem; line-height:1.75;">A Claude plugin can include skills, subagents, hooks, MCP servers and more — all packaged together and shared across projects or teams. Each component type lives in its own directory at the <strong>plugin root</strong>.</p>
 
   <table style="width: 100%; border-collapse: collapse; margin-top: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;">
     <thead>
       <tr style="background: rgba(0, 242, 255, 0.05);">
         <th style="padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color); color: var(--accent-primary);">Ingredient</th>
+        <th style="padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color); color: var(--accent-primary);">Location</th>
         <th style="padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color); color: var(--accent-primary);">What it does</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><strong>Skills</strong></td>
-        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Instructions that guide Claude on how to perform a task</td>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">skills/</code></td>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Instructions that guide Claude on how to perform a task. Also creates a <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/plugin-name:skill-name</code> shortcut you can invoke manually</td>
       </tr>
       <tr>
         <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><strong>Commands</strong></td>
-        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Slash commands you can trigger manually, like <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/review</code></td>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">commands/</code></td>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">The older flat-Markdown form of a skill. Custom commands have merged into skills — both produce a namespaced slash command. Prefer <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">skills/</code> for new plugins</td>
       </tr>
       <tr>
-        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><strong>MCPs</strong></td>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><strong>Agents</strong></td>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">agents/</code></td>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Custom subagents with their own system prompt, tools, and model — delegated work that runs in its own context window</td>
+      </tr>
+      <tr>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><strong>Hooks</strong></td>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">hooks/hooks.json</code></td>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Automatic behaviors that run when specific lifecycle events happen</td>
+      </tr>
+      <tr>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><strong>MCP servers</strong></td>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">.mcp.json</code></td>
         <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Connections to external tools, APIs, databases, and services</td>
       </tr>
       <tr>
-        <td style="padding: 1rem;"><strong>Hooks</strong></td>
-        <td style="padding: 1rem;">Automatic behaviors that run when specific events happen</td>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><strong>LSP servers</strong></td>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">.lsp.json</code></td>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Language server connections that give Claude real-time diagnostics and code navigation</td>
+      </tr>
+      <tr>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><strong>Monitors</strong></td>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">monitors/monitors.json</code></td>
+        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Background watchers (logs, files, external status) that push notifications to Claude as events arrive</td>
+      </tr>
+      <tr>
+        <td style="padding: 1rem;"><strong>Binaries &amp; settings</strong></td>
+        <td style="padding: 1rem;"><code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">bin/</code>, <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">settings.json</code></td>
+        <td style="padding: 1rem;">Executables added to the Bash tool's <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">PATH</code>, and default settings applied while the plugin is enabled</td>
       </tr>
     </tbody>
   </table>
+
+  <div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-secondary); border-radius: 8px; margin: 1.25rem 0 0;">
+    <p style="margin: 0; line-height:1.75; color: var(--text-secondary);"><strong>Plugin vs. standalone <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">.claude/</code>:</strong> the same skills, agents, and hooks work either way. A plugin is what you reach for when you want to <em>share</em> them — versioned releases, marketplace distribution, reusable across projects. The trade-off is namespacing: a standalone skill is <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/hello</code>, the plugin version is <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/my-plugin:hello</code>. Start standalone while you iterate, then package it.</p>
+  </div>
 </div>
 
 <div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; margin: 1rem 0;">
@@ -66,7 +95,7 @@ const claudePluginsConcept = {
 `,
     },
     {
-      label: '1. Prerequisites',
+      label: "1. Prerequisites",
       content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Before You Start]</strong>
 
@@ -102,7 +131,7 @@ const claudePluginsConcept = {
 `,
     },
     {
-      label: '2. Folder Plan',
+      label: "2. Folder Plan",
       content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[What We Are Building]</strong>
 
@@ -162,6 +191,15 @@ const claudePluginsConcept = {
   <p style="margin: 0; line-height:1.75; color: var(--text-secondary);"><strong>Important:</strong> the <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">py-helper</code> plugin folder must live inside the <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">py-helper-marketplace</code> folder under a <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">plugins/</code> subfolder.</p>
 </div>
 
+<div style="padding: 1rem; background: rgba(255, 0, 255, 0.05); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-magenta); border-radius: 8px; margin: 1rem 0;">
+  <p style="margin: 0 0 0.5rem; font-weight:700; color: var(--text-primary);">The most common plugin mistake</p>
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">Only <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">plugin.json</code> goes inside <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">.claude-plugin/</code>. Never put <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">skills/</code>, <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">commands/</code>, <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">agents/</code>, or <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">hooks/</code> in there — they belong at the plugin root, one level up, exactly as shown in the tree above. Components placed inside <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">.claude-plugin/</code> are silently not discovered.</p>
+</div>
+
+<div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-secondary); border-radius: 8px; margin: 1rem 0;">
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);"><strong>Good to know:</strong> the <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">plugin.json</code> manifest is technically <em>optional</em> now — with no manifest, Claude Code auto-discovers components in these default locations and derives the plugin name from the directory name. We still write one here, because it's what carries your version, description, and author metadata into the marketplace listing.</p>
+</div>
+
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="1" class="tutorial-nav-link previous">
     <span>←</span> Previous: Prerequisites
@@ -173,7 +211,7 @@ const claudePluginsConcept = {
 `,
     },
     {
-      label: '3. Create Folders',
+      label: "3. Create Folders",
       content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Create All Folders]</strong>
 
@@ -222,7 +260,7 @@ mkdir -p my-claude-marketplace/py-helper-marketplace/plugins/py-helper/hooks</co
 `,
     },
     {
-      label: '4. Core Files',
+      label: "4. Core Files",
       content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Create the Core Files]</strong>
 
@@ -265,7 +303,11 @@ EOF</code></pre>
   </ul>
   
   <p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">No logic or behavior is defined here — it is purely a directory and routing file.</p>
-  
+
+  <p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);"><strong>What's actually required:</strong> at the top level, only <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">name</code>, <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">owner</code> (with its own <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">name</code>), and <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">plugins</code>. Within each plugin entry, only <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">name</code> and <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">source</code> are required — everything else is metadata for the listing. Besides a relative path, <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">source</code> also accepts a GitHub repo, a git URL, a git subdirectory, or an npm package, so a marketplace can catalog plugins that live in other repositories.</p>
+
+  <p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">Marketplace names are public-facing and a handful are reserved for Anthropic (<code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">claude-plugins-official</code>, <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">claude-community</code> and similar), so pick something clearly your own.</p>
+
   <p style="margin: 0; line-height:1.75; color: var(--text-secondary);"><strong>How it differs from <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">plugin.json</code>:</strong> while <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">plugin.json</code> is the ID card for a single plugin, <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">marketplace.json</code> is the index for the entire collection. It sits one level above and points <em>to</em> the <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">plugin.json</code> files beneath it.</p>
 </div>
 
@@ -293,7 +335,11 @@ EOF</code></pre>
     <li><strong><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">author</code></strong> — credits the creator of the plugin</li>
   </ul>
   
-  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">This file contains no logic or behavior of its own — it does not define any skills, commands, or code. It simply declares that the folder it lives in is a named, versioned, attributable plugin package. Think of it as the equivalent of a <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">package.json</code> in Node.js or a <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">pyproject.toml</code> in Python.</p>
+  <p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);">This file contains no logic or behavior of its own — it does not define any skills, commands, or code. It simply declares that the folder it lives in is a named, versioned, attributable plugin package. Think of it as the equivalent of a <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">package.json</code> in Node.js or a <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">pyproject.toml</code> in Python.</p>
+
+  <p style="margin-bottom:0.75rem; line-height:1.75; color: var(--text-secondary);"><strong>What's actually required:</strong> only <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">name</code>. Everything else — including <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">version</code>, <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">description</code>, and <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">author</code> — is optional. The manifest also accepts <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">displayName</code>, <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">homepage</code>, <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">repository</code>, <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">license</code>, <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">keywords</code>, and custom component paths. Unrecognized top-level fields are ignored rather than rejected, so one manifest can double as an npm or editor-extension manifest.</p>
+
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);"><strong>Why setting <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">version</code> matters:</strong> when you set it, users only get an update after you bump the string. If you omit it and distribute over git, Claude Code falls back to the commit SHA — so every commit you push counts as a new version. Setting it explicitly, as we do here, is what gives you controlled releases.</p>
 </div>
 
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">File 3 — SKILL.md</p>
@@ -356,7 +402,7 @@ cat my-claude-marketplace/py-helper-marketplace/plugins/py-helper/skills/py-revi
 `,
     },
     {
-      label: '5. Commands + MCP',
+      label: "5. Commands + MCP",
       content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Create the Remaining Files]</strong>
 
@@ -393,6 +439,13 @@ EOF</code></pre>
   </ul>
   
   <p style="margin: 0; line-height:1.75; color: var(--text-secondary);"><strong>How it differs from <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">SKILL.md</code>:</strong> while <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">SKILL.md</code> is read-only and report-based, <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">py-fix.md</code> is action-based and modifies actual files. It also uses <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">$ARGUMENTS</code> for explicit file targeting. The absence of an auto-trigger means the user retains full control over when fixes are applied — appropriate given that this command directly alters code.</p>
+</div>
+
+<div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-secondary); border-radius: 8px; margin: 1rem 0;">
+  <p style="margin: 0 0 0.5rem; font-weight:700; color: var(--text-primary);">A note on <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">commands/</code> vs <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">skills/</code></p>
+  <p style="margin: 0 0 0.75rem; line-height:1.75; color: var(--text-secondary);">Custom commands have been <strong>merged into skills</strong>. A flat file at <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">commands/py-fix.md</code> and a directory at <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">skills/py-fix/SKILL.md</code> both produce <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/py-helper:py-fix</code> and behave the same way. That's why the terminal reports <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">Skill(py-helper:py-fix)</code> when you run it, even though the file lives under <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">commands/</code>.</p>
+  <p style="margin: 0 0 0.75rem; line-height:1.75; color: var(--text-secondary);">We keep <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">commands/</code> here to show both layouts side by side, but <strong>for new plugins prefer <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">skills/</code></strong>. A skill is a directory, so it can carry reference docs, templates, and scripts alongside its <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">SKILL.md</code>; a flat command file has to fit everything in the prompt. To move it, the file becomes <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">skills/py-fix/SKILL.md</code> with the same contents.</p>
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">One frontmatter field worth knowing: adding <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">disable-model-invocation: true</code> makes a skill invocable only by you, never picked up automatically by Claude. That's the explicit way to get the manual-only behavior <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">py-fix</code> relies on.</p>
 </div>
 
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">File 5 — hooks/hooks.json</p>
@@ -499,7 +552,7 @@ cat my-claude-marketplace/py-helper-marketplace/plugins/py-helper/.mcp.json</pre
 `,
     },
     {
-      label: '6. Verify',
+      label: "6. Verify",
       content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Verify Your Files]</strong>
 
@@ -515,6 +568,20 @@ my-claude-marketplace/py-helper-marketplace/plugins/py-helper/hooks/hooks.json
 my-claude-marketplace/py-helper-marketplace/plugins/py-helper/.mcp.json
 my-claude-marketplace/py-helper-marketplace/.claude-plugin/marketplace.json</pre>
 
+<p style="margin-top:2rem; margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Run the real validator</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">Listing files only proves they exist. Claude Code ships a validator that actually parses your manifests and checks the structure — run it from your terminal against the marketplace folder:</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.5;"><code class="language-bash">claude plugin validate my-claude-marketplace/py-helper-marketplace</code></pre>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">You can also validate the individual plugin, or run the same check from inside a Claude Code session with <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/plugin validate .</code>:</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.5;"><code class="language-bash">claude plugin validate my-claude-marketplace/py-helper-marketplace/plugins/py-helper</code></pre>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">A clean run prints:</p>
+<code style="display: block; padding: 1rem; background: var(--surface-dark); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-green); white-space: pre-wrap;">✔ Validation passed</code>
+
+<div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-secondary); border-radius: 8px; margin: 1rem 0;">
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">Warnings (a misspelled field, an unrecognized key) don't fail validation — you'll see <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">✔ Validation passed with warnings</code> and the plugin still loads. Add <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">--strict</code> to treat them as errors, which is what you want in CI or before publishing. Type errors, like a <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">keywords</code> value written as a string instead of an array, always fail.</p>
+</div>
+
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="5" class="tutorial-nav-link previous">
     <span>←</span> Previous: Commands + MCP
@@ -526,9 +593,16 @@ my-claude-marketplace/py-helper-marketplace/.claude-plugin/marketplace.json</pre
 `,
     },
     {
-      label: '7. Install',
+      label: "7. Install",
       content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Install the Plugin]</strong>
+
+<div style="padding: 1rem; background: rgba(0, 242, 255, 0.05); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 8px; margin: 0 0 1.5rem;">
+  <p style="margin: 0 0 0.5rem; font-weight:700; color: var(--text-primary);">Shortcut while you're still developing</p>
+  <p style="margin: 0 0 0.75rem; line-height:1.75; color: var(--text-secondary);">You don't need a marketplace at all to try a plugin. Point Claude Code straight at the plugin folder and it loads for that session only:</p>
+  <pre style="display: block; padding: 0.85rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0 0 0.75rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.85rem; line-height: 1.5;"><code class="language-bash">claude --plugin-dir /absolute/path/to/my-claude-marketplace/py-helper-marketplace/plugins/py-helper</code></pre>
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">Repeat the flag to load several plugins at once. If a local copy shares a name with an installed marketplace plugin, the local one wins for that session — handy for testing changes without uninstalling first. Use this loop while iterating; use the marketplace route below when you're ready to install it properly and share it.</p>
+</div>
 
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Step 1 — Go to your Python project</p>
 <p style="margin-bottom:0.5rem; line-height:1.75;">Enter your project directory and launch Claude:</p>
@@ -550,11 +624,37 @@ my-claude-marketplace/py-helper-marketplace/.claude-plugin/marketplace.json</pre
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Step 3 — Install and reload</p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.5rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.85rem; line-height: 1.5;">/plugin install py-helper@py-helper-marketplace</pre>
 
-<p style="margin-bottom: 1.5rem; line-height: 1.6; color: var(--text-secondary); font-size: 0.9rem; padding-left: 0.5rem; border-left: 2px solid var(--accent-primary);">
+<p style="margin-bottom: 1rem; line-height: 1.6; color: var(--text-secondary); font-size: 0.9rem; padding-left: 0.5rem; border-left: 2px solid var(--accent-primary);">
   Where:<br>
   <code style="color: var(--code-text);">py-helper</code> is the plugin you want to install<br>
   <code style="color: var(--code-text);">py-helper-marketplace</code> is the marketplace it comes from
 </p>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">The command opens the plugin's details and asks you to pick an <strong>installation scope</strong>:</p>
+<table style="width: 100%; border-collapse: collapse; margin: 0 0 1.5rem; font-size: 0.95rem; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;">
+  <thead>
+    <tr style="background: var(--surface-color); border-bottom: 1px solid var(--border-color);">
+      <th style="padding: 0.75rem; text-align: left; color: var(--text-primary);">Scope</th>
+      <th style="padding: 0.75rem; text-align: left; color: var(--text-primary);">Who gets it</th>
+    </tr>
+  </thead>
+  <tbody style="line-height:1.6; color: var(--text-secondary);">
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;"><strong>User</strong></td>
+      <td style="padding: 0.75rem;">Just you, across every project — the right choice for this tutorial</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;"><strong>Project</strong></td>
+      <td style="padding: 0.75rem;">Everyone on this repository (written to <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">.claude/settings.json</code>)</td>
+    </tr>
+    <tr>
+      <td style="padding: 0.75rem;"><strong>Local</strong></td>
+      <td style="padding: 0.75rem;">Just you, in this repository only — not shared with collaborators</td>
+    </tr>
+  </tbody>
+</table>
+
+<p style="margin-bottom:1.5rem; line-height:1.75; color: var(--text-secondary); font-size: 0.9rem;">To skip the interactive step entirely — in a script or a setup task — use the shell form instead: <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">claude plugin install py-helper@py-helper-marketplace --scope user</code>.</p>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">You should see a confirmation message like this:</p>
 <code style="display: block; padding: 1rem; background: var(--surface-dark); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-green); white-space: pre-wrap;"> /plugin install py-helper@py-helper-marketplace                                                                                                            
@@ -608,7 +708,7 @@ my-claude-marketplace/py-helper-marketplace/.claude-plugin/marketplace.json</pre
 `,
     },
     {
-      label: '8. Test',
+      label: "8. Test",
       content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Test Each Component]</strong>
 
@@ -936,7 +1036,7 @@ Claude: Use pd.read_csv() with the parse_dates parameter...
 `,
     },
     {
-      label: '9. Share',
+      label: "9. Share",
       content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Share With Your Team]</strong>
 
@@ -950,9 +1050,23 @@ git commit -m "Initial plugin"
 git remote add origin https://github.com/yourname/py-helper.git
 git push -u origin main</code></pre>
 
-<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Teammates install it with two commands inside Claude Code</p>
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Teammates install it with three commands inside Claude Code</p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap;"><code>/plugin marketplace add yourname/py-helper
-/plugin install py-helper@py-helper-marketplace</code></pre>
+/plugin install py-helper@py-helper-marketplace
+/reload-plugins</code></pre>
+
+<p style="margin-bottom:1rem; line-height:1.75; color: var(--text-secondary);">The <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">owner/repo</code> shorthand works for GitHub. For GitLab, Bitbucket, or a self-hosted server, pass the full URL including <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">https://</code> and the <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">.git</code> suffix, optionally pinned to a branch or tag with <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">#v1.0.0</code>:</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap;"><code>/plugin marketplace add https://gitlab.com/yourteam/py-helper.git#v1.0.0</code></pre>
+
+<p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Shipping updates</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Push changes to the repository, then bump <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">version</code> in <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">plugin.json</code> — that bump is what tells your teammates a new release exists. They refresh their local catalog with:</p>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap;"><code>/plugin marketplace update py-helper-marketplace</code></pre>
+<p style="margin-bottom:1.5rem; line-height:1.75; color: var(--text-secondary);">Marketplaces can also auto-update in the background: open <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/plugin</code> → <strong>Marketplaces</strong>, pick yours, and choose <strong>Enable auto-update</strong>. Third-party and local marketplaces have it off by default; official Anthropic ones have it on.</p>
+
+<div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-secondary); border-radius: 8px; margin: 1rem 0 1.5rem;">
+  <p style="margin: 0 0 0.5rem; font-weight:700; color: var(--text-primary);">Going wider than your team</p>
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">Anthropic runs a public <strong>community marketplace</strong> (<code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">anthropics/claude-plugins-community</code>) that accepts third-party submissions after automated validation and safety screening. Run <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">claude plugin validate ./py-helper --strict</code> first, then submit through the in-app form at <a href="https://platform.claude.com/plugins/submit" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">platform.claude.com/plugins/submit</a>. Approved plugins get pinned to a commit SHA in the public catalog and install as <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">py-helper@claude-community</code>.</p>
+</div>
 
 <div style="padding: 1.25rem; background: rgba(0, 242, 255, 0.03); border: 1px solid var(--border-color); border-radius: 8px; margin: 1rem 0;">
   <p style="margin: 0 0 0.75rem; font-weight: 600; color: var(--text-primary);">You are done</p>
@@ -973,14 +1087,14 @@ git push -u origin main</code></pre>
   <a href="#" data-goto-tab="8" class="tutorial-nav-link previous">
     <span>←</span> Previous: Test
   </a>
-  <a href="#" data-goto-tab="9" class="tutorial-nav-link">
+  <a href="#" data-goto-tab="10" class="tutorial-nav-link">
     Next: Additional <span>→</span>
   </a>
 </div>
 `,
     },
     {
-      label: '10. Additional',
+      label: "10. Additional",
       content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Maintenance & Troubleshooting]</strong>
 
@@ -997,6 +1111,54 @@ git push -u origin main</code></pre>
        • <span style="background: var(--surface-hover); border-radius: 4px; padding: 0 4px; color: var(--accent-primary); font-weight: bold;">py-helper-marketplace</span></code></pre>
   <p style="margin-bottom:0.5rem; line-height:1.75;">You can remove it by using the following command:</p>
   <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); border-left: 2px solid var(--accent-secondary);"><code>/plugin marketplace remove py-helper-marketplace</code></pre>
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary); font-size: 0.9rem;"><strong>Careful:</strong> removing a marketplace also uninstalls every plugin you installed from it. If you only want to stop using one plugin, disable or uninstall that plugin instead (below). Shortcuts: <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/plugin market</code> works in place of <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/plugin marketplace</code>, and <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">rm</code> in place of <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">remove</code>.</p>
+</div>
+
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-top: 4px solid var(--accent-secondary); border-radius: 8px; margin: 1.5rem 0;">
+  <p style="margin-bottom:0.75rem; font-weight:700; color: var(--text-primary); font-size:1.1rem;">Managing individual plugins</p>
+  <p style="margin-bottom:0.75rem; line-height:1.75;">Run <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/plugin</code> and open the <strong>Installed</strong> tab to browse, favourite (<code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">f</code>), filter, and manage what you have. Or use the direct commands:</p>
+  <table style="width: 100%; border-collapse: collapse; margin: 0.5rem 0 0; font-size: 0.9rem; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;">
+    <thead>
+      <tr style="background: rgba(0, 242, 255, 0.05); border-bottom: 1px solid var(--border-color);">
+        <th style="padding: 0.75rem; text-align: left; color: var(--accent-primary);">Command</th>
+        <th style="padding: 0.75rem; text-align: left; color: var(--accent-primary);">What it does</th>
+      </tr>
+    </thead>
+    <tbody style="line-height:1.6; color: var(--text-secondary);">
+      <tr style="border-bottom: 1px solid var(--border-color);">
+        <td style="padding: 0.75rem;"><code style="font-family: 'JetBrains Mono', monospace; color: var(--code-text);">/plugin list</code></td>
+        <td style="padding: 0.75rem;">List installed plugins without opening the panel. Takes <code style="font-family: 'JetBrains Mono', monospace;">--enabled</code> or <code style="font-family: 'JetBrains Mono', monospace;">--disabled</code></td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border-color);">
+        <td style="padding: 0.75rem;"><code style="font-family: 'JetBrains Mono', monospace; color: var(--code-text);">/plugin disable py-helper@py-helper-marketplace</code></td>
+        <td style="padding: 0.75rem;">Turn a plugin off without uninstalling it</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border-color);">
+        <td style="padding: 0.75rem;"><code style="font-family: 'JetBrains Mono', monospace; color: var(--code-text);">/plugin enable py-helper@py-helper-marketplace</code></td>
+        <td style="padding: 0.75rem;">Turn it back on</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border-color);">
+        <td style="padding: 0.75rem;"><code style="font-family: 'JetBrains Mono', monospace; color: var(--code-text);">/plugin uninstall py-helper@py-helper-marketplace</code></td>
+        <td style="padding: 0.75rem;">Remove the plugin entirely, leaving the marketplace registered</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem;"><code style="font-family: 'JetBrains Mono', monospace; color: var(--code-text);">/reload-plugins</code></td>
+        <td style="padding: 0.75rem;">Apply install / enable / disable changes without restarting</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="margin: 0.75rem 0 0; line-height:1.75; color: var(--text-secondary); font-size: 0.9rem;">These commands open the plugin panel to apply the change and leave it open — press <strong>Esc</strong> before typing the next one. For scripting, the equivalent <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">claude plugin ...</code> shell commands run without the panel.</p>
+</div>
+
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-top: 4px solid var(--accent-secondary); border-radius: 8px; margin: 1.5rem 0;">
+  <p style="margin-bottom:0.75rem; font-weight:700; color: var(--text-primary); font-size:1.1rem;">When something isn't working</p>
+  <ul style="margin: 0 0 0 1.25rem; padding: 0; color: var(--text-secondary); line-height: 1.8;">
+    <li style="margin-bottom: 0.5rem;"><strong>Changes not showing up:</strong> run <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/reload-plugins</code> first. Note that its summary counts skills from <code style="font-family: 'JetBrains Mono', monospace;">commands/</code> only, so it can report <code style="font-family: 'JetBrains Mono', monospace;">0 skills</code> even when your <code style="font-family: 'JetBrains Mono', monospace;">skills/</code> content reloaded fine.</li>
+    <li style="margin-bottom: 0.5rem;"><strong>A component never loads:</strong> check it isn't sitting inside <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">.claude-plugin/</code>. Only <code style="font-family: 'JetBrains Mono', monospace;">plugin.json</code> belongs there.</li>
+    <li style="margin-bottom: 0.5rem;"><strong>Load errors:</strong> open <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/plugin</code> → <strong>Errors</strong> tab. A failing MCP or language server shows up there with its reason.</li>
+    <li style="margin-bottom: 0.5rem;"><strong>Manifest problems:</strong> run <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">claude plugin validate .</code> from the plugin or marketplace folder.</li>
+    <li style="margin-bottom: 0;"><strong>Skills still missing after all that:</strong> clear the plugin cache with <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">rm -rf ~/.claude/plugins/cache</code>, restart Claude Code, and reinstall.</li>
+  </ul>
 </div>
 
 <div style="margin-top: 2rem; display: flex; justify-content: flex-start; border-top: 1px solid var(--border-color); padding-top: 1rem;">
@@ -1007,7 +1169,7 @@ git push -u origin main</code></pre>
 `,
     },
   ],
-  interactiveType: 'custom',
+  interactiveType: "custom",
 };
 
 export default claudePluginsConcept;
