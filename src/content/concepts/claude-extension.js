@@ -1,11 +1,11 @@
 const claudeExtensionConcept = {
-  id: 'claude-extension',
-  title: 'Claude Extension',
-  category: '',
+  id: "claude-extension",
+  title: "Claude Extension",
+  category: "",
   tags: [],
   tabs: [
     {
-      label: 'Features',
+      label: "Features",
       content: `
 <style>
 .cc-table-wrap { width:100%; margin-top:1.5rem; border-radius:12px; overflow: visible; }
@@ -32,6 +32,9 @@ const claudeExtensionConcept = {
 .cc-table tr:last-child td { border-bottom:none }
 .cc-table tr:hover td { background:var(--surface-hover) }
 .badge { display:inline-block;padding:0 10px;border-radius:6px;font-size:0.8rem;font-weight:700;white-space:nowrap; border: 1px solid var(--border-color); letter-spacing: 0.02em; line-height: 24px; vertical-align: top; margin: 0; box-sizing: border-box; }
+.badge-exp, .badge-legacy { font-size:0.65rem; padding:0 7px; line-height:20px; margin-top:4px; text-transform:uppercase; font-weight:700; }
+.badge-exp { color:#f5c842; border-color:rgba(245,200,66,0.45); background:rgba(245,200,66,0.08); }
+.badge-legacy { color:var(--text-secondary); background:rgba(255,255,255,0.04); }
 .doc-links { display:grid; gap: 4px; }
 .doc-links a { font-size:0.85rem;color:var(--accent-primary);text-decoration:none;white-space:nowrap; transition: 0.2s ease; }
 .doc-links a:hover { text-decoration:underline; opacity: 0.8; }
@@ -120,9 +123,9 @@ const claudeExtensionConcept = {
 <tr>
 <td data-label="Feature"><span class="badge">Skills</span></td>
 <td data-label="One-liner"><p>Teaches Claude how to handle specific tasks or workflows</p></td>
-<td data-label="What it stores"><p>Instructions, scripts, reference files in a folder</p></td>
-<td data-label="How to invoke"><p><code>/skill-name</code></p></td>
-<td data-label="Best used for"><p>Codifying repeatable workflows: code review, deployments, doc generation</p></td>
+<td data-label="What it stores"><p>A folder holding <code>SKILL.md</code> plus any scripts and reference files, in <code>.claude/skills/</code> or <code>~/.claude/skills/</code></p></td>
+<td data-label="How to invoke"><p><code>/skill-name</code>, or Claude loads it on its own when the task matches the <code>description</code>. Set <code>disable-model-invocation: true</code> to make it manual-only</p></td>
+<td data-label="Best used for"><p>Codifying repeatable workflows: code review, deployments, doc generation. The body loads only when used, so long reference material costs nothing until needed</p></td>
 <td data-label="Official docs">
   <div class="doc-links">
     <span class="doc-label">Guide</span>
@@ -131,82 +134,99 @@ const claudeExtensionConcept = {
 </td>
 </tr>
 <tr>
-<td data-label="Feature"><span class="badge">Commands</span></td>
-<td data-label="One-liner"><p>Prompt shortcuts</p></td>
-<td data-label="What it stores"><p>Single markdown file with prompt template</p></td>
+<td data-label="Feature"><span class="badge">Commands</span> <span class="badge badge-legacy">Merged into Skills</span></td>
+<td data-label="One-liner"><p>Prompt shortcuts — now the flat-file form of a Skill</p></td>
+<td data-label="What it stores"><p>Single markdown file with a prompt template, in <code>.claude/commands/</code></p></td>
 <td data-label="How to invoke"><p><code>/command-name</code></p></td>
-<td data-label="Best used for"><p>Quick prompt templates: /fix-bug, /explain-code, /summarize</p></td>
+<td data-label="Best used for"><p>Quick one-file prompt templates. Existing files keep working, but new work belongs in <code>.claude/skills/&lt;name&gt;/SKILL.md</code>, which can carry scripts and reference files alongside the prompt</p></td>
 <td data-label="Official docs">
   <div class="doc-links">
     <span class="doc-label">Guide</span>
-    <a href="https://docs.anthropic.com/en/docs/claude-code/slash-commands" target="_blank">Slash commands →</a>
+    <a href="https://code.claude.com/docs/en/skills" target="_blank">Skills →</a>
   </div>
 </td>
 </tr>
 <tr>
 <td data-label="Feature"><span class="badge">MCP</span></td>
 <td data-label="One-liner"><p>USB-C for AI — connects Claude to real data</p></td>
-<td data-label="What it stores"><p>External tool definitions (21st.dev, Supadata, Stitch..)</p></td>
-<td data-label="How to invoke"><p>Claude picks tools automatically</p></td>
+<td data-label="What it stores"><p>External server definitions in <code>.mcp.json</code> at the <strong>project root</strong>, or <code>~/.claude.json</code> for user scope — never in <code>settings.json</code></p></td>
+<td data-label="How to invoke"><p>Claude picks tools automatically. Add with <code>claude mcp add</code>; check what connected with <code>/mcp</code></p></td>
 <td data-label="Best used for"><p>Querying live databases, creating PRs, reading Slack, anything with real external state</p></td>
 <td data-label="Official docs">
   <div class="doc-links">
     <span class="doc-label">Guide</span>
-    <a href="https://docs.anthropic.com/en/docs/claude-code/mcp" target="_blank">MCP overview →</a>
+    <a href="https://code.claude.com/docs/en/mcp" target="_blank">MCP overview →</a>
   </div>
 </td>
 </tr>
 <tr>
 <td data-label="Feature"><span class="badge">Hooks</span></td>
-<td data-label="One-liner"><p>Scripts that fire automatically at lifecycle events</p></td>
-<td data-label="What it stores"><p>Shell commands tied to events (PostToolUse etc.)</p></td>
-<td data-label="How to invoke"><p>Never manually — fires automatically on event</p></td>
-<td data-label="Best used for"><p>Auto-linting, blocking dangerous commands, desktop notifications, test gates</p></td>
+<td data-label="One-liner"><p>Handlers that fire automatically at lifecycle events</p></td>
+<td data-label="What it stores"><p>Handlers tied to ~30 events, in <code>settings.json</code> or a plugin's <code>hooks/hooks.json</code>. A handler can be a shell <code>command</code>, an <code>http</code> endpoint, an <code>mcp_tool</code> call, a model <code>prompt</code>, or an <code>agent</code></p></td>
+<td data-label="How to invoke"><p>Never manually — fires automatically on event. Browse what's configured with <code>/hooks</code> (read-only)</p></td>
+<td data-label="Best used for"><p>Auto-linting, blocking dangerous commands, desktop notifications, test gates. The <code>prompt</code> and <code>agent</code> types cover rules that need judgment rather than a regex</p></td>
 <td data-label="Official docs">
   <div class="doc-links">
     <span class="doc-label">Guide</span>
-    <a href="https://docs.anthropic.com/en/docs/claude-code/hooks-guide" target="_blank">Hooks guide →</a>
+    <a href="https://code.claude.com/docs/en/hooks-guide" target="_blank">Hooks guide →</a>
+    <span class="doc-label">Reference</span>
+    <a href="https://code.claude.com/docs/en/hooks" target="_blank">Hooks reference →</a>
   </div>
 </td>
 </tr>
 <tr>
 <td data-label="Feature"><span class="badge">Plugins</span></td>
 <td data-label="One-liner"><p>Installable bundles containing all of the above (Skills, Commands, MCPs, Hooks)</p></td>
-<td data-label="What it stores"><p>plugin.json manifest + skills/ agents/ hooks/ MCPs</p></td>
-<td data-label="How to invoke"><p>All components auto-activate on install</p></td>
+<td data-label="What it stores"><p>Optional <code>plugin.json</code> manifest plus <code>skills/</code> <code>agents/</code> <code>hooks/</code> <code>workflows/</code>, <code>.mcp.json</code>, <code>.lsp.json</code>, <code>monitors/</code> and <code>bin/</code> — all at the plugin root, never inside <code>.claude-plugin/</code></p></td>
+<td data-label="How to invoke"><p>Components activate on install, but run <code>/reload-plugins</code> to pick them up mid-session. Skills are namespaced <code>/plugin-name:skill</code></p></td>
 <td data-label="Best used for"><p>Sharing team setups, open-source toolkits, org-wide standards</p></td>
 <td data-label="Official docs">
   <div class="doc-links">
     <span class="doc-label">Discover</span>
-    <a href="https://docs.anthropic.com/en/docs/claude-code/plugins" target="_blank">Find &amp; install plugins →</a>
+    <a href="https://code.claude.com/docs/en/discover-plugins" target="_blank">Find &amp; install plugins →</a>
     <span class="doc-label">Build</span>
-    <a href="https://docs.anthropic.com/en/docs/claude-code/create-plugins" target="_blank">Create plugins →</a>
+    <a href="https://code.claude.com/docs/en/plugins" target="_blank">Create plugins →</a>
+    <span class="doc-label">Distribute</span>
+    <a href="https://code.claude.com/docs/en/plugin-marketplaces" target="_blank">Marketplaces →</a>
   </div>
 </td>
 </tr>
 <tr>
 <td data-label="Feature"><span class="badge">Subagents</span></td>
 <td data-label="One-liner"><p>Isolated mini-agents with their own context window</p></td>
-<td data-label="What it stores"><p>Agent system prompt + tool/model config in YAML</p></td>
-<td data-label="How to invoke"><p>Natural language or <code>/agents</code> menu</p></td>
-<td data-label="Best used for"><p>Delegating heavy subtasks without polluting main session context</p></td>
+<td data-label="What it stores"><p>System prompt plus tool/model config in YAML frontmatter, in <code>.claude/agents/</code> or <code>~/.claude/agents/</code></p></td>
+<td data-label="How to invoke"><p>Natural language, <code>@agent-&lt;name&gt;</code> to guarantee it, or <code>claude --agent &lt;name&gt;</code> for the whole session. Note <code>/agents</code> no longer opens a creation menu — ask Claude to write the file instead</p></td>
+<td data-label="Best used for"><p>Delegating heavy subtasks without polluting main session context. Built-ins: Explore, Plan, general-purpose</p></td>
 <td data-label="Official docs">
   <div class="doc-links">
     <span class="doc-label">Guide</span>
-    <a href="https://docs.anthropic.com/en/docs/claude-code/sub-agents" target="_blank">Subagents →</a>
+    <a href="https://code.claude.com/docs/en/sub-agents" target="_blank">Subagents →</a>
   </div>
 </td>
 </tr>
 <tr>
-<td data-label="Feature"><span class="badge">Agent teams</span></td>
-<td data-label="One-liner"><p>Multiple Claude sessions that collaborate and cross-check</p></td>
-<td data-label="What it stores"><p>Defined through prompts; teams.json for fine-tuning</p></td>
-<td data-label="How to invoke"><p>Prompt-driven; keyboard shortcuts to manage</p></td>
-<td data-label="Best used for"><p>Large parallel work: security + perf + tests reviewing the same module</p></td>
+<td data-label="Feature"><span class="badge">Agent teams</span> <span class="badge badge-exp">Experimental</span></td>
+<td data-label="One-liner"><p>Multiple full Claude sessions that collaborate, message each other, and share a task list</p></td>
+<td data-label="What it stores"><p>Nothing you author. Runtime state is generated at <code>~/.claude/teams/{team}/config.json</code> — don't hand-edit it, and note a project <code>teams.json</code> is <strong>not</strong> recognised as config</p></td>
+<td data-label="How to invoke"><p>Off by default — set <code>CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1</code> first, then ask in natural language. Manage from the agent panel (↑/↓, Enter, Esc)</p></td>
+<td data-label="Best used for"><p>Large parallel work where workers must talk to each other: security + perf + tests reviewing the same module, or competing debugging hypotheses</p></td>
 <td data-label="Official docs">
   <div class="doc-links">
     <span class="doc-label">Guide</span>
-    <a href="https://docs.anthropic.com/en/docs/claude-code/agent-teams" target="_blank">Agent teams →</a>
+    <a href="https://code.claude.com/docs/en/agent-teams" target="_blank">Agent teams →</a>
+  </div>
+</td>
+</tr>
+<tr>
+<td data-label="Feature"><span class="badge">Workflows</span></td>
+<td data-label="One-liner"><p>A JavaScript script that orchestrates dozens of subagents, with the plan in code instead of in Claude's head</p></td>
+<td data-label="What it stores"><p>A script with a <code>meta</code> block and <code>agent()</code> / <code>pipeline()</code> calls, saved to <code>.claude/workflows/</code> or <code>~/.claude/workflows/</code></p></td>
+<td data-label="How to invoke"><p>Ask for one (<code>use a workflow…</code> or the <code>ultracode</code> keyword), then save the run as <code>/&lt;name&gt;</code>. <code>/deep-research</code> ships built in; watch runs with <code>/workflows</code></p></td>
+<td data-label="Best used for"><p>Work too big for one context: repo-wide audits, 500-file migrations, research cross-checked across sources. Intermediate results stay in script variables, so only the final answer reaches your context</p></td>
+<td data-label="Official docs">
+  <div class="doc-links">
+    <span class="doc-label">Guide</span>
+    <a href="https://code.claude.com/docs/en/workflows" target="_blank">Dynamic workflows →</a>
   </div>
 </td>
 </tr>
@@ -216,15 +236,15 @@ const claudeExtensionConcept = {
       `,
     },
     {
-      label: 'Decision Flow',
+      label: "Decision Flow",
       content: `
 <div class="flowchart-embed" style="width: 100%; height: calc(100vh - 160px); min-height: 700px; overflow: hidden; background: var(--syntax-bg); border-radius: 12px; border: 1px solid var(--border-color);">
   <iframe src="/knowledgelab/flowchart.html" style="width: 100%; height: 100%; border: none;" title="Decision Flowchart" allow="fullscreen" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
 </div>
       `,
-    }
+    },
   ],
-  interactiveType: 'custom'
+  interactiveType: "custom",
 };
 
 export default claudeExtensionConcept;

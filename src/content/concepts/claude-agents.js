@@ -1,11 +1,11 @@
 const claudeAgentsConcept = {
-  id: 'claude-agents',
-  title: 'Claude Agents',
-  category: 'AI Tools',
-  tags: ['agents', 'multi-agent', 'orchestration', 'tutorial'],
+  id: "claude-agents",
+  title: "Claude Agents",
+  category: "AI Tools",
+  tags: ["agents", "multi-agent", "orchestration", "tutorial"],
   tabs: [
     {
-      label: 'Overview',
+      label: "Overview",
       content: `
 <p style="margin-bottom:1rem; line-height:1.75;">Agent teams let you coordinate <strong>multiple Claude Code instances working together</strong>. One session acts as the team lead, coordinating work, assigning tasks, and synthesizing results. Teammates work independently, each in its own context window, and can communicate directly with each other.</p>
 
@@ -25,7 +25,7 @@ const claudeAgentsConcept = {
 
 <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);">Prerequisites</h3>
 <ul style="margin: 0 0 1.5rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
-  <li style="margin-bottom: 0.25rem;">Claude Code <strong>v2.1.32</strong> or later (<code style="padding: 0.1rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--syntax-text); font-family: monospace;">claude --version</code> to check)</li>
+  <li style="margin-bottom: 0.25rem;">Claude Code <strong>v2.1.178</strong> or later (<code style="padding: 0.1rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--syntax-text); font-family: monospace;">claude --version</code> to check). Teams work on older builds, but v2.1.178 removed the manual team-creation and cleanup steps this tutorial assumes</li>
   <li style="margin-bottom: 0.25rem;">A terminal &mdash; macOS Terminal, iTerm2, or any Linux terminal</li>
   <li style="margin-bottom: 0.25rem;">Optional: <code style="padding: 0.1rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--syntax-text); font-family: monospace;">tmux</code> for split-pane display (covered in Step 2)</li>
 </ul>
@@ -78,7 +78,7 @@ const claudeAgentsConcept = {
 `,
     },
     {
-      label: 'Step 1 – Enable',
+      label: "Step 1 – Enable",
       content: `
 <h2 style="margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 1 — Enable Agent Teams</h2>
 
@@ -88,12 +88,12 @@ const claudeAgentsConcept = {
   <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
     <span style="color: var(--accent-primary);">📋</span> Before you begin
   </p>
-  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">You need <strong>Claude Code v2.1.32 or later</strong>. Run the command below to check your version. If it's older, run <code style="padding: 0.1rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--syntax-text); font-family: monospace;">npm update -g @anthropic-ai/claude-code</code> to upgrade.</p>
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">You need <strong>Claude Code v2.1.178 or later</strong> for the behaviour described here. Run the command below to check. If it's older, run <code style="padding: 0.1rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--syntax-text); font-family: monospace;">npm update -g @anthropic-ai/claude-code</code> to upgrade.</p>
 </div>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">Check your installed version:</p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>claude --version</code></pre>
-<p style="margin-bottom:1.5rem; font-size:0.85rem; color: var(--text-secondary); font-style:italic;">Expected output: <code style="color: var(--syntax-text); background: var(--syntax-bg); padding: 0.1rem 0.3rem; border-radius:3px;">Claude Code 2.1.32</code> (or higher)</p>
+<p style="margin-bottom:1.5rem; font-size:0.85rem; color: var(--text-secondary); font-style:italic;">Expected output: <code style="color: var(--syntax-text); background: var(--syntax-bg); padding: 0.1rem 0.3rem; border-radius:3px;">Claude Code 2.1.178</code> (or higher)</p>
 
 <h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Option A: settings.json <span style="font-size:0.8rem; color: var(--accent-primary); font-weight:400;">(Recommended — persists across sessions)</span></h3>
 
@@ -173,7 +173,7 @@ source ~/.zshrc   # reload (use ~/.bashrc if on bash)</code></pre>
 `,
     },
     {
-      label: 'Step 2 – Display',
+      label: "Step 2 – Display",
       content: `
 <h2 style="margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 2 — Choose Your Display Mode</h2>
 
@@ -192,8 +192,8 @@ source ~/.zshrc   # reload (use ~/.bashrc if on bash)</code></pre>
   <tbody style="color: var(--text-secondary);">
     <tr style="border-bottom: 1px solid var(--border-color);">
       <td style="padding: 0.75rem; font-weight: 600; color: var(--accent-primary);">In-Process</td>
-      <td style="padding: 0.75rem;">All teammates run in your main terminal. Use <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">Shift+Down</code> to cycle through them.</td>
-      <td style="padding: 0.75rem;">Any terminal, beginners, quick tasks</td>
+      <td style="padding: 0.75rem;">All teammates run in your main terminal, listed in the agent panel below the prompt. Use the <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">↑</code> / <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">↓</code> arrows to select one.</td>
+      <td style="padding: 0.75rem;">Any terminal, beginners, quick tasks. <strong>This is the default.</strong></td>
     </tr>
     <tr>
       <td style="padding: 0.75rem; font-weight: 600; color: var(--accent-primary);">Split Panes</td>
@@ -228,10 +228,24 @@ source ~/.zshrc   # reload (use ~/.bashrc if on bash)</code></pre>
 
 <h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Make Split-Pane Mode the Default</h3>
 
-<p style="margin-bottom:0.5rem; line-height:1.75;">If you want to make this the default behavior whenever you run Claude inside a tmux session, open or create your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude.json</code> file and add:</p>
+<p style="margin-bottom:0.5rem; line-height:1.75;">To make this the default, set <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">teammateMode</code> in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/settings.json</code> — the same settings file as everything else, <em>not</em> <code style="font-family: monospace; color: var(--code-text);">~/.claude.json</code>:</p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; white-space: pre-wrap; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>{
-  "teammateMode": "tmux"
+  "teammateMode": "auto"
 }</code></pre>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">The four accepted values:</p>
+<ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
+  <li style="margin-bottom: 0.25rem;"><code style="font-family: monospace; color: var(--code-text);">in-process</code> — the default. Everything in one terminal</li>
+  <li style="margin-bottom: 0.25rem;"><code style="font-family: monospace; color: var(--code-text);">auto</code> — split panes when you're already inside tmux or iTerm2 with <code style="font-family: monospace;">it2</code>, otherwise in-process. Usually the one you want</li>
+  <li style="margin-bottom: 0.25rem;"><code style="font-family: monospace; color: var(--code-text);">tmux</code> — force split panes, auto-detecting tmux or iTerm2</li>
+  <li><code style="font-family: monospace; color: var(--code-text);">iterm2</code> — force iTerm2 native panes (needs the <code style="font-family: monospace;">it2</code> CLI)</li>
+</ul>
+
+<div style="padding: 1rem; background: rgba(255, 200, 50, 0.1); border: 1px solid rgba(255, 200, 50, 0.3); border-radius: 8px; margin: 1rem 0;">
+  <p style="margin: 0; line-height:1.6; color: var(--text-primary);">
+    <strong style="color: var(--accent-primary);">⚠️ Split panes don't work everywhere.</strong> They need tmux or iTerm2, and are <strong>not supported</strong> in VS Code's integrated terminal, Windows Terminal, or Ghostty. In-process mode works in any terminal — if you're on one of those, stay with the default. Note also that before v2.1.179 the default was <code style="font-family: monospace; color: var(--code-text);">auto</code>, so an upgraded session that used to open split panes now stays in one terminal until you set the mode explicitly.
+  </p>
+</div>
 
 <div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1rem 0;">
   <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
@@ -253,7 +267,7 @@ source ~/.zshrc   # reload (use ~/.bashrc if on bash)</code></pre>
 `,
     },
     {
-      label: 'Step 3 – First Team',
+      label: "Step 3 – First Team",
       content: `
 <h2 style="margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 3 — Your First Agent Team</h2>
 
@@ -280,7 +294,7 @@ lead synthesize all findings into a summary.</code></pre>
 
 <ol style="margin: 0.5rem 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
   <li style="margin-bottom: 0.5rem;"><strong>Claude creates a team</strong> with a shared task list</li>
-  <li style="margin-bottom: 0.5rem;"><strong>Spawns 3 teammates</strong> (historian, technician, ethicist)</li>
+  <li style="margin-bottom: 0.5rem;"><strong>Spawns 3 teammates</strong> (historian, psychologist, ethicist)</li>
   <li style="margin-bottom: 0.5rem;"><strong>Each teammate works independently</strong> on their assigned task</li>
   <li style="margin-bottom: 0.5rem;"><strong>The lead waits</strong> for all to complete</li>
   <li style="margin-bottom: 0.5rem;"><strong>The lead synthesizes</strong> all findings</li>
@@ -296,7 +310,7 @@ lead synthesize all findings into a summary.</code></pre>
 <code style="color: var(--accent-primary);">│</code><code style="color: var(--text-secondary);">                 assigns tasks & synthesizes                </code><code style="color: var(--accent-primary);">│</code>
 <code style="color: var(--accent-primary);">│</code>                                                            <code style="color: var(--accent-primary);">│</code>
 <code style="color: var(--accent-primary);">│</code>  <code style="color: var(--accent-secondary);">┌────────────┐      ┌────────────┐      ┌────────────┐</code>    <code style="color: var(--accent-primary);">│</code>
-<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--accent-secondary);">│</code> <code style="color: var(--text-primary);">Historian</code>  <code style="color: var(--accent-secondary);">│</code>      <code style="color: var(--accent-secondary);">│</code> <code style="color: var(--text-primary);">Technician</code> <code style="color: var(--accent-secondary);">│</code>      <code style="color: var(--accent-secondary);">│</code>  <code style="color: var(--text-primary);">Ethicist</code>  <code style="color: var(--accent-secondary);">│</code>    <code style="color: var(--accent-primary);">│</code>
+<code style="color: var(--accent-primary);">│</code>  <code style="color: var(--accent-secondary);">│</code> <code style="color: var(--text-primary);">Historian</code>  <code style="color: var(--accent-secondary);">│</code>      <code style="color: var(--accent-secondary);">│</code><code style="color: var(--text-primary);">Psychologist</code><code style="color: var(--accent-secondary);">│</code>      <code style="color: var(--accent-secondary);">│</code>  <code style="color: var(--text-primary);">Ethicist</code>  <code style="color: var(--accent-secondary);">│</code>    <code style="color: var(--accent-primary);">│</code>
 <code style="color: var(--accent-primary);">│</code>  <code style="color: var(--accent-secondary);">│</code> <code style="color: var(--text-secondary);">(Teammate)</code> <code style="color: var(--accent-secondary);">│</code>      <code style="color: var(--accent-secondary);">│</code> <code style="color: var(--text-secondary);">(Teammate)</code> <code style="color: var(--accent-secondary);">│</code>      <code style="color: var(--accent-secondary);">│</code> <code style="color: var(--text-secondary);">(Teammate)</code> <code style="color: var(--accent-secondary);">│</code>    <code style="color: var(--accent-primary);">│</code>
 <code style="color: var(--accent-primary);">│</code>  <code style="color: var(--accent-secondary);">└────────────┘      └────────────┘      └────────────┘</code>    <code style="color: var(--accent-primary);">│</code>
 <code style="color: var(--accent-primary);">│</code>         <code style="color: var(--text-secondary);">▲                  ▲                   ▲</code>           <code style="color: var(--accent-primary);">│</code>
@@ -323,7 +337,7 @@ lead synthesize all findings into a summary.</code></pre>
 `,
     },
     {
-      label: 'Step 4 – Interact',
+      label: "Step 4 – Interact",
       content: `
 <h2 style="margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 4 — Interact with Your Team</h2>
 
@@ -380,16 +394,20 @@ lead synthesize all findings into a summary.</code></pre>
   </thead>
   <tbody style="color: var(--text-secondary);">
     <tr style="border-bottom: 1px solid var(--border-color);">
-      <td style="padding: 0.75rem;">Cycle through teammates</td>
-      <td style="padding: 0.75rem;"><kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Shift+Down</kbd></td>
+      <td style="padding: 0.75rem;">Select a teammate in the agent panel</td>
+      <td style="padding: 0.75rem;"><kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">↑</kbd> / <kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">↓</kbd></td>
     </tr>
     <tr style="border-bottom: 1px solid var(--border-color);">
-      <td style="padding: 0.75rem;">View teammate's session</td>
+      <td style="padding: 0.75rem;">Open its transcript and message it</td>
       <td style="padding: 0.75rem;"><kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Enter</kbd></td>
     </tr>
     <tr style="border-bottom: 1px solid var(--border-color);">
-      <td style="padding: 0.75rem;">Interrupt current turn</td>
+      <td style="padding: 0.75rem;">Interrupt the selected teammate's turn</td>
       <td style="padding: 0.75rem;"><kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Escape</kbd></td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;">Stop the selected teammate</td>
+      <td style="padding: 0.75rem;"><kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">x</kbd></td>
     </tr>
     <tr style="border-bottom: 1px solid var(--border-color);">
       <td style="padding: 0.75rem;">Toggle task list</td>
@@ -397,7 +415,7 @@ lead synthesize all findings into a summary.</code></pre>
     </tr>
     <tr>
       <td style="padding: 0.75rem;">Send a message</td>
-      <td style="padding: 0.75rem;">Just type and send</td>
+      <td style="padding: 0.75rem;">Type while viewing the teammate. Note built-in commands still run in the <em>lead's</em> session, and <code style="font-family: monospace; color: var(--code-text);">/model</code> can't change a teammate's model after it spawns</td>
     </tr>
   </tbody>
 </table>
@@ -432,7 +450,7 @@ discriminatory behavior and how it influenced current practices.</code></pre>
 `,
     },
     {
-      label: 'Step 5 – Tasks',
+      label: "Step 5 – Tasks",
       content: `
 <h2 style="margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 5 — Manage Tasks</h2>
 
@@ -503,7 +521,7 @@ compile a prioritized action list.</code></pre>
 `,
     },
     {
-      label: 'Step 6 – Approval',
+      label: "Step 6 – Approval",
       content: `
 <h2 style="margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 6 — Approval Mode</h2>
 
@@ -608,7 +626,7 @@ and don't modify the database schema.</code></pre>
 `,
     },
     {
-      label: 'Step 7 – Cleanup',
+      label: "Step 7 – Cleanup",
       content: `
 <h2 style="margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 7 — Cleanup</h2>
 
@@ -619,24 +637,28 @@ and don't modify the database schema.</code></pre>
 
 <p style="margin-bottom:0.75rem; line-height:1.75;">The lead sends a shutdown request. The teammate can approve (exit gracefully) or reject with an explanation.</p>
 
-<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Clean Up the Entire Team</h3>
-<pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); white-space: pre-wrap;"><code>Clean up the team</code></pre>
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Cleaning Up the Team</h3>
 
-<p style="margin-bottom:0.75rem; line-height:1.75;">This removes shared team resources. <strong>All teammates must be shut down first</strong> or the cleanup will fail.</p>
+<div style="padding: 1.25rem; background: rgba(0, 242, 255, 0.05); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 0 0 1rem 0;">
+  <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">✅ There is no cleanup step anymore</p>
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">Since <strong>v2.1.178</strong>, the team's shared directories are removed automatically when the session ends. You don't need to shut teammates down first, and there's no "clean up the team" command to run.</p>
+</div>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">This is worth flagging because older guides describe a manual teardown sequence built on the <code style="padding: 0.1rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--syntax-text); font-family: monospace;">TeamCreate</code> and <code style="padding: 0.1rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--syntax-text); font-family: monospace;">TeamDelete</code> tools. <strong>Both tools no longer exist.</strong> The same release also removed the setup step — you no longer create and name a team before spawning teammates; the team forms the moment the first teammate is spawned, and takes a name derived from your session ID.</p>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">Shutting an individual teammate down is still useful mid-session, when a worker has finished and you'd rather not pay to keep it around. Ending the session handles the rest.</p>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">What Persists After the Session</h3>
+<ul style="margin: 0.5rem 0 1.5rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
+  <li style="margin-bottom: 0.4rem;"><strong>Team config</strong> (<code style="font-family: monospace; color: var(--code-text);">~/.claude/teams/{team}/config.json</code>) — removed when the session ends</li>
+  <li style="margin-bottom: 0.4rem;"><strong>Task list</strong> (<code style="font-family: monospace; color: var(--code-text);">~/.claude/tasks/{team}/</code>) — kept locally so a resumed session still has its tasks. Retention follows the same <code style="font-family: monospace; color: var(--code-text);">cleanupPeriodDays</code> setting as session transcripts</li>
+</ul>
 
 <div style="padding: 1rem; background: rgba(255, 200, 50, 0.1); border: 1px solid rgba(255, 200, 50, 0.3); border-radius: 8px; margin: 1rem 0;">
   <p style="margin: 0; line-height:1.6; color: var(--text-primary);">
-    <strong style="color: var(--accent-primary);">⚠️ Important:</strong> Always use the lead to clean up. Teammates should not run cleanup because their team context may not resolve correctly, potentially leaving resources in an inconsistent state.
+    <strong style="color: var(--accent-primary);">⚠️ Don't hand-edit the team config.</strong> It holds live runtime state — session IDs, tmux pane IDs — and your changes are overwritten on the next state update. There is also no project-level equivalent: a <code style="font-family: monospace; color: var(--code-text);">.claude/teams/teams.json</code> in your repo is not recognised as configuration and is treated as an ordinary file.
   </p>
 </div>
-
-<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Cleanup Checklist</h3>
-<ol style="margin: 0.5rem 0 1.5rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
-  <li style="margin-bottom: 0.4rem;">Tell each teammate to shut down: <em>"Ask the historian to shut down"</em></li>
-  <li style="margin-bottom: 0.4rem;">Wait for each teammate to confirm they've exited</li>
-  <li style="margin-bottom: 0.4rem;">Ask the lead to clean up the team: <em>"Clean up the team"</em></li>
-  <li style="margin-bottom: 0.4rem;">Exit the lead session: type <code style="padding: 0.1rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--syntax-text); font-family: monospace;">/exit</code> or press <kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Ctrl+C</kbd></li>
-</ol>
 
 <h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Token Costs</h3>
 
@@ -676,7 +698,7 @@ and don't modify the database schema.</code></pre>
 `,
     },
     {
-      label: 'Step 8 – Troubleshoot',
+      label: "Step 8 – Troubleshoot",
       content: `
 <h2 style="margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 8 — Troubleshoot</h2>
 
@@ -688,8 +710,9 @@ and don't modify the database schema.</code></pre>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;"><strong>Solutions:</strong></p>
 <ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
-  <li style="margin-bottom: 0.25rem;">In in-process mode, teammates may already be running but not visible. Press <kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Shift+Down</kbd> to cycle through active teammates.</li>
-  <li style="margin-bottom: 0.25rem;">Check that the task was complex enough to warrant a team.</li>
+  <li style="margin-bottom: 0.25rem;">In in-process mode, teammates appear in the agent panel below the prompt input. Use <kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">↑</kbd> / <kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">↓</kbd> to select one, then <kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Enter</kbd> to view it.</li>
+  <li style="margin-bottom: 0.25rem;"><strong>A row that vanished is hidden, not stopped.</strong> Idle rows hide 30 seconds after the whole panel goes idle, and reappear on that teammate's next turn. When more than three are idle, the surplus collapses into a single <code style="font-family: monospace; color: var(--code-text);">N idle agents</code> row — press <kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Enter</kbd> to expand it. The teammate stays running and addressable the whole time; message it by name to bring the row back.</li>
+  <li style="margin-bottom: 0.25rem;">Check that the task was complex enough to warrant a team. Claude sometimes uses subagents instead — and those appear in the same panel, so the panel alone doesn't confirm a team formed. Ask again and explicitly request an agent team.</li>
   <li style="margin-bottom: 0.25rem;">If you requested split panes, verify tmux is installed: <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">which tmux</code></li>
 </ul>
 
@@ -705,9 +728,20 @@ and don't modify the database schema.</code></pre>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;"><strong>Solutions:</strong></p>
 <ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
-  <li style="margin-bottom: 0.25rem;">Check their output using <kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Shift+Down</kbd></li>
+  <li style="margin-bottom: 0.25rem;">Select the teammate in the agent panel and press <kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Enter</kbd> to read its output</li>
   <li style="margin-bottom: 0.25rem;">Give them additional instructions directly</li>
   <li style="margin-bottom: 0.25rem;">Spawn a replacement teammate to continue the work</li>
+</ul>
+
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Known Limitations</h3>
+
+<p style="margin-bottom:0.5rem; line-height:1.75;">Agent teams are still experimental. These aren't bugs to work around — they're current constraints worth knowing before you plan around them:</p>
+<ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
+  <li style="margin-bottom: 0.25rem;"><strong>Resuming doesn't restore teammates.</strong> <code style="font-family: monospace; color: var(--code-text);">/resume</code> and <code style="font-family: monospace; color: var(--code-text);">/rewind</code> don't bring back in-process teammates, and the lead may try to message ones that no longer exist. Tell it to spawn new ones.</li>
+  <li style="margin-bottom: 0.25rem;"><strong>Task status can lag.</strong> A teammate sometimes fails to mark a task complete, which blocks anything depending on it. Update it yourself or nudge the teammate.</li>
+  <li style="margin-bottom: 0.25rem;"><strong>One team per session, no nesting.</strong> Teammates can't spawn their own teammates, and you can't run two named teams side by side.</li>
+  <li style="margin-bottom: 0.25rem;"><strong>The lead is fixed.</strong> Your main session leads for its lifetime — you can't promote a teammate or hand off leadership.</li>
+  <li><strong>Shutdown is slow.</strong> A teammate finishes its current request or tool call first.</li>
 </ul>
 
 <h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Lead Shuts Down Before Work Is Done</h3>
@@ -736,7 +770,7 @@ tmux kill-session -t &lt;session-name&gt;</code></pre>
 `,
     },
     {
-      label: 'Best Practices',
+      label: "Best Practices",
       content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Best Practices for Agent Teams</strong>
 
@@ -806,7 +840,7 @@ severity ratings."</code></pre>
 `,
     },
     {
-      label: 'Quick Reference',
+      label: "Quick Reference",
       content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Quick Reference Card</strong>
 
@@ -818,8 +852,11 @@ severity ratings."</code></pre>
 # Assign specific roles
 "Spawn teammates: one focused on [A], one on [B], one on [C]"
 
-# Specify a model
+# Specify a model (teammates do NOT inherit the lead's /model)
 "Create a team using Sonnet for each teammate"
+
+# Reuse an existing subagent definition as a teammate role
+"Spawn a teammate using the security-reviewer agent type"
 
 # Require plan approval
 "Require plan approval before making changes"
@@ -830,8 +867,12 @@ severity ratings."</code></pre>
 # Shut down a teammate
 "Ask the [name] teammate to shut down"
 
-# Clean up
-"Clean up the team"</code></pre>
+# No cleanup command needed — shared directories are removed
+# automatically when the session ends</code></pre>
+
+<div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 8px; margin: 1rem 0;">
+  <p style="margin: 0; line-height:1.6; color: var(--text-secondary);"><strong style="color: var(--accent-primary);">Model defaults:</strong> teammates don't follow the lead's <code style="font-family: monospace; color: var(--code-text);">/model</code> selection unless you say so in the prompt, or set <strong>Default teammate model</strong> in <code style="font-family: monospace; color: var(--code-text);">/config</code> to "Default (leader's model)". They <em>do</em> inherit the lead's effort level. A teammate's model is fixed once it spawns.</p>
+</div>
 
 <h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Keyboard Shortcuts (In-Process Mode)</h3>
 
@@ -844,16 +885,20 @@ severity ratings."</code></pre>
   </thead>
   <tbody style="color: var(--text-secondary);">
     <tr style="border-bottom: 1px solid var(--border-color);">
-      <td style="padding: 0.75rem;"><kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Shift+Down</kbd></td>
-      <td style="padding: 0.75rem;">Cycle to next teammate</td>
+      <td style="padding: 0.75rem;"><kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">↑</kbd> / <kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">↓</kbd></td>
+      <td style="padding: 0.75rem;">Select a teammate in the agent panel</td>
     </tr>
     <tr style="border-bottom: 1px solid var(--border-color);">
       <td style="padding: 0.75rem;"><kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Enter</kbd></td>
-      <td style="padding: 0.75rem;">View teammate session</td>
+      <td style="padding: 0.75rem;">Open its transcript and message it directly</td>
     </tr>
     <tr style="border-bottom: 1px solid var(--border-color);">
       <td style="padding: 0.75rem;"><kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Escape</kbd></td>
-      <td style="padding: 0.75rem;">Interrupt current turn</td>
+      <td style="padding: 0.75rem;">Interrupt the selected teammate's turn</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--border-color);">
+      <td style="padding: 0.75rem;"><kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">x</kbd></td>
+      <td style="padding: 0.75rem;">Stop the selected teammate</td>
     </tr>
     <tr>
       <td style="padding: 0.75rem;"><kbd style="padding: 0.2rem 0.5rem; background: var(--surface-color); border-radius: 4px; font-family: monospace;">Ctrl+T</kbd></td>
@@ -907,7 +952,7 @@ severity ratings."</code></pre>
 `,
     },
     {
-      label: 'Resources',
+      label: "Resources",
       content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Resources & Further Reading</strong>
 
@@ -998,7 +1043,7 @@ severity ratings."</code></pre>
 `,
     },
   ],
-  interactiveType: 'custom',
+  interactiveType: "custom",
 };
 
 export default claudeAgentsConcept;

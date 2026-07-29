@@ -695,7 +695,7 @@ Explain non-obvious decisions.`,
       "Read(./secrets/**)"
     ]
   },
-  "model": "claude-sonnet-4-6"
+  "model": "claude-sonnet-5"
 }`,
     tags: [{t:"committed",c:"ntag-g"},{t:"team sees it",c:"ntag-b"},{t:"JSON",c:"ntag-m"}]
   },
@@ -715,7 +715,7 @@ Explain non-obvious decisions.`,
     heading: "~/.claude/settings.json",
     body: `<p>Global model preference and environment variables that apply to every project on your machine. Set your preferred model once here and forget about it.</p>`,
     example: `{
-  "model": "claude-sonnet-4-6",
+  "model": "claude-sonnet-5",
   "effortLevel": "medium",
   "env": {
     "LOG_LEVEL": "DEBUG",
@@ -757,7 +757,7 @@ Then run git commit -m "your message".`,
     example: `---
 description: Deep code review for Python
 allowed-tools: Read, Grep, Bash(ruff *)
-model: claude-opus-4-6
+model: claude-opus-5
 argument-hint: [filename]
 ---
 
