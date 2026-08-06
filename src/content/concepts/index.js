@@ -13,6 +13,7 @@ import claudeAgentsConcept from './claude-agents.js';
 import claudePluginsConcept from './claude-plugins.js';
 import claudeDesignerStackConcept from './claude-designer-stack.js';
 import aiAgentWorkflowsConcept from './ai-agent-coding-framework.js';
+import claudeOfficialDocsConcept from './claude-official-docs.js';
 
 const concepts = [
   claudeFolderConcept,
@@ -26,6 +27,7 @@ const concepts = [
   claudeMcpConcept,
   claudeCodeUiux21stDevConcept,
   buildAppSkillMcpConcept,
+  claudeOfficialDocsConcept,
   claudeDesignerStackConcept,
   buildWebappAiConcept,
   aiAgentWorkflowsConcept,
@@ -33,3 +35,4 @@ const concepts = [
 ];
 
 export default concepts;
+
