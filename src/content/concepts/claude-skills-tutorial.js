@@ -295,6 +295,7 @@ EOF</code></pre>
       <li style="margin-bottom: 0.25rem;"><a href="https://github.com/PleasePrompto/notebooklm-skill" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">NotebookLM Skills</a></li>
       <li style="margin-bottom: 0.25rem;"><a href="https://github.com/kepano/obsidian-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Obsidian Skills</a></li>
       <li style="margin-bottom: 0.25rem;"><a href="https://github.com/gsd-build/get-shit-done" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Get Shit done</a></li>
+      <li style="margin-bottom: 0.25rem;"><a href="https://github.com/microsoft/skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Microsoft Skills</a></li>
       <li style="margin-bottom: 0.25rem;"><a href="https://github.com/addyosmani/agent-skills" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Agent Skills</a></li>
     </ul>
   </li>
@@ -305,65 +306,6 @@ EOF</code></pre>
     <span>←</span> Previous: Step 5 – Pre-built Skills
   </a>
   <a href="#" data-goto-tab="7" class="tutorial-nav-link">
-    Next: Official Docs <span>→</span>
-  </a>
-</div>
-`,
-    },
-    {
-      label: "Official Docs",
-      content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Claude Code Official Documentation & Guides</strong>
-
-<p style="margin-bottom:1.25rem; line-height:1.75;">Reference official documentation resources to deepen your understanding of Claude Code's core architecture, caching, memory, and best practices:</p>
-
-<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0;">
-  <div style="padding: 1rem 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
-    <div>
-      <strong style="display: block; color: var(--text-primary); font-size: 1rem;">Best Practices</strong>
-      <span style="font-size: 0.88rem; color: var(--text-secondary);">Guidelines for prompting, iterative loops, and efficient workflows</span>
-    </div>
-    <a href="https://code.claude.com/docs/en/best-practices" target="_blank" class="github-link-btn">
-      <span>https://code.claude.com/docs/en/best-practices</span>
-    </a>
-  </div>
-
-  <div style="padding: 1rem 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
-    <div>
-      <strong style="display: block; color: var(--text-primary); font-size: 1rem;">Prompt Caching</strong>
-      <span style="font-size: 0.88rem; color: var(--text-secondary);">How prompt caching works to optimize response times and lower API costs</span>
-    </div>
-    <a href="https://code.claude.com/docs/en/prompt-caching" target="_blank" class="github-link-btn">
-      <span>https://code.claude.com/docs/en/prompt-caching</span>
-    </a>
-  </div>
-
-  <div style="padding: 1rem 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
-    <div>
-      <strong style="display: block; color: var(--text-primary); font-size: 1rem;">Memory</strong>
-      <span style="font-size: 0.88rem; color: var(--text-secondary);">CLAUDE.md guidelines, auto-memory files, and project memory structure</span>
-    </div>
-    <a href="https://code.claude.com/docs/en/memory" target="_blank" class="github-link-btn">
-      <span>https://code.claude.com/docs/en/memory</span>
-    </a>
-  </div>
-
-  <div style="padding: 1rem 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
-    <div>
-      <strong style="display: block; color: var(--text-primary); font-size: 1rem;">Context Window</strong>
-      <span style="font-size: 0.88rem; color: var(--text-secondary);">Managing context compaction, token limits, and subagent isolation</span>
-    </div>
-    <a href="https://code.claude.com/docs/en/context-window" target="_blank" class="github-link-btn">
-      <span>https://code.claude.com/docs/en/context-window</span>
-    </a>
-  </div>
-</div>
-
-<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
-  <a href="#" data-goto-tab="6" class="tutorial-nav-link previous">
-    <span>←</span> Previous: Step 6 – Find Skills
-  </a>
-  <a href="#" data-goto-tab="8" class="tutorial-nav-link">
     Next: Resources <span>→</span>
   </a>
 </div>
@@ -396,8 +338,8 @@ EOF</code></pre>
 </p>
 
 <div style="margin-top: 2rem; display: flex; justify-content: flex-start; border-top: 1px solid var(--border-color); padding-top: 1rem;">
-  <a href="#" data-goto-tab="7" class="tutorial-nav-link previous">
-    <span>←</span> Previous: Official Docs
+  <a href="#" data-goto-tab="6" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Step 6 – Find Skills
   </a>
 </div>
 `,
