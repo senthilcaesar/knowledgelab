@@ -7,6 +7,8 @@ const claudeMcpConcept = {
       {
         label: 'Overview',
         content: `
+<p style="margin-bottom:1rem; line-height:1.75;">𝗠𝗖𝗣 is for connecting agents to tools and data. It standardizes how agents discover and use capabilities like querying databases, calling APIs, accessing files, and interacting with external systems.</p>
+
 <p style="margin-bottom:1rem; line-height:1.75;">The Model Context Protocol (<a href="https://modelcontextprotocol.io/docs/getting-started/intro" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">MCP</a>) is an open standard that enables Claude to interact with external tools and data sources. This modular architecture allows you to extend Claude's capabilities with specialized services.</p>
 
 <p style="margin-bottom:0.75rem; line-height:1.75;">In this section, we will configure Claude to connect to <strong>four</strong> powerful MCP servers:</p>
