@@ -1,12 +1,14 @@
 const claudeMcpConcept = {
-    id: 'claude-mcp',
-    title: 'Claude MCP',
-    category: '',
-    tags: [''],
-    tabs: [
-      {
-        label: 'Overview',
-        content: `
+  id: 'claude-mcp',
+  title: 'Claude MCP',
+  category: '',
+  tags: [''],
+  tabs: [
+    {
+      label: 'Overview',
+      content: `
+<p style="margin-bottom:1rem; line-height:1.75;">MCP is an open standard for connecting models to tools, data and context, in a consistent, structured way. It defines how a model can discover available tools, ask for information and perform actions without having to know the specific implementation details.</p>
+
 <p style="margin-bottom:1rem; line-height:1.75;">𝗠𝗖𝗣 is for connecting agents to tools and data. It standardizes how agents discover and use capabilities like querying databases, calling APIs, accessing files, and interacting with external systems.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">The Model Context Protocol (<a href="https://modelcontextprotocol.io/docs/getting-started/intro" target="_blank" style="color: var(--accent-primary); text-decoration: underline; word-break: break-all;">MCP</a>) is an open standard that enables Claude to interact with external tools and data sources. This modular architecture allows you to extend Claude's capabilities with specialized services.</p>
@@ -19,16 +21,22 @@ const claudeMcpConcept = {
   <li style="margin-bottom: 0.5rem;"><strong>shadcn:</strong> Browse and install shadcn/ui components directly into your local codebase.</li>
 </ul>
 
+<div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; align-items: center;">
+  <img src="/knowledgelab/images/1.png" alt="Overview Image 1" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+  <img src="/knowledgelab/images/2.png" alt="Overview Image 2" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+  <img src="/knowledgelab/images/3.png" alt="Overview Image 3" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;">
+</div>
+
 <div style="margin-top: 2rem; display: flex; justify-content: flex-end; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="1" class="tutorial-nav-link">
     Next: 21st.dev Magic <span>→</span>
   </a>
 </div>
 `,
-      },
-      {
-        label: '21st.dev Magic',
-        content: `
+    },
+    {
+      label: '21st.dev Magic',
+      content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">21st.dev Magic</strong>
 
 <p style="margin-bottom:0.75rem; line-height:1.75;">A tool that helps developers create beautiful, modern UI components instantly through natural language descriptions.</p>
@@ -75,10 +83,10 @@ const claudeMcpConcept = {
   </a>
 </div>
 `,
-      },
-      {
-        label: 'Supadata',
-        content: `
+    },
+    {
+      label: 'Supadata',
+      content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">Supadata MCP</strong>
 
 <p style="margin-bottom:0.75rem; line-height:1.75;">The Supadata MCP server enables powerful web and video scraping capabilities directly within AI development environments like Claude. This open-source integration allows AI models to extract transcripts, scrape web pages, and crawl entire websites to gather context.</p>
@@ -130,10 +138,10 @@ const claudeMcpConcept = {
   </a>
 </div>
 `,
-      },
-      {
-        label: 'Stitch',
-        content: `
+    },
+    {
+      label: 'Stitch',
+      content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">Stitch MCP</strong>
 
 <p style="margin-bottom:0.75rem; line-height:1.75;">Stitch helps you generate polished UI concepts and app flows that you can bring directly into your Claude workflow.</p>
@@ -159,10 +167,10 @@ const claudeMcpConcept = {
   </a>
 </div>
 `,
-      },
-      {
-        label: 'shadcn',
-        content: `
+    },
+    {
+      label: 'shadcn',
+      content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">shadcn MCP</strong>
 
 <p style="margin-bottom:0.75rem; line-height:1.75;">The shadcn Model Context Protocol (MCP) server allows Claude Code to browse, search, and install components, blocks, and templates directly from shadcn/ui registries. This live connection ensures the AI generates correct code using accurate component props, configurations, and dependencies on the first try without hallucinations.</p>
@@ -212,10 +220,10 @@ const claudeMcpConcept = {
   </a>
 </div>
 `,
-      },
-      {
-        label: 'Tool Reference',
-        content: `
+    },
+    {
+      label: 'Tool Reference',
+      content: `
 <p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Lists all configured MCP servers in your Claude Code setup (<code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">~/.claude.json</code>)</p>
 
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); font-size: 0.85rem; line-height: 1.5;">claude mcp list</pre>
@@ -264,15 +272,59 @@ const claudeMcpConcept = {
   - get_component_details — Get detail of specific component
   - add_item — Add components to the local workspace</pre>
 
-<div style="margin-top: 2rem; display: flex; justify-content: flex-start; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+<div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="4" class="tutorial-nav-link previous">
     <span>←</span> Previous: shadcn
   </a>
+  <a href="#" data-goto-tab="6" class="tutorial-nav-link">
+    Next: Resources <span>→</span>
+  </a>
 </div>
 `,
-      },
-    ],
-    interactiveType: 'custom',
-  };
+    },
+    {
+      label: 'Resources',
+      content: `
+<div style="background: #0d0d12; border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; font-family: 'JetBrains Mono', monospace; box-shadow: 0 20px 40px rgba(0,0,0,0.4); margin: 1rem 0 2rem;">
+  <!-- Terminal Header -->
+  <div style="background: rgba(255,255,255,0.05); padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--border-color);">
+    <div style="width: 10px; height: 10px; border-radius: 50%; background: #ff5f56;"></div>
+    <div style="width: 10px; height: 10px; border-radius: 50%; background: #ffbd2e;"></div>
+    <div style="width: 10px; height: 10px; border-radius: 50%; background: #27c93f;"></div>
+    <span style="margin-left: 0.5rem; font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8;">zsh — mcp-resources</span>
+  </div>
+  
+  <!-- Terminal Body -->
+  <div style="padding: 1.5rem; line-height: 1.6;">
+    <div style="margin-bottom: 1.5rem;">
+      <p style="color: #ae81ff; margin-bottom: 0.5rem; font-weight: bold;">[01] YouTube Video</p>
+      <p style="color: #a0a0b0; font-size: 0.9rem; margin-bottom: 0.5rem;">Watch the Model Context Protocol overview and walkthrough.</p>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="color: #27c93f;">➜</span> 
+        <a href="https://youtu.be/cGuyrANVi4A" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-size: 0.85rem; word-break: break-all;">https://youtu.be/cGuyrANVi4A</a>
+      </div>
+    </div>
+    
+    <div>
+      <p style="color: #ae81ff; margin-bottom: 0.5rem; font-weight: bold;">[02] Google MCP Repository</p>
+      <p style="color: #a0a0b0; font-size: 0.9rem; margin-bottom: 0.5rem;">Official Google Model Context Protocol repository on GitHub.</p>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="color: #27c93f;">➜</span> 
+        <a href="https://github.com/google/mcp" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-size: 0.85rem; word-break: break-all;">https://github.com/google/mcp</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top: 2rem; display: flex; justify-content: flex-start; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  <a href="#" data-goto-tab="5" class="tutorial-nav-link previous">
+    <span>←</span> Previous: Tool Reference
+  </a>
+</div>
+`,
+    },
+  ],
+  interactiveType: 'custom',
+};
 
 export default claudeMcpConcept;
