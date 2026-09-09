@@ -305,12 +305,21 @@ const claudeMcpConcept = {
       </div>
     </div>
     
-    <div>
+    <div style="margin-bottom: 1.5rem;">
       <p style="color: #ae81ff; margin-bottom: 0.5rem; font-weight: bold;">[02] Google MCP Repository</p>
       <p style="color: #a0a0b0; font-size: 0.9rem; margin-bottom: 0.5rem;">Official Google Model Context Protocol repository on GitHub.</p>
       <div style="display: flex; align-items: center; gap: 0.5rem;">
         <span style="color: #27c93f;">➜</span> 
         <a href="https://github.com/google/mcp" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-size: 0.85rem; word-break: break-all;">https://github.com/google/mcp</a>
+      </div>
+    </div>
+
+    <div>
+      <p style="color: #ae81ff; margin-bottom: 0.5rem; font-weight: bold;">[03] MCP Live Resources</p>
+      <p style="color: #a0a0b0; font-size: 0.9rem; margin-bottom: 0.5rem;">Collection of Model Context Protocol live sessions, samples, and developer resources.</p>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="color: #27c93f;">➜</span> 
+        <a href="https://aka.ms/MCPLiveResources" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-size: 0.85rem; word-break: break-all;">https://aka.ms/MCPLiveResources</a>
       </div>
     </div>
   </div>
