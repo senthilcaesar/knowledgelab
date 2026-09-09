@@ -14,6 +14,7 @@ import claudePluginsConcept from './claude-plugins.js';
 import claudeDesignerStackConcept from './claude-designer-stack.js';
 import aiAgentWorkflowsConcept from './ai-agent-coding-framework.js';
 import claudeOfficialDocsConcept from './claude-official-docs.js';
+import questionsConcept from './questions.js';
 
 const concepts = [
   claudeFolderConcept,
@@ -32,7 +33,7 @@ const concepts = [
   buildWebappAiConcept,
   aiAgentWorkflowsConcept,
   aiEngineeringConcept,
+  questionsConcept,
 ];
 
 export default concepts;
-
