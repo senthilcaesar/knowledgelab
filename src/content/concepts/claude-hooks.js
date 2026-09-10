@@ -748,7 +748,7 @@ exit $CODE</code></pre>
 
           <div style="background: rgba(0, 242, 255, 0.06); border: 1px solid var(--accent-primary); border-radius: 10px; padding: 1.1rem 1.25rem;">
             <strong style="color: var(--accent-primary); font-size: 0.9rem;">💡 Pro tip</strong>
-            <p style="margin: 0.5rem 0 0; line-height: 1.6; font-size: 0.95rem;">For more debugging tips, check out the <a href="https://code.claude.com/docs/en/debugging" target="_blank" style="color: var(--accent-primary);">Claude Code debugging documentation</a>.</p>
+            <p style="margin: 0.5rem 0 0; line-height: 1.6; font-size: 0.95rem;">For more debugging tips, check out the <a href="https://code.claude.com/docs/en/hooks-guide#debug-techniques" target="_blank" style="color: var(--accent-primary);">hook debugging guide</a>.</p>
           </div>
         </div>
       `,

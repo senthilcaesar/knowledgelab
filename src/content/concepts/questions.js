@@ -28,7 +28,12 @@ const questionsConcept = {
     background-color: var(--surface-hover);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
   }
+  .question-item > span {
+    flex: 1;
+    min-width: 0;
+  }
   .question-copy-btn {
+    flex-shrink: 0;
     padding: 0.35rem 0.75rem;
     background: transparent;
     border: 1px solid var(--border-color);
@@ -46,7 +51,7 @@ const questionsConcept = {
   }
 </style>
 
-<div style="display: flex; flex-direction: column; gap: 0.75rem; max-width: 850px; margin: 0.5rem 0;">
+<div style="display: flex; flex-direction: column; gap: 0.75rem; width: 100%; margin: 0.5rem 0;">
   
   <div class="question-item">
     <span style="font-size: 1rem; color: var(--text-primary); line-height: 1.5;">How does an AI agent perceive and interact with a tool?</span>
@@ -56,8 +61,8 @@ const questionsConcept = {
         var text = btn.parentElement.querySelector('span').innerText;
         navigator.clipboard.writeText(text);
         var orig = btn.innerHTML;
-        btn.innerHTML = '<span style=\\'color:#27c93f; font-weight:bold; margin-right:4px;\\'>✓</span> Copied';
-        btn.style.borderColor = '#27c93f';
+        btn.innerHTML = '<span style=\\'color:#15803d; font-weight:bold; margin-right:4px;\\'>✓✓</span> Copied';
+        btn.style.borderColor = '#15803d';
         setTimeout(function(){ 
           btn.innerHTML = orig; 
           btn.style.borderColor = '';
@@ -94,7 +99,12 @@ const questionsConcept = {
     background-color: var(--surface-hover);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
   }
+  .question-item > span {
+    flex: 1;
+    min-width: 0;
+  }
   .question-copy-btn {
+    flex-shrink: 0;
     padding: 0.35rem 0.75rem;
     background: transparent;
     border: 1px solid var(--border-color);
@@ -112,7 +122,7 @@ const questionsConcept = {
   }
 </style>
 
-<div style="display: flex; flex-direction: column; gap: 0.75rem; max-width: 850px; margin: 0.5rem 0;">
+<div style="display: flex; flex-direction: column; gap: 0.75rem; width: 100%; margin: 0.5rem 0;">
   
   <div class="question-item">
     <span style="font-size: 1rem; color: var(--text-primary); line-height: 1.5;">How does MCP server work alongside REST APIs?</span>
@@ -122,8 +132,8 @@ const questionsConcept = {
         var text = btn.parentElement.querySelector('span').innerText;
         navigator.clipboard.writeText(text);
         var orig = btn.innerHTML;
-        btn.innerHTML = '<span style=\\'color:#27c93f; font-weight:bold; margin-right:4px;\\'>✓</span> Copied';
-        btn.style.borderColor = '#27c93f';
+        btn.innerHTML = '<span style=\\'color:#15803d; font-weight:bold; margin-right:4px;\\'>✓✓</span> Copied';
+        btn.style.borderColor = '#15803d';
         setTimeout(function(){ 
           btn.innerHTML = orig; 
           btn.style.borderColor = '';
@@ -141,8 +151,8 @@ const questionsConcept = {
         var text = btn.parentElement.querySelector('span').innerText;
         navigator.clipboard.writeText(text);
         var orig = btn.innerHTML;
-        btn.innerHTML = '<span style=\\'color:#27c93f; font-weight:bold; margin-right:4px;\\'>✓</span> Copied';
-        btn.style.borderColor = '#27c93f';
+        btn.innerHTML = '<span style=\\'color:#15803d; font-weight:bold; margin-right:4px;\\'>✓✓</span> Copied';
+        btn.style.borderColor = '#15803d';
         setTimeout(function(){ 
           btn.innerHTML = orig; 
           btn.style.borderColor = '';
@@ -160,8 +170,8 @@ const questionsConcept = {
         var text = btn.parentElement.querySelector('span').innerText;
         navigator.clipboard.writeText(text);
         var orig = btn.innerHTML;
-        btn.innerHTML = '<span style=\\'color:#27c93f; font-weight:bold; margin-right:4px;\\'>✓</span> Copied';
-        btn.style.borderColor = '#27c93f';
+        btn.innerHTML = '<span style=\\'color:#15803d; font-weight:bold; margin-right:4px;\\'>✓✓</span> Copied';
+        btn.style.borderColor = '#15803d';
         setTimeout(function(){ 
           btn.innerHTML = orig; 
           btn.style.borderColor = '';
@@ -179,8 +189,8 @@ const questionsConcept = {
         var text = btn.parentElement.querySelector('span').innerText;
         navigator.clipboard.writeText(text);
         var orig = btn.innerHTML;
-        btn.innerHTML = '<span style=\\'color:#27c93f; font-weight:bold; margin-right:4px;\\'>✓</span> Copied';
-        btn.style.borderColor = '#27c93f';
+        btn.innerHTML = '<span style=\\'color:#15803d; font-weight:bold; margin-right:4px;\\'>✓✓</span> Copied';
+        btn.style.borderColor = '#15803d';
         setTimeout(function(){ 
           btn.innerHTML = orig; 
           btn.style.borderColor = '';
@@ -198,8 +208,8 @@ const questionsConcept = {
         var text = btn.parentElement.querySelector('span').innerText;
         navigator.clipboard.writeText(text);
         var orig = btn.innerHTML;
-        btn.innerHTML = '<span style=\\'color:#27c93f; font-weight:bold; margin-right:4px;\\'>✓</span> Copied';
-        btn.style.borderColor = '#27c93f';
+        btn.innerHTML = '<span style=\\'color:#15803d; font-weight:bold; margin-right:4px;\\'>✓✓</span> Copied';
+        btn.style.borderColor = '#15803d';
         setTimeout(function(){ 
           btn.innerHTML = orig; 
           btn.style.borderColor = '';
@@ -217,8 +227,8 @@ const questionsConcept = {
         var text = btn.parentElement.querySelector('span').innerText;
         navigator.clipboard.writeText(text);
         var orig = btn.innerHTML;
-        btn.innerHTML = '<span style=\\'color:#27c93f; font-weight:bold; margin-right:4px;\\'>✓</span> Copied';
-        btn.style.borderColor = '#27c93f';
+        btn.innerHTML = '<span style=\\'color:#15803d; font-weight:bold; margin-right:4px;\\'>✓✓</span> Copied';
+        btn.style.borderColor = '#15803d';
         setTimeout(function(){ 
           btn.innerHTML = orig; 
           btn.style.borderColor = '';
@@ -236,8 +246,8 @@ const questionsConcept = {
         var text = btn.parentElement.querySelector('span').innerText;
         navigator.clipboard.writeText(text);
         var orig = btn.innerHTML;
-        btn.innerHTML = '<span style=\\'color:#27c93f; font-weight:bold; margin-right:4px;\\'>✓</span> Copied';
-        btn.style.borderColor = '#27c93f';
+        btn.innerHTML = '<span style=\\'color:#15803d; font-weight:bold; margin-right:4px;\\'>✓✓</span> Copied';
+        btn.style.borderColor = '#15803d';
         setTimeout(function(){ 
           btn.innerHTML = orig; 
           btn.style.borderColor = '';
@@ -255,8 +265,8 @@ const questionsConcept = {
         var text = btn.parentElement.querySelector('span').innerText;
         navigator.clipboard.writeText(text);
         var orig = btn.innerHTML;
-        btn.innerHTML = '<span style=\\'color:#27c93f; font-weight:bold; margin-right:4px;\\'>✓</span> Copied';
-        btn.style.borderColor = '#27c93f';
+        btn.innerHTML = '<span style=\\'color:#15803d; font-weight:bold; margin-right:4px;\\'>✓✓</span> Copied';
+        btn.style.borderColor = '#15803d';
         setTimeout(function(){ 
           btn.innerHTML = orig; 
           btn.style.borderColor = '';

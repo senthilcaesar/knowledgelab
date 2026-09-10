@@ -776,11 +776,11 @@ specific, actionable feedback on quality, security, and best practices.</code>
                   </tr>
                   <tr style="border-bottom: 1px solid var(--border-color);">
                     <td style="padding: 0.6rem; font-family: monospace; color: var(--text-primary);">model</td>
-                    <td style="padding: 0.6rem; color: var(--text-secondary);"><code>sonnet</code>, <code>opus</code>, <code>haiku</code>, <code>fable</code>, a full model ID, or <code>inherit</code>. Defaults to <code>inherit</code>.</td>
+                    <td style="padding: 0.6rem; color: var(--text-secondary);"><code>sonnet</code>, <code>opus</code>, <code>haiku</code>, <code>fable</code>, a full model ID, or <code>inherit</code>. Omit it and the model falls through the resolution order below.</td>
                   </tr>
                   <tr style="border-bottom: 1px solid var(--border-color);">
                     <td style="padding: 0.6rem; font-family: monospace; color: var(--text-primary);">permissionMode</td>
-                    <td style="padding: 0.6rem; color: var(--text-secondary);"><code>default</code>, <code>acceptEdits</code>, <code>auto</code>, <code>dontAsk</code>, <code>bypassPermissions</code>, or <code>plan</code>.</td>
+                    <td style="padding: 0.6rem; color: var(--text-secondary);"><code>default</code>, <code>acceptEdits</code>, <code>auto</code>, <code>dontAsk</code>, <code>bypassPermissions</code>, <code>plan</code>, or <code>manual</code> (an alias for <code>default</code>, v2.1.200+). Since v2.1.267 <code>bypassPermissions</code> only applies if the main conversation is in that mode too — a subagent can no longer escalate past it.</td>
                   </tr>
                   <tr style="border-bottom: 1px solid var(--border-color);">
                     <td style="padding: 0.6rem; font-family: monospace; color: var(--text-primary);">maxTurns</td>
@@ -822,6 +822,10 @@ specific, actionable feedback on quality, security, and best practices.</code>
                     <td style="padding: 0.6rem; font-family: monospace; color: var(--text-primary);">initialPrompt</td>
                     <td style="padding: 0.6rem; color: var(--text-secondary);">Auto-submitted as the first user turn when this agent runs as the main session (<code>--agent</code> or the <code>agent</code> setting).</td>
                   </tr>
+                  <tr>
+                    <td style="padding: 0.6rem; font-family: monospace; color: var(--text-primary);">experimental</td>
+                    <td style="padding: 0.6rem; color: var(--text-secondary);">Map of experimental options. <code>cacheTtl</code> (<code>5m</code> or <code>1h</code>) sets the prompt cache lifetime for this subagent.</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -834,9 +838,9 @@ specific, actionable feedback on quality, security, and best practices.</code>
                 <li><strong style="color: var(--text-primary);">Model alias:</strong> Use one of the available aliases: <code>sonnet</code>, <code>opus</code>, <code>haiku</code>, or <code>fable</code></li>
                 <li><strong style="color: var(--text-primary);">Full model ID:</strong> Use a full model ID such as <code>claude-opus-5</code> or <code>claude-sonnet-5</code>.</li>
                 <li><strong style="color: var(--text-primary);">inherit:</strong> Use the same model as the main conversation</li>
-                <li><strong style="color: var(--text-primary);">Omitted:</strong> If not specified, defaults to <code>inherit</code>.</li>
+                <li><strong style="color: var(--text-primary);">Omitted:</strong> Falls through to the resolution order below — <code>CLAUDE_CODE_SUBAGENT_MODEL</code> if it's set, otherwise the main conversation's model.</li>
               </ul>
-              <p style="margin-top: 1rem; line-height: 1.6; font-size: 0.9rem; color: var(--text-secondary);">Resolution order when several sources set a model: the <code>CLAUDE_CODE_SUBAGENT_MODEL</code> environment variable, then the per-invocation <code>model</code> parameter Claude passes, then the frontmatter, then the main conversation's model. Subagents also inherit the main conversation's extended thinking setting.</p>
+              <p style="margin-top: 1rem; line-height: 1.6; font-size: 0.9rem; color: var(--text-secondary);">Resolution order when several sources set a model, first match winning: the per-invocation <code>model</code> parameter Claude passes, then the frontmatter <code>model</code> (where <code>inherit</code> means the main conversation's model), then the <code>CLAUDE_CODE_SUBAGENT_MODEL</code> environment variable, then the main conversation's model. Before v2.1.251 the environment variable came first; it now yields to a per-invocation model and to <code>model: inherit</code>. To force every subagent onto one model regardless, set <code>CLAUDE_CODE_SUBAGENT_MODEL_FORCE=1</code> alongside it. Subagents also inherit the main conversation's extended thinking setting.</p>
             </div>
 
             <p style="margin-top: 1.5rem; line-height: 1.6;">The frontmatter defines the subagent’s metadata and configuration. The body becomes the system prompt that guides the subagent’s behavior. Subagents receive only this system prompt (plus basic environment details like working directory), not the full Claude Code system prompt.</p>

@@ -703,12 +703,13 @@ Use plan mode for changes under \`src/billing/\`.</code></pre>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>{
   "model": "claude-sonnet-5",
   "effortLevel": "high",
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": false
 }</code></pre>
 
 <ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.8;">
-  <li><code style="color: var(--code-text);">model</code>: a full model ID such as <code style="color: var(--code-text);">claude-sonnet-5</code> or <code style="color: var(--code-text);">claude-opus-5</code>, or an alias like <code style="color: var(--code-text);">sonnet</code>, <code style="color: var(--code-text);">opus</code>, <code style="color: var(--code-text);">haiku</code></li>
+  <li><code style="color: var(--code-text);">model</code>: a full model ID such as <code style="color: var(--code-text);">claude-sonnet-5</code> or <code style="color: var(--code-text);">claude-opus-5</code>, or an alias like <code style="color: var(--code-text);">sonnet</code>, <code style="color: var(--code-text);">opus</code>, <code style="color: var(--code-text);">haiku</code>, <code style="color: var(--code-text);">fable</code></li>
   <li><code style="color: var(--code-text);">effortLevel</code>: <code style="color: var(--code-text);">low</code> (quick responses), <code style="color: var(--code-text);">medium</code> (standard), <code style="color: var(--code-text);">high</code> (deep reasoning), or <code style="color: var(--code-text);">xhigh</code></li>
+  <li><code style="color: var(--code-text);">alwaysThinkingEnabled</code>: extended thinking is on by default, so the only useful value here is <code style="color: var(--code-text);">false</code>, which turns it off for every session. Setting it to <code style="color: var(--code-text);">true</code> changes nothing. On models that always think, such as the Fable family, <code style="color: var(--code-text);">false</code> has no effect either.</li>
 </ul>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Note that <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">model</code> is read once at session start, so editing it mid-session does nothing until you restart. To switch models in a running session use <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/model</code>; for effort, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/effort</code> both switches and writes the value back to your settings.</p>

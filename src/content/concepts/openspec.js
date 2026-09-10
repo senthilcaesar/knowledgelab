@@ -103,7 +103,7 @@ openspec init
     <li style="margin-bottom: 0.5rem;"><strong>Before any feature:</strong> Run <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/opsx:propose</code> to create structured change artifacts</li>
     <li style="margin-bottom: 0.5rem;"><strong>During coding:</strong> AI reads <code>tasks.md</code> and works through checklist items predictably</li>
     <li style="margin-bottom: 0.5rem;"><strong>After completion:</strong> <code>/opsx:archive</code> archives the change and keeps specs as living docs</li>
-    <li><strong>Best models:</strong> Works best with Opus 4.5 and GPT 5.2 for planning and implementation</li>
+    <li><strong>Best models:</strong> Works best with frontier planning models — Claude Opus 5 or Claude Fable 5.1 on the Anthropic side</li>
   </ul>
 </div>
 

@@ -16,7 +16,7 @@ const claudeCodeSystemPromptsConcept = {
   <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">What's Inside the Repo?</strong>
   <ul style="margin-left: 1.25rem; line-height: 1.6;">
     <li style="margin-bottom: 0.5rem;">🔧 <strong>24 built-in tool descriptions</strong> — Exact prompts for Bash, WebFetch, Editor, Read, etc.</li>
-    <li style="margin-bottom: 0.5rem;">🤖 <strong>Sub-agent prompts</strong> — Plan, Explore, and Task sub-agent system prompts</li>
+    <li style="margin-bottom: 0.5rem;">🤖 <strong>Sub-agent prompts</strong> — Plan, Explore, and general-purpose sub-agent system prompts</li>
     <li style="margin-bottom: 0.5rem;">📋 <strong>Utility prompts</strong> — CLAUDE.md format, compact summary, statusline, magic docs</li>
     <li style="margin-bottom: 0.5rem;">🔒 <strong>Security review prompt</strong> — How Claude evaluates security risks in bash commands</li>
     <li style="margin-bottom: 0.5rem;">🌐 <strong>WebFetch prompt</strong> — How Claude fetches and processes web content</li>
@@ -31,7 +31,7 @@ const claudeCodeSystemPromptsConcept = {
     <li style="margin-bottom: 0.5rem;"><strong>Base system prompt</strong> — Core identity, values, and safety guidelines</li>
     <li style="margin-bottom: 0.5rem;"><strong>Tool descriptions</strong> — Each tool (Bash, Read, Write, etc.) has its own mini-prompt</li>
     <li style="margin-bottom: 0.5rem;"><strong>CLAUDE.md</strong> — Your project-specific instructions injected at runtime</li>
-    <li style="margin-bottom: 0.5rem;"><strong>Sub-agent prompts</strong> — Specialized prompts for Plan/Explore/Task agents</li>
+    <li style="margin-bottom: 0.5rem;"><strong>Sub-agent prompts</strong> — Specialized prompts for the Plan, Explore, and general-purpose agents</li>
     <li><strong>Compact/statusline prompts</strong> — Context management during long sessions</li>
   </ol>
 </div>
@@ -51,7 +51,7 @@ const claudeCodeSystemPromptsConcept = {
   <ul style="margin-left: 1.25rem; line-height: 1.6;">
     <li style="margin-bottom: 0.5rem;"><strong>Write better CLAUDE.md files:</strong> Knowing the base system prompt helps you write project instructions that work <em>with</em> Claude's defaults rather than fighting them</li>
     <li style="margin-bottom: 0.5rem;"><strong>Debug unexpected behavior:</strong> When Claude refuses a task or acts strangely, the system prompts reveal why</li>
-    <li style="margin-bottom: 0.5rem;"><strong>Understand sub-agents:</strong> Knowing Plan vs. Task vs. Explore agent prompts helps you trigger the right mode for your workflow</li>
+    <li style="margin-bottom: 0.5rem;"><strong>Understand sub-agents:</strong> Knowing the Plan, Explore, and general-purpose agent prompts helps you trigger the right mode for your workflow</li>
     <li style="margin-bottom: 0.5rem;"><strong>Security awareness:</strong> The security review prompt shows exactly what triggers Claude's caution on bash commands</li>
     <li><strong>Prompt engineering:</strong> Model your custom prompts and instructions on the patterns used in these official prompts</li>
   </ul>
@@ -62,7 +62,7 @@ const claudeCodeSystemPromptsConcept = {
   <ul style="margin-left: 1.25rem; line-height: 1.6;">
     <li style="margin-bottom: 0.5rem;"><strong>Plan sub-agent</strong> — Focuses on research and planning before touching any code; read-only mindset</li>
     <li style="margin-bottom: 0.5rem;"><strong>Explore sub-agent</strong> — Investigates codebase, existing patterns, dependencies before acting</li>
-    <li><strong>Task sub-agent</strong> — The executor; writes code, runs commands, and implements changes</li>
+    <li><strong>general-purpose sub-agent</strong> — The executor; writes code, runs commands, and implements changes. (This was called the Task agent until v2.1.63, when the <code>Task</code> tool was renamed to <code>Agent</code>; older dumps of these prompts still use the old name.)</li>
   </ul>
 </div>
 
