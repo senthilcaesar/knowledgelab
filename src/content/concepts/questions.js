@@ -366,6 +366,82 @@ const questionsConcept = {
     </button>
   </div>
 
+  <div class="question-item">
+    <span style="font-size: 1rem; color: var(--text-primary); line-height: 1.5;">Count the number of times an entity appears in the graph.</span>
+    <button
+      class="question-copy-btn"
+      onclick="(function(btn){
+        var text = btn.parentElement.querySelector('span').innerText;
+        navigator.clipboard.writeText(text);
+        var orig = btn.innerHTML;
+        btn.innerHTML = '<span style=\\'color:#15803d; font-weight:bold; margin-right:4px;\\'>✓✓</span> Copied';
+        btn.style.borderColor = '#15803d';
+        setTimeout(function(){
+          btn.innerHTML = orig;
+          btn.style.borderColor = '';
+        }, 1500);
+      })(this)">
+      Copy
+    </button>
+  </div>
+
+  <div class="question-item">
+    <span style="font-size: 1rem; color: var(--text-primary); line-height: 1.5;">Match all the entities across the documents and the relationships between them.</span>
+    <button
+      class="question-copy-btn"
+      onclick="(function(btn){
+        var text = btn.parentElement.querySelector('span').innerText;
+        navigator.clipboard.writeText(text);
+        var orig = btn.innerHTML;
+        btn.innerHTML = '<span style=\\'color:#15803d; font-weight:bold; margin-right:4px;\\'>✓✓</span> Copied';
+        btn.style.borderColor = '#15803d';
+        setTimeout(function(){
+          btn.innerHTML = orig;
+          btn.style.borderColor = '';
+        }, 1500);
+      })(this)">
+      Copy
+    </button>
+  </div>
+
+  <div class="question-item">
+    <span style="font-size: 1rem; color: var(--text-primary); line-height: 1.5;">Which documents are related to each other?</span>
+    <button
+      class="question-copy-btn"
+      onclick="(function(btn){
+        var text = btn.parentElement.querySelector('span').innerText;
+        navigator.clipboard.writeText(text);
+        var orig = btn.innerHTML;
+        btn.innerHTML = '<span style=\\'color:#15803d; font-weight:bold; margin-right:4px;\\'>✓✓</span> Copied';
+        btn.style.borderColor = '#15803d';
+        setTimeout(function(){
+          btn.innerHTML = orig;
+          btn.style.borderColor = '';
+        }, 1500);
+      })(this)">
+      Copy
+    </button>
+  </div>
+
+  <div class="question-item">
+    <span style="font-size: 1rem; color: var(--text-primary); line-height: 1.5;">Which entities are related to the document &quot;sop.md&quot;?</span>
+    <button
+      class="question-copy-btn"
+      onclick="(function(btn){
+        var text = btn.parentElement.querySelector('span').innerText;
+        navigator.clipboard.writeText(text);
+        var orig = btn.innerHTML;
+        btn.innerHTML = '<span style=\\'color:#15803d; font-weight:bold; margin-right:4px;\\'>✓✓</span> Copied';
+        btn.style.borderColor = '#15803d';
+        setTimeout(function(){
+          btn.innerHTML = orig;
+          btn.style.borderColor = '';
+        }, 1500);
+      })(this)">
+      Copy
+    </button>
+  </div>
+
 </div>
 `,
     },
