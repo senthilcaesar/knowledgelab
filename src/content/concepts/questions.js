@@ -329,7 +329,26 @@ const questionsConcept = {
 <div style="display: flex; flex-direction: column; gap: 0.75rem; width: 100%; margin: 0.5rem 0;">
 
   <div class="question-item">
-    <span style="font-size: 1rem; color: var(--text-primary); line-height: 1.5;">How the entities of a specific documents are connected in the knowledge graph?</span>
+    <span style="font-size: 1rem; color: var(--text-primary); line-height: 1.5;">How are the entities of a specific document connected in the knowledge graph?</span>
+    <button
+      class="question-copy-btn"
+      onclick="(function(btn){
+        var text = btn.parentElement.querySelector('span').innerText;
+        navigator.clipboard.writeText(text);
+        var orig = btn.innerHTML;
+        btn.innerHTML = '<span style=\\'color:#15803d; font-weight:bold; margin-right:4px;\\'>✓✓</span> Copied';
+        btn.style.borderColor = '#15803d';
+        setTimeout(function(){
+          btn.innerHTML = orig;
+          btn.style.borderColor = '';
+        }, 1500);
+      })(this)">
+      Copy
+    </button>
+  </div>
+
+  <div class="question-item">
+    <span style="font-size: 1rem; color: var(--text-primary); line-height: 1.5;">Which documents contain a specific entity?</span>
     <button
       class="question-copy-btn"
       onclick="(function(btn){
