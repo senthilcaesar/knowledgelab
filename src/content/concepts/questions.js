@@ -72,6 +72,25 @@ const questionsConcept = {
     </button>
   </div>
 
+  <div class="question-item">
+    <span style="font-size: 1rem; color: var(--text-primary); line-height: 1.5;">How can we define measurable and objective acceptance criteria and evaluation metrics to determine whether an AI agent has successfully completed a specific task in accordance with the instructions and context provided to it?</span>
+    <button 
+      class="question-copy-btn"
+      onclick="(function(btn){
+        var text = btn.parentElement.querySelector('span').innerText;
+        navigator.clipboard.writeText(text);
+        var orig = btn.innerHTML;
+        btn.innerHTML = '<span style=\\'color:#15803d; font-weight:bold; margin-right:4px;\\'>✓✓</span> Copied';
+        btn.style.borderColor = '#15803d';
+        setTimeout(function(){ 
+          btn.innerHTML = orig; 
+          btn.style.borderColor = '';
+        }, 1500);
+      })(this)">
+      Copy
+    </button>
+  </div>
+
 </div>
 `,
     },
