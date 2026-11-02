@@ -58,13 +58,13 @@ class Node {
     const alpha = (this.isHub ? 0.7 : 0.4) + pulse * 0.4;
 
     const coreColor = isLight
-      ? `rgba(176, 141, 87, ${alpha})`
+      ? `rgba(95, 80, 157, ${alpha})`
       : this.isHub
         ? `rgba(180, 100, 255, ${alpha})`
         : `rgba(0, 242, 255, ${alpha})`;
 
     const glowColor = isLight
-      ? `rgba(176, 141, 87, ${pulse * 0.12})`
+      ? `rgba(95, 80, 157, ${pulse * 0.12})`
       : this.isHub
         ? `rgba(130, 0, 255, ${pulse * 0.1})`
         : `rgba(0, 242, 255, ${pulse * 0.1})`;
@@ -107,7 +107,7 @@ class Spark {
     ctx.beginPath();
     ctx.arc(x, y, 3, 0, Math.PI * 2);
     ctx.fillStyle = this.isLight
-      ? `rgba(212, 160, 23, ${alpha})`
+      ? `rgba(196, 91, 110, ${alpha})`
       : `rgba(255, 255, 255, ${alpha})`;
     ctx.fill();
   }
@@ -150,8 +150,8 @@ export function initConstellation(canvas) {
 
     // Gradient line from node to node
     const grad = ctx.createLinearGradient(n1.x, n1.y, n2.x, n2.y);
-    const c1 = isLight ? `rgba(176,141,87,${alpha * 1.5})` : n1.isHub ? `rgba(150,50,255,${alpha * 1.5})` : `rgba(0,242,255,${alpha * 1.5})`;
-    const c2 = isLight ? `rgba(122,106,83,${alpha})` : n2.isHub ? `rgba(150,50,255,${alpha})` : `rgba(0,200,220,${alpha})`;
+    const c1 = isLight ? `rgba(95, 80, 157, ${alpha * 1.5})` : n1.isHub ? `rgba(150,50,255,${alpha * 1.5})` : `rgba(0,242,255,${alpha * 1.5})`;
+    const c2 = isLight ? `rgba(164,119,178,${alpha})` : n2.isHub ? `rgba(150,50,255,${alpha})` : `rgba(0,200,220,${alpha})`;
     grad.addColorStop(0, c1);
     grad.addColorStop(1, c2);
 

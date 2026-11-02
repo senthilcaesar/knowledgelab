@@ -51,54 +51,75 @@
 }
 
 :root.light-mode {
-  --bg-color: #fcf8e8; /* Warm parchment */
-  --surface-color: rgba(67, 52, 34, 0.05);
-  --surface-hover: rgba(67, 52, 34, 0.08);
-  --border-color: rgba(67, 52, 34, 0.15);
-  --text-primary: #3d3021; /* Deep ink brown */
-  --text-secondary: #6e5b4b; /* Muted stone brown */
-  --accent-primary: #b08d57; /* Old gold / Brass */
-  --accent-secondary: #7d6b5d; /* Warm earth */
-  --accent-magenta: #a64d4d; /* Red clay */
-  --code-text: #8c6b3e; /* Darker old gold */
-  --code-text-secondary: #544436; /* Darker stone brown */
+  /* ── Hex "light" theme (hex.tech landing page) ──────────────────────
+   * Page      #fffcfc  (fg100, warm near-white)
+   * Raised    #f8f5f6  (fg200)   Border  #dbd7da (grid500)
+   * Text      #31263b  (eggplant) Loud   #14141c (obsidian)
+   * Muted     #89828d  (fg1100)
+   * Accents   Violet Topaz #5f509d · Minsk #473982 · Amethyst #a477b2
+   *           Rose Quartz #f5c0c0 · Jade #5cb198 · Citrine #cda849
+   * ─────────────────────────────────────────────────────────────────── */
+  --bg-color: #fffcfc;
+  --surface-color: rgba(49, 38, 59, 0.03);
+  --surface-hover: rgba(49, 38, 59, 0.06);
+  --border-color: rgba(49, 38, 59, 0.14);
+  --text-primary: #31263b;   /* Eggplant */
+  --text-secondary: #6f6676; /* Muted (a shade darker than #89828d for body-text contrast) */
+  --accent-primary: #5f509d;   /* Violet Topaz */
+  --accent-secondary: #a477b2; /* Amethyst */
+  --accent-magenta: #c45b6e;   /* Deep rose (Rose Quartz is too pale for text) */
+  --code-text: #473982;        /* Minsk */
+  --code-text-secondary: #43394c;
   --glass-blur: 8px;
 
-  /* Syntax Highlighting — Parchment-compatible analogues */
-  --syntax-bg:         rgba(67, 52, 34, 0.07);
-  --syntax-text:       #3d3021;
-  --syntax-keyword:    #a64d4d;  /* red clay   */
-  --syntax-string:     #4a7c44;  /* forest     */
-  --syntax-constant:   #704da6;  /* plum       */
-  --syntax-comment:    #8a7a6a;  /* stone      */
-  --syntax-function:   #4a6fa6;  /* slate blue */
-  --syntax-identifier: #2e7d8a;  /* teal (cyan analogue, italic) */
-  --syntax-params:     #8a5a1e;  /* amber (orange analogue, italic) */
+  /* Syntax Highlighting — Hex palette analogues */
+  --syntax-bg:         #f8f5f6;
+  --syntax-text:       #31263b;
+  --syntax-keyword:    #7a4f9a;  /* amethyst, deepened */
+  --syntax-string:     #1c866b;  /* dark green (jade)  */
+  --syntax-constant:   #a0471f;  /* burnt orange       */
+  --syntax-comment:    #9c959f;  /* fg1000             */
+  --syntax-function:   #215db0;  /* dark blue          */
+  --syntax-identifier: #2a7f99;  /* teal (italic)      */
+  --syntax-params:     #8e6a12;  /* citrine, deepened (italic) */
 
   /* Code block surface colors (light mode) */
-  --surface-dark: rgba(67, 52, 34, 0.07);
-  --surface-light: rgba(67, 52, 34, 0.04);
-  --code-green: #2a6e1e;
+  --surface-dark: #f4f1f2;     /* fg300 */
+  --surface-light: #f8f5f6;    /* fg200 */
+  --code-green: #1c866b;
 }
 
 :root.light-mode #app {
-  background-image: 
-    radial-gradient(circle at 10% 10%, rgba(176, 141, 87, 0.16) 0%, rgba(176, 141, 87, 0.06) 18%, transparent 32%),
-    radial-gradient(circle at 90% 90%, rgba(125, 107, 93, 0.16) 0%, rgba(125, 107, 93, 0.06) 18%, transparent 32%);
+  background-image: none; /* flat #fffcfc page, like hex.tech */
+}
+
+/* Paper grain — mirrors hex.tech's light theme: a fine, high-contrast grey
+ * noise tile (256px) laid over the whole page at 6% opacity. Generated with an
+ * SVG fractal-noise filter; the tile is rendered at 512px so the grain stays
+ * crisp on retina screens. */
+:root.light-mode body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  pointer-events: none;
+  opacity: 0.06;
+  background-size: 256px 256px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  14 0 0 0 -7.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 :root.light-mode .sidebar {
-  background: rgba(252, 248, 232, 0.9);
+  background: rgba(255, 252, 252, 0.9);
 }
 
 :root.light-mode .nav-item.active {
-  background: rgba(176, 141, 87, 0.15);
+  background: rgba(95, 80, 157, 0.15);
   color: var(--text-primary);
   border-color: var(--accent-primary);
 }
 
 :root.light-mode .concept-card {
-  box-shadow: 0 10px 30px rgba(67, 52, 34, 0.05);
+  box-shadow: 0 10px 30px rgba(49, 38, 59, 0.05);
 }
 
 :root.light-mode .welcome-card h2 {
@@ -376,7 +397,7 @@ h1, h2, h3 {
 }
 
 :root.light-mode .concept-card {
-  border-color: rgba(67, 52, 34, 0.06);          /* near-invisible in light mode */
+  border-color: rgba(49, 38, 59, 0.06);          /* near-invisible in light mode */
 }
 
 @keyframes slideIn {
@@ -823,7 +844,7 @@ h1, h2, h3 {
 }
 
 :root.light-mode .study-mode-overlay {
-  background: rgba(252, 248, 232, 0.98);
+  background: rgba(255, 252, 252, 0.98);
 }
 
 /* Zen Flow Canvas */
@@ -1051,11 +1072,11 @@ h1, h2, h3 {
 
 /* Light mode overrides for mini-timer */
 :root.light-mode .mini-timer-inner {
-  box-shadow: 0 4px 24px rgba(176, 141, 87, 0.2), 0 0 0 1px rgba(176, 141, 87, 0.15);
+  box-shadow: 0 4px 24px rgba(95, 80, 157, 0.2), 0 0 0 1px rgba(95, 80, 157, 0.15);
 }
 
 :root.light-mode .mini-timer-inner:hover {
-  box-shadow: 0 6px 32px rgba(176, 141, 87, 0.3);
+  box-shadow: 0 6px 32px rgba(95, 80, 157, 0.3);
 }
 
 :root.light-mode .mini-timer-bar {
@@ -1232,11 +1253,11 @@ h1, h2, h3 {
 :root.light-mode .primary-btn {
   background: linear-gradient(135deg, var(--accent-primary), #8b7355);
   color: #fff;
-  box-shadow: 0 4px 20px rgba(176, 141, 87, 0.3);
+  box-shadow: 0 4px 20px rgba(95, 80, 157, 0.3);
 }
 
 :root.light-mode .primary-btn:hover {
-  box-shadow: 0 6px 30px rgba(176, 141, 87, 0.4);
+  box-shadow: 0 6px 30px rgba(95, 80, 157, 0.4);
 }
 
 .secondary-btn {
@@ -1279,7 +1300,7 @@ h1, h2, h3 {
 }
 
 :root.light-mode .preset-btn.active {
-  background: rgba(176, 141, 87, 0.15);
+  background: rgba(95, 80, 157, 0.15);
   color: var(--accent-primary);
 }
 
@@ -1322,7 +1343,7 @@ h1, h2, h3 {
 }
 
 :root.light-mode .flashcard-face {
-  box-shadow: 0 10px 40px rgba(67, 52, 34, 0.08);
+  box-shadow: 0 10px 40px rgba(49, 38, 59, 0.08);
 }
 
 .flashcard-back {
@@ -1345,7 +1366,7 @@ h1, h2, h3 {
 }
 
 :root.light-mode .card-badge {
-  background: rgba(176, 141, 87, 0.15);
+  background: rgba(95, 80, 157, 0.15);
   color: var(--accent-primary);
 }
 
@@ -1501,7 +1522,7 @@ h1, h2, h3 {
 }
 
 :root.light-mode .view-switch.active {
-  background: rgba(176, 141, 87, 0.15);
+  background: rgba(95, 80, 157, 0.15);
   color: var(--accent-primary);
 }
 
@@ -1672,8 +1693,8 @@ h1, h2, h3 {
 }
 
 :root.light-mode .tech-stack-modal {
-  background: rgba(252, 248, 232, 0.95);
-  box-shadow: 0 20px 40px rgba(67, 52, 34, 0.15);
+  background: rgba(255, 252, 252, 0.95);
+  box-shadow: 0 20px 40px rgba(49, 38, 59, 0.15);
 }
 
 .tech-stack-overlay.active .tech-stack-modal {
@@ -1753,7 +1774,7 @@ h1, h2, h3 {
 }
 
 :root.light-mode .tech-stack-item:hover {
-  border-color: rgba(176, 141, 87, 0.3);
+  border-color: rgba(95, 80, 157, 0.3);
 }
 
 .tech-stack-icon-wrapper {
@@ -1831,7 +1852,7 @@ h1, h2, h3 {
 }
 
 :root.light-mode .concept-card--tabs {
-  border-color: rgba(67, 52, 34, 0.06);          /* near-invisible in light mode */
+  border-color: rgba(49, 38, 59, 0.06);          /* near-invisible in light mode */
 }
 
 /* ── Tab bar ── */
@@ -1991,15 +2012,15 @@ h1, h2, h3 {
 }
 
 :root.light-mode .github-link-btn {
-  background: linear-gradient(135deg, rgba(176, 141, 87, 0.05) 0%, rgba(125, 107, 93, 0.05) 100%);
+  background: linear-gradient(135deg, rgba(95, 80, 157, 0.05) 0%, rgba(164, 119, 178, 0.05) 100%);
   border: 1px solid var(--border-color);
-  box-shadow: 0 2px 8px rgba(67, 52, 34, 0.03);
+  box-shadow: 0 2px 8px rgba(49, 38, 59, 0.03);
 }
 
 :root.light-mode .github-link-btn:hover {
   border-color: var(--accent-primary);
-  background: linear-gradient(135deg, rgba(176, 141, 87, 0.12) 0%, rgba(125, 107, 93, 0.12) 100%);
-  box-shadow: 0 4px 12px rgba(176, 141, 87, 0.1);
+  background: linear-gradient(135deg, rgba(95, 80, 157, 0.12) 0%, rgba(164, 119, 178, 0.12) 100%);
+  box-shadow: 0 4px 12px rgba(95, 80, 157, 0.1);
 }
 
 .tutorial-nav-link.previous {
@@ -2095,9 +2116,9 @@ h1, h2, h3 {
 
 :root.light-mode .tutorial-tab-btn.active {
   color: var(--accent-primary);
-  background: rgba(176, 141, 87, 0.12);
-  border-color: rgba(176, 141, 87, 0.3);
-  border-bottom-color: rgba(176, 141, 87, 0.12);
+  background: rgba(95, 80, 157, 0.12);
+  border-color: rgba(95, 80, 157, 0.3);
+  border-bottom-color: rgba(95, 80, 157, 0.12);
 }
 
 /* ── Tablet (641 – 1024px) ── */

@@ -45,7 +45,7 @@ const claudeSubagentsConcept = {
             <p style="margin: 0; font-size: 0.9rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">The benefit:</strong> Each subagent concentrates on its phase, without context from other stages creating noise.</p>
           </div>
 
-          <div style="margin: 1.5rem 0; padding: 1rem 1.25rem; background: rgba(0, 242, 255, 0.05); border-left: 4px solid var(--accent-primary); border-radius: 0 8px 8px 0;">
+          <div style="margin: 1.5rem 0; padding: 1rem 1.25rem; background: rgba(0, 242, 255, 0.05); border-radius: 8px;">
             <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--text-primary);">
               <strong style="color: var(--accent-primary);">Pro-tip:</strong> When a task requires exploring ten or more files, or involves three or more independent pieces of work, that's a strong signal to direct Claude toward subagents.
             </p>
@@ -123,21 +123,21 @@ Return a summary of each, not the full file contents.</code>
           <p style="margin-bottom: 1rem; line-height: 1.75;">Tips for effective conversational invocation include:</p>
 
           <ul style="margin: 0 0 1.5rem 0; padding-left: 1.5rem; line-height: 1.8; list-style: none;">
-            <li style="margin-bottom: 1rem; padding-left: 0.5rem; border-left: 3px solid var(--accent-primary);">
+            <li style="margin-bottom: 1rem; padding-left: 0.5rem;">
               <strong style="color: var(--text-primary);">Scope tasks clearly.</strong> <span style="color: var(--text-secondary);">"Explore how payments work" beats "explore everything."</span>
             </li>
-            <li style="margin-bottom: 1rem; padding-left: 0.5rem; border-left: 3px solid var(--accent-primary);">
+            <li style="margin-bottom: 1rem; padding-left: 0.5rem;">
               <strong style="color: var(--text-primary);">Request parallelization explicitly.</strong> <span style="color: var(--text-secondary);">Say "these can run in parallel" or "work on all three simultaneously."</span>
             </li>
-            <li style="margin-bottom: 1rem; padding-left: 0.5rem; border-left: 3px solid var(--accent-primary);">
+            <li style="margin-bottom: 1rem; padding-left: 0.5rem;">
               <strong style="color: var(--text-primary);">Specify what should be returned.</strong> <span style="color: var(--text-secondary);">Summaries, specific findings, or recommendations. Naming the output format helps Claude deliver it.</span>
             </li>
-            <li style="margin-bottom: 0; padding-left: 0.5rem; border-left: 3px solid var(--accent-primary);">
+            <li style="margin-bottom: 0; padding-left: 0.5rem;">
               <strong style="color: var(--text-primary);">Ask for fresh context when unbiased analysis matters.</strong> <span style="color: var(--text-secondary);">"Use a subagent that does not see our previous discussion" ensures clean evaluation.</span>
             </li>
           </ul>
 
-          <div style="margin-top: 2rem; padding: 1rem 1.25rem; background: rgba(0, 242, 255, 0.05); border-left: 4px solid var(--accent-primary); border-radius: 0 8px 8px 0;">
+          <div style="margin-top: 2rem; padding: 1rem 1.25rem; background: rgba(0, 242, 255, 0.05); border-radius: 8px;">
             <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--text-primary);">
               <strong style="color: var(--accent-primary);">Pro-tip:</strong> When a subagent is taking a while, <code>Ctrl+B</code> sends it to the background. The conversation can continue while it runs, and results surface automatically when it finishes. The <code>/tasks</code> command shows anything running in the background.
             </p>
@@ -285,7 +285,7 @@ exit 0</code>
           <h2 style="margin-bottom: 1.5rem; color: var(--accent-primary); font-size: 1.4rem;">The Scenario</h2>
           <p style="margin-bottom: 1.5rem; line-height: 1.6;">You're an <strong>investigative journalist</strong> at the NYT or WSJ. Your editor walks over and says:</p>
           
-          <blockquote style="margin: 0 0 2rem 0; padding: 1.25rem 1.5rem; background: var(--surface-color); border-left: 4px solid var(--accent-primary); border-radius: 0 8px 8px 0; font-style: italic; line-height: 1.6; color: var(--text-primary);">
+          <blockquote style="margin: 0 0 2rem 0; padding: 1.25rem 1.5rem; background: var(--surface-color); border-radius: 8px; font-style: italic; line-height: 1.6; color: var(--text-primary);">
             "I need a full investigative piece on the surge in corporate bankruptcies this year &mdash; background research, court document analysis, expert source quotes, a competitor comparison on how we've covered it differently from the other paper, and a polished first draft ready for my desk by 4pm."
           </blockquote>
 
@@ -453,7 +453,7 @@ exit 0</code>
           </div>
         </div>
 
-        <div style="margin: 2rem 0; padding: 1rem 1.25rem; background: rgba(0, 242, 255, 0.05); border-left: 4px solid var(--accent-primary); border-radius: 0 8px 8px 0;">
+        <div style="margin: 2rem 0; padding: 1rem 1.25rem; background: rgba(0, 242, 255, 0.05); border-radius: 8px;">
           <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--text-primary);">
             <strong style="color: var(--accent-primary);">Worth knowing:</strong> Explore and Plan deliberately skip your CLAUDE.md files and the session's git status to stay fast and cheap. Every other built-in and custom subagent loads both. If a project rule matters to the research (<em>"ignore the vendor/ directory"</em>), restate it in the prompt you give Claude when delegating.
           </p>
@@ -575,7 +575,7 @@ export function useDarkMode() {
 
         <p style="margin-bottom: 1.25rem; line-height: 1.75;">Subagents are defined in Markdown files with YAML frontmatter. The fastest way to make one is to ask Claude to write the file for you — describe what you want, then review what it wrote.</p>
 
-        <div style="margin-bottom: 2rem; padding: 1rem 1.25rem; background: rgba(255, 0, 255, 0.05); border-left: 4px solid var(--accent-magenta); border-radius: 0 8px 8px 0;">
+        <div style="margin-bottom: 2rem; padding: 1rem 1.25rem; background: rgba(255, 0, 255, 0.05); border-radius: 8px;">
           <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--text-primary);">
             <strong style="color: var(--accent-magenta);">Changed in v2.1.198:</strong> <code>/agents</code> no longer opens an interactive creation wizard. Running it now prints a reminder to ask Claude or edit the agents directories directly. The file format, frontmatter fields, and <code>.claude/agents/</code> and <code>~/.claude/agents/</code> locations are all unchanged — only the terminal wizard is gone. If you're on v2.1.197 or earlier, <code>/agents</code> still opens the old <strong>Running</strong> / <strong>Library</strong> interface.
           </p>
@@ -647,7 +647,7 @@ the problem, show the current code, and provide an improved version.</code>
           <p style="line-height: 1.6; color: var(--text-secondary); font-size: 0.9rem;">You can also create subagents manually as Markdown files, define them via CLI flags, or distribute them through plugins. The next sections covers few of the configuration options.</p>
         </div>
 
-        <div style="margin-top: 2rem; padding: 1rem 1.25rem; background: rgba(0, 242, 255, 0.05); border-left: 4px solid var(--accent-primary); border-radius: 0 8px 8px 0;">
+        <div style="margin-top: 2rem; padding: 1rem 1.25rem; background: rgba(0, 242, 255, 0.05); border-radius: 8px;">
           <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--text-primary);">
             <strong style="color: var(--accent-primary);">Pro-tip:</strong> The <code>description</code> field is what Claude uses to decide when to delegate. Be specific about the trigger conditions, not just the capability. <em>"Reviews code for security issues before commits"</em> routes better than <em>"security expert."</em>
           </p>
@@ -1108,7 +1108,7 @@ Continue that code review and now analyze the authorization logic
           <div style="margin-bottom: 2rem;">
             <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--text-primary);">Isolate high-volume operations</strong>
             <p style="margin-bottom: 1rem; line-height: 1.6;">One of the most effective uses for subagents is isolating operations that produce large amounts of output. By delegating these to a subagent, the verbose output stays in the subagent’s context while only the relevant summary returns to your main conversation.</p>
-            <div style="padding: 0.75rem 1rem; background: var(--surface-color); border-left: 3px solid var(--accent-primary); border-radius: 0 4px 4px 0; font-style: italic; font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+            <div style="padding: 0.75rem 1rem; background: var(--surface-color); border-radius: 4px; font-style: italic; font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
               "Use a subagent to run the test suite and report only the failing tests with their error messages"
             </div>
           </div>
@@ -1116,7 +1116,7 @@ Continue that code review and now analyze the authorization logic
           <div style="margin-bottom: 2rem;">
             <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--text-primary);">Run parallel research</strong>
             <p style="margin-bottom: 1rem; line-height: 1.6;">For independent investigations, spawn multiple subagents to work simultaneously:</p>
-            <div style="padding: 0.75rem 1rem; background: var(--surface-color); border-left: 3px solid var(--accent-primary); border-radius: 0 4px 4px 0; font-style: italic; font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1rem;">
+            <div style="padding: 0.75rem 1rem; background: var(--surface-color); border-radius: 4px; font-style: italic; font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1rem;">
               "Research the authentication, database, and API modules in parallel using separate subagents"
             </div>
             <p style="margin-bottom: 1rem; line-height: 1.6; color: var(--text-secondary);">Each subagent explores its area independently, then Claude synthesizes the findings. This works best when the research paths don’t depend on each other. When subagents complete, their results return to your main conversation. Running many subagents that each return detailed results can consume significant context.</p>
@@ -1126,7 +1126,7 @@ Continue that code review and now analyze the authorization logic
           <div style="margin-bottom: 2rem;">
             <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--text-primary);">Chain subagents</strong>
             <p style="margin-bottom: 1rem; line-height: 1.6;">For multi-step workflows, ask Claude to use subagents in sequence. Each subagent completes its task and returns results to Claude, which then passes relevant context to the next subagent.</p>
-            <div style="padding: 0.75rem 1rem; background: var(--surface-color); border-left: 3px solid var(--accent-primary); border-radius: 0 4px 4px 0; font-style: italic; font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+            <div style="padding: 0.75rem 1rem; background: var(--surface-color); border-radius: 4px; font-style: italic; font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
               "Use the code-reviewer subagent to find performance issues, then use the optimizer subagent to fix them"
             </div>
           </div>
@@ -1134,7 +1134,7 @@ Continue that code review and now analyze the authorization logic
           <div style="margin-top: 3.5rem; border-top: 1px solid var(--border-color); padding-top: 2rem;">
             <strong style="display:block; margin-bottom:1.5rem; font-size:1.2rem; color: var(--accent-primary);">Choose between subagents and main conversation</strong>
             
-            <p style="margin-bottom: 2rem; padding: 1rem 1.25rem; background: var(--surface-color); border-left: 4px solid var(--accent-primary); border-radius: 0 8px 8px 0; font-style: italic; line-height: 1.6; color: var(--text-secondary); font-size: 1rem;">
+            <p style="margin-bottom: 2rem; padding: 1rem 1.25rem; background: var(--surface-color); border-radius: 8px; font-style: italic; line-height: 1.6; color: var(--text-secondary); font-size: 1rem;">
               "Think of your main conversation as your desk &mdash; the space where you do your main work and think clearly. A subagent is like sending a colleague to another room to do some research or grunt work. They go away, do the job, and come back with only the answer you need. Your desk stays clean the whole time."
             </p>
             

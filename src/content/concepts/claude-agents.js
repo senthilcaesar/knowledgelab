@@ -9,14 +9,14 @@ const claudeAgentsConcept = {
       content: `
 <p style="margin-bottom:1rem; line-height:1.75;">Agent teams let you coordinate <strong>multiple Claude Code instances working together</strong>. One session acts as the team lead, coordinating work, assigning tasks, and synthesizing results. Teammates work independently, each in its own context window, and can communicate directly with each other.</p>
 
-<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1rem 0;">
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; margin: 1rem 0;">
   <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
     &#x1F5DE; Think of it like a newsroom
   </p>
   <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">An <strong>editor-in-chief</strong> (the Team Lead) assigns three reporters to research different angles of a story <em>in parallel</em>. Each reporter works independently, then submits findings. The editor synthesizes everything into the final piece &mdash; simultaneously, not one at a time.</p>
 </div>
 
-<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-secondary); border-radius: 12px; margin: 1rem 0;">
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; margin: 1rem 0;">
   <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
     &#x26A1; How this differs from Subagents
   </p>
@@ -84,7 +84,7 @@ const claudeAgentsConcept = {
 
 <p style="margin-bottom:1rem; line-height:1.75;">Agent teams are an <strong>experimental feature</strong> that must be enabled with an environment variable before you can use them. Without this flag, Claude Code will not offer team coordination — it will just run as a normal single session.</p>
 
-<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 0 0 1.5rem 0;">
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; margin: 0 0 1.5rem 0;">
   <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
     <span style="color: var(--accent-primary);">📋</span> Before you begin
   </p>
@@ -215,7 +215,7 @@ source ~/.zshrc   # reload (use ~/.bashrc if on bash)</code></pre>
   <li style="margin-bottom: 0.5rem;">
     <strong>Start a tmux session:</strong> Before launching Claude Code, you must start a tmux session so it can manage your terminal panes.
     <pre style="display: block; padding: 0.75rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>tmux new -s claude-session</code></pre>
-    <div style="padding: 0.75rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 3px solid var(--accent-primary); border-radius: 8px; margin: 0.5rem 0; font-size: 0.85rem; line-height: 1.5;">
+    <div style="padding: 0.75rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-size: 0.85rem; line-height: 1.5;">
       <strong>Mac / iTerm2 Users:</strong> Start tmux with native window integration for the best native-tab experience:<br>
       <code style="color: var(--code-green); font-family: 'JetBrains Mono', monospace; margin-top: 0.25rem; display: inline-block;">tmux -CC new -s claude-session</code>
     </div>
@@ -247,7 +247,7 @@ source ~/.zshrc   # reload (use ~/.bashrc if on bash)</code></pre>
   </p>
 </div>
 
-<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1rem 0;">
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; margin: 1rem 0;">
   <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
     <span style="color: var(--accent-primary);">💡</span> Pro Tip
   </p>
@@ -345,7 +345,7 @@ lead synthesize all findings into a summary.</code></pre>
 
 <h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Split-Pane Mode (Recommended with tmux)</h3>
 
-<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--code-green); border-radius: 12px; margin: 1rem 0;">
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; margin: 1rem 0;">
   <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
     <span style="color: var(--code-green);">✨</span> Automatic Layout
   </p>
@@ -430,7 +430,7 @@ stereotype and anchoring bias in the last decade.</code></pre>
 <pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); white-space: pre-wrap;"><code>Add a section about researchers early work on implicit bias and
 discriminatory behavior and how it influenced current practices.</code></pre>
 
-<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1rem 0;">
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; margin: 1rem 0;">
   <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
     <span style="color: var(--accent-primary);">💡</span> Key Insight
   </p>
@@ -454,7 +454,7 @@ discriminatory behavior and how it influenced current practices.</code></pre>
       content: `
 <h2 style="margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 5 — Manage Tasks</h2>
 
-<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 0 0 1.5rem 0;">
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; margin: 0 0 1.5rem 0;">
   <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
     &#x1F4CB; What is the Shared Task List?
   </p>
@@ -525,7 +525,7 @@ compile a prioritized action list.</code></pre>
       content: `
 <h2 style="margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 6 — Approval Mode</h2>
 
-<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 0 0 1.5rem 0;">
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; margin: 0 0 1.5rem 0;">
   <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
     &#x1F6E1; Why use Plan Approval?
   </p>
@@ -602,7 +602,7 @@ Require plan approval before they make any changes.</code></pre>
 <pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); white-space: pre-wrap;"><code>Tell the lead to only approve plans that include test coverage
 and don't modify the database schema.</code></pre>
 
-<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1rem 0;">
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; margin: 1rem 0;">
   <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
     <span style="color: var(--accent-primary);">💡</span> When to Use Plan Approval
   </p>
@@ -639,7 +639,7 @@ and don't modify the database schema.</code></pre>
 
 <h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Cleaning Up the Team</h3>
 
-<div style="padding: 1.25rem; background: rgba(0, 242, 255, 0.05); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 0 0 1rem 0;">
+<div style="padding: 1.25rem; background: rgba(0, 242, 255, 0.05); border: 1px solid var(--border-color); border-radius: 12px; margin: 0 0 1rem 0;">
   <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">✅ There is no cleanup step anymore</p>
   <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">Since <strong>v2.1.178</strong>, the team's shared directories are removed automatically when the session ends. You don't need to shut teammates down first, and there's no "clean up the team" command to run.</p>
 </div>
@@ -870,7 +870,7 @@ severity ratings."</code></pre>
 # No cleanup command needed — shared directories are removed
 # automatically when the session ends</code></pre>
 
-<div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 8px; margin: 1rem 0;">
+<div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 1rem 0;">
   <p style="margin: 0; line-height:1.6; color: var(--text-secondary);"><strong style="color: var(--accent-primary);">Model defaults:</strong> teammates don't follow the lead's <code style="font-family: monospace; color: var(--code-text);">/model</code> selection unless you say so in the prompt, or set <strong>Default teammate model</strong> in <code style="font-family: monospace; color: var(--code-text);">/config</code> to "Default (leader's model)". They <em>do</em> inherit the lead's effort level. A teammate's model is fixed once it spawns.</p>
 </div>
 
@@ -1020,7 +1020,7 @@ severity ratings."</code></pre>
   </tbody>
 </table>
 
-<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-primary); border-radius: 12px; margin: 1rem 0;">
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; margin: 1rem 0;">
   <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
     <span style="color: var(--accent-primary);">🎓</span> Next Steps for Your Learning
   </p>

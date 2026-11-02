@@ -45,7 +45,7 @@ concepts/
 
 - 🌙 **Dark / Light theme toggle** (top-right button) — persisted in `localStorage`
   - Dark: futuristic neon (cyan, violet, magenta)
-  - Light: warm "Parchment" reading theme (`#fcf8e8`, ink-brown text)
+  - Light: Hex-inspired theme (warm near-white `#fffcfc`, eggplant text, violet-topaz accents, flat page with a fine paper-grain overlay)
 - 🧠 **Neural Constellation Web** — live canvas animation in the background (home screen only)
 - 🔲 **Sidebar toggle** (`‹` button in top-bar) — collapses/expands with smooth CSS transition; persisted in `localStorage`
 - 🏠 **Home navigation** — clicking "KnowledgeLab" title resets to the welcome screen
@@ -98,9 +98,9 @@ All colors are CSS variables defined in `:root` (dark) and `:root.light-mode` (l
 
 | Variable           | Dark value          | Light value        |
 |--------------------|---------------------|--------------------|
-| `--bg-color`       | `#050507`           | `#fcf8e8`          |
-| `--text-primary`   | `#f0f0f5`           | `#3d3021`          |
-| `--accent-primary` | `#00f2ff` (cyan)    | `#b08d57` (brass)  |
-| `--accent-secondary` | `#7000ff` (violet) | `#7d6b5d` (earth) |
+| `--bg-color`       | `#050507`           | `#fffcfc`          |
+| `--text-primary`   | `#f0f0f5`           | `#31263b`          |
+| `--accent-primary` | `#00f2ff` (cyan)    | `#5f509d` (violet topaz) |
+| `--accent-secondary` | `#7000ff` (violet) | `#a477b2` (amethyst) |
 
 Fonts: headings use `Outfit 800`, body uses `Inter`.
