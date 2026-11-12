@@ -1,6 +1,7 @@
 import './style.css';
 import { initConstellation } from './constellation.js';
 import { applyCodeColors } from './code-color.js';
+import { buildSearchIndex, search, renderResults, highlightMatches } from './search.js';
 import pkg from '../package.json';
 
 import concepts from './content/concepts/index.js';
@@ -32,6 +33,8 @@ const studyMode = {
 
 const app = {
   activeConcept: null,
+  searchIndex: null,
+  showingSearchResults: false,
 
   resetContentScroll() {
     const contentArea = document.getElementById('content-area');
@@ -109,7 +112,7 @@ const app = {
       if (e.target.classList.contains('nav-item')) {
         const id = e.target.dataset.id;
         if (this.isMobile()) this.closeMobileSidebar();
-        this.selectConcept(id);
+        this.selectConcept(id, { query: document.getElementById('concept-search').value });
       }
     });
 
@@ -152,13 +155,42 @@ const app = {
       this.renderWelcome();
     });
 
-    // Search functionality
-    document.getElementById('concept-search').addEventListener('input', (e) => {
-      const query = e.target.value.toLowerCase();
-      const items = document.querySelectorAll('.nav-item');
-      items.forEach((item) => {
-        const text = item.textContent.toLowerCase();
-        item.style.display = text.includes(query) ? 'block' : 'none';
+    // Full-text search: filters the sidebar and lists matching content
+    const searchInput = document.getElementById('concept-search');
+    const searchClear = document.getElementById('search-clear');
+    let searchTimer = null;
+    searchInput.addEventListener('input', () => {
+      searchClear.hidden = !searchInput.value;
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => this.runSearch(searchInput.value), 120);
+    });
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        clearTimeout(searchTimer);
+        this.runSearch(searchInput.value);
+        document.querySelector('.search-results .search-hit, .search-results .search-group-title')?.click();
+      } else if (e.key === 'Escape') {
+        searchInput.value = '';
+        searchClear.hidden = true;
+        this.runSearch('');
+      }
+    });
+    searchClear.addEventListener('click', () => {
+      clearTimeout(searchTimer);
+      searchInput.value = '';
+      searchClear.hidden = true;
+      this.runSearch('');
+      searchInput.focus();
+    });
+
+    // Clicking a search result opens that concept/tab with matches highlighted
+    document.getElementById('content-area').addEventListener('click', (e) => {
+      const hit = e.target.closest('.search-hit, .search-group-title');
+      if (!hit) return;
+      const tab = hit.dataset.tab;
+      this.selectConcept(hit.dataset.concept, {
+        tabIndex: tab === undefined ? null : Number(tab),
+        query: searchInput.value,
       });
     });
 
@@ -219,9 +251,53 @@ const app = {
     });
   },
 
-  selectConcept(id) {
+  runSearch(rawQuery) {
+    const query = rawQuery.trim();
+    const items = document.querySelectorAll('.nav-item');
+    const contentArea = document.getElementById('content-area');
+
+    if (!query) {
+      items.forEach((item) => (item.style.display = ''));
+      if (this.showingSearchResults) {
+        this.showingSearchResults = false;
+        if (this.activeConcept) {
+          this.renderConcept(this.activeConcept);
+        } else {
+          this.renderWelcome();
+        }
+      }
+      return;
+    }
+
+    if (!this.searchIndex) this.searchIndex = buildSearchIndex(concepts);
+    const results = search(this.searchIndex, concepts, query);
+    const matchedIds = new Set(results.map((r) => r.conceptId));
+    items.forEach((item) => {
+      item.style.display = matchedIds.has(item.dataset.id) ? '' : 'none';
+    });
+
+    this.showingSearchResults = true;
+    document.getElementById('constellation-bg').style.display = 'none';
+    contentArea.classList.remove('content-area--tabbed');
+    contentArea.innerHTML = renderResults(results, query);
+    contentArea.scrollTop = 0;
+  },
+
+  highlightInActivePanel(query) {
+    const root =
+      document.querySelector('.tutorial-tab-panel.active .concept-content') ||
+      document.getElementById('concept-description');
+    const marks = highlightMatches(root, query);
+    if (marks.length) {
+      marks[0].classList.add('search-highlight--current');
+      requestAnimationFrame(() => marks[0].scrollIntoView({ block: 'center' }));
+    }
+  },
+
+  selectConcept(id, { tabIndex = null, query = '' } = {}) {
     const concept = concepts.find((c) => c.id === id);
     if (!concept) return;
+    this.showingSearchResults = false;
 
     // Update URL hash
     if (window.location.hash !== `#${id}`) {
@@ -242,6 +318,11 @@ const app = {
 
     this.renderConcept(concept);
     this.resetContentScroll();
+
+    if (tabIndex !== null) {
+      document.querySelector(`.tutorial-tab-btn[data-tab="${tabIndex}"]`)?.click();
+    }
+    if (query.trim()) this.highlightInActivePanel(query);
   },
 
   renderConcept(concept) {

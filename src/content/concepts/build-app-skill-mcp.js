@@ -222,8 +222,8 @@ firebase login</pre>
   <p style="margin: 0 0 0.4rem; font-weight: 600; color: var(--text-primary);">💡 Pro Tip: Inspect your skills</p>
   <p style="margin: 0; color: var(--text-secondary); line-height: 1.6;">You can always view your installed Gemini and Antigravity skills at these paths:</p>
   <ul style="margin: 0.4rem 0 0 1.25rem; color: var(--text-secondary); line-height: 1.6; font-family: monospace; font-size: 0.85rem;">
-    <li>/Users/senthilpalanivelu/.gemini/skills</li>
-    <li>/Users/senthilpalanivelu/.gemini/antigravity/skills</li>
+    <li>~/.gemini/skills</li>
+    <li>~/.gemini/antigravity/skills</li>
   </ul>
 </div>
 

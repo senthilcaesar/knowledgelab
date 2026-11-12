@@ -88,7 +88,14 @@ const claudeAgentsConcept = {
   <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
     <span style="color: var(--accent-primary);">📋</span> Before you begin
   </p>
-  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">You need <strong>Claude Code v2.1.178 or later</strong> for the behaviour described here. Run the command below to check. If it's older, run <code style="padding: 0.1rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--syntax-text); font-family: monospace;">npm update -g @anthropic-ai/claude-code</code> to upgrade.</p>
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">You need <strong>Claude Code v2.1.178 or later</strong> for the behaviour described here. Run the command below to check. If it's older, run <code style="padding: 0.1rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--syntax-text); font-family: monospace;">claude update</code> to upgrade now (native installs also auto-update in the background). If you installed with npm, run <code style="padding: 0.1rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--syntax-text); font-family: monospace;">npm install -g @anthropic-ai/claude-code@latest</code> instead.</p>
+</div>
+
+<div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; margin: 0 0 1.5rem 0;">
+  <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
+    <span style="color: var(--accent-primary);">⚠️</span> Enabling teams changes ordinary delegation
+  </p>
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">While agent teams are enabled, any subagent that Claude <strong>names</strong> when it spawns it launches as a <strong>teammate</strong> &mdash; and Claude sometimes names subagents on its own, so a team can form even when you didn't ask for one. To get plain subagents back, set the variable to <code style="font-family: monospace; color: var(--code-text);">0</code>. Teams also need an interactive session: in non-interactive mode (<code style="font-family: monospace; color: var(--code-text);">claude -p</code>), including Agent SDK sessions, Claude never spawns teammates.</p>
 </div>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">Check your installed version:</p>
@@ -112,10 +119,10 @@ code ~/.claude/settings.json</code></pre>
 }</code></pre>
 
 <p style="margin-bottom:0.5rem; line-height:1.75; margin-top: 1.5rem;">Example real-world output:</p>
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>senthilpalanivelu@Senthils-MacBook-Pro-M4 ~/.claude$ pwd
-/Users/senthilpalanivelu/.claude</code></pre>
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>user@macbook ~/.claude$ pwd
+~/.claude</code></pre>
 
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>senthilpalanivelu@Senthils-MacBook-Pro-M4 ~/.claude$ cat settings.json 
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"><code>user@macbook ~/.claude$ cat settings.json 
 {
   "enabledPlugins": {
     "commit-commands@claude-plugins-official": true,
@@ -140,7 +147,7 @@ code ~/.claude/settings.json</code></pre>
     "py-helper-marketplace": {
       "source": {
         "source": "directory",
-        "path": "/Users/senthilpalanivelu/Downloads/my-claude-marketplace/py-helper-marketplace"
+        "path": "~/my-claude-marketplace/py-helper-marketplace"
       }
     }
   },
@@ -515,30 +522,30 @@ compile a prioritized action list.</code></pre>
     <span>←</span> Previous: Step 4
   </a>
   <a href="#" data-goto-tab="6" class="tutorial-nav-link">
-    Next: Step 6 – Plan Approval <span>→</span>
+    Next: Step 6 – Plan Mode <span>→</span>
   </a>
 </div>
 `,
     },
     {
-      label: "Step 6 – Approval",
+      label: "Step 6 – Plan Mode",
       content: `
-<h2 style="margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 6 — Approval Mode</h2>
+<h2 style="margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Step 6 — Plan Before Implementing</h2>
 
 <div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; margin: 0 0 1.5rem 0;">
   <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
-    &#x1F6E1; Why use Plan Approval?
+    &#x1F6E1; Why have teammates plan first?
   </p>
-  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">By default, teammates can read <em>and</em> write files. Approval mode makes a teammate <strong>read-only first</strong>: it proposes what it plans to do, and only proceeds once you say &ldquo;yes.&rdquo; Use this for risky changes so you stay in control.</p>
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">By default, teammates can read <em>and</em> write files. A teammate in <strong>plan mode</strong> explores read-only and writes up its approach before it touches anything. Note what this is <em>not</em>: it is not a gate where you sign off on each plan. You are never asked to approve a teammate's plan.</p>
 </div>
 
-<p style="margin-bottom:0.75rem; line-height:1.75;">For complex or risky tasks, you can require teammates to <strong>plan before implementing</strong>. The teammate works in read-only plan mode until the lead approves.</p>
+<p style="margin-bottom:0.75rem; line-height:1.75;">You can't ask for plan mode in the spawn prompt. A teammate works in plan mode only if Claude spawns it <strong>while the lead is in plan mode</strong>. So switch the lead into plan mode first (press <code style="font-family: monospace; color: var(--code-text);">Shift+Tab</code> until the status bar shows plan mode), then ask for the teammate.</p>
 
-<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Requesting Plan Approval</h3>
-<pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); white-space: pre-wrap;"><code>Spawn an "architect" teammate to refactor the authentication module.
-Require plan approval before they make any changes.</code></pre>
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Spawning a Planning Teammate</h3>
+<p style="margin-bottom:0.5rem; line-height:1.75;">With the lead already in plan mode:</p>
+<pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); white-space: pre-wrap;"><code>Spawn an "architect" teammate to refactor the authentication module.</code></pre>
 
-<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">The Approval Flow</h3>
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">What Happens to the Plan</h3>
 <div style="background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; font-family: 'JetBrains Mono', monospace;">
   <div style="border: 2px solid rgba(176, 141, 87, 0.75); padding: 0.9rem 1.1rem 1.5rem; position: relative;">
     <div style="text-align: center; font-size: 1.05rem; font-weight: 700; color: var(--text-primary); letter-spacing: 0.01em; margin-bottom: 0.9rem;">TEAMMATE (Read-Only)</div>
@@ -556,55 +563,49 @@ Require plan approval before they make any changes.</code></pre>
   <div style="text-align: center; color: rgba(176, 141, 87, 0.9); margin: 0.75rem 0 1rem; line-height: 1;">
     <div style="font-size: 1.2rem;">│</div>
     <div style="font-size: 1.2rem;">▼</div>
-    <div style="margin-top: 0.35rem; font-size: 0.98rem; font-weight: 500; color: var(--text-primary);">Plan Approval Request</div>
+    <div style="margin-top: 0.35rem; font-size: 0.98rem; font-weight: 500; color: var(--text-primary);">Plan Approval Request (sent to the lead)</div>
     <div style="margin-top: 0.35rem; font-size: 1.2rem;">│</div>
     <div style="font-size: 1.2rem;">▼</div>
   </div>
 
   <div style="border: 2px solid rgba(176, 141, 87, 0.75); padding: 0.9rem 1.1rem 1.35rem;">
-    <div style="text-align: center; font-size: 1.05rem; font-weight: 700; color: var(--text-primary); letter-spacing: 0.01em; margin-bottom: 0.9rem;">TEAM LEAD (YOU)</div>
-
-    <div style="border: 2px solid rgba(67, 52, 34, 0.14); padding: 1rem 1.15rem; margin: 0 auto 1rem; max-width: 92%; background: rgba(255,255,255,0.02);">
-      <div style="font-size: 1.02rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.55rem;">REVIEWING PLAN</div>
-      <ul style="margin: 0; padding-left: 1.3rem; color: var(--text-secondary); line-height: 1.6;">
-        <li>Checks for risks</li>
-        <li>Validates approach</li>
-      </ul>
-    </div>
+    <div style="text-align: center; font-size: 1.05rem; font-weight: 700; color: var(--text-primary); letter-spacing: 0.01em; margin-bottom: 0.9rem;">WHO HANDLES IT?</div>
 
     <div style="display: grid; grid-template-columns: repeat(2, minmax(180px, 1fr)); gap: 1.5rem; align-items: start;">
       <div style="text-align: center;">
-        <div style="color: #4f8f4f; font-weight: 700; margin-bottom: 0.4rem;">APPROVE</div>
+        <div style="color: #4f8f4f; font-weight: 700; margin-bottom: 0.4rem;">SPAWNED IN PLAN MODE</div>
+        <div style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.4rem;">Claude Code auto-approves at once &mdash; the lead doesn't review it</div>
         <div style="color: rgba(176, 141, 87, 0.9); font-size: 1.15rem; line-height: 1;">│</div>
         <div style="color: rgba(176, 141, 87, 0.9); font-size: 1.15rem; line-height: 1;">▼</div>
         <div style="display: inline-block; margin-top: 0.5rem; padding: 0.8rem 1rem; border: 2px solid rgba(79, 143, 79, 0.8); color: var(--text-primary); text-align: left;">
           <div style="font-weight: 700; margin-bottom: 0.25rem;">IMPLEMENT</div>
-          <div style="color: var(--text-secondary);">(Write Mode)</div>
+          <div style="color: var(--text-secondary);">(lead's mode, or Manual)</div>
         </div>
       </div>
 
       <div style="text-align: center;">
-        <div style="color: #d96b6b; font-weight: 700; margin-bottom: 0.4rem;">REJECT</div>
+        <div style="color: #d96b6b; font-weight: 700; margin-bottom: 0.4rem;">YOU SHIFT+TAB'D IT INTO PLAN MODE</div>
+        <div style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.4rem;">The lead reviews that plan (not you)</div>
         <div style="color: rgba(176, 141, 87, 0.9); font-size: 1.15rem; line-height: 1;">│</div>
         <div style="color: rgba(176, 141, 87, 0.9); font-size: 1.15rem; line-height: 1;">▼</div>
         <div style="display: inline-block; margin-top: 0.5rem; padding: 0.8rem 1rem; border: 2px solid rgba(217, 107, 107, 0.75); color: var(--text-primary); text-align: left;">
-          <div style="font-weight: 700; margin-bottom: 0.25rem;">FEEDBACK</div>
-          <div style="color: var(--text-secondary);">(Try Again)</div>
+          <div style="font-weight: 700; margin-bottom: 0.25rem;">APPROVE or SEND BACK</div>
+          <div style="color: var(--text-secondary);">(lead decides)</div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Controlling Approval Decisions</h3>
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Getting the Lead to Review a Plan</h3>
 
-<p style="margin-bottom:0.5rem; line-height:1.75;">Give the lead criteria for approval:</p>
-<pre style="display: block; padding: 1rem; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--code-green); white-space: pre-wrap;"><code>Tell the lead to only approve plans that include test coverage
-and don't modify the database schema.</code></pre>
+<p style="margin-bottom:0.75rem; line-height:1.75;">If you want the plan reviewed rather than auto-approved, put a <strong>running in-process teammate</strong> into plan mode yourself: select it in the agent panel, press Enter to view its session, then press <code style="font-family: monospace; color: var(--code-text);">Shift+Tab</code> until it shows plan mode. For that run, the lead reviews the plan and either approves it or sends it back for revision. You still aren't asked to approve it.</p>
+
+<p style="margin-bottom:0.75rem; line-height:1.75;">Once a plan is approved, the teammate leaves plan mode and starts implementing in the lead's current permission mode (or Manual, if the lead is itself in plan mode).</p>
 
 <div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; margin: 1rem 0;">
   <p style="margin-bottom: 0.5rem; line-height:1.75; color: var(--text-primary); font-weight: 600;">
-    <span style="color: var(--accent-primary);">💡</span> When to Use Plan Approval
+    <span style="color: var(--accent-primary);">💡</span> When to Have Teammates Plan First
   </p>
   <ul style="margin: 0 0 0 1.5rem; color: var(--text-secondary); line-height: 1.5;">
     <li style="margin-bottom: 0.25rem;">Refactoring critical systems</li>
@@ -852,14 +853,15 @@ severity ratings."</code></pre>
 # Assign specific roles
 "Spawn teammates: one focused on [A], one on [B], one on [C]"
 
-# Specify a model (teammates do NOT inherit the lead's /model)
+# Specify a model (otherwise teammates default to the lead's current model)
 "Create a team using Sonnet for each teammate"
 
 # Reuse an existing subagent definition as a teammate role
 "Spawn a teammate using the security-reviewer agent type"
 
-# Require plan approval
-"Require plan approval before making changes"
+# Have a teammate plan first: Shift+Tab the LEAD into plan mode,
+# then spawn it (its plan is auto-approved; you never approve it)
+"Spawn an architect teammate to refactor the auth module"
 
 # Talk to a teammate
 "Ask the [name] teammate to [additional instruction]"
@@ -871,7 +873,14 @@ severity ratings."</code></pre>
 # automatically when the session ends</code></pre>
 
 <div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 1rem 0;">
-  <p style="margin: 0; line-height:1.6; color: var(--text-secondary);"><strong style="color: var(--accent-primary);">Model defaults:</strong> teammates don't follow the lead's <code style="font-family: monospace; color: var(--code-text);">/model</code> selection unless you say so in the prompt, or set <strong>Default teammate model</strong> in <code style="font-family: monospace; color: var(--code-text);">/config</code> to "Default (leader's model)". They <em>do</em> inherit the lead's effort level. A teammate's model is fixed once it spawns.</p>
+  <p style="margin: 0; line-height:1.6; color: var(--text-secondary);"><strong style="color: var(--accent-primary);">Model defaults:</strong> Claude Code picks each teammate's model from the first of these that applies:</p>
+  <ol style="margin: 0.5rem 0 0.5rem 1.5rem; color: var(--text-secondary); line-height: 1.6;">
+    <li>The model your spawn prompt names for that teammate</li>
+    <li>For a teammate spawned from a subagent definition, the definition's <code style="font-family: monospace; color: var(--code-text);">model</code> (<code style="font-family: monospace; color: var(--code-text);">inherit</code> = the lead's model)</li>
+    <li><code style="font-family: monospace; color: var(--code-text);">CLAUDE_CODE_SUBAGENT_MODEL</code>, when set to anything other than <code style="font-family: monospace; color: var(--code-text);">inherit</code></li>
+    <li>The lead's current model</li>
+  </ol>
+  <p style="margin: 0; line-height:1.6; color: var(--text-secondary);">The old <code style="font-family: monospace; color: var(--code-text);">teammateDefaultModel</code> setting was removed in v2.1.234 and is ignored &mdash; name the model in your prompt instead. A teammate on the lead's model inherits the lead's effort level; a teammate on a different model doesn't automatically. A teammate's model is fixed once it spawns.</p>
 </div>
 
 <h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Keyboard Shortcuts (In-Process Mode)</h3>
@@ -1010,8 +1019,8 @@ severity ratings."</code></pre>
       <td style="padding: 0.75rem;">Shared coordination mechanism (pending, in progress, completed)</td>
     </tr>
     <tr style="border-bottom: 1px solid var(--border-color);">
-      <td style="padding: 0.75rem; font-weight: 600;">Plan Approval</td>
-      <td style="padding: 0.75rem;">Teammate plans before implementing (for risky work)</td>
+      <td style="padding: 0.75rem; font-weight: 600;">Plan Mode</td>
+      <td style="padding: 0.75rem;">Teammate spawned while the lead is in plan mode plans first; Claude Code auto-approves the plan (for risky work)</td>
     </tr>
     <tr>
       <td style="padding: 0.75rem; font-weight: 600;">In-Process vs Split Panes</td>
@@ -1027,7 +1036,7 @@ severity ratings."</code></pre>
   <ol style="margin: 0 0 0 1.5rem; color: var(--text-secondary); line-height: 1.75;">
     <li style="margin-bottom: 0.25rem;">Try a parallel code review on your current project</li>
     <li style="margin-bottom: 0.25rem;">Experiment with task dependencies for multi-stage workflows</li>
-    <li style="margin-bottom: 0.25rem;">Use plan approval for risky changes</li>
+    <li style="margin-bottom: 0.25rem;">Spawn teammates from a lead in plan mode for risky changes</li>
     <li style="margin-bottom: 0.25rem;">Compare agent teams with subagents to understand when each approach fits</li>
   </ol>
 </div>

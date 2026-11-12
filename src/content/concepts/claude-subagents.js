@@ -958,7 +958,7 @@ skills:
   - api-conventions
   - error-handling-patterns
 ---</code>
-            <p style="margin-top: 1rem; line-height: 1.6; color: var(--text-secondary);">The full content of each skill is injected into the subagent’s context, not just made available for invocation. Subagents don’t inherit skills from the parent conversation; you must list them explicitly.</p>
+            <p style="margin-top: 1rem; line-height: 1.6; color: var(--text-secondary);">The full content of each skill is injected into the subagent’s context, not just made available for invocation. This field controls which skills are preloaded, not which skills the subagent can access: without it, the subagent can still discover and invoke project, user, and plugin skills through the Skill tool. To block skill use entirely, omit <code>Skill</code> from <code>tools</code> or add it to <code>disallowedTools</code>.</p>
           </div>
 
           <div style="margin-top: 3.5rem; border-top: 1px solid var(--border-color); padding-top: 2.5rem;">
@@ -1088,7 +1088,7 @@ Continue that code review and now analyze the authorization logic
           <div style="padding: 0.75rem 1rem; background: var(--surface-color); border-radius: 4px; margin: 1rem 0;">
             <ul style="margin: 0; padding-left: 1.2rem; line-height: 1.8; font-size: 0.95rem; color: var(--text-secondary);">
               <li><strong style="color: var(--text-primary);">Depth:</strong> 3 layers, set by <code>CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</code> (<code>1</code> turns nesting off)</li>
-              <li><strong style="color: var(--text-primary);">Per session:</strong> 200 subagents total, set by <code>CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION</code>. <code>/clear</code> resets the count</li>
+              <li><strong style="color: var(--text-primary);">Per session:</strong> no limit on the total number of subagents spawned over a session</li>
               <li><strong style="color: var(--text-primary);">Concurrent:</strong> 20 running at once, set by <code>CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS</code></li>
             </ul>
           </div>

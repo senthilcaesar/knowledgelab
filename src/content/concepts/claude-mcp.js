@@ -60,7 +60,7 @@ const claudeMcpConcept = {
         "@21st-dev/magic@latest"
       ],
       "env": {
-        "API_KEY": "ab1115bb368968***************c8b2867599589"
+        "API_KEY": "YOUR_21ST_DEV_API_KEY"
       }
     }
   }
@@ -110,7 +110,7 @@ const claudeMcpConcept = {
         "@supadata/mcp"
       ],
       "env": {
-        "SUPADATA_API_KEY": "sd_2816a*************360eb7a803"
+        "SUPADATA_API_KEY": "YOUR_SUPADATA_API_KEY"
       }
     }
   }

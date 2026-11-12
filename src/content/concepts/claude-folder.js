@@ -684,8 +684,7 @@ Use plan mode for changes under \`src/billing/\`.</code></pre>
       "Bash(pytest *)",
       "Bash(pip install *)",
       "Bash(git *)",
-      "Read(**)",
-      "Write(**)"
+      "Edit(src/**)"
     ],
     "deny": [
       "Read(./.env)",
@@ -792,8 +791,7 @@ Use plan mode for changes under \`src/billing/\`.</code></pre>
       "Bash(git *)",
       "Bash(ruff *)",
       "Bash(black *)",
-      "Read(**)",
-      "Write(**)"
+      "Edit(src/**)"
     ],
     "deny": [
       "Read(./.env)",
@@ -819,7 +817,7 @@ Use plan mode for changes under \`src/billing/\`.</code></pre>
   <li><strong>Use wildcards smartly</strong> — <code style="color: var(--code-text);">Bash(pytest *)</code> lets Claude run any pytest variant without prompting you every time</li>
   <li><strong>Deny your <code style="color: var(--code-text);">.env</code> files</strong> — always deny access to <code style="color: var(--code-text);">.env</code> files and any directories containing secrets or credentials as a security best practice</li>
   <li><strong>Check your merged config</strong> — use <code style="color: var(--code-text);">/status</code> inside Claude Code to see each configuration layer (managed, user, project) along with its origin. If a settings file contains errors, <code style="color: var(--code-text);">/status</code> reports the issue so you can fix it.</li>
-  <li><strong>Arrays replace, objects merge</strong> — settings merge with a last-writer-wins strategy at the field level: arrays are replaced (not appended), objects are deep-merged. So if your project <code style="color: var(--code-text);">settings.json</code> has a <code style="color: var(--code-text);">permissions.allow</code> array, it replaces — not adds to — your global one.</li>
+  <li><strong>Permission lists merge, deny wins</strong> — list keys such as <code style="color: var(--code-text);">permissions.allow</code> are combined across settings files instead of one replacing another, so a project <code style="color: var(--code-text);">settings.json</code> adds its <code style="color: var(--code-text);">allow</code> rules to your global ones. Single values like <code style="color: var(--code-text);">model</code> still take the higher-priority file's value. And a <code style="color: var(--code-text);">deny</code> rule at any level beats an <code style="color: var(--code-text);">allow</code> rule.</li>
   <li><strong>Restart after changes</strong> — if you manually modify <code style="color: var(--code-text);">settings.json</code> and changes don't take effect, close all Claude Code windows, open a new terminal window, and run <code style="color: var(--code-text);">claude</code> again.</li>
 </ol>
 
@@ -1377,15 +1375,7 @@ paths:
 
 <hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
 
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 5 — Know the Current Limitation</strong>
-
-<p style="margin-bottom:1rem; line-height:1.75;">Path-scoped rules defined in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code> with a <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">paths:</code> frontmatter are only injected into context when Claude <strong>reads</strong> a file matching the pattern. They are not injected when Claude <strong>writes or creates</strong> a file matching the same pattern. This means rules targeting file creation conventions are silently ignored when a new file is created, because Claude never sees the rule at the time of writing.</p>
-
-<p style="margin-bottom:1rem; line-height:1.75;"><strong>Workaround for new file creation:</strong> As a practical fix, put your most critical "file creation" rules (e.g., required headers, boilerplate structure) into a global rule file without <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">paths:</code> frontmatter, so they're always in context regardless of whether Claude is reading or writing.</p>
-
-<hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
-
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 6 — Sharing Rules Across Projects</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 5 — Sharing Rules Across Projects</strong>
 
 <p style="margin-bottom:1rem; line-height:1.75;">The <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code> directory supports symlinks, allowing you to maintain a single source of rules shared across multiple projects:</p>
 
@@ -1436,9 +1426,7 @@ ln -s ~/company-standards/security.md .claude/rules/security.md</code></pre>
 
 <p style="margin-bottom:0.75rem; line-height:1.75;"><strong>3. One topic per file</strong> — name files after what they govern: <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">testing.md</code>, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">security.md</code>, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">api-design.md</code>. Never mix concerns in one rules file.</p>
 
-<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>4. Path-scoped rules are loaded on Read</strong> — because of the current limitation with Write, don't rely on path-scoped rules alone to enforce new-file conventions. Back them up with a global rule for the most critical requirements.</p>
-
-<p style="margin-bottom:1rem; line-height:1.75;"><strong>5. Don't duplicate your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code></strong> — Use <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> for what applies everywhere: routing logic, quality standards, coordination protocols. Keep it lean — everything here competes for high-priority attention. Use rules for what applies to specific areas: API patterns for API files, test requirements for test files.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>4. Don't duplicate your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code></strong> — Use <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> for what applies everywhere: routing logic, quality standards, coordination protocols. Keep it lean — everything here competes for high-priority attention. Use rules for what applies to specific areas: API patterns for API files, test requirements for test files.</p>
 
 <hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
 

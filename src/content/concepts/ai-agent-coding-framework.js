@@ -98,32 +98,35 @@ const aiAgentWorkflowsConcept = {
 </div>
 
 <div style="margin-top: 1.5rem;">
-  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Example: Compound Feature Build</strong>
-  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;"># Install the plugin
-npm install -g compound-engineering-plugin
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Install (Claude Code)</strong>
+  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;"># Inside a Claude Code session
+/plugin marketplace add EveryInc/compound-engineering-plugin
+/plugin install compound-engineering
 
-# Run a compound engineering task
-compound run feature \\
-  --spec "Add user authentication with JWT" \\
-  --agent claude-code \\
-  --steps spec,implement,test,document</pre>
+# Then, in any project
+/ce-setup     # report optional tools, create .compound-engineering/config.yaml
+/ce-help      # not sure which skill to run next? ask here</pre>
 </div>
 
 <div style="margin-top: 1.5rem;">
-  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Example: Chained Refactor + Test</strong>
-  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;"># Chain a refactor with test generation
-compound run refactor \\
-  --target src/auth/login.ts \\
-  --goal "Extract validation logic into a separate service" \\
-  --steps refactor,generate-tests,lint-fix</pre>
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Example: The Standard Loop</strong>
+  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;"># Rough idea → shipped, reviewed code
+/ce-brainstorm make background job retries safer
+/ce-plan
+/ce-work
+/ce-simplify-code
+/ce-code-review
+/ce-compound   # capture learnings into docs/solutions/</pre>
 </div>
 
 <div style="margin-top: 1.5rem;">
-  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Example: PR-Ready Pipeline</strong>
-  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;"># Full pipeline: design → code → test → PR description
-compound run pr-ready \\
-  --feature "Add rate limiting to /api/users" \\
-  --output-pr-body true</pre>
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Example: Autonomous Pipeline</strong>
+  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;"># Brainstorm first, then hand off the whole loop
+/ce-brainstorm describe the feature
+/lfg
+
+# Starting from a bug instead?  /ce-debug
+# Not sure what to build yet?   /ce-ideate</pre>
 </div>
 
 <div style="height: 10rem;"></div>
@@ -163,32 +166,27 @@ compound run pr-ready \\
 </div>
 
 <div style="margin-top: 1.5rem;">
-  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Example: Ship a Feature</strong>
-  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;"># Initialize GSD in your repo
-gsd init
-
-# Define a task with done criteria
-gsd task create \\
-  --title "Add dark mode toggle" \\
-  --done-when "tests pass, PR opened, screenshot attached"
-
-# Run the agent
-gsd run --task add-dark-mode-toggle --agent claude-code</pre>
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Install</strong>
+  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;"># Interactive installer: pick your runtime (Claude Code, Codex, Cursor, …)
+# and global vs local install
+npx @opengsd/gsd-core@latest</pre>
 </div>
 
 <div style="margin-top: 1.5rem;">
-  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Example: CI-Driven Re-run</strong>
-  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;"># Automatically re-queue agent on CI failure
-gsd watch --branch feature/dark-mode \\
-  --on-failure rerun-agent \\
-  --max-retries 3</pre>
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Example: Start a Project</strong>
+  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;"># Inside your agent session
+/gsd-new-project   # greenfield project
+/gsd-onboard       # existing codebase</pre>
 </div>
 
 <div style="margin-top: 1.5rem;">
-  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Example: Self-Review Before PR</strong>
-  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;"># Have the agent review its own diff before opening PR
-gsd run --task fix-auth-bug \\
-  --steps implement,self-review,open-pr</pre>
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Example: The Phase Loop</strong>
+  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;"># Discuss → Plan → Execute → Verify → Ship, one phase at a time
+/gsd-discuss-phase 1
+/gsd-plan-phase 1
+/gsd-execute-phase 1
+/gsd-verify-work 1
+/gsd-ship 1 --draft   # open a (draft) PR for the phase</pre>
 </div>
 
 <div style="height: 10rem;"></div>
@@ -219,7 +217,7 @@ gsd run --task fix-auth-bug \\
 <div style="margin-bottom: 2rem; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px;">
   <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">Key Features</strong>
   <ul style="margin-left: 1.25rem; line-height: 1.6;">
-    <li style="margin-bottom: 0.5rem;">⚡ <strong>Skills-as-code</strong> — define agent skills in structured YAML/Markdown with inputs, outputs, and success criteria</li>
+    <li style="margin-bottom: 0.5rem;">⚡ <strong>Skills-as-code</strong> — each skill is a folder with a <code>SKILL.md</code> (frontmatter + step-by-step instructions)</li>
     <li style="margin-bottom: 0.5rem;">🧪 <strong>Testable behaviours</strong> — every skill has an associated test harness</li>
     <li style="margin-bottom: 0.5rem;">🔀 <strong>Composable pipelines</strong> — chain skills into multi-step methodologies</li>
     <li style="margin-bottom: 0.5rem;">📖 <strong>Methodology-first</strong> — encodes proven dev practices (TDD, spec-first, review-then-merge)</li>
@@ -228,41 +226,38 @@ gsd run --task fix-auth-bug \\
 </div>
 
 <div style="margin-top: 1.5rem;">
-  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Example: Define a Skill</strong>
-  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;"># skills/write-tests.yaml
-name: write-tests
-description: Write unit tests for a given module
-inputs:
-  - module_path: string
-  - coverage_target: number (default: 80)
-outputs:
-  - test_file: string
-  - coverage_report: string
-success_criteria:
-  - all tests pass
-  - coverage >= coverage_target
-agent_prompt: |
-  Write comprehensive unit tests for {{ module_path }}.
-  Target {{ coverage_target }}% coverage. Use existing test patterns.</pre>
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Install (Claude Code)</strong>
+  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;"># From Anthropic's official marketplace
+/plugin install superpowers@claude-plugins-official
+
+# Or from the Superpowers marketplace
+/plugin marketplace add obra/superpowers-marketplace
+/plugin install superpowers@superpowers-marketplace</pre>
 </div>
 
 <div style="margin-top: 1.5rem;">
-  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Example: Compose a Methodology</strong>
-  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;"># methodologies/tdd-feature.yaml
-name: tdd-feature
-steps:
-  - skill: write-spec
-  - skill: write-tests
-  - skill: implement-to-pass-tests
-  - skill: refactor
-  - skill: open-pr</pre>
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Skill Layout</strong>
+  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;"># Each skill is a folder with a SKILL.md (not YAML files)
+skills/
+  brainstorming/SKILL.md
+  writing-plans/SKILL.md
+  test-driven-development/SKILL.md
+  subagent-driven-development/SKILL.md
+  requesting-code-review/SKILL.md
+  finishing-a-development-branch/SKILL.md</pre>
 </div>
 
 <div style="margin-top: 1.5rem;">
-  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Example: Run a Methodology</strong>
-  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;">superpowers run tdd-feature \\
-  --feature "Add email verification" \\
-  --agent claude-code</pre>
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Example: The Basic Workflow</strong>
+  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;"># Skills trigger automatically. There is no "run" command.
+1. brainstorming                  → draws out a design before any code
+2. using-git-worktrees            → isolated branch + clean test baseline
+3. writing-plans                  → bite-sized tasks with exact file paths
+4. subagent-driven-development    → fresh subagent per task, reviewed
+   (or executing-plans)
+5. test-driven-development        → RED-GREEN-REFACTOR
+6. requesting-code-review         → review against the plan
+7. finishing-a-development-branch → merge / PR / keep / discard</pre>
 </div>
 
 <div style="height: 10rem;"></div>
@@ -302,35 +297,37 @@ steps:
 </div>
 
 <div style="margin-top: 1.5rem;">
-  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Example: Performance Audit Skill</strong>
-  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;"># Run a performance audit skill
-agent-skills run performance-audit \\
-  --url https://myapp.com \\
-  --fix-suggestions true \\
-  --agent claude-code
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Install (Claude Code)</strong>
+  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;"># Marketplace install, inside a Claude Code session
+/plugin marketplace add addyosmani/agent-skills
+/plugin install agent-skills@addy-agent-skills
 
-# The agent will:
-# 1. Run Lighthouse against the URL
-# 2. Identify top 3 performance bottlenecks
-# 3. Generate specific code fixes for each
-# 4. Open a PR with the changes</pre>
+# Or any agent, via the open skills CLI
+npx skills add addyosmani/agent-skills
+npx skills add addyosmani/agent-skills --skill performance-optimization</pre>
 </div>
 
 <div style="margin-top: 1.5rem;">
-  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Example: Accessibility Skill</strong>
-  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;"># Check and fix accessibility issues
-agent-skills run accessibility-fix \\
-  --component src/components/Modal.tsx \\
-  --standard WCAG-AA</pre>
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Example: Lifecycle Commands</strong>
+  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;">/spec            # spec before code
+/plan            # small, atomic tasks
+/build           # one slice at a time  (/build auto runs the whole plan)
+/test            # tests are proof
+/agent-skills:review   # namespaced: /review is a built-in
+/webperf         # audit web performance
+/code-simplify   # clarity over cleverness
+/ship            # ship to production</pre>
 </div>
 
 <div style="margin-top: 1.5rem;">
-  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Example: Test Coverage Skill</strong>
-  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;"># Bring a module up to 90% test coverage
-agent-skills run improve-coverage \\
-  --module src/utils/formatters.ts \\
-  --target-coverage 90 \\
-  --test-framework vitest</pre>
+  <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Example: Skill Anatomy (SKILL.md)</strong>
+  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.9rem;">---
+name: performance-optimization
+description: Guides agents through [task]. Use when…
+---
+
+Overview · When to Use · Process ·
+Rationalizations · Red Flags · Verification</pre>
 </div>
 
 <div style="margin-top: 2rem; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px;">

@@ -85,7 +85,7 @@ const claudePluginsConcept = {
   </ul>
 </div>
 
-<p style="margin-bottom:0.75rem; line-height:1.75;">By the end, you will have a plugin that can review code, fix formatting, warn about secrets, and interact with Context7 for live Python documentation.</p>
+<p style="margin-bottom:0.75rem; line-height:1.75;">By the end, you will have a plugin that can review code, fix formatting, block hardcoded secrets, and interact with Context7 for live Python documentation.</p>
 
 <div style="margin-top: 2rem; display: flex; justify-content: flex-end; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="1" class="tutorial-nav-link">
@@ -154,7 +154,7 @@ const claudePluginsConcept = {
     <tr>
       <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Command</td>
       <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><strong>py-fix</strong></td>
-      <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">A manual slash command (<code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/py-helper:py-fix</code>) that instantly fixes style violations, adds missing docstrings, and applies type hints across the entire open file. It runs manually via an explicit slash command. You have to deliberately invoke it. It won't activate from conversation alone. py-fix is destructive (in the good sense) — it actually modifies the file and then summarizes what changed.</td>
+      <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">A manual slash command (<code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/py-helper:py-fix</code>) that instantly fixes style violations, adds missing docstrings, and applies type hints across the entire open file. It runs manually via an explicit slash command. You have to deliberately invoke it: its frontmatter sets <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">disable-model-invocation: true</code>, so Claude won't activate it from conversation alone. py-fix is destructive (in the good sense) — it actually modifies the file and then summarizes what changed.</td>
     </tr>
     <tr>
       <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Hook</td>
@@ -410,6 +410,7 @@ cat my-claude-marketplace/py-helper-marketplace/plugins/py-helper/skills/py-revi
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.5;"><code class="language-bash">cat > my-claude-marketplace/py-helper-marketplace/plugins/py-helper/commands/py-fix.md << 'EOF'
 ---
 description: "Automatically fix PEP 8 issues in a Python file"
+disable-model-invocation: true
 ---
  
 Look at the Python file at $ARGUMENTS (or the currently open file if no path is provided) and:
@@ -428,7 +429,8 @@ EOF</code></pre>
   
   <p style="margin-bottom:0.25rem; font-weight:700; color: var(--text-primary);">Frontmatter (YAML header <code style="color: var(--code-text);">---</code>)</p>
   <ul style="margin-bottom:1rem; padding-left: 1.25rem; color: var(--text-secondary); line-height: 1.6;">
-    <li><strong><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">description</code></strong> — a short summary of what the command does ("Automatically fix PEP 8 issues in a Python file"), used for display purposes in the marketplace and command palette. Notably, there is <strong>no auto-trigger definition</strong> here — this command only fires when explicitly invoked via <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/py-helper:py-fix</code></li>
+    <li><strong><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">description</code></strong> — a short summary of what the command does ("Automatically fix PEP 8 issues in a Python file"), used for display purposes in the marketplace and command palette. Claude also reads it to decide when a command is relevant, so on its own it would not stop auto-invocation</li>
+    <li><strong><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">disable-model-invocation</code></strong> — set to <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">true</code> so Claude never invokes the command automatically (the default is <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">false</code>). This is what makes it fire only when explicitly invoked via <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/py-helper:py-fix</code></li>
   </ul>
   
   <p style="margin-bottom:0.25rem; font-weight:700; color: var(--text-primary);">Body (Markdown instructions)</p>
@@ -438,14 +440,14 @@ EOF</code></pre>
     <li>It also requires Claude to produce a <strong>change summary</strong> explaining every modification made and why</li>
   </ul>
   
-  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);"><strong>How it differs from <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">SKILL.md</code>:</strong> while <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">SKILL.md</code> is read-only and report-based, <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">py-fix.md</code> is action-based and modifies actual files. It also uses <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">$ARGUMENTS</code> for explicit file targeting. The absence of an auto-trigger means the user retains full control over when fixes are applied — appropriate given that this command directly alters code.</p>
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);"><strong>How it differs from <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">SKILL.md</code>:</strong> while <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">SKILL.md</code> is read-only and report-based, <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">py-fix.md</code> is action-based and modifies actual files. It also uses <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">$ARGUMENTS</code> for explicit file targeting. Setting <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">disable-model-invocation: true</code> means the user retains full control over when fixes are applied — appropriate given that this command directly alters code.</p>
 </div>
 
 <div style="padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 1rem 0;">
   <p style="margin: 0 0 0.5rem; font-weight:700; color: var(--text-primary);">A note on <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">commands/</code> vs <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">skills/</code></p>
   <p style="margin: 0 0 0.75rem; line-height:1.75; color: var(--text-secondary);">Custom commands have been <strong>merged into skills</strong>. A flat file at <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">commands/py-fix.md</code> and a directory at <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">skills/py-fix/SKILL.md</code> both produce <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/py-helper:py-fix</code> and behave the same way. That's why the terminal reports <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">Skill(py-helper:py-fix)</code> when you run it, even though the file lives under <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">commands/</code>.</p>
   <p style="margin: 0 0 0.75rem; line-height:1.75; color: var(--text-secondary);">We keep <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">commands/</code> here to show both layouts side by side, but <strong>for new plugins prefer <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">skills/</code></strong>. A skill is a directory, so it can carry reference docs, templates, and scripts alongside its <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">SKILL.md</code>; a flat command file has to fit everything in the prompt. To move it, the file becomes <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">skills/py-fix/SKILL.md</code> with the same contents.</p>
-  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">One frontmatter field worth knowing: adding <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">disable-model-invocation: true</code> makes a skill invocable only by you, never picked up automatically by Claude. That's the explicit way to get the manual-only behavior <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">py-fix</code> relies on.</p>
+  <p style="margin: 0; line-height:1.75; color: var(--text-secondary);">One frontmatter field worth knowing: adding <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">disable-model-invocation: true</code> makes a skill invocable only by you, never picked up automatically by Claude. That's why <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">py-fix.md</code> sets it: without it, the default (<code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">false</code>) would let Claude invoke the fix on its own.</p>
 </div>
 
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">File 5 — hooks/hooks.json</p>
@@ -458,7 +460,7 @@ EOF</code></pre>
         "hooks": [
           {
             "type": "prompt",
-            "prompt": "Before writing this Python file, check: does it contain any hardcoded passwords, API keys, or secrets? If yes, warn the user and suggest using environment variables instead."
+            "prompt": "Block writing this Python file if it contains hardcoded passwords, API keys, or secrets, and give a reason suggesting environment variables instead. Otherwise allow it."
           }
         ]
       }
@@ -469,7 +471,8 @@ EOF</code></pre>
         "hooks": [
           {
             "type": "prompt",
-            "prompt": "After editing this Python file, quickly check if any obvious syntax errors were introduced. If yes, point them out immediately."
+            "prompt": "After editing this Python file, quickly check if any obvious syntax errors were introduced. If yes, point them out immediately.",
+            "continueOnBlock": true
           }
         ]
       }
@@ -487,14 +490,14 @@ EOF</code></pre>
   <p style="margin-bottom:0.25rem; font-weight:700; color: var(--text-primary);"><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">PreToolUse</code> (Before writing/editing)</p>
   <ul style="margin-bottom:1rem; padding-left: 1.25rem; color: var(--text-secondary); line-height: 1.6;">
     <li><strong><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">matcher</code></strong> — <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">"Write|Edit"</code> tells Claude to intercept any Write or Edit tool call before it executes</li>
-    <li><strong><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">prompt</code></strong> — instructs Claude to scan the file for hardcoded passwords, API keys, or secrets <em>before</em> writing, and if found, warn the user and recommend environment variables instead</li>
+    <li><strong><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">prompt</code></strong> — instructs Claude to scan the file for hardcoded passwords, API keys, or secrets <em>before</em> writing. If the model finds one it returns <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">ok: false</code>, which <strong>blocks</strong> (denies) the Write/Edit call; by default the turn then ends and the reason is shown as a warning line</li>
     <li>This acts as a <strong>security gate</strong> — catching sensitive data leaks before they are committed to disk</li>
   </ul>
   
   <p style="margin-bottom:0.25rem; font-weight:700; color: var(--text-primary);"><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">PostToolUse</code> (After writing/editing)</p>
   <ul style="margin-bottom:1rem; padding-left: 1.25rem; color: var(--text-secondary); line-height: 1.6;">
     <li><strong><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">matcher</code></strong> — same <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">"Write|Edit"</code> pattern, but fires <em>after</em> the tool call completes</li>
-    <li><strong><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">prompt</code></strong> — instructs Claude to immediately check whether the edit introduced any obvious syntax errors, and flag them if so</li>
+    <li><strong><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">prompt</code></strong> — instructs Claude to immediately check whether the edit introduced any obvious syntax errors. A failing check (<code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">ok: false</code>) would end the turn by default; <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">"continueOnBlock": true</code> instead feeds the reason back to Claude so it can fix the error and keep going</li>
     <li>This acts as a <strong>quality gate</strong> — catching accidental breakage introduced during a fix or edit</li>
   </ul>
   
@@ -618,7 +621,7 @@ my-claude-marketplace/py-helper-marketplace/.claude-plugin/marketplace.json</pre
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.85rem; line-height: 1.5;">cd my-claude-marketplace/py-helper-marketplace && pwd</pre>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">You should see a success message like this:</p>
-<code style="display: block; padding: 1rem; background: var(--surface-dark); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-green); white-space: pre-wrap;">❯ /plugin marketplace add /Users/senthilpalanivelu/Downloads/my-claude-marketplace/py-helper-marketplace                                                       
+<code style="display: block; padding: 1rem; background: var(--surface-dark); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: monospace; color: var(--code-green); white-space: pre-wrap;">❯ /plugin marketplace add ~/my-claude-marketplace/py-helper-marketplace                                                       
   ⎿  Successfully added marketplace: py-helper-marketplace</code>
   
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Step 3 — Install and reload</p>
@@ -689,7 +692,7 @@ my-claude-marketplace/py-helper-marketplace/.claude-plugin/marketplace.json</pre
       1 available • 1 installed • Updated 3/17/2026                                                                                                
                                                                                                                                                    
     <span style="color: var(--accent-primary); font-weight: bold;">● py-helper-marketplace
-      /Users/senthilpalanivelu/Downloads/my-claude-marketplace/py-helper-marketplace                                                                          
+      ~/my-claude-marketplace/py-helper-marketplace                                                                          
       1 available • 1 installed • Updated 3/24/2026</span>
                                                                                                                                                    
     ● ui-ux-pro-max-skill                                                                                                                          
@@ -803,7 +806,7 @@ my-claude-marketplace/py-helper-marketplace/.claude-plugin/marketplace.json</pre
   The updated code now follows Python best practices and is more maintainable, readable, and professional.</code>
 
 
-<p style="margin-bottom:0.75rem; line-height:1.75;">The intended workflow is sequential: run <code style="color: var(--code-text);"> /py-review </code> first to understand the problems, then run <code style="color: var(--code-text);"> /py-fix app.py </code> when you're ready to apply the fixes.</p>
+<p style="margin-bottom:0.75rem; line-height:1.75;">The intended workflow is sequential: run <code style="color: var(--code-text);"> /py-helper:py-review </code> first to understand the problems, then run <code style="color: var(--code-text);"> /py-helper:py-fix app.py </code> when you're ready to apply the fixes.</p>
 
 
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Test 3 — Hook</p>
@@ -848,7 +851,7 @@ my-claude-marketplace/py-helper-marketplace/.claude-plugin/marketplace.json</pre
   Manage MCP servers                                                                                                                               
   4 servers                                                                                                                                        
                                                                                                                                                    
-    User MCPs (/Users/senthilpalanivelu/.claude.json)                                                                                              
+    User MCPs (~/.claude.json)                                                                                              
   ❯ magic · ✔ connected                                                                                                                            
     stitch · ✔ connected                                                                                                                           
     supadata · ✔ connected
@@ -1153,7 +1156,7 @@ git push -u origin main</code></pre>
 <div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-top: 4px solid var(--accent-secondary); border-radius: 8px; margin: 1.5rem 0;">
   <p style="margin-bottom:0.75rem; font-weight:700; color: var(--text-primary); font-size:1.1rem;">When something isn't working</p>
   <ul style="margin: 0 0 0 1.25rem; padding: 0; color: var(--text-secondary); line-height: 1.8;">
-    <li style="margin-bottom: 0.5rem;"><strong>Changes not showing up:</strong> run <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/reload-plugins</code> first. Note that its summary counts skills from <code style="font-family: 'JetBrains Mono', monospace;">commands/</code> only, so it can report <code style="font-family: 'JetBrains Mono', monospace;">0 skills</code> even when your <code style="font-family: 'JetBrains Mono', monospace;">skills/</code> content reloaded fine.</li>
+    <li style="margin-bottom: 0.5rem;"><strong>Changes not showing up:</strong> run <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/reload-plugins</code> first.</li>
     <li style="margin-bottom: 0.5rem;"><strong>A component never loads:</strong> check it isn't sitting inside <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">.claude-plugin/</code>. Only <code style="font-family: 'JetBrains Mono', monospace;">plugin.json</code> belongs there.</li>
     <li style="margin-bottom: 0.5rem;"><strong>Load errors:</strong> open <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/plugin</code> → <strong>Errors</strong> tab. A failing MCP or language server shows up there with its reason.</li>
     <li style="margin-bottom: 0.5rem;"><strong>Manifest problems:</strong> run <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">claude plugin validate .</code> from the plugin or marketplace folder.</li>

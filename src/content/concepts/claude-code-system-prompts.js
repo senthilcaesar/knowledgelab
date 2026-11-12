@@ -38,8 +38,9 @@ const claudeCodeSystemPromptsConcept = {
 
 <div style="margin-top: 1.5rem;">
   <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">Example: Bash Tool Description (simplified)</strong>
-  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.85rem;">Executes a bash command in a persistent shell session.
-- State persists between commands (working dir, env vars)
+  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.4; font-size: 0.85rem;">Executes a bash command and returns its output.
+- Working dir (cd) carries over only in the main session,
+  inside project dirs; env vars do NOT persist between commands
 - NEVER run interactive commands that require stdin
 - Avoid commands that run indefinitely
 - For destructive operations, use --dry-run first

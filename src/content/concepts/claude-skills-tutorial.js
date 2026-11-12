@@ -31,7 +31,8 @@ A skill is a folder of organized files consisting of instructions, scripts, asse
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">The recommended way to install Anthropic's official skills is through the <strong>plugin marketplace</strong>, from inside Claude Code:</p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap;"><code>/plugin marketplace add anthropics/skills
-/plugin install &lt;skill-name&gt;@anthropics-skills</code></pre>
+/plugin install example-skills@anthropic-agent-skills</code></pre>
+<p style="margin: 0.5rem 0; line-height:1.75;">The marketplace is named <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">anthropic-agent-skills</code>, and its plugins are bundles of skills: <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">example-skills</code> (skill-creator, frontend-design, mcp-builder, and more) and <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">document-skills</code> (docx, pdf, pptx, xlsx).</p>
 
 <p style="margin: 0.5rem 0; line-height:1.75;">Alternatively, you can clone the repo and copy skill folders manually into <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/skills</code> (note: in the repo, the skill folders live inside a nested <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">skills/</code> subdirectory):</p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap;"><code>mkdir -p ~/.claude/skills
@@ -147,11 +148,12 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
     <span>💡</span> When Claude Code starts, it scans four locations for skills:
   </p>
   <ul style="margin: 0 0 0 1.5rem; color: var(--text-secondary); line-height: 1.5; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">
-    <li style="margin-bottom: 0.25rem;">Enterprise (managed settings) - managed-settings.json</li>
+    <li style="margin-bottom: 0.25rem;">Enterprise (managed settings) - .claude/skills inside the managed settings directory</li>
     <li style="margin-bottom: 0.25rem;">Personal (your home directory) - ~/.claude/skills</li>
     <li style="margin-bottom: 0.25rem;">Project (your project directory) - .claude/skills</li>
     <li style="margin-bottom: 0;">Plugins (installed plugins) - each plugin's skills/ directory</li>
   </ul>
+  <p style="margin: 0.75rem 0 0; line-height:1.6; color: var(--text-secondary);">Plugin skills are namespaced, so you invoke them as <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/plugin-name:skill-name</code>.</p>
 </div>
 
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
@@ -238,7 +240,9 @@ EOF</code></pre>
   <p style="margin-bottom: 0.75rem; line-height:1.75; color: var(--text-primary); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem;">
     <span>📄</span> Document Skills:
   </p>
-  <p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Claude ships with pre-built skills for creating, editing, and reading Microsoft Office and PDF documents — these are bundled into Claude Code by default, so no installation is needed:</p>
+  <p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Anthropic provides pre-built skills for creating, editing, and reading Microsoft Office and PDF documents. They are not among Claude Code's bundled skills (those are commands like <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/doctor</code>, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/code-review</code>, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/loop</code>, and <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/claude-api</code>). If you sign in to Claude Code with a claude.ai account, some of them (such as pdf and xlsx) sync automatically from your account. Otherwise, install the <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">document-skills</code> plugin:</p>
+  <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap;"><code>/plugin marketplace add anthropics/skills
+/plugin install document-skills@anthropic-agent-skills</code></pre>
   <ul style="margin: 0 0 0 1.5rem; color: var(--text-secondary); line-height: 1.6; font-family: monospace; font-size: 0.85rem;">
     <li style="margin-bottom: 0.25rem;"><strong>docx</strong> — Creates and edits Word documents (tables, headers/footers, tracked changes, TOCs) and extracts their content.</li>
     <li style="margin-bottom: 0.25rem;"><strong>pdf</strong> — Creates PDFs, merges/splits files, fills forms, and extracts text and structure.</li>

@@ -201,7 +201,7 @@ const claudeHooksConcept = {
               </tbody>
             </table>
           </div>
-          <p style="margin: 1rem 0 0; line-height: 1.75; font-size: 0.95rem; color: var(--text-secondary);">The examples below use <code>command</code> and <code>prompt</code>, but any event accepts any type.</p>
+          <p style="margin: 1rem 0 0; line-height: 1.75; font-size: 0.95rem; color: var(--text-secondary);">The examples below use <code>command</code> and <code>prompt</code>, but not every event accepts every type. Tool and turn events (PreToolUse, PostToolUse, PostToolUseFailure, PostToolBatch, PermissionDenied, Stop, SubagentStop, UserPromptSubmit, UserPromptExpansion, TaskCreated, TaskCompleted, TeammateIdle) support all five. PermissionRequest supports everything except <code>agent</code>. Most lifecycle events (Notification, SubagentStart, PreCompact, SessionEnd, ConfigChange, FileChanged and similar) support only <code>command</code>, <code>http</code>, and <code>mcp_tool</code>, and SessionStart and Setup accept only <code>command</code> and <code>mcp_tool</code>.</p>
         </div>
 
         <div style="margin-bottom: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
@@ -239,18 +239,28 @@ const claudeHooksConcept = {
   "hooks": {
     "PermissionRequest": [
       {
-        "matcher": "Bash(npm test*)",
+        "matcher": "Bash",
         "hooks": [
           {
             "type": "command",
-            "command": "/path/to/validate-test-command.sh"
+            "if": "Bash(npm test*)",
+            "command": "/path/to/approve-test-command.sh"
           }
         ]
       }
     ]
   }
 }</code></pre>
-          <p style="margin-bottom: 0.75rem; line-height: 1.6;">This example auto-approves any Bash command starting with npm test. The matcher pattern can include arguments for finer control.</p>
+          <p style="margin-bottom: 0.75rem; line-height: 1.6;">This example auto-approves any Bash command starting with npm test. The matcher only ever sees the <strong>tool name</strong> (<code>Bash</code>); a matcher like <code>"Bash(npm test*)"</code> is treated as a regex against tool names and never fires. The argument filter belongs in the handler's <code>if</code> field. To approve, the script prints a decision object on stdout and exits 0:</p>
+          <pre style="background: var(--syntax-bg, #0d1117); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; font-size: 0.85rem; line-height: 1.6;"><code style="color: var(--text-primary);">{
+  "hookSpecificOutput": {
+    "hookEventName": "PermissionRequest",
+    "decision": {
+      "behavior": "allow"
+    }
+  }
+}</code></pre>
+          <p style="margin-bottom: 0.75rem; line-height: 1.6;">Use <code>"behavior": "deny"</code> (with an optional <code>message</code>) to refuse. Exit code 2 is <em>not</em> honoured on this event, so the permission flow carries on unchanged. Denials have to go through the <code>decision</code> object too.</p>
           <p style="margin-bottom: 0.5rem; font-weight: 600; color: var(--text-secondary); font-size: 0.9rem;">When to use PermissionRequest:</p>
           <ul style="margin: 0 0 0 1.25rem; line-height: 1.8; font-size: 0.95rem; color: var(--text-secondary);">
             <li>Auto-approving test commands you run dozens of times per session</li>
@@ -361,13 +371,14 @@ const claudeHooksConcept = {
         "hooks": [
           {
             "type": "prompt",
-            "prompt": "Review whether the task is complete. If all requirements are met, respond with 'complete'. If work remains, respond with 'continue' and specify what still needs to be done."
+            "prompt": "Evaluate whether Claude should stop. Context: $ARGUMENTS. If all requirements are met, return ok true. If work remains, return ok false with a reason that specifies what still needs to be done."
           }
         ]
       }
     ]
   }
 }</code></pre>
+          <p style="margin-bottom: 0.75rem; line-height: 1.6;"><code>$ARGUMENTS</code> is replaced with the hook's JSON input (it's appended if you leave it out). Prompt hooks don't answer in free text: the model must return <code>{"ok": true}</code> to let Claude stop, or <code>{"ok": false, "reason": "..."}</code>, in which case the reason is fed back to Claude as its next instruction and the turn continues.</p>
           <p style="margin-bottom: 0.5rem; font-weight: 600; color: var(--text-secondary); font-size: 0.9rem;">When to use Stop:</p>
           <ul style="margin: 0 0 0 1.25rem; line-height: 1.8; font-size: 0.95rem; color: var(--text-secondary);">
             <li>Forcing Claude to continue until all items in a checklist are done</li>
@@ -387,13 +398,14 @@ const claudeHooksConcept = {
         "hooks": [
           {
             "type": "prompt",
-            "prompt": "Evaluate the subagent's output. Verify the task was completed correctly and the results meet quality standards. If the output is satisfactory, respond with 'accept'. If issues exist, respond with 'reject' and explain what needs to be fixed."
+            "prompt": "Evaluate the subagent's output: $ARGUMENTS. Verify the task was completed correctly and the results meet quality standards. If the output is satisfactory, return ok true. If issues exist, return ok false with a reason explaining what needs to be fixed."
           }
         ]
       }
     ]
   }
 }</code></pre>
+          <p style="margin-bottom: 0.75rem; line-height: 1.6;">Same response schema as Stop: <code>{"ok": true}</code> lets the subagent finish, and <code>{"ok": false, "reason": "..."}</code> feeds the reason back so the subagent keeps working.</p>
           <p style="margin-bottom: 0.5rem; font-weight: 600; color: var(--text-secondary); font-size: 0.9rem;">When to use SubagentStop:</p>
           <ul style="margin: 0 0 0 1.25rem; line-height: 1.8; font-size: 0.95rem; color: var(--text-secondary);">
             <li>Validating that subagent output meets quality criteria</li>

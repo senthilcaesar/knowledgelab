@@ -36,7 +36,7 @@ const claudeOfficialDocsConcept = {
         <span class="tag" style="font-size: 0.75rem;">Performance</span>
       </div>
       <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 1rem;">
-        Understand how prompt caching works in Claude Code to dramatically lower API latency and reduce token costs across sessions.
+        Understand how prompt caching works in Claude Code to lower latency and token costs while you keep working, and which actions invalidate the cache.
       </p>
     </div>
     <a href="https://code.claude.com/docs/en/prompt-caching" target="_blank" class="github-link-btn" style="align-self: flex-start;">
@@ -95,9 +95,9 @@ const claudeOfficialDocsConcept = {
 
 <ul style="margin-left: 1.25rem; margin-bottom: 1.5rem; line-height: 1.7; color: var(--text-primary);">
   <li style="margin-bottom: 0.5rem;"><strong>Give clear, specific instructions:</strong> Break large features into smaller, verifiable tasks rather than open-ended requests.</li>
-  <li style="margin-bottom: 0.5rem;"><strong>Provide context early:</strong> Keep project conventions in <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">CLAUDE.md</code> so Claude starts every session fully informed.</li>
+  <li style="margin-bottom: 0.5rem;"><strong>Keep CLAUDE.md short:</strong> Only write in <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">CLAUDE.md</code> what Claude can't learn by reading the repo — commands to run, non-obvious gotchas, and decisions — since every line loads into every session.</li>
   <li style="margin-bottom: 0.5rem;"><strong>Use Test-Driven Loops:</strong> Ask Claude to run unit tests or lint commands before declaring a task complete.</li>
-  <li style="margin-bottom: 0.5rem;"><strong>Manage session context:</strong> Run <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">/compact</code> periodically when working through long sessions to prevent token bloat.</li>
+  <li style="margin-bottom: 0.5rem;"><strong>Manage session context:</strong> Compaction happens automatically as context fills. Use <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">/clear</code> between unrelated tasks, <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">/compact &lt;focus&gt;</code> at natural breakpoints, and <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">/context</code> to inspect usage.</li>
 </ul>
 
 <div style="margin: 1.5rem 0;">
@@ -128,6 +128,8 @@ const claudeOfficialDocsConcept = {
   <li style="margin-bottom: 0.5rem;"><strong>Latency reduction:</strong> Cached prefixes accelerate generation by skipping repeated token processing.</li>
   <li style="margin-bottom: 0.5rem;"><strong>Cost efficiency:</strong> Reading cached tokens costs significantly less than processing raw input tokens.</li>
   <li style="margin-bottom: 0.5rem;"><strong>Automatic handling:</strong> Claude Code handles caching automatically behind the scenes for conversation turns and tools.</li>
+  <li style="margin-bottom: 0.5rem;"><strong>Lifetime &amp; scope:</strong> Cached prefixes expire after inactivity (a five-minute TTL by default, one hour for the main conversation on a Claude subscription within plan usage), and the cache is effectively scoped to one machine and directory.</li>
+  <li style="margin-bottom: 0.5rem;"><strong>Cache invalidation:</strong> Switching models, connecting or removing an MCP server (when its tools load upfront rather than via tool search), and <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">/compact</code> all force a slower, uncached turn while the cache rebuilds.</li>
 </ul>
 
 <div style="margin: 1.5rem 0;">
@@ -156,7 +158,7 @@ const claudeOfficialDocsConcept = {
 
 <ul style="margin-left: 1.25rem; margin-bottom: 1.5rem; line-height: 1.7; color: var(--text-primary);">
   <li style="margin-bottom: 0.5rem;"><strong>CLAUDE.md:</strong> Project-level instructions committed to git, shared across the whole engineering team.</li>
-  <li style="margin-bottom: 0.5rem;"><strong>CLAUDE.local.md:</strong> Personal developer notes gitignored for local machine configuration.</li>
+  <li style="margin-bottom: 0.5rem;"><strong>CLAUDE.local.md:</strong> Personal, project-specific notes that stay out of version control — add <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">CLAUDE.local.md</code> to <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">.gitignore</code> yourself.</li>
   <li style="margin-bottom: 0.5rem;"><strong>Auto-Memory:</strong> Automatic memory storage located in <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">~/.claude/projects/&lt;project&gt;/memory/</code>.</li>
   <li style="margin-bottom: 0.5rem;"><strong>Memory Shortcuts:</strong> Use <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">/memory</code> to view and edit memory topics directly.</li>
 </ul>
@@ -186,9 +188,9 @@ const claudeOfficialDocsConcept = {
 <p style="margin-bottom:1rem; line-height:1.75;">Understanding how Claude Code manages token capacity and context window limits keeps long-running agent workflows fast and responsive:</p>
 
 <ul style="margin-left: 1.25rem; margin-bottom: 1.5rem; line-height: 1.7; color: var(--text-primary);">
-  <li style="margin-bottom: 0.5rem;"><strong>Context Compaction:</strong> When context grows large, run <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">/compact</code> to generate a dense summary and free up token space.</li>
+  <li style="margin-bottom: 0.5rem;"><strong>Context Compaction:</strong> Compaction is automatic as you near the limit. Use <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">/clear</code> between unrelated tasks, <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">/compact &lt;focus&gt;</code> at natural breakpoints to choose what the summary keeps, and <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">/context</code> to inspect usage.</li>
   <li style="margin-bottom: 0.5rem;"><strong>Subagent Isolation:</strong> Subagents run in isolated context windows, preventing tool outputs from filling up your main session context.</li>
-  <li style="margin-bottom: 0.5rem;"><strong>Token Economy:</strong> Large file reads and bash output are pruned automatically when context thresholds are reached.</li>
+  <li style="margin-bottom: 0.5rem;"><strong>Auto-Compaction:</strong> As you approach the context limit, Claude Code summarises the conversation automatically, then re-reads up to five of the most recently modified files it had read or edited.</li>
 </ul>
 
 <div style="margin: 1.5rem 0;">
