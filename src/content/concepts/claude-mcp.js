@@ -227,9 +227,6 @@ const claudeMcpConcept = {
 <p style="margin-bottom:0.5rem; line-height:1.75; color: var(--text-secondary);">Lists all configured MCP servers in your Claude Code setup (<code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">~/.claude.json</code>)</p>
 
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); font-size: 0.85rem; line-height: 1.5;">claude mcp list</pre>
-
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Terminal Output]</strong>
-
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'Fira Code', 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.5; font-size: 0.85rem;">
 ⏺ Bash(claude mcp list)
   ⎿ Checking MCP server health...

@@ -9,7 +9,7 @@ const claudeExtensionConcept = {
       content: `
 <style>
 .cc-table-wrap { width:100%; margin-top:1.5rem; border-radius:12px; overflow: visible; }
-.cc-table { width:100%; border-collapse:collapse; font-size:0.85rem; font-family:'Outfit', sans-serif; line-height:1.5; table-layout:auto; letter-spacing:0.01em; }
+.cc-table { width:100%; border-collapse:collapse; font-size:0.85rem; font-family:'Nunito Sans', sans-serif; line-height:1.5; table-layout:auto; letter-spacing:0.01em; }
 .cc-table th { padding:12px 12px;text-align:left;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;font-size:0.75rem;color:var(--text-secondary);border-bottom:1px solid var(--border-color);background:rgba(0,0,0,0.2) }
 .cc-table td { padding:24px 12px;border-bottom:1px solid var(--border-color);vertical-align:top;color:var(--text-primary); }
 .cc-table td p { margin: 0; padding: 0; line-height: 1.5; }

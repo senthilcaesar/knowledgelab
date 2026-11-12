@@ -191,3 +191,12 @@ export function highlightMatches(root, query) {
   }
   return marks;
 }
+
+/** Remove search highlights added by highlightMatches, restoring the original text. */
+export function clearHighlights(root = document) {
+  root.querySelectorAll('mark.search-highlight').forEach((mark) => {
+    const parent = mark.parentNode;
+    parent.replaceChild(document.createTextNode(mark.textContent), mark);
+    parent.normalize();
+  });
+}

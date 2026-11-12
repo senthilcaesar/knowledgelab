@@ -97,8 +97,6 @@ const claudePluginsConcept = {
     {
       label: "1. Prerequisites",
       content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Before You Start]</strong>
-
 <p style="margin-bottom:0.75rem; line-height:1.75;">You need two things installed before building any plugin.</p>
 
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Step 1 — Install Node.js</p>
@@ -133,8 +131,6 @@ const claudePluginsConcept = {
     {
       label: "2. Folder Plan",
       content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[What We Are Building]</strong>
-
 <p style="margin-bottom:1rem; line-height:1.75;">Before creating files, it helps to understand the complete plugin structure.</p>
 
 <table style="width: 100%; border-collapse: collapse; margin-top: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;">
@@ -213,8 +209,6 @@ const claudePluginsConcept = {
     {
       label: "3. Create Folders",
       content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Create All Folders]</strong>
-
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Step 1 — Create your Python project</p>
 <p style="margin-bottom:0.5rem; line-height:1.75;">This is where your actual Python code will live. Create the folder and enter it:</p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.85rem; line-height: 1.5;"><code class="language-bash">mkdir my-python-project</code></pre>
@@ -262,8 +256,6 @@ mkdir -p my-claude-marketplace/py-helper-marketplace/plugins/py-helper/hooks</co
     {
       label: "4. Core Files",
       content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Create the Core Files]</strong>
-
 <p style="margin-bottom:0.75rem; line-height:1.75;">Run each block one at a time.</p>
 
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">File 1 — marketplace.json</p>
@@ -404,8 +396,6 @@ cat my-claude-marketplace/py-helper-marketplace/plugins/py-helper/skills/py-revi
     {
       label: "5. Commands + MCP",
       content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Create the Remaining Files]</strong>
-
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">File 4 — commands/py-fix.md</p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.5;"><code class="language-bash">cat > my-claude-marketplace/py-helper-marketplace/plugins/py-helper/commands/py-fix.md << 'EOF'
 ---
@@ -557,8 +547,6 @@ cat my-claude-marketplace/py-helper-marketplace/plugins/py-helper/.mcp.json</pre
     {
       label: "6. Verify",
       content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Verify Your Files]</strong>
-
 <p style="margin-bottom:0.75rem; line-height:1.75;">Before installing the plugin, make sure every file is in the correct place.</p>
 
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.5;">find my-claude-marketplace -type f</pre>
@@ -598,8 +586,6 @@ my-claude-marketplace/py-helper-marketplace/.claude-plugin/marketplace.json</pre
     {
       label: "7. Install",
       content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Install the Plugin]</strong>
-
 <div style="padding: 1rem; background: rgba(0, 242, 255, 0.05); border: 1px solid var(--border-color); border-radius: 8px; margin: 0 0 1.5rem;">
   <p style="margin: 0 0 0.5rem; font-weight:700; color: var(--text-primary);">Shortcut while you're still developing</p>
   <p style="margin: 0 0 0.75rem; line-height:1.75; color: var(--text-secondary);">You don't need a marketplace at all to try a plugin. Point Claude Code straight at the plugin folder and it loads for that session only:</p>
@@ -713,8 +699,6 @@ my-claude-marketplace/py-helper-marketplace/.claude-plugin/marketplace.json</pre
     {
       label: "8. Test",
       content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Test Each Component]</strong>
-
 <p style="margin-bottom:0.75rem; line-height:1.75;">Now test all four parts of the plugin one by one inside Claude Code.</p>
 
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Test 1 — Skill</p>
@@ -1041,8 +1025,6 @@ Claude: Use pd.read_csv() with the parse_dates parameter...
     {
       label: "9. Share",
       content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Share With Your Team]</strong>
-
 <p style="margin-bottom:0.75rem; line-height:1.75;">Once the plugin works locally, you can publish the marketplace and share it with your team.</p>
 
 <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1rem;">Push the marketplace to GitHub</p>
@@ -1099,8 +1081,6 @@ git push -u origin main</code></pre>
     {
       label: "10. Additional",
       content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Maintenance & Troubleshooting]</strong>
-
 <div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-top: 4px solid var(--accent-secondary); border-radius: 8px; margin: 1.5rem 0;">
   <p style="margin-bottom:0.35rem; font-weight:700; color: var(--text-primary); font-size:1.1rem;">How to remove a Marketplace plugin from Claude</p>
   <p style="margin-bottom:0.5rem; line-height:1.75;">Inside Claude Code, first list what's registered:</p>

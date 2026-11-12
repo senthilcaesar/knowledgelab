@@ -27,8 +27,6 @@ A skill is a folder of organized files consisting of instructions, scripts, asse
     {
       label: "Step 1 – Setup",
       content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 1 – Install Skills from the Official Repo]</strong>
-
 <p style="margin-bottom:0.5rem; line-height:1.75;">The recommended way to install Anthropic's official skills is through the <strong>plugin marketplace</strong>, from inside Claude Code:</p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap;"><code>/plugin marketplace add anthropics/skills
 /plugin install example-skills@anthropic-agent-skills</code></pre>
@@ -79,8 +77,6 @@ cp -R skills/skills/* ~/.claude/skills/</code></pre>
     {
       label: "Step 2 – Launch Claude",
       content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 2 – Launch Claude in Your Terminal]</strong>
-
 <p style="margin-bottom:0.75rem; line-height:1.75;">If you are new to Claude Code, please install it by following the instructions at <a href="https://code.claude.com/docs/en/quickstart" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">https://code.claude.com/docs/en/quickstart</a>.</p>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">Usually, you can launch it by simply typing <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">claude</code> in your terminal. For this tutorial, however, I am launching Claude using an open source free model via Ollama with this command:</p>
@@ -108,8 +104,6 @@ cp -R skills/skills/* ~/.claude/skills/</code></pre>
     {
       label: "Step 3 – Call a Skill",
       content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 3 – Call the Skill]</strong>
-
 <p style="margin-bottom:0.5rem; line-height:1.75;">To know what skills are available, just ask Claude in the terminal:</p>
 
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text);"><code>What skills are available?</code></pre>
@@ -169,7 +163,6 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
     {
       label: "Step 4 – Create a skill",
       content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 4 – Create Your Own Skill]</strong>
 <p style="margin-bottom:0.75rem; line-height:1.75;">Building your first skill is the best way to understand how Claude thinks. Let's create a <strong>Python Code Reviewer</strong> skill.</p>
 
 <strong style="display:block; margin-top: 1.5rem; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 1 — Create the directory structure</strong>
@@ -232,8 +225,6 @@ EOF</code></pre>
     {
       label: "Step 5 – Pre-built Skills",
       content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 5 – Pre-built Skills & Document Skills]</strong>
-
 <p style="margin-bottom:1rem; line-height:1.75;">Anthropic hosts a set of official pre-built skills to extend Claude's utility out of the box. These include automation templates for common workflows, developer tools, and document processing capabilities.</p>
 
 <div style="padding: 1.25rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; margin: 1.25rem 0;">
@@ -274,8 +265,6 @@ EOF</code></pre>
     {
       label: "Step 6 – Find Skills",
       content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[STEP 6 – Where to Find Skills]</strong>
-
 <p style="margin: 0.5rem 0; line-height:1.75;">You can find more skills to use with Claude Code in the following places:</p>
 
 <ul style="margin: 0.5rem 0 1rem 2rem; color: var(--text-secondary); line-height: 1.6;">

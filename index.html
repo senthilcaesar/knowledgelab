@@ -7,7 +7,7 @@
     <title>Knowledge Lab</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=JetBrains+Mono:wght@400;500;700&family=Nunito+Sans:ital,opsz,wght@0,6..12,300..900;1,6..12,300..900&display=swap" rel="stylesheet">
   </head>
   <body>
     <canvas id="constellation-bg"></canvas>
@@ -16,6 +16,9 @@
       <aside class="sidebar">
         <header class="sidebar-header">
           <h1 id="home-link">Knowledge<span>Lab</span></h1>
+          <button id="sidebar-collapse" class="sidebar-toggle-btn sidebar-collapse-btn" title="Collapse sidebar" aria-label="Collapse sidebar">
+            <span class="toggle-icon">‹</span>
+          </button>
         </header>
         <nav class="nav-menu">
           <ul id="concept-list">
@@ -25,7 +28,7 @@
       </aside>
       <main class="main-content">
         <header class="top-bar">
-          <button id="sidebar-toggle" class="sidebar-toggle-btn" title="Toggle Sidebar">
+          <button id="sidebar-toggle" class="sidebar-toggle-btn" title="Show sidebar" aria-label="Show sidebar">
             <span class="toggle-icon">‹</span>
           </button>
           <div class="search-container">
@@ -58,17 +61,19 @@
     </div>
 
     <!-- Tech Stack Modal Overlay -->
-    <div id="tech-stack-overlay" class="tech-stack-overlay hidden">
+    <div id="tech-stack-overlay" class="tech-stack-overlay hidden" role="dialog" aria-modal="true" aria-label="Project tech stack">
       <div class="tech-stack-modal">
         <header class="tech-stack-header">
-          <h2>Project Tech Stack</h2>
-          <button id="close-tech-stack" class="close-btn" title="Close Modal">✕</button>
+          <div>
+            <h2>Project Tech Stack</h2>
+            <p class="tech-stack-intro">How Knowledge Lab is built: no framework, no backend, just the web platform.</p>
+          </div>
+          <button id="close-tech-stack" class="close-btn" title="Close" aria-label="Close tech stack">✕</button>
         </header>
         <div class="tech-stack-content">
-          <p class="tech-stack-intro">This app is built using the following technologies:</p>
-          <ul id="tech-stack-list" class="tech-stack-list">
-            <!-- Technologies will be injected here -->
-          </ul>
+          <div id="tech-stack-list" class="kl-bento">
+            <!-- Bento tiles are injected here -->
+          </div>
         </div>
       </div>
     </div>

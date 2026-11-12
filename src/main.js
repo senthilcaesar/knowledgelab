@@ -1,7 +1,11 @@
 import './style.css';
 import { initConstellation } from './constellation.js';
 import { applyCodeColors } from './code-color.js';
-import { buildSearchIndex, search, renderResults, highlightMatches } from './search.js';
+import { buildSearchIndex, search, renderResults, highlightMatches, clearHighlights } from './search.js';
+import {
+  groupIntoTracks, stepCount, stepLabel, readingMinutes, progress,
+  squiggle, heroDoodle, trackDoodle, checkIcon,
+} from './course.js';
 import pkg from '../package.json';
 
 import concepts from './content/concepts/index.js';
@@ -35,6 +39,19 @@ const app = {
   activeConcept: null,
   searchIndex: null,
   showingSearchResults: false,
+  minutes: new Map(),
+  activeStep: 0,
+
+  /** The page scrolls as one: if the reader is past the concept header, bring the new step to the top. */
+  scrollToStepTop() {
+    const area = document.getElementById('content-area');
+    const hero = document.querySelector('.kl-concept-hero');
+    if (!area) return;
+    const heroBottom = hero
+      ? hero.getBoundingClientRect().bottom - area.getBoundingClientRect().top + area.scrollTop
+      : 0;
+    if (area.scrollTop > heroBottom) area.scrollTop = heroBottom;
+  },
 
   resetContentScroll() {
     const contentArea = document.getElementById('content-area');
@@ -45,6 +62,8 @@ const app = {
   },
 
   init() {
+    this.searchIndex = buildSearchIndex(concepts);
+    this.minutes = readingMinutes(this.searchIndex);
     this.renderSidebar();
     this.setupEventListeners();
     this.initTheme();
@@ -64,16 +83,104 @@ const app = {
   },
 
   renderWelcome() {
-    // Restore constellation on home screen
+    // Restore constellation on home screen (hidden in light mode via CSS)
     document.getElementById('constellation-bg').style.display = '';
     const contentArea = document.getElementById('content-area');
     contentArea.classList.remove('content-area--tabbed');
+
+    const totalSteps = concepts.reduce((n, c) => n + stepCount(c), 0);
+    const doneSteps = concepts.reduce((n, c) => n + progress.count(c.id, stepCount(c)), 0);
+    const totalMin = [...this.minutes.values()].reduce((a, b) => a + b, 0);
+    const pct = totalSteps ? Math.round((doneSteps / totalSteps) * 100) : 0;
+    const hours = totalMin >= 60 ? `${Math.round(totalMin / 6) / 10}<small> h</small>` : `${totalMin}<small> min</small>`;
+
+    const last = progress.last();
+    const lastConcept = last && concepts.find((c) => c.id === last.id);
+    const continueCard = lastConcept
+      ? `<button class="kl-continue" data-concept="${lastConcept.id}" data-step="${last.step || 0}">
+          <span><span class="k">Pick up where you left off</span>
+          <span class="v">${lastConcept.title}${stepCount(lastConcept) > 1 ? ` · ${this.escape(stepLabel(lastConcept, Math.min(last.step || 0, stepCount(lastConcept) - 1)))}` : ''}</span></span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </button>`
+      : '';
+
+    const tracks = groupIntoTracks(concepts)
+      .map(
+        (t, ti) => `
+      <section class="kl-track" aria-labelledby="track-${t.id}">
+        ${trackDoodle(ti)}
+        <div class="kl-track-head">
+          <span class="kl-tag">${t.label}</span>
+          <h2 id="track-${t.id}">${t.title}</h2>
+          ${squiggle()}
+        </div>
+        <div class="kl-grid">${t.items.map((c) => this.courseCard(c)).join('')}</div>
+      </section>`,
+      )
+      .join('');
+
     contentArea.innerHTML = `
-      <div class="welcome-card">
-        <h2>Welcome to Knowledge Lab</h2>
-        <p>Select a tutorial from the sidebar to begin your interactive learning journey.</p>
+      <div class="kl-home">
+        <header class="kl-home-hero">
+          <span class="kl-tag">Knowledge Lab · Claude Code learning path</span>
+          <div class="kl-home-hero-inner">
+            <div>
+              <h1>Learn <span class="kl-accent">Claude Code</span>, one step at a time</h1>
+              <p class="kl-lede">Hands-on tutorials, broken into short steps. Tick each step off as you go and pick up right where you stopped.</p>
+            </div>
+            ${heroDoodle()}
+          </div>
+          <dl class="kl-meta-strip">
+            <div><dt>Concepts</dt><dd>${concepts.length}</dd></div>
+            <div><dt>Steps</dt><dd>${totalSteps}</dd></div>
+            <div><dt>Completed</dt><dd>${doneSteps}<small> of ${totalSteps}</small></dd>
+              <div class="kl-bar" role="progressbar" aria-label="Overall progress" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><span style="width:${pct}%"></span></div></div>
+            <div><dt>Reading time</dt><dd>~${hours}</dd></div>
+          </dl>
+        </header>
+        ${continueCard}
+        ${tracks}
+        <footer class="kl-home-foot">
+          <span>Your progress is saved in this browser only.</span>
+          <button class="kl-reset" type="button">Reset progress</button>
+        </footer>
       </div>
     `;
+  },
+
+  escape(s) {
+    return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+  },
+
+  conceptSummary(id) {
+    const section = this.searchIndex.find((s) => s.conceptId === id && s.text);
+    if (!section) return '';
+    const text = section.text.replace(/^(Next|Previous):?\s*\S+(\s\S+)?\s*→?\s*/i, '');
+    return text.length > 150 ? `${text.slice(0, 150).replace(/\s+\S*$/, '')}…` : text;
+  },
+
+  courseCard(c) {
+    const total = stepCount(c);
+    const done = progress.count(c.id, total);
+    const pct = Math.round((done / total) * 100);
+    const state = done === 0 ? ['', 'Not started', 'Start'] : done === total ? ['is-done', 'Done', 'Review'] : ['is-progress', 'In progress', 'Continue'];
+    return `
+      <button class="kl-course-card" data-concept="${c.id}">
+        <span class="kl-chip ${state[0]}">${state[0] === 'is-done' ? checkIcon() : ''}${state[1]}</span>
+        <h3>${c.title}</h3>
+        <p class="desc">${this.escape(this.conceptSummary(c.id))}</p>
+        <div class="foot">
+          <div class="meta"><span>${total} step${total === 1 ? '' : 's'} · ~${this.minutes.get(c.id) || 1} min</span><span>${done}/${total}</span></div>
+          <div class="kl-bar" aria-hidden="true"><span style="width:${pct}%"></span></div>
+          <span class="cta">${state[2]} →</span>
+        </div>
+      </button>`;
+  },
+
+  firstOpenStep(c) {
+    const total = stepCount(c);
+    for (let i = 0; i < total; i++) if (!progress.isDone(c.id, i)) return i;
+    return 0;
   },
 
   initTheme() {
@@ -90,16 +197,28 @@ const app = {
   renderSidebar() {
     const list = document.getElementById('concept-list');
     list.innerHTML = concepts
-      .map(
-        (c) => `
-      <li class="nav-item" data-id="${c.id}">${c.title}</li>
-    `,
-      )
+      .map((c) => `<li class="nav-item" data-id="${c.id}"><span class="nav-title">${c.title}</span><span class="nav-progress"></span></li>`)
       .join('');
+    this.updateSidebarProgress();
   },
 
+  updateSidebarProgress() {
+    document.querySelectorAll('.nav-item').forEach((item) => {
+      const c = concepts.find((x) => x.id === item.dataset.id);
+      if (!c) return;
+      const total = stepCount(c);
+      const done = progress.count(c.id, total);
+      const badge = item.querySelector('.nav-progress');
+      item.style.setProperty('--p', `${Math.round((done / total) * 100)}%`);
+      badge.classList.toggle('is-done', done === total);
+      badge.innerHTML = done === total ? checkIcon() : done ? `${done}/${total}` : '';
+      badge.setAttribute('aria-label', `${done} of ${total} steps done`);
+    });
+  },
+
+  /** Drawer-style sidebar on phones and portrait tablets. */
   isMobile() {
-    return window.innerWidth <= 640;
+    return window.innerWidth <= 900;
   },
 
   closeMobileSidebar() {
@@ -109,22 +228,32 @@ const app = {
   setupEventListeners() {
     // Concept list: close mobile drawer after selecting
     document.getElementById('concept-list').addEventListener('click', (e) => {
-      if (e.target.classList.contains('nav-item')) {
-        const id = e.target.dataset.id;
+      const item = e.target.closest('.nav-item');
+      if (item) {
+        const id = item.dataset.id;
         if (this.isMobile()) this.closeMobileSidebar();
         this.selectConcept(id, { query: document.getElementById('concept-search').value });
       }
     });
 
-    // Sidebar toggle: overlay drawer on mobile, collapse on desktop
+    // Sidebar: the button inside the sidebar collapses it (or closes the mobile
+    // drawer); the top-bar button brings it back and only shows while hidden.
+    const setCollapsed = (collapsed) => {
+      document.getElementById('app').classList.toggle('sidebar-collapsed', collapsed);
+      try { localStorage.setItem('sidebar', collapsed ? 'collapsed' : 'open'); } catch { /* ignore */ }
+    };
     document.getElementById('sidebar-toggle').addEventListener('click', () => {
       const app = document.getElementById('app');
-      if (this.isMobile()) {
-        app.classList.toggle('sidebar-open');
-      } else {
-        const collapsed = app.classList.toggle('sidebar-collapsed');
-        localStorage.setItem('sidebar', collapsed ? 'collapsed' : 'open');
-      }
+      if (this.isMobile()) app.classList.toggle('sidebar-open');
+      else setCollapsed(false);
+    });
+    document.getElementById('sidebar-collapse').addEventListener('click', () => {
+      if (this.isMobile()) this.closeMobileSidebar();
+      else setCollapsed(true);
+    });
+
+    window.matchMedia('(max-width: 900px)').addEventListener('change', (e) => {
+      if (!e.matches) this.closeMobileSidebar();
     });
 
     // Backdrop click: close mobile drawer
@@ -158,6 +287,13 @@ const app = {
     // Full-text search: filters the sidebar and lists matching content
     const searchInput = document.getElementById('concept-search');
     const searchClear = document.getElementById('search-clear');
+    const fullPlaceholder = searchInput.placeholder;
+    const smallScreen = window.matchMedia('(max-width: 640px)');
+    const setPlaceholder = () => {
+      searchInput.placeholder = smallScreen.matches ? 'Search tutorials…' : fullPlaceholder;
+    };
+    setPlaceholder();
+    smallScreen.addEventListener('change', setPlaceholder);
     let searchTimer = null;
     searchInput.addEventListener('input', () => {
       searchClear.hidden = !searchInput.value;
@@ -181,6 +317,68 @@ const app = {
       searchClear.hidden = true;
       this.runSearch('');
       searchInput.focus();
+    });
+
+    // Compact the step-tab bar while reading; expand it again near the top
+    const area = document.getElementById('content-area');
+    let tabsTicking = false;
+    area.addEventListener('scroll', () => {
+      if (tabsTicking) return;
+      tabsTicking = true;
+      requestAnimationFrame(() => {
+        tabsTicking = false;
+        const card = area.querySelector('.concept-card--tabs');
+        const hero = area.querySelector('.kl-concept-hero');
+        if (!card || !card.querySelector('.tutorial-tabs')) return;
+        const start = hero ? hero.offsetHeight : 0;
+        const compact = card.classList.contains('tabs-compact');
+        // Hysteresis: shrink a little past the header, expand only back at the header
+        if (!compact && area.scrollTop > start + 40) card.classList.add('tabs-compact');
+        else if (compact && area.scrollTop < start + 4) card.classList.remove('tabs-compact');
+      });
+    }, { passive: true });
+
+    // Home course map, continue card, reset, and step navigation
+    document.getElementById('content-area').addEventListener('click', (e) => {
+      const card = e.target.closest('.kl-course-card, .kl-continue');
+      if (card) {
+        const c = concepts.find((x) => x.id === card.dataset.concept);
+        const step = card.dataset.step !== undefined ? Number(card.dataset.step) : this.firstOpenStep(c);
+        this.selectConcept(c.id, { tabIndex: step });
+        return;
+      }
+      const reset = e.target.closest('.kl-reset');
+      if (reset) {
+        if (!reset.classList.contains('is-armed')) {
+          reset.classList.add('is-armed');
+          reset.textContent = 'Click again to reset all progress';
+          setTimeout(() => {
+            reset.classList.remove('is-armed');
+            reset.textContent = 'Reset progress';
+          }, 4000);
+        } else {
+          progress.reset();
+          this.updateSidebarProgress();
+          this.renderWelcome();
+        }
+        return;
+      }
+      const toggle = e.target.closest('.kl-done-toggle');
+      if (toggle) {
+        progress.toggle(this.activeConcept.id, this.activeStep);
+        this.refreshProgressUI();
+        return;
+      }
+      const go = e.target.closest('.kl-step-card');
+      if (go) this.goStep(go.dataset.go, { markDone: go.dataset.go === 'next' });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!this.activeConcept || this.showingSearchResults || studyMode.isActive) return;
+      if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      if (e.target.closest('input, textarea, select, [contenteditable="true"]')) return;
+      if (e.key === 'ArrowRight') { e.preventDefault(); this.goStep('next'); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); this.goStep('prev'); }
     });
 
     // Clicking a search result opens that concept/tab with matches highlighted
@@ -258,6 +456,7 @@ const app = {
 
     if (!query) {
       items.forEach((item) => (item.style.display = ''));
+      clearHighlights(contentArea);
       if (this.showingSearchResults) {
         this.showingSearchResults = false;
         if (this.activeConcept) {
@@ -319,76 +518,182 @@ const app = {
     this.renderConcept(concept);
     this.resetContentScroll();
 
-    if (tabIndex !== null) {
-      document.querySelector(`.tutorial-tab-btn[data-tab="${tabIndex}"]`)?.click();
+    if (tabIndex !== null && tabIndex > 0 && this.switchToTab) {
+      this.switchToTab(Math.min(tabIndex, stepCount(concept) - 1));
+    } else {
+      progress.visit(concept.id, 0);
     }
     if (query.trim()) this.highlightInActivePanel(query);
   },
 
+  /** Move to the previous/next step; past the last step, open the next concept. */
+  goStep(dir, { markDone = false } = {}) {
+    const c = this.activeConcept;
+    if (!c) return;
+    const total = stepCount(c);
+    if (markDone) {
+      progress.set(c.id, this.activeStep, true);
+      this.refreshProgressUI();
+    }
+    if (dir === 'next') {
+      if (this.activeStep < total - 1) this.switchToTab(this.activeStep + 1);
+      else {
+        const next = concepts[concepts.indexOf(c) + 1];
+        if (next) this.selectConcept(next.id, { tabIndex: this.firstOpenStep(next) });
+      }
+    } else if (dir === 'prev' && this.activeStep > 0) {
+      this.switchToTab(this.activeStep - 1);
+    }
+  },
+
+  refreshProgressUI() {
+    const c = this.activeConcept;
+    if (!c) return;
+    const total = stepCount(c);
+    const done = progress.count(c.id, total);
+    document.querySelectorAll('.tutorial-tab-btn').forEach((b) => {
+      const i = Number(b.dataset.tab);
+      const isDone = progress.isDone(c.id, i);
+      b.classList.toggle('is-done', isDone);
+      b.querySelector('.kl-step-n').innerHTML = isDone ? checkIcon() : this.autoNumber ? String(i + 1) : '';
+    });
+    document.querySelectorAll('.kl-done-toggle').forEach((t) => {
+      const isDone = progress.isDone(c.id, Number(t.dataset.step));
+      t.setAttribute('aria-pressed', String(isDone));
+      t.querySelector('.label').textContent = isDone ? 'Step complete' : 'Mark step complete';
+    });
+    const count = document.querySelector('.kl-meta .kl-done-count');
+    if (count) count.textContent = `${done}/${total}`;
+    const bar = document.querySelector('.kl-meta .kl-bar > span');
+    if (bar) bar.style.width = `${Math.round((done / total) * 100)}%`;
+    this.updateSidebarProgress();
+  },
+
+  trackLabel(id) {
+    const t = groupIntoTracks(concepts).find((x) => x.items.some((c) => c.id === id));
+    return t ? t.label : 'Knowledge Lab';
+  },
+
+  stepNav(c, i) {
+    const total = stepCount(c);
+    const next = concepts[concepts.indexOf(c) + 1];
+    const prevCard = i > 0
+      ? `<button class="kl-step-card prev" data-go="prev"><span class="n">← Previous</span><span class="t">${this.escape(stepLabel(c, i - 1))}</span></button>`
+      : '<span class="kl-step-card prev" hidden></span>';
+    let nextCard = '<span class="kl-step-card next" hidden></span>';
+    if (i < total - 1) {
+      nextCard = `<button class="kl-step-card next" data-go="next"><span class="n">Next →</span><span class="t">${this.escape(stepLabel(c, i + 1))}</span></button>`;
+    } else if (next) {
+      nextCard = `<button class="kl-step-card next is-concept" data-go="next"><span class="n">Next concept →</span><span class="t">${this.escape(next.title)}</span></button>`;
+    }
+    const isDone = progress.isDone(c.id, i);
+    return `
+      <nav class="kl-stepnav" aria-label="Step navigation">
+        ${prevCard}
+        <button class="kl-done-toggle" data-step="${i}" aria-pressed="${isDone}">${checkIcon()}<span class="label">${isDone ? 'Step complete' : 'Mark step complete'}</span></button>
+        ${nextCard}
+        <p class="kl-keys">Tip: use <kbd>←</kbd> <kbd>→</kbd> to move between steps. Clicking the next step marks this one complete.</p>
+      </nav>`;
+  },
+
   renderConcept(concept) {
     const contentArea = document.getElementById('content-area');
+    contentArea.classList.add('content-area--tabbed');
+    this.activeStep = 0;
 
-    if (concept.tabs && concept.tabs.length > 0) {
-      contentArea.classList.add('content-area--tabbed');
-      // Render tabbed interface
-      const tabButtons = concept.tabs
-        .map(
-          (tab, i) =>
-            `<button class="tutorial-tab-btn${i === 0 ? ' active' : ''}" data-tab="${i}">${tab.label}</button>`,
-        )
-        .join('');
+    const hasTabs = concept.tabs && concept.tabs.length > 0;
+    const steps = hasTabs
+      ? concept.tabs
+      : [{ label: concept.title, content: this.formatDescription(concept.description) }];
+    const total = steps.length;
+    const done = progress.count(concept.id, total);
+    // Skip auto numbers when the tutorial's own labels are already numbered
+    this.autoNumber = !steps.some((t) => /^\s*(\d+\s*[.):–-]|step\s*\d+)/i.test(t.label));
 
-      const tabPanels = concept.tabs
-        .map(
-          (tab, i) =>
-            `<div class="tutorial-tab-panel${i === 0 ? ' active' : ''}" data-panel="${i}">
-          <div class="concept-content" id="concept-description-${i}">
-            ${tab.content}
-          </div>
+    const tabButtons = hasTabs
+      ? `<nav class="tutorial-tabs" role="tablist">${steps
+          .map((tab, i) => {
+            const isDone = progress.isDone(concept.id, i);
+            return `<button class="tutorial-tab-btn${i === 0 ? ' active' : ''}${isDone ? ' is-done' : ''}" data-tab="${i}"><span class="kl-step-n">${isDone ? checkIcon() : this.autoNumber ? i + 1 : ''}</span>${tab.label}</button>`;
+          })
+          .join('')}</nav>`
+      : '';
+
+    const tabPanels = steps
+      .map(
+        (tab, i) => `<div class="tutorial-tab-panel${i === 0 ? ' active' : ''}" data-panel="${i}">
+          <div class="concept-content" id="concept-description-${i}">${tab.content}</div>
+          ${this.stepNav(concept, i)}
         </div>`,
-        )
-        .join('');
+      )
+      .join('');
 
-      contentArea.innerHTML = `
-        <article class="concept-card concept-card--tabs">
-          <nav class="tutorial-tabs" role="tablist">${tabButtons}</nav>
-          <div class="tutorial-tab-content">${tabPanels}</div>
-        </article>
-      `;
+    contentArea.innerHTML = `
+      <article class="concept-card concept-card--tabs">
+        <header class="kl-concept-hero">
+          <div class="kl-hero-text">
+            <h1 class="kl-concept-title">${concept.title}</h1>
+            <span class="kl-track-label">${this.trackLabel(concept.id)}</span>
+          </div>
+          <div class="kl-meta" aria-label="Tutorial progress">
+            <span><b class="kl-done-count">${done}/${total}</b> done</span>
+            <div class="kl-bar" aria-hidden="true"><span style="width:${Math.round((done / total) * 100)}%"></span></div>
+          </div>
+        </header>
+        ${tabButtons}
+        <div class="tutorial-tab-content">${tabPanels}</div>
+      </article>
+    `;
 
-      this.initTabs();
-      // Apply Monokai syntax theme to all code blocks
-      concept.tabs.forEach((_, i) => {
-        const el = document.getElementById(`concept-description-${i}`);
-        if (el) {
-          applyCodeColors(el);
-          this.attachCopyButtonsTo(el);
+    this.removeDuplicateStepLinks();
+    contentArea.querySelectorAll('.concept-content table').forEach((table) => {
+      if (table.parentElement.classList.contains('kl-table-scroll')) return;
+      const wrap = document.createElement('div');
+      wrap.className = 'kl-table-scroll';
+      table.replaceWith(wrap);
+      wrap.appendChild(table);
+    });
+    this.initTabs();
+    steps.forEach((_, i) => {
+      const el = document.getElementById(`concept-description-${i}`);
+      if (el) {
+        applyCodeColors(el);
+        this.attachCopyButtonsTo(el);
+      }
+    });
+  },
+
+  /**
+   * Many tutorials end each tab with hand-written "Previous / Next" links. The
+   * step navigation cards do the same job, so drop links that only point to the
+   * adjacent step (and their wrapper once it is empty). Other jump links stay.
+   */
+  removeDuplicateStepLinks() {
+    document.querySelectorAll('.tutorial-tab-panel').forEach((panel) => {
+      const i = Number(panel.dataset.panel);
+      panel.querySelectorAll('.concept-content .tutorial-nav-link[data-goto-tab]').forEach((link) => {
+        const target = Number(link.dataset.gotoTab);
+        if (Math.abs(target - i) !== 1) return;
+        let wrapper = link.parentElement;
+        link.remove();
+        while (
+          wrapper &&
+          !wrapper.classList.contains('concept-content') &&
+          !wrapper.children.length &&
+          !wrapper.textContent.trim()
+        ) {
+          const parent = wrapper.parentElement;
+          wrapper.remove();
+          wrapper = parent;
         }
       });
-    } else {
-      contentArea.classList.remove('content-area--tabbed');
-      const content = concept.description || 'Add your description here...';
-      const formattedContent = content.trim().startsWith('<') 
-        ? content 
-        : content.split('\n\n').map((p) => `<p>${p}</p>`).join('');
+    });
+  },
 
-      contentArea.innerHTML = `
-        <article class="concept-card">
-          <h2 class="concept-title">${concept.title}</h2>
-          ${(concept.category || (concept.tags && concept.tags.length > 0)) ? `
-          <div class="concept-meta">
-            ${concept.category ? `<span class="tag">${concept.category}</span>` : ''}
-            ${concept.tags ? concept.tags.map((t) => `<span class="tag">${t}</span>`).join('') : ''}
-          </div>` : ''}
-          <div class="concept-content" id="concept-description">
-            ${formattedContent}
-          </div>
-        </article>
-      `;
-      // Apply Monokai syntax theme to all code blocks
-      applyCodeColors(document.getElementById('concept-description'));
-      this.attachCopyButtons();
-    }
+  formatDescription(content = 'Add your description here...') {
+    return content.trim().startsWith('<')
+      ? content
+      : content.split('\n\n').map((p) => `<p>${p}</p>`).join('');
   },
 
   initTabs() {
@@ -396,20 +701,26 @@ const app = {
     const panels = document.querySelectorAll('.tutorial-tab-panel');
 
     const switchToTab = (index) => {
+      if (!panels[index]) return;
       btns.forEach((b) => b.classList.remove('active'));
       panels.forEach((p) => p.classList.remove('active'));
-      btns[index].classList.add('active');
       panels[index].classList.add('active');
+      this.activeStep = index;
+      if (this.activeConcept) progress.visit(this.activeConcept.id, index);
 
-      // Scroll the active tab into the center of the viewport
-      btns[index].scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'center',
-      });
+      if (btns[index]) {
+        btns[index].classList.add('active');
+        // Centre the active tab horizontally in the tab bar (no vertical jump)
+        const bar = btns[index].parentElement;
+        bar.scrollTo({
+          left: btns[index].offsetLeft - (bar.clientWidth - btns[index].offsetWidth) / 2,
+          behavior: 'smooth',
+        });
+      }
 
-      this.resetContentScroll();
+      this.scrollToStepTop();
     };
+    this.switchToTab = switchToTab;
 
     btns.forEach((btn) => {
       btn.addEventListener('click', () => switchToTab(Number(btn.dataset.tab)));
@@ -520,72 +831,114 @@ const app = {
 
     if (!btn || !overlay || !closeBtn || !list) return;
 
-    // Check technologies from package.json
-    const deps = {
-      ...(pkg.dependencies || {}),
-      ...(pkg.devDependencies || {}),
-    };
+    const ver = (name) => (pkg.dependencies?.[name] || pkg.devDependencies?.[name] || '').replace(/^[\^~]/, '');
+    const ico = (paths) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
+    const chips = (items) => `<ul class="kl-chips">${items.map((x) => `<li>${x}</li>`).join('')}</ul>`;
+    const conceptCount = concepts.length;
+    const stepTotal = concepts.reduce((n, c) => n + stepCount(c), 0);
 
-    // Core tech stack
-    const stack = [
+    // Each tile: size = 'wide' (2 cols) | 'tall' (2 rows) | 'hero' (2x2) | '' (1x1)
+    const tiles = [
       {
-        name: 'Vanilla JavaScript',
-        desc: 'Core application logic, ECMAScript modules, DOM manipulation, and dynamic rendering.',
-        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M14.5 9h-5l-.5-5h7l-.5 5zm-5 4h5l-.5 4.5-2 1.5-2-1.5-.2-2h2.2l.1 1.2 1 .8 1-.8.2-1.2h-3.8z"></path></svg>',
+        size: 'hero', accent: true, kicker: 'Core',
+        icon: ico('<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>'),
+        title: 'Vanilla JavaScript + Vite',
+        body: `ES modules and plain DOM rendering, with no UI framework. Vite ${ver('vite')} serves the dev build with hot reload and bundles the production site.`,
+        stats: [
+          ['0', 'UI frameworks'],
+          [String(Object.keys(pkg.dependencies || {}).length), 'runtime dependency' + (Object.keys(pkg.dependencies || {}).length === 1 ? '' : 'ies')],
+          ['0', 'servers or backend'],
+        ],
+        extra: chips(['HTML5', 'CSS3', 'ES modules', `Vite ${ver('vite')}`]),
       },
       {
-        name: 'Vanilla CSS3 & HTML5',
-        desc: 'Custom glassmorphism styling, responsive layouts, and semantic HTML5 structure.',
-        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 3 17 21 12 23 7 21 5 3"></polygon><path d="M15 9h-6l-.5-4h7.5l-.5 4zm-6 4h6l-.5 4.5-2.5 1.5-2.5-1.5-.2-2h2.2l.1 1.2 1.2.8 1.2-.8.2-1.2h-4.6z"></path></svg>',
+        size: 'wide', kicker: 'Code blocks',
+        icon: ico('<path d="M4 7h16M4 12h10M4 17h7"/>'),
+        title: `highlight.js ${ver('highlight.js')}`,
+        body: 'Syntax colours for tutorial code, plus a custom highlighter for shell commands, directory trees, prompts and terminal transcripts.',
+        extra: chips(['bash', 'python', 'json', 'yaml', 'javascript', 'html']),
       },
       {
-        name: 'HTML5 Canvas API',
-        desc: 'Custom performant animations including the Neural Constellation and Zen Flow backgrounds.',
-        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.268-.652-.053-.877.215-.225.542-.31 1.051-.31h2.438c2.66 0 4.853-2.192 4.853-4.853C21.5 6.756 17.244 2 12 2z"></path></svg>',
+        size: 'tall', kicker: 'Typography',
+        icon: ico('<polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/>'),
+        title: 'Google Fonts',
+        body: 'Loaded from Google Fonts, with system fallbacks.',
+        extra: `<div class="kl-fonts">
+            <div><span class="aa" style="font-family:'Nunito Sans'">Aa</span><b>Nunito Sans</b><small>Headings &amp; body</small></div>
+            <div><span class="aa" style="font-family:'Inter'">Aa</span><b>Inter</b><small>Sidebar</small></div>
+            <div><span class="aa" style="font-family:'JetBrains Mono', monospace">Aa</span><b>JetBrains Mono</b><small>Code blocks</small></div>
+            <div><span class="aa" style="font-family:'Shantell Sans', 'Nunito Sans'">Aa</span><b>Shantell Sans</b><small>Flowchart labels</small></div>
+          </div>`,
       },
       {
-        name: 'Google Fonts',
-        desc: 'Futuristic/technical headers using Outfit and high-readability body text using Inter.',
-        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>',
+        kicker: 'Animation',
+        icon: ico('<circle cx="5" cy="6" r="2"/><circle cx="19" cy="8" r="2"/><circle cx="11" cy="18" r="2"/><path d="M7 6.5l10 1.2M6.3 7.6l3.7 8.6M17.6 9.6l-5.2 7"/>'),
+        title: 'Canvas 2D',
+        body: 'Neural Constellation on the home screen and the Zen Flow background in Study Mode.',
+      },
+      {
+        kicker: 'Themes',
+        icon: ico('<path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/>'),
+        title: 'Light & dark',
+        body: 'CSS custom-property design tokens; light editorial palette and a Windows 95–inspired dark platinum.',
+        extra: '<div class="kl-swatches"><span style="background:#F7F8FA"></span><span style="background:#006989"></span><span style="background:#2B2D30"></span><span style="background:#ca9ee6"></span></div>',
+      },
+      {
+        kicker: 'Search',
+        icon: ico('<circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>'),
+        title: 'Full-text search',
+        body: 'In-browser index over every tab: highlighted snippets, jump straight to the match.',
+      },
+      {
+        size: 'wide', kicker: 'Learning',
+        icon: ico('<path d="M3 12l6 6L21 6"/>'),
+        title: 'Course map & progress',
+        body: `${conceptCount} tutorials, ${stepTotal} steps in 4 tracks. Step completion, “pick up where you left off” and preferences persist in localStorage.`,
+        extra: chips(['progress', 'lastVisit', 'theme', 'sidebar', 'study stats']),
+      },
+      {
+        kicker: 'Focus',
+        icon: ico('<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/>'),
+        title: 'Study Mode',
+        body: 'Pomodoro focus timer and concept flashcards with a daily streak.',
+      },
+      {
+        kicker: 'Diagrams',
+        icon: ico('<rect x="3" y="3" width="7" height="6" rx="1"/><rect x="14" y="15" width="7" height="6" rx="1"/><path d="M6.5 9v4a2 2 0 0 0 2 2H14"/>'),
+        title: 'Interactive flowcharts',
+        body: 'Standalone HTML diagrams embedded in tutorials, with fullscreen support.',
+      },
+      {
+        kicker: 'Navigation',
+        icon: ico('<path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"/>'),
+        title: 'Hash routing',
+        body: 'Each tutorial has a shareable #concept-id URL; back/forward just work.',
+      },
+      {
+        size: 'wide', accent: true, kicker: 'Deployment',
+        icon: ico('<path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/>'),
+        title: 'GitHub Actions → GitHub Pages',
+        body: 'Every push to main builds and publishes the static site automatically.',
+        extra: `<ol class="kl-pipeline"><li>Push to main</li><li>Node 20 · npm install</li><li>vite build</li><li>deploy-pages</li></ol>`,
+      },
+      {
+        size: 'wide', kicker: 'Layout',
+        icon: ico('<rect x="2" y="4" width="20" height="16" rx="2"/><path d="M9 4v16"/>'),
+        title: 'Responsive',
+        body: 'Drawer sidebar on phones and tablets, sticky step tabs, centred search.',
       },
     ];
 
-    if (deps.vite) {
-      stack.push({
-        name: 'Vite (' + deps.vite.replace(/[\^\~]/, '') + ')',
-        desc: 'Next-generation frontend tooling providing ultra-fast builds and Hot Module Replacement.',
-        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>',
-      });
-    }
-
-    if (deps['highlight.js']) {
-      stack.push({
-        name: 'Highlight.js (' + deps['highlight.js'].replace(/[\^\~]/, '') + ')',
-        desc: 'Lightweight syntax highlighter for code snippets and terminal commands in tutorials.',
-        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"></path></svg>',
-      });
-    }
-
-    // Hosting logic mapped explicitly
-    stack.push({
-      name: 'GitHub Pages',
-      desc: 'Automated CI/CD deployment via GitHub Actions pipeline using the deployed build.',
-      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>',
-    });
-
-    list.innerHTML = stack
+    list.innerHTML = tiles
       .map(
-        (tech) => `
-      <li class="tech-stack-item">
-        <div class="tech-stack-icon-wrapper">
-          ${tech.icon}
-        </div>
-        <div class="tech-stack-info">
-          <span class="tech-stack-name">${tech.name}</span>
-          <span class="tech-stack-desc">${tech.desc}</span>
-        </div>
-      </li>
-    `,
+        (t) => `
+      <article class="kl-tile${t.size ? ' kl-tile--' + t.size : ''}${t.accent ? ' kl-tile--accent' : ''}">
+        <div class="kl-tile-top"><span class="kl-tile-icon">${t.icon}</span><span class="kl-tile-kicker">${t.kicker}</span></div>
+        ${t.stats ? `<dl class="kl-stats">${t.stats.map(([n, l]) => `<div><dt>${n}</dt><dd>${l}</dd></div>`).join('')}</dl>` : ''}
+        <h3>${t.title}</h3>
+        <p>${t.body}</p>
+        ${t.extra || ''}
+      </article>`,
       )
       .join('');
 
@@ -607,6 +960,9 @@ const app = {
 
     btn.addEventListener('click', openModal);
     closeBtn.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('active')) closeModal();
+    });
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) closeModal();
     });

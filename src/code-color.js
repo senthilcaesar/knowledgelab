@@ -30,6 +30,7 @@ hljs.registerLanguage('json',       json);
 hljs.registerLanguage('yaml',       yaml);
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('html',       xml);
+hljs.configure({ ignoreUnescapedHTML: true });
 
 /* ── Shared style strings ─────────────────────────────────────────────────── */
 const BASE_PRE = [
@@ -166,6 +167,148 @@ function _injectHljsTokenStyles() {
   document.head.appendChild(style);
 }
 
+
+/* ── Extra highlighters for content highlight.js can't colour ───────────────
+ * highlight.js's bash grammar leaves plain commands (`claude --version`),
+ * slash commands, directory trees and prompts uncoloured. These small
+ * line-based highlighters fill the gap using the same hljs token classes,
+ * so they pick up the theme colours above.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+const esc = (s) => s.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c]);
+const tok = (cls, s) => `<span class="hljs-${cls}">${esc(s)}</span>`;
+
+const TREE_RE = /[├└│]──|[├└]─|^\s*│/m;
+const PROMPT_RE = /^(\s*)([$❯>]|PS>)(\s+)/;
+
+/** Colour one shell command line. */
+function shellLine(line) {
+  let out = '';
+  let rest = line;
+  const prompt = rest.match(PROMPT_RE);
+  if (prompt) {
+    out += esc(prompt[1]) + tok('meta', prompt[2]) + prompt[3];
+    rest = rest.slice(prompt[0].length);
+  }
+  if (/^\s*#/.test(rest)) return out + tok('comment', rest);
+
+  const re = /(\s+)|(#.*$)|("(?:[^"\\]|\\.)*"|'[^']*')|(&&|\|\||\||;|>>?|<<)|(\S+)/g;
+  let cmdPos = true;
+  let m;
+  while ((m = re.exec(rest))) {
+    const [all, ws, comment, str, op, word] = m;
+    if (ws) { out += ws; continue; }
+    if (comment) {
+      // Only a comment if it starts a token (not part of a URL fragment)
+      out += tok('comment', comment); break;
+    }
+    if (str) { out += tok('string', str); cmdPos = false; continue; }
+    if (op) { out += tok('keyword', op); cmdPos = true; continue; }
+    if (cmdPos) {
+      out += tok(word.startsWith('/') ? 'keyword' : 'title', word);
+      cmdPos = false;
+      continue;
+    }
+    if (/^--?[\w-]/.test(word)) out += tok('params', word);
+    else if (/^\$\{?\w+\}?$|^\w+=/.test(word)) out += tok('variable', word);
+    else if (/^\d+(\.\d+)*$/.test(word)) out += tok('number', word);
+    else if (/[/@~.:]/.test(word)) out += tok('string', word);
+    else out += esc(word);
+  }
+  return out;
+}
+
+/** Colour a directory tree: branches dimmed, folders vs files, notes as comments. */
+function treeLine(line) {
+  const m = line.match(/^([\s│├└─┬┼]*)(.*)$/);
+  const glyphs = m[1];
+  let body = m[2];
+  let note = '';
+  const noteAt = body.search(/\s+(←|<-|#|\/\/)\s/);
+  if (noteAt > -1) { note = body.slice(noteAt); body = body.slice(0, noteAt); }
+  const name = body.trim() ? tok(/\/$/.test(body.trim()) ? 'title' : 'string', body) : esc(body);
+  return (glyphs ? tok('comment', glyphs) : '') + name + (note ? tok('comment', note) : '');
+}
+
+/** Colour a natural-language prompt: prompt marker, /commands and @mentions. */
+function promptLine(line) {
+  let out = '';
+  let rest = line;
+  const prompt = rest.match(PROMPT_RE);
+  if (prompt) {
+    out += esc(prompt[1]) + tok('meta', prompt[2]) + prompt[3];
+    rest = rest.slice(prompt[0].length);
+  }
+  return out + rest
+    .split(/(\s+)/)
+    .map((w) => (/^\s*$/.test(w) ? w : /^\/[\w:-]+/.test(w) ? tok('keyword', w) : /^@[\w:-]+/.test(w) ? tok('variable', w) : tok('string', w)))
+    .join('');
+}
+
+const BOX_CHARS = /[┌┐└┘│├┤┬┴┼─═║╔╗╚╝╠╣╦╩╬▶◀▲▼→←↓↑]+/g;
+/** Colour an ASCII box diagram: frame characters dimmed, labels as titles. */
+function boxLine(line) {
+  let out = '';
+  let last = 0;
+  line.replace(BOX_CHARS, (g, at) => {
+    const txt = line.slice(last, at);
+    out += txt.trim() ? tok('title', txt) : txt;
+    out += tok('comment', g);
+    last = at + g.length;
+    return g;
+  });
+  const tail = line.slice(last);
+  return out + (tail.trim() ? tok('title', tail) : tail);
+}
+
+const looksLikeShell = (text) =>
+  text
+    .split('\n')
+    .filter((l) => l.trim())
+    .every((l) => {
+      const t = l.trim().replace(/^([$❯>]|PS>)\s+/, '');
+      if (/^#/.test(t)) return true;
+      // English sentences start with a capitalised word; shell commands rarely do
+      if (/^[A-Z][a-z]+\b/.test(t)) return false;
+      return /^(\/[\w:-]|[\w.~/-]+(\s|$)|[A-Z_]+=)/.test(t) && t.split(/\s+/).length <= 14 && !/[.?!]$/.test(t);
+    });
+
+/**
+ * Re-colour a block when highlight.js produced little or nothing useful.
+ * Terminal transcripts: prompt lines get shell/prompt colours; Claude's output
+ * keeps the terminal colour (with box-drawing dimmed).
+ */
+function enhance(el, { terminal }) {
+  const text = el.textContent;
+  if (!text.trim()) return;
+  const lang = (el.className.match(/language-(\w+)/) || [])[1];
+  const spans = el.querySelectorAll('[class^="hljs-"]').length;
+
+  let html = null;
+  if (TREE_RE.test(text)) {
+    html = text.split('\n').map(treeLine).join('\n');
+  } else if (!terminal && /[┌┐└┘╔╗╚╝]/.test(text)) {
+    html = text.split('\n').map(boxLine).join('\n');
+  } else if (terminal) {
+    html = text
+      .split('\n')
+      .map((l) => {
+        if (PROMPT_RE.test(l)) return looksLikeShell(l) ? shellLine(l) : promptLine(l);
+        if (/^[\s│┌┐└┘├┤─═║╔╗╚╝⎿●]+/.test(l)) return l.replace(/^([\s│┌┐└┘├┤─═║╔╗╚╝⎿●]+)(.*)$/, (_, g, r) => tok('comment', g) + esc(r));
+        return esc(l);
+      })
+      .join('\n');
+  } else if ((lang === 'bash' || lang === 'shell' || spans === 0) && looksLikeShell(text)) {
+    html = text.split('\n').map(shellLine).join('\n');
+  } else if (spans === 0) {
+    html = text.split('\n').map(promptLine).join('\n');
+  }
+  if (html !== null) {
+    el.innerHTML = html;
+    el.classList.add('hljs', 'kl-enhanced');
+  }
+}
+
 export function applyCodeColors(container) {
   if (!container) return;
   _injectHljsTokenStyles();
@@ -197,12 +340,12 @@ export function applyCodeColors(container) {
       pre.style[camel] = rest.join(':').trim();
     });
 
-    // Run highlight.js on code blocks (skip terminal output — freeform text)
-    if (!isTerminal) {
-      const codeEl = pre.querySelector('code') || pre;
-      if (!codeEl.classList.contains('hljs')) {
-        hljs.highlightElement(codeEl);
-      }
+    // Run highlight.js on code blocks, then fill gaps (plain commands,
+    // trees, prompts). Terminal transcripts get the line-based highlighter.
+    const codeEl = pre.querySelector('code') || pre;
+    if (!codeEl.classList.contains('hljs')) {
+      if (!isTerminal) hljs.highlightElement(codeEl);
+      enhance(codeEl, { terminal: isTerminal });
     }
   });
 
@@ -219,10 +362,14 @@ export function applyCodeColors(container) {
     code.style.fontFamily = "'JetBrains Mono', monospace";
     code.style.lineHeight = '1.5';
 
-    if (!isTerminal && !code.classList.contains('hljs')) {
-      code.style.background = 'var(--syntax-bg)';
-      code.style.color      = 'var(--syntax-text)';
-      hljs.highlightElement(code);
+    const isBlock = /display:\s*block/.test(code.getAttribute('style') || '');
+    if (!code.classList.contains('hljs')) {
+      if (!isTerminal) {
+        code.style.background = 'var(--syntax-bg)';
+        code.style.color      = 'var(--syntax-text)';
+        hljs.highlightElement(code);
+      }
+      if (isBlock || isTerminal) enhance(code, { terminal: isTerminal });
     }
   });
 

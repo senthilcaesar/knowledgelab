@@ -28,8 +28,6 @@ const claudeCodeUiux21stDevConcept = {
     {
       label: 'Install Claude Code',
       content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[First: Install Claude Code]</strong>
-
 <p style="margin-bottom:0.75rem; line-height:1.75;">Begin by installing Claude Code from the official quickstart page:</p>
 
 <p style="margin: 0.25rem 0 0.75rem; line-height:1.75;">
@@ -64,8 +62,6 @@ claude --help</pre>
     {
       label: 'Install UI/UX + 21st.dev',
       content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Next: Add UI/UX Pro Max and 21st.dev]</strong>
-
 <p style="margin-bottom:0.5rem; line-height:1.75;"><strong>1. Install the <a href="https://www.uupm.cc/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">UI/UX Pro</a> skill:</strong></p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.5;">/plugin marketplace add nextlevelbuilder/ui-ux-pro-max-skill
 /plugin install ui-ux-pro-max@ui-ux-pro-max-skill</pre>
@@ -136,8 +132,6 @@ claude mcp list</pre>
     {
       label: 'Prompt Template',
       content: `
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">[Prompt Template]</strong>
-
 <p style="margin-bottom:0.75rem; line-height:1.75;">Use this prompt when generating your site:</p>
 
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.5;">Build a modern, high-end website for [DESCRIBE YOUR PRODUCT].
