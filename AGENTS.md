@@ -20,11 +20,10 @@ This file provides guidance to Codex (Codex.ai/code) when working with code in t
 
 ```
 concepts/
-├── index.html                  # App shell — sidebar, main layout, canvas
+├── index.html                  # App shell — sidebar, main layout
 ├── vite.config.js              # Sets base: '/concepts/' for GitHub Pages
 ├── src/
 │   ├── main.js                 # App logic: concepts data, rendering, events
-│   ├── constellation.js        # Neural constellation canvas animation
 │   └── style.css               # All styles — dark theme, light mode, components
 └── .github/workflows/main.yml  # Auto-deploy to GitHub Pages on push to main
 ```
@@ -39,14 +38,12 @@ concepts/
   - `initTheme()` — restores theme + sidebar state from `localStorage`
   - `setupEventListeners()` — all click/input handlers
 
-- **`constellation.js`** exports `initConstellation(canvas)`. It runs a Canvas 2D animation: 70 drifting nodes, gradient connection lines, mouse repulsion, pulsing glows, and periodic sparks. It is only visible on the home/welcome screen — hidden when a concept card is open.
 
 ## Features
 
 - 🌙 **Dark / Light theme toggle** (top-right button) — persisted in `localStorage`
   - Dark: futuristic neon (cyan, violet, magenta)
   - Light: warm "Parchment" reading theme (`#fcf8e8`, ink-brown text)
-- 🧠 **Neural Constellation Web** — live canvas animation in the background (home screen only)
 - 🔲 **Sidebar toggle** (`‹` button in top-bar) — collapses/expands with smooth CSS transition; persisted in `localStorage`
 - 🏠 **Home navigation** — clicking "KnowledgeLab" title resets to the welcome screen
 - 🔍 **Search** — filters the sidebar concept list in real-time

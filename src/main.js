@@ -1,5 +1,4 @@
 import './style.css';
-import { initConstellation } from './constellation.js';
 import { applyCodeColors } from './code-color.js';
 import { buildSearchIndex, search, renderResults, highlightMatches, clearHighlights } from './search.js';
 import {
@@ -77,14 +76,9 @@ const app = {
     } else {
       this.renderWelcome();
     }
-
-    // Start the neural constellation background
-    initConstellation(document.getElementById('constellation-bg'));
   },
 
   renderWelcome() {
-    // Restore constellation on home screen (hidden in light mode via CSS)
-    document.getElementById('constellation-bg').style.display = '';
     const contentArea = document.getElementById('content-area');
     contentArea.classList.remove('content-area--tabbed');
 
@@ -327,6 +321,7 @@ const app = {
       tabsTicking = true;
       requestAnimationFrame(() => {
         tabsTicking = false;
+        if (window.innerWidth <= 900) return;   // tabs keep one size on phones/tablets
         const card = area.querySelector('.concept-card--tabs');
         const hero = area.querySelector('.kl-concept-hero');
         if (!card || !card.querySelector('.tutorial-tabs')) return;
@@ -476,7 +471,6 @@ const app = {
     });
 
     this.showingSearchResults = true;
-    document.getElementById('constellation-bg').style.display = 'none';
     contentArea.classList.remove('content-area--tabbed');
     contentArea.innerHTML = renderResults(results, query);
     contentArea.scrollTop = 0;
@@ -503,8 +497,6 @@ const app = {
       window.location.hash = id;
     }
 
-    // Hide constellation when reading a concept
-    document.getElementById('constellation-bg').style.display = 'none';
 
     // Update UI
     this.activeConcept = concept;
@@ -874,7 +866,7 @@ const app = {
         kicker: 'Animation',
         icon: ico('<circle cx="5" cy="6" r="2"/><circle cx="19" cy="8" r="2"/><circle cx="11" cy="18" r="2"/><path d="M7 6.5l10 1.2M6.3 7.6l3.7 8.6M17.6 9.6l-5.2 7"/>'),
         title: 'Canvas 2D',
-        body: 'Neural Constellation on the home screen and the Zen Flow background in Study Mode.',
+        body: 'The animated Zen Flow background behind the Study Mode focus timer.',
       },
       {
         kicker: 'Themes',

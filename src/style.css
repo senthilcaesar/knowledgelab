@@ -145,19 +145,6 @@ h1, h2, h3 {
   font-weight: 800;
 }
 
-/* ============================
-   Neural Constellation Canvas
-   ============================ */
-#constellation-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 0;
-  pointer-events: none; /* clicks pass through to the app */
-}
-
 #app {
   position: relative;
   z-index: 1;
@@ -2727,7 +2714,6 @@ h1, h2, h3, h4 { font-family: var(--font-display); }
 }
 
 /* Refinements */
-#constellation-bg { opacity: 0.35; }
 :root.light-mode .nav-item { font-weight: 600; }
 
 /* ── Reading layout: one page scroll, pinned step tabs, comfortable column ── */
@@ -3394,5 +3380,52 @@ h1, h2, h3, h4 { font-family: var(--font-display); }
 :root:not(.light-mode) .sidebar { background: var(--bg-color); }
 :root:not(.light-mode) .kl-concept-title { color: #B4B4B4; }   /* aluminium on graphite */
 
-/* Light mode: constellation visible in the teal accent, a touch stronger on the off-white page */
-:root.light-mode #constellation-bg { opacity: 0.55; }
+
+/* ══════════════════════════════════════════════════════════════════════
+ * Smooth touch scrolling on phones & tablets
+ * ══════════════════════════════════════════════════════════════════════ */
+
+/* Use the dynamic viewport height so the page and the content area don't
+ * fight over scrolling when mobile browser toolbars show/hide. */
+@supports (height: 100dvh) {
+  body, #app, .main-content { height: 100dvh; }
+  @media (max-width: 640px) {
+    .content-area { height: calc(100dvh - 60px); }
+  }
+}
+
+.content-area {
+  overscroll-behavior-y: contain;      /* no scroll chaining / rubber-band fights */
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 900px) {
+  /* Tab bar keeps one size while scrolling: resizing a sticky bar mid-scroll
+   * forces layout and shifts the text under the finger. */
+  .concept-card--tabs .tutorial-tabs,
+  .concept-card--tabs .tutorial-tab-btn { transition: none; }
+  .concept-card--tabs.tabs-compact .tutorial-tabs { padding-top: 0.25rem; box-shadow: 0 1px 0 var(--border-color); }
+  .concept-card--tabs.tabs-compact .tutorial-tab-btn,
+  :root.light-mode .concept-card--tabs.tabs-compact .tutorial-tab-btn { padding: 0.6rem 0.7rem 0.55rem; font-size: 0.82rem; }
+  .concept-card--tabs.tabs-compact .kl-step-n { font-size: 0.78rem; }
+
+  /* Replace the mask (repainted every frame on a sticky element) with a cheap overlay */
+  .concept-card--tabs .tutorial-tabs { -webkit-mask-image: none; mask-image: none; }
+  .concept-card--tabs .tutorial-tabs::after {
+    content: '';
+    position: sticky;
+    right: 0;
+    flex: 0 0 28px;
+    margin-left: -28px;
+    align-self: stretch;
+    pointer-events: none;
+    background: linear-gradient(to right, transparent, var(--surface-solid));
+  }
+
+  /* No blur layers behind the off-screen drawer while scrolling */
+  .sidebar { backdrop-filter: none; -webkit-backdrop-filter: none; }
+  #app.sidebar-open::before { backdrop-filter: none; -webkit-backdrop-filter: none; }
+
+  /* Keep each step panel on its own compositing layer for steady momentum scrolling */
+  .concept-card--tabs .tutorial-tab-content { contain: content; }
+}

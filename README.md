@@ -10,7 +10,6 @@ A personal, interactive web app for storing and reviewing technical concept note
 
 | Feature | Description |
 |---|---|
-| 🌌 **Neural Constellation** | Live canvas animation — glowing nodes drifting and reacting to your mouse |
 | 🌙 **Dark / Light Theme** | Futuristic dark mode + warm "Parchment" reading mode |
 | ⏱️ **Study Mode Timer** | Built-in 25-minute focus timer with an animated "Zen Flow" backdrop |
 | 📱 **Responsive Layout** | Optimized for mobile/tablet with an elegant off-canvas drawer sidebar |
@@ -44,7 +43,7 @@ Edit the `concepts` array in `src/main.js`:
 
 - **Vite** — fast dev server + production bundler  
 - **Vanilla JS / CSS / HTML** — no frameworks  
-- **Canvas 2D** — neural constellation animation  
+- **Canvas 2D** — Zen Flow animation in Study Mode  
 - **GitHub Actions** — automated deploy on every push to `main`
 
 ---
