@@ -38,8 +38,8 @@ const BASE_PRE = [
   'padding: 1rem',
   'border: 1px solid var(--border-color)',
   'border-radius: 8px',
-  "font-family: 'JetBrains Mono', monospace",
-  'font-size: 0.85rem',
+  "font-family: var(--font-mono)",
+  'font-size: var(--code-block-size)',
   'white-space: pre-wrap',
   'line-height: 1.5',
   'overflow-x: hidden',
@@ -54,7 +54,7 @@ export const codeStyles = {
     'padding: 0.2rem 0.4rem',
     'background: var(--surface-color)',
     'border-radius: 4px',
-    'font-family: monospace',
+    'font-family: var(--font-mono)',
     'color: var(--code-text)',
   ].join('; '),
 };
@@ -358,8 +358,8 @@ export function applyCodeColors(container) {
     const isTerminal = existingBg.includes('surface-dark');
 
     // Enforce uniform font-size regardless of what the HTML says
-    code.style.fontSize = '0.85rem';
-    code.style.fontFamily = "'JetBrains Mono', monospace";
+    code.style.fontSize = 'var(--code-block-size)';
+    code.style.fontFamily = 'var(--font-mono)';
     code.style.lineHeight = '1.5';
 
     const isBlock = /display:\s*block/.test(code.getAttribute('style') || '');
@@ -375,7 +375,7 @@ export function applyCodeColors(container) {
 
   // Also ensure every <pre> has a default font-size (if not already set)
   container.querySelectorAll('pre').forEach((pre) => {
-    if (!pre.style.fontSize)   pre.style.fontSize   = '0.85rem';
+    if (!pre.style.fontSize)   pre.style.fontSize   = 'var(--code-block-size)';
     if (!pre.style.lineHeight) pre.style.lineHeight = '1.5';
   });
 }

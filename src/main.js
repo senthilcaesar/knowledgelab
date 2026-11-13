@@ -858,7 +858,7 @@ const app = {
         extra: `<div class="kl-fonts">
             <div><span class="aa" style="font-family:'Nunito Sans'">Aa</span><b>Nunito Sans</b><small>Headings &amp; body</small></div>
             <div><span class="aa" style="font-family:'Inter'">Aa</span><b>Inter</b><small>Sidebar</small></div>
-            <div><span class="aa" style="font-family:'JetBrains Mono', monospace">Aa</span><b>JetBrains Mono</b><small>Code blocks</small></div>
+            <div><span class="aa" style="font-family:var(--font-mono)">Aa</span><b>IBM Plex Mono</b><small>Code blocks</small></div>
             <div><span class="aa" style="font-family:'Shantell Sans', 'Nunito Sans'">Aa</span><b>Shantell Sans</b><small>Flowchart labels</small></div>
           </div>`,
       },

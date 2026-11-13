@@ -52,6 +52,11 @@
   /* Editorial shapes (dark keeps Catppuccin colours) */
   --font-display: 'Nunito Sans', system-ui, sans-serif;
   --font-body: 'Nunito Sans', system-ui, sans-serif;
+  --font-content: 'Inter', sans-serif;
+  --content-weight: 340;        /* body text in lessons; 400 = regular, 300 = light */
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --code-block-size: 1.02rem;   /* code blocks & terminals */
+  --code-inline-size: 0.92em;   /* inline code, relative to the surrounding text */
   --ink: #c6d0f5;            /* Text */
   --ink-line: rgba(131, 139, 167, 0.35); /* soft structural lines */
   --hard-shadow: #ca9ee6;    /* Mauve — offset shadow */
@@ -2059,7 +2064,6 @@ h1, h2, h3 {
 }
 
 .tutorial-tab-content,
-.tutorial-tab-panel,
 .tutorial-tab-panel pre,
 .tutorial-tab-panel code,
 .tutorial-tab-panel .code-wrapper {
@@ -2744,7 +2748,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); }
   margin: 0 auto;
 }
 .tutorial-tab-panel .concept-content {
-  font-size: 1.06rem;
+  font-size: 1.18rem;
 }
 .tutorial-tab-panel .concept-content p,
 .tutorial-tab-panel .concept-content li {
@@ -2757,7 +2761,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); }
   .concept-card--tabs .tutorial-tabs { top: -0.5rem; padding-top: calc(0.6rem + 0.5rem); }
   .concept-card--tabs .tutorial-tab-content { padding: 1.25rem 1rem 2rem; }
   .tutorial-tab-panel .concept-content,
-  .tutorial-tab-panel p { font-size: 1rem; }
+  .tutorial-tab-panel p { font-size: 1.08rem; }
 }
 .main-content > .content-area { min-height: 0; } /* let the flex child scroll instead of growing */
 /* `overflow-x: hidden` turns these into (barely) scrollable boxes that trap the
@@ -2891,7 +2895,8 @@ h1, h2, h3, h4 { font-family: var(--font-display); }
 .concept-card--tabs .tutorial-tab-btn { padding: 0.5rem 0.9rem; }
 .kl-concept-hero { padding: 0.6rem 1.25rem; }
 .concept-card--tabs .tutorial-tab-content { padding: 1.25rem 2rem 2rem; }
-.tutorial-tab-panel { max-width: 1100px; }
+/* Readable measure: ~70–80 characters per line, centred with breathing room either side */
+.tutorial-tab-panel { width: 100%; max-width: 54rem; margin-inline: auto; }
 .kl-stepnav { margin-top: 2rem; }
 @media (max-width: 640px) {
   .concept-card--tabs .tutorial-tabs { top: 0; padding: 0.3rem 0.5rem 0; }
@@ -3160,7 +3165,6 @@ h1, h2, h3, h4 { font-family: var(--font-display); }
             mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
     padding-right: 2rem;
   }
-  .tutorial-tab-panel { max-width: none; }
 }
 
 /* Comfortable touch targets */
@@ -3429,3 +3433,50 @@ h1, h2, h3, h4 { font-family: var(--font-display); }
   /* Keep each step panel on its own compositing layer for steady momentum scrolling */
   .concept-card--tabs .tutorial-tab-content { contain: content; }
 }
+
+/* ── Code font: every code surface uses IBM Plex Mono ──
+ * !important beats the inline `font-family` styles baked into lesson content. */
+code, pre, kbd, samp,
+.code-wrapper, .code-wrapper *,
+pre *, code *,
+[style*="monospace"] {
+  font-family: var(--font-mono) !important;
+}
+
+/* ── Code font size: one place for every code surface ── */
+pre, pre *,
+.code-wrapper :not(.copy-btn):not(.copy-btn *),
+code[style*="display: block"], code[style*="display:block"] {
+  font-size: var(--code-block-size) !important;
+}
+:not(pre) > code:not([style*="display: block"]):not([style*="display:block"]) {
+  font-size: var(--code-inline-size) !important;
+}
+@media (max-width: 640px) {
+  :root { --code-block-size: 0.9rem; }
+}
+
+/* ── Breathing room above each tab's content ── */
+.concept-card--tabs .tutorial-tab-content { padding-top: 2.75rem; }
+@media (max-width: 640px) {
+  .concept-card--tabs .tutorial-tab-content { padding-top: 1.75rem; }
+}
+
+/* ── Lesson content font: Inter everywhere except code ──
+ * The :not() list keeps code blocks, inline code and copy buttons on --font-mono. */
+.concept-card,
+.concept-card *:not(code):not(pre):not(kbd):not(samp):not(pre *):not(code *):not(.code-wrapper *):not([style*="monospace"]) {
+  font-family: var(--font-content) !important;
+}
+
+/* ── Lighter body text in lessons ──
+ * Bold text is pinned to 600 because `bolder` from a 340 base would only reach ~400. */
+.tutorial-tab-panel .concept-content {
+  font-weight: var(--content-weight);
+}
+.tutorial-tab-panel .concept-content :is(strong, b, th) {
+  font-weight: 600;
+}
+
+/* ── Tech Stack button hidden (modal code kept; delete this rule to bring it back) ── */
+.tech-stack-btn { display: none !important; }
