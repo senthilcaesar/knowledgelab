@@ -1,55 +1,52 @@
 :root {
-  /* ── Catppuccin Frappé ───────────────────────────────────────────────
-   * Base      #303446   Mantle    #292c3c   Crust     #232634
-   * Surface0  #414559   Surface1  #51576d   Surface2  #626880
-   * Overlay0  #737994   Overlay1  #838ba7   Overlay2  #949cbb
-   * Text      #c6d0f5   Subtext1  #b5bfe2   Subtext0  #a5adce
-   * Mauve     #ca9ee6   Blue      #8caaee   Lavender  #babbf1
-   * Sapphire  #85c1dc   Sky       #99d1db   Teal      #81c8be
-   * Green     #a6d189   Yellow    #e5c890   Peach     #ef9f76
-   * Red       #e78284   Maroon    #ea999c   Flamingo  #eebebe
+  /* ── Emily Black Academic Dark Theme (emblack.github.io) ─────────────
+   * Base/Bg      #474747   Surface   #3d3d3d   Raised    #434343
+   * Text         #ffffff   Secondary #f3f3f3   Silver    #bcc0c3
+   * Accent       #0ea1c5   Hover     #0b7994   Visited   #4ab9d4
+   * Border       #bcc0c3   DarkBorder #dadada
    * ─────────────────────────────────────────────────────────────────── */
-  --bg-color: #303446;                       /* Base */
-  --surface-color: rgba(65, 69, 89, 0.5);   /* Surface0 @ 50% */
-  --surface-hover: rgba(81, 87, 109, 0.6);  /* Surface1 @ 60% */
-  --border-color: rgba(115, 121, 148, 0.4); /* Overlay0 @ 40% */
-  --text-primary: #c6d0f5;                  /* Text */
-  --text-secondary: #a5adce;                /* Subtext0 */
-  --accent-primary: #ca9ee6;               /* Mauve */
-  --accent-secondary: #8caaee;             /* Blue */
-  --accent-magenta: #ef9f76;              /* Peach */
-  --code-text: #81c8be;                    /* Teal */
-  --code-text-secondary: #626880;          /* Surface2 */
+  --bg-color: #474747;
+  --surface-solid: #3d3d3d;
+  --surface-color: #434343;
+  --surface-hover: rgba(255, 255, 255, 0.08);
+  --border-color: rgba(188, 192, 195, 0.35);
+  --text-primary: #ffffff;
+  --text-secondary: #f3f3f3;
+  --accent-primary: #0ea1c5;
+  --accent-secondary: #4ab9d4;
+  --accent-magenta: #0b7994;
+  --code-text: #0ea1c5;
+  --code-text-secondary: #bcc0c3;
   --sidebar-width: 280px;
   --glass-blur: 16px;
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Syntax Highlighting — Catppuccin Frappé
-   * Keyword    = #ca9ee6  Mauve
-   * String     = #a6d189  Green
-   * Constant   = #ef9f76  Peach
-   * Comment    = #737994  Overlay0 (italic)
-   * Function   = #8caaee  Blue
-   * Identifier = #81c8be  Teal (italic)
-   * Params     = #e5c890  Yellow (italic)
+  /* Syntax Highlighting — Solarized Dark (matching emblack.github.io)
+   * Keyword    = #859900
+   * String     = #2aa198
+   * Constant   = #cb4b16
+   * Comment    = #93a1a1
+   * Function   = #0ea1c5
+   * Identifier = #4ab9d4
+   * Params     = #b58900
    */
-  --syntax-bg:         #292c3c;            /* Mantle */
-  --syntax-text:       #c6d0f5;            /* Text */
-  --syntax-keyword:    #ca9ee6;            /* Mauve  — keyword / operator / type */
-  --syntax-string:     #a6d189;            /* Green  — strings, labels           */
-  --syntax-constant:   #ef9f76;            /* Peach  — numbers, booleans         */
-  --syntax-comment:    #737994;            /* Overlay0 — comments (italic)       */
-  --syntax-function:   #8caaee;            /* Blue   — function names            */
-  --syntax-identifier: #81c8be;            /* Teal   — identifiers / built-ins   */
-  --syntax-params:     #e5c890;            /* Yellow — params / decorators       */
+  --syntax-bg:         #383838;
+  --syntax-text:       #f3f3f3;
+  --syntax-keyword:    #859900;
+  --syntax-string:     #2aa198;
+  --syntax-constant:   #cb4b16;
+  --syntax-comment:    #93a1a1;
+  --syntax-function:   #0ea1c5;
+  --syntax-identifier: #4ab9d4;
+  --syntax-params:     #b58900;
 
   /* Code block surface colors */
-  --surface-dark: #232634;                  /* Crust — terminal/output blocks */
-  --surface-light: rgba(65, 69, 89, 0.3);  /* Surface0 — command/input blocks */
-  --code-green: #a6d189;                   /* Green — terminal output text */
+  --surface-dark: #303030;
+  --surface-light: #3d3d3d;
+  --code-green: #2aa198;
 
-  /* Editorial shapes (dark keeps Catppuccin colours) */
+  /* Editorial shapes */
   --font-display: 'Nunito Sans', system-ui, sans-serif;
   --font-body: 'Nunito Sans', system-ui, sans-serif;
   --font-content: 'Inter', sans-serif;
@@ -57,16 +54,16 @@
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   --code-block-size: 1.02rem;   /* code blocks & terminals */
   --code-inline-size: 0.92em;   /* inline code, relative to the surrounding text */
-  --ink: #c6d0f5;            /* Text */
-  --ink-line: rgba(131, 139, 167, 0.35); /* soft structural lines */
-  --hard-shadow: #ca9ee6;    /* Mauve — offset shadow */
-  --tag-bg: #ca9ee6;
-  --tag-fg: #232634;
-  --tint: rgba(202, 158, 230, 0.12);
-  --surface-solid: #292c3c;  /* Mantle */
-  --ok: #a6d189;     --ok-bg: rgba(166, 209, 137, 0.12);
-  --warn: #e5c890;   --warn-bg: rgba(229, 200, 144, 0.12);
-  --danger: #e78284; --danger-bg: rgba(231, 130, 132, 0.12);
+  --ink: #ffffff;
+  --ink-line: rgba(188, 192, 195, 0.28);
+  --hard-shadow: #0ea1c5;
+  --tag-bg: #0ea1c5;
+  --tag-fg: #ffffff;
+  --tint: rgba(14, 161, 197, 0.14);
+  --surface-solid: #3d3d3d;
+  --ok: #62c462;     --ok-bg: rgba(98, 196, 98, 0.14);
+  --warn: #f89406;   --warn-bg: rgba(248, 148, 6, 0.14);
+  --danger: #ee5f5b; --danger-bg: rgba(238, 95, 91, 0.14);
 }
 
 :root.light-mode {
@@ -156,16 +153,14 @@ h1, h2, h3 {
   display: flex;
   height: 100vh;
   width: 100vw;
-  background-image: 
-    radial-gradient(circle at 10% 10%, rgba(140, 170, 238, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 90% 90%, rgba(202, 158, 230, 0.15) 0%, transparent 40%);
+  background-color: var(--bg-color);
 }
 
 /* Sidebar */
 .sidebar {
   width: var(--sidebar-width);
   height: 100%;
-  background: rgba(41, 44, 60, 0.85);
+  background: var(--bg-color);
   backdrop-filter: blur(var(--glass-blur));
   border-right: 1px solid var(--border-color);
   display: flex;
@@ -243,9 +238,9 @@ h1, h2, h3 {
 }
 
 .nav-item.active {
-  background: rgba(202, 158, 230, 0.1);
+  background: var(--tint);
   color: var(--accent-primary);
-  border-color: rgba(202, 158, 230, 0.3);
+  border-color: rgba(14, 161, 197, 0.35);
 }
 
 /* Main Content */
@@ -372,7 +367,7 @@ h1, h2, h3 {
 #concept-search:focus {
   border-color: var(--accent-primary);
   background: var(--surface-hover);
-  box-shadow: 0 0 20px rgba(202, 158, 230, 0.1);
+  box-shadow: 0 0 20px rgba(14, 161, 197, 0.15);
 }
 
 .welcome-card {
@@ -507,7 +502,7 @@ h1, h2, h3 {
 }
 
 .copy-btn.copied {
-  background: rgba(202, 158, 230, 0.1);
+  background: var(--tint);
   border-color: var(--accent-primary);
   color: var(--accent-primary);
 }
@@ -1009,7 +1004,7 @@ h1, h2, h3 {
   border-radius: 100px;
   cursor: pointer;
   backdrop-filter: blur(12px);
-  box-shadow: 0 4px 24px rgba(202, 158, 230, 0.15), 0 0 0 1px rgba(202, 158, 230, 0.1);
+  box-shadow: 0 4px 24px rgba(14, 161, 197, 0.15), 0 0 0 1px rgba(14, 161, 197, 0.1);
   transition: var(--transition-fast);
   position: relative;
   overflow: hidden;
@@ -1017,7 +1012,7 @@ h1, h2, h3 {
 
 .mini-timer-inner:hover {
   background: var(--surface-hover);
-  box-shadow: 0 6px 32px rgba(202, 158, 230, 0.25);
+  box-shadow: 0 6px 32px rgba(14, 161, 197, 0.25);
   transform: translateY(-2px);
 }
 
@@ -1248,13 +1243,13 @@ h1, h2, h3 {
 
 .primary-btn {
   background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-  color: #000;
-  box-shadow: 0 4px 20px rgba(202, 158, 230, 0.3);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(14, 161, 197, 0.3);
 }
 
 .primary-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 30px rgba(202, 158, 230, 0.4);
+  box-shadow: 0 6px 30px rgba(14, 161, 197, 0.4);
 }
 
 :root.light-mode .primary-btn {
@@ -1301,7 +1296,7 @@ h1, h2, h3 {
 }
 
 .preset-btn.active {
-  background: rgba(202, 158, 230, 0.15);
+  background: var(--tint);
   border-color: var(--accent-primary);
   color: var(--accent-primary);
 }
@@ -1362,7 +1357,7 @@ h1, h2, h3 {
   position: absolute;
   top: 1.5rem;
   padding: 0.4rem 1rem;
-  background: rgba(202, 158, 230, 0.1);
+  background: var(--tint);
   border-radius: 20px;
   font-family: 'Nunito Sans', sans-serif;
   font-weight: 600;
@@ -1523,7 +1518,7 @@ h1, h2, h3 {
 }
 
 .view-switch.active {
-  background: rgba(202, 158, 230, 0.15);
+  background: var(--tint);
   border-color: var(--accent-primary);
   color: var(--accent-primary);
 }
@@ -1776,7 +1771,7 @@ h1, h2, h3 {
 
 .tech-stack-item:hover {
   background: var(--surface-hover);
-  border-color: rgba(202, 158, 230, 0.3);
+  border-color: rgba(14, 161, 197, 0.35);
   transform: translateX(4px);
 }
 
@@ -1902,9 +1897,9 @@ h1, h2, h3 {
 .tutorial-tab-btn.active {
   color: var(--accent-primary);
   font-weight: 650;
-  background: rgba(202, 158, 230, 0.06);
+  background: var(--tint);
   border-color: var(--border-color);
-  border-bottom-color: rgba(202, 158, 230, 0.06);
+  border-bottom-color: var(--tint);
 }
 
 /* ── Content panel ── */
@@ -1981,7 +1976,7 @@ h1, h2, h3 {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  background: linear-gradient(135deg, rgba(202, 158, 230, 0.08) 0%, rgba(140, 170, 238, 0.08) 100%);
+  background: linear-gradient(135deg, rgba(14, 161, 197, 0.08) 0%, rgba(74, 184, 212, 0.08) 100%);
   color: var(--text-primary);
   border: 1px solid var(--border-color);
   padding: 0.55rem 1.15rem;
@@ -1998,8 +1993,8 @@ h1, h2, h3 {
 
 .github-link-btn:hover {
   border-color: var(--accent-primary);
-  background: linear-gradient(135deg, rgba(202, 158, 230, 0.15) 0%, rgba(140, 170, 238, 0.15) 100%);
-  box-shadow: 0 4px 12px rgba(202, 158, 230, 0.15);
+  background: linear-gradient(135deg, rgba(14, 161, 197, 0.15) 0%, rgba(74, 184, 212, 0.15) 100%);
+  box-shadow: 0 4px 12px rgba(14, 161, 197, 0.15);
 }
 
 .github-link-btn svg {
@@ -3360,29 +3355,53 @@ h1, h2, h3, h4 { font-family: var(--font-display); }
 }
 
 /* ══════════════════════════════════════════════════════════════════════
- * Dark mode: Windows 95–inspired dark platinum (neutral graphite greys)
- * Accent stays mauve. Light mode is untouched.
+ * Dark mode: Emily Black Academic Dark Theme (emblack.github.io)
+ * Neutral charcoal graphite (#474747), crisp white text (#ffffff),
+ * academic cyan-teal accents (#0ea1c5, #4ab9d4), and silver borders (#bcc0c3).
+ * Light mode is untouched.
  * ══════════════════════════════════════════════════════════════════════ */
 :root:not(.light-mode) {
-  --bg-color: #2B2D30;          /* page */
-  --surface-solid: #313337;     /* tutorial panel, cards */
-  --surface-color: #36383C;     /* raised platinum-dark */
-  --surface-hover: #3E4045;
-  --border-color: #4A4D52;
-  --ink-line: rgba(168, 168, 168, 0.22);
-  --ink: #E4E4E4;
-  --text-primary: #E4E4E4;
-  --text-secondary: #A8A8A8;    /* platinum */
-  --tag-fg: #1F2023;
-  --syntax-bg: #26282B;
-  --syntax-text: #E4E4E4;
-  --surface-dark: #232427;      /* terminal blocks */
-  --surface-light: #2F3134;
+  --bg-color: #474747;          /* page background from emblack */
+  --surface-solid: #3d3d3d;     /* tutorial panel, cards */
+  --surface-color: #434343;     /* raised surface */
+  --surface-hover: rgba(255, 255, 255, 0.08);
+  --border-color: rgba(188, 192, 195, 0.35);
+  --ink-line: rgba(188, 192, 195, 0.28);
+  --ink: #ffffff;
+  --text-primary: #ffffff;
+  --text-secondary: #f3f3f3;    /* light text from emblack */
+  --accent-primary: #0ea1c5;    /* link & accent color from emblack */
+  --accent-secondary: #4ab9d4;  /* visited link color from emblack */
+  --accent-magenta: #0b7994;    /* link hover color from emblack */
+  --hard-shadow: #0ea1c5;
+  --tag-bg: #0ea1c5;
+  --tag-fg: #ffffff;
+  --tint: rgba(14, 161, 197, 0.14);
+  --code-text: #0ea1c5;
+  --code-text-secondary: #bcc0c3;
+  --syntax-bg: #383838;
+  --syntax-text: #f3f3f3;
+  --syntax-keyword: #859900;
+  --syntax-string: #2aa198;
+  --syntax-constant: #cb4b16;
+  --syntax-comment: #93a1a1;
+  --syntax-function: #0ea1c5;
+  --syntax-identifier: #4ab9d4;
+  --syntax-params: #b58900;
+  --surface-dark: #303030;      /* terminal blocks */
+  --surface-light: #3d3d3d;
+  --code-green: #2aa198;
+  --ok: #62c462;
+  --ok-bg: rgba(98, 196, 98, 0.14);
+  --warn: #f89406;
+  --warn-bg: rgba(248, 148, 6, 0.14);
+  --danger: #ee5f5b;
+  --danger-bg: rgba(238, 95, 91, 0.14);
 }
 :root:not(.light-mode) body { background-color: var(--bg-color); }
-:root:not(.light-mode) #app { background-image: none; }
+:root:not(.light-mode) #app { background-image: none; background-color: var(--bg-color); }
 :root:not(.light-mode) .sidebar { background: var(--bg-color); }
-:root:not(.light-mode) .kl-concept-title { color: #B4B4B4; }   /* aluminium on graphite */
+:root:not(.light-mode) .kl-concept-title { color: #ffffff; }
 
 
 /* ══════════════════════════════════════════════════════════════════════

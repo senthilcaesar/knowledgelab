@@ -42,7 +42,7 @@ concepts/
 ## Features
 
 - 🌙 **Dark / Light theme toggle** (top-right button) — persisted in `localStorage`
-  - Dark: futuristic neon (cyan, violet, magenta)
+  - Dark: Academic dark theme inspired by `emblack.github.io` (charcoal `#474747`, crisp white `#ffffff`, cyan `#0ea1c5`, and sky `#4ab9d4`)
   - Light: warm "Parchment" reading theme (`#fcf8e8`, ink-brown text)
 - 🔲 **Sidebar toggle** (`‹` button in top-bar) — collapses/expands with smooth CSS transition; persisted in `localStorage`
 - 🏠 **Home navigation** — clicking "KnowledgeLab" title resets to the welcome screen
@@ -95,9 +95,9 @@ All colors are CSS variables defined in `:root` (dark) and `:root.light-mode` (l
 
 | Variable           | Dark value          | Light value        |
 |--------------------|---------------------|--------------------|
-| `--bg-color`       | `#050507`           | `#fcf8e8`          |
-| `--text-primary`   | `#f0f0f5`           | `#3d3021`          |
-| `--accent-primary` | `#00f2ff` (cyan)    | `#b08d57` (brass)  |
-| `--accent-secondary` | `#7000ff` (violet) | `#7d6b5d` (earth) |
+| `--bg-color`       | `#474747`           | `#fcf8e8`          |
+| `--text-primary`   | `#ffffff`           | `#3d3021`          |
+| `--accent-primary` | `#0ea1c5` (cyan)    | `#b08d57` (brass)  |
+| `--accent-secondary` | `#4ab9d4` (sky)   | `#7d6b5d` (earth)  |
 
 Fonts: headings use `Outfit 800`, body uses `Inter`.
