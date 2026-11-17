@@ -42,7 +42,7 @@ cp -R skills/skills/* ~/.claude/skills/</code></pre>
 <p style="margin-bottom:0.5rem; line-height:1.75;">Here's what a skill's frontmatter looks like: The <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">  name</code> identifies your skill and the <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">description</code> tell Claude when to use it.</p>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">A good description answers two questions:</p>
-<ul style="margin: 0 0 0.5rem 1.5rem; color: var(--text-secondary); line-height: 1.5; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">
+<ul style="margin: 0 0 0.5rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
   <li style="margin-bottom: 0.25rem;">What does this skill do?</li>
   <li style="margin-bottom: 0.25rem;">When should Claude use it?</li>
 </ul>
@@ -141,7 +141,7 @@ I'll help you create a distinctive, production-grade frontend interface. To get 
   <p style="margin-bottom: 0.75rem; line-height:1.75; color: var(--text-primary); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 1.15rem;">
     <span>💡</span> When Claude Code starts, it scans four locations for skills:
   </p>
-  <ul style="margin: 0 0 0 1.5rem; color: var(--text-secondary); line-height: 1.5; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">
+  <ul style="margin: 0 0 0 1.5rem; color: var(--text-secondary); line-height: 1.75;">
     <li style="margin-bottom: 0.25rem;">Enterprise (managed settings) - .claude/skills inside the managed settings directory</li>
     <li style="margin-bottom: 0.25rem;">Personal (your home directory) - ~/.claude/skills</li>
     <li style="margin-bottom: 0.25rem;">Project (your project directory) - .claude/skills</li>

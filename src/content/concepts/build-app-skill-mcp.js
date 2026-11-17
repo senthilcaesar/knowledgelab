@@ -95,7 +95,7 @@ cp -R skills/skills/* ~/.claude/skills/</pre>
 <p style="margin-bottom:0.5rem; line-height:1.75;">Here's what a skill's frontmatter looks like: The <code style="padding: 0.2rem 0.4rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">name</code> identifies your skill and the <code style="padding: 0.2rem 0.4rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">description</code> tell Claude when to use it.</p>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">A good description answers two questions:</p>
-<ul style="margin: 0 0 0.5rem 1.5rem; color: var(--text-secondary); line-height: 1.6; font-family: monospace; font-size: 1.05rem;">
+<ul style="margin: 0 0 0.5rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
   <li style="margin-bottom: 0.25rem;">What does this skill do?</li>
   <li style="margin-bottom: 0.25rem;">When should Claude use it?</li>
 </ul>
