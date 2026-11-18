@@ -313,25 +313,35 @@ const app = {
       searchInput.focus();
     });
 
-    // Compact the step-tab bar while reading; expand it again near the top
+    // While reading, slide the step-tab bar away; bring it back near the top.
+    // A back-to-top button appears whenever the tabs are hidden.
     const area = document.getElementById('content-area');
+    const toTop = document.getElementById('back-to-top');
     let tabsTicking = false;
+    const updateScrollChrome = () => {
+      tabsTicking = false;
+      const card = area.querySelector('.concept-card--tabs');
+      const hero = area.querySelector('.kl-concept-hero');
+      if (!card) {
+        toTop.classList.remove('is-visible');
+        return;
+      }
+      const start = hero ? hero.offsetHeight : 0;
+      const hidden = card.classList.contains('tabs-hidden');
+      // Hysteresis: hide a little past the header, show again only back at the header
+      if (!hidden && area.scrollTop > start + 80) card.classList.add('tabs-hidden');
+      else if (hidden && area.scrollTop < start + 16) card.classList.remove('tabs-hidden');
+      toTop.classList.toggle('is-visible', card.classList.contains('tabs-hidden'));
+    };
     area.addEventListener('scroll', () => {
       if (tabsTicking) return;
       tabsTicking = true;
-      requestAnimationFrame(() => {
-        tabsTicking = false;
-        if (window.innerWidth <= 900) return;   // tabs keep one size on phones/tablets
-        const card = area.querySelector('.concept-card--tabs');
-        const hero = area.querySelector('.kl-concept-hero');
-        if (!card || !card.querySelector('.tutorial-tabs')) return;
-        const start = hero ? hero.offsetHeight : 0;
-        const compact = card.classList.contains('tabs-compact');
-        // Hysteresis: shrink a little past the header, expand only back at the header
-        if (!compact && area.scrollTop > start + 40) card.classList.add('tabs-compact');
-        else if (compact && area.scrollTop < start + 4) card.classList.remove('tabs-compact');
-      });
+      requestAnimationFrame(updateScrollChrome);
     }, { passive: true });
+    toTop.addEventListener('click', () => {
+      const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      area.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' });
+    });
 
     // Home course map, continue card, reset, and step navigation
     document.getElementById('content-area').addEventListener('click', (e) => {

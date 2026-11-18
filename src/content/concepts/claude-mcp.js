@@ -249,25 +249,25 @@ const claudeMcpConcept = {
 
   Available Tools
 
-  supadata — Web content extraction:
-  - supadata_transcript — Extract transcripts from YouTube, TikTok, Instagram, Twitter, or video files
-  - supadata_check_transcript_status — Check transcript job progress
-  - supadata_scrape — Scrape web pages to Markdown
-  - supadata_map — Crawl website to discover all URLs
-  - supadata_crawl — Batch crawl website to extract content from all pages
-  - supadata_check_crawl_status — Check crawl job progress
+  supadata - Web content extraction:
+  - supadata_transcript - Extract transcripts from YouTube, TikTok, Instagram, Twitter, or video files
+  - supadata_check_transcript_status - Check transcript job progress
+  - supadata_scrape - Scrape web pages to Markdown
+  - supadata_map - Crawl website to discover all URLs
+  - supadata_crawl - Batch crawl website to extract content from all pages
+  - supadata_check_crawl_status - Check crawl job progress
 
-  magic — 21st.dev UI components:
-  - 21st_magic_component_builder — Build new UI components from library
-  - 21st_magic_component_inspiration — Browse UI component examples
-  - 21st_magic_component_refiner — Redesign/improve existing UI components
-  - logo_search — Search for company logos in JSX/TSX/SVG formats
+  magic - 21st.dev UI components:
+  - 21st_magic_component_builder - Build new UI components from library
+  - 21st_magic_component_inspiration - Browse UI component examples
+  - 21st_magic_component_refiner - Redesign/improve existing UI components
+  - logo_search - Search for company logos in JSX/TSX/SVG formats
 
-  shadcn — Interact with shadcn/ui registries:
-  - list_components — List all components available in the registry
-  - search_components — Search components by name or description
-  - get_component_details — Get detail of specific component
-  - add_item — Add components to the local workspace</pre>
+  shadcn - Interact with shadcn/ui registries:
+  - list_components - List all components available in the registry
+  - search_components - Search components by name or description
+  - get_component_details - Get detail of specific component
+  - add_item - Add components to the local workspace</pre>
 
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="4" class="tutorial-nav-link previous">
@@ -288,7 +288,7 @@ const claudeMcpConcept = {
     <div style="width: 10px; height: 10px; border-radius: 50%; background: #ff5f56;"></div>
     <div style="width: 10px; height: 10px; border-radius: 50%; background: #ffbd2e;"></div>
     <div style="width: 10px; height: 10px; border-radius: 50%; background: #27c93f;"></div>
-    <span style="margin-left: 0.5rem; font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8;">zsh — mcp-resources</span>
+    <span style="margin-left: 0.5rem; font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8;">zsh - mcp-resources</span>
   </div>
   
   <!-- Terminal Body -->

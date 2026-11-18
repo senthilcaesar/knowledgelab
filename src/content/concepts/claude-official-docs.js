@@ -95,7 +95,7 @@ const claudeOfficialDocsConcept = {
 
 <ul style="margin-left: 1.25rem; margin-bottom: 1.5rem; line-height: 1.7; color: var(--text-primary);">
   <li style="margin-bottom: 0.5rem;"><strong>Give clear, specific instructions:</strong> Break large features into smaller, verifiable tasks rather than open-ended requests.</li>
-  <li style="margin-bottom: 0.5rem;"><strong>Keep CLAUDE.md short:</strong> Only write in <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">CLAUDE.md</code> what Claude can't learn by reading the repo — commands to run, non-obvious gotchas, and decisions — since every line loads into every session.</li>
+  <li style="margin-bottom: 0.5rem;"><strong>Keep CLAUDE.md short:</strong> Only write in <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">CLAUDE.md</code> what Claude can't learn by reading the repo - commands to run, non-obvious gotchas, and decisions - since every line loads into every session.</li>
   <li style="margin-bottom: 0.5rem;"><strong>Use Test-Driven Loops:</strong> Ask Claude to run unit tests or lint commands before declaring a task complete.</li>
   <li style="margin-bottom: 0.5rem;"><strong>Manage session context:</strong> Compaction happens automatically as context fills. Use <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">/clear</code> between unrelated tasks, <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">/compact &lt;focus&gt;</code> at natural breakpoints, and <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">/context</code> to inspect usage.</li>
 </ul>
@@ -158,7 +158,7 @@ const claudeOfficialDocsConcept = {
 
 <ul style="margin-left: 1.25rem; margin-bottom: 1.5rem; line-height: 1.7; color: var(--text-primary);">
   <li style="margin-bottom: 0.5rem;"><strong>CLAUDE.md:</strong> Project-level instructions committed to git, shared across the whole engineering team.</li>
-  <li style="margin-bottom: 0.5rem;"><strong>CLAUDE.local.md:</strong> Personal, project-specific notes that stay out of version control — add <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">CLAUDE.local.md</code> to <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">.gitignore</code> yourself.</li>
+  <li style="margin-bottom: 0.5rem;"><strong>CLAUDE.local.md:</strong> Personal, project-specific notes that stay out of version control - add <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">CLAUDE.local.md</code> to <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">.gitignore</code> yourself.</li>
   <li style="margin-bottom: 0.5rem;"><strong>Auto-Memory:</strong> Automatic memory storage located in <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">~/.claude/projects/&lt;project&gt;/memory/</code>.</li>
   <li style="margin-bottom: 0.5rem;"><strong>Memory Shortcuts:</strong> Use <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: monospace;">/memory</code> to view and edit memory topics directly.</li>
 </ul>

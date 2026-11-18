@@ -4,7 +4,7 @@ const buildWebappAiConcept = {
     category: '',
     tags: [''],
     description: `
-Build your own Notebook Web App using AI coding — no prior coding experience required.
+Build your own Notebook Web App using AI coding - no prior coding experience required.
 
 In this tutorial, you’ll learn how to build and launch the app step-by-step using three tools:
 

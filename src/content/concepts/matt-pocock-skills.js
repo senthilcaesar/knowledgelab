@@ -12,13 +12,13 @@ const mattPocockSkillsConcept = {
     <span>AI Engineer Workshop</span>
   </a>
 </div>
-<p style="margin-bottom:1rem; line-height:1.75;"><strong>Agent Skills</strong> by Matt Pocock is a curated collection of real-world <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">.claude</code> skills — markdown-based instruction files that extend what Claude Code can do. These are <em>production skills straight from his own <code>.claude</code> directory</em>, built for professional engineers who want to supercharge their AI-assisted workflow.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>Agent Skills</strong> by Matt Pocock is a curated collection of real-world <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">.claude</code> skills - markdown-based instruction files that extend what Claude Code can do. These are <em>production skills straight from his own <code>.claude</code> directory</em>, built for professional engineers who want to supercharge their AI-assisted workflow.</p>
 
-<p style="margin-bottom:1.5rem; line-height:1.75; font-style:italic; opacity:0.8;"><strong>Who is Matt Pocock?</strong> He's a TypeScript educator and creator of Total TypeScript. His skills represent real patterns used in production — not tutorials, but battle-tested AI workflows.</p>
+<p style="margin-bottom:1.5rem; line-height:1.75; font-style:italic; opacity:0.8;"><strong>Who is Matt Pocock?</strong> He's a TypeScript educator and creator of Total TypeScript. His skills represent real patterns used in production - not tutorials, but battle-tested AI workflows.</p>
 
 <div style="margin-bottom: 2rem; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px;">
   <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">What Are Claude Skills?</strong>
-  <p style="margin-bottom: 0.75rem; line-height: 1.6;">Skills are folders, each holding a <code>SKILL.md</code>, placed in your <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">~/.claude/skills/</code> directory. When Claude Code reads them, it can follow the specialized instructions they contain — turning complex workflows into repeatable, single-command actions.</p>
+  <p style="margin-bottom: 0.75rem; line-height: 1.6;">Skills are folders, each holding a <code>SKILL.md</code>, placed in your <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">~/.claude/skills/</code> directory. When Claude Code reads them, it can follow the specialized instructions they contain - turning complex workflows into repeatable, single-command actions.</p>
   <ul style="margin-left: 1.25rem; line-height: 1.6;">
     <li style="margin-bottom: 0.5rem;">Each skill is a directory with a <code>SKILL.md</code> whose YAML frontmatter holds a <code>description</code> (plus optional <code>when_to_use</code>); <code>name</code> is optional and defaults to the folder name</li>
     <li style="margin-bottom: 0.5rem;">Claude reads the skill and follows its step-by-step instructions</li>
@@ -29,13 +29,13 @@ const mattPocockSkillsConcept = {
 <div style="margin-bottom: 2rem; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px;">
   <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">Example Skills in the Collection</strong>
   <ul style="margin-left: 1.25rem; line-height: 1.6;">
-    <li style="margin-bottom: 0.5rem;"><strong>grill-me</strong> — Get relentlessly interviewed about a plan or design until every branch is resolved</li>
-    <li style="margin-bottom: 0.5rem;"><strong>grill-with-docs</strong> — A grilling session that also builds your domain glossary and ADRs</li>
-    <li style="margin-bottom: 0.5rem;"><strong>to-spec</strong> — Turn the current conversation into a spec and publish it to your issue tracker</li>
-    <li style="margin-bottom: 0.5rem;"><strong>improve-codebase-architecture</strong> — Survey a codebase for deepening opportunities</li>
-    <li style="margin-bottom: 0.5rem;"><strong>diagnosing-bugs</strong> — Disciplined diagnosis loop for hard bugs and performance regressions</li>
-    <li style="margin-bottom: 0.5rem;"><strong>retro</strong> — Suggest improvements to the agent's environment after a session</li>
-    <li><strong>tdd</strong> — Test-driven development with a red-green-refactor loop</li>
+    <li style="margin-bottom: 0.5rem;"><strong>grill-me</strong> - Get relentlessly interviewed about a plan or design until every branch is resolved</li>
+    <li style="margin-bottom: 0.5rem;"><strong>grill-with-docs</strong> - A grilling session that also builds your domain glossary and ADRs</li>
+    <li style="margin-bottom: 0.5rem;"><strong>to-spec</strong> - Turn the current conversation into a spec and publish it to your issue tracker</li>
+    <li style="margin-bottom: 0.5rem;"><strong>improve-codebase-architecture</strong> - Survey a codebase for deepening opportunities</li>
+    <li style="margin-bottom: 0.5rem;"><strong>diagnosing-bugs</strong> - Disciplined diagnosis loop for hard bugs and performance regressions</li>
+    <li style="margin-bottom: 0.5rem;"><strong>retro</strong> - Suggest improvements to the agent's environment after a session</li>
+    <li><strong>tdd</strong> - Test-driven development with a red-green-refactor loop</li>
   </ul>
 </div>
 

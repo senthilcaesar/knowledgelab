@@ -33,7 +33,7 @@ const claudeSubagentsConcept = {
 
           <div style="margin-bottom: 1.5rem; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0, 242, 255, 0.02);">
             <strong style="display:block; margin-bottom:0.5rem; font-size:1rem; color: var(--text-primary);">Fresh perspective needed</strong>
-            <p style="margin-bottom: 0.75rem; line-height: 1.6; font-size: 0.95rem;">When a task benefits from an unbiased look — like auditing code the main conversation just wrote — a subagent starts fresh, free from any assumptions baked into the current context.</p>
+            <p style="margin-bottom: 0.75rem; line-height: 1.6; font-size: 0.95rem;">When a task benefits from an unbiased look - like auditing code the main conversation just wrote - a subagent starts fresh, free from any assumptions baked into the current context.</p>
             <p style="margin-bottom: 0.35rem; font-size: 0.9rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">The signal:</strong> You want a second pair of eyes on work already done.</p>
             <p style="margin: 0; font-size: 0.9rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">The benefit:</strong> Catches issues the main conversation might rationalize away.</p>
           </div>
@@ -245,7 +245,7 @@ Each issue should include the file, line number, and recommended fix.</code>
 INPUT=$(cat)
 STOP_HOOK_ACTIVE=$(echo "$INPUT" | jq -r '.stop_hook_active // false')
 
-# Don't loop forever — if we already blocked once this turn, let it through
+# Don't loop forever - if we already blocked once this turn, let it through
 if [ "$STOP_HOOK_ACTIVE" = "true" ]; then
   exit 0
 fi
@@ -260,7 +260,7 @@ fi
 
 exit 0</code>
 
-          <p style="margin-bottom: 1rem; line-height: 1.75;">When Claude finishes its turn, the Stop event fires. The script runs the test suite—if tests fail, it returns JSON with <code>decision: "block"</code> and a reason. Claude Code reads that, doesn't let Claude stop, and feeds the reason back into the conversation as instruction to keep working. The <code>stop_hook_active</code> guard at the top prevents infinite loops: if Claude is already continuing because of a previous stop-hook block, the script lets it exit.</p>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">When Claude finishes its turn, the Stop event fires. The script runs the test suite - if tests fail, it returns JSON with <code>decision: "block"</code> and a reason. Claude Code reads that, doesn't let Claude stop, and feeds the reason back into the conversation as instruction to keep working. The <code>stop_hook_active</code> guard at the top prevents infinite loops: if Claude is already continuing because of a previous stop-hook block, the script lets it exit.</p>
 
           <p style="margin-bottom: 1rem; line-height: 1.75;">Hooks represent the most automated approach to subagent orchestration. Conversational invocation or CLAUDE.md instructions are the better starting point; hooks come later, as workflows mature.</p>
 
@@ -413,8 +413,8 @@ exit 0</code>
               <li><strong>Purpose:</strong> File discovery, code search, codebase exploration</li>
             </ul>
           </div>
-          <p style="font-size: 0.95rem; line-height: 1.5;">Claude delegates to Explore when it needs to search or understand a codebase without making changes. This keeps exploration results out of your main session context. When invoking it, Claude specifies a thoroughness level — <strong>quick</strong> for targeted lookups, <strong>medium</strong> for balanced exploration, or <strong>very thorough</strong> for comprehensive analysis.</p>
-          <p style="font-size: 0.9rem; line-height: 1.5; color: var(--text-secondary); margin-top: 0.75rem;">Explore used to always run on Haiku; since v2.1.198 it inherits your session's model instead. To force it back onto a cheaper model, define your own subagent named <code>Explore</code> with <code>model: haiku</code> — a user or project subagent overrides the built-in.</p>
+          <p style="font-size: 0.95rem; line-height: 1.5;">Claude delegates to Explore when it needs to search or understand a codebase without making changes. This keeps exploration results out of your main session context. When invoking it, Claude specifies a thoroughness level - <strong>quick</strong> for targeted lookups, <strong>medium</strong> for balanced exploration, or <strong>very thorough</strong> for comprehensive analysis.</p>
+          <p style="font-size: 0.9rem; line-height: 1.5; color: var(--text-secondary); margin-top: 0.75rem;">Explore used to always run on Haiku; since v2.1.198 it inherits your session's model instead. To force it back onto a cheaper model, define your own subagent named <code>Explore</code> with <code>model: haiku</code> - a user or project subagent overrides the built-in.</p>
         </div>
         <div style="margin-top: 1.5rem;">
           <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">2. Plan</strong>
@@ -444,11 +444,11 @@ exit 0</code>
 
         <div style="margin-top: 1.5rem;">
           <strong style="display:block; margin-bottom:0.5rem; font-size:1.1rem; color: var(--accent-primary);">4. Helper agents</strong>
-          <p style="margin-bottom: 0.75rem;">Claude Code also ships small helpers that are invoked automatically — you rarely call them directly.</p>
+          <p style="margin-bottom: 0.75rem;">Claude Code also ships small helpers that are invoked automatically - you rarely call them directly.</p>
           <div style="padding: 0.75rem 1rem; background: var(--surface-color); border-radius: 4px; margin: 0.75rem 0;">
             <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5;">
-              <li><code>statusline-setup</code> (Sonnet) — runs when you use <code>/statusline</code></li>
-              <li><code>claude-code-guide</code> (Haiku) — runs when you ask questions about Claude Code features</li>
+              <li><code>statusline-setup</code> (Sonnet) - runs when you use <code>/statusline</code></li>
+              <li><code>claude-code-guide</code> (Haiku) - runs when you ask questions about Claude Code features</li>
             </ul>
           </div>
         </div>
@@ -464,8 +464,8 @@ exit 0</code>
 
           <div style="margin-bottom: 2rem;">
             <strong style="display:block; margin-bottom:0.75rem; font-size: 1rem; color: var(--text-primary);">Where they live</strong>
-            <p style="line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 0.75rem;">Custom subagents are just Markdown files, so the fastest way to see what you have is to look at the directories they load from: <code>.claude/agents/</code> in the project and <code>~/.claude/agents/</code> for your personal ones. Everything available in the session — built-in, custom, and plugin-provided — also shows up in the <code>@</code>-mention typeahead as you type.</p>
-            <p style="line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem;">Since v2.1.198, <code>/agents</code> no longer opens the old interactive wizard. Running it just prints a reminder to ask Claude to create or manage subagents, or to edit those directories directly. (On v2.1.197 and earlier it opened a <strong>Running</strong> / <strong>Library</strong> interface.) Note that <code>claude agents</code> on the command line is a different thing entirely — it opens <em>agent view</em> for monitoring parallel background sessions, not a list of your subagent definitions.</p>
+            <p style="line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 0.75rem;">Custom subagents are just Markdown files, so the fastest way to see what you have is to look at the directories they load from: <code>.claude/agents/</code> in the project and <code>~/.claude/agents/</code> for your personal ones. Everything available in the session - built-in, custom, and plugin-provided - also shows up in the <code>@</code>-mention typeahead as you type.</p>
+            <p style="line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem;">Since v2.1.198, <code>/agents</code> no longer opens the old interactive wizard. Running it just prints a reminder to ask Claude to create or manage subagents, or to edit those directories directly. (On v2.1.197 and earlier it opened a <strong>Running</strong> / <strong>Library</strong> interface.) Note that <code>claude agents</code> on the command line is a different thing entirely - it opens <em>agent view</em> for monitoring parallel background sessions, not a list of your subagent definitions.</p>
           </div>
 
           <div>
@@ -485,23 +485,23 @@ exit 0</code>
           <p style="margin-bottom: 2rem; color: var(--text-secondary);">A real-world walkthrough of adding dark mode support to a React + Vite app using subagents.</p>
 
           <div style="margin-bottom: 2.5rem;">
-            <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--text-primary);">Step 1 — Explore: Understand the structure</strong>
+            <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--text-primary);">Step 1 - Explore: Understand the structure</strong>
             <p style="margin-bottom: 0.75rem;">Type this in your session:</p>
             <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1rem;">> I want to add a dark mode toggle to this React + Tailwind app. Explore the codebase first.</code>
             <p style="line-height: 1.6;">Claude automatically delegates to the <strong>Explore</strong> subagent, which scans read-only:</p>
             <div style="padding: 0.75rem 1rem; background: var(--surface-color); border-radius: 4px; margin: 0.75rem 0;">
               <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
-                <li><code>vite.config.ts</code> — checks build setup</li>
-                <li><code>tailwind.config.ts</code> — checks if <code>darkMode: 'class'</code> is set</li>
-                <li><code>src/components/</code> — finds existing layout components</li>
-                <li><code>src/App.tsx</code> — checks current theme integration</li>
+                <li><code>vite.config.ts</code> - checks build setup</li>
+                <li><code>tailwind.config.ts</code> - checks if <code>darkMode: 'class'</code> is set</li>
+                <li><code>src/components/</code> - finds existing layout components</li>
+                <li><code>src/App.tsx</code> - checks current theme integration</li>
               </ul>
             </div>
             <p style="font-size: 0.95rem; color: var(--text-secondary);">It returns a concise summary, keeping your context clean.</p>
           </div>
 
           <div style="margin-bottom: 2.5rem;">
-            <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--text-primary);">Step 2 — Plan: Design the implementation</strong>
+            <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--text-primary);">Step 2 - Plan: Design the implementation</strong>
             <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1rem;">> /plan Add a dark mode toggle button to the Navbar component with Tailwind dark: classes and localStorage persistence</code>
             <p style="margin-bottom: 0.75rem;">The <strong>Plan</strong> subagent researches and returns a structured plan:</p>
             <div style="padding: 0.75rem 1rem; background: var(--surface-color); border-radius: 4px; margin: 0.75rem 0;">
@@ -516,7 +516,7 @@ exit 0</code>
           </div>
 
           <div style="margin-bottom: 2.5rem;">
-            <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--text-primary);">Step 3 — Execute: Final Implementation</strong>
+            <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--text-primary);">Step 3 - Execute: Final Implementation</strong>
             <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1rem;">> Implement the dark mode plan we just approved</code>
             <p style="margin-bottom: 1rem;">Claude delegates this task to a General-purpose subagent. A capable agent for complex, multi-step tasks that require both exploration and action:</p>
             <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); font-size: 0.85rem; margin-bottom: 1rem;">// src/hooks/useDarkMode.ts
@@ -532,7 +532,7 @@ export function useDarkMode() {
           </div>
 
           <div style="margin-bottom: 2.5rem;">
-            <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--text-primary);">Step 4 — Verify: Final Checks</strong>
+            <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--text-primary);">Step 4 - Verify: Final Checks</strong>
             <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1rem;">> Explore and confirm the dark: Tailwind classes are consistent</code>
             <p style="line-height: 1.6;"><strong>Explore</strong> conducts a targeted grep across <code>src/</code> to ensure visual consistency without touching files.</p>
           </div>
@@ -563,7 +563,7 @@ export function useDarkMode() {
                 </tbody>
               </table>
             </div>
-            <p style="margin-top: 1.5rem; font-style: italic; color: var(--text-secondary); font-size: 0.9rem;">Claude routes to the right subagent automatically — no manual configuration needed for built-ins.</p>
+            <p style="margin-top: 1.5rem; font-style: italic; color: var(--text-secondary); font-size: 0.9rem;">Claude routes to the right subagent automatically - no manual configuration needed for built-ins.</p>
           </div>
         </div>
       `,
@@ -573,11 +573,11 @@ export function useDarkMode() {
       content: `
         <p style="margin-bottom: 1.25rem; line-height: 1.75;">Custom subagents live as markdown files in <code>.claude/agents/</code> (project-level, shared with the team) or <code>~/.claude/agents/</code> (user-level, available across all projects). Each one gets its own system prompt, tool permissions, and optionally its own model.</p>
 
-        <p style="margin-bottom: 1.25rem; line-height: 1.75;">Subagents are defined in Markdown files with YAML frontmatter. The fastest way to make one is to ask Claude to write the file for you — describe what you want, then review what it wrote.</p>
+        <p style="margin-bottom: 1.25rem; line-height: 1.75;">Subagents are defined in Markdown files with YAML frontmatter. The fastest way to make one is to ask Claude to write the file for you - describe what you want, then review what it wrote.</p>
 
         <div style="margin-bottom: 2rem; padding: 1rem 1.25rem; background: rgba(255, 0, 255, 0.05); border-radius: 8px;">
           <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--text-primary);">
-            <strong style="color: var(--accent-magenta);">Changed in v2.1.198:</strong> <code>/agents</code> no longer opens an interactive creation wizard. Running it now prints a reminder to ask Claude or edit the agents directories directly. The file format, frontmatter fields, and <code>.claude/agents/</code> and <code>~/.claude/agents/</code> locations are all unchanged — only the terminal wizard is gone. If you're on v2.1.197 or earlier, <code>/agents</code> still opens the old <strong>Running</strong> / <strong>Library</strong> interface.
+            <strong style="color: var(--accent-magenta);">Changed in v2.1.198:</strong> <code>/agents</code> no longer opens an interactive creation wizard. Running it now prints a reminder to ask Claude or edit the agents directories directly. The file format, frontmatter fields, and <code>.claude/agents/</code> and <code>~/.claude/agents/</code> locations are all unchanged - only the terminal wizard is gone. If you're on v2.1.197 or earlier, <code>/agents</code> still opens the old <strong>Running</strong> / <strong>Library</strong> interface.
           </p>
         </div>
 
@@ -626,11 +626,11 @@ the problem, show the current code, and provide an improved version.</code>
 
   Top Recommendations
 
-  1. Accessibility — Add ARIA labels, roles, and states throughout (e.g., aria-label, role="dialog", aria-expanded)
-  2. Icon Consistency — Replace Unicode emojis (🌙, ⏱️ , ✕) with inline SVGs for consistent rendering
-  3. SEO Meta Tags — Add meta description, Open Graph tags, and Twitter Card meta tags
-  4. Landmark Roles — Add role="main", role="navigation", role="banner" for screen reader navigation
-  5. Modal Accessibility — Add role="dialog", aria-modal="true", and proper focus management
+  1. Accessibility - Add ARIA labels, roles, and states throughout (e.g., aria-label, role="dialog", aria-expanded)
+  2. Icon Consistency - Replace Unicode emojis (🌙, ⏱️ , ✕) with inline SVGs for consistent rendering
+  3. SEO Meta Tags - Add meta description, Open Graph tags, and Twitter Card meta tags
+  4. Landmark Roles - Add role="main", role="navigation", role="banner" for screen reader navigation
+  5. Modal Accessibility - Add role="dialog", aria-modal="true", and proper focus management
 
   CSS Additions Needed
 
@@ -714,7 +714,7 @@ the problem, show the current code, and provide an improved version.</code>
           <div style="margin-bottom: 2rem;">
             <p style="margin-bottom: 1rem; line-height: 1.6;"><strong style="color: var(--text-primary);">Project subagents (.claude/agents/)</strong> are ideal for subagents specific to a codebase. Check them into version control so your team can use and improve them collaboratively.</p>
             <p style="margin-bottom: 1rem; line-height: 1.6;"><strong style="color: var(--text-primary);">User subagents (~/.claude/agents/)</strong> are personal subagents available in all your projects.</p>
-            <p style="margin-bottom: 2.5rem; line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem;">Both directories are scanned recursively, so you can organize definitions into subfolders like <code>agents/review/</code>. The path doesn't affect identity — that comes only from the <code>name</code> field — so keep names unique across the whole tree. Project subagents are also discovered by walking up from your working directory, and when nested directories declare the same name, the one closest to the working directory wins.</p>
+            <p style="margin-bottom: 2.5rem; line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem;">Both directories are scanned recursively, so you can organize definitions into subfolders like <code>agents/review/</code>. The path doesn't affect identity - that comes only from the <code>name</code> field - so keep names unique across the whole tree. Project subagents are also discovered by walking up from your working directory, and when nested directories declare the same name, the one closest to the working directory wins.</p>
           </div>
 
           <div style="margin-bottom: 2rem;">
@@ -737,7 +737,7 @@ the problem, show the current code, and provide an improved version.</code>
 
           <div style="margin-top: 3.5rem; border-top: 1px solid var(--border-color); padding-top: 2.5rem;">
             <h3 style="margin-bottom: 1rem; color: var(--accent-primary); font-size: 1.2rem;">2. Create subagent manually</h3>
-            <p style="margin-bottom: 1rem; line-height: 1.6;">Subagent files use YAML frontmatter for configuration, followed by the system prompt in Markdown. Claude Code watches <code>.claude/agents/</code> and <code>~/.claude/agents/</code>: add or edit a file and the next delegation uses the updated definition within a few seconds, no restart needed. Two cases still need a restart — creating a scope's very first agent file in a directory that didn't exist at session start, and sessions launched with <code>--disable-slash-commands</code>.</p>
+            <p style="margin-bottom: 1rem; line-height: 1.6;">Subagent files use YAML frontmatter for configuration, followed by the system prompt in Markdown. Claude Code watches <code>.claude/agents/</code> and <code>~/.claude/agents/</code>: add or edit a file and the next delegation uses the updated definition within a few seconds, no restart needed. Two cases still need a restart - creating a scope's very first agent file in a directory that didn't exist at session start, and sessions launched with <code>--disable-slash-commands</code>.</p>
             <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 1rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);">---
 name: code-reviewer
 description: Reviews code for quality and best practices
@@ -760,7 +760,7 @@ specific, actionable feedback on quality, security, and best practices.</code>
                 <tbody>
                   <tr style="border-bottom: 1px solid var(--border-color);">
                     <td style="padding: 0.6rem; font-family: monospace; color: var(--text-primary);">name</td>
-                    <td style="padding: 0.6rem; color: var(--text-secondary);"><strong>Required.</strong> Unique identifier, lowercase and hyphens. Can't contain <code>:</code> — that's reserved for plugin-scoped names. The filename doesn't have to match.</td>
+                    <td style="padding: 0.6rem; color: var(--text-secondary);"><strong>Required.</strong> Unique identifier, lowercase and hyphens. Can't contain <code>:</code> - that's reserved for plugin-scoped names. The filename doesn't have to match.</td>
                   </tr>
                   <tr style="border-bottom: 1px solid var(--border-color);">
                     <td style="padding: 0.6rem; font-family: monospace; color: var(--text-primary);">description</td>
@@ -780,7 +780,7 @@ specific, actionable feedback on quality, security, and best practices.</code>
                   </tr>
                   <tr style="border-bottom: 1px solid var(--border-color);">
                     <td style="padding: 0.6rem; font-family: monospace; color: var(--text-primary);">permissionMode</td>
-                    <td style="padding: 0.6rem; color: var(--text-secondary);"><code>default</code>, <code>acceptEdits</code>, <code>auto</code>, <code>dontAsk</code>, <code>bypassPermissions</code>, <code>plan</code>, or <code>manual</code> (an alias for <code>default</code>, v2.1.200+). Since v2.1.267 <code>bypassPermissions</code> only applies if the main conversation is in that mode too — a subagent can no longer escalate past it.</td>
+                    <td style="padding: 0.6rem; color: var(--text-secondary);"><code>default</code>, <code>acceptEdits</code>, <code>auto</code>, <code>dontAsk</code>, <code>bypassPermissions</code>, <code>plan</code>, or <code>manual</code> (an alias for <code>default</code>, v2.1.200+). Since v2.1.267 <code>bypassPermissions</code> only applies if the main conversation is in that mode too - a subagent can no longer escalate past it.</td>
                   </tr>
                   <tr style="border-bottom: 1px solid var(--border-color);">
                     <td style="padding: 0.6rem; font-family: monospace; color: var(--text-primary);">maxTurns</td>
@@ -838,7 +838,7 @@ specific, actionable feedback on quality, security, and best practices.</code>
                 <li><strong style="color: var(--text-primary);">Model alias:</strong> Use one of the available aliases: <code>sonnet</code>, <code>opus</code>, <code>haiku</code>, or <code>fable</code></li>
                 <li><strong style="color: var(--text-primary);">Full model ID:</strong> Use a full model ID such as <code>claude-opus-5</code> or <code>claude-sonnet-5</code>.</li>
                 <li><strong style="color: var(--text-primary);">inherit:</strong> Use the same model as the main conversation</li>
-                <li><strong style="color: var(--text-primary);">Omitted:</strong> Falls through to the resolution order below — <code>CLAUDE_CODE_SUBAGENT_MODEL</code> if it's set, otherwise the main conversation's model.</li>
+                <li><strong style="color: var(--text-primary);">Omitted:</strong> Falls through to the resolution order below - <code>CLAUDE_CODE_SUBAGENT_MODEL</code> if it's set, otherwise the main conversation's model.</li>
               </ul>
               <p style="margin-top: 1rem; line-height: 1.6; font-size: 0.9rem; color: var(--text-secondary);">Resolution order when several sources set a model, first match winning: the per-invocation <code>model</code> parameter Claude passes, then the frontmatter <code>model</code> (where <code>inherit</code> means the main conversation's model), then the <code>CLAUDE_CODE_SUBAGENT_MODEL</code> environment variable, then the main conversation's model. Before v2.1.251 the environment variable came first; it now yields to a per-invocation model and to <code>model: inherit</code>. To force every subagent onto one model regardless, set <code>CLAUDE_CODE_SUBAGENT_MODEL_FORCE=1</code> alongside it. Subagents also inherit the main conversation's extended thinking setting.</p>
             </div>
@@ -857,7 +857,7 @@ specific, actionable feedback on quality, security, and best practices.</code>
             
             <div style="margin-top: 1rem;">
               <h4 style="margin-bottom: 0.5rem; color: var(--accent-primary);">Available tools</h4>
-              <p style="margin-bottom: 0.75rem; line-height: 1.6; color: var(--text-secondary);">By default, subagents inherit the built-in and MCP tools available in the main conversation, narrowed by two filters. The first drops a handful of tools from every subagent — including <code>AskUserQuestion</code>, <code>EnterPlanMode</code>, and <code>ExitPlanMode</code> (unless <code>permissionMode: plan</code>) — because they only make sense in the main conversation. The second applies to background subagents, which is now the default: they keep every MCP tool but only a core set of built-ins (<code>Read</code>, <code>Grep</code>, <code>Glob</code>, <code>Bash</code>, <code>Edit</code>, <code>Write</code>, <code>WebFetch</code>, <code>WebSearch</code>, <code>Skill</code>, and a few others). The same definition can therefore resolve to different tools in the foreground and the background.</p>
+              <p style="margin-bottom: 0.75rem; line-height: 1.6; color: var(--text-secondary);">By default, subagents inherit the built-in and MCP tools available in the main conversation, narrowed by two filters. The first drops a handful of tools from every subagent - including <code>AskUserQuestion</code>, <code>EnterPlanMode</code>, and <code>ExitPlanMode</code> (unless <code>permissionMode: plan</code>) - because they only make sense in the main conversation. The second applies to background subagents, which is now the default: they keep every MCP tool but only a core set of built-ins (<code>Read</code>, <code>Grep</code>, <code>Glob</code>, <code>Bash</code>, <code>Edit</code>, <code>Write</code>, <code>WebFetch</code>, <code>WebSearch</code>, <code>Skill</code>, and a few others). The same definition can therefore resolve to different tools in the foreground and the background.</p>
               
               <p style="margin-bottom: 0.75rem; line-height: 1.6;">To restrict tools, use either the <code>tools</code> field (allowlist) or the <code>disallowedTools</code> field (denylist). This example uses <code>tools</code> to exclusively allow Read, Grep, Glob, and Bash:</p>
               <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);">---
@@ -877,7 +877,7 @@ disallowedTools: Write, Edit
 
             <div style="margin-top: 2.5rem;">
               <h4 style="margin-bottom: 0.5rem; color: var(--accent-primary);">Permission modes</h4>
-              <p style="margin-bottom: 1rem; line-height: 1.6; color: var(--text-secondary);">The <code>permissionMode</code> field controls how the subagent handles permission prompts. Subagents inherit the main conversation's permission context and can override the mode — except that a parent in <code>bypassPermissions</code>, <code>acceptEdits</code>, or <code>auto</code> takes precedence and the frontmatter value is ignored.</p>
+              <p style="margin-bottom: 1rem; line-height: 1.6; color: var(--text-secondary);">The <code>permissionMode</code> field controls how the subagent handles permission prompts. Subagents inherit the main conversation's permission context and can override the mode - except that a parent in <code>bypassPermissions</code>, <code>acceptEdits</code>, or <code>auto</code> takes precedence and the frontmatter value is ignored.</p>
               <div style="max-width: 100%; overflow-x: auto;">
                 <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; border: 1px solid var(--border-color);">
                   <thead>
@@ -905,7 +905,7 @@ disallowedTools: Write, Edit
                     </tr>
                     <tr style="border-bottom: 1px solid var(--border-color);">
                       <td style="padding: 0.6rem; font-family: monospace; color: var(--text-primary);">bypassPermissions</td>
-                      <td style="padding: 0.6rem; color: var(--text-secondary);">Skip permission prompts — use with caution</td>
+                      <td style="padding: 0.6rem; color: var(--text-secondary);">Skip permission prompts - use with caution</td>
                     </tr>
                     <tr>
                       <td style="padding: 0.6rem; font-family: monospace; color: var(--text-primary);">plan</td>
@@ -924,7 +924,7 @@ name: coordinator
 description: Coordinates work across specialized agents
 tools: Agent(worker, researcher), Read, Bash
 ---</code>
-              <p style="margin-top: 1rem; line-height: 1.6; font-size: 0.9rem; color: var(--text-secondary);">Bare <code>Agent</code> allows any type; omitting it entirely stops the agent from spawning subagents at all. Inside a subagent definition, the type list in parentheses is ignored — listing <code>Agent</code> simply lets it nest while the depth limit allows.</p>
+              <p style="margin-top: 1rem; line-height: 1.6; font-size: 0.9rem; color: var(--text-secondary);">Bare <code>Agent</code> allows any type; omitting it entirely stops the agent from spawning subagents at all. Inside a subagent definition, the type list in parentheses is ignored - listing <code>Agent</code> simply lets it nest while the depth limit allows.</p>
             </div>
           </div>
 
@@ -1042,7 +1042,7 @@ Have the code-reviewer subagent look at my recent changes</code>
             <p style="margin-bottom: 1rem; line-height: 1.6;">Type <code style="padding: 0.2rem 0.4rem; background: var(--syntax-bg); border-radius: 4px;">@</code> and pick the subagent from the typeahead, the same way you @-mention files. This guarantees that specific subagent runs rather than leaving the choice to Claude. The picker inserts the quoted form:</p>
             <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1rem;">@"code-reviewer (agent)" look at the auth changes</code>
             <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">Your full message still goes to Claude, which writes the subagent’s task prompt based on what you asked. The @-mention controls which subagent Claude invokes, not what prompt it receives.</p>
-            <p style="padding: 0.75rem 1rem; background: var(--surface-color); border-radius: 4px; font-size: 0.9rem; color: var(--text-tertiary); line-height: 1.5;">You can also type the mention by hand — note the hyphen: <code style="color: var(--accent-magenta);">@agent-&lt;name&gt;</code>, for example <code style="color: var(--accent-magenta);">@agent-code-reviewer</code>. Plugin subagents use their scoped name (<code style="color: var(--accent-primary);">@agent-my-plugin:code-reviewer</code>). While you type this form the typeahead shows file matches instead of agents, but the mention still resolves on submit. Named background subagents currently running in the session also appear in the typeahead with their status.</p>
+            <p style="padding: 0.75rem 1rem; background: var(--surface-color); border-radius: 4px; font-size: 0.9rem; color: var(--text-tertiary); line-height: 1.5;">You can also type the mention by hand - note the hyphen: <code style="color: var(--accent-magenta);">@agent-&lt;name&gt;</code>, for example <code style="color: var(--accent-magenta);">@agent-code-reviewer</code>. Plugin subagents use their scoped name (<code style="color: var(--accent-primary);">@agent-my-plugin:code-reviewer</code>). While you type this form the typeahead shows file matches instead of agents, but the mention still resolves on submit. Named background subagents currently running in the session also appear in the typeahead with their status.</p>
           </div>
 
           <div style="margin-bottom: 1.5rem;">
@@ -1050,7 +1050,7 @@ Have the code-reviewer subagent look at my recent changes</code>
             <p style="margin-bottom: 1rem; line-height: 1.6;">Pass <code style="padding: 0.2rem 0.4rem; background: var(--syntax-bg); border-radius: 4px; color: var(--syntax-keyword);">--agent &lt;name&gt;</code> to start a session where the main thread itself takes on that subagent’s system prompt, tool restrictions, and model:</p>
             <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1rem;">claude --agent code-reviewer</code>
             <p style="line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem;">The subagent’s system prompt replaces the default Claude Code system prompt entirely. CLAUDE.md files and project memory still load normally. The agent name appears as <code style="color: var(--accent-primary);">@&lt;name&gt;</code> in the startup header so you can confirm it’s active, and the choice persists when you resume the session.</p>
-            <p style="margin-bottom: 1rem; line-height: 1.6;">To make it the default for every session in a project, set <code>agent</code> in <code>.claude/settings.json</code> — the CLI flag wins if both are present:</p>
+            <p style="margin-bottom: 1rem; line-height: 1.6;">To make it the default for every session in a project, set <code>agent</code> in <code>.claude/settings.json</code> - the CLI flag wins if both are present:</p>
             <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);">{
   "agent": "code-reviewer"
 }</code>
@@ -1060,7 +1060,7 @@ Have the code-reviewer subagent look at my recent changes</code>
         <div style="margin-top: 3.5rem; border-top: 1px solid var(--border-color); padding-top: 2.5rem;">
           <strong style="display:block; margin-bottom:1.5rem; font-size:1.2rem; color: var(--accent-primary);">Foreground or background</strong>
           <p style="margin-bottom: 1rem; line-height: 1.6;"><strong style="color: var(--text-primary);">Foreground subagents</strong> block the main conversation until they finish, and permission prompts pass straight through to you. <strong style="color: var(--text-primary);">Background subagents</strong> run concurrently while you keep working; when one hits a tool call needing permission, the prompt surfaces in your main session and names the subagent asking. Approve it, or press <code>Esc</code> to deny that one call without killing the subagent.</p>
-          <p style="margin-bottom: 1rem; line-height: 1.6;">Since v2.1.198, <strong>subagents run in the background by default</strong> — Claude only uses the foreground when it needs the result before it can continue. Background subagents run with a smaller built-in tool set than foreground ones, so the same definition can resolve to slightly different tools depending on where it runs.</p>
+          <p style="margin-bottom: 1rem; line-height: 1.6;">Since v2.1.198, <strong>subagents run in the background by default</strong> - Claude only uses the foreground when it needs the result before it can continue. Background subagents run with a smaller built-in tool set than foreground ones, so the same definition can resolve to slightly different tools depending on where it runs.</p>
           <div style="padding: 0.75rem 1rem; background: var(--surface-color); border-radius: 4px; margin: 1rem 0;">
             <ul style="margin: 0; padding-left: 1.2rem; line-height: 1.8; font-size: 0.95rem; color: var(--text-secondary);">
               <li>Ask Claude directly to run a task in the background or foreground</li>
@@ -1073,18 +1073,18 @@ Have the code-reviewer subagent look at my recent changes</code>
 
         <div style="margin-top: 3.5rem; border-top: 1px solid var(--border-color); padding-top: 2.5rem;">
           <strong style="display:block; margin-bottom:1.5rem; font-size:1.2rem; color: var(--accent-primary);">Resume a subagent instead of respawning</strong>
-          <p style="margin-bottom: 1rem; line-height: 1.6;">Every invocation normally creates a fresh instance. To continue earlier work instead, just ask Claude to keep going — it resumes the subagent by ID with its full history of tool calls, results, and reasoning intact:</p>
+          <p style="margin-bottom: 1rem; line-height: 1.6;">Every invocation normally creates a fresh instance. To continue earlier work instead, just ask Claude to keep going - it resumes the subagent by ID with its full history of tool calls, results, and reasoning intact:</p>
           <code style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1rem;">Use the code-reviewer subagent to review the authentication module
 [agent completes]
 
 Continue that code review and now analyze the authorization logic
 [Claude resumes the same subagent with its previous context]</code>
-          <p style="line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem;">The built-in <strong>Explore</strong> and <strong>Plan</strong> agents are one-shot and return no agent ID, so they can't be resumed — use <code>general-purpose</code> or a custom subagent when you may want to continue. Subagent transcripts live in separate files from the main conversation, so compaction doesn't touch them, and they persist for <code>cleanupPeriodDays</code> (30 by default).</p>
+          <p style="line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem;">The built-in <strong>Explore</strong> and <strong>Plan</strong> agents are one-shot and return no agent ID, so they can't be resumed - use <code>general-purpose</code> or a custom subagent when you may want to continue. Subagent transcripts live in separate files from the main conversation, so compaction doesn't touch them, and they persist for <code>cleanupPeriodDays</code> (30 by default).</p>
         </div>
 
         <div style="margin-top: 3.5rem; border-top: 1px solid var(--border-color); padding-top: 2.5rem;">
           <strong style="display:block; margin-bottom:1.5rem; font-size:1.2rem; color: var(--accent-primary);">Nesting and limits</strong>
-          <p style="margin-bottom: 1rem; line-height: 1.6;">A subagent can spawn subagents of its own, up to three layers below the main conversation. This suits a delegated task that itself splits into parallel subtasks — a reviewer that dispatches a verifier per finding, say — because the intermediate output never reaches your main conversation. Only the top-level summary comes back.</p>
+          <p style="margin-bottom: 1rem; line-height: 1.6;">A subagent can spawn subagents of its own, up to three layers below the main conversation. This suits a delegated task that itself splits into parallel subtasks - a reviewer that dispatches a verifier per finding, say - because the intermediate output never reaches your main conversation. Only the top-level summary comes back.</p>
           <div style="padding: 0.75rem 1rem; background: var(--surface-color); border-radius: 4px; margin: 1rem 0;">
             <ul style="margin: 0; padding-left: 1.2rem; line-height: 1.8; font-size: 0.95rem; color: var(--text-secondary);">
               <li><strong style="color: var(--text-primary);">Depth:</strong> 3 layers, set by <code>CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</code> (<code>1</code> turns nesting off)</li>
@@ -1092,7 +1092,7 @@ Continue that code review and now analyze the authorization logic
               <li><strong style="color: var(--text-primary);">Concurrent:</strong> 20 running at once, set by <code>CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS</code></li>
             </ul>
           </div>
-          <p style="line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem;">To stop one subagent from delegating further — a reviewer that should stay read-only, for instance — omit <code>Agent</code> from its <code>tools</code> list or add it to <code>disallowedTools</code>.</p>
+          <p style="line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem;">To stop one subagent from delegating further - a reviewer that should stay read-only, for instance - omit <code>Agent</code> from its <code>tools</code> list or add it to <code>disallowedTools</code>.</p>
         </div>
 
         <div style="margin-top: 3.5rem; border-top: 1px solid var(--border-color); padding-top: 2.5rem;">

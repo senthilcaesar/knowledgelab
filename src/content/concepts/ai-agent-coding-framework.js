@@ -82,18 +82,18 @@ const aiAgentWorkflowsConcept = {
   </a>
 </div>
 
-<p style="margin-bottom:1rem; line-height:1.75;">The official <strong>Compound Engineering</strong> plugin for Claude Code, Codex, Cursor, and other AI coding agents. It brings a structured, compound-action methodology to AI-assisted software development — letting you chain together multi-step engineering tasks into coherent, reproducible workflows.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">The official <strong>Compound Engineering</strong> plugin for Claude Code, Codex, Cursor, and other AI coding agents. It brings a structured, compound-action methodology to AI-assisted software development - letting you chain together multi-step engineering tasks into coherent, reproducible workflows.</p>
 
-<p style="margin-bottom:1.5rem; line-height:1.75; font-style:italic; opacity:0.8;"><strong>Core idea:</strong> Instead of firing one-off prompts, you define compound actions that chain spec → implement → test → document as a single agent run — reducing context drift and producing production-ready output every time.</p>
+<p style="margin-bottom:1.5rem; line-height:1.75; font-style:italic; opacity:0.8;"><strong>Core idea:</strong> Instead of firing one-off prompts, you define compound actions that chain spec → implement → test → document as a single agent run - reducing context drift and producing production-ready output every time.</p>
 
 <div style="margin-bottom: 2rem; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px;">
   <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">Key Features</strong>
   <ul style="margin-left: 1.25rem; line-height: 1.6;">
-    <li style="margin-bottom: 0.5rem;">🔌 <strong>Multi-editor support</strong> — works with Claude Code, OpenAI Codex CLI, Cursor, and more</li>
-    <li style="margin-bottom: 0.5rem;">🔗 <strong>Chained actions</strong> — link spec → code → test → review into a single agent run</li>
-    <li style="margin-bottom: 0.5rem;">📋 <strong>Plugin protocol</strong> — standardized API so agents share context across steps</li>
-    <li style="margin-bottom: 0.5rem;">🔄 <strong>Iterative refinement</strong> — agents loop back on failing steps automatically</li>
-    <li>🧩 <strong>Composable skills</strong> — mix and match engineering sub-skills for custom pipelines</li>
+    <li style="margin-bottom: 0.5rem;">🔌 <strong>Multi-editor support</strong> - works with Claude Code, OpenAI Codex CLI, Cursor, and more</li>
+    <li style="margin-bottom: 0.5rem;">🔗 <strong>Chained actions</strong> - link spec → code → test → review into a single agent run</li>
+    <li style="margin-bottom: 0.5rem;">📋 <strong>Plugin protocol</strong> - standardized API so agents share context across steps</li>
+    <li style="margin-bottom: 0.5rem;">🔄 <strong>Iterative refinement</strong> - agents loop back on failing steps automatically</li>
+    <li>🧩 <strong>Composable skills</strong> - mix and match engineering sub-skills for custom pipelines</li>
   </ul>
 </div>
 
@@ -150,18 +150,18 @@ const aiAgentWorkflowsConcept = {
   </a>
 </div>
 
-<p style="margin-bottom:1rem; line-height:1.75;"><strong>GSD Core</strong> is the engine behind the "Git. Ship. Done." philosophy — an opinionated AI agent workflow framework that enforces a tight loop of committing, shipping, and iterating. It is designed for developers who want their AI agents to produce deliverable output on every run, not just exploratory drafts.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>GSD Core</strong> is the engine behind the "Git. Ship. Done." philosophy - an opinionated AI agent workflow framework that enforces a tight loop of committing, shipping, and iterating. It is designed for developers who want their AI agents to produce deliverable output on every run, not just exploratory drafts.</p>
 
-<p style="margin-bottom:1.5rem; line-height:1.75; font-style:italic; opacity:0.8;"><strong>Core idea:</strong> Every agent session is a shipping event. Agents must commit changes and mark tasks done before context is released — enforcing accountability and traceability in AI-driven development.</p>
+<p style="margin-bottom:1.5rem; line-height:1.75; font-style:italic; opacity:0.8;"><strong>Core idea:</strong> Every agent session is a shipping event. Agents must commit changes and mark tasks done before context is released - enforcing accountability and traceability in AI-driven development.</p>
 
 <div style="margin-bottom: 2rem; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px;">
   <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">Key Features</strong>
   <ul style="margin-left: 1.25rem; line-height: 1.6;">
-    <li style="margin-bottom: 0.5rem;">🚀 <strong>Ship-first mindset</strong> — every task ends with a deliverable commit or PR</li>
-    <li style="margin-bottom: 0.5rem;">📦 <strong>Git-native workflow</strong> — agents operate on branches, commits, and diffs as first-class objects</li>
-    <li style="margin-bottom: 0.5rem;">✅ <strong>Done criteria enforcement</strong> — tasks must satisfy explicit done conditions before closing</li>
-    <li style="margin-bottom: 0.5rem;">🔁 <strong>Iterative feedback loop</strong> — CI failures automatically re-enter the agent queue</li>
-    <li>🧠 <strong>Context-aware</strong> — agents carry git history and PR comments as context</li>
+    <li style="margin-bottom: 0.5rem;">🚀 <strong>Ship-first mindset</strong> - every task ends with a deliverable commit or PR</li>
+    <li style="margin-bottom: 0.5rem;">📦 <strong>Git-native workflow</strong> - agents operate on branches, commits, and diffs as first-class objects</li>
+    <li style="margin-bottom: 0.5rem;">✅ <strong>Done criteria enforcement</strong> - tasks must satisfy explicit done conditions before closing</li>
+    <li style="margin-bottom: 0.5rem;">🔁 <strong>Iterative feedback loop</strong> - CI failures automatically re-enter the agent queue</li>
+    <li>🧠 <strong>Context-aware</strong> - agents carry git history and PR comments as context</li>
   </ul>
 </div>
 
@@ -210,18 +210,18 @@ npx @opengsd/gsd-core@latest</pre>
   </a>
 </div>
 
-<p style="margin-bottom:1rem; line-height:1.75;"><strong>Superpowers</strong> is an agentic skills framework and software development methodology that works. It provides a structured way to define, compose, and deploy AI agent skills — making agent behaviour repeatable, testable, and shareable across teams and projects.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>Superpowers</strong> is an agentic skills framework and software development methodology that works. It provides a structured way to define, compose, and deploy AI agent skills - making agent behaviour repeatable, testable, and shareable across teams and projects.</p>
 
-<p style="margin-bottom:1.5rem; line-height:1.75; font-style:italic; opacity:0.8;"><strong>Core idea:</strong> Most agent frameworks focus on tool-use. Superpowers focuses on <em>methodology</em> — encoding proven software development practices as skills that agents reliably execute, not just as prompts that sometimes work.</p>
+<p style="margin-bottom:1.5rem; line-height:1.75; font-style:italic; opacity:0.8;"><strong>Core idea:</strong> Most agent frameworks focus on tool-use. Superpowers focuses on <em>methodology</em> - encoding proven software development practices as skills that agents reliably execute, not just as prompts that sometimes work.</p>
 
 <div style="margin-bottom: 2rem; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px;">
   <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">Key Features</strong>
   <ul style="margin-left: 1.25rem; line-height: 1.6;">
-    <li style="margin-bottom: 0.5rem;">⚡ <strong>Skills-as-code</strong> — each skill is a folder with a <code>SKILL.md</code> (frontmatter + step-by-step instructions)</li>
-    <li style="margin-bottom: 0.5rem;">🧪 <strong>Testable behaviours</strong> — every skill has an associated test harness</li>
-    <li style="margin-bottom: 0.5rem;">🔀 <strong>Composable pipelines</strong> — chain skills into multi-step methodologies</li>
-    <li style="margin-bottom: 0.5rem;">📖 <strong>Methodology-first</strong> — encodes proven dev practices (TDD, spec-first, review-then-merge)</li>
-    <li>🤝 <strong>Agent-agnostic</strong> — works with Claude, GPT, local LLMs, and Codex</li>
+    <li style="margin-bottom: 0.5rem;">⚡ <strong>Skills-as-code</strong> - each skill is a folder with a <code>SKILL.md</code> (frontmatter + step-by-step instructions)</li>
+    <li style="margin-bottom: 0.5rem;">🧪 <strong>Testable behaviours</strong> - every skill has an associated test harness</li>
+    <li style="margin-bottom: 0.5rem;">🔀 <strong>Composable pipelines</strong> - chain skills into multi-step methodologies</li>
+    <li style="margin-bottom: 0.5rem;">📖 <strong>Methodology-first</strong> - encodes proven dev practices (TDD, spec-first, review-then-merge)</li>
+    <li>🤝 <strong>Agent-agnostic</strong> - works with Claude, GPT, local LLMs, and Codex</li>
   </ul>
 </div>
 
@@ -281,18 +281,18 @@ skills/
   </a>
 </div>
 
-<p style="margin-bottom:1rem; line-height:1.75;">A curated collection of <strong>production-grade engineering skills</strong> for AI coding agents, authored by Addy Osmani (Chrome team, Google). These skills encode real-world software engineering expertise — performance optimization, accessibility, testing, and code quality — as structured agent instructions that any LLM coding agent can execute reliably.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">A curated collection of <strong>production-grade engineering skills</strong> for AI coding agents, authored by Addy Osmani (Chrome team, Google). These skills encode real-world software engineering expertise - performance optimization, accessibility, testing, and code quality - as structured agent instructions that any LLM coding agent can execute reliably.</p>
 
 <p style="margin-bottom:1.5rem; line-height:1.75; font-style:italic; opacity:0.8;"><strong>Core idea:</strong> Generic AI agents know <em>how</em> to write code, but not always the <em>right way</em> for production systems. These skills embed years of real engineering experience into repeatable, reviewable agent behaviours.</p>
 
 <div style="margin-bottom: 2rem; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px;">
   <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">Skill Categories</strong>
   <ul style="margin-left: 1.25rem; line-height: 1.6;">
-    <li style="margin-bottom: 0.5rem;">🚀 <strong>Performance</strong> — Core Web Vitals, bundle analysis, lazy loading, caching strategies</li>
-    <li style="margin-bottom: 0.5rem;">♿ <strong>Accessibility</strong> — WCAG compliance checks, ARIA patterns, keyboard navigation</li>
-    <li style="margin-bottom: 0.5rem;">🧪 <strong>Testing</strong> — unit test generation, E2E coverage, snapshot testing workflows</li>
-    <li style="margin-bottom: 0.5rem;">🔍 <strong>Code Review</strong> — automated review checklists, security scanning, style consistency</li>
-    <li>📐 <strong>Architecture</strong> — component design, API contract review, dependency auditing</li>
+    <li style="margin-bottom: 0.5rem;">🚀 <strong>Performance</strong> - Core Web Vitals, bundle analysis, lazy loading, caching strategies</li>
+    <li style="margin-bottom: 0.5rem;">♿ <strong>Accessibility</strong> - WCAG compliance checks, ARIA patterns, keyboard navigation</li>
+    <li style="margin-bottom: 0.5rem;">🧪 <strong>Testing</strong> - unit test generation, E2E coverage, snapshot testing workflows</li>
+    <li style="margin-bottom: 0.5rem;">🔍 <strong>Code Review</strong> - automated review checklists, security scanning, style consistency</li>
+    <li>📐 <strong>Architecture</strong> - component design, API contract review, dependency auditing</li>
   </ul>
 </div>
 
@@ -333,10 +333,10 @@ Rationalizations · Red Flags · Verification</pre>
 <div style="margin-top: 2rem; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px;">
   <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">Key Principles</strong>
   <ul style="margin-left: 1.25rem; line-height: 1.6;">
-    <li style="margin-bottom: 0.5rem;">Skills are <strong>opinionated</strong> — they encode best practices, not just possibilities</li>
-    <li style="margin-bottom: 0.5rem;">Skills are <strong>composable</strong> — combine them into multi-step engineering workflows</li>
-    <li style="margin-bottom: 0.5rem;">Skills are <strong>reviewable</strong> — every agent action produces a human-readable rationale</li>
-    <li>Skills are <strong>tested</strong> — each skill has example inputs/outputs for validation</li>
+    <li style="margin-bottom: 0.5rem;">Skills are <strong>opinionated</strong> - they encode best practices, not just possibilities</li>
+    <li style="margin-bottom: 0.5rem;">Skills are <strong>composable</strong> - combine them into multi-step engineering workflows</li>
+    <li style="margin-bottom: 0.5rem;">Skills are <strong>reviewable</strong> - every agent action produces a human-readable rationale</li>
+    <li>Skills are <strong>tested</strong> - each skill has example inputs/outputs for validation</li>
   </ul>
 </div>
 

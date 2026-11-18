@@ -49,7 +49,7 @@ const claudeDesignerStackConcept = {
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.5;">/plugin marketplace add anthropics/skills
 /plugin install example-skills@anthropic-agent-skills</pre>
 
-<p style="margin-bottom: 1rem; line-height: 1.75;">All five skills — <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">frontend-design</code>, <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">theme-factory</code>, <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">brand-guidelines</code>, <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">canvas-design</code>, and <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">skill-creator</code> — ship inside the <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">example-skills</code> plugin. Anthropic's document skills (Word, Excel, PowerPoint, PDF) live in a separate plugin you can add the same way:</p>
+<p style="margin-bottom: 1rem; line-height: 1.75;">All five skills - <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">frontend-design</code>, <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">theme-factory</code>, <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">brand-guidelines</code>, <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">canvas-design</code>, and <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">skill-creator</code> - ship inside the <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">example-skills</code> plugin. Anthropic's document skills (Word, Excel, PowerPoint, PDF) live in a separate plugin you can add the same way:</p>
 
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.5;">/plugin install document-skills@anthropic-agent-skills</pre>
 
@@ -68,7 +68,7 @@ npx skills add https://github.com/anthropics/skills --skill skill-creator -a cla
       content: `
 <h2 style="margin-bottom: 1rem; color: var(--text-primary);">1. frontend-design</h2>
 
-<p style="margin-bottom: 1rem; line-height: 1.75;"><strong>What it does:</strong> Generates distinctive, production-ready frontend interfaces — components, landing pages, dashboards, React apps, HTML/CSS layouts — with a strong, intentional aesthetic point of view. It actively avoids the generic "AI slop" look (no purple gradients on white, no Inter/Roboto defaults, no cookie-cutter layouts).</p>
+<p style="margin-bottom: 1rem; line-height: 1.75;"><strong>What it does:</strong> Generates distinctive, production-ready frontend interfaces - components, landing pages, dashboards, React apps, HTML/CSS layouts - with a strong, intentional aesthetic point of view. It actively avoids the generic "AI slop" look (no purple gradients on white, no Inter/Roboto defaults, no cookie-cutter layouts).</p>
 
 <p style="margin-bottom: 1rem; line-height: 1.75;"><strong>How to call it:</strong> Just describe what you want to build. The skill triggers automatically on words like "build," "create a component," "landing page," "dashboard," "React app," "HTML layout," or "beautify this UI."</p>
 
@@ -76,19 +76,19 @@ npx skills add https://github.com/anthropics/skills --skill skill-creator -a cla
 <pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Build me a dark-themed SaaS landing page for a developer tool called Axiom"</pre>
 <pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Create a React dashboard component for real-time analytics with a brutalist aesthetic"</pre>
 <pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Design a product card component that feels luxury/high-end"</pre>
-<pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Make a personal portfolio page — go wild with the aesthetic, I want it memorable"</pre>
+<pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Make a personal portfolio page - go wild with the aesthetic, I want it memorable"</pre>
 
-<p style="margin-bottom: 0.5rem; line-height: 1.75;"><strong>Explicit invocation</strong> — call the skill by name for guaranteed triggering:</p>
+<p style="margin-bottom: 0.5rem; line-height: 1.75;"><strong>Explicit invocation</strong> - call the skill by name for guaranteed triggering:</p>
 <pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Use frontend-design to build me a landing page for Axiom"</pre>
 
-<p style="margin-bottom: 0.5rem; line-height: 1.75;"><strong>Slash command with no arguments</strong> — run <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">/frontend-design</code> on its own in Claude Code and Claude will prompt you for the brief interactively:</p>
+<p style="margin-bottom: 0.5rem; line-height: 1.75;"><strong>Slash command with no arguments</strong> - run <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">/frontend-design</code> on its own in Claude Code and Claude will prompt you for the brief interactively:</p>
 <pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">/frontend-design
 → "What would you like me to build? Tell me about the component,
-   page, or application — including purpose, audience, and constraints."
+   page, or application - including purpose, audience, and constraints."
 → You describe your project
 → Claude commits to an aesthetic direction and outputs the code</pre>
 
-<p style="margin-bottom: 1rem; line-height: 1.75;">This is the closest thing to a guided walkthrough — useful if you're not sure how to frame your request. Once you answer, Claude makes all remaining design decisions itself (aesthetic direction, fonts, layout, animations) and generates the code without further questions.</p>
+<p style="margin-bottom: 1rem; line-height: 1.75;">This is the closest thing to a guided walkthrough - useful if you're not sure how to frame your request. Once you answer, Claude makes all remaining design decisions itself (aesthetic direction, fonts, layout, animations) and generates the code without further questions.</p>
 `,
     },
     {
@@ -96,18 +96,18 @@ npx skills add https://github.com/anthropics/skills --skill skill-creator -a cla
       content: `
 <h2 style="margin-bottom: 1rem; color: var(--text-primary);">2. theme-factory</h2>
 
-<p style="margin-bottom: 1rem; line-height: 1.75;"><strong>What it does:</strong> A toolkit for applying professional font and color themes to any artifact — slide decks, docs, reports, HTML landing pages, and more. It ships with <strong>10 pre-set curated themes</strong> (including "Ocean Depths," a professional maritime palette, and others), each with carefully selected color palettes and font pairings. It can also generate a brand-new custom theme on the fly from a brief description.</p>
+<p style="margin-bottom: 1rem; line-height: 1.75;"><strong>What it does:</strong> A toolkit for applying professional font and color themes to any artifact - slide decks, docs, reports, HTML landing pages, and more. It ships with <strong>10 pre-set curated themes</strong> (including "Ocean Depths," a professional maritime palette, and others), each with carefully selected color palettes and font pairings. It can also generate a brand-new custom theme on the fly from a brief description.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.75;"><strong>The 10 built-in themes include:</strong> Ocean Depths, plus nine others covering professional, bold, minimalist, warm, and other aesthetic directions — all visible in the bundled <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">theme-showcase.pdf</code>.</p>
+<p style="margin-bottom: 1rem; line-height: 1.75;"><strong>The 10 built-in themes include:</strong> Ocean Depths, plus nine others covering professional, bold, minimalist, warm, and other aesthetic directions - all visible in the bundled <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">theme-showcase.pdf</code>.</p>
 
 <p style="margin-bottom: 1rem; line-height: 1.75;"><strong>Custom theme generation:</strong> If none of the presets fit, describe what you want in plain language and the skill generates a new theme with matching fonts and colors, shows it for review, then applies it.</p>
 
 <p style="margin-bottom: 1rem; line-height: 1.75;"><strong>How to call it:</strong> Triggers on words like "apply a theme," "style this," "make this look consistent," "theme my slides/doc/report," or "change the colors and fonts."</p>
 
 <p style="margin-bottom: 0.5rem; line-height: 1.75;"><strong>Example prompts:</strong></p>
-<pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Apply a theme to this presentation — show me the options first"</pre>
+<pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Apply a theme to this presentation - show me the options first"</pre>
 <pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Style my HTML landing page with the Ocean Depths theme"</pre>
-<pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Generate a custom dark theme for my report — think editorial magazine"</pre>
+<pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Generate a custom dark theme for my report - think editorial magazine"</pre>
 <pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Apply consistent styling across all my slides using theme-factory"</pre>
 `,
     },
@@ -116,7 +116,7 @@ npx skills add https://github.com/anthropics/skills --skill skill-creator -a cla
       content: `
 <h2 style="margin-bottom: 1rem; color: var(--text-primary);">3. brand-guidelines</h2>
 
-<p style="margin-bottom: 1rem; line-height: 1.75;"><strong>What it does:</strong> Applies Anthropic's official brand colors, typography, and visual identity to any artifact. Use it when you need your output to carry Anthropic's look-and-feel — whether that's a doc, presentation, HTML page, or any design asset. It's a post-processing / styling layer that wraps around whatever you've already created.</p>
+<p style="margin-bottom: 1rem; line-height: 1.75;"><strong>What it does:</strong> Applies Anthropic's official brand colors, typography, and visual identity to any artifact. Use it when you need your output to carry Anthropic's look-and-feel - whether that's a doc, presentation, HTML page, or any design asset. It's a post-processing / styling layer that wraps around whatever you've already created.</p>
 
 <p style="margin-bottom: 1rem; line-height: 1.75;">Keywords that signal this skill: branding, corporate identity, visual identity, brand colors, typography, Anthropic brand, visual formatting, company design standards.</p>
 
@@ -129,27 +129,27 @@ npx skills add https://github.com/anthropics/skills --skill skill-creator -a cla
 <pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Post-process this artifact to align with brand guidelines"</pre>
 
 <div style="padding: 1rem 1.1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 10px; margin: 1rem 0;">
-  <p style="margin: 0; line-height: 1.75; color: var(--text-secondary);"><strong>Tip:</strong> This skill is most powerful as a finishing step — build first with <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">frontend-design</code> or <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">theme-factory</code>, then apply <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">brand-guidelines</code> as a final pass.</p>
+  <p style="margin: 0; line-height: 1.75; color: var(--text-secondary);"><strong>Tip:</strong> This skill is most powerful as a finishing step - build first with <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">frontend-design</code> or <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">theme-factory</code>, then apply <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">brand-guidelines</code> as a final pass.</p>
 </div>
 
 <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
 
 <h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Worked Example: Rebrand a Web App in One Prompt</h3>
-<p style="margin-bottom: 1rem; line-height: 1.75;">Your web app can look like it was built by Anthropic — in one prompt.</p>
+<p style="margin-bottom: 1rem; line-height: 1.75;">Your web app can look like it was built by Anthropic - in one prompt.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.75;">There's an official brand-guidelines skill that knows every Anthropic design token — the coral accent, the warm neutrals, the typography, the spacing system. All of it.</p>
+<p style="margin-bottom: 1rem; line-height: 1.75;">There's an official brand-guidelines skill that knows every Anthropic design token - the coral accent, the warm neutrals, the typography, the spacing system. All of it.</p>
 
-<p style="margin-bottom: 0.5rem; line-height: 1.75;"><strong>Step 1 — Install the brand skill</strong></p>
+<p style="margin-bottom: 0.5rem; line-height: 1.75;"><strong>Step 1 - Install the brand skill</strong></p>
 <pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">/plugin marketplace add anthropics/skills
 /plugin install example-skills@anthropic-agent-skills</pre>
 
-<p style="margin-bottom: 0.5rem; line-height: 1.75;"><strong>Step 2 — Open Claude Code in your project terminal</strong></p>
+<p style="margin-bottom: 0.5rem; line-height: 1.75;"><strong>Step 2 - Open Claude Code in your project terminal</strong></p>
 <pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">claude</pre>
 
-<p style="margin-bottom: 0.5rem; line-height: 1.75;"><strong>Step 3 — Run this single prompt:</strong></p>
-<pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">Restyle this web app's landing page to match Anthropic's visual identity. Use Anthropic's official brand guidelines colors, typography, and spacing. Preserve all existing functionality and layout structure — only change the visual styling.</pre>
+<p style="margin-bottom: 0.5rem; line-height: 1.75;"><strong>Step 3 - Run this single prompt:</strong></p>
+<pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">Restyle this web app's landing page to match Anthropic's visual identity. Use Anthropic's official brand guidelines colors, typography, and spacing. Preserve all existing functionality and layout structure - only change the visual styling.</pre>
 
-<p style="margin-bottom: 1rem; line-height: 1.75;">Claude reads the skill file, pulls the defined hex values and spacing rules — then rewrites your CSS.</p>
+<p style="margin-bottom: 1rem; line-height: 1.75;">Claude reads the skill file, pulls the defined hex values and spacing rules - then rewrites your CSS.</p>
 `,
     },
     {
@@ -161,21 +161,21 @@ npx skills add https://github.com/anthropics/skills --skill skill-creator -a cla
 
 <p style="margin-bottom: 0.5rem; line-height: 1.75;"><strong>The two-step workflow:</strong></p>
 
-<p style="margin-bottom: 0.75rem; line-height: 1.75;"><strong>Step 1 — Design Philosophy Creation (.md file):</strong><br>
-Claude doesn't jump straight to designing. It first authors a <em>visual manifesto</em> — a named aesthetic movement (e.g., "Brutalist Joy," "Chromatic Silence") with a 4–6 paragraph philosophy articulating how space, color, form, scale, and composition should behave. This becomes the creative DNA of the piece.</p>
+<p style="margin-bottom: 0.75rem; line-height: 1.75;"><strong>Step 1 - Design Philosophy Creation (.md file):</strong><br>
+Claude doesn't jump straight to designing. It first authors a <em>visual manifesto</em> - a named aesthetic movement (e.g., "Brutalist Joy," "Chromatic Silence") with a 4–6 paragraph philosophy articulating how space, color, form, scale, and composition should behave. This becomes the creative DNA of the piece.</p>
 
-<p style="margin-bottom: 0.75rem; line-height: 1.75;"><strong>Step 2 — Canvas Creation (.pdf or .png):</strong><br>
-Using that philosophy as a guide, Claude creates the actual artwork — museum-quality, with repeating patterns, perfect shapes, sparse clinical typography, and expert craftsmanship. The SKILL.md explicitly instructs: <em>"Create work that looks like it took countless hours. Make it appear as though someone at the absolute top of their field labored over every detail."</em></p>
+<p style="margin-bottom: 0.75rem; line-height: 1.75;"><strong>Step 2 - Canvas Creation (.pdf or .png):</strong><br>
+Using that philosophy as a guide, Claude creates the actual artwork - museum-quality, with repeating patterns, perfect shapes, sparse clinical typography, and expert craftsmanship. The SKILL.md explicitly instructs: <em>"Create work that looks like it took countless hours. Make it appear as though someone at the absolute top of their field labored over every detail."</em></p>
 
-<p style="margin-bottom: 1rem; line-height: 1.75;">A built-in self-critique pass ("The user ALREADY said it isn't perfect enough — refine without adding more elements") ensures the final output is pristine.</p>
+<p style="margin-bottom: 1rem; line-height: 1.75;">A built-in self-critique pass ("The user ALREADY said it isn't perfect enough - refine without adding more elements") ensures the final output is pristine.</p>
 
 <p style="margin-bottom: 1rem; line-height: 1.75;"><strong>How to call it:</strong> Trigger with "create a poster," "design a piece of art," "make a visual," "I want something that looks like it could hang in a museum," or "design a static graphic."</p>
 
 <p style="margin-bottom: 0.5rem; line-height: 1.75;"><strong>Example prompts:</strong></p>
-<pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Create a poster for a jazz festival — go for something abstract and art-deco"</pre>
+<pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Create a poster for a jazz festival - go for something abstract and art-deco"</pre>
 <pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Design a visual art piece inspired by the concept of machine learning"</pre>
 <pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Make a multi-page coffee table book spread about the ocean"</pre>
-<pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Create a minimalist brand identity poster — I want it to feel Bauhaus"</pre>
+<pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Create a minimalist brand identity poster - I want it to feel Bauhaus"</pre>
 `,
     },
     {
@@ -196,14 +196,14 @@ Using that philosophy as a guide, Claude creates the actual artwork — museum-q
   <li>Package and distribute</li>
 </ol>
 
-<p style="margin-bottom: 1rem; line-height: 1.75;"><strong>Key insight from the SKILL.md:</strong> The <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">description</code> field is the primary triggering mechanism — it's how Claude decides whether to invoke the skill. Well-crafted descriptions should be slightly "pushy," mentioning both what the skill does <em>and</em> when to use it, including synonyms and edge cases.</p>
+<p style="margin-bottom: 1rem; line-height: 1.75;"><strong>Key insight from the SKILL.md:</strong> The <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">description</code> field is the primary triggering mechanism - it's how Claude decides whether to invoke the skill. Well-crafted descriptions should be slightly "pushy," mentioning both what the skill does <em>and</em> when to use it, including synonyms and edge cases.</p>
 
 <p style="margin-bottom: 1rem; line-height: 1.75;"><strong>How to call it:</strong> Say "help me create a skill," "I want to turn this workflow into a skill," "improve my existing skill," or "run evals on my skill."</p>
 
 <p style="margin-bottom: 0.5rem; line-height: 1.75;"><strong>Example prompts:</strong></p>
 <pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Help me create a skill for generating Python data pipeline code"</pre>
 <pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Turn this conversation into a Claude Code skill for writing PRDs"</pre>
-<pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"My skill isn't triggering reliably — help me optimize the description"</pre>
+<pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"My skill isn't triggering reliably - help me optimize the description"</pre>
 <pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Run evaluations on my draft skill and help me improve it"</pre>
 `,
     },
@@ -212,29 +212,29 @@ Using that philosophy as a guide, Claude creates the actual artwork — museum-q
       content: `
 <h2 style="margin-bottom: 1rem; color: var(--text-primary);">Combining All 5 Skills: Building "Prompt Shelf" from Scratch</h2>
 
-<p style="margin-bottom: 1rem; line-height: 1.75;">Let's walk through a real-world example — <strong>Prompt Shelf</strong>, a web-based repository for storing, searching, and organizing AI prompts.</p>
+<p style="margin-bottom: 1rem; line-height: 1.75;">Let's walk through a real-world example - <strong>Prompt Shelf</strong>, a web-based repository for storing, searching, and organizing AI prompts.</p>
 
 <p style="margin-bottom: 1rem; line-height: 1.75;">Here's exactly how all five skills are invoked in sequence to go from blank canvas to production-ready app.</p>
 
 <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
 
-<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Phase 1 — Define the Visual Philosophy (<code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">canvas-design</code>)</h3>
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Phase 1 - Define the Visual Philosophy (<code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">canvas-design</code>)</h3>
 
-<p style="margin-bottom: 1rem; line-height: 1.75;">Before touching any code, establish the soul of the app. Prompt Shelf is a personal tool for knowledge workers — it should feel calm, organized, and intellectually focused. Use <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">canvas-design</code> to produce a visual manifesto and reference poster that captures that energy.</p>
+<p style="margin-bottom: 1rem; line-height: 1.75;">Before touching any code, establish the soul of the app. Prompt Shelf is a personal tool for knowledge workers - it should feel calm, organized, and intellectually focused. Use <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">canvas-design</code> to produce a visual manifesto and reference poster that captures that energy.</p>
 
 <p style="margin-bottom: 0.35rem; line-height: 1.75;"><strong>Prompt:</strong></p>
 <pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Use canvas-design to create a visual philosophy and reference poster for \"Prompt Shelf\"
-— a web app for organizing AI prompts. The aesthetic should feel like a well-curated
+ - a web app for organizing AI prompts. The aesthetic should feel like a well-curated
 library: structured, editorial, with a quiet confidence. Think archival systems meets
 modern developer tooling. Output a .md philosophy file and a .pdf poster."</pre>
 
-<p style="margin-bottom: 1rem; line-height: 1.75;">Canvas-design generates a named aesthetic movement — say, <strong>"Archival Precision"</strong> — with a 4–6 paragraph manifesto covering how space, color, typographic weight, and composition should behave throughout the app. The <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">.pdf</code> poster becomes your visual north star for every subsequent decision: sidebar proportions, card density, color palette, font choices.</p>
+<p style="margin-bottom: 1rem; line-height: 1.75;">Canvas-design generates a named aesthetic movement - say, <strong>"Archival Precision"</strong> - with a 4–6 paragraph manifesto covering how space, color, typographic weight, and composition should behave throughout the app. The <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">.pdf</code> poster becomes your visual north star for every subsequent decision: sidebar proportions, card density, color palette, font choices.</p>
 
 <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
 
-<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Phase 2 — Lock In a Theme System (<code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">theme-factory</code>)</h3>
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Phase 2 - Lock In a Theme System (<code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">theme-factory</code>)</h3>
 
-<p style="margin-bottom: 1rem; line-height: 1.75;">With the philosophy established, translate it into a concrete, reusable theme — exact CSS variables, color tokens, and font pairings that will flow consistently through every component.</p>
+<p style="margin-bottom: 1rem; line-height: 1.75;">With the philosophy established, translate it into a concrete, reusable theme - exact CSS variables, color tokens, and font pairings that will flow consistently through every component.</p>
 
 <p style="margin-bottom: 0.35rem; line-height: 1.75;"><strong>Prompt:</strong></p>
 <pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Use theme-factory to generate a custom theme for Prompt Shelf based on the
@@ -245,46 +245,46 @@ modern developer tooling. Output a .md philosophy file and a .pdf poster."</pre>
   for prompt content, one clean sans for UI labels
 - Output as CSS variables ready to drop into a :root {} block"</pre>
 
-<p style="margin-bottom: 1rem; line-height: 1.75;">Theme-factory either matches one of its 10 presets to your philosophy or generates a custom theme from scratch. The output is a named theme — e.g., <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">prompt-shelf-archival</code> — with a complete <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">:root {}</code> CSS variables block. These tokens (<code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">--color-bg</code>, <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">--color-surface</code>, etc.) will be the single source of truth referenced by every component the <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">frontend-design</code> skill produces.</p>
+<p style="margin-bottom: 1rem; line-height: 1.75;">Theme-factory either matches one of its 10 presets to your philosophy or generates a custom theme from scratch. The output is a named theme - e.g., <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">prompt-shelf-archival</code> - with a complete <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">:root {}</code> CSS variables block. These tokens (<code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">--color-bg</code>, <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">--color-surface</code>, etc.) will be the single source of truth referenced by every component the <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">frontend-design</code> skill produces.</p>
 
 <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
 
-<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Phase 3 — Build the Core Application (<code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">frontend-design</code>)</h3>
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Phase 3 - Build the Core Application (<code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">frontend-design</code>)</h3>
 
-<p style="margin-bottom: 1rem; line-height: 1.75;">Now invoke the main build. Pass the full specification — architecture, tech stack, features, and the theme tokens from Phase 2 to <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">frontend-design</code>.</p>
+<p style="margin-bottom: 1rem; line-height: 1.75;">Now invoke the main build. Pass the full specification - architecture, tech stack, features, and the theme tokens from Phase 2 to <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">frontend-design</code>.</p>
 
 <p style="margin-bottom: 0.35rem; line-height: 1.75;"><strong>Prompt:</strong></p>
-<pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Use frontend-design to build \"Prompt Shelf\" — a React 19 + Vite 8 web app for
+<pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Use frontend-design to build \"Prompt Shelf\" - a React 19 + Vite 8 web app for
 storing, searching, and organizing AI prompts.
 
 Tech stack (strict):
 - React 19 with the \`use\` API for data and improved Transitions
 - Vite 8 as the build tool
 - Lucide React for Sidebar and View Toggle icons
-- Pure Vanilla CSS — CSS Grid for layout, CSS Variables for the design system
+- Pure Vanilla CSS - CSS Grid for layout, CSS Variables for the design system
 
 Apply the prompt-shelf-archival theme tokens from our theme-factory output.
 
 Architecture requirements:
-1. MainLayout component — CSS Grid defining sidebar + main content areas
-2. Sidebar — persistent on desktop, collapsible on mobile; maps through categories
+1. MainLayout component - CSS Grid defining sidebar + main content areas
+2. Sidebar - persistent on desktop, collapsible on mobile; maps through categories
    (Coding, Research, Design, Career, Personal); shows active state
-3. Data model — Title, Content, Category, Tags[]
-4. Search — real-time keyword search bar synced with sidebar category filter
-5. Layout toggle — Grid View (card-based) vs List View (compact rows) via Lucide icons
-6. State management — combined filtering logic for category selection + search text
+3. Data model - Title, Content, Category, Tags[]
+4. Search - real-time keyword search bar synced with sidebar category filter
+5. Layout toggle - Grid View (card-based) vs List View (compact rows) via Lucide icons
+6. State management - combined filtering logic for category selection + search text
 
 Sidebar CSS specifics: position: sticky, height: 100vh, hover states.
 
-Make it production-grade and visually memorable — not generic."</pre>
+Make it production-grade and visually memorable - not generic."</pre>
 
 <p style="margin-bottom: 1rem; line-height: 1.75;">Frontend-design reads the Archival Precision philosophy (indirectly, via the theme tokens and the aesthetic context you've provided), commits to a bold direction, and produces the core components and application logic using clean, vanilla CSS.</p>
 
 <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
 
-<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Phase 4 — Apply Brand Guidelines (<code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">brand-guidelines</code>)</h3>
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Phase 4 - Apply Brand Guidelines (<code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">brand-guidelines</code>)</h3>
 
-<p style="margin-bottom: 1rem; line-height: 1.75;">With the app built, run a final brand pass to ensure everything — the app itself and its documentation — is visually consistent and on-brand.</p>
+<p style="margin-bottom: 1rem; line-height: 1.75;">With the app built, run a final brand pass to ensure everything - the app itself and its documentation - is visually consistent and on-brand.</p>
 
 <p style="margin-bottom: 0.35rem; line-height: 1.75;"><strong>Prompt:</strong></p>
 <pre style="display: block; padding: 0.9rem 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0 1rem; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6;">"Apply brand-guidelines to post-process the Prompt Shelf app and its docs.
@@ -296,7 +296,7 @@ deviates from the Archival Precision theme we established."</pre>
 
 <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
 
-<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Phase 5 — Package the Workflow as a Reusable Skill (<code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">skill-creator</code>)</h3>
+<h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-primary);">Phase 5 - Package the Workflow as a Reusable Skill (<code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">skill-creator</code>)</h3>
 
 <p style="margin-bottom: 1rem; line-height: 1.75;">Codify this repeatable, high-quality workflow so you can reproduce this entire pipeline with a single skill invocation in the future.</p>
 
@@ -346,7 +346,7 @@ skill-creator     →  Whole workflow packaged as "prompt-app-builder.skill"</pr
   </thead>
   <tbody style="color: var(--text-secondary);">
     <tr style="border-bottom: 1px solid var(--border-color);">
-      <td style="padding: 0.75rem;">Build working UI code — components, pages, dashboards, React/HTML/CSS</td>
+      <td style="padding: 0.75rem;">Build working UI code - components, pages, dashboards, React/HTML/CSS</td>
       <td style="padding: 0.75rem;"><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">frontend-design</code></td>
       <td style="padding: 0.75rem;">Production-ready front-end code</td>
     </tr>
@@ -361,7 +361,7 @@ skill-creator     →  Whole workflow packaged as "prompt-app-builder.skill"</pr
       <td style="padding: 0.75rem;">Anthropic's brand tokens applied as a finishing pass</td>
     </tr>
     <tr style="border-bottom: 1px solid var(--border-color);">
-      <td style="padding: 0.75rem;">Create static visual art — posters, prints, infographics — as PNG/PDF</td>
+      <td style="padding: 0.75rem;">Create static visual art - posters, prints, infographics - as PNG/PDF</td>
       <td style="padding: 0.75rem;"><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">canvas-design</code></td>
       <td style="padding: 0.75rem;">High-fidelity <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">.png</code> / <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">.pdf</code> artwork</td>
     </tr>
@@ -375,8 +375,8 @@ skill-creator     →  Whole workflow packaged as "prompt-app-builder.skill"</pr
 
 <p style="margin-bottom: 0.5rem; line-height: 1.75;">Two quick disambiguations that trip people up:</p>
 <ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
-  <li><strong><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">frontend-design</code> vs <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">canvas-design</code></strong> — code you can run vs. a static image you can hang. If it has to be interactive, it's <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">frontend-design</code>.</li>
-  <li><strong><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">theme-factory</code> vs <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">brand-guidelines</code></strong> — <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">theme-factory</code> gives you <em>any</em> aesthetic (10 presets or a custom one); <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">brand-guidelines</code> gives you Anthropic's <em>specific</em> brand. Want your <em>own</em> company's brand? Use <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">theme-factory</code> or build a custom skill with <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">skill-creator</code>.</li>
+  <li><strong><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">frontend-design</code> vs <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">canvas-design</code></strong> - code you can run vs. a static image you can hang. If it has to be interactive, it's <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">frontend-design</code>.</li>
+  <li><strong><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">theme-factory</code> vs <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">brand-guidelines</code></strong> - <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">theme-factory</code> gives you <em>any</em> aesthetic (10 presets or a custom one); <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">brand-guidelines</code> gives you Anthropic's <em>specific</em> brand. Want your <em>own</em> company's brand? Use <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">theme-factory</code> or build a custom skill with <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">skill-creator</code>.</li>
 </ul>
 `,
     },
@@ -429,9 +429,9 @@ skill-creator     →  Whole workflow packaged as "prompt-app-builder.skill"</pr
 <h2 style="margin-bottom: 1rem; color: var(--text-primary);">Important Notes</h2>
 
 <ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.75;">
-  <li><strong>Skills are loaded dynamically</strong> — only the description is always in context. The full instructions load only when the skill triggers, keeping your context window clean.</li>
+  <li><strong>Skills are loaded dynamically</strong> - only the description is always in context. The full instructions load only when the skill triggers, keeping your context window clean.</li>
   <li><strong>Skill descriptions are the routing mechanism.</strong> If a skill isn't triggering automatically, you can always invoke it manually with <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">"Use [skill-name] to..."</code> or the slash command <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">/[skill-name]</code> in Claude Code.</li>
-  <li><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">frontend-design</code> and <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">canvas-design</code> overlap but are distinct. Frontend-design outputs working code (HTML/CSS/JS/React). Canvas-design outputs <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">.png</code> and <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">.pdf</code> art files — it's for static visuals, not interactive UIs.</li>
+  <li><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">frontend-design</code> and <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">canvas-design</code> overlap but are distinct. Frontend-design outputs working code (HTML/CSS/JS/React). Canvas-design outputs <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">.png</code> and <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">.pdf</code> art files - it's for static visuals, not interactive UIs.</li>
   <li><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">brand-guidelines</code> is a post-processor. Use it <em>after</em> building with other skills, not as a starting point.</li>
   <li><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">skill-creator</code> works slightly differently in Claude.ai vs Claude Code. In Claude.ai, subagent-based parallel test execution isn't available, so tests run sequentially and quantitative benchmarking is skipped. In Claude Code, the full eval loop with <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">run_loop.py</code> and the description optimizer is available.</li>
 </ul>
@@ -451,7 +451,7 @@ skill-creator     →  Whole workflow packaged as "prompt-app-builder.skill"</pr
   <li><strong>Agent Skills Spec:</strong> <a href="https://agentskills.io" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">https://agentskills.io</a></li>
 </ul>
 
-<p style="margin-bottom: 1rem; line-height: 1.75;"><em>Skills are a living system — Anthropic is actively adding new ones. Check the repo regularly, and use <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">skill-creator</code> to build your own domain-specific workflows on top of these foundations.</em></p>
+<p style="margin-bottom: 1rem; line-height: 1.75;"><em>Skills are a living system - Anthropic is actively adding new ones. Check the repo regularly, and use <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; color: var(--accent-primary);">skill-creator</code> to build your own domain-specific workflows on top of these foundations.</em></p>
 `,
     },
   ],

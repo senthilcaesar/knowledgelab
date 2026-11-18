@@ -8,7 +8,7 @@ const openSpecConcept = {
     <span>GitHub: Fission-AI/OpenSpec</span>
   </a>
 </div>
-<p style="margin-bottom:1rem; line-height:1.75;"><strong>OpenSpec</strong> is a lightweight, open-source framework for <strong>Spec-Driven Development (SDD)</strong> designed specifically for AI coding assistants. Unlike rigid planning tools, OpenSpec is built on a philosophy of being <em>fluid, iterative, and easy</em> — and it works with 25+ AI tools you already use.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>OpenSpec</strong> is a lightweight, open-source framework for <strong>Spec-Driven Development (SDD)</strong> designed specifically for AI coding assistants. Unlike rigid planning tools, OpenSpec is built on a philosophy of being <em>fluid, iterative, and easy</em> - and it works with 25+ AI tools you already use.</p>
 
 <p style="margin-bottom:1.5rem; line-height:1.75; font-style:italic; opacity:0.8;"><strong>The Problem:</strong> AI coding assistants are powerful but unpredictable when requirements live only in chat history. OpenSpec adds a lightweight spec layer so you agree on <em>what to build before any code is written</em>.</p>
 
@@ -17,10 +17,10 @@ const openSpecConcept = {
   <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6; font-size: 0.85rem;">You: /opsx:propose add-dark-mode
 
 AI: Created openspec/changes/add-dark-mode/
-  ✓ proposal.md  — why we're doing this, what's changing
-  ✓ specs/       — requirements and scenarios
-  ✓ design.md    — technical approach
-  ✓ tasks.md     — implementation checklist
+  ✓ proposal.md - why we're doing this, what's changing
+  ✓ specs/ - requirements and scenarios
+  ✓ design.md - technical approach
+  ✓ tasks.md - implementation checklist
 
 You: /opsx:apply
 
@@ -53,12 +53,12 @@ openspec init
 <div style="margin-top: 2rem; padding: 1rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px;">
   <strong style="display:block; margin-bottom:0.75rem; font-size:1.1rem; color: var(--accent-primary);">Key Slash Commands</strong>
   <ul style="margin-left: 1.25rem; line-height: 1.6;">
-    <li style="margin-bottom: 0.5rem;"><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/opsx:propose</code> — Create a change folder with proposal, specs, design, and tasks</li>
-    <li style="margin-bottom: 0.5rem;"><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/opsx:apply</code> — Execute all tasks in the implementation checklist</li>
-    <li style="margin-bottom: 0.5rem;"><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/opsx:archive</code> — Archive the completed change, update living specs</li>
-    <li style="margin-bottom: 0.5rem;"><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/opsx:new</code> — Start a new feature from scratch</li>
-    <li style="margin-bottom: 0.5rem;"><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/opsx:verify</code> — Check implementation against the spec</li>
-    <li><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/opsx:onboard</code> — Help AI understand your existing project</li>
+    <li style="margin-bottom: 0.5rem;"><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/opsx:propose</code> - Create a change folder with proposal, specs, design, and tasks</li>
+    <li style="margin-bottom: 0.5rem;"><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/opsx:apply</code> - Execute all tasks in the implementation checklist</li>
+    <li style="margin-bottom: 0.5rem;"><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/opsx:archive</code> - Archive the completed change, update living specs</li>
+    <li style="margin-bottom: 0.5rem;"><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/opsx:new</code> - Start a new feature from scratch</li>
+    <li style="margin-bottom: 0.5rem;"><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/opsx:verify</code> - Check implementation against the spec</li>
+    <li><code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/opsx:onboard</code> - Help AI understand your existing project</li>
   </ul>
 </div>
 
@@ -103,7 +103,7 @@ openspec init
     <li style="margin-bottom: 0.5rem;"><strong>Before any feature:</strong> Run <code style="padding: 0.15rem 0.35rem; background: var(--syntax-bg); border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary);">/opsx:propose</code> to create structured change artifacts</li>
     <li style="margin-bottom: 0.5rem;"><strong>During coding:</strong> AI reads <code>tasks.md</code> and works through checklist items predictably</li>
     <li style="margin-bottom: 0.5rem;"><strong>After completion:</strong> <code>/opsx:archive</code> archives the change and keeps specs as living docs</li>
-    <li><strong>Best models:</strong> Works best with frontier planning models — Claude Opus 5 or Claude Fable 5.1 on the Anthropic side</li>
+    <li><strong>Best models:</strong> Works best with frontier planning models - Claude Opus 5 or Claude Fable 5.1 on the Anthropic side</li>
   </ul>
 </div>
 

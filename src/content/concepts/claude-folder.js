@@ -10,7 +10,7 @@ const claudeFolderConcept = {
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">A Complete Beginner's Guide to Claude Code Configuration</strong>
 
 <strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">What is Claude Code, really?</strong>
-<p style="margin-bottom:1rem; line-height:1.75;">Claude Code is an AI coding assistant that lives in your terminal. You type instructions in plain English, and it reads your code, edits files, runs commands, and helps you build things — all without you leaving the command line.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Claude Code is an AI coding assistant that lives in your terminal. You type instructions in plain English, and it reads your code, edits files, runs commands, and helps you build things - all without you leaving the command line.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">But here is the thing that makes Claude Code different from a simple chatbot: it has a memory system. You can teach it about your project once, set rules for how it should behave, and give it shortcuts for your most common tasks. It will remember all of that across every session, for every developer on your team.</p>
 
@@ -21,7 +21,7 @@ const claudeFolderConcept = {
 <strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">The problem Claude Code solves</strong>
 <p style="margin-bottom:1rem; line-height:1.75;">Every time you start a new Claude Code session, it begins with a completely blank slate. It does not remember that you prefer Google-style docstrings. It does not know your database runs on port 5433. It does not know that your team uses a specific branch naming convention, or that there is a tricky workaround in your authentication module.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Without any configuration, you end up repeating yourself constantly — explaining the same context at the start of every conversation, re-establishing your preferences, reminding Claude not to touch certain files. This gets old very fast.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Without any configuration, you end up repeating yourself constantly - explaining the same context at the start of every conversation, re-establishing your preferences, reminding Claude not to touch certain files. This gets old very fast.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">The configuration files solve this by encoding everything Claude needs to know once, upfront. From that point on, every session starts with Claude already briefed on your project.</p>
 
@@ -30,9 +30,9 @@ const claudeFolderConcept = {
 <strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">The two kinds of configuration</strong>
 <p style="margin-bottom:1rem; line-height:1.75;">Before looking at individual files, it helps to understand that Claude Code has two fundamentally different things it needs to know:</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;"><strong>What Claude should know</strong> — context about your project, your coding conventions, your architecture, your team's rules. This is documentation you write for Claude the same way you'd write documentation for a new teammate.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>What Claude should know</strong> - context about your project, your coding conventions, your architecture, your team's rules. This is documentation you write for Claude the same way you'd write documentation for a new teammate.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;"><strong>What Claude is allowed to do</strong> — permissions, tool access, environment variables, which commands it can run without asking. This is the safety layer that controls Claude's behaviour at runtime.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>What Claude is allowed to do</strong> - permissions, tool access, environment variables, which commands it can run without asking. This is the safety layer that controls Claude's behaviour at runtime.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">The first kind lives in Markdown files (<code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.md</code>). The second kind lives in JSON files (<code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.json</code>). Once you understand that split, the whole system clicks into place.</p>
 
@@ -41,11 +41,11 @@ const claudeFolderConcept = {
 <strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Where the files live</strong>
 <p style="margin-bottom:1rem; line-height:1.75;">Claude Code uses files in three locations. Together they form a layered system where more specific settings override broader ones.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;"><strong>Inside your project</strong> — files that are specific to this codebase and shared with your team via version control. This is where most of your configuration lives.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>Inside your project</strong> - files that are specific to this codebase and shared with your team via version control. This is where most of your configuration lives.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;"><strong>In your home directory</strong> (<code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/</code>) — files that apply to every project you work on, across your whole machine. Good for personal preferences that follow you everywhere.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>In your home directory</strong> (<code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/</code>) - files that apply to every project you work on, across your whole machine. Good for personal preferences that follow you everywhere.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;"><strong>On your machine only</strong> — certain files are intentionally never committed to git. They contain your personal notes, your local environment details, and anything else that should not be imposed on teammates.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>On your machine only</strong> - certain files are intentionally never committed to git. They contain your personal notes, your local environment details, and anything else that should not be imposed on teammates.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">The diagram below shows exactly where each file lives and how the layers relate.</p>
 
@@ -87,47 +87,47 @@ const claudeFolderConcept = {
     └── projects/&lt;project&gt;/memory/   ← Auto memory Claude writes itself</code></pre>
 
 <div style="padding: 1rem; background: rgba(255, 193, 7, 0.06); border: 1px solid rgba(255, 193, 7, 0.4); border-radius: 8px; margin: 1rem 0;">
-  <p style="margin:0; line-height:1.7; color: var(--text-secondary); font-size: 0.92rem;">⚠️ <strong><code style="color: var(--code-text);">.mcp.json</code> goes at the project root, not inside <code style="color: var(--code-text);">.claude/</code>.</strong> This one catches people out constantly — a <code style="color: var(--code-text);">.claude/.mcp.json</code> is simply never read. User-scope MCP servers live in <code style="color: var(--code-text);">~/.claude.json</code> instead (note: <em>not</em> <code style="color: var(--code-text);">~/.claude/</code>).</p>
+  <p style="margin:0; line-height:1.7; color: var(--text-secondary); font-size: 0.92rem;">⚠️ <strong><code style="color: var(--code-text);">.mcp.json</code> goes at the project root, not inside <code style="color: var(--code-text);">.claude/</code>.</strong> This one catches people out constantly - a <code style="color: var(--code-text);">.claude/.mcp.json</code> is simply never read. User-scope MCP servers live in <code style="color: var(--code-text);">~/.claude.json</code> instead (note: <em>not</em> <code style="color: var(--code-text);">~/.claude/</code>).</p>
 </div>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
 <strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">The six configuration files, explained plainly</strong>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);"><code style="color: var(--code-text);">CLAUDE.md</code> — the project briefing</strong>
-<p style="margin-bottom:1rem; line-height:1.75;">This is the most important file. It is a plain Markdown document that Claude reads automatically at the start of every session. Think of it as the briefing document you would write for a new developer joining the team — except Claude reads it every single time, so it never forgets.</p>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);"><code style="color: var(--code-text);">CLAUDE.md</code> - the project briefing</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">This is the most important file. It is a plain Markdown document that Claude reads automatically at the start of every session. Think of it as the briefing document you would write for a new developer joining the team - except Claude reads it every single time, so it never forgets.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">You put things in here that would cause mistakes if Claude didn't know them: your build commands, your architecture decisions, your naming conventions, which files are off-limits. Anything you find yourself explaining at the start of every conversation belongs here.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;">It lives in your project root and is committed to git, so the whole team benefits. It is written in plain English — no special syntax required.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">It lives in your project root and is committed to git, so the whole team benefits. It is written in plain English - no special syntax required.</p>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);"><code style="color: var(--code-text);">CLAUDE.local.md</code> — your personal notes</strong>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);"><code style="color: var(--code-text);">CLAUDE.local.md</code> - your personal notes</strong>
 <p style="margin-bottom:1rem; line-height:1.75;">Same format as <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code>, but never committed to git. It sits alongside <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> in your project root and is invisible to your teammates.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">This is where you put things that are specific to your machine: your local server port, the path to your virtual environment, your sandbox API URL, whatever feature you are currently working on. Because it is gitignored by default, you can write freely without worrying about polluting the shared project context.</p>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);"><code style="color: var(--code-text);">settings.json</code> — the permission layer</strong>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);"><code style="color: var(--code-text);">settings.json</code> - the permission layer</strong>
 <p style="margin-bottom:1rem; line-height:1.75;">Where <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> tells Claude what to know, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code> tells Claude what it is allowed to do. This JSON file controls which tools Claude can run without asking for your approval, which commands are blocked entirely, what environment variables to set at startup, and which AI model to use.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">The most important section is <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">permissions</code>. You can allow certain commands to run silently (like <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">pytest</code> or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">git</code>) and explicitly deny others (like reading your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.env</code> file). This is the file that makes Claude safe to use on a real codebase.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">It is committed to git so your team shares the same baseline permissions.</p>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);"><code style="color: var(--code-text);">settings.local.json</code> — your personal permission overrides</strong>
-<p style="margin-bottom:1rem; line-height:1.75;">The personal counterpart to <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code>. Also gitignored. Use it for permission tweaks that only make sense on your machine — like allowing Claude to access a local docs directory that only you have, or bypassing permission prompts during a focused debugging session you're running solo.</p>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);"><code style="color: var(--code-text);">settings.local.json</code> - your personal permission overrides</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">The personal counterpart to <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code>. Also gitignored. Use it for permission tweaks that only make sense on your machine - like allowing Claude to access a local docs directory that only you have, or bypassing permission prompts during a focused debugging session you're running solo.</p>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);"><code style="color: var(--code-text);">.claude/rules/*.md</code> — modular, scoped instructions</strong>
-<p style="margin-bottom:1rem; line-height:1.75;">As your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> grows, you will want to break it into separate files — one for code style, one for testing conventions, one for API design rules. The <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">rules/</code> directory is where those go.</p>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);"><code style="color: var(--code-text);">.claude/rules/*.md</code> - modular, scoped instructions</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">As your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> grows, you will want to break it into separate files - one for code style, one for testing conventions, one for API design rules. The <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">rules/</code> directory is where those go.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Each file is a plain Markdown document covering one topic. The real power is path scoping: you can add YAML frontmatter to a rules file so it only loads when Claude is working with certain files. Your API rules only appear when Claude touches your router files. Your test conventions only appear when Claude touches files in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">tests/</code>. This keeps Claude's context lean and focused.</p>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);"><code style="color: var(--code-text);">.claude/commands/*.md</code> — slash command shortcuts</strong>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);"><code style="color: var(--code-text);">.claude/commands/*.md</code> - slash command shortcuts</strong>
 <p style="margin-bottom:1rem; line-height:1.75;">Any prompt you type more than once a week probably belongs here. Create a Markdown file, write your prompt inside it, save it as <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">review.md</code>, and from that point on you can type <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/review</code> to run it instantly.</p>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
 <strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">The seventh thing: memory Claude writes itself</strong>
-<p style="margin-bottom:1rem; line-height:1.75;">Everything above is configuration <em>you</em> write. There is a second memory system running alongside it that you don't write at all: <strong>auto memory</strong>. As you work, Claude saves notes for itself — build commands it figured out, a debugging insight, a preference it picked up when you corrected it. Those notes load at the start of every future session in that repository.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Everything above is configuration <em>you</em> write. There is a second memory system running alongside it that you don't write at all: <strong>auto memory</strong>. As you work, Claude saves notes for itself - build commands it figured out, a debugging insight, a preference it picked up when you corrected it. Those notes load at the start of every future session in that repository.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">It's on by default, and it lives outside your project entirely:</p>
 
@@ -136,7 +136,7 @@ const claudeFolderConcept = {
 ├── debugging.md       ← detail files, read on demand
 └── api-conventions.md</code></pre>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Only <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">MEMORY.md</code> is loaded automatically, and only its first 200 lines or 25KB, whichever comes first — Claude is expected to keep it as an index and push detail into the topic files, which it reads only when needed.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Only <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">MEMORY.md</code> is loaded automatically, and only its first 200 lines or 25KB, whichever comes first - Claude is expected to keep it as an index and push detail into the topic files, which it reads only when needed.</p>
 
 <p style="margin-bottom:0.75rem; line-height:1.75;">How this differs from CLAUDE.md is the useful distinction:</p>
 <div style="overflow-x:auto; margin-bottom:1rem;">
@@ -162,13 +162,13 @@ const claudeFolderConcept = {
       <tr>
         <td style="padding: 0.75rem; border: 1px solid var(--border-color);"><strong>Shared with team</strong></td>
         <td style="padding: 0.75rem; border: 1px solid var(--border-color);">Yes, via git</td>
-        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">No — machine-local, never committed</td>
+        <td style="padding: 0.75rem; border: 1px solid var(--border-color);">No - machine-local, never committed</td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Two practical notes. First, when you see <em>"Saved 2 memories"</em> or <em>"Recalled 2 memories"</em> in your session, that's this system at work — the files are plain markdown you can read, edit, or delete via <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/memory</code>. Second, it's shared across all worktrees of a repo but never across machines, so it's the wrong place for anything a teammate needs. To turn it off, toggle it in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/memory</code> or set <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">"autoMemoryEnabled": false</code> in settings.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Two practical notes. First, when you see <em>"Saved 2 memories"</em> or <em>"Recalled 2 memories"</em> in your session, that's this system at work - the files are plain markdown you can read, edit, or delete via <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/memory</code>. Second, it's shared across all worktrees of a repo but never across machines, so it's the wrong place for anything a teammate needs. To turn it off, toggle it in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/memory</code> or set <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">"autoMemoryEnabled": false</code> in settings.</p>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
@@ -207,24 +207,24 @@ const claudeFolderConcept = {
   line-height: 1.2;
 "><code>/init</code></pre>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Claude will examine your codebase — reading your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">package.json</code> or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">pyproject.toml</code>, scanning your directory structure, detecting your test framework — and generate a starter <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> that reflects what it finds. From there, you edit it like any other text file and build up the other pieces as you discover you need them.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Claude will examine your codebase - reading your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">package.json</code> or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">pyproject.toml</code>, scanning your directory structure, detecting your test framework - and generate a starter <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> that reflects what it finds. From there, you edit it like any other text file and build up the other pieces as you discover you need them.</p>
 
 <p style="margin-bottom:0.75rem; line-height:1.75;">A good order to build things up:</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;"><strong>1</strong> — let <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/init</code> create your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code>. Edit it to add anything it missed. Add your personal local notes to <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code>.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>1</strong> - let <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/init</code> create your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code>. Edit it to add anything it missed. Add your personal local notes to <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code>.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;"><strong>2</strong> — set up <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code> with permissions. Allow the commands you use constantly (like <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">pytest</code>). Deny access to your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.env</code> file.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>2</strong> - set up <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code> with permissions. Allow the commands you use constantly (like <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">pytest</code>). Deny access to your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.env</code> file.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;"><strong>3</strong> — create your first custom command for whatever task you repeat most. Probably <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/commit</code> or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/review</code>.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>3</strong> - create your first custom command for whatever task you repeat most. Probably <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/commit</code> or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/review</code>.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;"><strong>When <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> grows past 200 lines</strong> — start moving sections into <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">rules/*.md</code> files. Add <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">paths:</code> frontmatter to the ones that only apply to specific parts of your codebase.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>When <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> grows past 200 lines</strong> - start moving sections into <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">rules/*.md</code> files. Add <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">paths:</code> frontmatter to the ones that only apply to specific parts of your codebase.</p>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
 <strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">The one thing to remember</strong>
 <p style="margin-bottom:1rem; line-height:1.75;">All of these files are plain text. There is no special tooling, no build step, no compiler. A Markdown file is a Markdown file. A JSON file is a JSON file. You can open any of them in your editor right now and start writing.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;">The sophistication is in how Claude reads them — not in how you write them. Write clearly, be specific, and Claude will follow what you write. That is the whole system.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">The sophistication is in how Claude reads them - not in how you write them. Write clearly, be specific, and Claude will follow what you write. That is the whole system.</p>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
@@ -319,7 +319,7 @@ const claudeFolderConcept = {
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
 <strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">How They Layer Together</strong>
-<p style="margin-bottom:0.75rem; line-height:1.75;">Every Claude Code session loads files in this order — later layers have higher priority:</p>
+<p style="margin-bottom:0.75rem; line-height:1.75;">Every Claude Code session loads files in this order - later layers have higher priority:</p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>1. Managed policy CLAUDE.md        (org-wide, if your team uses it)
 2. ~/.claude/CLAUDE.md             (your global personal defaults)
 3. ~/.claude/settings.json         (your global tool settings)
@@ -364,24 +364,24 @@ const claudeFolderConcept = {
       content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">What is <code style="color: var(--code-text);">CLAUDE.md</code>?</strong>
 
-<p style="margin-bottom:1rem; line-height:1.75;"><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> is a plain markdown file that Claude Code reads at the start of every session. Whatever you put in it gets injected into the model's context automatically — no prompting required. Think of it as a standing brief: every time you open a session in a project, Claude already knows your preferred code style, how the project is structured, which commands to run, and any rules you've set for how it should behave.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> is a plain markdown file that Claude Code reads at the start of every session. Whatever you put in it gets injected into the model's context automatically - no prompting required. Think of it as a standing brief: every time you open a session in a project, Claude already knows your preferred code style, how the project is structured, which commands to run, and any rules you've set for how it should behave.</p>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
 <strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Why is it needed?</strong>
-<p style="margin-bottom:1rem; line-height:1.75;">Claude starts every session with no memory of the last one. It doesn't know your code style preferences. It doesn't know how to run your tests. It doesn't know that your team uses a specific branch naming convention or that there's a quirky workaround in your authentication module. You end up repeating yourself. Or worse, you forget to mention something important and spend time fixing code that didn't follow your conventions. <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> fixes that — Claude reads it automatically, so your preferences persist across sessions.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Claude starts every session with no memory of the last one. It doesn't know your code style preferences. It doesn't know how to run your tests. It doesn't know that your team uses a specific branch naming convention or that there's a quirky workaround in your authentication module. You end up repeating yourself. Or worse, you forget to mention something important and spend time fixing code that didn't follow your conventions. <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> fixes that - Claude reads it automatically, so your preferences persist across sessions.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">In short: <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code> controls <strong>how Claude behaves</strong> (permissions, tools, env). <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> controls <strong>what Claude knows</strong> (your project, your rules, your context).</p>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 1 — The File Hierarchy (Where to Put It)</strong>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 1 - The File Hierarchy (Where to Put It)</strong>
 <p style="margin-bottom:0.75rem; line-height:1.75;">There are four scopes, listed here in load order from broadest to most specific:</p>
 <ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.8;">
-  <li><strong>Managed policy</strong> — organization-wide, deployed by IT. On macOS: <code style="color: var(--code-text);">/Library/Application Support/ClaudeCode/CLAUDE.md</code>; on Linux/WSL: <code style="color: var(--code-text);">/etc/claude-code/CLAUDE.md</code>. Individual settings can't exclude it.</li>
-  <li><code style="color: var(--code-text);">~/.claude/CLAUDE.md</code> — your personal <strong>global preferences</strong>, applied to every project</li>
-  <li><code style="color: var(--code-text);">./CLAUDE.md</code> <em>or</em> <code style="color: var(--code-text);">./.claude/CLAUDE.md</code> — <strong>project-specific</strong> context, committed to the repo and shared with your team. Either location works; pick one.</li>
-  <li><code style="color: var(--code-text);">./CLAUDE.local.md</code> — your <strong>personal project notes</strong>, gitignored</li>
+  <li><strong>Managed policy</strong> - organization-wide, deployed by IT. On macOS: <code style="color: var(--code-text);">/Library/Application Support/ClaudeCode/CLAUDE.md</code>; on Linux/WSL: <code style="color: var(--code-text);">/etc/claude-code/CLAUDE.md</code>. Individual settings can't exclude it.</li>
+  <li><code style="color: var(--code-text);">~/.claude/CLAUDE.md</code> - your personal <strong>global preferences</strong>, applied to every project</li>
+  <li><code style="color: var(--code-text);">./CLAUDE.md</code> <em>or</em> <code style="color: var(--code-text);">./.claude/CLAUDE.md</code> - <strong>project-specific</strong> context, committed to the repo and shared with your team. Either location works; pick one.</li>
+  <li><code style="color: var(--code-text);">./CLAUDE.local.md</code> - your <strong>personal project notes</strong>, gitignored</li>
 </ul>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Keeping these separate means you maintain your global file once and update project files as those projects evolve. Team members who open the same repository get the same project context automatically.</p>
@@ -390,7 +390,7 @@ const claudeFolderConcept = {
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 2 — How to Generate Your First One</strong>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 2 - How to Generate Your First One</strong>
 <p style="margin-bottom:0.75rem; line-height:1.75;">The fastest way to get started is the <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/init</code> command. Run it inside your project:</p>
 
 <pre style="
@@ -435,11 +435,11 @@ const claudeFolderConcept = {
   line-height: 1.2;
 "><code>/init</code></pre>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Claude examines your codebase — reading package files, existing documentation, configuration files, and code structure — then generates a <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> tailored to your project. The generated file typically includes build commands, test instructions, key directories, and coding conventions it detected. Think of <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/init</code> as a starting point, not a finished product. The generated <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> captures obvious patterns but may miss nuances specific to your workflow. Review what Claude produces and refine it based on your team's actual practices.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Claude examines your codebase - reading package files, existing documentation, configuration files, and code structure - then generates a <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> tailored to your project. The generated file typically includes build commands, test instructions, key directories, and coding conventions it detected. Think of <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/init</code> as a starting point, not a finished product. The generated <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> captures obvious patterns but may miss nuances specific to your workflow. Review what Claude produces and refine it based on your team's actual practices.</p>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 3 — What Goes Inside</strong>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 3 - What Goes Inside</strong>
 <p style="margin-bottom:1rem; line-height:1.75;">Write instructions that would cause mistakes if missing. Everything else is noise.</p>
 
 <p style="margin-bottom:0.75rem; line-height:1.75;"><strong>Include:</strong></p>
@@ -460,7 +460,7 @@ const claudeFolderConcept = {
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 4 — A Complete Example for a Python Project</strong>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 4 - A Complete Example for a Python Project</strong>
 <p style="margin-bottom:0.75rem; line-height:1.75;">Here's what a well-structured <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> looks like for a Python backend project:</p>
 
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code># Project: My FastAPI Service
@@ -490,12 +490,12 @@ alembic revision --autogenerate -m "description"
 
 ## Architecture
 
-- \`app/\` — main application code
-- \`app/routers/\` — FastAPI route handlers (one file per domain)
-- \`app/services/\` — business logic; never access DB directly
-- \`app/models/\` — SQLAlchemy ORM models
-- \`app/schemas/\` — Pydantic schemas for request/response validation
-- \`tests/\` — pytest tests mirroring the app/ structure
+- \`app/\` - main application code
+- \`app/routers/\` - FastAPI route handlers (one file per domain)
+- \`app/services/\` - business logic; never access DB directly
+- \`app/models/\` - SQLAlchemy ORM models
+- \`app/schemas/\` - Pydantic schemas for request/response validation
+- \`tests/\` - pytest tests mirroring the app/ structure
 
 Routers call services. Services call models. Never skip layers.
 
@@ -512,7 +512,7 @@ Routers call services. Services call models. Never skip layers.
 - NEVER modify files under \`alembic/versions/\` directly
 - Always run \`mypy app/\` before considering a change complete
 - Do not add third-party libraries without asking first
-- \`.env\` file is gitignored — never commit secrets
+- \`.env\` file is gitignored - never commit secrets
 
 ## Current Focus
 
@@ -520,7 +520,7 @@ Working on the invoice PDF export feature in \`app/services/export.py\`.</code><
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 5 — Imports with <code style="color: var(--code-text);">@path</code> (Advanced)</strong>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 5 - Imports with <code style="color: var(--code-text);">@path</code> (Advanced)</strong>
 <p style="margin-bottom:1rem; line-height:1.75;">Memory files can pull in other files using <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">@path/to/file</code> notation. Both relative and absolute paths work; relative paths resolve against the file containing the import, not your working directory:</p>
 
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre; line-height: 1.6;"><code># CLAUDE.md
@@ -541,7 +541,7 @@ See @README for an overview and @package.json for available commands.
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
 <strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Already have an <code style="color: var(--code-text);">AGENTS.md</code>?</strong>
-<p style="margin-bottom:1rem; line-height:1.75;">Claude Code reads <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code>, not <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">AGENTS.md</code>. If your repository already uses <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">AGENTS.md</code> for other coding agents, don't duplicate it — create a <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> that imports it, then add anything Claude-specific below:</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Claude Code reads <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code>, not <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">AGENTS.md</code>. If your repository already uses <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">AGENTS.md</code> for other coding agents, don't duplicate it - create a <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> that imports it, then add anything Claude-specific below:</p>
 
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre; line-height: 1.6;"><code>@AGENTS.md
 
@@ -549,20 +549,20 @@ See @README for an overview and @package.json for available commands.
 
 Use plan mode for changes under \`src/billing/\`.</code></pre>
 
-<p style="margin-bottom:1rem; line-height:1.75;">A symlink (<code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">ln -s AGENTS.md CLAUDE.md</code>) also works if you have nothing Claude-specific to add. On Windows, use the import — symlinks need Administrator rights or Developer Mode.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">A symlink (<code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">ln -s AGENTS.md CLAUDE.md</code>) also works if you have nothing Claude-specific to add. On Windows, use the import - symlinks need Administrator rights or Developer Mode.</p>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
 <strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Tips &amp; Tricks</strong>
 <ol style="margin: 0 0 1rem 1.4rem; color: var(--text-secondary); line-height: 1.85;">
-  <li><strong>Be specific, not vague</strong> — "Functions should be under 40 lines; if longer, extract helper functions" is something Claude can act on. "Write good code" does nothing.</li>
-  <li><strong>Keep it short</strong> — The file counts toward Claude's context window, so length matters. A bloated <code style="color: var(--code-text);">CLAUDE.md</code> eats into the space available for actual conversation and reasoning, and longer files measurably reduce how consistently Claude follows them. The official guidance is to <strong>target under 200 lines per file</strong>. Past that, move sections into path-scoped <code style="color: var(--code-text);">rules/</code> rather than trimming the useful parts.</li>
-  <li><strong>Use emphasis for critical rules</strong> — For rules that absolutely must be followed, phrases like "IMPORTANT: Never modify the migrations folder directly" or "YOU MUST run tests before committing" can help draw attention. Use it sparingly — if everything is marked IMPORTANT, nothing is.</li>
-  <li><strong>Add a "Current Focus" section</strong> — Add a "Current Focus" section and update it regularly to steer Claude toward what's relevant right now. This is particularly useful when working on a long feature over multiple sessions.</li>
-  <li><strong>Document domain-specific terms</strong> — Claude Code excels at understanding general programming principles, but it might lack context for your business domain. Project-specific jargon, obscure entity names, and acronyms can confuse the agent. Documenting domain-specific terms helps AI agents navigate the codebase and edit the correct files.</li>
-  <li><strong>Never put secrets in <code style="color: var(--code-text);">CLAUDE.md</code></strong> — Don't include sensitive information, API keys, credentials, or database connection strings — especially if you commit to version control. Since <code style="color: var(--code-text);">CLAUDE.md</code> becomes part of Claude's system prompt, treat it as documentation that could be shared publicly.</li>
-  <li><strong>Evolve it as you work</strong> — The most valuable updates often come from code reviews. When a PR reveals a convention that wasn't documented, or a reviewer catches a pattern violation, that's a signal to update <code style="color: var(--code-text);">CLAUDE.md</code>.</li>
-  <li><strong>Don't duplicate your README</strong> — If something is already in your README or a <code style="color: var(--code-text);">/docs</code> folder, don't copy it into <code style="color: var(--code-text);">CLAUDE.md</code>. Either reference the file or trust that Claude can read it when needed.</li>
+  <li><strong>Be specific, not vague</strong> - "Functions should be under 40 lines; if longer, extract helper functions" is something Claude can act on. "Write good code" does nothing.</li>
+  <li><strong>Keep it short</strong> - The file counts toward Claude's context window, so length matters. A bloated <code style="color: var(--code-text);">CLAUDE.md</code> eats into the space available for actual conversation and reasoning, and longer files measurably reduce how consistently Claude follows them. The official guidance is to <strong>target under 200 lines per file</strong>. Past that, move sections into path-scoped <code style="color: var(--code-text);">rules/</code> rather than trimming the useful parts.</li>
+  <li><strong>Use emphasis for critical rules</strong> - For rules that absolutely must be followed, phrases like "IMPORTANT: Never modify the migrations folder directly" or "YOU MUST run tests before committing" can help draw attention. Use it sparingly - if everything is marked IMPORTANT, nothing is.</li>
+  <li><strong>Add a "Current Focus" section</strong> - Add a "Current Focus" section and update it regularly to steer Claude toward what's relevant right now. This is particularly useful when working on a long feature over multiple sessions.</li>
+  <li><strong>Document domain-specific terms</strong> - Claude Code excels at understanding general programming principles, but it might lack context for your business domain. Project-specific jargon, obscure entity names, and acronyms can confuse the agent. Documenting domain-specific terms helps AI agents navigate the codebase and edit the correct files.</li>
+  <li><strong>Never put secrets in <code style="color: var(--code-text);">CLAUDE.md</code></strong> - Don't include sensitive information, API keys, credentials, or database connection strings - especially if you commit to version control. Since <code style="color: var(--code-text);">CLAUDE.md</code> becomes part of Claude's system prompt, treat it as documentation that could be shared publicly.</li>
+  <li><strong>Evolve it as you work</strong> - The most valuable updates often come from code reviews. When a PR reveals a convention that wasn't documented, or a reviewer catches a pattern violation, that's a signal to update <code style="color: var(--code-text);">CLAUDE.md</code>.</li>
+  <li><strong>Don't duplicate your README</strong> - If something is already in your README or a <code style="color: var(--code-text);">/docs</code> folder, don't copy it into <code style="color: var(--code-text);">CLAUDE.md</code>. Either reference the file or trust that Claude can read it when needed.</li>
 </ol>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
@@ -607,7 +607,7 @@ Use plan mode for changes under \`src/billing/\`.</code></pre>
   </table>
 </div>
 
-<p style="margin-bottom:0; line-height:1.75;">The two files work together — <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> tells Claude about <em>your world</em>, and <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code> tells Claude Code what it's <em>allowed to do</em>.</p>
+<p style="margin-bottom:0; line-height:1.75;">The two files work together - <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> tells Claude about <em>your world</em>, and <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code> tells Claude Code what it's <em>allowed to do</em>.</p>
 
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="0" class="tutorial-nav-link previous"><span>←</span> Previous: Overview</a>
@@ -620,7 +620,7 @@ Use plan mode for changes under \`src/billing/\`.</code></pre>
       content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">What is <code style="color: var(--code-text);">settings.json</code>?</strong>
 
-<p style="margin-bottom:1rem; line-height:1.75;">While <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> handles instructions and context, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code> gives you <em>programmatic control</em> over Claude's behavior — managing permissions, environment variables, and advanced features that go beyond simple instructions.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">While <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> handles instructions and context, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code> gives you <em>programmatic control</em> over Claude's behavior - managing permissions, environment variables, and advanced features that go beyond simple instructions.</p>
 
 <p style="margin-bottom:0.75rem; line-height:1.75;">Think of it like this:</p>
 <ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.8;">
@@ -635,16 +635,16 @@ Use plan mode for changes under \`src/billing/\`.</code></pre>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 1 — The Three Files (Configuration Hierarchy)</strong>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 1 - The Three Files (Configuration Hierarchy)</strong>
 <p style="margin-bottom:0.75rem; line-height:1.75;">Claude Code reads settings from three JSON files at different scopes:</p>
 
 <ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.8;">
-  <li><code style="color: var(--code-text);">~/.claude/settings.json</code> — <strong>global</strong>, your personal baseline for all projects</li>
-  <li><code style="color: var(--code-text);">&lt;project-root&gt;/.claude/settings.json</code> — <strong>project</strong>, team-shared settings (commit to repo)</li>
-  <li><code style="color: var(--code-text);">&lt;project-root&gt;/.claude/settings.local.json</code> — <strong>local</strong>, personal overrides (add to <code style="color: var(--code-text);">.gitignore</code>)</li>
+  <li><code style="color: var(--code-text);">~/.claude/settings.json</code> - <strong>global</strong>, your personal baseline for all projects</li>
+  <li><code style="color: var(--code-text);">&lt;project-root&gt;/.claude/settings.json</code> - <strong>project</strong>, team-shared settings (commit to repo)</li>
+  <li><code style="color: var(--code-text);">&lt;project-root&gt;/.claude/settings.local.json</code> - <strong>local</strong>, personal overrides (add to <code style="color: var(--code-text);">.gitignore</code>)</li>
 </ul>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Values merge with local taking priority — local overrides project, project overrides global.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Values merge with local taking priority - local overrides project, project overrides global.</p>
 
 <p style="margin-bottom:0.75rem; line-height:1.75;"><strong>Rule of thumb for beginners:</strong></p>
 <ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.8;">
@@ -655,8 +655,8 @@ Use plan mode for changes under \`src/billing/\`.</code></pre>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 2 — The Most Important Setting: Permissions</strong>
-<p style="margin-bottom:1rem; line-height:1.75;">Permissions control which tools and commands Claude Code can execute — this is arguably the most important setting for both productivity and security.</p>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 2 - The Most Important Setting: Permissions</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">Permissions control which tools and commands Claude Code can execute - this is arguably the most important setting for both productivity and security.</p>
 
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>{
   "permissions": {
@@ -696,7 +696,7 @@ Use plan mode for changes under \`src/billing/\`.</code></pre>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 3 — Model Selection</strong>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 3 - Model Selection</strong>
 <p style="margin-bottom:0.75rem; line-height:1.75;">Control which AI model Claude Code uses and how deeply it reasons:</p>
 
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>{
@@ -715,7 +715,7 @@ Use plan mode for changes under \`src/billing/\`.</code></pre>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 4 — Environment Variables</strong>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 4 - Environment Variables</strong>
 <p style="margin-bottom:1rem; line-height:1.75;">Any environment variable can be configured in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code> under the <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">env</code> key to apply it to every session or roll it out to your team.</p>
 
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>{
@@ -726,11 +726,11 @@ Use plan mode for changes under \`src/billing/\`.</code></pre>
   }
 }</code></pre>
 
-<p style="margin-bottom:1rem; line-height:1.75;">This is great for Python projects — you won't need to export <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">PYTHONPATH</code> manually every time.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">This is great for Python projects - you won't need to export <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">PYTHONPATH</code> manually every time.</p>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 5 — MCP Servers (a different file)</strong>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 5 - MCP Servers (a different file)</strong>
 
 <div style="padding: 1rem; background: rgba(255, 193, 7, 0.06); border: 1px solid rgba(255, 193, 7, 0.4); border-radius: 8px; margin: 0 0 1rem;">
   <p style="margin:0; line-height:1.7; color: var(--text-secondary); font-size: 0.92rem;">⚠️ <strong>MCP servers cannot be configured in <code style="color: var(--code-text);">settings.json</code>.</strong> An <code style="color: var(--code-text);">mcpServers</code> block placed there is ignored. They live in their own files.</p>
@@ -759,14 +759,14 @@ Use plan mode for changes under \`src/billing/\`.</code></pre>
     }
   }
 }</code></pre>
-<p style="margin-bottom:1rem; line-height:1.75;">Servers start automatically when Claude Code launches and stop when it exits. The easiest way to add one is <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">claude mcp add</code>, which writes the right file for you — and <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/mcp</code> inside a session shows which servers actually connected.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Servers start automatically when Claude Code launches and stop when it exits. The easiest way to add one is <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">claude mcp add</code>, which writes the right file for you - and <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/mcp</code> inside a session shows which servers actually connected.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;">What <em>does</em> belong in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code> are the permission rules around MCP — keys like <code style="color: var(--code-text);">allowedMcpServers</code> and <code style="color: var(--code-text);">deniedMcpServers</code>, plus normal <code style="color: var(--code-text);">permissions.allow</code> entries for individual MCP tools.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">What <em>does</em> belong in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">settings.json</code> are the permission rules around MCP - keys like <code style="color: var(--code-text);">allowedMcpServers</code> and <code style="color: var(--code-text);">deniedMcpServers</code>, plus normal <code style="color: var(--code-text);">permissions.allow</code> entries for individual MCP tools.</p>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 6 — Attribution &amp; Git Settings</strong>
-<p style="margin-bottom:1rem; line-height:1.75;">Control how Claude Code attributes its contributions to commits and pull requests. The sub-keys are <code style="color: var(--code-text);">commit</code> and <code style="color: var(--code-text);">pr</code>, and their values are the <strong>attribution text itself</strong> — not booleans. Set a value to an empty string to suppress attribution entirely:</p>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 6 - Attribution &amp; Git Settings</strong>
+<p style="margin-bottom:1rem; line-height:1.75;">Control how Claude Code attributes its contributions to commits and pull requests. The sub-keys are <code style="color: var(--code-text);">commit</code> and <code style="color: var(--code-text);">pr</code>, and their values are the <strong>attribution text itself</strong> - not booleans. Set a value to an empty string to suppress attribution entirely:</p>
 
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>{
   "attribution": {
@@ -813,17 +813,17 @@ Use plan mode for changes under \`src/billing/\`.</code></pre>
 
 <strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Tips &amp; Tricks</strong>
 <ol style="margin: 0 0 1rem 1.4rem; color: var(--text-secondary); line-height: 1.85;">
-  <li><strong>Don't commit secrets</strong> — always put API keys in <code style="color: var(--code-text);">.claude/settings.local.json</code> and add it to <code style="color: var(--code-text);">.gitignore</code></li>
-  <li><strong>Use wildcards smartly</strong> — <code style="color: var(--code-text);">Bash(pytest *)</code> lets Claude run any pytest variant without prompting you every time</li>
-  <li><strong>Deny your <code style="color: var(--code-text);">.env</code> files</strong> — always deny access to <code style="color: var(--code-text);">.env</code> files and any directories containing secrets or credentials as a security best practice</li>
-  <li><strong>Check your merged config</strong> — use <code style="color: var(--code-text);">/status</code> inside Claude Code to see each configuration layer (managed, user, project) along with its origin. If a settings file contains errors, <code style="color: var(--code-text);">/status</code> reports the issue so you can fix it.</li>
-  <li><strong>Permission lists merge, deny wins</strong> — list keys such as <code style="color: var(--code-text);">permissions.allow</code> are combined across settings files instead of one replacing another, so a project <code style="color: var(--code-text);">settings.json</code> adds its <code style="color: var(--code-text);">allow</code> rules to your global ones. Single values like <code style="color: var(--code-text);">model</code> still take the higher-priority file's value. And a <code style="color: var(--code-text);">deny</code> rule at any level beats an <code style="color: var(--code-text);">allow</code> rule.</li>
-  <li><strong>Restart after changes</strong> — if you manually modify <code style="color: var(--code-text);">settings.json</code> and changes don't take effect, close all Claude Code windows, open a new terminal window, and run <code style="color: var(--code-text);">claude</code> again.</li>
+  <li><strong>Don't commit secrets</strong> - always put API keys in <code style="color: var(--code-text);">.claude/settings.local.json</code> and add it to <code style="color: var(--code-text);">.gitignore</code></li>
+  <li><strong>Use wildcards smartly</strong> - <code style="color: var(--code-text);">Bash(pytest *)</code> lets Claude run any pytest variant without prompting you every time</li>
+  <li><strong>Deny your <code style="color: var(--code-text);">.env</code> files</strong> - always deny access to <code style="color: var(--code-text);">.env</code> files and any directories containing secrets or credentials as a security best practice</li>
+  <li><strong>Check your merged config</strong> - use <code style="color: var(--code-text);">/status</code> inside Claude Code to see each configuration layer (managed, user, project) along with its origin. If a settings file contains errors, <code style="color: var(--code-text);">/status</code> reports the issue so you can fix it.</li>
+  <li><strong>Permission lists merge, deny wins</strong> - list keys such as <code style="color: var(--code-text);">permissions.allow</code> are combined across settings files instead of one replacing another, so a project <code style="color: var(--code-text);">settings.json</code> adds its <code style="color: var(--code-text);">allow</code> rules to your global ones. Single values like <code style="color: var(--code-text);">model</code> still take the higher-priority file's value. And a <code style="color: var(--code-text);">deny</code> rule at any level beats an <code style="color: var(--code-text);">allow</code> rule.</li>
+  <li><strong>Restart after changes</strong> - if you manually modify <code style="color: var(--code-text);">settings.json</code> and changes don't take effect, close all Claude Code windows, open a new terminal window, and run <code style="color: var(--code-text);">claude</code> again.</li>
 </ol>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
-<p style="margin-bottom:0; line-height:1.75;">The most impactful thing you can do as a beginner is set up your <strong>permissions</strong> correctly and define your <strong>env variables</strong> — those two alone will save you a lot of repetitive prompting during Python development.</p>
+<p style="margin-bottom:0; line-height:1.75;">The most impactful thing you can do as a beginner is set up your <strong>permissions</strong> correctly and define your <strong>env variables</strong> - those two alone will save you a lot of repetitive prompting during Python development.</p>
 
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="1" class="tutorial-nav-link previous"><span>←</span> Previous: CLAUDE.md</a>
@@ -836,7 +836,7 @@ Use plan mode for changes under \`src/billing/\`.</code></pre>
       content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">What Are Custom Commands?</strong>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Custom commands are your own reusable shortcuts — stored as Markdown files — that you can trigger instantly by typing <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/command-name</code> in Claude Code. Instead of typing out a long, repetitive prompt every session, you write it once in a file and call it with a single slash.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Custom commands are your own reusable shortcuts - stored as Markdown files - that you can trigger instantly by typing <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/command-name</code> in Claude Code. Instead of typing out a long, repetitive prompt every session, you write it once in a file and call it with a single slash.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Think of them as custom spells for your most common development tasks.</p>
 
@@ -849,14 +849,14 @@ Use plan mode for changes under \`src/billing/\`.</code></pre>
 
 <p style="margin-bottom:0.75rem; line-height:1.75;"><strong>What this means for you as a beginner:</strong></p>
 <ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.8;">
-  <li><code style="color: var(--code-text);">.claude/commands/*.md</code> still works perfectly — use it, it's simpler</li>
+  <li><code style="color: var(--code-text);">.claude/commands/*.md</code> still works perfectly - use it, it's simpler</li>
   <li><code style="color: var(--code-text);">.claude/skills/&lt;name&gt;/SKILL.md</code> is the modern approach with more features</li>
   <li>This guide covers both, starting with the simpler commands format</li>
 </ul>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 1 — Where Commands Live (The Two Locations)</strong>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 1 - Where Commands Live (The Two Locations)</strong>
 <p style="margin-bottom:1rem; line-height:1.75;">Project commands are stored in a <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/commands/</code> directory right inside your project's repository. The great thing about this is that they get checked into version control, so anyone who clones the repo gets the same set of standard commands.</p>
 
 <div style="overflow-x:auto; margin-bottom:1rem;">
@@ -885,24 +885,24 @@ Use plan mode for changes under \`src/billing/\`.</code></pre>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 2 — How to Create Your First Command</strong>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 2 - How to Create Your First Command</strong>
 <p style="margin-bottom:0.75rem; line-height:1.75;">It's just three steps:</p>
 
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code># 1. Create the commands directory
 mkdir -p .claude/commands
 
-# 2. Create a markdown file — the filename IS the command name
+# 2. Create a markdown file - the filename IS the command name
 touch .claude/commands/review.md
 
 # 3. Write your prompt inside it (plain English)</code></pre>
 
-<p style="margin-bottom:1rem; line-height:1.75;">The filename becomes the slash command name — <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">commit.md</code> becomes <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/commit</code>.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">The filename becomes the slash command name - <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">commit.md</code> becomes <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/commit</code>.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Then inside Claude Code, just type <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/review</code> and it runs.</p>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 3 — Anatomy of a Command File</strong>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 3 - Anatomy of a Command File</strong>
 <p style="margin-bottom:1rem; line-height:1.75;">A command file has two parts: optional <strong>frontmatter</strong> (metadata) and the <strong>prompt body</strong>.</p>
 
 <strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Simplest possible command (no frontmatter)</strong>
@@ -970,7 +970,7 @@ Be concise. List issues with line numbers.</code></pre>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 4 — Using <code style="color: var(--code-text);">$ARGUMENTS</code></strong>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 4 - Using <code style="color: var(--code-text);">$ARGUMENTS</code></strong>
 <p style="margin-bottom:1rem; line-height:1.75;">You can use the <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">$ARGUMENTS</code> string to place user-supplied arguments into the prompt.</p>
 
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>---
@@ -998,7 +998,7 @@ Run mypy after to confirm no type errors were introduced.</code></pre>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 5 — Running Bash Commands Inside a Command File</strong>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 5 - Running Bash Commands Inside a Command File</strong>
 <p style="margin-bottom:1rem; line-height:1.75;">You can embed shell commands that get executed when the command runs using backtick syntax with <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">!</code>:</p>
 
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>---
@@ -1022,10 +1022,10 @@ Then run \`git commit -m "&lt;your message&gt;"\`.</code></pre>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 6 — Practical Python Examples</strong>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 6 - Practical Python Examples</strong>
 <p style="margin-bottom:1rem; line-height:1.75;">Here are ready-to-use commands for Python development. Create these in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/commands/</code>:</p>
 
-<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="color: var(--code-text);">review.md</code></strong> — Code review</p>
+<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="color: var(--code-text);">review.md</code></strong> - Code review</p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>---
 description: Review Python file for quality, style, and correctness
 allowed-tools: Read, Grep
@@ -1045,7 +1045,7 @@ Check for:
 
 Format output as a bulleted list with line numbers.</code></pre>
 
-<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="color: var(--code-text);">test-gen.md</code></strong> — Generate tests</p>
+<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="color: var(--code-text);">test-gen.md</code></strong> - Generate tests</p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>---
 description: Generate pytest tests for a Python file or function
 allowed-tools: Read, Write, Bash(pytest *)
@@ -1062,7 +1062,7 @@ Requirements:
 - Follow the existing test structure in tests/
 - Run the generated tests and fix any failures</code></pre>
 
-<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="color: var(--code-text);">docstring.md</code></strong> — Add docstrings</p>
+<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="color: var(--code-text);">docstring.md</code></strong> - Add docstrings</p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>---
 description: Add Google-style docstrings to all undocumented functions
 allowed-tools: Read, Write, Grep
@@ -1087,7 +1087,7 @@ Raises:
 
 Do not modify existing docstrings. Only add where missing.</code></pre>
 
-<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="color: var(--code-text);">debug.md</code></strong> — Debug an error</p>
+<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="color: var(--code-text);">debug.md</code></strong> - Debug an error</p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>---
 description: Debug an error by tracing it through the codebase
 allowed-tools: Read, Grep, Bash(python *), Bash(pytest *)
@@ -1105,25 +1105,25 @@ Steps:
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
-<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 7 — Personal Global Commands</strong>
+<strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Step 7 - Personal Global Commands</strong>
 <p style="margin-bottom:1rem; line-height:1.75;">For commands you want in <strong>every</strong> project, put them in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/commands/</code>:</p>
 
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>mkdir -p ~/.claude/commands</code></pre>
 
 <p style="margin-bottom:0.75rem; line-height:1.75;">Good candidates for your global commands:</p>
 <ul style="margin: 0 0 1rem 1.5rem; color: var(--text-secondary); line-height: 1.8;">
-  <li><code style="color: var(--code-text);">/standup</code> — summarize what changed in git today</li>
-  <li><code style="color: var(--code-text);">/explain</code> — explain any code with an analogy</li>
-  <li><code style="color: var(--code-text);">/refactor</code> — general refactoring prompt</li>
-  <li><code style="color: var(--code-text);">/commit</code> — smart commit message generator</li>
+  <li><code style="color: var(--code-text);">/standup</code> - summarize what changed in git today</li>
+  <li><code style="color: var(--code-text);">/explain</code> - explain any code with an analogy</li>
+  <li><code style="color: var(--code-text);">/refactor</code> - general refactoring prompt</li>
+  <li><code style="color: var(--code-text);">/commit</code> - smart commit message generator</li>
 </ul>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
 
 <strong style="display:block; margin-bottom:0.5rem; font-size:0.95rem; color: var(--accent-primary);">Tips &amp; Tricks</strong>
 <ol style="margin: 0 0 1rem 1.4rem; color: var(--text-secondary); line-height: 1.85;">
-  <li><strong>Tab autocomplete works</strong> — Slash commands appear in autocomplete when you type <code style="color: var(--code-text);">/</code>. The <code style="color: var(--code-text);">description</code> frontmatter is what shows up there, so write it clearly.</li>
-  <li><strong>Chain commands into shell aliases</strong> — You can skip the interactive prompt entirely with <code style="color: var(--code-text);">claude -p</code>. Add aliases to your <code style="color: var(--code-text);">.zshrc</code> or <code style="color: var(--code-text);">.bashrc</code>:</li>
+  <li><strong>Tab autocomplete works</strong> - Slash commands appear in autocomplete when you type <code style="color: var(--code-text);">/</code>. The <code style="color: var(--code-text);">description</code> frontmatter is what shows up there, so write it clearly.</li>
+  <li><strong>Chain commands into shell aliases</strong> - You can skip the interactive prompt entirely with <code style="color: var(--code-text);">claude -p</code>. Add aliases to your <code style="color: var(--code-text);">.zshrc</code> or <code style="color: var(--code-text);">.bashrc</code>:</li>
 </ol>
 
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>alias clint="claude -p '/lint'"
@@ -1132,10 +1132,10 @@ alias ccommit="claude -p '/commit'"</code></pre>
 <p style="margin-bottom:1rem; line-height:1.75;">Now <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">ccommit</code> runs your commit command without opening the interactive session.</p>
 
 <ol start="3" style="margin: 0 0 1rem 1.4rem; color: var(--text-secondary); line-height: 1.85;">
-  <li><strong>Use <code style="color: var(--code-text);">!</code> to inject live shell output</strong> — Embedding <code style="color: var(--code-text);">!</code>backtick<code style="color: var(--code-text);">command</code>backtick<code style="color: var(--code-text);"></code> inside your prompt runs a shell command and injects its output into the context before Claude sees the prompt. Great for injecting <code style="color: var(--code-text);">git diff</code>, <code style="color: var(--code-text);">pytest</code> output, or environment info.</li>
-  <li><strong>Keep command files focused</strong> — One command, one job. If a command does three unrelated things, split it into three files.</li>
-  <li><strong>Check available commands anytime</strong> — The <code style="color: var(--code-text);">/help</code> command shows all available slash commands, including your custom commands from <code style="color: var(--code-text);">.claude/commands/</code> and <code style="color: var(--code-text);">~/.claude/commands/</code> directories.</li>
-  <li><strong>Evolve commands from real friction</strong> — The best commands come from noticing what you type repeatedly. When you write the same long prompt three times in a week, that's a command waiting to be made.</li>
+  <li><strong>Use <code style="color: var(--code-text);">!</code> to inject live shell output</strong> - Embedding <code style="color: var(--code-text);">!</code>backtick<code style="color: var(--code-text);">command</code>backtick<code style="color: var(--code-text);"></code> inside your prompt runs a shell command and injects its output into the context before Claude sees the prompt. Great for injecting <code style="color: var(--code-text);">git diff</code>, <code style="color: var(--code-text);">pytest</code> output, or environment info.</li>
+  <li><strong>Keep command files focused</strong> - One command, one job. If a command does three unrelated things, split it into three files.</li>
+  <li><strong>Check available commands anytime</strong> - The <code style="color: var(--code-text);">/help</code> command shows all available slash commands, including your custom commands from <code style="color: var(--code-text);">.claude/commands/</code> and <code style="color: var(--code-text);">~/.claude/commands/</code> directories.</li>
+  <li><strong>Evolve commands from real friction</strong> - The best commands come from noticing what you type repeatedly. When you write the same long prompt three times in a week, that's a command waiting to be made.</li>
 </ol>
 
 <div style="height:1px; background: var(--border-color); margin: 1.25rem 0;"></div>
@@ -1199,7 +1199,7 @@ alias ccommit="claude -p '/commit'"</code></pre>
       content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">What Is <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code>?</strong>
 
-<p style="margin-bottom:1rem; line-height:1.75;">The <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code> directory is a modular alternative to monolithic <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> files. Instead of cramming everything into one file, you organize instructions into multiple markdown files that Claude loads as project memory. Every <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.md</code> file in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code> automatically becomes part of your project context — no configuration needed.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">The <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code> directory is a modular alternative to monolithic <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> files. Instead of cramming everything into one file, you organize instructions into multiple markdown files that Claude loads as project memory. Every <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.md</code> file in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code> automatically becomes part of your project context - no configuration needed.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Think of it as the evolution of <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code>. Once your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> grows too long, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code> is how you split it up intelligently.</p>
 
@@ -1224,7 +1224,7 @@ alias ccommit="claude -p '/commit'"</code></pre>
 <hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
 
 
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 1 — Set Up the Directory</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 1 - Set Up the Directory</strong>
 
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); line-height: 1.6;"><code>mkdir -p .claude/rules</code></pre>
 
@@ -1247,9 +1247,9 @@ alias ccommit="claude -p '/commit'"</code></pre>
 
 <hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
 
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 2 — Global Rules (No Frontmatter)</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 2 - Global Rules (No Frontmatter)</strong>
 
-<p style="margin-bottom:1rem; line-height:1.75;">The simplest kind — a plain markdown file with no YAML header. It loads every session for every file, just like <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code>.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">The simplest kind - a plain markdown file with no YAML header. It loads every session for every file, just like <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code>.</p>
 
 <p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/code-style.md</code></strong></p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code># Python Code Style
@@ -1260,20 +1260,20 @@ alias ccommit="claude -p '/commit'"</code></pre>
 - Use \`snake_case\` for functions/variables, \`PascalCase\` for classes
 - All public functions and classes must have Google-style docstrings
 - Use \`black\` for formatting, \`ruff\` for linting
-- No \`print()\` in production code — use \`logging\`</code></pre>
+- No \`print()\` in production code - use \`logging\`</code></pre>
 
 <p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/git.md</code></strong></p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code># Git Conventions
 
 - Branch names: \`feat/\`, \`fix/\`, \`chore/\`, \`docs/\` prefixes
 - Commit format: \`type(scope): short description\` (Conventional Commits)
-- Never commit directly to \`main\` — always use a branch
+- Never commit directly to \`main\` - always use a branch
 - Run \`pytest\` and \`mypy\` before committing
 - NEVER modify files under \`alembic/versions/\` directly</code></pre>
 
 <hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
 
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 3 — Path-Scoped Rules (The Superpower)</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 3 - Path-Scoped Rules (The Superpower)</strong>
 
 <p style="margin-bottom:1rem; line-height:1.75;">This is where <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code> becomes genuinely powerful. Add a <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">paths:</code> field in YAML frontmatter and the rule only loads when Claude is working on matching files.</p>
 
@@ -1281,7 +1281,7 @@ alias ccommit="claude -p '/commit'"</code></pre>
 
 <p style="margin-bottom:1rem; line-height:1.75;">For Python, you could create <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/testing.md</code> that only applies when Claude is editing files in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">tests/</code>, keeping your testing rules separate from your general rules.</p>
 
-<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/testing.md</code></strong> — only applies when editing test files:</p>
+<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/testing.md</code></strong> - only applies when editing test files:</p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>---
 paths:
   - "tests/**/*.py"
@@ -1296,9 +1296,9 @@ paths:
 - Mock all external services with \`unittest.mock\` or \`pytest-mock\`
 - Every test must have a docstring explaining what it verifies
 - Test filenames mirror the source file: \`app/services/auth.py\` → \`tests/services/test_auth.py\`
-- Never use real DB connections in unit tests — use SQLite in-memory or mocks</code></pre>
+- Never use real DB connections in unit tests - use SQLite in-memory or mocks</code></pre>
 
-<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/migrations.md</code></strong> — only applies when working with Alembic:</p>
+<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/migrations.md</code></strong> - only applies when working with Alembic:</p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>---
 paths:
   - "alembic/**/*.py"
@@ -1307,7 +1307,7 @@ paths:
 
 # Alembic Migration Rules
 
-- NEVER modify existing migration files — always create a new one
+- NEVER modify existing migration files - always create a new one
 - Always include both \`upgrade()\` and \`downgrade()\` functions
 - Run \`alembic check\` after generating to verify consistency
 - Migration filenames must be descriptive: use \`--message\` flag
@@ -1315,18 +1315,18 @@ paths:
 
 <hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
 
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 4 — Using Glob Patterns Correctly</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 4 - Using Glob Patterns Correctly</strong>
 
 <p style="margin-bottom:1rem; line-height:1.75;">A common mistake: unquoted glob patterns starting with <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">*</code> or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">{</code> are reserved indicators in YAML and will silently fail. Always quote your patterns.</p>
 
-<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code># ❌ WRONG — unquoted patterns will silently fail
+<pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code># ❌ WRONG - unquoted patterns will silently fail
 ---
 paths:
   - **/*.py
   - {src,lib}/**
 ---
 
-# ✅ CORRECT — always quote glob patterns
+# ✅ CORRECT - always quote glob patterns
 ---
 paths:
   - "**/*.py"
@@ -1375,7 +1375,7 @@ paths:
 
 <hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
 
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 5 — Sharing Rules Across Projects</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 5 - Sharing Rules Across Projects</strong>
 
 <p style="margin-bottom:1rem; line-height:1.75;">The <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code> directory supports symlinks, allowing you to maintain a single source of rules shared across multiple projects:</p>
 
@@ -1387,7 +1387,7 @@ ln -s ~/company-standards/security.md .claude/rules/security.md</code></pre>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Symlinks are resolved and their contents load normally. Circular symlinks are detected and handled gracefully.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;">This is great for teams — maintain one canonical rules repository and symlink it into each project.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">This is great for teams - maintain one canonical rules repository and symlink it into each project.</p>
 
 <hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
 
@@ -1406,12 +1406,12 @@ ln -s ~/company-standards/security.md .claude/rules/security.md</code></pre>
     └── db/
         └── migrations.md    ← paths: alembic/**/*.py</code></pre>
 
-<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/security.md</code></strong> (global — always loaded):</p>
+<p style="margin-bottom:0.25rem; line-height:1.75;"><strong><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/security.md</code></strong> (global - always loaded):</p>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code># Security Rules
 
 - Never log passwords, tokens, or PII
 - Always validate and sanitize user inputs before DB operations
-- Use parameterized queries — never f-string SQL
+- Use parameterized queries - never f-string SQL
 - Secrets must come from environment variables, never hardcoded
 - NEVER commit \`.env\` files or API keys
 - Rate-limit all public endpoints</code></pre>
@@ -1420,13 +1420,13 @@ ln -s ~/company-standards/security.md .claude/rules/security.md</code></pre>
 
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Tips &amp; Tricks</strong>
 
-<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>1. Verify what's actually loaded</strong> — Run <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/memory</code> inside Claude Code to see which rules files are currently in context. This is your debugging tool when rules don't seem to be applying.</p>
+<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>1. Verify what's actually loaded</strong> - Run <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/memory</code> inside Claude Code to see which rules files are currently in context. This is your debugging tool when rules don't seem to be applying.</p>
 
-<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>2. Keep each rule file under 50 lines</strong> — Target under 200 lines per <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> file. Longer files consume more context and reduce adherence. If your instructions are growing large, split them using <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code> files. Apply the same discipline to each rules file.</p>
+<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>2. Keep each rule file under 50 lines</strong> - Target under 200 lines per <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> file. Longer files consume more context and reduce adherence. If your instructions are growing large, split them using <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code> files. Apply the same discipline to each rules file.</p>
 
-<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>3. One topic per file</strong> — name files after what they govern: <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">testing.md</code>, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">security.md</code>, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">api-design.md</code>. Never mix concerns in one rules file.</p>
+<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>3. One topic per file</strong> - name files after what they govern: <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">testing.md</code>, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">security.md</code>, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">api-design.md</code>. Never mix concerns in one rules file.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;"><strong>4. Don't duplicate your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code></strong> — Use <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> for what applies everywhere: routing logic, quality standards, coordination protocols. Keep it lean — everything here competes for high-priority attention. Use rules for what applies to specific areas: API patterns for API files, test requirements for test files.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>4. Don't duplicate your <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code></strong> - Use <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> for what applies everywhere: routing logic, quality standards, coordination protocols. Keep it lean - everything here competes for high-priority attention. Use rules for what applies to specific areas: API patterns for API files, test requirements for test files.</p>
 
 <hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
 
@@ -1496,14 +1496,14 @@ ln -s ~/company-standards/security.md .claude/rules/security.md</code></pre>
       content: `
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">What Is <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code>?</strong>
 
-<p style="margin-bottom:1rem; line-height:1.75;"><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> is your <strong>personal, private instruction file</strong> for a specific project. It lives alongside <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> in your project root but is never committed to version control — it exists only on your machine, for your eyes only.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> is your <strong>personal, private instruction file</strong> for a specific project. It lives alongside <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> in your project root but is never committed to version control - it exists only on your machine, for your eyes only.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;"><strong>Local instructions</strong> live at <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">./CLAUDE.local.md</code> — personal project-specific preferences you add to <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.gitignore</code>. Typical use cases: your sandbox URLs, preferred test data, personal notes about the codebase.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>Local instructions</strong> live at <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">./CLAUDE.local.md</code> - personal project-specific preferences you add to <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.gitignore</code>. Typical use cases: your sandbox URLs, preferred test data, personal notes about the codebase.</p>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">Think of it this way:</p>
 <ul style="margin:0 0 1rem 1.5rem; color:var(--text-secondary); line-height:1.8;">
-  <li><code style="color:var(--code-text);">CLAUDE.md</code> is the <strong>team contract</strong> — shared with everyone via git</li>
-  <li><code style="color:var(--code-text);">CLAUDE.local.md</code> is your <strong>personal sticky note</strong> on that contract — visible only to you</li>
+  <li><code style="color:var(--code-text);">CLAUDE.md</code> is the <strong>team contract</strong> - shared with everyone via git</li>
+  <li><code style="color:var(--code-text);">CLAUDE.local.md</code> is your <strong>personal sticky note</strong> on that contract - visible only to you</li>
 </ul>
 
 <hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
@@ -1518,7 +1518,7 @@ ln -s ~/company-standards/security.md .claude/rules/security.md</code></pre>
 
 <hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
 
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 1 — Create the File and Gitignore It</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 1 - Create the File and Gitignore It</strong>
 
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code># In your project root
 touch CLAUDE.local.md</code></pre>
@@ -1534,15 +1534,15 @@ echo "CLAUDE.local.md" &gt;&gt; .gitignore</code></pre>
 
 <hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
 
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 2 — The Loading Order (How It Fits In)</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 2 - The Loading Order (How It Fits In)</strong>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">The full loading order, from lowest to highest priority, is:</p>
 <ul style="margin:0 0 1rem 1.5rem; color:var(--text-secondary); line-height:1.8;">
-  <li><code style="color:var(--code-text);">CLAUDE.md</code>, <code style="color:var(--code-text);">.claude/CLAUDE.md</code>, and <code style="color:var(--code-text);">.claude/rules/*.md</code> in each directory from the filesystem root down to your current directory — files closer to your CWD are higher priority</li>
-  <li><code style="color:var(--code-text);">CLAUDE.local.md</code> in each directory from root to CWD — same traversal order, but gitignored by default</li>
+  <li><code style="color:var(--code-text);">CLAUDE.md</code>, <code style="color:var(--code-text);">.claude/CLAUDE.md</code>, and <code style="color:var(--code-text);">.claude/rules/*.md</code> in each directory from the filesystem root down to your current directory - files closer to your CWD are higher priority</li>
+  <li><code style="color:var(--code-text);">CLAUDE.local.md</code> in each directory from root to CWD - same traversal order, but gitignored by default</li>
 </ul>
 
-<p style="margin-bottom:1rem; line-height:1.75;">All of these load together at session start. <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> doesn't <em>override</em> <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> — both are in context simultaneously. If they conflict, Claude uses the more specific instruction.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">All of these load together at session start. <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> doesn't <em>override</em> <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> - both are in context simultaneously. If they conflict, Claude uses the more specific instruction.</p>
 
 <p style="margin-bottom:0.5rem; line-height:1.75;">The full picture:</p>
 
@@ -1554,7 +1554,7 @@ echo "CLAUDE.local.md" &gt;&gt; .gitignore</code></pre>
 
 <hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
 
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 3 — What to Put In It</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 3 - What to Put In It</strong>
 
 <p style="margin-bottom:1rem; line-height:1.75;">The golden rule: <strong>anything you wouldn't want a teammate to see or be affected by.</strong></p>
 
@@ -1574,13 +1574,13 @@ echo "CLAUDE.local.md" &gt;&gt; .gitignore</code></pre>
 - Local API: http://localhost:8001
 - Local frontend: http://localhost:3001
 - My personal staging environment: https://senthil-staging.myapp.io
-- DO NOT use https://staging.myapp.io — that's the shared one</code></pre>
+- DO NOT use https://staging.myapp.io - that's the shared one</code></pre>
 
 <strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Personal Test Data</strong>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>## My Test Fixtures
 
 - Use user ID \`usr_test_senthil_001\` for integration tests
-- Test database: \`myproject_dev_senthil\` (NOT myproject_dev — that's shared)
+- Test database: \`myproject_dev_senthil\` (NOT myproject_dev - that's shared)
 - Stripe test card: 4242... (last 4: 4242)
 - My test webhook secret is in ~/.secrets/stripe_test_webhook</code></pre>
 
@@ -1590,7 +1590,7 @@ echo "CLAUDE.local.md" &gt;&gt; .gitignore</code></pre>
 Working on the invoice PDF export feature. The relevant files are:
 - app/services/export.py (main logic)
 - app/templates/invoice.html (Jinja2 template)
-- tests/test_export.py (currently failing — that's OK, WIP)
+- tests/test_export.py (currently failing - that's OK, WIP)
 
 The tricky part: we're using WeasyPrint but my local install
 needs \`brew install pango\` first. Docs don't mention this.</code></pre>
@@ -1598,9 +1598,9 @@ needs \`brew install pango\` first. Docs don't mention this.</code></pre>
 <strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Personal Debugging Preferences</strong>
 <pre style="display: block; padding: 1rem; background: var(--syntax-bg); border: 1px solid var(--border-color); border-radius: 8px; margin: 0.25rem 0 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--syntax-text); white-space: pre-wrap; line-height: 1.6;"><code>## My Debugging Style
 
-- I prefer verbose logging during development — set LOG_LEVEL=DEBUG
+- I prefer verbose logging during development - set LOG_LEVEL=DEBUG
 - When debugging, always add \`breakpoint()\` rather than print statements
-- I use \`ipdb\` not \`pdb\` — it's installed in my venv
+- I use \`ipdb\` not \`pdb\` - it's installed in my venv
 - For DB queries, always print the generated SQL first so I can see it</code></pre>
 
 <strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem; color: var(--accent-primary);">Machine-Specific Paths</strong>
@@ -1612,7 +1612,7 @@ needs \`brew install pango\` first. Docs don't mention this.</code></pre>
 
 <hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
 
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 4 — A Complete Example for a Python Developer</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 4 - A Complete Example for a Python Developer</strong>
 
 <p style="margin-bottom:1rem; line-height:1.75;">Here's a realistic <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> for a FastAPI project:</p>
 
@@ -1621,7 +1621,7 @@ needs \`brew install pango\` first. Docs don't mention this.</code></pre>
 ## Environment
 
 - Activate venv: \`source ~/.venvs/fastapi-proj/bin/activate\`
-- I use Python 3.12.3 — \`python3.12\` not \`python\`
+- I use Python 3.12.3 - \`python3.12\` not \`python\`
 - Local postgres runs on port 5433 (my laptop has two PG versions)
 - DATABASE_URL for local: \`postgresql://senthil:@localhost:5433/myproject_local\`
 
@@ -1640,7 +1640,7 @@ Key files I'm currently editing:
 ## Personal Notes
 
 - The \`auth\` module has a known issue on my machine with token refresh.
-  Ignore it for now — it's being fixed in PR #138 (not merged yet).
+  Ignore it for now - it's being fixed in PR #138 (not merged yet).
 - When running alembic, always use:
   \`alembic -x env=local upgrade head\`
   (the -x env=local flag selects my local .env file)
@@ -1652,14 +1652,14 @@ Key files I'm currently editing:
 
 ## DO NOT
 
-- Don't run \`docker-compose up\` — I run services natively
+- Don't run \`docker-compose up\` - I run services natively
 - Don't use the shared staging DB for testing</code></pre>
 
 <hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
 
-<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 5 — Adding Notes Mid-Session</strong>
+<strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Step 5 - Adding Notes Mid-Session</strong>
 
-<p style="margin-bottom:1rem; line-height:1.75;">You don't have to stop and open a file when you discover something worth keeping. Just tell Claude in plain English — and be aware that <em>how</em> you phrase it decides where the note lands:</p>
+<p style="margin-bottom:1rem; line-height:1.75;">You don't have to stop and open a file when you discover something worth keeping. Just tell Claude in plain English - and be aware that <em>how</em> you phrase it decides where the note lands:</p>
 
 <ul style="margin:0 0 1rem 1.5rem; color:var(--text-secondary); line-height:1.8;">
   <li><strong>"Remember that I use python3.12, not python"</strong> → saved to <strong>auto memory</strong>, Claude's own notes directory. Good for machine facts and preferences.</li>
@@ -1667,13 +1667,13 @@ Key files I'm currently editing:
   <li><strong>"Add this to CLAUDE.local.md"</strong> → written to your private file.</li>
 </ul>
 
-<p style="margin-bottom:1rem; line-height:1.75;">Running <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/memory</code> gives you the manual route: it lists every memory file across user and project scope — including ones that don't exist yet — and opens whichever you select in your editor, creating it if needed. The older <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">#</code>-prefix shortcut has been superseded by simply asking; <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/memory</code> is the documented path if you want to choose the file yourself.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">Running <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/memory</code> gives you the manual route: it lists every memory file across user and project scope - including ones that don't exist yet - and opens whichever you select in your editor, creating it if needed. The older <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">#</code>-prefix shortcut has been superseded by simply asking; <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/memory</code> is the documented path if you want to choose the file yourself.</p>
 
 <hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
 
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">One caveat: git worktrees</strong>
 
-<p style="margin-bottom:1rem; line-height:1.75;"><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> is a fully supported, first-class scope — the docs list it alongside user and project instructions as "local instructions." Earlier guidance described it as deprecated in favour of imports; that isn't the case, and you can use it without hesitation.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> is a fully supported, first-class scope - the docs list it alongside user and project instructions as "local instructions." Earlier guidance described it as deprecated in favour of imports; that isn't the case, and you can use it without hesitation.</p>
 
 <p style="margin-bottom:1rem; line-height:1.75;">There <em>is</em> one situation where it falls short. Because the file is gitignored, it only exists in the worktree where you created it. If you work across several worktrees of the same repository, each one starts empty and you end up maintaining the same personal notes several times over.</p>
 
@@ -1684,21 +1684,21 @@ Key files I'm currently editing:
 
 <p style="margin-bottom:1rem; line-height:1.75;">One thing to know about that pattern: an import in a <em>project</em> memory file whose path resolves outside your working directory counts as an external import. The first time Claude Code sees one it shows an approval dialog listing the files, so nobody can slip a surprise import into a shared repo. Imports inside your own <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">~/.claude/</code> files load without the dialog.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;">If you work in a single checkout — which is most people, most of the time — <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> in the project root is simpler and works perfectly well.</p>
+<p style="margin-bottom:1rem; line-height:1.75;">If you work in a single checkout - which is most people, most of the time - <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> in the project root is simpler and works perfectly well.</p>
 
 <hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
 
 <strong style="display:block; margin-bottom:0.75rem; font-size:1rem;">Tips &amp; Tricks</strong>
 
-<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>1. Treat it as a living document</strong> — update it whenever you discover something specific to your machine. It compounds in value over time.</p>
+<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>1. Treat it as a living document</strong> - update it whenever you discover something specific to your machine. It compounds in value over time.</p>
 
-<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>2. Never put real secrets in it</strong> — even though it's gitignored, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> is still a plaintext file on disk. Reference environment variable <em>names</em> only, not their values. Use <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.env</code> files for actual secrets.</p>
+<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>2. Never put real secrets in it</strong> - even though it's gitignored, <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> is still a plaintext file on disk. Reference environment variable <em>names</em> only, not their values. Use <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.env</code> files for actual secrets.</p>
 
-<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>3. Use it for "current focus"</strong> — a <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">## Current Task</code> section that you update each time you sit down to work is incredibly effective. Claude immediately knows what you're working on without you having to explain it.</p>
+<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>3. Use it for "current focus"</strong> - a <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">## Current Task</code> section that you update each time you sit down to work is incredibly effective. Claude immediately knows what you're working on without you having to explain it.</p>
 
-<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>4. Verify with <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/memory</code></strong> — run <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/memory</code> inside Claude Code to see all loaded memory files including <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code>. This is your debugging tool if things aren't loading as expected.</p>
+<p style="margin-bottom:0.75rem; line-height:1.75;"><strong>4. Verify with <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/memory</code></strong> - run <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">/memory</code> inside Claude Code to see all loaded memory files including <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code>. This is your debugging tool if things aren't loading as expected.</p>
 
-<p style="margin-bottom:1rem; line-height:1.75;"><strong>5. Keep it short</strong> — the same context window rules apply here. Aim for under 100 lines. If it's growing large, you're probably putting things in it that belong in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code>.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><strong>5. Keep it short</strong> - the same context window rules apply here. Aim for under 100 lines. If it's growing large, you're probably putting things in it that belong in <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.md</code> or <code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">.claude/rules/</code>.</p>
 
 <hr style="border:0; border-top:1px solid var(--border-color); margin:1.5rem 0;" />
 
@@ -1761,7 +1761,7 @@ Key files I'm currently editing:
   </table>
 </div>
 
-<p style="margin-bottom:1rem; line-height:1.75;"><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> is the private complement to everything else in the system — it's where <em>your</em> reality lives, separate from the team's shared contract.</p>
+<p style="margin-bottom:1rem; line-height:1.75;"><code style="padding: 0.2rem 0.4rem; background: var(--surface-color); border-radius: 4px; font-family: monospace; color: var(--code-text);">CLAUDE.local.md</code> is the private complement to everything else in the system - it's where <em>your</em> reality lives, separate from the team's shared contract.</p>
 
 <div style="margin-top: 2rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem;">
   <a href="#" data-goto-tab="4" class="tutorial-nav-link previous"><span>←</span> Previous: rules/*.md</a>
@@ -1797,7 +1797,7 @@ Key files I'm currently editing:
       ],
       [
         "3",
-        "Store personal notes for this project — not for teammates",
+        "Store personal notes for this project - not for teammates",
         "CLAUDE.local.md (project root, gitignored)",
       ],
       [
@@ -1868,11 +1868,11 @@ Key files I'm currently editing:
   </tr></thead>
   <tbody>
     <tr><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; color:var(--accent-primary);">/init</td><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Generate a starter CLAUDE.md for your project automatically</td></tr>
-    <tr style="background:var(--surface-color);"><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; color:var(--accent-primary);">/context</td><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);"><strong>What actually loaded</strong> this session — check the "Memory files" list when an instruction is being ignored</td></tr>
+    <tr style="background:var(--surface-color);"><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; color:var(--accent-primary);">/context</td><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);"><strong>What actually loaded</strong> this session - check the "Memory files" list when an instruction is being ignored</td></tr>
     <tr><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; color:var(--accent-primary);">/memory</td><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Browse and edit every memory file across scopes; toggle auto memory</td></tr>
     <tr style="background:var(--surface-color);"><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; color:var(--accent-primary);">/config</td><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Open the settings interface</td></tr>
     <tr><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; color:var(--accent-primary);">/status</td><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Show which settings files are active, and flag broken ones</td></tr>
-    <tr style="background:var(--surface-color);"><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; color:var(--accent-primary);">/doctor</td><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Setup checkup — reports config problems and proposes trims for an oversized CLAUDE.md</td></tr>
+    <tr style="background:var(--surface-color);"><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; color:var(--accent-primary);">/doctor</td><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Setup checkup - reports config problems and proposes trims for an oversized CLAUDE.md</td></tr>
     <tr><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; color:var(--accent-primary);">/model</td><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Switch model mid-session (editing <code>model</code> in settings needs a restart)</td></tr>
     <tr style="background:var(--surface-color);"><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; color:var(--accent-primary);">/mcp</td><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Show which MCP servers connected</td></tr>
     <tr><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); font-family:monospace; color:var(--accent-primary);">"remember that…"</td><td style="padding:0.4rem 0.8rem; border:1px solid var(--border-color); color:var(--text-secondary);">Save a note to auto memory. Say "add this to CLAUDE.md" to write the project file instead</td></tr>

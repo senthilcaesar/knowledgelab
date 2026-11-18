@@ -252,7 +252,7 @@ pnpm install</pre>
     <div style="width: 10px; height: 10px; border-radius: 50%; background: #ff5f56;"></div>
     <div style="width: 10px; height: 10px; border-radius: 50%; background: #ffbd2e;"></div>
     <div style="width: 10px; height: 10px; border-radius: 50%; background: #27c93f;"></div>
-    <span style="margin-left: 0.5rem; font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8;">zsh — build-ui</span>
+    <span style="margin-left: 0.5rem; font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8;">zsh - build-ui</span>
   </div>
   
   <!-- Terminal Body -->

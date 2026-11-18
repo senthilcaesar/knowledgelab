@@ -44,7 +44,7 @@ const claudeHooksConcept = {
 
         <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
           <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">Hook reference</strong>
-          <p style="margin-bottom: 1.25rem; line-height: 1.75;">Claude Code fires around thirty lifecycle events. You'll spend almost all your time with the eight below — they cover session start, the tool-call cycle, permissions, compaction, and turn completion. The rest are covered further down.</p>
+          <p style="margin-bottom: 1.25rem; line-height: 1.75;">Claude Code fires around thirty lifecycle events. You'll spend almost all your time with the eight below - they cover session start, the tool-call cycle, permissions, compaction, and turn completion. The rest are covered further down.</p>
           <div style="overflow-x: auto;">
             <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem; line-height: 1.6;">
               <thead>
@@ -112,11 +112,11 @@ const claudeHooksConcept = {
               <tbody>
                 <tr style="border-bottom: 1px solid var(--border-color);">
                   <td style="padding: 0.65rem 1rem; white-space: nowrap; font-family: monospace; color: var(--text-primary);">SessionEnd</td>
-                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">When a session terminates — cleanup, final logging</td>
+                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">When a session terminates - cleanup, final logging</td>
                 </tr>
                 <tr style="border-bottom: 1px solid var(--border-color); background: rgba(0,242,255,0.02);">
                   <td style="padding: 0.65rem 1rem; white-space: nowrap; font-family: monospace; color: var(--text-primary);">PostToolUseFailure</td>
-                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">After a tool call <em>fails</em> — the counterpart to PostToolUse</td>
+                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">After a tool call <em>fails</em> - the counterpart to PostToolUse</td>
                 </tr>
                 <tr style="border-bottom: 1px solid var(--border-color);">
                   <td style="padding: 0.65rem 1rem; white-space: nowrap; font-family: monospace; color: var(--text-primary);">PostToolBatch</td>
@@ -128,11 +128,11 @@ const claudeHooksConcept = {
                 </tr>
                 <tr style="border-bottom: 1px solid var(--border-color);">
                   <td style="padding: 0.65rem 1rem; white-space: nowrap; font-family: monospace; color: var(--text-primary);">SubagentStart</td>
-                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">When a subagent is spawned — the bookend to SubagentStop</td>
+                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">When a subagent is spawned - the bookend to SubagentStop</td>
                 </tr>
                 <tr style="border-bottom: 1px solid var(--border-color); background: rgba(0,242,255,0.02);">
                   <td style="padding: 0.65rem 1rem; white-space: nowrap; font-family: monospace; color: var(--text-primary);">Notification</td>
-                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">When Claude Code sends a notification — desktop alerts, sounds</td>
+                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">When Claude Code sends a notification - desktop alerts, sounds</td>
                 </tr>
                 <tr style="border-bottom: 1px solid var(--border-color);">
                   <td style="padding: 0.65rem 1rem; white-space: nowrap; font-family: monospace; color: var(--text-primary);">FileChanged</td>
@@ -140,11 +140,11 @@ const claudeHooksConcept = {
                 </tr>
                 <tr style="border-bottom: 1px solid var(--border-color); background: rgba(0,242,255,0.02);">
                   <td style="padding: 0.65rem 1rem; white-space: nowrap; font-family: monospace; color: var(--text-primary);">CwdChanged</td>
-                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">When the working directory changes — useful with direnv-style tooling</td>
+                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">When the working directory changes - useful with direnv-style tooling</td>
                 </tr>
                 <tr style="border-bottom: 1px solid var(--border-color);">
                   <td style="padding: 0.65rem 1rem; white-space: nowrap; font-family: monospace; color: var(--text-primary);">PostCompact</td>
-                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">After compaction completes — re-inject anything the summary dropped</td>
+                  <td style="padding: 0.65rem 1rem; color: var(--text-secondary);">After compaction completes - re-inject anything the summary dropped</td>
                 </tr>
                 <tr style="border-bottom: 1px solid var(--border-color); background: rgba(0,242,255,0.02);">
                   <td style="padding: 0.65rem 1rem; white-space: nowrap; font-family: monospace; color: var(--text-primary);">StopFailure</td>
@@ -157,7 +157,7 @@ const claudeHooksConcept = {
               </tbody>
             </table>
           </div>
-          <p style="margin-top: 1.25rem; line-height: 1.75; color: var(--text-secondary); font-size: 0.95rem;">There are more still — <code>Setup</code>, <code>UserPromptExpansion</code>, <code>MessageDisplay</code>, <code>TaskCreated</code>, <code>TaskCompleted</code>, <code>TeammateIdle</code>, <code>InstructionsLoaded</code>, <code>WorktreeCreate</code>, <code>WorktreeRemove</code>, <code>Elicitation</code> and <code>ElicitationResult</code>. See the <a href="https://code.claude.com/docs/en/hooks" target="_blank" style="color: var(--accent-primary);">hooks reference</a> for the complete list.</p>
+          <p style="margin-top: 1.25rem; line-height: 1.75; color: var(--text-secondary); font-size: 0.95rem;">There are more still - <code>Setup</code>, <code>UserPromptExpansion</code>, <code>MessageDisplay</code>, <code>TaskCreated</code>, <code>TaskCompleted</code>, <code>TeammateIdle</code>, <code>InstructionsLoaded</code>, <code>WorktreeCreate</code>, <code>WorktreeRemove</code>, <code>Elicitation</code> and <code>ElicitationResult</code>. See the <a href="https://code.claude.com/docs/en/hooks" target="_blank" style="color: var(--accent-primary);">hooks reference</a> for the complete list.</p>
         </div>
       `,
     },
@@ -291,7 +291,7 @@ const claudeHooksConcept = {
 }</code></pre>
           <div style="background: rgba(255, 193, 7, 0.06); border: 1px solid rgba(255, 193, 7, 0.4); border-radius: 10px; padding: 1.1rem 1.25rem; margin-bottom: 1rem;">
             <strong style="color: #f5c842; font-size: 0.9rem;">⚠️ There is no <code>$CLAUDE_TOOL_INPUT_FILE_PATH</code></strong>
-            <p style="margin: 0.5rem 0 0; line-height: 1.6; font-size: 0.95rem;">Claude Code does not expose tool arguments as environment variables. Everything about the event arrives as <strong>JSON on stdin</strong>, so read the path out with <code>jq</code> as above, or capture stdin in a script and parse it there. This trips people up constantly — a hook referencing an invented env var silently formats nothing.</p>
+            <p style="margin: 0.5rem 0 0; line-height: 1.6; font-size: 0.95rem;">Claude Code does not expose tool arguments as environment variables. Everything about the event arrives as <strong>JSON on stdin</strong>, so read the path out with <code>jq</code> as above, or capture stdin in a script and parse it there. This trips people up constantly - a hook referencing an invented env var silently formats nothing.</p>
           </div>
           <p style="margin-bottom: 0.5rem; font-weight: 600; color: var(--text-secondary); font-size: 0.9rem;">When to use PostToolUse:</p>
           <ul style="margin: 0 0 0 1.25rem; line-height: 1.8; font-size: 0.95rem; color: var(--text-secondary);">
@@ -358,10 +358,10 @@ const claudeHooksConcept = {
         <div style="margin-bottom: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
           <strong style="display:block; margin-bottom:0.75rem; font-size:1.15rem; color: var(--accent-primary);">Stop</strong>
           <p style="margin-bottom: 1rem; line-height: 1.75;">Fires when Claude finishes responding and would normally wait for your next input. Your script can inspect what Claude produced and decide whether the task is truly complete.</p>
-          <p style="margin-bottom: 0.75rem; line-height: 1.6;">To make Claude keep working rather than stop, the handler returns <code>{"decision": "block", "reason": "..."}</code> — the reason is fed back as instruction for what still needs doing. Exiting with code 2 and writing the reason to stderr does the same thing. Omit <code>decision</code> entirely (or just exit 0) to let Claude stop normally.</p>
+          <p style="margin-bottom: 0.75rem; line-height: 1.6;">To make Claude keep working rather than stop, the handler returns <code>{"decision": "block", "reason": "..."}</code> - the reason is fed back as instruction for what still needs doing. Exiting with code 2 and writing the reason to stderr does the same thing. Omit <code>decision</code> entirely (or just exit 0) to let Claude stop normally.</p>
           <div style="background: rgba(255, 193, 7, 0.06); border: 1px solid rgba(255, 193, 7, 0.4); border-radius: 10px; padding: 1.1rem 1.25rem; margin-bottom: 1rem;">
             <strong style="color: #f5c842; font-size: 0.9rem;">⚠️ <code>continue</code> does the opposite of what it sounds like</strong>
-            <p style="margin: 0.5rem 0 0; line-height: 1.6; font-size: 0.95rem;">The top-level <code>continue</code> field defaults to <code>true</code> and is not how you force continuation — setting <code>continue: false</code> <em>halts Claude entirely</em>. Use <code>decision: "block"</code> to keep it working, and <code>hookSpecificOutput.additionalContext</code> when you want to pass feedback along without blocking.</p>
+            <p style="margin: 0.5rem 0 0; line-height: 1.6; font-size: 0.95rem;">The top-level <code>continue</code> field defaults to <code>true</code> and is not how you force continuation - setting <code>continue: false</code> <em>halts Claude entirely</em>. Use <code>decision: "block"</code> to keep it working, and <code>hookSpecificOutput.additionalContext</code> when you want to pass feedback along without blocking.</p>
           </div>
           <p style="margin-bottom: 0.75rem; line-height: 1.6;">A prompt handler is a natural fit here, since "is this task actually finished?" is a judgment call:</p>
           <pre style="background: var(--syntax-bg, #0d1117); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; font-size: 0.85rem; line-height: 1.6;"><code style="color: var(--text-primary);">{
@@ -390,7 +390,7 @@ const claudeHooksConcept = {
 
         <div style="margin-bottom: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
           <strong style="display:block; margin-bottom:0.75rem; font-size:1.15rem; color: var(--accent-primary);">SubagentStop</strong>
-          <p style="margin-bottom: 1rem; line-height: 1.75;">This hook fires whenever a subagent spawned via the Agent tool finishes (the tool was renamed from Task in v2.1.63; old <code>Task(...)</code> references still work as aliases). It works the same way as Stop, but triggers when a subagent completes rather than the main agent — and it accepts a matcher on the <strong>agent type</strong>, so you can target <code>Explore</code>, <code>general-purpose</code>, or one of your own subagents specifically. There's a matching <code>SubagentStart</code> event for the other end. The configuration mirrors the Stop hook structure:</p>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">This hook fires whenever a subagent spawned via the Agent tool finishes (the tool was renamed from Task in v2.1.63; old <code>Task(...)</code> references still work as aliases). It works the same way as Stop, but triggers when a subagent completes rather than the main agent - and it accepts a matcher on the <strong>agent type</strong>, so you can target <code>Explore</code>, <code>general-purpose</code>, or one of your own subagents specifically. There's a matching <code>SubagentStart</code> event for the other end. The configuration mirrors the Stop hook structure:</p>
           <pre style="background: var(--syntax-bg, #0d1117); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; font-size: 0.85rem; line-height: 1.6;"><code style="color: var(--text-primary);">{
   "hooks": {
     "SubagentStop": [
@@ -448,12 +448,12 @@ const claudeHooksConcept = {
         <div style="margin-bottom: 2rem;">
           <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">Configuration and file locations</strong>
           <p style="margin-bottom: 1rem; line-height: 1.75;">Hooks live in JSON settings files at three levels. Project-level hooks go in .claude/settings.json within your repository, making them shareable with your team. User-level hooks go in ~/.claude/settings.json and apply across all your projects. Local project hooks go in .claude/settings.local.json for personal configuration you don't want to commit.</p>
-          <p style="margin-bottom: 1rem; line-height: 1.75;">There are also enterprise-managed policy settings available for organizational control. Hooks from these levels <strong>merge</strong> rather than override — a later source adds its hooks alongside the earlier ones instead of replacing them, so a project hook and a user hook on the same event both fire.</p>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">There are also enterprise-managed policy settings available for organizational control. Hooks from these levels <strong>merge</strong> rather than override - a later source adds its hooks alongside the earlier ones instead of replacing them, so a project hook and a user hook on the same event both fire.</p>
 
           <p style="margin-bottom: 0.75rem; line-height: 1.75;">Settings files aren't the only place hooks can come from. Two more sources are worth knowing:</p>
           <ul style="margin: 0 0 1.25rem 1.25rem; line-height: 1.8; font-size: 0.95rem; color: var(--text-secondary);">
-            <li><strong>Plugins</strong> — a plugin can ship <code>hooks/hooks.json</code>, active whenever that plugin is enabled. This is how you distribute hooks to a team without asking everyone to edit their settings.</li>
-            <li><strong>Skill and subagent frontmatter</strong> — a hook declared there is scoped to that component, firing only while it's active. Useful for a rule that should apply to one subagent rather than the whole session.</li>
+            <li><strong>Plugins</strong> - a plugin can ship <code>hooks/hooks.json</code>, active whenever that plugin is enabled. This is how you distribute hooks to a team without asking everyone to edit their settings.</li>
+            <li><strong>Skill and subagent frontmatter</strong> - a hook declared there is scoped to that component, firing only while it's active. Useful for a rule that should apply to one subagent rather than the whole session.</li>
           </ul>
 
           <div style="background: rgba(0, 242, 255, 0.06); border: 1px solid var(--accent-primary); border-radius: 10px; padding: 1.1rem 1.25rem; margin-bottom: 1.5rem;">
@@ -464,7 +464,7 @@ const claudeHooksConcept = {
 
         <div style="margin-bottom: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
           <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">Matcher syntax</strong>
-          <p style="margin-bottom: 1rem; line-height: 1.75;">Matchers filter which occurrences of an event trigger your hook. On tool events they match the <strong>tool name</strong> — but matchers are no longer tool-only. Many events accept a matcher, and what it filters depends on the event:</p>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Matchers filter which occurrences of an event trigger your hook. On tool events they match the <strong>tool name</strong> - but matchers are no longer tool-only. Many events accept a matcher, and what it filters depends on the event:</p>
 
           <div style="overflow-x: auto; margin-bottom: 1.25rem;">
             <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6;">
@@ -518,8 +518,8 @@ const claudeHooksConcept = {
                 </tr>
                 <tr>
                   <td style="padding: 0.6rem 0.85rem; color: var(--text-secondary); font-family: monospace; font-size: 0.82rem;">UserPromptSubmit, Stop, PostToolBatch, CwdChanged and others</td>
-                  <td style="padding: 0.6rem 0.85rem; color: var(--text-secondary);">No matcher support — the hook fires every time</td>
-                  <td style="padding: 0.6rem 0.85rem; color: var(--text-secondary);">—</td>
+                  <td style="padding: 0.6rem 0.85rem; color: var(--text-secondary);">No matcher support - the hook fires every time</td>
+                  <td style="padding: 0.6rem 0.85rem; color: var(--text-secondary);"> - </td>
                 </tr>
               </tbody>
             </table>
@@ -561,7 +561,7 @@ const claudeHooksConcept = {
 
         <div style="margin-bottom: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
           <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">Narrowing further with <code>if</code></strong>
-          <p style="margin-bottom: 1rem; line-height: 1.75;">A matcher selects the tool; the <code>if</code> field, set on the individual handler, selects <em>which calls to that tool</em> using permission-rule syntax. This is the current way to key off command arguments — the pattern that used to be written as a matcher like <code>"Bash(npm test*)"</code>.</p>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">A matcher selects the tool; the <code>if</code> field, set on the individual handler, selects <em>which calls to that tool</em> using permission-rule syntax. This is the current way to key off command arguments - the pattern that used to be written as a matcher like <code>"Bash(npm test*)"</code>.</p>
           <pre style="background: var(--syntax-bg, #0d1117); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; font-size: 0.85rem; line-height: 1.6;"><code style="color: var(--text-primary);">{
   "hooks": {
     "PreToolUse": [
@@ -582,24 +582,24 @@ const claudeHooksConcept = {
 
           <p style="margin-bottom: 0.75rem; line-height: 1.75;">Handlers accept a few other useful fields regardless of type:</p>
           <ul style="margin: 0 0 0 1.25rem; line-height: 1.8; font-size: 0.95rem; color: var(--text-secondary);">
-            <li><code>timeout</code> — seconds before the handler is cancelled</li>
-            <li><code>statusMessage</code> — custom spinner text while it runs</li>
-            <li><code>async</code> — run in the background instead of blocking the turn (command hooks)</li>
-            <li><code>once</code> — run a single time per session, then drop out</li>
-            <li><code>shell</code> — <code>"bash"</code> (default) or <code>"powershell"</code> on Windows</li>
+            <li><code>timeout</code> - seconds before the handler is cancelled</li>
+            <li><code>statusMessage</code> - custom spinner text while it runs</li>
+            <li><code>async</code> - run in the background instead of blocking the turn (command hooks)</li>
+            <li><code>once</code> - run a single time per session, then drop out</li>
+            <li><code>shell</code> - <code>"bash"</code> (default) or <code>"powershell"</code> on Windows</li>
           </ul>
         </div>
 
         <div style="margin-bottom: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
           <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">What hooks receive</strong>
           <p style="margin-bottom: 1rem; line-height: 1.75;">All hooks receive JSON via stdin containing session information and event-specific data. Common fields include: <code>session_id</code>, <code>prompt_id</code>, <code>transcript_path</code>, <code>cwd</code>, <code>permission_mode</code>, <code>effort.level</code>, and <code>hook_event_name</code>. When the hook fires inside a subagent you also get <code>agent_id</code> and <code>agent_type</code>.</p>
-          <p style="margin-bottom: 1rem; line-height: 1.75;">Additionally, tool-related hooks also receive <code>tool_name</code> and <code>tool_input</code>. This data lets your scripts make informed decisions about how to respond — and, as noted earlier, stdin is the <em>only</em> place this data appears. There are no per-tool environment variables.</p>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Additionally, tool-related hooks also receive <code>tool_name</code> and <code>tool_input</code>. This data lets your scripts make informed decisions about how to respond - and, as noted earlier, stdin is the <em>only</em> place this data appears. There are no per-tool environment variables.</p>
         </div>
 
         <div style="margin-bottom: 0; padding-top: 2rem; border-top: 1px solid var(--border-color);">
           <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">How hooks respond</strong>
-          <p style="margin-bottom: 1rem; line-height: 1.75;">Exit codes determine the basic outcome. Exit code 0 means success, and stdout either gets processed for JSON or added to context. Exit code 2 means a blocking error: stderr becomes the error message and the action gets prevented — what "prevented" means depends on the event (PreToolUse blocks the tool call, UserPromptSubmit erases the prompt, Stop refuses to stop, PreCompact cancels compaction).</p>
-          <p style="margin-bottom: 1rem; line-height: 1.75;">Every other exit code is a <em>non-blocking</em> error: stderr is surfaced as a notice and execution continues. Note that this includes exit 1 — a script that fails with the conventional <code>exit 1</code> will not block anything. Use <code>exit 2</code> whenever you mean to enforce a policy.</p>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Exit codes determine the basic outcome. Exit code 0 means success, and stdout either gets processed for JSON or added to context. Exit code 2 means a blocking error: stderr becomes the error message and the action gets prevented - what "prevented" means depends on the event (PreToolUse blocks the tool call, UserPromptSubmit erases the prompt, Stop refuses to stop, PreCompact cancels compaction).</p>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Every other exit code is a <em>non-blocking</em> error: stderr is surfaced as a notice and execution continues. Note that this includes exit 1 - a script that fails with the conventional <code>exit 1</code> will not block anything. Use <code>exit 2</code> whenever you mean to enforce a policy.</p>
           <p style="margin-bottom: 1rem; line-height: 1.75;">Beyond exit codes, hooks can exit 0 and print structured JSON to stdout for finer control. The schema splits into universal fields and an event-specific <code>hookSpecificOutput</code> object:</p>
 
           <pre style="background: var(--syntax-bg, #0d1117); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; font-size: 0.85rem; line-height: 1.6;"><code style="color: var(--text-primary);">{
@@ -628,7 +628,7 @@ const claudeHooksConcept = {
               <tbody>
                 <tr style="border-bottom: 1px solid var(--border-color);">
                   <td style="padding: 0.6rem 0.85rem; font-family: monospace; color: var(--text-primary); white-space: nowrap;">continue</td>
-                  <td style="padding: 0.6rem 0.85rem; color: var(--text-secondary);">Defaults to <code>true</code>. Setting it to <code>false</code> stops Claude entirely — it is <em>not</em> how you force continuation</td>
+                  <td style="padding: 0.6rem 0.85rem; color: var(--text-secondary);">Defaults to <code>true</code>. Setting it to <code>false</code> stops Claude entirely - it is <em>not</em> how you force continuation</td>
                 </tr>
                 <tr style="border-bottom: 1px solid var(--border-color); background: rgba(0,242,255,0.02);">
                   <td style="padding: 0.6rem 0.85rem; font-family: monospace; color: var(--text-primary); white-space: nowrap;">decision / reason</td>
@@ -668,22 +668,22 @@ const claudeHooksConcept = {
           <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">Environment and execution</strong>
           <p style="margin-bottom: 1rem; line-height: 1.75;">Hooks have access to environment variables set by Claude Code, alongside the standard ones from your shell:</p>
           <ul style="margin: 0 0 1.25rem 1.25rem; line-height: 1.8; font-size: 0.95rem; color: var(--text-secondary);">
-            <li><code>CLAUDE_PROJECT_DIR</code> — the project root path</li>
-            <li><code>CLAUDE_PLUGIN_ROOT</code> — the plugin's install directory, for hooks shipped inside a plugin</li>
-            <li><code>CLAUDE_PLUGIN_DATA</code> — a persistent data directory for that plugin</li>
-            <li><code>CLAUDE_EFFORT</code> — the current effort level (<code>low</code> through <code>max</code>)</li>
-            <li><code>CLAUDE_CODE_REMOTE</code> — <code>"true"</code> in remote web environments</li>
+            <li><code>CLAUDE_PROJECT_DIR</code> - the project root path</li>
+            <li><code>CLAUDE_PLUGIN_ROOT</code> - the plugin's install directory, for hooks shipped inside a plugin</li>
+            <li><code>CLAUDE_PLUGIN_DATA</code> - a persistent data directory for that plugin</li>
+            <li><code>CLAUDE_EFFORT</code> - the current effort level (<code>low</code> through <code>max</code>)</li>
+            <li><code>CLAUDE_CODE_REMOTE</code> - <code>"true"</code> in remote web environments</li>
           </ul>
-          <p style="margin-bottom: 1rem; line-height: 1.75;">Note that everything <em>about the event itself</em> — session id, tool name, tool arguments, transcript path — arrives as JSON on stdin, not as environment variables.</p>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">Note that everything <em>about the event itself</em> - session id, tool name, tool arguments, transcript path - arrives as JSON on stdin, not as environment variables.</p>
 
           <p style="margin-bottom: 0.75rem; line-height: 1.75;">Timeouts are configurable per handler, and the defaults vary by type and event rather than being one number:</p>
           <ul style="margin: 0 0 1.25rem 1.25rem; line-height: 1.8; font-size: 0.95rem; color: var(--text-secondary);">
-            <li><strong>600 seconds</strong> — command, HTTP, and MCP tool handlers</li>
-            <li><strong>30 seconds</strong> — prompt handlers, and anything on UserPromptSubmit</li>
-            <li><strong>60 seconds</strong> — agent handlers</li>
-            <li><strong>10 seconds</strong> — MessageDisplay, which sits in the render path</li>
+            <li><strong>600 seconds</strong> - command, HTTP, and MCP tool handlers</li>
+            <li><strong>30 seconds</strong> - prompt handlers, and anything on UserPromptSubmit</li>
+            <li><strong>60 seconds</strong> - agent handlers</li>
+            <li><strong>10 seconds</strong> - MessageDisplay, which sits in the render path</li>
           </ul>
-          <p style="margin-bottom: 1rem; line-height: 1.75;">When multiple hooks match an event they run in parallel, and identical handlers are deduplicated automatically — command hooks by command string and <code>args</code>, HTTP hooks by URL.</p>
+          <p style="margin-bottom: 1rem; line-height: 1.75;">When multiple hooks match an event they run in parallel, and identical handlers are deduplicated automatically - command hooks by command string and <code>args</code>, HTTP hooks by URL.</p>
         </div>
 
         <div style="margin-bottom: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
@@ -692,10 +692,10 @@ const claudeHooksConcept = {
 
           <div style="background: rgba(255, 193, 7, 0.06); border: 1px solid rgba(255, 193, 7, 0.4); border-radius: 10px; padding: 1.1rem 1.25rem; margin-bottom: 1.25rem;">
             <strong style="color: #f5c842; font-size: 0.9rem;">⚠️ <code>/hooks</code> is a viewer, not an approval gate</strong>
-            <p style="margin: 0.5rem 0 0; line-height: 1.6; font-size: 0.95rem;">Older guidance said edits to hook configuration had to be reviewed in the <code>/hooks</code> menu before taking effect. That is no longer how it works. <code>/hooks</code> is now a <strong>read-only browser</strong> — it lists every configured event, its matchers, handlers, and which settings file each came from, but you can't approve or edit anything there. Direct edits to a settings file are picked up automatically by the file watcher. So a hook added to a repository's <code>.claude/settings.json</code> can run as soon as you trust that project: review before you trust, not after.</p>
+            <p style="margin: 0.5rem 0 0; line-height: 1.6; font-size: 0.95rem;">Older guidance said edits to hook configuration had to be reviewed in the <code>/hooks</code> menu before taking effect. That is no longer how it works. <code>/hooks</code> is now a <strong>read-only browser</strong> - it lists every configured event, its matchers, handlers, and which settings file each came from, but you can't approve or edit anything there. Direct edits to a settings file are picked up automatically by the file watcher. So a hook added to a repository's <code>.claude/settings.json</code> can run as soon as you trust that project: review before you trust, not after.</p>
           </div>
 
-          <p style="margin-bottom: 1.25rem; line-height: 1.75;">To turn everything off in one move, set <code>"disableAllHooks": true</code> in your settings. One limit worth knowing: <code>disableAllHooks</code> in user or project settings can't switch off hooks that came from enterprise-managed policy settings — only managed settings can do that.</p>
+          <p style="margin-bottom: 1.25rem; line-height: 1.75;">To turn everything off in one move, set <code>"disableAllHooks": true</code> in your settings. One limit worth knowing: <code>disableAllHooks</code> in user or project settings can't switch off hooks that came from enterprise-managed policy settings - only managed settings can do that.</p>
 
           <div style="background: rgba(0, 242, 255, 0.06); border: 1px solid var(--accent-primary); border-radius: 10px; padding: 1.1rem 1.25rem; margin-bottom: 1.5rem;">
             <strong style="color: var(--accent-primary); font-size: 0.9rem;">💡 Pro tip</strong>
@@ -776,7 +776,7 @@ exit $CODE</code></pre>
 
         <div style="padding-top: 2rem; border-top: 1px solid var(--border-color);">
           <strong style="display:block; margin-bottom:1rem; font-size:1.2rem; color: var(--accent-primary);">Hooks at a glance</strong>
-          <p style="margin-bottom: 1.25rem; line-height: 1.75;">The eight events you'll reach for most often. Roughly twenty more exist for narrower cases — see the Overview tab for the second tier and the reference docs for the rest.</p>
+          <p style="margin-bottom: 1.25rem; line-height: 1.75;">The eight events you'll reach for most often. Roughly twenty more exist for narrower cases - see the Overview tab for the second tier and the reference docs for the rest.</p>
 
           <div style="overflow-x: auto; margin-bottom: 2rem;">
             <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
